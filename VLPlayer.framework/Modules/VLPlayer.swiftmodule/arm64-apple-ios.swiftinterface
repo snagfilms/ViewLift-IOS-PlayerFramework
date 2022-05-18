@@ -1,0 +1,428 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name VLPlayer
+import AVFoundation
+import AVKit
+import AdSupport
+import AmazonIVSPlayer
+import CommonCrypto
+import CoreMedia
+import Foundation
+import GoogleInteractiveMediaAds
+import MediaPlayer
+import ObjectiveC
+import QuartzCore
+import Swift
+import SystemConfiguration
+import UIKit
+@_exported import VLPlayer
+import _Concurrency
+@objc @_inheritsConvenienceInitializers open class VLError : ObjectiveC.NSObject {
+  open var isSuccess: Swift.Bool?
+  open var isPlayable: Swift.Bool?
+  open var errorCode: Swift.String?
+  open var errorMessage: Swift.String?
+  open var vl_errorCode: Swift.String?
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor(unsafe) open class MarqueeLabel : UIKit.UILabel, QuartzCore.CAAnimationDelegate {
+  public enum MarqueeType {
+    case left
+    case leftRight
+    case right
+    case rightLeft
+    case continuous
+    case continuousReverse
+    public static func == (a: VLPlayer.MarqueeLabel.MarqueeType, b: VLPlayer.MarqueeLabel.MarqueeType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @_Concurrency.MainActor(unsafe) open var type: VLPlayer.MarqueeLabel.MarqueeType {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) open var scrollSequence: [VLPlayer.MarqueeStep]?
+  @_Concurrency.MainActor(unsafe) open var animationCurve: UIKit.UIView.AnimationCurve
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) open var labelize: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) open var holdScrolling: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) open var tapToScroll: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) open var isPaused: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) open var awayFromHome: Swift.Bool {
+    get
+  }
+  public enum SpeedLimit {
+    case rate(CoreGraphics.CGFloat)
+    case duration(CoreGraphics.CGFloat)
+  }
+  @_Concurrency.MainActor(unsafe) open var speed: VLPlayer.MarqueeLabel.SpeedLimit {
+    get
+    set
+  }
+  @objc @available(*, deprecated, message: "Use speed property instead")
+  @IBInspectable @_Concurrency.MainActor(unsafe) open var scrollDuration: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @available(*, deprecated, message: "Use speed property instead")
+  @IBInspectable @_Concurrency.MainActor(unsafe) open var scrollRate: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) open var leadingBuffer: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) open var trailingBuffer: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) open var fadeLength: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) open var animationDelay: CoreGraphics.CGFloat
+  @_Concurrency.MainActor(unsafe) public var animationDuration: CoreGraphics.CGFloat {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) open class func restartLabelsOfController(_ controller: UIKit.UIViewController)
+  @_Concurrency.MainActor(unsafe) open class func controllerViewWillAppear(_ controller: UIKit.UIViewController)
+  @_Concurrency.MainActor(unsafe) open class func controllerViewDidAppear(_ controller: UIKit.UIViewController)
+  @_Concurrency.MainActor(unsafe) open class func controllerLabelsLabelize(_ controller: UIKit.UIViewController)
+  @_Concurrency.MainActor(unsafe) open class func controllerLabelsAnimate(_ controller: UIKit.UIViewController)
+  @_Concurrency.MainActor(unsafe) public init(frame: CoreGraphics.CGRect, rate: CoreGraphics.CGFloat, fadeLength fade: CoreGraphics.CGFloat)
+  @_Concurrency.MainActor(unsafe) public init(frame: CoreGraphics.CGRect, duration: CoreGraphics.CGFloat, fadeLength fade: CoreGraphics.CGFloat)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc convenience override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc override dynamic open func awakeFromNib()
+  @available(iOS 8.0, *)
+  @objc override dynamic open func prepareForInterfaceBuilder()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func willMove(toWindow newWindow: UIKit.UIWindow?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didMoveToWindow()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func sizeThatFits(_ size: CoreGraphics.CGSize) -> CoreGraphics.CGSize
+  @_Concurrency.MainActor(unsafe) open func labelShouldScroll() -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc public func animationDidStop(_ anim: QuartzCore.CAAnimation, finished flag: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open class var layerClass: Swift.AnyClass {
+    @_Concurrency.MainActor(unsafe) @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func draw(_ layer: QuartzCore.CALayer, in ctx: CoreGraphics.CGContext)
+  @objc @_Concurrency.MainActor(unsafe) public func restartForViewController(_ notification: Foundation.Notification)
+  @objc @_Concurrency.MainActor(unsafe) public func labelizeForController(_ notification: Foundation.Notification)
+  @objc @_Concurrency.MainActor(unsafe) public func animateForController(_ notification: Foundation.Notification)
+  @_Concurrency.MainActor(unsafe) public func triggerScrollStart()
+  @objc @_Concurrency.MainActor(unsafe) public func restartLabel()
+  @available(*, deprecated, message: "Use the shutdownLabel function instead")
+  @_Concurrency.MainActor(unsafe) public func resetLabel()
+  @objc @_Concurrency.MainActor(unsafe) public func shutdownLabel()
+  @_Concurrency.MainActor(unsafe) public func pauseLabel()
+  @_Concurrency.MainActor(unsafe) public func unpauseLabel()
+  @objc @_Concurrency.MainActor(unsafe) public func labelWasTapped(_ recognizer: UIKit.UIGestureRecognizer)
+  @_Concurrency.MainActor(unsafe) open func labelWillBeginScroll()
+  @_Concurrency.MainActor(unsafe) open func labelReturnedToHome(_ finished: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func forBaselineLayout() -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var forLastBaselineLayout: UIKit.UIView {
+    @_Concurrency.MainActor(unsafe) @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var text: Swift.String? {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var attributedText: Foundation.NSAttributedString? {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var font: UIKit.UIFont! {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var textColor: UIKit.UIColor! {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var backgroundColor: UIKit.UIColor? {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var shadowColor: UIKit.UIColor? {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var shadowOffset: CoreGraphics.CGSize {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var highlightedTextColor: UIKit.UIColor? {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var isHighlighted: Swift.Bool {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var isEnabled: Swift.Bool {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var numberOfLines: Swift.Int {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var adjustsFontSizeToFitWidth: Swift.Bool {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var minimumScaleFactor: CoreGraphics.CGFloat {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var baselineAdjustment: UIKit.UIBaselineAdjustment {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var intrinsicContentSize: CoreGraphics.CGSize {
+    @_Concurrency.MainActor(unsafe) @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var tintColor: UIKit.UIColor! {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func tintColorDidChange()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var contentMode: UIKit.UIView.ContentMode {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
+  }
+  @objc override dynamic open var isAccessibilityElement: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+public protocol MarqueeStep {
+  var timeStep: CoreGraphics.CGFloat { get }
+  var timingFunction: UIKit.UIView.AnimationCurve { get }
+  var edgeFades: VLPlayer.EdgeFade { get }
+}
+public struct ScrollStep : VLPlayer.MarqueeStep {
+  public enum Position {
+    case home
+    case away
+    case partial(CoreGraphics.CGFloat)
+  }
+  public let timeStep: CoreGraphics.CGFloat
+  public let timingFunction: UIKit.UIView.AnimationCurve
+  public let position: VLPlayer.ScrollStep.Position
+  public let edgeFades: VLPlayer.EdgeFade
+  public init(timeStep: CoreGraphics.CGFloat, timingFunction: UIKit.UIView.AnimationCurve = .linear, position: VLPlayer.ScrollStep.Position, edgeFades: VLPlayer.EdgeFade)
+}
+public struct FadeStep : VLPlayer.MarqueeStep {
+  public let timeStep: CoreGraphics.CGFloat
+  public let timingFunction: UIKit.UIView.AnimationCurve
+  public let edgeFades: VLPlayer.EdgeFade
+  public init(timeStep: CoreGraphics.CGFloat, timingFunction: UIKit.UIView.AnimationCurve = .linear, edgeFades: VLPlayer.EdgeFade)
+}
+public struct EdgeFade : Swift.OptionSet {
+  public let rawValue: Swift.Int
+  public static let leading: VLPlayer.EdgeFade
+  public static let trailing: VLPlayer.EdgeFade
+  public init(rawValue: Swift.Int)
+  public typealias ArrayLiteralElement = VLPlayer.EdgeFade
+  public typealias Element = VLPlayer.EdgeFade
+  public typealias RawValue = Swift.Int
+}
+@objc @_inheritsConvenienceInitializers open class VLPlayer : ObjectiveC.NSObject {
+  public enum VideoPlayerGravity : Swift.String {
+    case resizeAspect
+    case resizeAspectFill
+    case resize
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public enum VLPlayerState : Swift.String {
+    case paused
+    case playing
+    case playingAndCasting
+    case buffering
+    case complete
+    case error
+    case advertisement
+    case stalled
+    case stopped
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  @objc open var videoPlayerDelegate: VLPlayer.videoPlaybackDelegate?
+  open var enablePlayerBitrateLogs: Swift.Bool?
+  @objc override dynamic public init()
+  @objc open func addCustomVideoControls(controlsView: UIKit.UIView)
+  open func setSource(vlToken: Swift.String, videoID: Swift.String, vlPlayerTag: Swift.String, fullScreenOnly: Swift.Bool, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, isCustomLoaderAdded: Swift.Bool = false, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void))
+  open func setSource(vlToken: Swift.String, videoID: Swift.String, vlPlayerTag: Swift.String, fullScreenOnly: Swift.Bool, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void))
+  @objc open func play()
+  @objc open func pause()
+  @objc open func dispose()
+  @objc open func destroy()
+  @objc open func setPlayerFitToFullScreen()
+  @objc open func setPlayerFitToSmallScreen()
+  @objc open func goFullScreen()
+  @objc open func removeFullScreen()
+  @objc open func seekTo(seconds: Swift.Double)
+  @objc open func startTime(seconds: Swift.Double)
+  open func getCurrentTime() -> Swift.Double?
+  @objc open func getSource() -> Swift.Dictionary<Swift.String, Swift.String>?
+  @objc open func setIconColor(color: Swift.String)
+  @objc open func setTextColor(color: Swift.String)
+  @objc open func setProgressBarBGColor(color: Swift.String)
+  @objc open func setProgressBarColor(color: Swift.String)
+  @objc open func shouldAutoplay(autoplay: Swift.Bool)
+  @objc open func checkFullscreenState() -> Swift.Bool
+  @objc open func getVideoPlayerView() -> UIKit.UIView?
+  @objc open func setNextVideo(videoId: Swift.String, adTag: Swift.String?)
+  @objc open func playNextVideo(videoId: Swift.String?, vlToken: Swift.String?, adTag: Swift.String?)
+  open func isAutoPlay() -> Swift.Bool?
+  @objc open func shouldPlayMuted(isMuted: Swift.Bool)
+  open func isMuted() -> Swift.Bool?
+  @objc open func setVolumeLevel(volumeLevel: Swift.Int)
+  open func getVolumeLevel() -> Swift.Int?
+  @objc open func getState() -> Swift.String?
+  @objc open func getPlayerVersion() -> Swift.String?
+  open func getCurrentVideoTimeLeft() -> Swift.Double?
+  open func getCurrentVideoDuration() -> Swift.Double?
+  @objc open func setCaptionsVisiblity(captionsVisible: Swift.Bool)
+  @objc open func updateVideoPlayerFrame(frame: CoreGraphics.CGRect)
+  @objc open func isPictureInPictureSelected() -> Swift.Bool
+  @objc open func setupPictureInPicture()
+  @objc open func pictureInPictureClicked(isPipSelected: Swift.Bool)
+  open func setVideoPlayerGravity(videoPlayerGravity: VLPlayer.VLPlayer.VideoPlayerGravity)
+  open func toggleClosedCaption(enable: Swift.Bool)
+  open func isClosedCaptionEnabled() -> Swift.Bool
+  open func isLiveVideo() -> Swift.Bool
+  open func startPictureInPictureAutomaticallyFromInline(enablePictureInPictureInline: Swift.Bool)
+  @objc deinit
+}
+public class Subtitles {
+  public init(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8)
+  public init(subtitles string: Swift.String)
+  public func searchSubtitles(at time: Foundation.TimeInterval) -> Swift.String?
+  @objc deinit
+}
+extension AVFoundation.AVPlayer {
+  public var subtitleLabel: UIKit.UILabel? {
+    get
+    set(value)
+  }
+  public func addSubtitles(parentView: UIKit.UIView, textColor: Swift.String?, isFullScreen: Swift.Bool) -> Self
+  public func updateSubTitleConstraints(parentView: UIKit.UIView, isFullScreen: Swift.Bool)
+  public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8, isPathLocal: Swift.Bool)
+  public func show(subtitles string: Swift.String)
+}
+extension AmazonIVSPlayer.IVSPlayer {
+  public var subtitleLabel: UIKit.UILabel? {
+    get
+    set(value)
+  }
+  public func addSubtitles(parentView: UIKit.UIView, textColor: Swift.String?, isFullScreen: Swift.Bool) -> Self
+  public func updateSubTitleConstraints(parentView: UIKit.UIView, isFullScreen: Swift.Bool)
+  public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8, isPathLocal: Swift.Bool, playerPosition: Swift.Double)
+  public func show(subtitles string: Swift.String, playerPosition: Swift.Double)
+  public func showSubTitlesOnPlayerProgress(playerPosition: Swift.Double)
+}
+@objc public protocol videoPlaybackDelegate : ObjectiveC.NSObjectProtocol {
+  @objc optional func videoStarted(timestamp: Swift.Double, playerTag: Swift.String)
+  @objc optional func videoFinished(playerTag: Swift.String)
+  @objc optional func videoPause(timestamp: Swift.Double, playerTag: Swift.String)
+  @objc optional func videoResume(timestamp: Swift.Double, playerTag: Swift.String)
+  @objc optional func videoPlayerUpdateProgressby30Seconds(currentTime: Swift.Double, totalTime: Swift.Double, playerTag: Swift.String)
+  @objc optional func videoPlaybackError(currentTime: Swift.Double, errorMessage: Swift.String, errorCode: Swift.String, playerTag: Swift.String)
+  @objc optional func adStarted(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
+  @objc optional func adResumed(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
+  @objc optional func adStopped(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
+  @objc optional func adPaused(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
+  @objc optional func adFinished(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
+  @objc optional func adError(currentTime: Swift.Double, adTag: Swift.String?, errorMessage: Swift.String?, playerTag: Swift.String)
+  @objc optional func onFullScreenChange(currentTime: Swift.Double, isFullScreen: Swift.Bool, playerTag: Swift.String)
+  @objc optional func onSeek(currentTime: Swift.Double, playerTag: Swift.String)
+  @objc optional func onBuffer(currentTime: Swift.Double, playerTag: Swift.String)
+  @objc optional func videoFetchError(error: VLPlayer.VLError, playerTag: Swift.String)
+  @objc optional func pictureInPictureSetupCompleted(isPIPSelected: Swift.Bool)
+  @objc optional func pictureInPictureWillStart()
+  @objc optional func pictureInPictureDidStart()
+  @objc optional func pictureInPictureWillStop()
+  @objc optional func pictureInPictureDidStop()
+  @objc optional func pictureInPictureDidFailedToStart(error: VLPlayer.VLError, playerTag: Swift.String)
+  @objc optional func onLoadingChanged(isLoading: Swift.Bool)
+  @objc optional func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Swift.Bool)
+  @objc optional func playerBitrateDebugLogs(logString: Swift.String)
+}
+@_hasMissingDesignatedInitializers open class NetworkReachabilityManager {
+  public enum NetworkReachabilityStatus {
+    case unknown
+    case notReachable
+    case reachable(VLPlayer.NetworkReachabilityManager.ConnectionType)
+  }
+  public enum ConnectionType {
+    case ethernetOrWiFi
+    case wwan
+    public static func == (a: VLPlayer.NetworkReachabilityManager.ConnectionType, b: VLPlayer.NetworkReachabilityManager.ConnectionType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public typealias Listener = (VLPlayer.NetworkReachabilityManager.NetworkReachabilityStatus) -> Swift.Void
+  open var isReachable: Swift.Bool {
+    get
+  }
+  open var isReachableOnWWAN: Swift.Bool {
+    get
+  }
+  open var isReachableOnEthernetOrWiFi: Swift.Bool {
+    get
+  }
+  open var networkReachabilityStatus: VLPlayer.NetworkReachabilityManager.NetworkReachabilityStatus {
+    get
+  }
+  open var listenerQueue: Dispatch.DispatchQueue
+  open var listener: VLPlayer.NetworkReachabilityManager.Listener?
+  open var flags: SystemConfiguration.SCNetworkReachabilityFlags? {
+    get
+  }
+  open var previousFlags: SystemConfiguration.SCNetworkReachabilityFlags
+  convenience public init?(host: Swift.String)
+  convenience public init?()
+  @objc deinit
+  @discardableResult
+  open func startListening() -> Swift.Bool
+  open func stopListening()
+}
+extension VLPlayer.NetworkReachabilityManager.NetworkReachabilityStatus : Swift.Equatable {
+}
+public func == (lhs: VLPlayer.NetworkReachabilityManager.NetworkReachabilityStatus, rhs: VLPlayer.NetworkReachabilityManager.NetworkReachabilityStatus) -> Swift.Bool
+extension VLPlayer.MarqueeLabel.MarqueeType : Swift.Equatable {}
+extension VLPlayer.MarqueeLabel.MarqueeType : Swift.Hashable {}
+extension VLPlayer.VLPlayer.VideoPlayerGravity : Swift.Equatable {}
+extension VLPlayer.VLPlayer.VideoPlayerGravity : Swift.Hashable {}
+extension VLPlayer.VLPlayer.VideoPlayerGravity : Swift.RawRepresentable {}
+extension VLPlayer.VLPlayer.VLPlayerState : Swift.Equatable {}
+extension VLPlayer.VLPlayer.VLPlayerState : Swift.Hashable {}
+extension VLPlayer.VLPlayer.VLPlayerState : Swift.RawRepresentable {}
+extension VLPlayer.NetworkReachabilityManager.ConnectionType : Swift.Equatable {}
+extension VLPlayer.NetworkReachabilityManager.ConnectionType : Swift.Hashable {}

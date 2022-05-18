@@ -1,0 +1,11 @@
+framework module VLPlayer {
+  umbrella header "VLPlayer.h"
+
+  export *
+  module * { export * }
+}
+
+module VLPlayer.Swift {
+    header "VLPlayer-Swift.h"
+    requires objc
+}
