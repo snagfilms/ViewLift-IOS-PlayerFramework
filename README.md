@@ -1,5 +1,5 @@
 ~~~~~~~~~~~~~~
-VLPlayer SDK
+VLPlayer SDK [![Version](https://img.shields.io/cocoapods/v/VLPlayeriOSLib.svg?style=flat)](https://cocoapods.org/pods/VLPlayeriOSLib)
 ~~~~~~~~~~~~~~
 
 Getting support and submitting feedback
