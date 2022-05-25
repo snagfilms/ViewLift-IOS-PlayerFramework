@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "VLPlayeriOSLib"
-  s.version      = "2.5.2"
+  s.version      = "2.5.3"
   s.summary      = "VLPlayer SDK for iOS.  SDKs page: https://developer.viewlift.com/docs/sdk-ios-player/"
 
   s.description  = <<-DESC
@@ -17,14 +17,19 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "12.0"
   s.source       = { :git => "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework.git", :tag => s.version.to_s }
 
-  s.ios.vendored_frameworks = "VLPlayer.framework"
+  s.default_subspecs = 'Main'
 
-  #s.subspec 'Legacy' do |ss|
+  s.subspec 'Main' do |ss|
+       ss.ios.preserve_paths = 'VLPlayerLib.xcframework'
+       ss.ios.vendored_frameworks = 'VLPlayerLib.xcframework'
+  end
+
+  s.subspec 'Legacy' do |ss|
        s.pod_target_xcconfig  = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e'}
        s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e'}
-       # ss.ios.preserve_paths = 'VLPlayer.framework'
-       # ss.ios.vendored_frameworks = 'VLPlayer.framework'
-  #end
+       # ss.ios.preserve_paths = 'iOS/VLPlayerLib.framework'
+       # ss.ios.vendored_frameworks = 'iOS/VLPlayerLib.framework'
+  end
   
 
   s.dependency 'AmazonIVSPlayer', '1.8.2'

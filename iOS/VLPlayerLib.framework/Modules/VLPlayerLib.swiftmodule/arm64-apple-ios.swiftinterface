@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
-// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name VLPlayer
+// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name VLPlayerLib
 import AVFoundation
 import AVKit
 import AdSupport
@@ -15,7 +15,6 @@ import QuartzCore
 import Swift
 import SystemConfiguration
 import UIKit
-@_exported import VLPlayer
 import _Concurrency
 @objc @_inheritsConvenienceInitializers open class VLError : ObjectiveC.NSObject {
   open var isSuccess: Swift.Bool?
@@ -34,17 +33,17 @@ import _Concurrency
     case rightLeft
     case continuous
     case continuousReverse
-    public static func == (a: VLPlayer.MarqueeLabel.MarqueeType, b: VLPlayer.MarqueeLabel.MarqueeType) -> Swift.Bool
+    public static func == (a: VLPlayerLib.MarqueeLabel.MarqueeType, b: VLPlayerLib.MarqueeLabel.MarqueeType) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
   }
-  @_Concurrency.MainActor(unsafe) open var type: VLPlayer.MarqueeLabel.MarqueeType {
+  @_Concurrency.MainActor(unsafe) open var type: VLPlayerLib.MarqueeLabel.MarqueeType {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) open var scrollSequence: [VLPlayer.MarqueeStep]?
+  @_Concurrency.MainActor(unsafe) open var scrollSequence: [VLPlayerLib.MarqueeStep]?
   @_Concurrency.MainActor(unsafe) open var animationCurve: UIKit.UIView.AnimationCurve
   @objc @IBInspectable @_Concurrency.MainActor(unsafe) open var labelize: Swift.Bool {
     @objc get
@@ -68,7 +67,7 @@ import _Concurrency
     case rate(CoreGraphics.CGFloat)
     case duration(CoreGraphics.CGFloat)
   }
-  @_Concurrency.MainActor(unsafe) open var speed: VLPlayer.MarqueeLabel.SpeedLimit {
+  @_Concurrency.MainActor(unsafe) open var speed: VLPlayerLib.MarqueeLabel.SpeedLimit {
     get
     set
   }
@@ -214,9 +213,9 @@ import _Concurrency
 public protocol MarqueeStep {
   var timeStep: CoreGraphics.CGFloat { get }
   var timingFunction: UIKit.UIView.AnimationCurve { get }
-  var edgeFades: VLPlayer.EdgeFade { get }
+  var edgeFades: VLPlayerLib.EdgeFade { get }
 }
-public struct ScrollStep : VLPlayer.MarqueeStep {
+public struct ScrollStep : VLPlayerLib.MarqueeStep {
   public enum Position {
     case home
     case away
@@ -224,23 +223,23 @@ public struct ScrollStep : VLPlayer.MarqueeStep {
   }
   public let timeStep: CoreGraphics.CGFloat
   public let timingFunction: UIKit.UIView.AnimationCurve
-  public let position: VLPlayer.ScrollStep.Position
-  public let edgeFades: VLPlayer.EdgeFade
-  public init(timeStep: CoreGraphics.CGFloat, timingFunction: UIKit.UIView.AnimationCurve = .linear, position: VLPlayer.ScrollStep.Position, edgeFades: VLPlayer.EdgeFade)
+  public let position: VLPlayerLib.ScrollStep.Position
+  public let edgeFades: VLPlayerLib.EdgeFade
+  public init(timeStep: CoreGraphics.CGFloat, timingFunction: UIKit.UIView.AnimationCurve = .linear, position: VLPlayerLib.ScrollStep.Position, edgeFades: VLPlayerLib.EdgeFade)
 }
-public struct FadeStep : VLPlayer.MarqueeStep {
+public struct FadeStep : VLPlayerLib.MarqueeStep {
   public let timeStep: CoreGraphics.CGFloat
   public let timingFunction: UIKit.UIView.AnimationCurve
-  public let edgeFades: VLPlayer.EdgeFade
-  public init(timeStep: CoreGraphics.CGFloat, timingFunction: UIKit.UIView.AnimationCurve = .linear, edgeFades: VLPlayer.EdgeFade)
+  public let edgeFades: VLPlayerLib.EdgeFade
+  public init(timeStep: CoreGraphics.CGFloat, timingFunction: UIKit.UIView.AnimationCurve = .linear, edgeFades: VLPlayerLib.EdgeFade)
 }
 public struct EdgeFade : Swift.OptionSet {
   public let rawValue: Swift.Int
-  public static let leading: VLPlayer.EdgeFade
-  public static let trailing: VLPlayer.EdgeFade
+  public static let leading: VLPlayerLib.EdgeFade
+  public static let trailing: VLPlayerLib.EdgeFade
   public init(rawValue: Swift.Int)
-  public typealias ArrayLiteralElement = VLPlayer.EdgeFade
-  public typealias Element = VLPlayer.EdgeFade
+  public typealias ArrayLiteralElement = VLPlayerLib.EdgeFade
+  public typealias Element = VLPlayerLib.EdgeFade
   public typealias RawValue = Swift.Int
 }
 @objc @_inheritsConvenienceInitializers open class VLPlayer : ObjectiveC.NSObject {
@@ -270,7 +269,7 @@ public struct EdgeFade : Swift.OptionSet {
       get
     }
   }
-  @objc open var videoPlayerDelegate: VLPlayer.videoPlaybackDelegate?
+  @objc open var videoPlayerDelegate: VLPlayerLib.videoPlaybackDelegate?
   open var enablePlayerBitrateLogs: Swift.Bool?
   @objc override dynamic public init()
   @objc open func addCustomVideoControls(controlsView: UIKit.UIView)
@@ -311,11 +310,12 @@ public struct EdgeFade : Swift.OptionSet {
   @objc open func isPictureInPictureSelected() -> Swift.Bool
   @objc open func setupPictureInPicture()
   @objc open func pictureInPictureClicked(isPipSelected: Swift.Bool)
-  open func setVideoPlayerGravity(videoPlayerGravity: VLPlayer.VLPlayer.VideoPlayerGravity)
+  open func setVideoPlayerGravity(videoPlayerGravity: VLPlayerLib.VLPlayer.VideoPlayerGravity)
   open func toggleClosedCaption(enable: Swift.Bool)
   open func isClosedCaptionEnabled() -> Swift.Bool
   open func isLiveVideo() -> Swift.Bool
   open func startPictureInPictureAutomaticallyFromInline(enablePictureInPictureInline: Swift.Bool)
+  open func requireLinearPlaybackInPictureInPicture(isRequired: Swift.Bool)
   @objc deinit
 }
 public class Subtitles {
@@ -361,13 +361,13 @@ extension AmazonIVSPlayer.IVSPlayer {
   @objc optional func onFullScreenChange(currentTime: Swift.Double, isFullScreen: Swift.Bool, playerTag: Swift.String)
   @objc optional func onSeek(currentTime: Swift.Double, playerTag: Swift.String)
   @objc optional func onBuffer(currentTime: Swift.Double, playerTag: Swift.String)
-  @objc optional func videoFetchError(error: VLPlayer.VLError, playerTag: Swift.String)
+  @objc optional func videoFetchError(error: VLPlayerLib.VLError, playerTag: Swift.String)
   @objc optional func pictureInPictureSetupCompleted(isPIPSelected: Swift.Bool)
   @objc optional func pictureInPictureWillStart()
   @objc optional func pictureInPictureDidStart()
   @objc optional func pictureInPictureWillStop()
   @objc optional func pictureInPictureDidStop()
-  @objc optional func pictureInPictureDidFailedToStart(error: VLPlayer.VLError, playerTag: Swift.String)
+  @objc optional func pictureInPictureDidFailedToStart(error: VLPlayerLib.VLError, playerTag: Swift.String)
   @objc optional func onLoadingChanged(isLoading: Swift.Bool)
   @objc optional func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Swift.Bool)
   @objc optional func playerBitrateDebugLogs(logString: Swift.String)
@@ -376,18 +376,18 @@ extension AmazonIVSPlayer.IVSPlayer {
   public enum NetworkReachabilityStatus {
     case unknown
     case notReachable
-    case reachable(VLPlayer.NetworkReachabilityManager.ConnectionType)
+    case reachable(VLPlayerLib.NetworkReachabilityManager.ConnectionType)
   }
   public enum ConnectionType {
     case ethernetOrWiFi
     case wwan
-    public static func == (a: VLPlayer.NetworkReachabilityManager.ConnectionType, b: VLPlayer.NetworkReachabilityManager.ConnectionType) -> Swift.Bool
+    public static func == (a: VLPlayerLib.NetworkReachabilityManager.ConnectionType, b: VLPlayerLib.NetworkReachabilityManager.ConnectionType) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
   }
-  public typealias Listener = (VLPlayer.NetworkReachabilityManager.NetworkReachabilityStatus) -> Swift.Void
+  public typealias Listener = (VLPlayerLib.NetworkReachabilityManager.NetworkReachabilityStatus) -> Swift.Void
   open var isReachable: Swift.Bool {
     get
   }
@@ -397,11 +397,11 @@ extension AmazonIVSPlayer.IVSPlayer {
   open var isReachableOnEthernetOrWiFi: Swift.Bool {
     get
   }
-  open var networkReachabilityStatus: VLPlayer.NetworkReachabilityManager.NetworkReachabilityStatus {
+  open var networkReachabilityStatus: VLPlayerLib.NetworkReachabilityManager.NetworkReachabilityStatus {
     get
   }
   open var listenerQueue: Dispatch.DispatchQueue
-  open var listener: VLPlayer.NetworkReachabilityManager.Listener?
+  open var listener: VLPlayerLib.NetworkReachabilityManager.Listener?
   open var flags: SystemConfiguration.SCNetworkReachabilityFlags? {
     get
   }
@@ -413,16 +413,16 @@ extension AmazonIVSPlayer.IVSPlayer {
   open func startListening() -> Swift.Bool
   open func stopListening()
 }
-extension VLPlayer.NetworkReachabilityManager.NetworkReachabilityStatus : Swift.Equatable {
+extension VLPlayerLib.NetworkReachabilityManager.NetworkReachabilityStatus : Swift.Equatable {
 }
-public func == (lhs: VLPlayer.NetworkReachabilityManager.NetworkReachabilityStatus, rhs: VLPlayer.NetworkReachabilityManager.NetworkReachabilityStatus) -> Swift.Bool
-extension VLPlayer.MarqueeLabel.MarqueeType : Swift.Equatable {}
-extension VLPlayer.MarqueeLabel.MarqueeType : Swift.Hashable {}
-extension VLPlayer.VLPlayer.VideoPlayerGravity : Swift.Equatable {}
-extension VLPlayer.VLPlayer.VideoPlayerGravity : Swift.Hashable {}
-extension VLPlayer.VLPlayer.VideoPlayerGravity : Swift.RawRepresentable {}
-extension VLPlayer.VLPlayer.VLPlayerState : Swift.Equatable {}
-extension VLPlayer.VLPlayer.VLPlayerState : Swift.Hashable {}
-extension VLPlayer.VLPlayer.VLPlayerState : Swift.RawRepresentable {}
-extension VLPlayer.NetworkReachabilityManager.ConnectionType : Swift.Equatable {}
-extension VLPlayer.NetworkReachabilityManager.ConnectionType : Swift.Hashable {}
+public func == (lhs: VLPlayerLib.NetworkReachabilityManager.NetworkReachabilityStatus, rhs: VLPlayerLib.NetworkReachabilityManager.NetworkReachabilityStatus) -> Swift.Bool
+extension VLPlayerLib.MarqueeLabel.MarqueeType : Swift.Equatable {}
+extension VLPlayerLib.MarqueeLabel.MarqueeType : Swift.Hashable {}
+extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.Equatable {}
+extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.Hashable {}
+extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.RawRepresentable {}
+extension VLPlayerLib.VLPlayer.VLPlayerState : Swift.Equatable {}
+extension VLPlayerLib.VLPlayer.VLPlayerState : Swift.Hashable {}
+extension VLPlayerLib.VLPlayer.VLPlayerState : Swift.RawRepresentable {}
+extension VLPlayerLib.NetworkReachabilityManager.ConnectionType : Swift.Equatable {}
+extension VLPlayerLib.NetworkReachabilityManager.ConnectionType : Swift.Hashable {}
