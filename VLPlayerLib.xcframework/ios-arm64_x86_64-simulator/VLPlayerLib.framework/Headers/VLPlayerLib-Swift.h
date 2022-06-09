@@ -375,6 +375,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) Class _Nonnull layer
 
 
 
+
 SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 @interface VLError : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -1168,6 +1169,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) Class _Nonnull layer
 @property (nonatomic) UIViewContentMode contentMode;
 @property (nonatomic) BOOL isAccessibilityElement;
 @end
+
 
 
 

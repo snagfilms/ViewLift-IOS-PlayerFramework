@@ -373,6 +373,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) Class _Nonnull layer
 
 
 
+
 SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 @interface VLError : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
