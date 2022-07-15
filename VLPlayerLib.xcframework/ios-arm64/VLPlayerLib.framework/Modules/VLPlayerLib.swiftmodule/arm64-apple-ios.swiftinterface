@@ -273,8 +273,8 @@ public struct EdgeFade : Swift.OptionSet {
   open var enablePlayerBitrateLogs: Swift.Bool?
   @objc override dynamic public init()
   @objc open func addCustomVideoControls(controlsView: UIKit.UIView)
-  open func setSource(vlToken: Swift.String, videoID: Swift.String, vlPlayerTag: Swift.String, fullScreenOnly: Swift.Bool, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, isCustomLoaderAdded: Swift.Bool = false, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void))
-  open func setSource(vlToken: Swift.String, videoID: Swift.String, vlPlayerTag: Swift.String, fullScreenOnly: Swift.Bool, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void))
+  open func setSource(vlToken: Swift.String, videoID: Swift.String, vlPlayerTag: Swift.String, fullScreenOnly: Swift.Bool, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, isCustomLoaderAdded: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void))
+  open func setSource(vlToken: Swift.String, videoID: Swift.String, vlPlayerTag: Swift.String, fullScreenOnly: Swift.Bool, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void))
   @objc open func play()
   @objc open func pause()
   @objc open func dispose()
@@ -365,6 +365,7 @@ extension AmazonIVSPlayer.IVSPlayer {
   @objc optional func pictureInPictureSetupCompleted(isPIPSelected: Swift.Bool)
   @objc optional func pictureInPictureWillStart()
   @objc optional func pictureInPictureDidStart()
+  @objc optional func pictureInPictureRestoreFullPlayer()
   @objc optional func pictureInPictureWillStop()
   @objc optional func pictureInPictureDidStop()
   @objc optional func pictureInPictureDidFailedToStart(error: VLPlayerLib.VLError, playerTag: Swift.String)

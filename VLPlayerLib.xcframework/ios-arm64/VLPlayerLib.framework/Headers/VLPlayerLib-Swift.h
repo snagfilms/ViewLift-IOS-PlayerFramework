@@ -756,6 +756,10 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 - (void)pictureInPictureDidStart;
 /// important:
 ///
+/// Delgate method - called when Picture in Picture will restore Full screen playback
+- (void)pictureInPictureRestoreFullPlayer;
+/// important:
+///
 /// Delgate method - called when Picture in Picture will stop
 - (void)pictureInPictureWillStop;
 /// important:
