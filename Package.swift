@@ -8,6 +8,8 @@ let package = Package(
     platforms: [.iOS(.v12)],
     products: [
         .library(name: "VLPlayerLib", targets: ["VLPlayerLib"]),
+        .library(name: "GoogleInteractiveMediaAds", targets: ["GoogleInteractiveMediaAds"]),
+        .library(name: "AmazonIVSPlayer", targets: ["AmazonIVSPlayer"])
     ],
     dependencies: [
     ],
