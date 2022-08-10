@@ -15,7 +15,7 @@ let package = Package(
     ],
     targets: [
         .binaryTarget(name: "VLPlayerLib", path: "VLPlayerLib.xcframework"),
-        .binaryTarget(name: "GoogleInteractiveMediaAds", path: "GoogleInteractiveMediaAds.xcframework"),
-        .binaryTarget(name: "AmazonIVSPlayer", path: "AmazonIVSPlayer.xcframework")
+        .binaryTarget(name: "GoogleInteractiveMediaAds", path: "DependentFrameworks/GoogleInteractiveMediaAds.xcframework"),
+        .binaryTarget(name: "AmazonIVSPlayer", path: "DependentFrameworks/AmazonIVSPlayer.xcframework")
     ]
 )
