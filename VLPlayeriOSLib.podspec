@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "VLPlayeriOSLib"
-  s.version      = "2.5.7"
+  s.version      = "2.5.8"
   s.summary      = "VLPlayer SDK for iOS.  SDKs page: https://developer.viewlift.com/docs/sdk-ios-player/"
 
   s.description  = <<-DESC
