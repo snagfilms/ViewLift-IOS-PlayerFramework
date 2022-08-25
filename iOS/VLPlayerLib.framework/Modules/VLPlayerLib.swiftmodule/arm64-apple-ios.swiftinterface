@@ -263,6 +263,7 @@ public struct EdgeFade : Swift.OptionSet {
     case advertisement
     case stalled
     case stopped
+    case none
     public init?(rawValue: Swift.String)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -301,7 +302,7 @@ public struct EdgeFade : Swift.OptionSet {
   open func isMuted() -> Swift.Bool?
   @objc open func setVolumeLevel(volumeLevel: Swift.Int)
   open func getVolumeLevel() -> Swift.Int?
-  @objc open func getState() -> Swift.String?
+  open func getState() -> VLPlayerLib.VLPlayer.VLPlayerState
   @objc open func getPlayerVersion() -> Swift.String?
   open func getCurrentVideoTimeLeft() -> Swift.Double?
   open func getCurrentVideoDuration() -> Swift.Double?

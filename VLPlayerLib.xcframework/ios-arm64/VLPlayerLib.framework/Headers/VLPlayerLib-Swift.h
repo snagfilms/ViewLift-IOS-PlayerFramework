@@ -515,10 +515,6 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)setVolumeLevelWithVolumeLevel:(NSInteger)volumeLevel;
 /// important:
 ///
-/// Method - Used to get player state (Paused, Playing, Playing+Casting, Buffering, Complete, Error, Advertisement)
-- (NSString * _Nullable)getState SWIFT_WARN_UNUSED_RESULT;
-/// important:
-///
 /// Method - Used to get player version number
 - (NSString * _Nullable)getPlayerVersion SWIFT_WARN_UNUSED_RESULT;
 /// important:
