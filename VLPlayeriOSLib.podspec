@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "VLPlayeriOSLib"
-  s.version      = "2.5.8"
+  s.version      = "2.5.9"
   s.summary      = "VLPlayer SDK for iOS.  SDKs page: https://developer.viewlift.com/docs/sdk-ios-player/"
 
   s.description  = <<-DESC
@@ -32,8 +32,10 @@ Pod::Spec.new do |s|
   end
   
 
-  s.dependency 'AmazonIVSPlayer', '1.8.3'
-  s.dependency 'GoogleAds-IMA-iOS-SDK', '3.16.3'
+  s.dependency 'AmazonIVSPlayer', '1.17.0'
+  s.dependency 'GoogleAds-IMA-iOS-SDK', '3.18.4'
+  s.dependency 'VisualEffectView', '4.1.4'
+  s.dependency 'M3U8Parser', '1.0.2'
 
   s.requires_arc = true
 

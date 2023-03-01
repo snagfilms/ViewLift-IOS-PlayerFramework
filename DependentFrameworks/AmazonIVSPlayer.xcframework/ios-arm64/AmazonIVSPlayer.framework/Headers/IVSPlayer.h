@@ -173,8 +173,12 @@ IVS_EXPORT
 /// @see `liveLowLatency` property, which is `true` when this mode is enabled for the stream.
 - (void)setLiveLowLatencyEnabled:(BOOL)enable;
 
-/// Set the maximum quality when using auto quality mode. This can be used to control resource usage.
-/// The quality you provide here is applied to the current stream. If you load a new stream, call this again after `IVSPlayerStateReady`.
+/// Set the maximum bitrate when using auto quality mode. This can be used to control resource usage. The bitrate you provide here is applied to the current stream as well as future streams loaded by the player.
+/// @param autoMaxBitrate Maximum bitrate to use.
+- (void)setAutoMaxBitrate:(NSInteger)autoMaxBitrate;
+
+/// Sets the maximum quality the player is allowed to auto-switch up to (if ABR is enabled) using the input quality's bitrate value. This allows you to control resource usage.
+/// The `IVSQuality` you provide here is applied to the current stream. If you load a new stream, call this again after `IVSPlayerStateReady`.
 /// @param quality Maximum quality to use.
 - (void)setAutoMaxQuality:(nullable IVSQuality *)quality;
 
@@ -184,10 +188,31 @@ IVS_EXPORT
 
 /// Sets the initial (minimum) buffer duration required to start playback.
 /// If a value outside the allowable range is used, the current value is maintained.
-/// Supported range: 0.1 to 5.0 seconds, default: Determined by player based on normal or low latency setting.
+/// The allowable range is 0.1 to 5.0 seconds. Defaults to 1s in low latency mode, 2s otherwise.
 /// Lowering this value may increase rebuffering.
 /// @param duration Duration of the initial buffer.
 - (void)setInitialBufferDuration:(CMTime)duration;
+
+/// Sets the max video display size of the player.
+/// This prevents switching to qualities above the specified resolution when `autoQualityMode` is true.
+/// @param size Maximum video display size
+- (void)setMaxVideoSize:(CGSize)size;
+
+/// When `quality` is `nil` or `adaptive` is `false`, this method behaves exactly like `setQuality:`, the setter for the
+/// `quality` property. Otherwise, with `adaptive` and a nonnull `quality`, the player will attempt a seamless quality
+/// switch asynchronously. This avoids playback interruption, and the new quality will be reported via the delegate
+/// method `-[IVSPlayerDelegate player:didChangeQuality:]`.
+///
+/// Setting the property to nil implicitly enables `autoQualityMode`, and a new quality will be selected asynchronously.
+/// In this case the `adaptive` parameter is ignored, as this is always an adaptive change.
+/// @see `quality` property
+/// @see `-[IVSPlayerDelegate player:didChangeQuality:]`
+- (void)setQuality:(IVSQuality *)quality
+          adaptive:(BOOL)adaptive;
+
+/// Sets the HTTP 'Origin' header on all outgoing requests.
+/// @param origin The HTTP 'Origin' header value.
+- (void)setOrigin:(nullable NSURL *)origin;
 
 @end
 
