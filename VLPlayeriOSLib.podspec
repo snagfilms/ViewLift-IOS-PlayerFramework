@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
   s.dependency 'AmazonIVSPlayer', '1.17.0'
   s.dependency 'GoogleAds-IMA-iOS-SDK', '3.18.4'
   s.dependency 'VisualEffectView', '4.1.4'
-  s.dependency 'M3U8Parser', '1.0.2'
+  s.dependency 'M3U8Kit', '1.0.2'
 
   s.requires_arc = true
 
