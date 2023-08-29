@@ -9,7 +9,8 @@ let package = Package(
     products: [
         .library(name: "VLPlayerLib", targets: ["VLPlayerLibWrapper"]),
         .library(name: "GoogleInteractiveMediaAds", targets: ["GoogleInteractiveMediaAds"]),
-        .library(name: "AmazonIVSPlayer", targets: ["AmazonIVSPlayer"])
+        .library(name: "AmazonIVSPlayer", targets: ["AmazonIVSPlayer"]),
+		.library(name: "VLBeaconLib", targets: ["VLBeaconLib"])
     ],
     dependencies: [
         .package(
@@ -31,6 +32,7 @@ let package = Package(
                 ],
                 path: "VLPlayerLibWrapper/Sources"),
         .binaryTarget(name: "GoogleInteractiveMediaAds", path: "DependentFrameworks/GoogleInteractiveMediaAds.xcframework"),
-        .binaryTarget(name: "AmazonIVSPlayer", path: "DependentFrameworks/AmazonIVSPlayer.xcframework")
+        .binaryTarget(name: "AmazonIVSPlayer", path: "DependentFrameworks/AmazonIVSPlayer.xcframework"),
+		.binaryTarget(name: "VLBeaconLib", path: "DependentFrameworks/VLBeaconLib.xcframework")
     ]
 )

@@ -9,6 +9,7 @@ import AmazonIVSPlayer
 import CommonCrypto
 import CoreMedia
 import Foundation
+import GoogleCast
 import GoogleInteractiveMediaAds
 import MediaPlayer
 import Network
@@ -281,11 +282,14 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func pause()
   @objc dynamic open func dispose()
   @objc dynamic open func destroy()
+  @objc dynamic open func deinitialisePlayer()
   @objc dynamic open func setPlayerFitToFullScreen()
-  @objc dynamic open func setPlayerFitToSmallScreen()
+  @objc dynamic open func setPlayerFitToSmallScreen(frame: CoreFoundation.CGRect)
   @objc dynamic open func goFullScreen()
   @objc dynamic open func removeFullScreen()
   @objc dynamic open func seekTo(seconds: Swift.Double)
+  @objc dynamic open func seekToLivePosition()
+  @objc dynamic open func seekDVRToLivePosition()
   @objc dynamic open func startTime(seconds: Swift.Double)
   public func getCurrentTime() -> Swift.Double?
   @objc dynamic open func getSource() -> Swift.Dictionary<Swift.String, Swift.String>?
@@ -297,18 +301,12 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func checkFullscreenState() -> Swift.Bool
   @objc dynamic open func getVideoPlayerView() -> UIKit.UIView?
   @objc dynamic open func setNextVideo(videoId: Swift.String, adTag: Swift.String?)
-  @objc dynamic open func playNextVideo(videoId: Swift.String?, vlToken: Swift.String?, adTag: Swift.String?)
+  @objc dynamic open func playNextVideo(videoId: Swift.String?, vlToken: Swift.String?, adTag: Swift.String?, isSuccess: @escaping ((_ isSuccess: Swift.Bool) -> Swift.Void))
   public func isAutoPlay() -> Swift.Bool?
   @objc dynamic open func shouldPlayMuted(isMuted: Swift.Bool)
   public func isMuted() -> Swift.Bool?
   @objc dynamic open func setVolumeLevel(volumeLevel: Swift.Int)
   public func getVolumeLevel() -> Swift.Int?
-  public func getState() -> VLPlayerLib.VLPlayer.VLPlayerState
-  @objc dynamic open func getPlayerVersion() -> Swift.String?
-  public func getCurrentVideoTimeLeft() -> Swift.Double?
-  public func getCurrentVideoDuration() -> Swift.Double?
-  @objc dynamic open func setCaptionsVisiblity(captionsVisible: Swift.Bool)
-  @objc dynamic open func updateVideoPlayerFrame(frame: CoreFoundation.CGRect)
   @objc dynamic open func isPictureInPictureSelected() -> Swift.Bool
   @objc dynamic open func setupPictureInPicture()
   @objc dynamic open func pictureInPictureClicked(isPipSelected: Swift.Bool)
@@ -318,28 +316,47 @@ extension VLPlayerLib.VLPlayer {
   public func isLiveVideo() -> Swift.Bool
   public func startPictureInPictureAutomaticallyFromInline(enablePictureInPictureInline: Swift.Bool)
   public func requireLinearPlaybackInPictureInPicture(isRequired: Swift.Bool)
+  public func getChromeCastConnectedStatus() -> Swift.Bool
+  public func castButtonTapped(sender: UIKit.UIButton)
+  @objc dynamic open func setCaptionsVisiblity(captionsVisible: Swift.Bool)
+  public func getState() -> VLPlayerLib.VLPlayer.VLPlayerState
+  @objc dynamic open func getPlayerVersion() -> Swift.String?
+  public func getCurrentVideoTimeLeft() -> Swift.Double?
+  public func getCurrentVideoDuration() -> Swift.Double?
+  @objc dynamic open func updateVideoPlayerFrame(frame: CoreFoundation.CGRect)
   public func getStartOverTime() -> Swift.Double?
+  public func isDVREnabled() -> Swift.Bool?
   public func getAllVideoPlaybackQualityList() -> [Swift.String]?
   public func getCurrentPlaybackQuality() -> Swift.String?
   public func setPlaybackQuality(playbackQuality: Swift.String)
   public func getAllClosedCaptionList() -> [Swift.String]?
   public func getAllContentAudioLanguageList() -> [Swift.String]?
+  public func setPlaybackRate(playbackSpeed: Swift.Float)
+  public func getPlaybackRate() -> Swift.Float
+  public func getCurrentAudioSelected() -> Swift.Int
+  public func setAudioSelected(selectedAudio: Swift.String)
+  public func setClosedCaption(selectedKey: Swift.String, selectedIndex: Swift.Int)
+  public func showOrHideAlwaysPlaybackControl(isShowing: Swift.Bool)
 }
 @objc @_inheritsConvenienceInitializers open class VLPlayer : ObjectiveC.NSObject {
-  @objc open var videoPlayerDelegate: VLPlayerLib.videoPlaybackDelegate?
-  open var clientSideAdTrackingDelegate: VLPlayerLib.ClientSideAdTrackingDelegate? {
+  @objc weak open var videoPlayerDelegate: VLPlayerLib.videoPlaybackDelegate?
+  @objc weak open var castDelegate: VLPlayerLib.ChromeCastPlaybackDelegate?
+  weak open var clientSideAdTrackingDelegate: VLPlayerLib.ClientSideAdTrackingDelegate? {
+    get
+    set
+  }
+  public var debugLogs: Swift.Bool? {
     get
     set
   }
   open var enablePlayerBitrateLogs: Swift.Bool?
   @objc override dynamic public init()
-  @objc open func addCustomVideoControls(controlsView: UIKit.UIView)
-  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void))
+  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextVideoList: [Swift.String] = [], isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
   @objc deinit
 }
 extension VLPlayerLib.VLPlayer {
   public struct VLPlayerFeatureSupported {
-    public init(fullScreenOnly: Swift.Bool, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil)
+    public init(fullScreenOnly: Swift.Bool, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, showPlayerControlAlways: Swift.Bool = false, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, playerResponseRequired: Swift.Bool = false, preGameStartTime: Swift.Double?)
   }
   public struct VLClientSideAdTrackingDetails {
     public init(isClientSideAdTrackingEnabled: Swift.Bool, isWTAEnabled: Swift.Bool)
@@ -403,13 +420,15 @@ extension VLPlayerLib.VLPlayer {
   }
 }
 public struct PlayerControlsColor {
+  public init(iconColor: Swift.String? = nil, textColor: Swift.String? = nil, progressBarBGColor: Swift.String? = nil, progressBarColor: Swift.String? = nil)
 }
 @objc public protocol videoPlaybackDelegate : ObjectiveC.NSObjectProtocol {
   @objc optional func videoStarted(timestamp: Swift.Double, playerTag: Swift.String)
   @objc optional func videoFinished(playerTag: Swift.String)
   @objc optional func videoPause(timestamp: Swift.Double, playerTag: Swift.String)
   @objc optional func videoResume(timestamp: Swift.Double, playerTag: Swift.String)
-  @objc optional func videoPlayerUpdateProgressby30Seconds(currentTime: Swift.Double, totalTime: Swift.Double, playerTag: Swift.String)
+  @objc optional func videoPlayerUpdateByProgressInterveral(currentTime: Swift.Double, totalTime: Swift.Double, playerTag: Swift.String)
+  @objc optional func videoPlayerProgressByEverySecond(currentTime: Swift.Double, totalTime: Swift.Double, playerTag: Swift.String)
   @objc optional func videoPlaybackError(currentTime: Swift.Double, errorMessage: Swift.String, errorCode: Swift.String, playerTag: Swift.String)
   @objc optional func adStarted(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
   @objc optional func adResumed(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
@@ -418,9 +437,10 @@ public struct PlayerControlsColor {
   @objc optional func adFinished(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
   @objc optional func adError(currentTime: Swift.Double, adTag: Swift.String?, errorMessage: Swift.String?, playerTag: Swift.String)
   @objc optional func onFullScreenChange(currentTime: Swift.Double, isFullScreen: Swift.Bool, playerTag: Swift.String)
+  @objc optional func onBackButtonTapped()
   @objc optional func onSeek(currentTime: Swift.Double, playerTag: Swift.String)
   @objc optional func onBuffer(currentTime: Swift.Double, playerTag: Swift.String)
-  @objc optional func videoFetchError(error: VLPlayerLib.VLError, playerTag: Swift.String)
+  @objc optional func videoFetchError(error: VLPlayerLib.VLError?, playerTag: Swift.String?, contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?)
   @objc optional func pictureInPictureSetupCompleted(isPIPSelected: Swift.Bool)
   @objc optional func pictureInPictureWillStart()
   @objc optional func pictureInPictureDidStart()
@@ -431,8 +451,14 @@ public struct PlayerControlsColor {
   @objc optional func onLoadingChanged(isLoading: Swift.Bool)
   @objc optional func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Swift.Bool)
   @objc optional func playerBitrateDebugLogs(logString: Swift.String)
+  @objc optional func autoPlayUIInitiated()
+  @objc optional func autoPlayUIDimissed(isPlayingNextContent: Swift.Bool)
 }
-public protocol ClientSideAdTrackingDelegate {
+@objc public protocol ChromeCastPlaybackDelegate : ObjectiveC.NSObjectProtocol {
+  @objc optional func chromeCastConnectionStatusUpdate(isConnected: Swift.Bool, castContextSessionInstance: GoogleCast.GCKCastContext?)
+  @objc optional func startAnimatingCastIcon()
+}
+public protocol ClientSideAdTrackingDelegate : AnyObject {
   func additionalTrackingDetailsForClientSideAdTracking() -> [Swift.String : Any]?
   func clientSideAdTrackingEvents(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType, eventTrackingProperties: [Swift.String : Any])
   func initalisationForExternalAdTrackingSdk(playerView: UIKit.UIView, playerSize: CoreFoundation.CGSize, completion: (() -> Swift.Void))

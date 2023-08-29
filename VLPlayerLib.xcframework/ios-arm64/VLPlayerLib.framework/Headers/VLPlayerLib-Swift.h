@@ -258,6 +258,23 @@ using UInt = size_t;
 #if defined(__OBJC__)
 
 
+@class GCKCastContext;
+
+SWIFT_PROTOCOL("_TtP11VLPlayerLib26ChromeCastPlaybackDelegate_")
+@protocol ChromeCastPlaybackDelegate <NSObject>
+@optional
+/// important:
+///
+/// Delgate method - called when ChromeCast Status Updated
+/// remark:
+///
+/// Use this method to perform anything after cast connected or disconnected
+/// \param isConnected Bool for connected status
+///
+- (void)chromeCastConnectionStatusUpdateWithIsConnected:(BOOL)isConnected castContextSessionInstance:(GCKCastContext * _Nullable)castContextSessionInstance;
+- (void)startAnimatingCastIcon;
+@end
+
 
 @class NSCoder;
 @class UIWindow;
@@ -414,6 +431,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) Class _Nonnull layer
 
 
 
+
 SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 @interface VLError : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -423,7 +441,8 @@ SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 
 SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 @interface VLPlayer : NSObject
-@property (nonatomic, strong) id <videoPlaybackDelegate> _Nullable videoPlayerDelegate;
+@property (nonatomic, weak) id <videoPlaybackDelegate> _Nullable videoPlayerDelegate;
+@property (nonatomic, weak) id <ChromeCastPlaybackDelegate> _Nullable castDelegate;
 /// important:
 ///
 /// Method - Used to initialize Video Player SDK
@@ -436,7 +455,6 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 ///   </li>
 /// </ul>
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (void)addCustomVideoControlsWithControlsView:(UIView * _Nonnull)controlsView;
 @end
 
 
@@ -448,22 +466,31 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)pause;
 - (void)dispose;
 - (void)destroy;
+- (void)deinitialisePlayer;
 - (void)setPlayerFitToFullScreen;
-- (void)setPlayerFitToSmallScreen;
+- (void)setPlayerFitToSmallScreenWithFrame:(CGRect)frame;
 - (void)goFullScreen;
 - (void)removeFullScreen;
 /// important:
 ///
-/// Method - Used to set boolean flag which should player start playing video automatically
+/// Method - Used to seek to specific duration
 /// <ul>
 ///   <li>
 ///     Parameters:
 ///   </li>
 ///   <li>
-///     autoplay: boolean value either true or false
+///     seconds: Time from where the video to be played from
 ///   </li>
 /// </ul>
 - (void)seekToSeconds:(double)seconds;
+/// important:
+///
+/// Method - Used to seek live video to live position
+- (void)seekToLivePosition;
+/// important:
+///
+/// Method - Used to seek dvr video to live position
+- (void)seekDVRToLivePosition;
 /// important:
 ///
 /// Method - Used to set initial start time
@@ -543,7 +570,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (BOOL)checkFullscreenState SWIFT_WARN_UNUSED_RESULT;
 - (UIView * _Nullable)getVideoPlayerView SWIFT_WARN_UNUSED_RESULT;
 - (void)setNextVideoWithVideoId:(NSString * _Nonnull)videoId adTag:(NSString * _Nullable)adTag;
-- (void)playNextVideoWithVideoId:(NSString * _Nullable)videoId vlToken:(NSString * _Nullable)vlToken adTag:(NSString * _Nullable)adTag;
+- (void)playNextVideoWithVideoId:(NSString * _Nullable)videoId vlToken:(NSString * _Nullable)vlToken adTag:(NSString * _Nullable)adTag isSuccess:(void (^ _Nonnull)(BOOL))isSuccess;
 /// important:
 ///
 /// Method - Used to mute video
@@ -560,34 +587,6 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 ///   </li>
 /// </ul>
 - (void)setVolumeLevelWithVolumeLevel:(NSInteger)volumeLevel;
-/// important:
-///
-/// Method - Used to get player version number
-- (NSString * _Nullable)getPlayerVersion SWIFT_WARN_UNUSED_RESULT;
-/// important:
-///
-/// Method - Used to set closed caption visibility
-/// <ul>
-///   <li>
-///     Parameters:
-///   </li>
-///   <li>
-///     captionsVisible: Boolean value either true or false
-///   </li>
-/// </ul>
-- (void)setCaptionsVisiblityWithCaptionsVisible:(BOOL)captionsVisible;
-/// important:
-///
-/// Method - Used to update player frame
-/// <ul>
-///   <li>
-///     Parameters:
-///   </li>
-///   <li>
-///     frame: CGRect value
-///   </li>
-/// </ul>
-- (void)updateVideoPlayerFrameWithFrame:(CGRect)frame;
 /// important:
 ///
 /// Method - Used to get picture in picture button state
@@ -608,13 +607,41 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 ///   </li>
 /// </ul>
 - (void)pictureInPictureClickedWithIsPipSelected:(BOOL)isPipSelected;
+/// important:
+///
+/// Method - Used to set closed caption visibility
+/// <ul>
+///   <li>
+///     Parameters:
+///   </li>
+///   <li>
+///     captionsVisible: Boolean value either true or false
+///   </li>
+/// </ul>
+- (void)setCaptionsVisiblityWithCaptionsVisible:(BOOL)captionsVisible;
+/// important:
+///
+/// Method - Used to get player version number
+- (NSString * _Nullable)getPlayerVersion SWIFT_WARN_UNUSED_RESULT;
+/// important:
+///
+/// Method - Used to update player frame
+/// <ul>
+///   <li>
+///     Parameters:
+///   </li>
+///   <li>
+///     frame: CGRect value
+///   </li>
+/// </ul>
+- (void)updateVideoPlayerFrameWithFrame:(CGRect)frame;
 @end
 
 
 /// remark:
 ///
 /// Confirm to this protocol and add callback methods to your view controller to get video playback and states
-/// Also included Ads callback methods.
+/// Also included Ads callback methods and chromecast methods.
 SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 @protocol videoPlaybackDelegate <NSObject>
 @optional
@@ -654,7 +681,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 - (void)videoResumeWithTimestamp:(double)timestamp playerTag:(NSString * _Nonnull)playerTag;
 /// important:
 ///
-/// Delgate method - called when video player playback reaches to time divisible by 30
+/// Delgate method - called when video player playback reaches to time divisible by progress interval provided and default by 30 seconds
 /// remark:
 ///
 /// Use this method to update video progress, sync with your server APIs
@@ -662,7 +689,18 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 ///
 /// \param totalTime Total time of video
 ///
-- (void)videoPlayerUpdateProgressby30SecondsWithCurrentTime:(double)currentTime totalTime:(double)totalTime playerTag:(NSString * _Nonnull)playerTag;
+- (void)videoPlayerUpdateByProgressInterveralWithCurrentTime:(double)currentTime totalTime:(double)totalTime playerTag:(NSString * _Nonnull)playerTag;
+/// important:
+///
+/// Delgate method - called when on every second
+/// remark:
+///
+/// Use this method to any action to be performed every second.
+/// \param currentTime Current time of video player (Current Progress)
+///
+/// \param totalTime Total time of video
+///
+- (void)videoPlayerProgressByEverySecondWithCurrentTime:(double)currentTime totalTime:(double)totalTime playerTag:(NSString * _Nonnull)playerTag;
 /// important:
 ///
 /// Delgate method - called when video player failed to play
@@ -763,6 +801,10 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 - (void)onFullScreenChangeWithCurrentTime:(double)currentTime isFullScreen:(BOOL)isFullScreen playerTag:(NSString * _Nonnull)playerTag;
 /// important:
 ///
+/// Delgate method - called when remote Menu press on small screen
+- (void)onBackButtonTapped;
+/// important:
+///
 /// Delgate method - called when video is seeked
 /// \param timestamp Current timestamp when video is seeked
 ///
@@ -780,7 +822,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 ///
 /// \param playerTag Tag of video player instance
 ///
-- (void)videoFetchErrorWithError:(VLError * _Nonnull)error playerTag:(NSString * _Nonnull)playerTag;
+- (void)videoFetchErrorWithError:(VLError * _Nullable)error playerTag:(NSString * _Nullable)playerTag contentResponse:(NSDictionary<NSString *, id> * _Nullable)contentResponse;
 /// important:
 ///
 /// Delgate method - called when Pip setup is completed
@@ -831,6 +873,16 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 /// \param logString Detailed log string of changes in bitrate
 ///
 - (void)playerBitrateDebugLogsWithLogString:(NSString * _Nonnull)logString;
+/// important:
+///
+/// Delgate method - Called when next video playback UI is displayed
+- (void)autoPlayUIInitiated;
+/// important:
+///
+/// Delgate method - Called when next video playback UI is dismissed
+/// \param isPlayingNextContent Tell is next content is playing or user has cancelled playback for next video
+///
+- (void)autoPlayUIDimissedWithIsPlayingNextContent:(BOOL)isPlayingNextContent;
 @end
 
 #endif
