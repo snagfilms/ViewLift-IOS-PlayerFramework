@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
 // swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name VLPlayerLib
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import AVFoundation
@@ -8,6 +8,7 @@ import AdSupport
 import AmazonIVSPlayer
 import CommonCrypto
 import CoreMedia
+import DeveloperToolsSupport
 import Foundation
 import GoogleCast
 import GoogleInteractiveMediaAds
@@ -16,10 +17,12 @@ import Network
 import ObjectiveC
 import QuartzCore
 import Swift
+import SwiftUI
 import SystemConfiguration
 import UIKit
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 public class Subtitles {
   public init(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8)
   public init(subtitles string: Swift.String)
@@ -78,7 +81,7 @@ extension AmazonIVSPlayer.IVSPlayer {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) open var scrollSequence: [VLPlayerLib.MarqueeStep]?
+  @_Concurrency.MainActor(unsafe) open var scrollSequence: [any VLPlayerLib.MarqueeStep]?
   @_Concurrency.MainActor(unsafe) open var animationCurve: UIKit.UIView.AnimationCurve
   @objc @IBInspectable @_Concurrency.MainActor(unsafe) open var labelize: Swift.Bool {
     @objc get
@@ -339,9 +342,9 @@ extension VLPlayerLib.VLPlayer {
   public func showOrHideAlwaysPlaybackControl(isShowing: Swift.Bool)
 }
 @objc @_inheritsConvenienceInitializers open class VLPlayer : ObjectiveC.NSObject {
-  @objc weak open var videoPlayerDelegate: VLPlayerLib.videoPlaybackDelegate?
-  @objc weak open var castDelegate: VLPlayerLib.ChromeCastPlaybackDelegate?
-  weak open var clientSideAdTrackingDelegate: VLPlayerLib.ClientSideAdTrackingDelegate? {
+  @objc weak open var videoPlayerDelegate: (any VLPlayerLib.videoPlaybackDelegate)?
+  @objc weak open var castDelegate: (any VLPlayerLib.ChromeCastPlaybackDelegate)?
+  weak open var clientSideAdTrackingDelegate: (any VLPlayerLib.ClientSideAdTrackingDelegate)? {
     get
     set
   }
