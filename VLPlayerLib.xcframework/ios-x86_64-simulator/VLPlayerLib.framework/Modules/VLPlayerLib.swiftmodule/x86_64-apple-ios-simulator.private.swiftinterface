@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
 // swift-module-flags: -target x86_64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name VLPlayerLib
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import AVFoundation
@@ -8,7 +8,6 @@ import AdSupport
 import AmazonIVSPlayer
 import CommonCrypto
 import CoreMedia
-import DeveloperToolsSupport
 import Foundation
 import GoogleCast
 import GoogleInteractiveMediaAds
@@ -17,12 +16,10 @@ import Network
 import ObjectiveC
 import QuartzCore
 import Swift
-import SwiftUI
 import SystemConfiguration
 import UIKit
 import _Concurrency
 import _StringProcessing
-import _SwiftConcurrencyShims
 public class Subtitles {
   public init(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8)
   public init(subtitles string: Swift.String)
@@ -354,7 +351,7 @@ extension VLPlayerLib.VLPlayer {
   }
   open var enablePlayerBitrateLogs: Swift.Bool?
   @objc override dynamic public init()
-  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextVideoList: [Swift.String] = [], isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
+  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String? = nil, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextVideoList: [Swift.String] = [], isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
   @objc deinit
 }
 extension VLPlayerLib.VLPlayer {
