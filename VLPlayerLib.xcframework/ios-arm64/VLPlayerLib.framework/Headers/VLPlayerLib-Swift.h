@@ -323,6 +323,12 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib26ChromeCastPlaybackDelegate_")
 @end
 
 
+SWIFT_CLASS("_TtC11VLPlayerLib10DataParser")
+@interface DataParser : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 @class NSCoder;
 @class UIWindow;
 @class CAAnimation;
@@ -473,6 +479,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) Class _Nonnull layer
 @end
 
 
+SWIFT_CLASS("_TtC11VLPlayerLib12PlayerObject")
+@interface PlayerObject : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 
 
 
@@ -492,18 +504,12 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 @interface VLPlayer : NSObject
 @property (nonatomic, weak) id <videoPlaybackDelegate> _Nullable videoPlayerDelegate;
 @property (nonatomic, weak) id <ChromeCastPlaybackDelegate> _Nullable castDelegate;
-/// important:
-///
-/// Method - Used to initialize Video Player SDK
-/// <ul>
-///   <li>
-///     Parameters:
-///   </li>
-///   <li>
-///     vlToken: Key(String) to intialize SDK
-///   </li>
-/// </ul>
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface VLPlayer (SWIFT_EXTENSION(VLPlayerLib))
+- (BOOL)isPlaying SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -687,13 +693,11 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 @end
 
 
-/// remark:
-///
-/// Confirm to this protocol and add callback methods to your view controller to get video playback and states
-/// Also included Ads callback methods and chromecast methods.
 SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 @protocol videoPlaybackDelegate <NSObject>
 @optional
+- (void)customPlayerStateWithIsPlaying:(BOOL)isPlaying;
+- (void)customPlayerControlsWithIsHidden:(BOOL)isHidden;
 /// important:
 ///
 /// Delgate method - called when video player started playback
