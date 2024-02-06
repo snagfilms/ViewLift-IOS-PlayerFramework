@@ -342,6 +342,18 @@ public struct AdTagDetail : Swift.Decodable {
       get
     }
   }
+  public enum ResolutionType : Swift.Float {
+    case autoResolution
+    case maxResolution
+    case averageAboveResolution
+    case averageBelowResolution
+    case minResolution
+    public init?(rawValue: Swift.Float)
+    public typealias RawValue = Swift.Float
+    public var rawValue: Swift.Float {
+      get
+    }
+  }
   @objc override dynamic public init()
   open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String? = nil, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextVideoList: [Swift.String] = [], householdID: Swift.String? = nil, tveProvider: Swift.String?, location: (lat: Swift.String, long: Swift.String)?, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
   @objc deinit
@@ -432,6 +444,9 @@ extension VLPlayerLib.VideoSourceType : Swift.Equatable {}
 extension VLPlayerLib.VideoSourceType : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.PlayerDisplayType : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.PlayerDisplayType : Swift.Hashable {}
+extension VLPlayerLib.VLPlayer.ResolutionType : Swift.Equatable {}
+extension VLPlayerLib.VLPlayer.ResolutionType : Swift.Hashable {}
+extension VLPlayerLib.VLPlayer.ResolutionType : Swift.RawRepresentable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.RawRepresentable {}
