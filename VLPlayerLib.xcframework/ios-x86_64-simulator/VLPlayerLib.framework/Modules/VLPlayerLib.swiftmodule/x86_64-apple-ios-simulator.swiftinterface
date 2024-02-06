@@ -110,6 +110,10 @@ public enum NetworkBandwidthUnit : Swift.String {
     get
   }
 }
+@objc @_inheritsConvenienceInitializers public class BeaconHelper : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
+}
 public struct VLPlayerResponse : Swift.Decodable {
   public let videoInfo: VLPlayerLib.VLPlayerResponse.ContentInfo?
   public init(from decoder: any Swift.Decoder) throws

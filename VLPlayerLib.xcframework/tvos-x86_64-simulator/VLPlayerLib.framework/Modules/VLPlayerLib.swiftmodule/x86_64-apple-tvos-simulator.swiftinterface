@@ -37,6 +37,10 @@ extension AVFoundation.AVPlayer {
   public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8, isPathLocal: Swift.Bool)
   public func show(subtitles string: Swift.String)
 }
+@objc @_inheritsConvenienceInitializers public class BeaconHelper : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
+}
 public struct VideoPlan : Swift.Codable {
   public let monetizationModel: Swift.String
   public var featureSetting: VLPlayerLib.VideoPlanFeatureSetting?

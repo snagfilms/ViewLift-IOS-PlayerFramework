@@ -305,6 +305,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if defined(__OBJC__)
 
 
+SWIFT_CLASS("_TtC11VLPlayerLib12BeaconHelper")
+@interface BeaconHelper : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 @class GCKCastContext;
 
 SWIFT_PROTOCOL("_TtP11VLPlayerLib26ChromeCastPlaybackDelegate_")
