@@ -504,6 +504,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
 @protocol videoPlaybackDelegate;
 
 SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
@@ -514,10 +515,11 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 @end
 
 
+
 @interface VLPlayer (SWIFT_EXTENSION(VLPlayerLib))
 - (BOOL)isPlaying SWIFT_WARN_UNUSED_RESULT;
+- (void)shouldPlayVideoWithInitially:(BOOL)initially;
 @end
-
 
 
 
@@ -920,6 +922,10 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 /// \param isLoading To tell if loader need to be start or stop
 ///
 - (void)onLoadingChangedWithIsLoading:(BOOL)isLoading;
+/// important:
+///
+/// Delgate method - Called when law latency player is ready
+- (void)lowLatencyPlayerLoaded;
 /// important:
 ///
 /// Delgate method - Called when subtitle is available or not.

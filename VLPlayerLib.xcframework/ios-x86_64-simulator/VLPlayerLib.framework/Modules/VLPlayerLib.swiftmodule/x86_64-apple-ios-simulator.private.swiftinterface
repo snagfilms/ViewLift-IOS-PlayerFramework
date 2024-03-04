@@ -115,7 +115,10 @@ public enum NetworkBandwidthUnit : Swift.String {
   @objc deinit
 }
 public struct VLPlayerResponse : Swift.Decodable {
+  public let id: Swift.String?
+  public let playable: Swift.Bool?
   public let videoInfo: VLPlayerLib.VLPlayerResponse.ContentInfo?
+  public let plans: [VLPlayerLib.VLPlayerResponse.PlanDetail]?
   public init(from decoder: any Swift.Decoder) throws
 }
 extension VLPlayerLib.VLPlayerResponse {
@@ -486,6 +489,7 @@ extension VLPlayerLib.VLPlayer {
   public func requireLinearPlaybackInPictureInPicture(isRequired: Swift.Bool)
   public func getChromeCastConnectedStatus() -> Swift.Bool
   public func castButtonTapped(sender: UIKit.UIButton)
+  public func isLowLatencyPlayer() -> Swift.Bool
   @objc dynamic open func setCaptionsVisiblity(captionsVisible: Swift.Bool)
   public func getState() -> VLPlayerLib.VLPlayer.VLPlayerState
   @objc dynamic open func getPlayerVersion() -> Swift.String?
@@ -510,6 +514,7 @@ extension VLPlayerLib.VLPlayer {
 }
 extension VLPlayerLib.VLPlayer {
   @objc dynamic open func isPlaying() -> Swift.Bool
+  @objc dynamic open func shouldPlayVideo(initially: Swift.Bool)
 }
 @objc @_inheritsConvenienceInitializers open class VLPlayer : ObjectiveC.NSObject {
   weak open var videoPlayerDatasource: (any VLPlayerLib.VideoPlayerDataSource)?
@@ -675,6 +680,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func pictureInPictureDidStop()
   @objc optional func pictureInPictureDidFailedToStart(error: VLPlayerLib.VLError, playerTag: Swift.String)
   @objc optional func onLoadingChanged(isLoading: Swift.Bool)
+  @objc optional func lowLatencyPlayerLoaded()
   @objc optional func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Swift.Bool)
   @objc optional func playerBitrateDebugLogs(logString: Swift.String)
   @objc optional func autoPlayUIInitiated()
@@ -733,6 +739,15 @@ public protocol ClientSideAdTrackingDelegate : AnyObject {
 extension VLPlayerLib.NetworkReachabilityManager.NetworkReachabilityStatus : Swift.Equatable {
 }
 public func == (lhs: VLPlayerLib.NetworkReachabilityManager.NetworkReachabilityStatus, rhs: VLPlayerLib.NetworkReachabilityManager.NetworkReachabilityStatus) -> Swift.Bool
+public struct ValidatedPlayerResponse {
+  public let success: Swift.Bool
+  public let error: VLPlayerLib.VLError?
+  public let contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?
+}
+public struct PlayerResponseValidation {
+  public init()
+  public func validateResponse(fetchedSuccessfully isSuccess: Swift.Bool, contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?, isUserLoggedIn: Swift.Bool?, creationHandler: (() -> Swift.Void)? = nil) -> VLPlayerLib.ValidatedPlayerResponse
+}
 extension VLPlayerLib.VideoSourceType : Swift.Equatable {}
 extension VLPlayerLib.VideoSourceType : Swift.Hashable {}
 extension VLPlayerLib.NetworkConnectionStatus : Swift.Equatable {}

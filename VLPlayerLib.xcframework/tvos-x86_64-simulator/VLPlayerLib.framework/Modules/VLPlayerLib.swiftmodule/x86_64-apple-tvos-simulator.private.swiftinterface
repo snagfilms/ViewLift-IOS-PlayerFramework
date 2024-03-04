@@ -19,6 +19,15 @@ import VLBeaconLib
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+public struct ValidatedPlayerResponse {
+  public let success: Swift.Bool
+  public let error: VLPlayerLib.VLError?
+  public let contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?
+}
+public struct PlayerResponseValidation {
+  public init()
+  public func validateResponse(fetchedSuccessfully isSuccess: Swift.Bool, contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?, isUserLoggedIn: Swift.Bool?, creationHandler: (() -> Swift.Void)? = nil) -> VLPlayerLib.ValidatedPlayerResponse
+}
 public class Subtitles {
   public init(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8)
   public init(subtitles string: Swift.String)
@@ -118,6 +127,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func pictureInPictureDidStop()
   @objc optional func pictureInPictureDidFailedToStart(error: VLPlayerLib.VLError, playerTag: Swift.String)
   @objc optional func onLoadingChanged(isLoading: Swift.Bool)
+  @objc optional func lowLatencyPlayerLoaded()
   @objc optional func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Swift.Bool)
   @objc optional func playerBitrateDebugLogs(logString: Swift.String)
   @objc optional func autoPlayUIInitiated()
@@ -200,9 +210,13 @@ extension VLPlayerLib.VLPlayer {
 extension VLPlayerLib.VLPlayer {
   @objc dynamic open func isPlaying() -> Swift.Bool
   @objc dynamic open func seekBarInUse()
+  @objc dynamic open func shouldPlayVideo(initially: Swift.Bool)
 }
 public struct VLPlayerResponse : Swift.Decodable {
+  public let id: Swift.String?
+  public let playable: Swift.Bool?
   public let videoInfo: VLPlayerLib.VLPlayerResponse.ContentInfo?
+  public let plans: [VLPlayerLib.VLPlayerResponse.PlanDetail]?
   public init(from decoder: any Swift.Decoder) throws
 }
 extension VLPlayerLib.VLPlayerResponse {
