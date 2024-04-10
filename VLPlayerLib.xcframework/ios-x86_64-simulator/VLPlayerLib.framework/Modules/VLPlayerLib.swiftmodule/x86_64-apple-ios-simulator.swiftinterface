@@ -36,12 +36,14 @@ public enum VideoSourceType {
   }
 }
 public struct VideoSource {
+  public var sourceUrl: Swift.String
 }
 public struct VideoImageObject {
 }
 public struct Tags {
 }
 @objc @_inheritsConvenienceInitializers public class PlayerObject : ObjectiveC.NSObject {
+  public var videoSources: Swift.Array<VLPlayerLib.VideoSource>?
   @objc override dynamic public init()
   @objc deinit
 }
