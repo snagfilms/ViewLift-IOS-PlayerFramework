@@ -552,6 +552,10 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)seekToLivePosition;
 /// important:
 ///
+/// Method - Used to play the video till the expected duration
+- (void)setEndTimeDurationFrom:(double)duration;
+/// important:
+///
 /// Method - Used to seek dvr video to live position
 - (void)seekDVRToLivePosition;
 /// important:

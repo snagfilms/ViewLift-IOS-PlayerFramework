@@ -324,6 +324,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib12PlayerObject")
 
 
 
+
 SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 @interface VLError : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -377,6 +378,10 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 ///
 /// Method - Used to seek live video to live position
 - (void)seekToLivePosition;
+/// important:
+///
+/// Method - Used to play the video till the expected duration
+- (void)setEndTimeDurationFrom:(double)duration;
 /// important:
 ///
 /// Method - Used to seek dvr video to live position

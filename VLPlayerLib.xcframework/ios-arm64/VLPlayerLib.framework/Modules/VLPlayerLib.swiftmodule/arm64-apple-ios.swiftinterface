@@ -461,6 +461,7 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func removeFullScreen()
   @objc dynamic open func seekTo(seconds: Swift.Double)
   @objc dynamic open func seekToLivePosition()
+  @objc dynamic open func setEndTimeDuration(from duration: Swift.Double)
   @objc dynamic open func seekDVRToLivePosition()
   @objc dynamic open func startTime(seconds: Swift.Double)
   public func getCurrentTime() -> Swift.Double?
