@@ -22,9 +22,13 @@ let package = Package(
             name: "M3U8Parser",
             url: "https://github.com/M3U8Kit/M3U8Parser.git",
             from: "1.0.2"),
-        .package(
-            url: "https://github.com/bitmovin/player-ios.git",
-            exact: "3.66.0"),
+        //        .package(
+        //            url: "https://github.com/bitmovin/player-ios.git",
+        //            exact: "3.66.0"),
+            .package(
+                name: "BitmovinPlayer",
+                url: "https://github.com/bitmovin/player-ios.git",
+                from: "3.66.0"),
         .package(
             name: "VLBeaconLib",
             url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
@@ -41,6 +45,7 @@ let package = Package(
                     .product(name: "VLBeaconLib", package: "VLBeaconLib"),
                     .product(name: "VisualEffectView", package: "VisualEffectView"),
                     .product(name: "M3U8Parser", package: "M3U8Parser"),
+                    .product(name: "BitmovinPlayer", package: "BitmovinPlayer"),
                     .target(name: "VLPlayerLib")
                 ],
                 path: "VLPlayerLibWrapper/Sources"),
