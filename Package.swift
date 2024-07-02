@@ -22,13 +22,10 @@ let package = Package(
             name: "M3U8Parser",
             url: "https://github.com/M3U8Kit/M3U8Parser.git",
             from: "1.0.2"),
-        //        .package(
-        //            url: "https://github.com/bitmovin/player-ios.git",
-        //            exact: "3.66.0"),
-            .package(
-                name: "BitmovinPlayer",
-                url: "https://github.com/bitmovin/player-ios.git",
-                from: "3.66.0"),
+        .package(
+            name: "BitmovinPlayer",
+            url: "https://github.com/bitmovin/player-ios.git",
+            from: "3.66.1"),
         .package(
             name: "VLBeaconLib",
             url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
