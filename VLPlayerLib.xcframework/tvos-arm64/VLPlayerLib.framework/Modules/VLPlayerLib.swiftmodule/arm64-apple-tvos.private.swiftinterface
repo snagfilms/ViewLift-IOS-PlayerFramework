@@ -101,6 +101,7 @@ public protocol VideoPlayerDataSource : AnyObject {
 @objc public protocol videoPlaybackDelegate : ObjectiveC.NSObjectProtocol {
   @objc optional func customPlayerState(isPlaying: Swift.Bool)
   @objc optional func customPlayerControls(isHidden: Swift.Bool)
+  @objc optional func playerRateChanged(rate: Swift.Float, playerTag: Swift.String?)
   @objc optional func videoStarted(timestamp: Swift.Double, playerTag: Swift.String)
   @objc optional func videoFinished(playerTag: Swift.String)
   @objc optional func videoPause(timestamp: Swift.Double, playerTag: Swift.String)
@@ -152,6 +153,9 @@ public enum VideoSourceType {
 }
 public struct VideoSource {
   public var sourceUrl: Swift.String
+}
+public struct AudioAssets {
+  public var hls: Swift.String?
 }
 public struct VideoImageObject {
 }
@@ -350,6 +354,9 @@ public struct AdTagDetail : Swift.Decodable {
     get
     set
   }
+  public var audioAsset: VLPlayerLib.AudioAssets? {
+    get
+  }
   open var enablePlayerBitrateLogs: Swift.Bool?
   public enum PlayerDisplayType : Swift.Equatable {
     case single
@@ -387,7 +394,7 @@ public struct AdTagDetail : Swift.Decodable {
 }
 extension VLPlayerLib.VLPlayer {
   public struct VLPlayerFeatureSupported {
-    public init(fullScreenOnly: Swift.Bool, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, showPlayerControlAlways: Swift.Bool = false, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, playerResponseRequired: Swift.Bool = false, preGameStartTime: Swift.Double?, appMacrosList: [Swift.String : Swift.String]? = [:], vlBeacon: VLBeaconLib.VLBeacon?)
+    public init(fullScreenOnly: Swift.Bool, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, showPlayerControlAlways: Swift.Bool = false, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, playerResponseRequired: Swift.Bool = false, preGameStartTime: Swift.Double?, appMacrosList: [Swift.String : Swift.String]? = [:], vlBeacon: VLBeaconLib.VLBeacon?, playAudioOnly: Swift.Bool? = false)
   }
   public struct VLClientSideAdTrackingDetails {
     public init(isClientSideAdTrackingEnabled: Swift.Bool, isWTAEnabled: Swift.Bool)

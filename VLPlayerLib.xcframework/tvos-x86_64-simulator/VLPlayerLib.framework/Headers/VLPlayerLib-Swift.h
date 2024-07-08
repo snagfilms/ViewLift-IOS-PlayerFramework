@@ -494,6 +494,10 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 @optional
 - (void)customPlayerStateWithIsPlaying:(BOOL)isPlaying;
 - (void)customPlayerControlsWithIsHidden:(BOOL)isHidden;
+/// Handle player rate change
+/// \param playerTag 
+///
+- (void)playerRateChangedWithRate:(float)rate playerTag:(NSString * _Nullable)playerTag;
 /// important:
 ///
 /// Delgate method - called when video player started playback
