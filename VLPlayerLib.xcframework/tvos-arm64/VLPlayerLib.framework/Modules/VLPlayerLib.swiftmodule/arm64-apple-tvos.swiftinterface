@@ -343,7 +343,7 @@ public struct AdTagDetail : Swift.Decodable {
   @objc deinit
 }
 public struct VLEPGProgramDetails {
-  public init(id: Swift.String, channelId: Swift.String, programId: Swift.String, programTitle: Swift.String)
+  public init(id: Swift.String, channelId: Swift.String, programId: Swift.String, programTitle: Swift.String, subType: Swift.String)
 }
 @objc @_inheritsConvenienceInitializers open class VLPlayer : ObjectiveC.NSObject {
   weak open var videoPlayerDatasource: (any VLPlayerLib.VideoPlayerDataSource)?

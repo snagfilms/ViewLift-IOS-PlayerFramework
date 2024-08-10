@@ -96,7 +96,7 @@ extension AmazonIVSPlayer.IVSPlayer {
   @objc deinit
 }
 public struct VLEPGProgramDetails {
-  public init(id: Swift.String, channelId: Swift.String, programId: Swift.String, programTitle: Swift.String)
+  public init(id: Swift.String, channelId: Swift.String, programId: Swift.String, programTitle: Swift.String, subType: Swift.String)
 }
 public enum NetworkConnectionStatus : Swift.String {
   case poor
