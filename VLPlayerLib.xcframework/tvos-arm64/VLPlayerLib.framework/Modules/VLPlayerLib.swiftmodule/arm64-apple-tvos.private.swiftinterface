@@ -396,7 +396,7 @@ public struct VLEPGProgramDetails {
 }
 extension VLPlayerLib.VLPlayer {
   public struct VLPlayerFeatureSupported {
-    public init(fullScreenOnly: Swift.Bool, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, showPlayerControlAlways: Swift.Bool = false, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, playerResponseRequired: Swift.Bool = false, preGameStartTime: Swift.Double?, appMacrosList: [Swift.String : Swift.String]? = [:], vlBeacon: VLBeaconLib.VLBeacon?, playAudioOnly: Swift.Bool? = false)
+    public init(fullScreenOnly: Swift.Bool, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, showPlayerControlAlways: Swift.Bool = false, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, playerResponseRequired: Swift.Bool = false, preGameStartTime: Swift.Double?, appMacrosList: [Swift.String : Swift.String]? = [:], vlBeacon: VLBeaconLib.VLBeacon?, playAudioOnly: Swift.Bool? = false, epgSupportModel: VLPlayerLib.EPGSupportModel? = nil)
   }
   public struct VLClientSideAdTrackingDetails {
     public init(isClientSideAdTrackingEnabled: Swift.Bool, isWTAEnabled: Swift.Bool)
@@ -469,6 +469,10 @@ public struct EntitlementData {
   public let playerResponse: VLPlayerLib.VLPlayerResponse?
   public let contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?
   public init(playerObject: VLPlayerLib.PlayerObject?, isSuccess: Swift.Bool?, error: VLPlayerLib.VLError?, playerResponse: VLPlayerLib.VLPlayerResponse?, contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?)
+}
+public class EPGSupportModel {
+  public init(isEpg: Swift.Bool = false, epgFrame: CoreFoundation.CGRect = UIScreen.main.bounds)
+  @objc deinit
 }
 extension VLPlayerLib.NetworkConnectionStatus : Swift.Equatable {}
 extension VLPlayerLib.NetworkConnectionStatus : Swift.Hashable {}
