@@ -217,6 +217,7 @@ extension VLPlayerLib.VLPlayer {
 extension VLPlayerLib.VLPlayer {
   @objc dynamic open func isPlaying() -> Swift.Bool
   @objc dynamic open func seekBarInUse()
+  public func setPlayerControls(isHidden: Swift.Bool)
   @objc dynamic open func shouldPlayVideo(initially: Swift.Bool)
 }
 public struct VLPlayerResponse : Swift.Decodable {
