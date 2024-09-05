@@ -519,6 +519,7 @@ extension VLPlayerLib.VLPlayer {
   public func getCurrentAudioSelected() -> Swift.Int
   public func setAudioSelected(selectedAudio: Swift.String)
   public func setClosedCaption(selectedKey: Swift.String, selectedIndex: Swift.Int)
+  public func setCCFontSize()
   public func setClosedCaption(selectedKey: Swift.String, selectedIndex: Swift.Int, isSrtSubtitle: Swift.Bool)
   public func showOrHideAlwaysPlaybackControl(isShowing: Swift.Bool)
 }
