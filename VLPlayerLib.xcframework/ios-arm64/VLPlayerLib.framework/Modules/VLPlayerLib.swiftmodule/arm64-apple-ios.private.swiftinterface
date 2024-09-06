@@ -125,6 +125,7 @@ public enum NetworkBandwidthUnit : Swift.String {
 public struct VLPlayerResponse : Swift.Decodable {
   public let id: Swift.String?
   public let playable: Swift.Bool?
+  public let errorMessage: Swift.String?
   public let videoInfo: VLPlayerLib.VLPlayerResponse.ContentInfo?
   public let plans: [VLPlayerLib.VLPlayerResponse.PlanDetail]?
   public init(from decoder: any Swift.Decoder) throws
@@ -518,6 +519,7 @@ extension VLPlayerLib.VLPlayer {
   public func getCurrentAudioSelected() -> Swift.Int
   public func setAudioSelected(selectedAudio: Swift.String)
   public func setClosedCaption(selectedKey: Swift.String, selectedIndex: Swift.Int)
+  public func setCCFontSize()
   public func setClosedCaption(selectedKey: Swift.String, selectedIndex: Swift.Int, isSrtSubtitle: Swift.Bool)
   public func showOrHideAlwaysPlaybackControl(isShowing: Swift.Bool)
 }
@@ -576,7 +578,7 @@ extension VLPlayerLib.VLPlayer {
   public func setEntitlement(data: VLPlayerLib.EntitlementData?, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String?)
   public func refreshEntitlement(data: VLPlayerLib.EntitlementData?, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
   open func setSourceToPlayDirectURL(customControlsView: UIKit.UIView?, playerDisplayType: VLPlayerLib.VLPlayer.PlayerDisplayType, analyticsAdditionalData: [Swift.String : Any]?)
-  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextVideoList: [Swift.String] = [], householdID: Swift.String? = nil, tveProvider: Swift.String?, location: (lat: Swift.String, long: Swift.String)?, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
+  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextVideoList: [Swift.String] = [], householdID: Swift.String? = nil, tveProvider: Swift.String?, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, location: (lat: Swift.String, long: Swift.String)?, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
   @objc deinit
 }
 extension VLPlayerLib.VLPlayer {
