@@ -125,7 +125,6 @@ public enum NetworkBandwidthUnit : Swift.String {
 public struct VLPlayerResponse : Swift.Decodable {
   public let id: Swift.String?
   public let playable: Swift.Bool?
-  public let errorMessage: Swift.String?
   public let videoInfo: VLPlayerLib.VLPlayerResponse.ContentInfo?
   public let plans: [VLPlayerLib.VLPlayerResponse.PlanDetail]?
   public init(from decoder: any Swift.Decoder) throws
@@ -519,7 +518,6 @@ extension VLPlayerLib.VLPlayer {
   public func getCurrentAudioSelected() -> Swift.Int
   public func setAudioSelected(selectedAudio: Swift.String)
   public func setClosedCaption(selectedKey: Swift.String, selectedIndex: Swift.Int)
-  public func setCCFontSize()
   public func setClosedCaption(selectedKey: Swift.String, selectedIndex: Swift.Int, isSrtSubtitle: Swift.Bool)
   public func showOrHideAlwaysPlaybackControl(isShowing: Swift.Bool)
 }
