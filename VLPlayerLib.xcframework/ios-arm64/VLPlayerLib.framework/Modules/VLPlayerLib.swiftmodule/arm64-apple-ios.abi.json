@@ -14514,7 +14514,7 @@
               {
                 "kind": "Constructor",
                 "name": "init",
-                "printedName": "init(fullScreenOnly:verticalVideo:isCustomLoaderAdded:shouldStartPictureInPictureInline:autoPlayEnabled:loopVideoPlayback:hideVideoControls:mutePlayback:customPlayerControlsColor:clientSideAdTrackingDetails:showPlayerControlAlways:supportsChromeCast:chromecastCustomReceiver:playerResponseRequired:preGameStartTime:appMacrosList:vlBeacon:playAudioOnly:epgSupportModel:)",
+                "printedName": "init(fullScreenOnly:verticalVideo:isCustomLoaderAdded:shouldStartPictureInPictureInline:autoPlayEnabled:loopVideoPlayback:hideVideoControls:mutePlayback:customPlayerControlsColor:clientSideAdTrackingDetails:showPlayerControlAlways:supportsChromeCast:chromecastCustomReceiver:playerResponseRequired:preGameStartTime:appMacrosList:vlBeacon:playAudioOnly:epgSupportModel:tapToPause:)",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -14735,11 +14735,26 @@
                     ],
                     "hasDefaultArg": true,
                     "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Bool?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
                   }
                 ],
                 "declKind": "Constructor",
-                "usr": "s:11VLPlayerLib0A0C0A16FeatureSupportedV14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInP6Inline15autoPlayEnabled04loopI8Playback04hideI8Controls04muteW0012customPlayerY5Color27clientSideAdTrackingDetails23showPlayerControlAlways18supportsChromeCast010chromecastK8Receiver22playerResponseRequired07preGameO4Time13appMacrosList8vlBeacon09playAudioG015epgSupportModelAESb_SbSgS6bAA06PlayerY5ColorVSgAC29VLClientSideAdTrackingDetailsVSgS2bSSSgSbSdSgSDyS2SGSg08VLBeaconB08VLBeaconCSgAyA15EPGSupportModelCSgtcfc",
-                "mangledName": "$s11VLPlayerLib0A0C0A16FeatureSupportedV14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInP6Inline15autoPlayEnabled04loopI8Playback04hideI8Controls04muteW0012customPlayerY5Color27clientSideAdTrackingDetails23showPlayerControlAlways18supportsChromeCast010chromecastK8Receiver22playerResponseRequired07preGameO4Time13appMacrosList8vlBeacon09playAudioG015epgSupportModelAESb_SbSgS6bAA06PlayerY5ColorVSgAC29VLClientSideAdTrackingDetailsVSgS2bSSSgSbSdSgSDyS2SGSg08VLBeaconB08VLBeaconCSgAyA15EPGSupportModelCSgtcfc",
+                "usr": "s:11VLPlayerLib0A0C0A16FeatureSupportedV14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInP6Inline15autoPlayEnabled04loopI8Playback04hideI8Controls04muteW0012customPlayerY5Color27clientSideAdTrackingDetails23showPlayerControlAlways18supportsChromeCast010chromecastK8Receiver22playerResponseRequired07preGameO4Time13appMacrosList8vlBeacon09playAudioG015epgSupportModel10tapToPauseAESb_SbSgS6bAA06PlayerY5ColorVSgAC29VLClientSideAdTrackingDetailsVSgS2bSSSgSbSdSgSDyS2SGSg08VLBeaconB08VLBeaconCSgAzA15EPGSupportModelCSgAZtcfc",
+                "mangledName": "$s11VLPlayerLib0A0C0A16FeatureSupportedV14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInP6Inline15autoPlayEnabled04loopI8Playback04hideI8Controls04muteW0012customPlayerY5Color27clientSideAdTrackingDetails23showPlayerControlAlways18supportsChromeCast010chromecastK8Receiver22playerResponseRequired07preGameO4Time13appMacrosList8vlBeacon09playAudioG015epgSupportModel10tapToPauseAESb_SbSgS6bAA06PlayerY5ColorVSgAC29VLClientSideAdTrackingDetailsVSgS2bSSSgSbSdSgSDyS2SGSg08VLBeaconB08VLBeaconCSgAzA15EPGSupportModelCSgAZtcfc",
                 "moduleName": "VLPlayerLib",
                 "declAttributes": [
                   "AccessControl"
@@ -23441,6 +23456,13 @@
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 14691,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
       "offset": 3566,
       "length": 21,
@@ -24366,224 +24388,224 @@
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 10946,
+      "offset": 11067,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 11000,
+      "offset": 11121,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 11068,
+      "offset": 11189,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 11118,
+      "offset": 11239,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 11169,
+      "offset": 11290,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 11221,
+      "offset": 11342,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 11268,
+      "offset": 11389,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 11481,
+      "offset": 11602,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 11534,
+      "offset": 11655,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 11626,
+      "offset": 11767,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Dictionary",
-      "offset": 11692,
+      "offset": 11873,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 11741,
+      "offset": 11962,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15313,
+      "offset": 15649,
       "length": 8,
       "value": "\"Paused\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15345,
+      "offset": 15681,
       "length": 9,
       "value": "\"Playing\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15388,
+      "offset": 15724,
       "length": 17,
       "value": "\"Playing+Casting\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15431,
+      "offset": 15767,
       "length": 11,
       "value": "\"Buffering\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15467,
+      "offset": 15803,
       "length": 10,
       "value": "\"Complete\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15499,
+      "offset": 15835,
       "length": 7,
       "value": "\"Error\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15536,
+      "offset": 15872,
       "length": 15,
       "value": "\"Advertisement\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15575,
+      "offset": 15911,
       "length": 9,
       "value": "\"Stalled\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15608,
+      "offset": 15944,
       "length": 9,
       "value": "\"Stopped\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15638,
+      "offset": 15974,
       "length": 6,
       "value": "\"None\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15313,
+      "offset": 15649,
       "length": 8,
       "value": "\"Paused\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15345,
+      "offset": 15681,
       "length": 9,
       "value": "\"Playing\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15388,
+      "offset": 15724,
       "length": 17,
       "value": "\"Playing+Casting\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15431,
+      "offset": 15767,
       "length": 11,
       "value": "\"Buffering\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15467,
+      "offset": 15803,
       "length": 10,
       "value": "\"Complete\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15499,
+      "offset": 15835,
       "length": 7,
       "value": "\"Error\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15536,
+      "offset": 15872,
       "length": 15,
       "value": "\"Advertisement\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15575,
+      "offset": 15911,
       "length": 9,
       "value": "\"Stalled\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15608,
+      "offset": 15944,
       "length": 9,
       "value": "\"Stopped\""
     },
     {
       "filePath": "\/Volumes\/Data\/Office\/PlayerSDKCode\/VideoPlayer\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15638,
+      "offset": 15974,
       "length": 6,
       "value": "\"None\""
     },
