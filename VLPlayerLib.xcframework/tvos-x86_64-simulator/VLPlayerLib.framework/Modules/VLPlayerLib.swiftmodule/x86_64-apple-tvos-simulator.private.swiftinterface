@@ -1,10 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
-// swift-module-flags: -target x86_64-apple-tvos13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name VLPlayerLib
-// swift-module-flags-ignorable: -enable-bare-slash-regex
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target x86_64-apple-tvos14.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name VLPlayerLib
 import AVFoundation
 import AVKit
 import AdSupport
+import Combine
 import CommonCrypto
 import CoreMedia
 import DeveloperToolsSupport
@@ -365,6 +365,9 @@ public struct VLEPGProgramDetails {
     get
   }
   open var enablePlayerBitrateLogs: Swift.Bool?
+  public var hasEntitlementData: Swift.Bool {
+    get
+  }
   public enum PlayerDisplayType : Swift.Equatable {
     case single
     case multiple
@@ -375,8 +378,6 @@ public struct VLEPGProgramDetails {
     case tutorial
     case fullScreen
     case smallScreen
-    public static func setUrl(_ urlString: Swift.String)
-    public static func getUrl() -> Swift.String?
     public static func == (a: VLPlayerLib.VLPlayer.LeaderboardPlayerControls, b: VLPlayerLib.VLPlayer.LeaderboardPlayerControls) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -396,7 +397,10 @@ public struct VLEPGProgramDetails {
     }
   }
   @objc override dynamic public init()
-  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextVideoList: [Swift.String] = [], householdID: Swift.String? = nil, tveProvider: Swift.String?, easeLiveEnabled: Swift.Bool, location: (lat: Swift.String, long: Swift.String)?, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
+  convenience public init(playerType: VLPlayerLib.VLPlayerType)
+  public func setEntitlement(data: VLPlayerLib.EntitlementData?, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String?)
+  public func refreshEntitlement(data: VLPlayerLib.EntitlementData?, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
+  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextVideoList: [Swift.String] = [], householdID: Swift.String? = nil, tveProvider: Swift.String?, easeLiveEnabled: Swift.Bool = false, location: (lat: Swift.String, long: Swift.String)?, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
   @objc deinit
 }
 extension VLPlayerLib.VLPlayer {
@@ -474,6 +478,25 @@ public struct EntitlementData {
   public let playerResponse: VLPlayerLib.VLPlayerResponse?
   public let contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?
   public init(playerObject: VLPlayerLib.PlayerObject?, isSuccess: Swift.Bool?, error: VLPlayerLib.VLError?, playerResponse: VLPlayerLib.VLPlayerResponse?, contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?)
+}
+public struct VLBitmovinConfig : Swift.Equatable {
+  public struct VLBitmovinLicenseConfig : Swift.Equatable {
+    public let playerKey: Swift.String
+    public let analyticsKey: Swift.String?
+    public init(playerKey: Swift.String, analyticsKey: Swift.String?)
+    public static func == (a: VLPlayerLib.VLBitmovinConfig.VLBitmovinLicenseConfig, b: VLPlayerLib.VLBitmovinConfig.VLBitmovinLicenseConfig) -> Swift.Bool
+  }
+  public let license: VLPlayerLib.VLBitmovinConfig.VLBitmovinLicenseConfig
+  public let userId: Swift.String?
+  public init(license: VLPlayerLib.VLBitmovinConfig.VLBitmovinLicenseConfig, userId: Swift.String?)
+  public static func == (a: VLPlayerLib.VLBitmovinConfig, b: VLPlayerLib.VLBitmovinConfig) -> Swift.Bool
+}
+public enum VLPlayerType : Swift.Equatable {
+  case bitmovin(config: VLPlayerLib.VLBitmovinConfig)
+  case `default`
+  public static func == (a: VLPlayerLib.VLPlayerType, b: VLPlayerLib.VLPlayerType) -> Swift.Bool
+}
+public struct BeaconConfig {
 }
 public class EPGSupportModel {
   public init(isEpg: Swift.Bool = false, epgFrame: CoreFoundation.CGRect = UIScreen.main.bounds)
