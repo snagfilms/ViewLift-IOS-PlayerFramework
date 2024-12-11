@@ -96,6 +96,11 @@ extension AmazonIVSPlayer.IVSPlayer {
   @objc deinit
 }
 public struct VLEPGProgramDetails {
+  public let id: Swift.String
+  public var channelId: Swift.String
+  public let programId: Swift.String
+  public let programTitle: Swift.String
+  public let subType: Swift.String
   public init(id: Swift.String, channelId: Swift.String, programId: Swift.String, programTitle: Swift.String, subType: Swift.String)
 }
 public enum NetworkConnectionStatus : Swift.String {
@@ -543,6 +548,9 @@ extension VLPlayerLib.VLPlayer {
     get
   }
   open var enablePlayerBitrateLogs: Swift.Bool?
+  public var hasEntitlementData: Swift.Bool {
+    get
+  }
   public enum PlayerDisplayType : Swift.Equatable {
     case single
     case multiple
