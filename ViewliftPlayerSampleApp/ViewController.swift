@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VLPlayerLibWrapper
+
 protocol VideoListProtocol {
     var videoList:VideoList? {get set}
     func readVideoList()

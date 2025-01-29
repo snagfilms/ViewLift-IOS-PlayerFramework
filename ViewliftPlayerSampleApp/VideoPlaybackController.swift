@@ -129,22 +129,27 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                 let vlToken = self.videoList.playbackToken
                 let streamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 var vlPlayer: VLPlayer!
-                if playerOptionSelected == .playStreamURL{
+                if playerOptionSelected == .playStreamURL {
                     enableCustomPlayerUI = true
                     let playerLicenseKey = ""
                     let analyticsLicenseKey = ""
-                    if playerLicenseKey.isEmpty{
-                        vlPlayer = VLPlayer(playerType: .default)
-                    }else{
-                        vlPlayer =  VLPlayer(playerType: .bitmovin(config: VLBitmovinConfig(license: VLBitmovinConfig.VLBitmovinLicenseConfig(playerKey: playerLicenseKey, analyticsKey: analyticsLicenseKey), userId: nil)))
+                    if playerLicenseKey.isEmpty || analyticsLicenseKey.isEmpty {
+                        vlPlayer = VLPlayer.init()
+                    } else {
+                        vlPlayer = VLPlayer(playerType: .bitmovin(config: VLBitmovinConfig(license: VLBitmovinConfig.VLBitmovinLicenseConfig(playerKey: playerLicenseKey, analyticsKey: analyticsLicenseKey), userId: nil)))
                     }
                     vlPlayer.videoPlayerDelegate = self
                     vlPlayer.clientSideAdTrackingDelegate = self
                     vlPlayer.enablePlayerBitrateLogs = self.enableBitrateLogs
-                    vlPlayer.setSourceToPlay(streamURL: streamURL, vlToken: vlToken, vlAPIEndPoint: vlBaseUrl, vlBeaconEndPoint: nil, customControlsView: nil, playerFeaturesSupported: featureSupported){ status, playerView in
+                    
+                    //MARK: isASATPlayer bool is required to check monetisation
+                    vlPlayer.setSourceToPlay(isASATPlayer: true, streamURL: streamURL, vlToken: vlToken, vlAPIEndPoint: vlBaseUrl, vlBeaconEndPoint: nil, customControlsView: nil, playerFeaturesSupported: featureSupported){ status, playerView in
                         DispatchQueue.main.async { [weak self] in
                             guard let checkedSelf = self else {return}
                             loaderView.stopAnimating()
+                            
+                            guard status else { return }
+                            
                             playerView?.frame = CGRect.init(x: 10, y: 10, width: UIScreen.main.bounds.width - 20, height: (UIScreen.main.bounds.width - 20) * 9/16)
                             if cell?.contentView != nil {
                                 cell?.contentView.addSubview(playerView!)
@@ -221,6 +226,13 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
         }
         cell?.selectionStyle = .none
         return cell!
+    }
+    
+    func showAlert(title: String = "Alert!", message: String = "Description") {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -357,13 +369,16 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
         }
     }
     
-    func videoFetchError(error: VLError, playerTag: String)
-    {
-        print("Is content playable - \(error.isPlayable ?? false)")
-        print("Content Fetched successfully - \(error.isSuccess ?? false)")
-        print("Error Code - \(error.errorCode ?? "errorCode")")
-        print("Error Message - \(error.errorMessage ?? "errorMessage")")
-        print("Error VL Code - \(error.vl_errorCode ?? "errorVLCode")")
+    func videoFetchError(error: VLError?, playerTag: String?, contentResponse: Dictionary<String, AnyObject>?) {
+        let errorDescription =  "Is content playable - \(error?.isPlayable ?? false) \n" +
+        "Content Fetched successfully - \(error?.isSuccess ?? false) \n" +
+        "Error Code - \(error?.errorCode ?? "errorCode") \n" +
+        "Error Message - \(error?.errorMessage ?? "errorMessage") \n" +
+        "Error VL Code - \(error?.vl_errorCode ?? "errorVLCode")"
+        
+        print("Error VL:", errorDescription)
+        print("VideoFetchError: contentResponse:", contentResponse)
+        showAlert(message: errorDescription)
     }
     
     func onFullScreenChange(currentTime: Double, isFullScreen: Bool, playerTag: String)

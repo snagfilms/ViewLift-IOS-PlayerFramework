@@ -14,16 +14,24 @@
 		5422EFFE209912C600206D66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5422EFFC209912C600206D66 /* LaunchScreen.storyboard */; };
 		5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
 		54703A0C20CAFE9A003B543D /* CustomVideoControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */; };
-		D2828A9E2CFEE8F70032951D /* AmazonIVSPlayer-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = D2828A9D2CFEE8F70032951D /* AmazonIVSPlayer-iOS */; };
-		D2828AA02CFEE8F70032951D /* GoogleCast-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = D2828A9F2CFEE8F70032951D /* GoogleCast-iOS */; };
-		D2828AA22CFEE8F70032951D /* GoogleInteractiveMediaAds-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = D2828AA12CFEE8F70032951D /* GoogleInteractiveMediaAds-iOS */; };
-		D2828AA42CFEE8F70032951D /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = D2828AA32CFEE8F70032951D /* VLPlayerLib */; };
+		9DBA166D2D4A157900B7E31E /* AmazonIVSPlayer-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16652D4A14EE00B7E31E /* AmazonIVSPlayer-iOS.xcframework */; };
+		9DBA166E2D4A157900B7E31E /* AmazonIVSPlayer-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16652D4A14EE00B7E31E /* AmazonIVSPlayer-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9DBA166F2D4A157900B7E31E /* GoogleCast-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16662D4A14EE00B7E31E /* GoogleCast-iOS.xcframework */; };
+		9DBA16702D4A157900B7E31E /* GoogleCast-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16662D4A14EE00B7E31E /* GoogleCast-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9DBA16712D4A157900B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16672D4A14EE00B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework */; };
+		9DBA16722D4A157900B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16672D4A14EE00B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9DBA16732D4A157900B7E31E /* VLPlayerLib.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA166B2D4A14FF00B7E31E /* VLPlayerLib.xcframework */; };
+		9DBA16742D4A157900B7E31E /* VLPlayerLib.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA166B2D4A14FF00B7E31E /* VLPlayerLib.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9DE4C8DF2D48E29500FBC483 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 9DE4C8DE2D48E29500FBC483 /* BitmovinPlayer */; };
+		D28B84D92B6A320000D61045 /* VLBeaconLib in Frameworks */ = {isa = PBXBuildFile; productRef = D28B84D82B6A320000D61045 /* VLBeaconLib */; };
 		F74E54E027461E8500016E7F /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74E54DF27461E8500016E7F /* NetworkHandler.swift */; };
 		F79C5385274384C400FFDB88 /* VideoPlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */; };
 		F79C538727438BD700FFDB88 /* VideoList.json in Resources */ = {isa = PBXBuildFile; fileRef = F79C538627438BD700FFDB88 /* VideoList.json */; };
 		F79C538927438CBD00FFDB88 /* VideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79C538827438CBD00FFDB88 /* VideoList.swift */; };
 		F7EAFF0D275F3AA700B46BDE /* ViewliftPlayerSampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EAFF0C275F3AA700B46BDE /* ViewliftPlayerSampleAppUITests.swift */; };
 		F7EAFF0F275F3AA700B46BDE /* ViewliftPlayerSampleAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EAFF0E275F3AA700B46BDE /* ViewliftPlayerSampleAppUITestsLaunchTests.swift */; };
+		F7FFAB7429ACBB7600786BA5 /* M3U8Parser in Frameworks */ = {isa = PBXBuildFile; productRef = F7FFAB7329ACBB7600786BA5 /* M3U8Parser */; };
+		F7FFAB7729ACBB8A00786BA5 /* VisualEffectView in Frameworks */ = {isa = PBXBuildFile; productRef = F7FFAB7629ACBB8A00786BA5 /* VisualEffectView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +44,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D28B85002B6B9EE600D61045 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9DBA16742D4A157900B7E31E /* VLPlayerLib.xcframework in Embed Frameworks */,
+				9DBA16722D4A157900B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework in Embed Frameworks */,
+				9DBA166E2D4A157900B7E31E /* AmazonIVSPlayer-iOS.xcframework in Embed Frameworks */,
+				9DBA16702D4A157900B7E31E /* GoogleCast-iOS.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5422EFF0209912C600206D66 /* ViewliftPlayerSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViewliftPlayerSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5422EFF3209912C600206D66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +71,10 @@
 		5422EFFF209912C600206D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPlayerViewController.swift; sourceTree = "<group>"; };
 		54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomVideoControls.swift; sourceTree = "<group>"; };
+		9DBA16652D4A14EE00B7E31E /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "DependentFrameworks/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
+		9DBA16662D4A14EE00B7E31E /* GoogleCast-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleCast-iOS.xcframework"; path = "DependentFrameworks/iOS/GoogleCast-iOS.xcframework"; sourceTree = "<group>"; };
+		9DBA16672D4A14EE00B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-iOS.xcframework"; path = "DependentFrameworks/iOS/GoogleInteractiveMediaAds-iOS.xcframework"; sourceTree = "<group>"; };
+		9DBA166B2D4A14FF00B7E31E /* VLPlayerLib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = VLPlayerLib.xcframework; sourceTree = "<group>"; };
 		F74E54DF27461E8500016E7F /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaybackController.swift; sourceTree = "<group>"; };
 		F79C538627438BD700FFDB88 /* VideoList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VideoList.json; sourceTree = "<group>"; };
@@ -60,10 +89,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2828AA02CFEE8F70032951D /* GoogleCast-iOS in Frameworks */,
-				D2828AA42CFEE8F70032951D /* VLPlayerLib in Frameworks */,
-				D2828AA22CFEE8F70032951D /* GoogleInteractiveMediaAds-iOS in Frameworks */,
-				D2828A9E2CFEE8F70032951D /* AmazonIVSPlayer-iOS in Frameworks */,
+				F7FFAB7429ACBB7600786BA5 /* M3U8Parser in Frameworks */,
+				9DBA16712D4A157900B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework in Frameworks */,
+				9DBA166F2D4A157900B7E31E /* GoogleCast-iOS.xcframework in Frameworks */,
+				9DE4C8DF2D48E29500FBC483 /* BitmovinPlayer in Frameworks */,
+				9DBA16732D4A157900B7E31E /* VLPlayerLib.xcframework in Frameworks */,
+				F7FFAB7729ACBB8A00786BA5 /* VisualEffectView in Frameworks */,
+				9DBA166D2D4A157900B7E31E /* AmazonIVSPlayer-iOS.xcframework in Frameworks */,
+				D28B84D92B6A320000D61045 /* VLBeaconLib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +151,10 @@
 		5422F0062099162100206D66 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9DBA166B2D4A14FF00B7E31E /* VLPlayerLib.xcframework */,
+				9DBA16652D4A14EE00B7E31E /* AmazonIVSPlayer-iOS.xcframework */,
+				9DBA16662D4A14EE00B7E31E /* GoogleCast-iOS.xcframework */,
+				9DBA16672D4A14EE00B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -141,6 +178,7 @@
 				5422EFEC209912C600206D66 /* Sources */,
 				5422EFED209912C600206D66 /* Frameworks */,
 				5422EFEE209912C600206D66 /* Resources */,
+				D28B85002B6B9EE600D61045 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -148,10 +186,10 @@
 			);
 			name = ViewliftPlayerSampleApp;
 			packageProductDependencies = (
-				D2828A9D2CFEE8F70032951D /* AmazonIVSPlayer-iOS */,
-				D2828A9F2CFEE8F70032951D /* GoogleCast-iOS */,
-				D2828AA12CFEE8F70032951D /* GoogleInteractiveMediaAds-iOS */,
-				D2828AA32CFEE8F70032951D /* VLPlayerLib */,
+				F7FFAB7329ACBB7600786BA5 /* M3U8Parser */,
+				F7FFAB7629ACBB8A00786BA5 /* VisualEffectView */,
+				D28B84D82B6A320000D61045 /* VLBeaconLib */,
+				9DE4C8DE2D48E29500FBC483 /* BitmovinPlayer */,
 			);
 			productName = ViewliftPlayerSampleApp;
 			productReference = 5422EFF0209912C600206D66 /* ViewliftPlayerSampleApp.app */;
@@ -206,7 +244,10 @@
 			);
 			mainGroup = 5422EFE7209912C600206D66;
 			packageReferences = (
-				D2828A9C2CFEE8F70032951D /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */,
+				F7FFAB7229ACBB7600786BA5 /* XCRemoteSwiftPackageReference "M3U8Parser" */,
+				F7FFAB7529ACBB8A00786BA5 /* XCRemoteSwiftPackageReference "VisualEffectView" */,
+				D28B84D72B6A320000D61045 /* XCRemoteSwiftPackageReference "iOS-VLBeacon-SPM" */,
+				9DE4C8DD2D48E29500FBC483 /* XCRemoteSwiftPackageReference "player-ios" */,
 			);
 			productRefGroup = 5422EFF1209912C600206D66 /* Products */;
 			projectDirPath = "";
@@ -416,7 +457,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
-				EXCLUDED_ARCHS = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ViewliftPlayerSampleApp",
@@ -680,7 +720,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
-				EXCLUDED_ARCHS = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ViewliftPlayerSampleApp",
@@ -889,36 +928,60 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D2828A9C2CFEE8F70032951D /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */ = {
+		9DE4C8DD2D48E29500FBC483 /* XCRemoteSwiftPackageReference "player-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework";
+			repositoryURL = "https://github.com/bitmovin/player-ios.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.66.1;
+			};
+		};
+		D28B84D72B6A320000D61045 /* XCRemoteSwiftPackageReference "iOS-VLBeacon-SPM" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/snagfilms/iOS-VLBeacon-SPM.git";
 			requirement = {
 				branch = "release-3.1.0";
 				kind = branch;
 			};
 		};
+		F7FFAB7229ACBB7600786BA5 /* XCRemoteSwiftPackageReference "M3U8Parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/M3U8Kit/M3U8Parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		F7FFAB7529ACBB8A00786BA5 /* XCRemoteSwiftPackageReference "VisualEffectView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/efremidze/VisualEffectView";
+			requirement = {
+				kind = exactVersion;
+				version = 4.1.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D2828A9D2CFEE8F70032951D /* AmazonIVSPlayer-iOS */ = {
+		9DE4C8DE2D48E29500FBC483 /* BitmovinPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D2828A9C2CFEE8F70032951D /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
-			productName = "AmazonIVSPlayer-iOS";
+			package = 9DE4C8DD2D48E29500FBC483 /* XCRemoteSwiftPackageReference "player-ios" */;
+			productName = BitmovinPlayer;
 		};
-		D2828A9F2CFEE8F70032951D /* GoogleCast-iOS */ = {
+		D28B84D82B6A320000D61045 /* VLBeaconLib */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D2828A9C2CFEE8F70032951D /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
-			productName = "GoogleCast-iOS";
+			package = D28B84D72B6A320000D61045 /* XCRemoteSwiftPackageReference "iOS-VLBeacon-SPM" */;
+			productName = VLBeaconLib;
 		};
-		D2828AA12CFEE8F70032951D /* GoogleInteractiveMediaAds-iOS */ = {
+		F7FFAB7329ACBB7600786BA5 /* M3U8Parser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D2828A9C2CFEE8F70032951D /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
-			productName = "GoogleInteractiveMediaAds-iOS";
+			package = F7FFAB7229ACBB7600786BA5 /* XCRemoteSwiftPackageReference "M3U8Parser" */;
+			productName = M3U8Parser;
 		};
-		D2828AA32CFEE8F70032951D /* VLPlayerLib */ = {
+		F7FFAB7629ACBB8A00786BA5 /* VisualEffectView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D2828A9C2CFEE8F70032951D /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
-			productName = VLPlayerLib;
+			package = F7FFAB7529ACBB8A00786BA5 /* XCRemoteSwiftPackageReference "VisualEffectView" */;
+			productName = VisualEffectView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
