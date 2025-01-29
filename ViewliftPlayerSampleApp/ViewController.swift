@@ -21,6 +21,7 @@ enum PlayerUIOptions: Int {
     case customControlWithCustomSeekDuration
     case adsEnabled
     case playStreamURL
+    case playASATURL
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -32,7 +33,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak private var muteControls: UISwitch!
     private var readVideoListOperation:VideoListProtocol?
     private var playerOptionSelected:PlayerUIOptions = .defaultControl
-    private var playerUIOptions = ["Default sdk controls", "Custom controls", "Debug logs enabled", "Custom controls and debug logs enabled", "Custom controls and custom seek duration", "Ads Enabled", "Play Stream URL"]
+    private var playerUIOptions = ["Default sdk controls", "Custom controls", "Debug logs enabled", "Custom controls and debug logs enabled", "Custom controls and custom seek duration", "Ads Enabled", "Play Stream URL", "Play ASAT URL"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -126,10 +126,12 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
             
                 let featureSupported = getPlayerFeaturesSupported()
                 let vlBaseUrl = ""
+                let vlBeaconURL: String? = nil
                 let vlToken = self.videoList.playbackToken
                 let streamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 var vlPlayer: VLPlayer!
-                if playerOptionSelected == .playStreamURL {
+                
+                if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
                     enableCustomPlayerUI = true
                     let playerLicenseKey = ""
                     let analyticsLicenseKey = ""
@@ -142,8 +144,10 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                     vlPlayer.clientSideAdTrackingDelegate = self
                     vlPlayer.enablePlayerBitrateLogs = self.enableBitrateLogs
                     
+                    let isASATPlayerValue = (playerOptionSelected == .playASATURL)
+                    
                     //MARK: isASATPlayer bool is required to check monetisation
-                    vlPlayer.setSourceToPlay(isASATPlayer: true, streamURL: streamURL, vlToken: vlToken, vlAPIEndPoint: vlBaseUrl, vlBeaconEndPoint: nil, customControlsView: nil, playerFeaturesSupported: featureSupported){ status, playerView in
+                    vlPlayer.setSourceToPlay(isASATPlayer: isASATPlayerValue, streamURL: streamURL, vlToken: vlToken, vlAPIEndPoint: vlBaseUrl, vlBeaconEndPoint: vlBeaconURL, customControlsView: nil, playerFeaturesSupported: featureSupported){ status, playerView in
                         DispatchQueue.main.async { [weak self] in
                             guard let checkedSelf = self else {return}
                             loaderView.stopAnimating()
@@ -162,7 +166,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                         }
                     }
                 }else{
-                    vlPlayer =  VLPlayer(playerType: .default)
+                     vlPlayer =  VLPlayer.init()
                     vlPlayer.videoPlayerDelegate = self
                     vlPlayer.clientSideAdTrackingDelegate = self
                 
@@ -385,10 +389,13 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     {
         guard let appDelegate: AppDelegate =  UIApplication.shared.delegate as? AppDelegate, let videoPlayerArray = videoPlayerArray else {return}
         appDelegate.isFullScreen = isFullScreen
+        
+        guard let playerTag = Int(playerTag) else {return}
+        let playerIndex: Int = (playerTag > 0) ? (playerTag - 1) : 0
+        
         if isFullScreen
         {
-            guard let playerTag = Int(playerTag) else {return}
-            let playerIndex: Int = playerTag - 1
+            
             for playerObj in videoPlayerArray
             {
                 if playerObj.keys.contains(playerIndex)
@@ -421,7 +428,6 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
         }
         else
         {
-            let playerIndex: Int = Int(playerTag)! - 1
             for playerObj in videoPlayerArray
             {
                 if playerObj.keys.contains(playerIndex)

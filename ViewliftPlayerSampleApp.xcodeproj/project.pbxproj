@@ -14,14 +14,14 @@
 		5422EFFE209912C600206D66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5422EFFC209912C600206D66 /* LaunchScreen.storyboard */; };
 		5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
 		54703A0C20CAFE9A003B543D /* CustomVideoControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */; };
-		9DBA166D2D4A157900B7E31E /* AmazonIVSPlayer-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16652D4A14EE00B7E31E /* AmazonIVSPlayer-iOS.xcframework */; };
-		9DBA166E2D4A157900B7E31E /* AmazonIVSPlayer-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16652D4A14EE00B7E31E /* AmazonIVSPlayer-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9DBA166F2D4A157900B7E31E /* GoogleCast-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16662D4A14EE00B7E31E /* GoogleCast-iOS.xcframework */; };
-		9DBA16702D4A157900B7E31E /* GoogleCast-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16662D4A14EE00B7E31E /* GoogleCast-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9DBA16712D4A157900B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16672D4A14EE00B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework */; };
-		9DBA16722D4A157900B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA16672D4A14EE00B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9DBA16732D4A157900B7E31E /* VLPlayerLib.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA166B2D4A14FF00B7E31E /* VLPlayerLib.xcframework */; };
-		9DBA16742D4A157900B7E31E /* VLPlayerLib.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBA166B2D4A14FF00B7E31E /* VLPlayerLib.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D1EC2322D4A7B1200CED367 /* AmazonIVSPlayer-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EC22E2D4A7ABF00CED367 /* AmazonIVSPlayer-iOS.xcframework */; };
+		9D1EC2332D4A7B1200CED367 /* AmazonIVSPlayer-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EC22E2D4A7ABF00CED367 /* AmazonIVSPlayer-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D1EC2342D4A7B1200CED367 /* GoogleCast-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EC22C2D4A7ABF00CED367 /* GoogleCast-iOS.xcframework */; };
+		9D1EC2352D4A7B1200CED367 /* GoogleCast-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EC22C2D4A7ABF00CED367 /* GoogleCast-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D1EC2362D4A7B1200CED367 /* GoogleInteractiveMediaAds-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EC22D2D4A7ABF00CED367 /* GoogleInteractiveMediaAds-iOS.xcframework */; };
+		9D1EC2372D4A7B1200CED367 /* GoogleInteractiveMediaAds-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EC22D2D4A7ABF00CED367 /* GoogleInteractiveMediaAds-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D1EC2382D4A7B1200CED367 /* VLPlayerLib.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC8CC362D4A796700107164 /* VLPlayerLib.xcframework */; };
+		9D1EC2392D4A7B1200CED367 /* VLPlayerLib.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC8CC362D4A796700107164 /* VLPlayerLib.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DE4C8DF2D48E29500FBC483 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 9DE4C8DE2D48E29500FBC483 /* BitmovinPlayer */; };
 		D28B84D92B6A320000D61045 /* VLBeaconLib in Frameworks */ = {isa = PBXBuildFile; productRef = D28B84D82B6A320000D61045 /* VLBeaconLib */; };
 		F74E54E027461E8500016E7F /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74E54DF27461E8500016E7F /* NetworkHandler.swift */; };
@@ -51,10 +51,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9DBA16742D4A157900B7E31E /* VLPlayerLib.xcframework in Embed Frameworks */,
-				9DBA16722D4A157900B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework in Embed Frameworks */,
-				9DBA166E2D4A157900B7E31E /* AmazonIVSPlayer-iOS.xcframework in Embed Frameworks */,
-				9DBA16702D4A157900B7E31E /* GoogleCast-iOS.xcframework in Embed Frameworks */,
+				9D1EC2392D4A7B1200CED367 /* VLPlayerLib.xcframework in Embed Frameworks */,
+				9D1EC2372D4A7B1200CED367 /* GoogleInteractiveMediaAds-iOS.xcframework in Embed Frameworks */,
+				9D1EC2332D4A7B1200CED367 /* AmazonIVSPlayer-iOS.xcframework in Embed Frameworks */,
+				9D1EC2352D4A7B1200CED367 /* GoogleCast-iOS.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,10 +71,10 @@
 		5422EFFF209912C600206D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPlayerViewController.swift; sourceTree = "<group>"; };
 		54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomVideoControls.swift; sourceTree = "<group>"; };
-		9DBA16652D4A14EE00B7E31E /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "DependentFrameworks/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
-		9DBA16662D4A14EE00B7E31E /* GoogleCast-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleCast-iOS.xcframework"; path = "DependentFrameworks/iOS/GoogleCast-iOS.xcframework"; sourceTree = "<group>"; };
-		9DBA16672D4A14EE00B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-iOS.xcframework"; path = "DependentFrameworks/iOS/GoogleInteractiveMediaAds-iOS.xcframework"; sourceTree = "<group>"; };
-		9DBA166B2D4A14FF00B7E31E /* VLPlayerLib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = VLPlayerLib.xcframework; sourceTree = "<group>"; };
+		9D1EC22C2D4A7ABF00CED367 /* GoogleCast-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleCast-iOS.xcframework"; path = "DependentFrameworks/iOS/GoogleCast-iOS.xcframework"; sourceTree = "<group>"; };
+		9D1EC22D2D4A7ABF00CED367 /* GoogleInteractiveMediaAds-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-iOS.xcframework"; path = "DependentFrameworks/iOS/GoogleInteractiveMediaAds-iOS.xcframework"; sourceTree = "<group>"; };
+		9D1EC22E2D4A7ABF00CED367 /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "DependentFrameworks/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
+		9DC8CC362D4A796700107164 /* VLPlayerLib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = VLPlayerLib.xcframework; sourceTree = "<group>"; };
 		F74E54DF27461E8500016E7F /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaybackController.swift; sourceTree = "<group>"; };
 		F79C538627438BD700FFDB88 /* VideoList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VideoList.json; sourceTree = "<group>"; };
@@ -90,12 +90,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7FFAB7429ACBB7600786BA5 /* M3U8Parser in Frameworks */,
-				9DBA16712D4A157900B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework in Frameworks */,
-				9DBA166F2D4A157900B7E31E /* GoogleCast-iOS.xcframework in Frameworks */,
+				9D1EC2362D4A7B1200CED367 /* GoogleInteractiveMediaAds-iOS.xcframework in Frameworks */,
+				9D1EC2342D4A7B1200CED367 /* GoogleCast-iOS.xcframework in Frameworks */,
 				9DE4C8DF2D48E29500FBC483 /* BitmovinPlayer in Frameworks */,
-				9DBA16732D4A157900B7E31E /* VLPlayerLib.xcframework in Frameworks */,
+				9D1EC2382D4A7B1200CED367 /* VLPlayerLib.xcframework in Frameworks */,
 				F7FFAB7729ACBB8A00786BA5 /* VisualEffectView in Frameworks */,
-				9DBA166D2D4A157900B7E31E /* AmazonIVSPlayer-iOS.xcframework in Frameworks */,
+				9D1EC2322D4A7B1200CED367 /* AmazonIVSPlayer-iOS.xcframework in Frameworks */,
 				D28B84D92B6A320000D61045 /* VLBeaconLib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,10 +151,10 @@
 		5422F0062099162100206D66 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9DBA166B2D4A14FF00B7E31E /* VLPlayerLib.xcframework */,
-				9DBA16652D4A14EE00B7E31E /* AmazonIVSPlayer-iOS.xcframework */,
-				9DBA16662D4A14EE00B7E31E /* GoogleCast-iOS.xcframework */,
-				9DBA16672D4A14EE00B7E31E /* GoogleInteractiveMediaAds-iOS.xcframework */,
+				9D1EC22E2D4A7ABF00CED367 /* AmazonIVSPlayer-iOS.xcframework */,
+				9D1EC22C2D4A7ABF00CED367 /* GoogleCast-iOS.xcframework */,
+				9D1EC22D2D4A7ABF00CED367 /* GoogleInteractiveMediaAds-iOS.xcframework */,
+				9DC8CC362D4A796700107164 /* VLPlayerLib.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
