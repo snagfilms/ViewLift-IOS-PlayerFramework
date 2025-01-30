@@ -20,8 +20,7 @@
 		9D1EC2352D4A7B1200CED367 /* GoogleCast-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EC22C2D4A7ABF00CED367 /* GoogleCast-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D1EC2362D4A7B1200CED367 /* GoogleInteractiveMediaAds-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EC22D2D4A7ABF00CED367 /* GoogleInteractiveMediaAds-iOS.xcframework */; };
 		9D1EC2372D4A7B1200CED367 /* GoogleInteractiveMediaAds-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EC22D2D4A7ABF00CED367 /* GoogleInteractiveMediaAds-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9D1EC2382D4A7B1200CED367 /* VLPlayerLib.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC8CC362D4A796700107164 /* VLPlayerLib.xcframework */; };
-		9D1EC2392D4A7B1200CED367 /* VLPlayerLib.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC8CC362D4A796700107164 /* VLPlayerLib.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D5DBD0B2D4BBCED00895D1F /* VLPlayerLib.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5DBD0A2D4BBCED00895D1F /* VLPlayerLib.xcframework */; };
 		9DE4C8DF2D48E29500FBC483 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 9DE4C8DE2D48E29500FBC483 /* BitmovinPlayer */; };
 		D28B84D92B6A320000D61045 /* VLBeaconLib in Frameworks */ = {isa = PBXBuildFile; productRef = D28B84D82B6A320000D61045 /* VLBeaconLib */; };
 		F74E54E027461E8500016E7F /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74E54DF27461E8500016E7F /* NetworkHandler.swift */; };
@@ -51,7 +50,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9D1EC2392D4A7B1200CED367 /* VLPlayerLib.xcframework in Embed Frameworks */,
 				9D1EC2372D4A7B1200CED367 /* GoogleInteractiveMediaAds-iOS.xcframework in Embed Frameworks */,
 				9D1EC2332D4A7B1200CED367 /* AmazonIVSPlayer-iOS.xcframework in Embed Frameworks */,
 				9D1EC2352D4A7B1200CED367 /* GoogleCast-iOS.xcframework in Embed Frameworks */,
@@ -74,7 +72,7 @@
 		9D1EC22C2D4A7ABF00CED367 /* GoogleCast-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleCast-iOS.xcframework"; path = "DependentFrameworks/iOS/GoogleCast-iOS.xcframework"; sourceTree = "<group>"; };
 		9D1EC22D2D4A7ABF00CED367 /* GoogleInteractiveMediaAds-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-iOS.xcframework"; path = "DependentFrameworks/iOS/GoogleInteractiveMediaAds-iOS.xcframework"; sourceTree = "<group>"; };
 		9D1EC22E2D4A7ABF00CED367 /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "DependentFrameworks/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
-		9DC8CC362D4A796700107164 /* VLPlayerLib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = VLPlayerLib.xcframework; sourceTree = "<group>"; };
+		9D5DBD0A2D4BBCED00895D1F /* VLPlayerLib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = VLPlayerLib.xcframework; sourceTree = "<group>"; };
 		F74E54DF27461E8500016E7F /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaybackController.swift; sourceTree = "<group>"; };
 		F79C538627438BD700FFDB88 /* VideoList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VideoList.json; sourceTree = "<group>"; };
@@ -93,7 +91,7 @@
 				9D1EC2362D4A7B1200CED367 /* GoogleInteractiveMediaAds-iOS.xcframework in Frameworks */,
 				9D1EC2342D4A7B1200CED367 /* GoogleCast-iOS.xcframework in Frameworks */,
 				9DE4C8DF2D48E29500FBC483 /* BitmovinPlayer in Frameworks */,
-				9D1EC2382D4A7B1200CED367 /* VLPlayerLib.xcframework in Frameworks */,
+				9D5DBD0B2D4BBCED00895D1F /* VLPlayerLib.xcframework in Frameworks */,
 				F7FFAB7729ACBB8A00786BA5 /* VisualEffectView in Frameworks */,
 				9D1EC2322D4A7B1200CED367 /* AmazonIVSPlayer-iOS.xcframework in Frameworks */,
 				D28B84D92B6A320000D61045 /* VLBeaconLib in Frameworks */,
@@ -151,10 +149,10 @@
 		5422F0062099162100206D66 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D5DBD0A2D4BBCED00895D1F /* VLPlayerLib.xcframework */,
 				9D1EC22E2D4A7ABF00CED367 /* AmazonIVSPlayer-iOS.xcframework */,
 				9D1EC22C2D4A7ABF00CED367 /* GoogleCast-iOS.xcframework */,
 				9D1EC22D2D4A7ABF00CED367 /* GoogleInteractiveMediaAds-iOS.xcframework */,
-				9DC8CC362D4A796700107164 /* VLPlayerLib.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
