@@ -443,7 +443,7 @@ public struct AdTagDetail : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @objc @_inheritsConvenienceInitializers public class DataParser : ObjectiveC.NSObject {
-  public func parseContent(contentDictionary: Swift.Dictionary<Swift.String, Swift.AnyObject>) -> VLPlayerLib.PlayerObject
+  public func parseContent(channelID: Swift.String? = nil, contentDictionary: Swift.Dictionary<Swift.String, Swift.AnyObject>) -> VLPlayerLib.PlayerObject
   @objc override dynamic public init()
   @objc deinit
 }

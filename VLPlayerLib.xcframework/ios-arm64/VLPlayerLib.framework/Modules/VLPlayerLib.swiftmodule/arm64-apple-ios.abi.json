@@ -3054,13 +3054,28 @@
           {
             "kind": "Function",
             "name": "parseContent",
-            "printedName": "parseContent(contentDictionary:)",
+            "printedName": "parseContent(channelID:contentDictionary:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "PlayerObject",
                 "printedName": "VLPlayerLib.PlayerObject",
                 "usr": "c:@M@VLPlayerLib@objc(cs)PlayerObject"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               },
               {
                 "kind": "TypeNominal",
@@ -3083,8 +3098,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:11VLPlayerLib10DataParserC12parseContent17contentDictionaryAA12PlayerObjectCSDySSyXlG_tF",
-            "mangledName": "$s11VLPlayerLib10DataParserC12parseContent17contentDictionaryAA12PlayerObjectCSDySSyXlG_tF",
+            "usr": "s:11VLPlayerLib10DataParserC12parseContent9channelID17contentDictionaryAA12PlayerObjectCSSSg_SDySSyXlGtF",
+            "mangledName": "$s11VLPlayerLib10DataParserC12parseContent9channelID17contentDictionaryAA12PlayerObjectCSSSg_SDySSyXlGtF",
             "moduleName": "VLPlayerLib",
             "declAttributes": [
               "AccessControl",
@@ -28396,42 +28411,42 @@
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Model\/PlayerObject.swift",
       "kind": "BooleanLiteral",
-      "offset": 1982,
+      "offset": 2009,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Model\/PlayerObject.swift",
       "kind": "BooleanLiteral",
-      "offset": 2017,
+      "offset": 2044,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Model\/PlayerObject.swift",
       "kind": "Dictionary",
-      "offset": 2085,
+      "offset": 2112,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Model\/PlayerObject.swift",
       "kind": "BooleanLiteral",
-      "offset": 2444,
+      "offset": 2471,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Model\/PlayerObject.swift",
       "kind": "BooleanLiteral",
-      "offset": 2478,
+      "offset": 2505,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Model\/PlayerObject.swift",
       "kind": "IntegerLiteral",
-      "offset": 2516,
+      "offset": 2543,
       "length": 1,
       "value": "0"
     },
@@ -34178,567 +34193,595 @@
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 10370,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
-      "kind": "StringLiteral",
-      "offset": 10483,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
-      "kind": "StringLiteral",
-      "offset": 10589,
+      "offset": 10356,
       "length": 103,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 10620,
+      "offset": 10387,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 10688,
+      "offset": 10455,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 10691,
+      "offset": 10458,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 10801,
+      "offset": 10510,
+      "length": 15,
+      "value": "\"LINEARCHANNEL\""
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
+      "kind": "StringLiteral",
+      "offset": 10640,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 11182,
+      "offset": 10759,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
+      "kind": "StringLiteral",
+      "offset": 10876,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
+      "kind": "StringLiteral",
+      "offset": 11006,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
+      "kind": "StringLiteral",
+      "offset": 11123,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
+      "kind": "StringLiteral",
+      "offset": 11238,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
+      "kind": "StringLiteral",
+      "offset": 11629,
       "length": 103,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 11213,
+      "offset": 11660,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 11281,
+      "offset": 11728,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 11284,
+      "offset": 11731,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 11410,
+      "offset": 11857,
       "length": 104,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 11442,
+      "offset": 11889,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 11510,
+      "offset": 11957,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 11513,
+      "offset": 11960,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 12017,
+      "offset": 12464,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 12043,
+      "offset": 12490,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 12132,
+      "offset": 12579,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 12521,
+      "offset": 12968,
       "length": 33,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 12553,
+      "offset": 13000,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 12843,
+      "offset": 13290,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 12961,
+      "offset": 13408,
       "length": 31,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 12979,
+      "offset": 13426,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 12991,
+      "offset": 13438,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13258,
+      "offset": 13705,
       "length": 113,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13261,
+      "offset": 13708,
       "length": 27,
       "value": "\"https:\/\/\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13287,
+      "offset": 13734,
       "length": 84,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13370,
+      "offset": 13817,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13454,
+      "offset": 13901,
       "length": 113,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13457,
+      "offset": 13904,
       "length": 27,
       "value": "\"https:\/\/\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13483,
+      "offset": 13930,
       "length": 84,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13566,
+      "offset": 14013,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13665,
+      "offset": 14112,
       "length": 163,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13668,
+      "offset": 14115,
       "length": 27,
       "value": "\"https:\/\/\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13694,
+      "offset": 14141,
       "length": 131,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13824,
+      "offset": 14271,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13827,
+      "offset": 14274,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13932,
+      "offset": 14379,
       "length": 100,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13935,
+      "offset": 14382,
       "length": 27,
       "value": "\"https:\/\/\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 13961,
+      "offset": 14408,
       "length": 68,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 14028,
+      "offset": 14475,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 14031,
+      "offset": 14478,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 14078,
+      "offset": 14525,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 14181,
+      "offset": 14628,
       "length": 20,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 14200,
+      "offset": 14647,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 14401,
+      "offset": 14848,
       "length": 3,
       "value": "\"0\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 15079,
+      "offset": 15526,
       "length": 5,
       "value": "\"120\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 16277,
+      "offset": 16724,
       "length": 3,
       "value": "\"1\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 16373,
+      "offset": 16820,
       "length": 33,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 16405,
+      "offset": 16852,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 16494,
+      "offset": 16941,
       "length": 42,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "IntegerLiteral",
-      "offset": 16530,
+      "offset": 16977,
       "length": 4,
       "value": "1000"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 16535,
+      "offset": 16982,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 16785,
+      "offset": 17232,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 16873,
+      "offset": 17320,
       "length": 20,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "IntegerLiteral",
-      "offset": 16887,
+      "offset": 17334,
       "length": 4,
       "value": "1000"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 16892,
+      "offset": 17339,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 17052,
+      "offset": 17499,
       "length": 3,
       "value": "\"0\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 17149,
+      "offset": 17596,
       "length": 13,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 17161,
+      "offset": 17608,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 17381,
+      "offset": 17828,
       "length": 8,
       "value": "\"120000\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 17650,
+      "offset": 18097,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 17731,
+      "offset": 18178,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 17812,
+      "offset": 18259,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 17893,
+      "offset": 18340,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "IntegerLiteral",
-      "offset": 20632,
+      "offset": 21079,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 21225,
+      "offset": 21672,
       "length": 5,
       "value": "\"en0\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "IntegerLiteral",
-      "offset": 21364,
+      "offset": 21811,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "IntegerLiteral",
-      "offset": 21606,
+      "offset": 22053,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 21717,
+      "offset": 22164,
       "length": 9,
       "value": "\"pdp_ip0\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 21738,
+      "offset": 22185,
       "length": 9,
       "value": "\"pdp_ip1\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 21759,
+      "offset": 22206,
       "length": 9,
       "value": "\"pdp_ip2\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 21780,
+      "offset": 22227,
       "length": 9,
       "value": "\"pdp_ip3\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "IntegerLiteral",
-      "offset": 21924,
+      "offset": 22371,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "IntegerLiteral",
-      "offset": 22166,
+      "offset": 22613,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "IntegerLiteral",
-      "offset": 22417,
+      "offset": 22864,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "IntegerLiteral",
-      "offset": 22890,
+      "offset": 23337,
       "length": 4,
       "value": "1000"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "Array",
-      "offset": 23300,
+      "offset": 23747,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 23352,
+      "offset": 23799,
       "length": 7,
       "value": "\"start\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 23368,
+      "offset": 23815,
       "length": 44,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/StringExtensions.swift",
       "kind": "StringLiteral",
-      "offset": 23411,
+      "offset": 23858,
       "length": 3,
       "value": "\"\""
     },
@@ -37685,875 +37728,875 @@
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 481,
+      "offset": 507,
       "length": 7,
       "value": "\"video\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 574,
+      "offset": 600,
       "length": 8,
       "value": "\"series\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 642,
+      "offset": 668,
       "length": 7,
       "value": "\"title\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 786,
+      "offset": 812,
       "length": 6,
       "value": "\"gist\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 991,
+      "offset": 1017,
       "length": 6,
       "value": "\"tags\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 1171,
+      "offset": 1197,
       "length": 10,
       "value": "\"metadata\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 1390,
+      "offset": 1416,
       "length": 15,
       "value": "\"streamingInfo\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 1635,
+      "offset": 1661,
       "length": 16,
       "value": "\"contentDetails\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "BooleanLiteral",
-      "offset": 1994,
+      "offset": 2020,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 2038,
+      "offset": 2064,
       "length": 13,
       "value": "\"liveDetails\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 2136,
+      "offset": 2162,
       "length": 14,
       "value": "\"isLowLatency\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 2309,
+      "offset": 2335,
       "length": 14,
       "value": "\"isDvrEnabled\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "BooleanLiteral",
-      "offset": 2351,
+      "offset": 2377,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 2393,
+      "offset": 2419,
       "length": 15,
       "value": "\"startOverTime\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "IntegerLiteral",
-      "offset": 2438,
+      "offset": 2464,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 2677,
+      "offset": 2703,
       "length": 15,
       "value": "\"linearchannel\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 2776,
+      "offset": 2802,
       "length": 6,
       "value": "\"gist\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 2981,
+      "offset": 3007,
       "length": 6,
       "value": "\"tags\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 3161,
+      "offset": 3187,
       "length": 10,
       "value": "\"metadata\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 3380,
+      "offset": 3406,
       "length": 15,
       "value": "\"streamingInfo\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 3625,
+      "offset": 3651,
       "length": 16,
       "value": "\"contentDetails\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "BooleanLiteral",
-      "offset": 3984,
+      "offset": 4125,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 4028,
+      "offset": 4169,
       "length": 13,
       "value": "\"liveDetails\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 4126,
+      "offset": 4267,
       "length": 14,
       "value": "\"isLowLatency\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 4299,
+      "offset": 4440,
       "length": 14,
       "value": "\"isDvrEnabled\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "BooleanLiteral",
-      "offset": 4341,
+      "offset": 4482,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 4383,
+      "offset": 4524,
       "length": 15,
       "value": "\"startOverTime\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "IntegerLiteral",
-      "offset": 4428,
+      "offset": 4569,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 4655,
+      "offset": 4796,
       "length": 5,
       "value": "\"ads\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 4724,
+      "offset": 4865,
       "length": 9,
       "value": "\"preRoll\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 4791,
+      "offset": 4932,
       "length": 8,
       "value": "\"adTags\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 4860,
+      "offset": 5001,
       "length": 5,
       "value": "\"ios\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 4928,
+      "offset": 5069,
       "length": 5,
       "value": "\"url\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 4991,
+      "offset": 5132,
       "length": 10,
       "value": "\"features\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 5224,
+      "offset": 5365,
       "length": 9,
       "value": "\"adsPlan\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 5311,
+      "offset": 5452,
       "length": 13,
       "value": "\"planDetails\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 5406,
+      "offset": 5547,
       "length": 9,
       "value": "\"preRoll\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 5480,
+      "offset": 5621,
       "length": 8,
       "value": "\"adTags\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 5556,
+      "offset": 5697,
       "length": 5,
       "value": "\"ios\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 5631,
+      "offset": 5772,
       "length": 5,
       "value": "\"url\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 5768,
+      "offset": 5909,
       "length": 16,
       "value": "\"featureSetting\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 6237,
+      "offset": 6378,
       "length": 10,
       "value": "\"playable\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 6308,
+      "offset": 6449,
       "length": 10,
       "value": "\"siteName\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 6379,
+      "offset": 6520,
       "length": 8,
       "value": "\"siteId\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 6463,
+      "offset": 6604,
       "length": 8,
       "value": "\"siteId\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 6547,
+      "offset": 6688,
       "length": 10,
       "value": "\"siteName\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "Dictionary",
-      "offset": 7284,
+      "offset": 7425,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 7362,
+      "offset": 7503,
       "length": 6,
       "value": "\"name\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 7392,
+      "offset": 7533,
       "length": 7,
       "value": "\"value\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 7523,
+      "offset": 7664,
       "length": 12,
       "value": "\"audio-only\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "BooleanLiteral",
-      "offset": 7603,
+      "offset": 7744,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 7712,
+      "offset": 7853,
       "length": 10,
       "value": "\"sfid.tve\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 7816,
+      "offset": 7957,
       "length": 10,
       "value": "\"sfid.dtc\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 7928,
+      "offset": 8069,
       "length": 13,
       "value": "\"prof.iphone\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 8077,
+      "offset": 8218,
       "length": 17,
       "value": "\"csid.iphone.tve\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 8192,
+      "offset": 8333,
       "length": 17,
       "value": "\"csid.iphone.dtc\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 8344,
+      "offset": 8485,
       "length": 22,
       "value": "\"csid.ipad.tablet.tve\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 8464,
+      "offset": 8605,
       "length": 22,
       "value": "\"csid.ipad.tablet.dtc\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9065,
+      "offset": 9206,
       "length": 4,
       "value": "\"id\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9143,
+      "offset": 9284,
       "length": 11,
       "value": "\"permalink\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9228,
+      "offset": 9369,
       "length": 7,
       "value": "\"title\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9309,
+      "offset": 9450,
       "length": 13,
       "value": "\"description\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9396,
+      "offset": 9537,
       "length": 6,
       "value": "\"free\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9474,
+      "offset": 9615,
       "length": 13,
       "value": "\"publishDate\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9561,
+      "offset": 9702,
       "length": 9,
       "value": "\"runtime\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9644,
+      "offset": 9785,
       "length": 15,
       "value": "\"videoImageUrl\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9733,
+      "offset": 9874,
       "length": 11,
       "value": "\"addedDate\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9818,
+      "offset": 9959,
       "length": 12,
       "value": "\"updateDate\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9904,
+      "offset": 10045,
       "length": 13,
       "value": "\"watchedTime\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 9991,
+      "offset": 10132,
       "length": 13,
       "value": "\"contentType\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 10078,
+      "offset": 10219,
       "length": 14,
       "value": "\"averageGrade\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 10166,
+      "offset": 10307,
       "length": 19,
       "value": "\"averageStarRating\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 10256,
+      "offset": 10397,
       "length": 12,
       "value": "\"drmEnabled\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 10338,
+      "offset": 10479,
       "length": 19,
       "value": "\"scheduleStartDate\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 10429,
+      "offset": 10570,
       "length": 17,
       "value": "\"scheduleEndDate\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 10520,
+      "offset": 10661,
       "length": 15,
       "value": "\"isSSAIEnabled\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "BooleanLiteral",
-      "offset": 10549,
+      "offset": 10690,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 10601,
+      "offset": 10742,
       "length": 11,
       "value": "\"imageGist\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 10798,
+      "offset": 10939,
       "length": 10,
       "value": "\"metadata\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 10922,
+      "offset": 11063,
       "length": 6,
       "value": "\"name\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 10950,
+      "offset": 11091,
       "length": 12,
       "value": "\"audio-only\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 10995,
+      "offset": 11136,
       "length": 7,
       "value": "\"value\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "BooleanLiteral",
-      "offset": 11089,
+      "offset": 11230,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "Array",
-      "offset": 11444,
+      "offset": 11585,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 11497,
+      "offset": 11638,
       "length": 4,
       "value": "\"id\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 11527,
+      "offset": 11668,
       "length": 7,
       "value": "\"title\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "Array",
-      "offset": 11926,
+      "offset": 12067,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 12014,
+      "offset": 12155,
       "length": 3,
       "value": "\"r\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 12083,
+      "offset": 12224,
       "length": 3,
       "value": "\"r\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 12094,
+      "offset": 12235,
       "length": 3,
       "value": "\"_\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 14838,
+      "offset": 14979,
       "length": 14,
       "value": "\"isLiveStream\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 14920,
+      "offset": 15061,
       "length": 13,
       "value": "\"videoAssets\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 15133,
+      "offset": 15274,
       "length": 13,
       "value": "\"audioAssets\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 15332,
+      "offset": 15473,
       "length": 22,
       "value": "\"secondaryVideoAssets\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 15806,
+      "offset": 15947,
       "length": 5,
       "value": "\"hls\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "Array",
-      "offset": 15904,
+      "offset": 16045,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 16195,
+      "offset": 16336,
       "length": 10,
       "value": "\"widevine\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "Array",
-      "offset": 16322,
+      "offset": 16463,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 16490,
+      "offset": 16631,
       "length": 6,
       "value": "\"mpeg\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "Array",
-      "offset": 16736,
+      "offset": 16877,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 16986,
+      "offset": 17127,
       "length": 10,
       "value": "\"fairPlay\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "Array",
-      "offset": 17112,
+      "offset": 17253,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 17399,
+      "offset": 17540,
       "length": 5,
       "value": "\"hls\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 17696,
+      "offset": 17837,
       "length": 16,
       "value": "\"renditionValue\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 17754,
+      "offset": 17895,
       "length": 5,
       "value": "\"url\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 17775,
+      "offset": 17916,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 17811,
+      "offset": 17952,
       "length": 9,
       "value": "\"bitrate\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18160,
+      "offset": 18301,
       "length": 5,
       "value": "\"url\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18181,
+      "offset": 18322,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18233,
+      "offset": 18374,
       "length": 12,
       "value": "\"licenseUrl\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18284,
+      "offset": 18425,
       "length": 16,
       "value": "\"certificateUrl\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18344,
+      "offset": 18485,
       "length": 14,
       "value": "\"licenseToken\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18401,
+      "offset": 18542,
       "length": 13,
       "value": "\"completeskd\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18727,
+      "offset": 18868,
       "length": 5,
       "value": "\"url\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18748,
+      "offset": 18889,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18800,
+      "offset": 18941,
       "length": 12,
       "value": "\"licenseUrl\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18851,
+      "offset": 18992,
       "length": 16,
       "value": "\"certificateUrl\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18911,
+      "offset": 19052,
       "length": 14,
       "value": "\"licenseToken\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 18968,
+      "offset": 19109,
       "length": 13,
       "value": "\"completeskd\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "Dictionary",
-      "offset": 19257,
+      "offset": 19398,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 19289,
+      "offset": 19430,
       "length": 16,
       "value": "\"closedCaptions\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 19328,
+      "offset": 19469,
       "length": 16,
       "value": "\"closedCaptions\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 19598,
+      "offset": 19739,
       "length": 12,
       "value": "\"deviceType\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 19672,
+      "offset": 19813,
       "length": 11,
       "value": "\"ios_phone\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Parser\/DataParser.swift",
       "kind": "StringLiteral",
-      "offset": 19725,
+      "offset": 19866,
       "length": 10,
       "value": "\"dfpAdTag\""
     },
@@ -48073,686 +48116,686 @@
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 8706,
+      "offset": 8747,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 8987,
+      "offset": 9028,
       "length": 11,
       "value": "\"Not Found\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 9074,
+      "offset": 9115,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 9151,
+      "offset": 9192,
       "length": 8,
       "value": "\"VL_404\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 9213,
+      "offset": 9254,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 9271,
+      "offset": 9312,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 9335,
+      "offset": 9376,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 9598,
+      "offset": 9639,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 9648,
+      "offset": 9689,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 9698,
+      "offset": 9739,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 9746,
+      "offset": 9787,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 9796,
+      "offset": 9837,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 9843,
+      "offset": 9884,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 10515,
+      "offset": 10556,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 10626,
+      "offset": 10667,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 10729,
+      "offset": 10770,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 10825,
+      "offset": 10866,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 10922,
+      "offset": 10963,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 10973,
+      "offset": 11014,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 11194,
+      "offset": 11235,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 11248,
+      "offset": 11289,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 11302,
+      "offset": 11343,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 11354,
+      "offset": 11395,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 11408,
+      "offset": 11449,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 11459,
+      "offset": 11500,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 11661,
+      "offset": 11702,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 11711,
+      "offset": 11752,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 11761,
+      "offset": 11802,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 11809,
+      "offset": 11850,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 11859,
+      "offset": 11900,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 11906,
+      "offset": 11947,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 12518,
+      "offset": 12559,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 12604,
+      "offset": 12645,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 12629,
+      "offset": 12670,
       "length": 13,
       "value": "\"Bad Request\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 12725,
+      "offset": 12766,
       "length": 13,
       "value": "\"Bad Request\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 12805,
+      "offset": 12846,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 12882,
+      "offset": 12923,
       "length": 8,
       "value": "\"VL_400\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 12944,
+      "offset": 12985,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 13002,
+      "offset": 13043,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 13085,
+      "offset": 13126,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 13110,
+      "offset": 13151,
       "length": 14,
       "value": "\"Unauthorized\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 13207,
+      "offset": 13248,
       "length": 15,
       "value": "\"Token Invalid\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 13289,
+      "offset": 13330,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 13366,
+      "offset": 13407,
       "length": 8,
       "value": "\"VL_401\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 13428,
+      "offset": 13469,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 13486,
+      "offset": 13527,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 13569,
+      "offset": 13610,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 13594,
+      "offset": 13635,
       "length": 11,
       "value": "\"Forbidden\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 13688,
+      "offset": 13729,
       "length": 11,
       "value": "\"Forbidden\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 13766,
+      "offset": 13807,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 13843,
+      "offset": 13884,
       "length": 8,
       "value": "\"VL_403\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 13905,
+      "offset": 13946,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 13963,
+      "offset": 14004,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 14046,
+      "offset": 14087,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 14071,
+      "offset": 14112,
       "length": 30,
       "value": "\"OUTSIDE_REGION_LIMIT_REACHED\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 14184,
+      "offset": 14225,
       "length": 30,
       "value": "\"OUTSIDE_REGION_LIMIT_REACHED\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 14281,
+      "offset": 14322,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 14358,
+      "offset": 14399,
       "length": 8,
       "value": "\"VL_403\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 14420,
+      "offset": 14461,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 14478,
+      "offset": 14519,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 14561,
+      "offset": 14602,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 14586,
+      "offset": 14627,
       "length": 11,
       "value": "\"Not Found\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 14680,
+      "offset": 14721,
       "length": 11,
       "value": "\"Not Found\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 14758,
+      "offset": 14799,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 14835,
+      "offset": 14876,
       "length": 8,
       "value": "\"VL_404\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 14897,
+      "offset": 14938,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 14955,
+      "offset": 14996,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 15038,
+      "offset": 15079,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 15063,
+      "offset": 15104,
       "length": 17,
       "value": "\"Request Timeout\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 15163,
+      "offset": 15204,
       "length": 17,
       "value": "\"Request Timeout\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 15247,
+      "offset": 15288,
       "length": 9,
       "value": "\"message\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 15324,
+      "offset": 15365,
       "length": 8,
       "value": "\"VL_408\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 15386,
+      "offset": 15427,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 15444,
+      "offset": 15485,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 15595,
+      "offset": 15636,
       "length": 15,
       "value": "\"Network Error\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 15666,
+      "offset": 15707,
       "length": 15,
       "value": "\"Network Error\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 15737,
+      "offset": 15778,
       "length": 18,
       "value": "\"VL_Network_Error\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 15809,
+      "offset": 15850,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 15867,
+      "offset": 15908,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 15948,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
-      "kind": "StringLiteral",
-      "offset": 16150,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
-      "kind": "StringLiteral",
-      "offset": 16261,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
-      "kind": "StringLiteral",
-      "offset": 16364,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
-      "kind": "BooleanLiteral",
-      "offset": 16460,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
-      "kind": "BooleanLiteral",
-      "offset": 16557,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
-      "kind": "BooleanLiteral",
-      "offset": 16608,
+      "offset": 15989,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 16832,
+      "offset": 16191,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 16878,
+      "offset": 16302,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 16924,
+      "offset": 16405,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 16968,
+      "offset": 16501,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 17014,
+      "offset": 16598,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 17057,
+      "offset": 16649,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 17231,
+      "offset": 16873,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 17273,
+      "offset": 16919,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "StringLiteral",
-      "offset": 17315,
+      "offset": 16965,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 17355,
+      "offset": 17009,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 17397,
+      "offset": 17055,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
       "kind": "BooleanLiteral",
-      "offset": 17436,
+      "offset": 17098,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
+      "kind": "StringLiteral",
+      "offset": 17272,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
+      "kind": "StringLiteral",
+      "offset": 17314,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
+      "kind": "StringLiteral",
+      "offset": 17356,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
+      "kind": "BooleanLiteral",
+      "offset": 17396,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
+      "kind": "BooleanLiteral",
+      "offset": 17438,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/DataManger\/Handler\/DataManger.swift",
+      "kind": "BooleanLiteral",
+      "offset": 17477,
       "length": 5,
       "value": "false"
     },
