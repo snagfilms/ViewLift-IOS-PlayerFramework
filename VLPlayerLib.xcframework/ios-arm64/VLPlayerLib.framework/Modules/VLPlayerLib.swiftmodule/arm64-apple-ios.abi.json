@@ -2145,6 +2145,13 @@
       },
       {
         "kind": "Import",
+        "name": "GoogleCast",
+        "printedName": "GoogleCast",
+        "declKind": "Import",
+        "moduleName": "VLPlayerLib"
+      },
+      {
+        "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
@@ -17593,9 +17600,69 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "castingId",
+            "printedName": "castingId",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib16VLBitmovinConfigV9castingIdSSSgvp",
+            "mangledName": "$s11VLPlayerLib16VLBitmovinConfigV9castingIdSSSgvp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib16VLBitmovinConfigV9castingIdSSSgvg",
+                "mangledName": "$s11VLPlayerLib16VLBitmovinConfigV9castingIdSSSgvg",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(license:userId:)",
+            "printedName": "init(license:userId:castingId:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -17622,11 +17689,26 @@
                   }
                 ],
                 "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:11VLPlayerLib16VLBitmovinConfigV7license6userIdA2C0c7LicenseD0V_SSSgtcfc",
-            "mangledName": "$s11VLPlayerLib16VLBitmovinConfigV7license6userIdA2C0c7LicenseD0V_SSSgtcfc",
+            "usr": "s:11VLPlayerLib16VLBitmovinConfigV7license6userId07castingG0A2C0c7LicenseD0V_SSSgAItcfc",
+            "mangledName": "$s11VLPlayerLib16VLBitmovinConfigV7license6userId07castingG0A2C0c7LicenseD0V_SSSgAItcfc",
             "moduleName": "VLPlayerLib",
             "declAttributes": [
               "AccessControl"
@@ -33760,527 +33842,597 @@
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 430,
+      "offset": 448,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 710,
+      "offset": 728,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 817,
+      "offset": 835,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 1363,
+      "offset": 1381,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 1405,
+      "offset": 1423,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 1447,
+      "offset": 1465,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 1924,
+      "offset": 1942,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 1988,
+      "offset": 2006,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2929,
+      "offset": 3043,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 3062,
+      "offset": 3094,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3218,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
+      "kind": "StringLiteral",
+      "offset": 3382,
+      "length": 19,
+      "value": "\"bitmovinplayer-ui\""
+    },
+    {
+      "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
+      "kind": "StringLiteral",
+      "offset": 3418,
+      "length": 9,
+      "value": "\"min.css\""
+    },
+    {
+      "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
+      "kind": "StringLiteral",
+      "offset": 3485,
+      "length": 19,
+      "value": "\"bitmovinplayer-ui\""
+    },
+    {
+      "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
+      "kind": "StringLiteral",
+      "offset": 3521,
+      "length": 8,
+      "value": "\"min.js\""
+    },
+    {
+      "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3796,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 6282,
+      "offset": 5991,
+      "length": 2,
+      "value": "10"
+    },
+    {
+      "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7102,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 6420,
+      "offset": 7240,
       "length": 3,
       "value": "100"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 6637,
+      "offset": 7457,
       "length": 3,
       "value": "100"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7706,
+      "offset": 8526,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7844,
+      "offset": 8664,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7884,
+      "offset": 8704,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "Array",
-      "offset": 8233,
+      "offset": 9053,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8271,
+      "offset": 9091,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8317,
+      "offset": 9137,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 8472,
+      "offset": 9292,
       "length": 16,
       "value": "\"[Player Event]\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 8500,
+      "offset": 9320,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 8913,
+      "offset": 9733,
       "length": 82,
       "value": "\"***** BitMovin: event: TimeChangedEvent, currentTime: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 8988,
+      "offset": 9808,
       "length": 5,
       "value": "\" *****\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 9083,
+      "offset": 9903,
       "length": 72,
       "value": "\"***** BitMovin: event: ReadyEvent, timestamp: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 9148,
+      "offset": 9968,
       "length": 5,
       "value": "\" *****\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 9411,
+      "offset": 10231,
       "length": 79,
       "value": "\"***** BitMovin: event: StallStartedEvent, timestamp: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 9483,
+      "offset": 10303,
       "length": 5,
       "value": "\" *****\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9932,
+      "offset": 10752,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 9978,
+      "offset": 10798,
       "length": 3,
       "value": "\"0\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 10135,
+      "offset": 10955,
       "length": 77,
       "value": "\"***** BitMovin: event: StallEndedEvent, timestamp: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 10205,
+      "offset": 11025,
       "length": 5,
       "value": "\" *****\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 10620,
+      "offset": 11440,
       "length": 78,
       "value": "\"***** BitMovin: event: onPlayerInactive, timestamp: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 10691,
+      "offset": 11511,
       "length": 5,
       "value": "\" *****\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10798,
+      "offset": 11618,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 10887,
+      "offset": 11707,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 10980,
+      "offset": 11800,
       "length": 64,
       "value": "\"***** BitMovin: event: PlayingEvent, time: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 11037,
+      "offset": 11857,
       "length": 5,
       "value": "\" *****\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11219,
+      "offset": 12039,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11541,
+      "offset": 12361,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11549,
+      "offset": 12369,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11556,
+      "offset": 12376,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11601,
+      "offset": 12421,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11709,
+      "offset": 12529,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11813,
+      "offset": 12633,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 11901,
+      "offset": 12721,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11939,
+      "offset": 12759,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11995,
+      "offset": 12815,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 12334,
+      "offset": 13154,
       "length": 4,
       "value": "1000"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 12854,
+      "offset": 13674,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 12878,
+      "offset": 13698,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 14452,
+      "offset": 15272,
       "length": 74,
       "value": "\"***** BitMovin: event: PlayerErrorEvent, message: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 14519,
+      "offset": 15339,
       "length": 5,
       "value": "\" *****\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 16191,
+      "offset": 17011,
       "length": 20,
       "value": "\"Video not playable\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 16247,
+      "offset": 17067,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 16283,
+      "offset": 17103,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 16321,
+      "offset": 17141,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 16618,
+      "offset": 17438,
       "length": 77,
       "value": "\"***** BitMovin: event: onSourceRemoved, message: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 16688,
+      "offset": 17508,
       "length": 5,
       "value": "\" *****\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 16932,
+      "offset": 17752,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 18537,
+      "offset": 19357,
       "length": 20,
       "value": "\"Video not playable\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 18593,
-      "length": 2,
-      "value": "\"\""
+      "offset": 19413,
+      "length": 15,
+      "value": "\"SourceRemoved\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 18629,
+      "offset": 19462,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 18667,
+      "offset": 19500,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 18970,
+      "offset": 19940,
       "length": 80,
       "value": "\"***** BitMovin: event: onPlaybackFinished, timestamp: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 19043,
+      "offset": 20013,
       "length": 5,
       "value": "\" *****\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 19258,
+      "offset": 20228,
       "length": 218,
       "value": "\"***** BitMovin: event: AirPlayAvailableEvent, timestamp: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 19334,
+      "offset": 20304,
       "length": 1,
       "value": "\", isAirPlayActive: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 19399,
+      "offset": 20369,
       "length": 1,
       "value": "\", isAirPlayAvailable: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 19470,
+      "offset": 20440,
       "length": 5,
       "value": "\"*****\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 19583,
+      "offset": 20553,
       "length": 217,
       "value": "\"***** BitMovin: event: AirPlayChangedEvent, timestamp: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 19657,
+      "offset": 20627,
       "length": 1,
       "value": "\", isAirPlayActive: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 19722,
+      "offset": 20692,
       "length": 1,
       "value": "\", isAirPlayAvailable: \""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 19793,
+      "offset": 20763,
       "length": 5,
       "value": "\" *****\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 19926,
+      "offset": 20896,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 20059,
+      "offset": 21029,
       "length": 4,
       "value": "true"
+    },
+    {
+      "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
+      "kind": "StringLiteral",
+      "offset": 21966,
+      "length": 40,
+      "value": "\"ChromeCast Log: \""
+    },
+    {
+      "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
+      "kind": "StringLiteral",
+      "offset": 21994,
+      "length": 1,
+      "value": "\" \""
+    },
+    {
+      "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/BitMovinVideoController.swift",
+      "kind": "StringLiteral",
+      "offset": 22005,
+      "length": 2,
+      "value": "\"\""
     },
     {
       "filePath": "\/Users\/japneetsingh\/ViewLift_Projects\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Handlers\/UserHistoryManager.swift",

@@ -671,7 +671,8 @@ public struct VLBitmovinConfig : Swift.Equatable {
   }
   public let license: VLPlayerLib.VLBitmovinConfig.VLBitmovinLicenseConfig
   public let userId: Swift.String?
-  public init(license: VLPlayerLib.VLBitmovinConfig.VLBitmovinLicenseConfig, userId: Swift.String?)
+  public let castingId: Swift.String?
+  public init(license: VLPlayerLib.VLBitmovinConfig.VLBitmovinLicenseConfig, userId: Swift.String?, castingId: Swift.String? = nil)
   public static func == (a: VLPlayerLib.VLBitmovinConfig, b: VLPlayerLib.VLBitmovinConfig) -> Swift.Bool
 }
 public enum VLPlayerType : Swift.Equatable {
