@@ -25,7 +25,7 @@ let package = Package(
         .package(
             name: "BitmovinPlayer",
             url: "https://github.com/bitmovin/player-ios.git",
-            from: "3.66.1"),
+            branch: "3.77.0"),
         .package(
             name: "VLBeaconLib",
             url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
