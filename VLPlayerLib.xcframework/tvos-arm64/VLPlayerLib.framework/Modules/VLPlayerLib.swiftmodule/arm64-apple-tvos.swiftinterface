@@ -1,13 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
-// swift-module-flags: -target arm64-apple-tvos14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name VLPlayerLib
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
+// swift-module-flags: -target arm64-apple-tvos14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name VLPlayerLib
+// swift-module-flags-ignorable: -enable-bare-slash-regex
 import AVFoundation
 import AVKit
 import AdSupport
 import Combine
 import CommonCrypto
 import CoreMedia
+import CryptoKit
 import DeveloperToolsSupport
 import Foundation
 import GoogleInteractiveMediaAds
@@ -29,6 +30,10 @@ public struct PlayerResponseValidation {
   public init()
   public func validateResponse(fetchedSuccessfully isSuccess: Swift.Bool, contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?, isUserLoggedIn: Swift.Bool?, creationHandler: (() -> Swift.Void)? = nil) -> VLPlayerLib.ValidatedPlayerResponse
 }
+open class StreamSwitchHandler {
+  public init(maxRetryCount: Swift.Int, delay: Swift.Int, jitterDelay: (min: Swift.Double, max: Swift.Double))
+  @objc deinit
+}
 public class Subtitles {
   public init(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8)
   public init(subtitles string: Swift.String)
@@ -36,16 +41,16 @@ public class Subtitles {
   @objc deinit
 }
 extension AVFoundation.AVPlayer {
-  @_Concurrency.MainActor @preconcurrency public var subtitleLabel: UIKit.UILabel? {
+  public var subtitleLabel: UIKit.UILabel? {
     get
     set(value)
   }
-  @_Concurrency.MainActor @preconcurrency public func addSubtitles(parentView: UIKit.UIView, textColor: Swift.String?, isFullScreen: Swift.Bool) -> Self
-  @_Concurrency.MainActor @preconcurrency public func getSubTitleInstance() -> Self
-  @_Concurrency.MainActor @preconcurrency public func updateSubtitlesFont()
-  @_Concurrency.MainActor @preconcurrency public func updateSubTitleConstraints(parentView: UIKit.UIView, isFullScreen: Swift.Bool)
-  @_Concurrency.MainActor @preconcurrency public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8, isPathLocal: Swift.Bool)
-  @_Concurrency.MainActor @preconcurrency public func show(subtitles string: Swift.String)
+  public func addSubtitles(parentView: UIKit.UIView, textColor: Swift.String?, isFullScreen: Swift.Bool) -> Self
+  public func getSubTitleInstance() -> Self
+  public func updateSubtitlesFont()
+  public func updateSubTitleConstraints(parentView: UIKit.UIView, isFullScreen: Swift.Bool)
+  public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8, isPathLocal: Swift.Bool)
+  public func show(subtitles string: Swift.String)
 }
 @objc @_inheritsConvenienceInitializers public class BeaconHelper : ObjectiveC.NSObject {
   @objc override dynamic public init()
@@ -506,9 +511,9 @@ public struct VLEPGProgramDetails {
     }
   }
   @objc override dynamic public init()
-  public func setEntitlement(data: VLPlayerLib.EntitlementData?, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String?)
-  public func refreshEntitlement(data: VLPlayerLib.EntitlementData?, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
-  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String, apiConfigEndPoint: Swift.String? = nil, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextVideoList: [Swift.String] = [], householdID: Swift.String? = nil, tveProvider: Swift.String?, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, easeLiveEnabled: Swift.Bool = false, location: (lat: Swift.String, long: Swift.String)?, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, nearestServerPlayerBaseURL: Swift.String? = nil, isBitMovinPlayer: Swift.Bool? = false, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
+  public func setEntitlement(data: VLPlayerLib.EntitlementData?, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String?, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil)
+  public func refreshEntitlement(data: VLPlayerLib.EntitlementData?, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
+  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String, apiConfigEndPoint: Swift.String? = nil, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView?, adUrl: Swift.String?, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextVideoList: [Swift.String] = [], householdID: Swift.String? = nil, tveProvider: Swift.String?, mvpdprovider: Swift.String?, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, easeLiveEnabled: Swift.Bool = false, location: (lat: Swift.String, long: Swift.String)?, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, nearestServerPlayerBaseURL: Swift.String? = nil, isBitMovinPlayer: Swift.Bool? = false, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
   @objc deinit
 }
 extension VLPlayerLib.VLPlayer {
