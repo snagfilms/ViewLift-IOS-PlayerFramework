@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
-// swift-module-flags: -target x86_64-apple-tvos14.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name VLPlayerLib
-// swift-module-flags-ignorable: -enable-bare-slash-regex
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-tvos14.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name VLPlayerLib
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
 import AVFoundation
 import AVKit
 import AdSupport
@@ -41,16 +41,16 @@ public class Subtitles {
   @objc deinit
 }
 extension AVFoundation.AVPlayer {
-  public var subtitleLabel: UIKit.UILabel? {
+  @_Concurrency.MainActor @preconcurrency public var subtitleLabel: UIKit.UILabel? {
     get
     set(value)
   }
-  public func addSubtitles(parentView: UIKit.UIView, textColor: Swift.String?, isFullScreen: Swift.Bool) -> Self
-  public func getSubTitleInstance() -> Self
-  public func updateSubtitlesFont()
-  public func updateSubTitleConstraints(parentView: UIKit.UIView, isFullScreen: Swift.Bool)
-  public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8, isPathLocal: Swift.Bool)
-  public func show(subtitles string: Swift.String)
+  @_Concurrency.MainActor @preconcurrency public func addSubtitles(parentView: UIKit.UIView, textColor: Swift.String?, isFullScreen: Swift.Bool) -> Self
+  @_Concurrency.MainActor @preconcurrency public func getSubTitleInstance() -> Self
+  @_Concurrency.MainActor @preconcurrency public func updateSubtitlesFont()
+  @_Concurrency.MainActor @preconcurrency public func updateSubTitleConstraints(parentView: UIKit.UIView, isFullScreen: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8, isPathLocal: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func show(subtitles string: Swift.String)
 }
 @objc @_inheritsConvenienceInitializers public class BeaconHelper : ObjectiveC.NSObject {
   @objc override dynamic public init()
