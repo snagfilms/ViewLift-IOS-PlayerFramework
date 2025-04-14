@@ -708,6 +708,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 ///   </li>
 /// </ul>
 - (void)updateVideoPlayerFrameWithFrame:(CGRect)frame;
+- (void)updateCaption;
 @end
 
 
@@ -715,6 +716,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 @protocol videoPlaybackDelegate <NSObject>
 @optional
 - (void)customPlayerStateWithIsPlaying:(BOOL)isPlaying;
+- (void)manageClosedCaptionButtonWithIsHidden:(BOOL)isHidden;
 - (void)customPlayerControlsWithIsHidden:(BOOL)isHidden;
 /// Handle player rate change
 /// \param playerTag 

@@ -20919,6 +20919,30 @@
           },
           {
             "kind": "Function",
+            "name": "updateCaption",
+            "printedName": "updateCaption()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@VLPlayerLib@objc(cs)VLPlayer(im)updateCaption",
+            "mangledName": "$s11VLPlayerLib0A0C13updateCaptionyyF",
+            "moduleName": "VLPlayerLib",
+            "isOpen": true,
+            "declAttributes": [
+              "Dynamic",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "getStartOverTime",
             "printedName": "getStartOverTime()",
             "children": [
@@ -25190,6 +25214,38 @@
             "sugared_genericSig": "<Self where Self : VLPlayerLib.videoPlaybackDelegate>",
             "protocolReq": true,
             "objc_name": "customPlayerStateWithIsPlaying:",
+            "declAttributes": [
+              "Optional",
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "manageClosedCaptionButton",
+            "printedName": "manageClosedCaptionButton(isHidden:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@VLPlayerLib@objc(pl)videoPlaybackDelegate(im)manageClosedCaptionButtonWithIsHidden:",
+            "mangledName": "$s11VLPlayerLib21videoPlaybackDelegateP25manageClosedCaptionButton8isHiddenySb_tF",
+            "moduleName": "VLPlayerLib",
+            "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.videoPlaybackDelegate>",
+            "sugared_genericSig": "<Self where Self : VLPlayerLib.videoPlaybackDelegate>",
+            "protocolReq": true,
+            "objc_name": "manageClosedCaptionButtonWithIsHidden:",
             "declAttributes": [
               "Optional",
               "ObjC"
@@ -29986,112 +30042,112 @@
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "StringLiteral",
-      "offset": 777,
+      "offset": 774,
       "length": 12,
       "value": "\"Font Style\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "StringLiteral",
-      "offset": 816,
+      "offset": 813,
       "length": 17,
       "value": "\"Closed Captions\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "StringLiteral",
-      "offset": 861,
+      "offset": 858,
       "length": 18,
       "value": "\"Playback Quality\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "StringLiteral",
-      "offset": 905,
+      "offset": 902,
       "length": 16,
       "value": "\"Audio Language\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "Array",
-      "offset": 1253,
+      "offset": 1250,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 1650,
+      "offset": 1647,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "StringLiteral",
-      "offset": 1684,
+      "offset": 1681,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 1720,
+      "offset": 1717,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 1768,
+      "offset": 1765,
       "length": 5,
       "value": "100.0"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 1813,
+      "offset": 1810,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 2004,
+      "offset": 2001,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2035,
+      "offset": 2032,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 2153,
+      "offset": 2150,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 2202,
+      "offset": 2199,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 2245,
+      "offset": 2242,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Custom Views\/Player Settings\/CustomPlayerSettingsScreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 2295,
+      "offset": 2292,
       "length": 1,
       "value": "0"
     },
@@ -30931,91 +30987,91 @@
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 38609,
+      "offset": 38773,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 68874,
+      "offset": 70030,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69386,
+      "offset": 70542,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69421,
+      "offset": 70577,
       "length": 2,
       "value": "40"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69466,
+      "offset": 70622,
       "length": 2,
       "value": "40"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69581,
+      "offset": 70737,
       "length": 2,
       "value": "19"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69585,
+      "offset": 70741,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69663,
+      "offset": 70819,
       "length": 2,
       "value": "21"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69668,
+      "offset": 70824,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69721,
+      "offset": 70877,
       "length": 2,
       "value": "19"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69778,
+      "offset": 70934,
       "length": 2,
       "value": "21"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 70197,
+      "offset": 71353,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 70526,
+      "offset": 71682,
       "length": 1,
       "value": "0"
     },

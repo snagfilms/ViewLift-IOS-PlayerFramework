@@ -115,6 +115,7 @@ public protocol VideoPlayerDataSource : AnyObject {
 }
 @objc public protocol videoPlaybackDelegate : ObjectiveC.NSObjectProtocol {
   @objc optional func customPlayerState(isPlaying: Swift.Bool)
+  @objc optional func manageClosedCaptionButton(isHidden: Swift.Bool)
   @objc optional func customPlayerControls(isHidden: Swift.Bool)
   @objc optional func playerRateChanged(rate: Swift.Float, playerTag: Swift.String?)
   @objc optional func videoStarted(timestamp: Swift.Double, playerTag: Swift.String)
@@ -226,6 +227,7 @@ extension VLPlayerLib.VLPlayer {
   public func getCurrentVideoTimeLeft() -> Swift.Double?
   public func getCurrentVideoDuration() -> Swift.Double?
   @objc dynamic open func updateVideoPlayerFrame(frame: CoreFoundation.CGRect)
+  @objc dynamic open func updateCaption()
   public func getStartOverTime() -> Swift.Double?
   public func isDVREnabled() -> Swift.Bool?
   public func isLiveVideo() -> Swift.Bool

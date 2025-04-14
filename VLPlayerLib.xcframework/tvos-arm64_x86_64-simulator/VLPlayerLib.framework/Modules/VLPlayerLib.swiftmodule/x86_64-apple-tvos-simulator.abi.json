@@ -3594,6 +3594,38 @@
           },
           {
             "kind": "Function",
+            "name": "manageClosedCaptionButton",
+            "printedName": "manageClosedCaptionButton(isHidden:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@VLPlayerLib@objc(pl)videoPlaybackDelegate(im)manageClosedCaptionButtonWithIsHidden:",
+            "mangledName": "$s11VLPlayerLib21videoPlaybackDelegateP25manageClosedCaptionButton8isHiddenySb_tF",
+            "moduleName": "VLPlayerLib",
+            "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.videoPlaybackDelegate>",
+            "sugared_genericSig": "<Self where Self : VLPlayerLib.videoPlaybackDelegate>",
+            "protocolReq": true,
+            "objc_name": "manageClosedCaptionButtonWithIsHidden:",
+            "declAttributes": [
+              "Optional",
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "customPlayerControls",
             "printedName": "customPlayerControls(isHidden:)",
             "children": [
@@ -16992,6 +17024,30 @@
               "AccessControl",
               "ObjC",
               "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "updateCaption",
+            "printedName": "updateCaption()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@VLPlayerLib@objc(cs)VLPlayer(im)updateCaption",
+            "mangledName": "$s11VLPlayerLib0A0C13updateCaptionyyF",
+            "moduleName": "VLPlayerLib",
+            "isOpen": true,
+            "declAttributes": [
+              "Dynamic",
+              "AccessControl",
+              "ObjC"
             ],
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
