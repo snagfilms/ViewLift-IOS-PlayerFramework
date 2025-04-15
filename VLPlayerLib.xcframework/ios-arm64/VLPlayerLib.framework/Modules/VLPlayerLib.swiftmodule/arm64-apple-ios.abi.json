@@ -18597,6 +18597,27 @@
           },
           {
             "kind": "Function",
+            "name": "checkClosedCaption",
+            "printedName": "checkClosedCaption()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11VLPlayerLib0A0C18checkClosedCaptionSbyF",
+            "mangledName": "$s11VLPlayerLib0A0C18checkClosedCaptionSbyF",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "setEntitlement",
             "printedName": "setEntitlement(data:screenResolution:isBitMovinPlayer:isLowLatency:userID:streamSwitchHandler:)",
             "children": [
@@ -20920,19 +20941,32 @@
           {
             "kind": "Function",
             "name": "updateCaption",
-            "printedName": "updateCaption()",
+            "printedName": "updateCaption(selectedIndex:selectedKey:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Void",
                 "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               }
             ],
             "declKind": "Func",
-            "usr": "c:@CM@VLPlayerLib@objc(cs)VLPlayer(im)updateCaption",
-            "mangledName": "$s11VLPlayerLib0A0C13updateCaptionyyF",
+            "usr": "c:@CM@VLPlayerLib@objc(cs)VLPlayer(im)updateCaptionWithSelectedIndex:selectedKey:",
+            "mangledName": "$s11VLPlayerLib0A0C13updateCaption13selectedIndex0E3KeyySi_SStF",
             "moduleName": "VLPlayerLib",
             "isOpen": true,
+            "objc_name": "updateCaptionWithSelectedIndex:selectedKey:",
             "declAttributes": [
               "Dynamic",
               "AccessControl",
@@ -30994,84 +31028,84 @@
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 70030,
+      "offset": 70284,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 70542,
+      "offset": 70796,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 70577,
+      "offset": 70831,
       "length": 2,
       "value": "40"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 70622,
+      "offset": 70876,
       "length": 2,
       "value": "40"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 70737,
+      "offset": 70991,
       "length": 2,
       "value": "19"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 70741,
+      "offset": 70995,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 70819,
+      "offset": 71073,
       "length": 2,
       "value": "21"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 70824,
+      "offset": 71078,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 70877,
+      "offset": 71131,
       "length": 2,
       "value": "19"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 70934,
+      "offset": 71188,
       "length": 2,
       "value": "21"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 71353,
+      "offset": 71607,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 71682,
+      "offset": 71936,
       "length": 1,
       "value": "0"
     },
@@ -31743,175 +31777,175 @@
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Array",
-      "offset": 7981,
+      "offset": 8452,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 8241,
+      "offset": 8712,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 8476,
+      "offset": 8947,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 13647,
+      "offset": 14118,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 13701,
+      "offset": 14172,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 13769,
+      "offset": 14240,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 13819,
+      "offset": 14290,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 13870,
+      "offset": 14341,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 13922,
+      "offset": 14393,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 13969,
+      "offset": 14440,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 14182,
+      "offset": 14653,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 14235,
+      "offset": 14706,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 14347,
+      "offset": 14818,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Dictionary",
-      "offset": 14453,
+      "offset": 14924,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 14542,
+      "offset": 15013,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18199,
+      "offset": 18670,
       "length": 8,
       "value": "\"Paused\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18231,
+      "offset": 18702,
       "length": 9,
       "value": "\"Playing\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18274,
+      "offset": 18745,
       "length": 17,
       "value": "\"Playing+Casting\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18317,
+      "offset": 18788,
       "length": 11,
       "value": "\"Buffering\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18353,
+      "offset": 18824,
       "length": 10,
       "value": "\"Complete\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18385,
+      "offset": 18856,
       "length": 7,
       "value": "\"Error\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18422,
+      "offset": 18893,
       "length": 15,
       "value": "\"Advertisement\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18461,
+      "offset": 18932,
       "length": 9,
       "value": "\"Stalled\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18494,
+      "offset": 18965,
       "length": 9,
       "value": "\"Stopped\""
     },
     {
       "filePath": "\/Users\/ratnakargautam\/Documents\/GitHub\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18524,
+      "offset": 18995,
       "length": 6,
       "value": "\"None\""
     },

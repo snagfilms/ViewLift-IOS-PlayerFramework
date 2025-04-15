@@ -708,7 +708,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 ///   </li>
 /// </ul>
 - (void)updateVideoPlayerFrameWithFrame:(CGRect)frame;
-- (void)updateCaption;
+- (void)updateCaptionWithSelectedIndex:(NSInteger)selectedIndex selectedKey:(NSString * _Nonnull)selectedKey;
 @end
 
 
@@ -1689,7 +1689,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 ///   </li>
 /// </ul>
 - (void)updateVideoPlayerFrameWithFrame:(CGRect)frame;
-- (void)updateCaption;
+- (void)updateCaptionWithSelectedIndex:(NSInteger)selectedIndex selectedKey:(NSString * _Nonnull)selectedKey;
 @end
 
 

@@ -615,7 +615,7 @@ extension VLPlayerLib.VLPlayer {
   public func getCurrentVideoTimeLeft() -> Swift.Double?
   public func getCurrentVideoDuration() -> Swift.Double?
   @objc dynamic open func updateVideoPlayerFrame(frame: CoreFoundation.CGRect)
-  @objc dynamic open func updateCaption()
+  @objc dynamic open func updateCaption(selectedIndex: Swift.Int, selectedKey: Swift.String)
   public func getStartOverTime() -> Swift.Double?
   public func isDVREnabled() -> Swift.Bool?
   public func isLiveVideo() -> Swift.Bool
@@ -689,6 +689,7 @@ extension VLPlayerLib.VLPlayer {
     }
   }
   @objc override dynamic public init()
+  public func checkClosedCaption() -> Swift.Bool
   public func setEntitlement(data: VLPlayerLib.EntitlementData?, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String?, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil)
   public func refreshEntitlement(data: VLPlayerLib.EntitlementData?, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
   open func setSourceToPlayDirectURL(customControlsView: UIKit.UIView?, playerDisplayType: VLPlayerLib.VLPlayer.PlayerDisplayType, analyticsAdditionalData: [Swift.String : Any]?, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil)
