@@ -5,10 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "VLPlayerLib",
-    platforms: [.iOS(.v14)],//,.tvOS(.v14)
+    platforms: [.iOS(.v14)],
     products: [
         .library(name: "VLPlayerLib", targets: ["VLPlayerLibWrapper"]),
-//        .library(name: "GoogleInteractiveMediaAds-tvOS", targets: ["GoogleInteractiveMediaAds-tvOS"]),
         .library(name: "GoogleInteractiveMediaAds-iOS", targets: ["GoogleInteractiveMediaAds-iOS"]),
         .library(name: "AmazonIVSPlayer-iOS", targets: ["AmazonIVSPlayer-iOS"]),
         .library(name: "GoogleCast-iOS", targets: ["GoogleCast-iOS"]),
@@ -17,7 +16,7 @@ let package = Package(
         .package(
             name: "VisualEffectView",
             url: "https://github.com/efremidze/VisualEffectView.git",
-            from: "4.1.4"),
+            branch: "master"),
         .package(
             name: "M3U8Parser",
             url: "https://github.com/M3U8Kit/M3U8Parser.git",
@@ -25,28 +24,31 @@ let package = Package(
         .package(
             name: "BitmovinPlayer",
             url: "https://github.com/bitmovin/player-ios.git",
-            branch: "3.77.0"),
+            branch: "3.85.2"),
         .package(
             name: "VLBeaconLib",
             url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
-            branch: "release-3.1.0")
+            branch: "3.2.1"),
+        .package(
+            name: "MUXSDKStats",
+            url: "https://github.com/muxinc/mux-stats-sdk-avplayer",
+            from: "4.0.0")
     ],
     targets: [
         .binaryTarget(name: "VLPlayerLib", path: "VLPlayerLib.xcframework"),
         .target(name: "VLPlayerLibWrapper",
                 dependencies: [
                     .byName(name: "GoogleInteractiveMediaAds-iOS", condition: .when(platforms: [.iOS])),
-//                    .byName(name: "GoogleInteractiveMediaAds-tvOS", condition: .when(platforms: [.tvOS])),
                     .byName(name: "GoogleCast-iOS", condition: .when(platforms: [.iOS])),
                     .byName(name: "AmazonIVSPlayer-iOS", condition: .when(platforms: [.iOS])),
                     .product(name: "VLBeaconLib", package: "VLBeaconLib"),
                     .product(name: "VisualEffectView", package: "VisualEffectView"),
                     .product(name: "M3U8Parser", package: "M3U8Parser"),
                     .product(name: "BitmovinPlayer", package: "BitmovinPlayer"),
+                    .product(name: "MUXSDKStats", package: "MUXSDKStats"),
                     .target(name: "VLPlayerLib")
                 ],
                 path: "VLPlayerLibWrapper/Sources"),
-//        .binaryTarget(name: "GoogleInteractiveMediaAds-tvOS", path: "DependentFrameworks/tvOS/GoogleInteractiveMediaAds-tvOS.xcframework"),
         .binaryTarget(name: "GoogleInteractiveMediaAds-iOS", path: "DependentFrameworks/iOS/GoogleInteractiveMediaAds-iOS.xcframework"),
         .binaryTarget(name: "AmazonIVSPlayer-iOS", path: "DependentFrameworks/iOS/AmazonIVSPlayer-iOS.xcframework"),
         .binaryTarget(name: "GoogleCast-iOS", path: "DependentFrameworks/iOS/GoogleCast-iOS.xcframework"),
