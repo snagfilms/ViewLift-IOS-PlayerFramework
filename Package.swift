@@ -17,7 +17,7 @@ let package = Package(
         .package(
             name: "VisualEffectView",
             url: "https://github.com/efremidze/VisualEffectView.git",
-            from: "4.1.4"),
+            branch: "master"),
         .package(
             name: "M3U8Parser",
             url: "https://github.com/M3U8Kit/M3U8Parser.git",
@@ -25,11 +25,15 @@ let package = Package(
         .package(
             name: "BitmovinPlayer",
             url: "https://github.com/bitmovin/player-ios.git",
-            from: "3.66.1"),
+            from: "3.85.2"),
         .package(
             name: "VLBeaconLib",
             url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
-            branch: "3.0.0")
+            branch: "3.0.0"),
+        .package(
+            name: "MUXSDKStats",
+            url: "https://github.com/muxinc/mux-stats-sdk-avplayer",
+            from: "4.0.0")
     ],
     targets: [
         .binaryTarget(name: "VLPlayerLib", path: "VLPlayerLib.xcframework"),
@@ -43,6 +47,7 @@ let package = Package(
                     .product(name: "VisualEffectView", package: "VisualEffectView"),
                     .product(name: "M3U8Parser", package: "M3U8Parser"),
                     .product(name: "BitmovinPlayer", package: "BitmovinPlayer"),
+                    .product(name: "MUXSDKStats", package: "MUXSDKStats"),
                     .target(name: "VLPlayerLib")
                 ],
                 path: "VLPlayerLibWrapper/Sources"),
