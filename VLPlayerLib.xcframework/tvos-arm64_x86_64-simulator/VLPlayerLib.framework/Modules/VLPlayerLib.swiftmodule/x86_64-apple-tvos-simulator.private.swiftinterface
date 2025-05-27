@@ -204,6 +204,7 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func deinitialisePlayer()
   @objc dynamic open func setPlayerFitToFullScreen()
   @objc dynamic open func setPlayerFitToSmallScreen(frame: CoreFoundation.CGRect)
+  public func handleOverrideMenu()
   @objc dynamic open func goFullScreen()
   @objc dynamic open func removeFullScreen()
   @objc dynamic open func seekTo(seconds: Swift.Double)
