@@ -633,7 +633,7 @@ extension VLPlayerLib.VLPlayer {
   public func showOrHideAlwaysPlaybackControl(isShowing: Swift.Bool)
 }
 extension VLPlayerLib.VLPlayer {
-  @objc dynamic open func isPlaying() -> Swift.Bool
+  @_Concurrency.MainActor @objc dynamic open func isPlaying() -> Swift.Bool
   @objc dynamic open func shouldPlayVideo(initially: Swift.Bool)
 }
 public struct TokenIdentity : Swift.Decodable {
