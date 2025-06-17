@@ -694,6 +694,7 @@ public struct TokenIdentity : Swift.Decodable {
   @objc override dynamic public init()
   public func checkClosedCaption() -> Swift.Bool
   convenience public init(playerType: VLPlayerLib.VLPlayerType)
+  public func createPlayerView()
   public func setEntitlement(data: VLPlayerLib.EntitlementData?, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String?, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil)
   public func refreshEntitlement(data: VLPlayerLib.EntitlementData?, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void))
   open func setSourceToPlay(isASATPlayer: Swift.Bool = false, streamURL: Swift.String, vlToken: Swift.String, vlAPIEndPoint: Swift.String, vlBeaconEndPoint: Swift.String? = nil, customControlsView: UIKit.UIView? = nil, hideDefaultControls: Swift.Bool = false, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, analyticsAdditionalData: [Swift.String : Any]? = nil, isSuccess: @escaping ((_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void))
