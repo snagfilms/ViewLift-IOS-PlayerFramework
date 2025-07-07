@@ -634,8 +634,9 @@ extension VLPlayerLib.VLPlayer {
   public func showOrHideAlwaysPlaybackControl(isShowing: Swift.Bool)
 }
 extension VLPlayerLib.VLPlayer {
-  @objc dynamic open func isPlaying() -> Swift.Bool
+  @_Concurrency.MainActor @objc dynamic open func isPlaying() -> Swift.Bool
   @objc dynamic open func shouldPlayVideo(initially: Swift.Bool)
+  public func updateEPG(programData: VLPlayerLib.EPGSupportModel?)
 }
 public struct TokenIdentity : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
@@ -816,7 +817,14 @@ public struct VideoPlanFeatureSetting : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 public class EPGSupportModel {
-  public init(isEpg: Swift.Bool = false, epgFrame: CoreFoundation.CGRect = UIScreen.main.bounds)
+  public var isEpg: Swift.Bool
+  public var epgFrame: CoreFoundation.CGRect
+  public var currentProgramID: Swift.String?
+  public var currentProgramTitle: Swift.String?
+  public init(isEpg: Swift.Bool = false, epgFrame: CoreFoundation.CGRect = UIScreen.main.bounds, currentProgramID: Swift.String? = nil, currentProgramTitle: Swift.String? = nil)
+  public var description: Swift.String {
+    get
+  }
   @objc deinit
 }
 public protocol VideoPlayerDataSource : AnyObject {

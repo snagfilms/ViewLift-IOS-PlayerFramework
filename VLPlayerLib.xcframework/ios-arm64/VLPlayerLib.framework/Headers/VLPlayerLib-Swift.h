@@ -521,12 +521,12 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 @end
 
 
+
+
 @interface VLPlayer (SWIFT_EXTENSION(VLPlayerLib))
 - (BOOL)isPlaying SWIFT_WARN_UNUSED_RESULT;
 - (void)shouldPlayVideoWithInitially:(BOOL)initially;
 @end
-
-
 
 
 
