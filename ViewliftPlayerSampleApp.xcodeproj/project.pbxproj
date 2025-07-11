@@ -23,6 +23,14 @@
 		9D5DBD0B2D4BBCED00895D1F /* VLPlayerLib.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5DBD0A2D4BBCED00895D1F /* VLPlayerLib.xcframework */; };
 		9DE4C8DF2D48E29500FBC483 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 9DE4C8DE2D48E29500FBC483 /* BitmovinPlayer */; };
 		D28B84D92B6A320000D61045 /* VLBeaconLib in Frameworks */ = {isa = PBXBuildFile; productRef = D28B84D82B6A320000D61045 /* VLBeaconLib */; };
+		D29314352E20E9E2000C2902 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314312E20E9E2000C2902 /* AssetListViewController.swift */; };
+		D29314362E20E9E2000C2902 /* AssetsListViewController+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */; };
+		D29314372E20E9E2000C2902 /* entitlement.json in Resources */ = {isa = PBXBuildFile; fileRef = D29314342E20E9E2000C2902 /* entitlement.json */; };
+		D29314382E20E9E2000C2902 /* assets-provider.json in Resources */ = {isa = PBXBuildFile; fileRef = D29314322E20E9E2000C2902 /* assets-provider.json */; };
+		D29314392E20E9E2000C2902 /* entitlement.json in Resources */ = {isa = PBXBuildFile; fileRef = D29314342E20E9E2000C2902 /* entitlement.json */; };
+		D293143A2E20E9E2000C2902 /* assets-provider.json in Resources */ = {isa = PBXBuildFile; fileRef = D29314322E20E9E2000C2902 /* assets-provider.json */; };
+		D293143B2E20E9E2000C2902 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314312E20E9E2000C2902 /* AssetListViewController.swift */; };
+		D293143C2E20E9E2000C2902 /* AssetsListViewController+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */; };
 		F74E54E027461E8500016E7F /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74E54DF27461E8500016E7F /* NetworkHandler.swift */; };
 		F79C5385274384C400FFDB88 /* VideoPlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */; };
 		F79C538727438BD700FFDB88 /* VideoList.json in Resources */ = {isa = PBXBuildFile; fileRef = F79C538627438BD700FFDB88 /* VideoList.json */; };
@@ -73,6 +81,10 @@
 		9D1EC22D2D4A7ABF00CED367 /* GoogleInteractiveMediaAds-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-iOS.xcframework"; path = "DependentFrameworks/iOS/GoogleInteractiveMediaAds-iOS.xcframework"; sourceTree = "<group>"; };
 		9D1EC22E2D4A7ABF00CED367 /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "DependentFrameworks/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
 		9D5DBD0A2D4BBCED00895D1F /* VLPlayerLib.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = VLPlayerLib.xcframework; sourceTree = "<group>"; };
+		D29314312E20E9E2000C2902 /* AssetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListViewController.swift; sourceTree = "<group>"; };
+		D29314322E20E9E2000C2902 /* assets-provider.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "assets-provider.json"; sourceTree = "<group>"; };
+		D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetsListViewController+Services.swift"; sourceTree = "<group>"; };
+		D29314342E20E9E2000C2902 /* entitlement.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = entitlement.json; sourceTree = "<group>"; };
 		F74E54DF27461E8500016E7F /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaybackController.swift; sourceTree = "<group>"; };
 		F79C538627438BD700FFDB88 /* VideoList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VideoList.json; sourceTree = "<group>"; };
@@ -130,7 +142,9 @@
 		5422EFF2209912C600206D66 /* ViewliftPlayerSampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				F79C538627438BD700FFDB88 /* VideoList.json */,
+				D29314312E20E9E2000C2902 /* AssetListViewController.swift */,
+				D293143D2E20EA07000C2902 /* json-file */,
+				D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */,
 				54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */,
 				5422EFF3209912C600206D66 /* AppDelegate.swift */,
 				5422EFF5209912C600206D66 /* ViewController.swift */,
@@ -155,6 +169,16 @@
 				9D1EC22D2D4A7ABF00CED367 /* GoogleInteractiveMediaAds-iOS.xcframework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D293143D2E20EA07000C2902 /* json-file */ = {
+			isa = PBXGroup;
+			children = (
+				D29314322E20E9E2000C2902 /* assets-provider.json */,
+				D29314342E20E9E2000C2902 /* entitlement.json */,
+				F79C538627438BD700FFDB88 /* VideoList.json */,
+			);
+			path = "json-file";
 			sourceTree = "<group>";
 		};
 		F7EAFF0B275F3AA700B46BDE /* ViewliftPlayerSampleAppUITests */ = {
@@ -266,6 +290,8 @@
 				F79C538727438BD700FFDB88 /* VideoList.json in Resources */,
 				5422EFFB209912C600206D66 /* Assets.xcassets in Resources */,
 				5422EFF9209912C600206D66 /* Main.storyboard in Resources */,
+				D29314372E20E9E2000C2902 /* entitlement.json in Resources */,
+				D29314382E20E9E2000C2902 /* assets-provider.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +299,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D29314392E20E9E2000C2902 /* entitlement.json in Resources */,
+				D293143A2E20E9E2000C2902 /* assets-provider.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +313,8 @@
 			files = (
 				5422EFF6209912C600206D66 /* ViewController.swift in Sources */,
 				5422EFF4209912C600206D66 /* AppDelegate.swift in Sources */,
+				D29314352E20E9E2000C2902 /* AssetListViewController.swift in Sources */,
+				D29314362E20E9E2000C2902 /* AssetsListViewController+Services.swift in Sources */,
 				F79C5385274384C400FFDB88 /* VideoPlaybackController.swift in Sources */,
 				F79C538927438CBD00FFDB88 /* VideoList.swift in Sources */,
 				5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */,
@@ -297,6 +327,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D293143B2E20E9E2000C2902 /* AssetListViewController.swift in Sources */,
+				D293143C2E20E9E2000C2902 /* AssetsListViewController+Services.swift in Sources */,
 				F7EAFF0D275F3AA700B46BDE /* ViewliftPlayerSampleAppUITests.swift in Sources */,
 				F7EAFF0F275F3AA700B46BDE /* ViewliftPlayerSampleAppUITestsLaunchTests.swift in Sources */,
 			);

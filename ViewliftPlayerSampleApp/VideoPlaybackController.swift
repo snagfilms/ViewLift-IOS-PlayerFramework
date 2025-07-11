@@ -38,12 +38,13 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     private var seekBackwardDuration:Double = 10.0
     private var adUrl:String?
     private var playerOptionSelected:PlayerUIOptions!
-    
+    var entitlementData: VLPlayerLib.EntitlementData?
+    var drmConfig: VLPlayerLib.DRMConfig?
     var loopEnabled: Bool = false
     var autoplayEnabled: Bool = true
     var hideControls: Bool = false
     var muteEnabled: Bool = false
-    
+    var streamUrl: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -125,85 +126,50 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                 loaderView.startAnimating()
             
                 let featureSupported = getPlayerFeaturesSupported()
-                let vlBaseUrl = ""
-                let vlBeaconURL: String? = nil
-                let vlToken = self.videoList.playbackToken
-                let streamURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                let vlBaseUrl = self.videoList.apiBaseUrl
+                let vlBeaconURL: String? = self.videoList.beaconBaseUrl
+                let vlToken = self.videoList.vlToken
                 var vlPlayer: VLPlayer!
-                
-                if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
-                    enableCustomPlayerUI = true
-                    let playerLicenseKey = ""
-                    let analyticsLicenseKey = ""
-                    if playerLicenseKey.isEmpty || analyticsLicenseKey.isEmpty {
-                        vlPlayer = VLPlayer.init()
-                    } else {
-                        vlPlayer = VLPlayer(playerType: .bitmovin(config: VLBitmovinConfig(license: VLBitmovinConfig.VLBitmovinLicenseConfig(playerKey: playerLicenseKey, analyticsKey: analyticsLicenseKey), userId: nil)))
-                    }
-                    vlPlayer.videoPlayerDelegate = self
-                    vlPlayer.clientSideAdTrackingDelegate = self
-                    vlPlayer.enablePlayerBitrateLogs = self.enableBitrateLogs
-                    
-                    let isASATPlayerValue = (playerOptionSelected == .playASATURL)
-                    
-                    //MARK: isASATPlayer bool is required to check monetisation
-                    vlPlayer.setSourceToPlay(isASATPlayer: isASATPlayerValue, streamURL: streamURL, vlToken: vlToken, vlAPIEndPoint: vlBaseUrl, vlBeaconEndPoint: vlBeaconURL, customControlsView: nil, playerFeaturesSupported: featureSupported){ status, playerView in
-                        DispatchQueue.main.async { [weak self] in
-                            guard let checkedSelf = self else {return}
-                            loaderView.stopAnimating()
-                            
-                            guard status else { return }
-                            
-                            playerView?.frame = CGRect.init(x: 10, y: 10, width: UIScreen.main.bounds.width - 20, height: (UIScreen.main.bounds.width - 20) * 9/16)
-                            if cell?.contentView != nil {
-                                cell?.contentView.addSubview(playerView!)
-                            }
-                            else {
-                                cell?.addSubview(playerView!)
-                            }
-                            checkedSelf.videoPlayerArray?.append([indexPath.row: vlPlayer])
-                            checkedSelf.indexPathArray?.append(indexPath)
-                        }
-                    }
-                }else{
-                     vlPlayer =  VLPlayer.init()
-                    vlPlayer.videoPlayerDelegate = self
-                    vlPlayer.clientSideAdTrackingDelegate = self
-                
-                    ///Code for custom controls
-                    var videoPlayerControlsView: CustomVideoControls?
-                    if self.enableCustomPlayerUI {
-                        videoPlayerControlsView = CustomVideoControls.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width - 20, height: (UIScreen.main.bounds.width - 20) * 9/16))
-                        if self.playerOptionSelected == .customControlWithCustomSeekDuration {
-                            videoPlayerControlsView?.seekBackwardDuration = self.seekBackwardDuration
-                            videoPlayerControlsView?.seekForwardDuration = self.seekForwardDuration
-                        }
-                        videoPlayerControlsView?.videoPlayer = vlPlayer
-                    }
-                    vlPlayer.enablePlayerBitrateLogs = self.enableBitrateLogs
-                    
 
-                    vlPlayer.setSource(vlToken: vlToken, vlAPIEndPoint: vlBaseUrl, videoID: self.videoList.videoId, vlPlayerTag: "\(indexPath.row + 1)", customControlsView: videoPlayerControlsView, adUrl: self.adUrl, playerProgressInterval: 1, playerFeaturesSupported: featureSupported, tveProvider: nil, location: nil) { [weak self] (success, playerView, playerResoponse)  in
-                        guard let checkedSelf = self else {return}
+                let videoPlayerControlsView = self.enableCustomPlayerUI ? self.getCustomControls() : nil
+                if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
+                    let playerLicenseKey: String? = ""
+                    let analyticsLicenseKey: String? = ""
+                    let userId: String? = nil
+                    if let playerLicenseKey = playerLicenseKey, !playerLicenseKey.isEmpty {
+                        vlPlayer = VLPlayer(playerType: .bitmovin(config: VLBitmovinConfig(license: VLBitmovinConfig.VLBitmovinLicenseConfig(playerKey: playerLicenseKey, analyticsKey: analyticsLicenseKey), userId: userId)))
+                    }else{
+                        vlPlayer = VLPlayer.init()
+                    }
+                    videoPlayerControlsView?.videoPlayer = vlPlayer
+                    vlPlayer.videoPlayerDelegate = self
+                    vlPlayer.clientSideAdTrackingDelegate = self
+                    vlPlayer.enablePlayerBitrateLogs = self.enableBitrateLogs
+                    vlPlayer.setSource(type: .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", contentId: nil, drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl)),customControlsView: videoPlayerControlsView, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
                         DispatchQueue.main.async {
                             loaderView.stopAnimating()
-                            if success
-                            {
-                                if checkedSelf.enableCustomPlayerUI {
-                                    videoPlayerControlsView?.setupPictureInPicture()
-                                    videoPlayerControlsView?.startPictureInPictureInline(enable: true)
-                                    videoPlayerControlsView?.updatePlayerControlsType(playerControlType: vlPlayer.isLiveVideo() ? .liveVideoControls : .streamVideoControls)
-                                    checkedSelf.videoPlayerControlsArray?.append([indexPath.row: videoPlayerControlsView!])
-                                }
-                                playerView?.frame = CGRect.init(x: 10, y: 10, width: UIScreen.main.bounds.width - 20, height: (UIScreen.main.bounds.width - 20) * 9/16)
-                                if cell?.contentView != nil {
-                                    cell?.contentView.addSubview(playerView!)
-                                }
-                                else {
-                                    cell?.addSubview(playerView!)
-                                }
-                                checkedSelf.videoPlayerArray?.append([indexPath.row: vlPlayer])
-                                checkedSelf.indexPathArray?.append(indexPath)
+                            if let cell = cell, let playerView = playerView {
+                                self?.addPlayer(indexPath: indexPath, cell: cell, videoPlayerControlsView: videoPlayerControlsView, playerView: playerView, vlPlayer: vlPlayer)
+                                
+                            }
+                        }
+                    }
+
+                }else{
+                    vlPlayer = VLPlayer(playerType: .default)
+                    vlPlayer.videoPlayerDelegate = self
+                    vlPlayer.clientSideAdTrackingDelegate = self
+                    vlPlayer.enablePlayerBitrateLogs = self.enableBitrateLogs
+                    videoPlayerControlsView?.videoPlayer = vlPlayer
+                    if let entitlementData{
+                        vlPlayer.setEntitlement(data: entitlementData)
+                    }
+                    vlPlayer.setSource(type: .contentPlayback(VLPlayer.ContentPlaybackConfig(contentId: self.videoList.videoId, token: vlToken, apiBaseURL: vlBaseUrl)),customControlsView: videoPlayerControlsView, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
+                        DispatchQueue.main.async {
+                            loaderView.stopAnimating()
+                            if let cell = cell, let playerView = playerView {
+                                self?.addPlayer(indexPath: indexPath, cell: cell, videoPlayerControlsView: videoPlayerControlsView, playerView: playerView, vlPlayer: vlPlayer)
+                                
                             }
                         }
                     }
@@ -231,6 +197,30 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
         cell?.selectionStyle = .none
         return cell!
     }
+    
+    private func addPlayer(indexPath: IndexPath, cell: UITableViewCell, videoPlayerControlsView: CustomVideoControls?, playerView: UIView, vlPlayer: VLPlayer){
+        if self.enableCustomPlayerUI {
+            videoPlayerControlsView?.setupPictureInPicture()
+            videoPlayerControlsView?.startPictureInPictureInline(enable: true)
+            videoPlayerControlsView?.updatePlayerControlsType(playerControlType: vlPlayer.isLiveVideo() ? .liveVideoControls : .streamVideoControls)
+            self.videoPlayerControlsArray?.append([indexPath.row: videoPlayerControlsView!])
+        }
+        playerView.frame = CGRect.init(x: 10, y: 10, width: UIScreen.main.bounds.width - 20, height: (UIScreen.main.bounds.width - 20) * 9/16)
+        cell.contentView.addSubview(playerView)
+        
+        self.videoPlayerArray?.append([indexPath.row: vlPlayer])
+        self.indexPathArray?.append(indexPath)
+    }
+    
+    private func getCustomControls() -> CustomVideoControls{
+        let videoPlayerControlsView = CustomVideoControls.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width - 20, height: (UIScreen.main.bounds.width - 20) * 9/16))
+        if self.playerOptionSelected == .customControlWithCustomSeekDuration {
+            videoPlayerControlsView.seekBackwardDuration = self.seekBackwardDuration
+            videoPlayerControlsView.seekForwardDuration = self.seekForwardDuration
+        }
+        return videoPlayerControlsView
+    }
+
     
     func showAlert(title: String = "Alert!", message: String = "Description") {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -382,7 +372,9 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
         
         print("Error VL:", errorDescription)
         print("VideoFetchError: contentResponse:", contentResponse)
-        showAlert(message: errorDescription)
+        DispatchQueue.main.async {
+            self.showAlert(message: errorDescription)
+        }
     }
     
     func onFullScreenChange(currentTime: Double, isFullScreen: Bool, playerTag: String)

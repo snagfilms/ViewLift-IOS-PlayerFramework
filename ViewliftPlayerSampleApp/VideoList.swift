@@ -10,8 +10,12 @@ import Foundation
 
 struct VideoList:Decodable {
     var videoId:String
-    var playbackToken:String
+    var streamUrl:String?
+    var vlToken:String
     var nextVideoList: [NextVideoList]?
+    var apiBaseUrl: String
+    var beaconBaseUrl: String?
+    var xApiKey: String
 }
 
 struct NextVideoList:Codable {

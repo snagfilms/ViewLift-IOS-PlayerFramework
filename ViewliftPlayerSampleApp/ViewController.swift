@@ -22,6 +22,7 @@ enum PlayerUIOptions: Int {
     case adsEnabled
     case playStreamURL
     case playASATURL
+    case exploreMore
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -33,7 +34,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak private var muteControls: UISwitch!
     private var readVideoListOperation:VideoListProtocol?
     private var playerOptionSelected:PlayerUIOptions = .defaultControl
-    private var playerUIOptions = ["Default sdk controls", "Custom controls", "Debug logs enabled", "Custom controls and debug logs enabled", "Custom controls and custom seek duration", "Ads Enabled", "Play Stream URL", "Play ASAT URL"]
+    private var playerUIOptions = ["Default sdk controls", "Custom controls", "Debug logs enabled", "Custom controls and debug logs enabled", "Custom controls and custom seek duration", "Ads Enabled", "Play Stream URL", "Play ASAT URL", "Explore More"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +72,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         playerOptionSelected = PlayerUIOptions(rawValue: indexPath.row) ?? .defaultControl
-        launchVideoPlayer()
+        if playerOptionSelected == .exploreMore{
+            guard let _videoList = self.readVideoListOperation?.videoList else {return}
+            let assetVC = AssetListViewController()
+            assetVC.videoList = _videoList
+            navigationController?.pushViewController(assetVC, animated: true)
+        }else{
+            launchVideoPlayer()
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -91,13 +99,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let _videoList = self.readVideoListOperation?.videoList else {return}
         let videoPlaybackController = self.storyboard?.instantiateViewController(withIdentifier: "VideoPlaybackController") as! VideoPlaybackController
         videoPlaybackController.view.frame = self.view.bounds
+        if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL {
+            videoPlaybackController.streamUrl =  _videoList.streamUrl
+        }
         videoPlaybackController.autoplayEnabled = self.autoPlayToggle.isOn
         videoPlaybackController.loopEnabled = self.loopPlaybackToggle.isOn
         videoPlaybackController.hideControls = self.hideControls.isOn
         videoPlaybackController.muteEnabled = self.muteControls.isOn
         videoPlaybackController.prepareView(withPlayerUIOption: playerOptionSelected, videoList: _videoList)
         videoPlaybackController.modalPresentationStyle = .fullScreen
-        self.show(videoPlaybackController, sender: nil)
+        self.present(videoPlaybackController, animated: true, completion: nil)
     }
     
     @IBAction func valueChangeForToggle(sender: UISwitch){
