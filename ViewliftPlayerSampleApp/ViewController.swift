@@ -13,16 +13,16 @@ protocol VideoListProtocol {
     func readVideoList()
 }
 
-enum PlayerUIOptions: Int {
-    case defaultControl = 0
-    case customControl
-    case debugLogEnabled
-    case customControlWithDebugLog
-    case customControlWithCustomSeekDuration
-    case adsEnabled
-    case playStreamURL
-    case playASATURL
-    case exploreMore
+enum PlayerUIOptions: String {
+    case defaultControl = "Default sdk controls"
+    case customControl = "Custom controls"
+    case debugLogEnabled = "Debug logs enabled"
+    case customControlWithDebugLog = "Custom controls and debug logs enabled"
+    case customControlWithCustomSeekDuration = "Custom controls and custom seek duration"
+    case adsEnabled = "Ads Enabled"
+    case playStreamURL = "Play Stream URL"
+    case playASATURL = "Play ASAT URL"
+    case exploreMore = "Explore Player SDK - Use Cases"
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak private var muteControls: UISwitch!
     private var readVideoListOperation:VideoListProtocol?
     private var playerOptionSelected:PlayerUIOptions = .defaultControl
-    private var playerUIOptions = ["Default sdk controls", "Custom controls", "Debug logs enabled", "Custom controls and debug logs enabled", "Custom controls and custom seek duration", "Ads Enabled", "Play Stream URL", "Play ASAT URL", "Explore More"]
+    private var playerUIOptions: [PlayerUIOptions] = [.exploreMore, .defaultControl, .customControl]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +62,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableCell = tableView.dequeueReusableCell(withIdentifier: "MultiplePlayerUICell", for: indexPath)
         let textLabel = tableCell.contentView.viewWithTag(111) as? UILabel
-        textLabel?.text = playerUIOptions[indexPath.row]
+        textLabel?.text = playerUIOptions[indexPath.row].rawValue
         return tableCell
     }
     
@@ -71,7 +71,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        playerOptionSelected = PlayerUIOptions(rawValue: indexPath.row) ?? .defaultControl
+        
+        playerOptionSelected = playerUIOptions[indexPath.row]
         if playerOptionSelected == .exploreMore{
             guard let _videoList = self.readVideoListOperation?.videoList else {return}
             let assetVC = AssetListViewController()
@@ -80,6 +81,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }else{
             launchVideoPlayer()
         }
+    }
+    
+    func showAlert(title: String = "Alert!", message: String = "Description") {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -97,6 +105,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     ///Private methods
     private func launchVideoPlayer() {
         guard let _videoList = self.readVideoListOperation?.videoList else {return}
+        if let message = _videoList.checkForConfigurationErrorMessage() {
+            showAlert(message: message)
+            return
+        }
+        if _videoList.videoId.contains("xxxxx"){
+            showAlert(title: "Alert!", message: "Please update the videoId in VideoList.json file to play the video.")
+            return
+        }
+            
         let videoPlaybackController = self.storyboard?.instantiateViewController(withIdentifier: "VideoPlaybackController") as! VideoPlaybackController
         videoPlaybackController.view.frame = self.view.bounds
         if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL {

@@ -128,6 +128,10 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let errorMessage = videoList.checkForConfigurationErrorMessage() {
+            self.showAlert(message: errorMessage)
+            return
+        }
         self.entitlementData = nil // Reset entitlement data on new selection
         let asset = assetModels[indexPath.row]
         checkForPlayBack(asset: asset, isExternal: asset.isExternal ?? false)
@@ -186,7 +190,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
 
     }
     
-    private func showAlert(title: String = "Alert!", message: String = "Description") {
+    func showAlert(title: String = "Alert!", message: String = "Description") {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alertController.addAction(okAction)
@@ -496,188 +500,3 @@ extension AssetModel {
         }
     }
 }
-
-//extension AssetListViewController{
-//    
-//    //    curl --location 'https://spinco.staging.api.viewlift.com/v2/partner/video/assests?id=ceaada6c-88a7-492c-baa5-86dea10a14a2&site=spinco' \
-//    //    --header 'x-api-key: 3c32790a-967c-4abf-beeb-64d29bcc90b9'
-//
-//    
-//     func fetchContentDetails(apiResponse: ((_ playerObject: VLPlayerLib.PlayerObject?, _ isSuccess: Bool, _ vlError: VLPlayerLib.VLError?, _ playerResponse: VLPlayerLib.VLPlayerResponse?, _ contentResponse: Dictionary<String, AnyObject>?) -> Void)) {
-//
-//        guard let fallbackURL = Bundle.main.url(forResource: "entitlement", withExtension: "json"),
-//              let localData = try? Data(contentsOf: fallbackURL) else {
-//            print("Failed to load local fallback JSON.")
-//            let error = VLPlayerLib.VLError()
-//            apiResponse(nil, false, error, nil, nil)
-//            return
-//        }
-//
-//        let responseConfigData: Data? = localData
-//        let responseErrorData: Error? = nil
-//        let isSuccess: Bool = true
-//
-//        if responseConfigData != nil {
-//            
-//            if isSuccess {
-//                
-//                let responseJson = try? JSONSerialization.jsonObject(with: responseConfigData!)
-//                
-//                if responseJson is Dictionary<String, AnyObject> {
-//                    
-//                    let contentResponseDict:Dictionary<String, AnyObject> = responseJson as! Dictionary<String, AnyObject>
-//                    
-//                    if contentResponseDict["success"] != nil && contentResponseDict["success"] as? Bool == false
-//                    {
-//                        let vlError: VLPlayerLib.VLError = VLPlayerLib.VLError()
-//                        vlError.errorCode = contentResponseDict["errorCode"] as? String ?? ""
-//                        vlError.errorMessage = contentResponseDict["errorMessage"] as? String ?? ""
-//                        vlError.vl_errorCode = contentResponseDict["vl_errorCode"] as? String ?? ""
-//                        vlError.isPlayable = contentResponseDict["playable"] as? Bool ?? false
-//                        vlError.isSuccess = contentResponseDict["success"] as? Bool ?? false
-//                        apiResponse(nil, false, vlError, nil, contentResponseDict)
-//                    }
-//                    else if contentResponseDict["message"] != nil
-//                    {
-//                        let vlError: VLPlayerLib.VLError = VLPlayerLib.VLError()
-//                        
-//                        if contentResponseDict["message"] as? String == "Bad Request"
-//                        {
-//                            vlError.errorCode = "Bad Request"
-//                            vlError.errorMessage = contentResponseDict["message"] as? String
-//                            vlError.vl_errorCode = "VL_400"
-//                            vlError.isPlayable = false
-//                            vlError.isSuccess = false
-//                        }
-//                        else if contentResponseDict["message"] as? String == "Unauthorized"
-//                        {
-//                            vlError.errorCode = "Token Invalid"
-//                            vlError.errorMessage = contentResponseDict["message"] as? String
-//                            vlError.vl_errorCode = "VL_401"
-//                            vlError.isPlayable = false
-//                            vlError.isSuccess = false
-//                        }
-//                        else if contentResponseDict["message"] as? String == "Forbidden"
-//                        {
-//                            vlError.errorCode = "Forbidden"
-//                            vlError.errorMessage = contentResponseDict["message"] as? String
-//                            vlError.vl_errorCode = "VL_403"
-//                            vlError.isPlayable = false
-//                            vlError.isSuccess = false
-//                        }
-//                        else if contentResponseDict["message"] as? String == "OUTSIDE_REGION_LIMIT_REACHED"
-//                        {
-//                            vlError.errorCode = "OUTSIDE_REGION_LIMIT_REACHED"
-//                            vlError.errorMessage = contentResponseDict["message"] as? String
-//                            vlError.vl_errorCode = "VL_403"
-//                            vlError.isPlayable = false
-//                            vlError.isSuccess = false
-//                        }
-//                        else if contentResponseDict["message"] as? String == "Not Found"
-//                        {
-//                            vlError.errorCode = "Not Found"
-//                            vlError.errorMessage = contentResponseDict["message"] as? String
-//                            vlError.vl_errorCode = "VL_404"
-//                            vlError.isPlayable = false
-//                            vlError.isSuccess = false
-//                        }
-//                        else if contentResponseDict["message"] as? String == "Request Timeout"
-//                        {
-//                            vlError.errorCode = "Request Timeout"
-//                            vlError.errorMessage = contentResponseDict["message"] as? String
-//                            vlError.vl_errorCode = "VL_408"
-//                            vlError.isPlayable = false
-//                            vlError.isSuccess = false
-//                        }
-//                        else
-//                        {
-//                            vlError.errorCode = "Network Error"
-//                            vlError.errorMessage = "Network Error"
-//                            vlError.vl_errorCode = "VL_Network_Error"
-//                            vlError.isPlayable = false
-//                            vlError.isSuccess = false
-//                        }
-//                        apiResponse(nil, false, vlError, nil, contentResponseDict)
-//                    } else {
-//                        let dataParser = DataParser()
-//                        let playerObject = dataParser.parseContent(channelID: nil, contentDictionary: contentResponseDict)
-//                        
-//                        do {
-//                            
-//                            let response = try JSONDecoder().decode(VLPlayerResponse.self, from: responseConfigData!)
-//                            apiResponse(playerObject, true, nil, response, contentResponseDict)
-//                        }
-//                        catch let err {
-//                            debugPrint(err)
-//                            let vlError: VLError = VLError()
-//                            vlError.errorCode = "Not Found"
-//                            vlError.errorMessage = contentResponseDict["message"] as? String
-//                            vlError.vl_errorCode = "VL_404"
-//                            vlError.isPlayable = false
-//                            vlError.isSuccess = false
-//                            apiResponse(playerObject, true, nil, nil, contentResponseDict)
-//                        }
-//                    }
-//                }
-//                else
-//                {
-//                    let vlError: VLPlayerLib.VLError = VLPlayerLib.VLError()
-//                    vlError.errorCode = ""
-//                    vlError.errorMessage = ""
-//                    vlError.vl_errorCode = ""
-//                    vlError.isPlayable = false
-//                    vlError.isSuccess = false
-//                    apiResponse(nil, false, vlError, nil, nil)
-//                }
-//            }
-//            else {
-//                
-//                let errorResponse = try? JSONSerialization.jsonObject(with: responseConfigData!)
-//                
-//                if errorResponse is Dictionary<String,AnyObject> {
-//                    
-//                    let errorDict:Dictionary<String,AnyObject>? = errorResponse as? Dictionary<String,AnyObject>
-//                    
-//                    if errorDict != nil {
-//                        let vlError: VLPlayerLib.VLError = VLPlayerLib.VLError()
-//                        vlError.errorCode = errorDict?["errorCode"] as? String ?? ""
-//                        vlError.errorMessage = errorDict?["errorMessage"] as? String ?? ""
-//                        vlError.vl_errorCode = errorDict?["vl_errorCode"] as? String ?? ""
-//                        vlError.isPlayable = errorDict?["playable"] as? Bool ?? false
-//                        vlError.isSuccess = errorDict?["success"] as? Bool ?? false
-//                        apiResponse(nil, false, vlError, nil, nil)
-//                    }
-//                    else {
-//                        
-//                        let vlError: VLPlayerLib.VLError = VLPlayerLib.VLError()
-//                        vlError.errorCode = ""
-//                        vlError.errorMessage = ""
-//                        vlError.vl_errorCode = ""
-//                        vlError.isPlayable = false
-//                        vlError.isSuccess = false
-//                        apiResponse(nil, false, vlError, nil, nil)
-//                    }
-//                }
-//                else {
-//                    let vlError: VLPlayerLib.VLError = VLPlayerLib.VLError()
-//                    vlError.errorCode = ""
-//                    vlError.errorMessage = ""
-//                    vlError.vl_errorCode = ""
-//                    vlError.isPlayable = false
-//                    vlError.isSuccess = false
-//                    apiResponse(nil, false, vlError, nil, nil)
-//                }
-//            }
-//        }
-//        else
-//        {
-//            let vlError: VLPlayerLib.VLError = VLPlayerLib.VLError()
-//            vlError.errorCode = ""
-//            vlError.errorMessage = ""
-//            vlError.vl_errorCode = ""
-//            vlError.isPlayable = false
-//            vlError.isSuccess = false
-//            apiResponse(nil, false, vlError, nil, nil)
-//        }
-//    }
-//}
