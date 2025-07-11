@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="IEx-LT-b1H">
-                                <rect key="frame" x="0.0" y="54" width="375" height="425"/>
+                                <rect key="frame" x="0.0" y="54" width="375" height="613"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MultiplePlayerUICell" rowHeight="40" id="uLX-jd-l66">
@@ -51,49 +51,49 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="fSX-ov-Cma"/>
                                 </connections>
                             </tableView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" title="AutoPlay" translatesAutoresizingMaskIntoConstraints="NO" id="FZa-BZ-Xf8">
+                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" title="AutoPlay" translatesAutoresizingMaskIntoConstraints="NO" id="FZa-BZ-Xf8">
                                 <rect key="frame" x="248" y="494" width="51" height="31"/>
                                 <connections>
                                     <action selector="valueChangeForToggleWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="tyH-IE-Npm"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AutoPlay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MuD-b4-3Kz">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AutoPlay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MuD-b4-3Kz">
                                 <rect key="frame" x="55" y="499" width="67" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="LoopPlayback" translatesAutoresizingMaskIntoConstraints="NO" id="LdB-3P-lNE">
+                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="LoopPlayback" translatesAutoresizingMaskIntoConstraints="NO" id="LdB-3P-lNE">
                                 <rect key="frame" x="248" y="533" width="51" height="31"/>
                                 <connections>
                                     <action selector="valueChangeForToggleWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="fWT-x8-pCG"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loop Play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wp6-4T-j6W">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loop Play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wp6-4T-j6W">
                                 <rect key="frame" x="55" y="538" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="HideControls" translatesAutoresizingMaskIntoConstraints="NO" id="kmH-SP-Xv6">
+                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="HideControls" translatesAutoresizingMaskIntoConstraints="NO" id="kmH-SP-Xv6">
                                 <rect key="frame" x="248" y="572" width="51" height="31"/>
                                 <connections>
                                     <action selector="valueChangeForToggleWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="nC6-2X-1XZ"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hide Controls" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9i-fH-EWu">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hide Controls" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9i-fH-EWu">
                                 <rect key="frame" x="55" y="577" width="104" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="HideControls" translatesAutoresizingMaskIntoConstraints="NO" id="0Sf-P1-Cwl" userLabel="Mute Control">
+                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="HideControls" translatesAutoresizingMaskIntoConstraints="NO" id="0Sf-P1-Cwl" userLabel="Mute Control">
                                 <rect key="frame" x="248" y="612" width="51" height="31"/>
                                 <connections>
                                     <action selector="valueChangeForToggleWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="d1w-7P-QVH"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mute" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zu0-Ia-dEk" userLabel="Mute">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mute" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zu0-Ia-dEk" userLabel="Mute">
                                 <rect key="frame" x="55" y="617" width="39" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -117,7 +117,7 @@
                             <constraint firstItem="a9i-fH-EWu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wp6-4T-j6W" secondAttribute="leading" id="jsk-ZP-zzq"/>
                             <constraint firstItem="a9i-fH-EWu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="k1x-zq-9Uy"/>
                             <constraint firstItem="MuD-b4-3Kz" firstAttribute="centerY" secondItem="FZa-BZ-Xf8" secondAttribute="centerY" id="kMz-Yj-tMk"/>
-                            <constraint firstItem="IEx-LT-b1H" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-188" id="lRV-GD-uRp"/>
+                            <constraint firstItem="IEx-LT-b1H" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="lRV-GD-uRp"/>
                             <constraint firstItem="IEx-LT-b1H" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="34" id="mgH-qt-5Ob"/>
                             <constraint firstItem="Zu0-Ia-dEk" firstAttribute="leading" secondItem="a9i-fH-EWu" secondAttribute="leading" id="nTG-m4-nfh"/>
                             <constraint firstItem="a9i-fH-EWu" firstAttribute="centerY" secondItem="kmH-SP-Xv6" secondAttribute="centerY" id="qlv-YQ-xUB"/>
