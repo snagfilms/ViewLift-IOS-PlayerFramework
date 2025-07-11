@@ -137,7 +137,7 @@ extension AssetListViewController {
             }
             parseEntitlementData(from: localData, apiResponse: apiResponse)
         case .server(let contentId):
-            let urlString = videoList.
+            let urlString = "https://xxxxx.com/v2/partner/video/assests?id=\(contentId)&site=xxxxx"
             guard let url = URL(string: urlString) else {
                 let error = VLPlayerLib.VLError()
                 error.errorCode = ""
