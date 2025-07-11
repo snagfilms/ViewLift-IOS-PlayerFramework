@@ -164,7 +164,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                     if let entitlementData{
                         vlPlayer.setEntitlement(data: entitlementData)
                     }
-                    vlPlayer.setSource(type: .contentPlayback(VLPlayer.ContentPlaybackConfig(contentId: self.videoList.videoId, token: vlToken, apiBaseURL: vlBaseUrl)),customControlsView: videoPlayerControlsView, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
+                    vlPlayer.setSource(type: .contentPlayback(VLPlayer.ContentPlaybackConfig(videoId: self.videoList.videoId, token: vlToken, apiBaseURL: vlBaseUrl)),customControlsView: videoPlayerControlsView, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
                         DispatchQueue.main.async {
                             loaderView.stopAnimating()
                             if let cell = cell, let playerView = playerView {
