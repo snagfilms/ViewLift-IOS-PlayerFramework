@@ -16,6 +16,8 @@ struct VideoList:Decodable {
     var apiBaseUrl: String
     var beaconBaseUrl: String?
     var xApiKey: String
+    var partnerApiBaseUrl: String
+    var site: String
     
     func checkForConfigurationErrorMessage() -> String?{
         if apiBaseUrl.contains("xxxxx") && vlToken.contains("xxxxx") {

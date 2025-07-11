@@ -137,11 +137,12 @@ extension AssetListViewController {
             }
             parseEntitlementData(from: localData, apiResponse: apiResponse)
         case .server(let contentId):
-            let urlString = "https://xxxxx.com/v2/partner/video/assests?id=\(contentId)&site=xxxxx"
+            let urlString = "\(videoList.partnerApiBaseUrl)/partner/video/assests?id=\(contentId)%0A&site=\(videoList.site)"
             if urlString.contains("xxxxx"){
                 self.showAlert(message: "Please update the URL with Api base url and site.\n\(urlString)")
                 return
             }
+            debugPrint("URL to fetch entitlement data: \(urlString)")
             guard let url = URL(string: urlString) else {
                 let error = VLPlayerLib.VLError()
                 error.errorCode = ""
