@@ -137,7 +137,7 @@ extension AssetListViewController {
             }
             parseEntitlementData(from: localData, apiResponse: apiResponse)
         case .server(let contentId):
-            let urlString = "\(videoList.partnerApiBaseUrl)/partner/video/assests?id=\(contentId)%0A&site=\(videoList.site)"
+            let urlString = "\(videoList.partnerApiBaseUrl)/partner/video/assests?id=\(contentId)&site=\(videoList.site)"
             if urlString.contains("xxxxx"){
                 self.showAlert(message: "Please update the URL with Api base url and site.\n\(urlString)")
                 return
