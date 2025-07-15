@@ -10,7 +10,7 @@ import VLPlayerLib
 import Foundation
 enum ResponseSource {
     case local
-    case server(contentId: String)
+    case server(videoId: String)
 }
 
 extension AssetListViewController {

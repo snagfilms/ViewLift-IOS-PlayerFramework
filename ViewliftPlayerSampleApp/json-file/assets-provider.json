@@ -1,111 +1,79 @@
 [
   {
     "title": "Asset Type - Linear DRM",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null,
-    "isExternal": false
+    "videoId": "xxxxx"
   },
   {
     "title": "Asset Type - Linear non-DRM",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null
+    "videoId": "xxxxx"
   },
   {
     "title": "Asset Type - CMAF/HLS (Linear)",
-    "videoId": null,
-    "url": "xxxxx",
-    "subtitle": null,
-    "isExternal": false,
-    "staticContentId": null
+    "url": "xxxxx"
   },
   {
     "title": "Asset Type - HLS/TS (tokenized) (linear)",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null
+    "videoId": "xxxxx"
   },
   {
     "title": "Asset Type - VOD DRM",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null
+    "videoId": "xxxxx"
   },
   {
     "title": "Asset Type - VOD non-DRM",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null
+    "videoId": "xxxxx"
   },
   {
     "title": "Asset Type - Unauthenticated SF content",
-    "videoId": "xxxxx",
-    "url": "xxxxx",
-    "subtitle": null,
-    "staticContentId": null
+    "videoId": "xxxxx"
   },
   {
-    "title": "Asset Type - VOD content from CVP(Server Response, will work if IP is whitelisted)",
+    "title": "Asset Type - VOD content from CVP",
+    "subtitle": "IP should be whitelisted.Please provide partnerApiBaseUrl, xApiKey and site in the VideoList.json",
     "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null,
     "isExternal": true,
     "responseType": "server"
   },
   {
       "title": "HLS/TS (tokenized + DRM) (linear)",
-      "videoId": "xxxxx",
-      "url": null,
-      "subtitle": null
+      "videoId": "xxxxx"
   },
   {
     "title": "Asset Type - Linear DRM + Token [Harmonic]",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null
+    "videoId": "xxxxx"
   },
   {
     "title": "Ad/Monetization - SSAI playback (Viewlift MediaTailor)",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null
+    "videoId": "xxxxx"
   },
   {
     "title": "Asset Type - Unauthenticated SF content",
-    "videoId": null,
-    "url": "xxxxx",
-    "subtitle": null,
-    "staticContentId": null
+    "url": "xxxxx"
   },
   {
     "title": "Low Latency Stability",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null
+    "videoId": "xxxxx"
   },
   {
     "title": "CC Support - Linear Channel",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null
+    "videoId": "xxxxx"
   },
   {
     "title": "CC Support - LF VOD",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null
+    "videoId": "xxxxx"
   },
   {
     "title": "Video startup behavior & bitrate switching",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null
+    "videoId": "xxxxx"
   },
   {
     "title": "DVR [FF/RW/Got to Live]",
-    "videoId": "xxxxx",
-    "url": null,
-    "subtitle": null
+    "videoId": "xxxxx"
+  },
+  {
+      "title": "Viewlift player natively support content that is DRMd outside of the Viewlift supply chain",
+      "subtitle": "Please provide DRM Configs in the VideoList.json",
+      "url": "xxxxx",
+      "isExternal": true
   }
 ]

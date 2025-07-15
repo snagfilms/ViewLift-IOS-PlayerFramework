@@ -155,7 +155,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         if let videoId = videoId, !videoId.isEmpty {
             videoList.videoId = videoId
             if isExternal{
-                getEntitlementData(source: responseType == "local" ? .local : .server(contentId: "ceaada6c-88a7-492c-baa5-86dea10a14a2")) { [weak self] result in
+                getEntitlementData(source: responseType == "local" ? .local : .server(videoId: videoId)) { [weak self] result in
                     switch result {
                     case .success(let data):
                         self?.entitlementData = data
@@ -174,12 +174,24 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                 self.loadVideoPlayer(videoId: videoId)
             }
         }else{
-            if isExternal{
+            if isExternal {
+                guard let licenseUrl = videoList.drmConfig?.licenseUrl,
+                      let certificateUrl = videoList.drmConfig?.certificateUrl,
+                      let licenseToken = videoList.drmConfig?.licenseToken,
+                      let completeskd = videoList.drmConfig?.completeskd,
+                      !licenseUrl.contains("xxxxx"),
+                      !certificateUrl.contains("xxxxx"),
+                      !licenseToken.contains("xxxxx"),
+                      !completeskd.contains("xxxxx")
+                else {
+                    showAlert(title: "Error", message: "DRM configuration is missing or contains invalid values.")
+                    return
+                }
                 drmConfig = VLPlayerLib.DRMConfig(
-                    licenseUrl: "https://e118bd38.drm-fairplay-licensing.axprod.net/AcquireLicense",
-                    certificateUrl: "https://spinco.staging.asset.viewlift.com/Certs/fairplay-Spinco.cer",
-                    licenseToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21fa2V5X2lkIjoiZGViOTU3NDUtZmRkNS00Yjc1LWI4NDktYjJhNjAwOTczNzQ1IiwiZXhwIjoxNzUxOTYyOTY4LCJtZXNzYWdlIjp7ImNvbnRlbnRfa2V5X3VzYWdlX3BvbGljaWVzIjpbeyJmYWlycGxheSI6eyJhbGxvd19haXJwbGF5Ijp0cnVlLCJhbGxvd19hdl9hZGFwdGVyIjp0cnVlLCJoZGNwIjoiTk9ORSJ9LCJuYW1lIjoiUG9saWN5IEEiLCJwbGF5cmVhZHkiOnsibWluX2RldmljZV9zZWN1cml0eV9sZXZlbCI6MjAwMCwicGxheV9lbmFibGVycyI6WyI3ODY2MjdEOC1DMkE2LTQ0QkUtOEY4OC0wOEFFMjU1QjAxQTciXX0sIndpZGV2aW5lIjp7ImRldmljZV9zZWN1cml0eV9sZXZlbCI6IlNXX1NFQ1VSRV9DUllQVE8ifX1dLCJjb250ZW50X2tleXNfc291cmNlIjp7ImlubGluZSI6W3siaWQiOiIxZmRiNWI3OS0xZTY3LTU4OWQtNzA0My1kYTVkYzRkODg5NjUiLCJ1c2FnZV9wb2xpY3kiOiJQb2xpY3kgQSJ9XX0sImxpY2Vuc2UiOnsiZHVyYXRpb24iOjQzMjAwfSwidHlwZSI6ImVudGl0bGVtZW50X21lc3NhZ2UiLCJ2ZXJzaW9uIjoyfSwidmVyc2lvbiI6MX0.jerrg_OmEfyE2qPmIPN7zqYYoxL51b-_t8aOiRfRuxo",
-                    completeSkd: "1fdb5b79-1e67-589d-7043-da5dc4d88965:79934FE3F47155642009452D89B2A6B7"
+                    licenseUrl: licenseUrl,
+                    certificateUrl: certificateUrl,
+                    licenseToken: licenseToken,
+                    completeSkd: completeskd
                 )
             }
             self.loadVideoPlayer(url: url, drmConfig: drmConfig)
@@ -236,8 +248,10 @@ class AssetTableViewCell: UITableViewCell {
 
     private func setupUI() {
         titleLabel.numberOfLines = 0
+        subtitleLabel.numberOfLines = 0
         subtitleLabel.textColor = .darkGray
-
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        subtitleLabel.font = UIFont.systemFont(ofSize: 14)
         let textStack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
         textStack.axis = .vertical
         textStack.spacing = 4

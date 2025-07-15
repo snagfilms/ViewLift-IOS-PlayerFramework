@@ -11,14 +11,14 @@ import Foundation
 struct VideoList:Decodable {
     var videoId:String
     var streamUrl:String?
-    var vlToken:String
+    let vlToken:String
     var nextVideoList: [NextVideoList]?
-    var apiBaseUrl: String
-    var beaconBaseUrl: String?
-    var xApiKey: String
-    var partnerApiBaseUrl: String
-    var site: String
-    
+    let apiBaseUrl: String
+    let beaconBaseUrl: String?
+    let xApiKey: String
+    let partnerApiBaseUrl: String
+    let site: String
+    let drmConfig: DRMConfigAsset?
     func checkForConfigurationErrorMessage() -> String?{
         if apiBaseUrl.contains("xxxxx") && vlToken.contains("xxxxx") {
             return "Please set the API base URL and ViewLift token in the VideoList json file."
@@ -35,4 +35,11 @@ struct VideoList:Decodable {
 
 struct NextVideoList:Codable {
     var videoId:String
+}
+
+struct DRMConfigAsset: Codable {
+    let licenseUrl:String
+    let certificateUrl:String
+    let licenseToken:String
+    let completeskd:String
 }
