@@ -25,9 +25,7 @@ class FullScreenPlayerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        #if os(iOS)
         UIApplication.shared.isStatusBarHidden = true
-        #endif
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,9 +35,7 @@ class FullScreenPlayerViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super .viewWillDisappear(animated)
-        #if os(iOS)
         UIApplication.shared.isStatusBarHidden = false
-        #endif
     }
 
     func loadPlayerView(playerView:UIView) {
@@ -52,12 +48,10 @@ class FullScreenPlayerViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    #if os(iOS)
     override var prefersStatusBarHidden: Bool {
         
         return true
     }
-    #endif
     /*
     // MARK: - Navigation
 

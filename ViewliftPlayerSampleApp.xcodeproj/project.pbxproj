@@ -29,7 +29,6 @@
 		D2A15DAA2E281AD900F88E09 /* VideoPlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */; };
 		D2A15DAB2E281AD900F88E09 /* VideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79C538827438CBD00FFDB88 /* VideoList.swift */; };
 		D2A15DAC2E281AD900F88E09 /* VideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79C538827438CBD00FFDB88 /* VideoList.swift */; };
-		D2A15DAD2E281AD900F88E09 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
 		D2A15DAF2E281AD900F88E09 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74E54DF27461E8500016E7F /* NetworkHandler.swift */; };
 		D2A15DB02E281AD900F88E09 /* AssetsListViewController+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */; };
 		D2A15DB32E281AD900F88E09 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314312E20E9E2000C2902 /* AssetListViewController.swift */; };
@@ -133,6 +132,7 @@
 		5422EFF2209912C600206D66 /* ViewliftPlayerSampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */,
 				F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */,
 				54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */,
 				5422EFF5209912C600206D66 /* ViewController.swift */,
@@ -168,7 +168,6 @@
 				D29314312E20E9E2000C2902 /* AssetListViewController.swift */,
 				D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */,
 				F74E54DF27461E8500016E7F /* NetworkHandler.swift */,
-				5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */,
 				F79C538827438CBD00FFDB88 /* VideoList.swift */,
 				D293143D2E20EA07000C2902 /* json-file */,
 			);
@@ -350,7 +349,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2A15DAC2E281AD900F88E09 /* VideoList.swift in Sources */,
-				D2A15DAD2E281AD900F88E09 /* FullScreenPlayerViewController.swift in Sources */,
 				D2A15DAF2E281AD900F88E09 /* NetworkHandler.swift in Sources */,
 				D2A15DB02E281AD900F88E09 /* AssetsListViewController+Services.swift in Sources */,
 				D2A15DB32E281AD900F88E09 /* AssetListViewController.swift in Sources */,
