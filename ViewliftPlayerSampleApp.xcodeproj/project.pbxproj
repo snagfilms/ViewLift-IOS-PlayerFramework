@@ -36,6 +36,21 @@
 		D2A15DB52E281AE500F88E09 /* entitlement.json in Resources */ = {isa = PBXBuildFile; fileRef = D29314342E20E9E2000C2902 /* entitlement.json */; };
 		D2A15DB62E281AE500F88E09 /* VideoList.json in Resources */ = {isa = PBXBuildFile; fileRef = F79C538627438BD700FFDB88 /* VideoList.json */; };
 		D2A15DB72E281AE500F88E09 /* assets-provider.json in Resources */ = {isa = PBXBuildFile; fileRef = D29314322E20E9E2000C2902 /* assets-provider.json */; };
+		D2AE024D2E2F994100C9D312 /* AssetInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE024C2E2F994100C9D312 /* AssetInfoViewController.swift */; };
+		D2AE024E2E2F994100C9D312 /* AssetInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE024C2E2F994100C9D312 /* AssetInfoViewController.swift */; };
+		D2AE024F2E2F994100C9D312 /* AssetInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE024C2E2F994100C9D312 /* AssetInfoViewController.swift */; };
+		D2AE02512E2F999600C9D312 /* AssetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE02502E2F999600C9D312 /* AssetModel.swift */; };
+		D2AE02522E2F999600C9D312 /* AssetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE02502E2F999600C9D312 /* AssetModel.swift */; };
+		D2AE02532E2F999600C9D312 /* AssetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE02502E2F999600C9D312 /* AssetModel.swift */; };
+		D2AE02552E2F99D400C9D312 /* AssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE02542E2F99D400C9D312 /* AssetTableViewCell.swift */; };
+		D2AE02562E2F99D400C9D312 /* AssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE02542E2F99D400C9D312 /* AssetTableViewCell.swift */; };
+		D2AE02572E2F99D400C9D312 /* AssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE02542E2F99D400C9D312 /* AssetTableViewCell.swift */; };
+		D2AE02592E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE02582E2F9DB400C9D312 /* ConfigurableHeaderView.swift */; };
+		D2AE025A2E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE02582E2F9DB400C9D312 /* ConfigurableHeaderView.swift */; };
+		D2AE025B2E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE02582E2F9DB400C9D312 /* ConfigurableHeaderView.swift */; };
+		D2AE025D2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE025C2E2FA0C700C9D312 /* ConfigurableItemRowView.swift */; };
+		D2AE025E2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE025C2E2FA0C700C9D312 /* ConfigurableItemRowView.swift */; };
+		D2AE025F2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE025C2E2FA0C700C9D312 /* ConfigurableItemRowView.swift */; };
 		F74E54E027461E8500016E7F /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74E54DF27461E8500016E7F /* NetworkHandler.swift */; };
 		F79C5385274384C400FFDB88 /* VideoPlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */; };
 		F79C538727438BD700FFDB88 /* VideoList.json in Resources */ = {isa = PBXBuildFile; fileRef = F79C538627438BD700FFDB88 /* VideoList.json */; };
@@ -69,6 +84,11 @@
 		D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetsListViewController+Services.swift"; sourceTree = "<group>"; };
 		D29314342E20E9E2000C2902 /* entitlement.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = entitlement.json; sourceTree = "<group>"; };
 		D2A15D8D2E28199900F88E09 /* ViewLiftPlayerSampleApp_tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViewLiftPlayerSampleApp_tvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AE024C2E2F994100C9D312 /* AssetInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInfoViewController.swift; sourceTree = "<group>"; };
+		D2AE02502E2F999600C9D312 /* AssetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetModel.swift; sourceTree = "<group>"; };
+		D2AE02542E2F99D400C9D312 /* AssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTableViewCell.swift; sourceTree = "<group>"; };
+		D2AE02582E2F9DB400C9D312 /* ConfigurableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableHeaderView.swift; sourceTree = "<group>"; };
+		D2AE025C2E2FA0C700C9D312 /* ConfigurableItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableItemRowView.swift; sourceTree = "<group>"; };
 		F74E54DF27461E8500016E7F /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaybackController.swift; sourceTree = "<group>"; };
 		F79C538627438BD700FFDB88 /* VideoList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VideoList.json; sourceTree = "<group>"; };
@@ -165,7 +185,12 @@
 		D2A15DA52E281A7B00F88E09 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				D2AE024C2E2F994100C9D312 /* AssetInfoViewController.swift */,
+				D2AE02582E2F9DB400C9D312 /* ConfigurableHeaderView.swift */,
+				D2AE025C2E2FA0C700C9D312 /* ConfigurableItemRowView.swift */,
 				D29314312E20E9E2000C2902 /* AssetListViewController.swift */,
+				D2AE02542E2F99D400C9D312 /* AssetTableViewCell.swift */,
+				D2AE02502E2F999600C9D312 /* AssetModel.swift */,
 				D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */,
 				F74E54DF27461E8500016E7F /* NetworkHandler.swift */,
 				F79C538827438CBD00FFDB88 /* VideoList.swift */,
@@ -334,13 +359,18 @@
 			files = (
 				5422EFF6209912C600206D66 /* ViewController.swift in Sources */,
 				5422EFF4209912C600206D66 /* AppDelegate.swift in Sources */,
+				D2AE02552E2F99D400C9D312 /* AssetTableViewCell.swift in Sources */,
 				D29314352E20E9E2000C2902 /* AssetListViewController.swift in Sources */,
 				D29314362E20E9E2000C2902 /* AssetsListViewController+Services.swift in Sources */,
 				F79C5385274384C400FFDB88 /* VideoPlaybackController.swift in Sources */,
+				D2AE024D2E2F994100C9D312 /* AssetInfoViewController.swift in Sources */,
 				F79C538927438CBD00FFDB88 /* VideoList.swift in Sources */,
 				5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */,
+				D2AE025E2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */,
+				D2AE02592E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */,
 				54703A0C20CAFE9A003B543D /* CustomVideoControls.swift in Sources */,
 				F74E54E027461E8500016E7F /* NetworkHandler.swift in Sources */,
+				D2AE02512E2F999600C9D312 /* AssetModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,8 +380,13 @@
 			files = (
 				D2A15DAC2E281AD900F88E09 /* VideoList.swift in Sources */,
 				D2A15DAF2E281AD900F88E09 /* NetworkHandler.swift in Sources */,
+				D2AE024F2E2F994100C9D312 /* AssetInfoViewController.swift in Sources */,
 				D2A15DB02E281AD900F88E09 /* AssetsListViewController+Services.swift in Sources */,
+				D2AE02532E2F999600C9D312 /* AssetModel.swift in Sources */,
+				D2AE02562E2F99D400C9D312 /* AssetTableViewCell.swift in Sources */,
 				D2A15DB32E281AD900F88E09 /* AssetListViewController.swift in Sources */,
+				D2AE025D2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */,
+				D2AE025B2E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,12 +396,17 @@
 			files = (
 				D293143B2E20E9E2000C2902 /* AssetListViewController.swift in Sources */,
 				D2A15DA62E281AD900F88E09 /* NetworkHandler.swift in Sources */,
+				D2AE025F2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */,
 				D2A15DA72E281AD900F88E09 /* ViewController.swift in Sources */,
 				D2A15DA82E281AD900F88E09 /* CustomVideoControls.swift in Sources */,
+				D2AE025A2E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */,
+				D2AE02522E2F999600C9D312 /* AssetModel.swift in Sources */,
 				D2A15DA92E281AD900F88E09 /* FullScreenPlayerViewController.swift in Sources */,
+				D2AE02572E2F99D400C9D312 /* AssetTableViewCell.swift in Sources */,
 				D2A15DAA2E281AD900F88E09 /* VideoPlaybackController.swift in Sources */,
 				D2A15DAB2E281AD900F88E09 /* VideoList.swift in Sources */,
 				D293143C2E20E9E2000C2902 /* AssetsListViewController+Services.swift in Sources */,
+				D2AE024E2E2F994100C9D312 /* AssetInfoViewController.swift in Sources */,
 				F7EAFF0D275F3AA700B46BDE /* ViewliftPlayerSampleAppUITests.swift in Sources */,
 				F7EAFF0F275F3AA700B46BDE /* ViewliftPlayerSampleAppUITestsLaunchTests.swift in Sources */,
 			);

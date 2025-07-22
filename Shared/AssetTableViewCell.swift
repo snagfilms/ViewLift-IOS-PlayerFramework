@@ -1,0 +1,110 @@
+//
+//  AssetTableViewCell.swift
+//  ViewliftPlayerSampleApp
+//
+//  Created by vikassachan@viewlift.com on 22/07/25.
+//  Copyright © 2025 Viewlift. All rights reserved.
+//
+
+import UIKit
+
+protocol AssetTableViewCellDelegate: AnyObject {
+    func assetCellDidTapInfo(_ cell: AssetTableViewCell, asset: AssetModel)
+}
+
+class AssetTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "AssetCell"
+
+    private let leftIndexLabel = UILabel()
+    private let titleLabel = UILabel()
+    private let subtitleLabel = UILabel()
+    private let infoButton = UIButton(type: .infoLight)
+    private let separatorView = UIView()
+    private var assetModel: AssetModel?
+
+    weak var delegate: AssetTableViewCellDelegate?
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupUI() {
+        leftIndexLabel.textColor = .systemBlue
+        leftIndexLabel.textAlignment = .center
+        leftIndexLabel.setContentHuggingPriority(.required, for: .horizontal)
+        leftIndexLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        leftIndexLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        titleLabel.numberOfLines = 0
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.textColor = .darkGray
+        titleLabel.textColor = .black
+       #if os(tvOS)
+       leftIndexLabel.font = UIFont.boldSystemFont(ofSize: 32)
+       titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
+       subtitleLabel.font = UIFont.systemFont(ofSize: 28)
+       infoButton.isHidden = true
+       #else
+       titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+       subtitleLabel.font = UIFont.systemFont(ofSize: 14)
+       leftIndexLabel.font = UIFont.boldSystemFont(ofSize: 16)
+       #endif
+
+        let textStack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
+        textStack.axis = .vertical
+        textStack.spacing = 4
+        infoButton.setContentHuggingPriority(.required, for: .horizontal)
+        infoButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
+        let horizontalStack = UIStackView(arrangedSubviews: [leftIndexLabel, textStack, infoButton])
+        horizontalStack.axis = .horizontal
+        horizontalStack.spacing = 8
+        horizontalStack.alignment = .top
+        horizontalStack.distribution = .fill
+        contentView.addSubview(horizontalStack)
+        horizontalStack.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            horizontalStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            horizontalStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            horizontalStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            horizontalStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+        ])
+
+        separatorView.backgroundColor = .black.withAlphaComponent(0.4)
+        contentView.addSubview(separatorView)
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            separatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            separatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+
+    func setSeparatorHidden(_ hidden: Bool) {
+        separatorView.isHidden = hidden
+    }
+
+    func configure(with asset: AssetModel, index: Int) {
+        assetModel = asset
+        #if os(tvOS)
+        leftIndexLabel.text = "tvOS-PL-UC-\(index + 1)"
+        #else
+        leftIndexLabel.text = "iOS-PL-UC-\(index + 1)"
+        #endif
+        titleLabel.text = asset.title
+        subtitleLabel.text = asset.subtitle
+        subtitleLabel.isHidden = asset.subtitle?.isEmpty ?? true
+    }
+
+    @objc private func infoButtonTapped() {
+        guard let asset = assetModel else { return }
+        delegate?.assetCellDidTapInfo(self, asset: asset)
+    }
+}
