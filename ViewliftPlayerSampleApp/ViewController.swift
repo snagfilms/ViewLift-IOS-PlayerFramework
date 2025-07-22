@@ -8,30 +8,15 @@
 
 import UIKit
 
-protocol VideoListProtocol {
-    var videoList:VideoList? {get set}
-    func readVideoList()
-}
-
-enum PlayerUIOptions: String {
-    case defaultControl = "Default sdk controls"
-    case customControl = "Custom controls"
-    case debugLogEnabled = "Debug logs enabled"
-    case customControlWithDebugLog = "Custom controls and debug logs enabled"
-    case customControlWithCustomSeekDuration = "Custom controls and custom seek duration"
-    case adsEnabled = "Ads Enabled"
-    case playStreamURL = "Play Stream URL"
-    case playASATURL = "Play ASAT URL"
-    case exploreMore = "Explore Player SDK - Use Cases"
-}
-
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak private var multiplePlayerOptionTable: UITableView!
+    #if os(iOS)
     @IBOutlet weak private var autoPlayToggle: UISwitch!
     @IBOutlet weak private var loopPlaybackToggle: UISwitch!
     @IBOutlet weak private var hideControls: UISwitch!
     @IBOutlet weak private var muteControls: UISwitch!
+    #endif
     private var readVideoListOperation:VideoListProtocol?
     private var playerOptionSelected:PlayerUIOptions = .defaultControl
     private var playerUIOptions: [PlayerUIOptions] = [.exploreMore, .defaultControl, .customControl]
@@ -119,34 +104,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL {
             videoPlaybackController.streamUrl =  _videoList.streamUrl
         }
+        #if os(iOS)
         videoPlaybackController.autoplayEnabled = self.autoPlayToggle.isOn
         videoPlaybackController.loopEnabled = self.loopPlaybackToggle.isOn
         videoPlaybackController.hideControls = self.hideControls.isOn
         videoPlaybackController.muteEnabled = self.muteControls.isOn
+        #endif
         videoPlaybackController.prepareView(withPlayerUIOption: playerOptionSelected, videoList: _videoList)
         videoPlaybackController.modalPresentationStyle = .fullScreen
         self.present(videoPlaybackController, animated: true, completion: nil)
     }
-    
+    #if os(iOS)
     @IBAction func valueChangeForToggle(sender: UISwitch){
         
     }
-}
-
-
-class ReadFromLocalJson:VideoListProtocol {
-    var videoList: VideoList?
-    
-    func readVideoList() {
-        if let path = Bundle.main.path(forResource: "VideoList", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                self.videoList = try JSONDecoder().decode(VideoList.self, from: data)
-            } catch {
-                // handle error
-            }
-        }
-    }
+    #endif
 }
 
 class ReadFromAPI:VideoListProtocol {

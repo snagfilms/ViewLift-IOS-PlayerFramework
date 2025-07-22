@@ -20,7 +20,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         videoList.nextVideoList?.removeAll()
         setupHeader()
         setupTableView()
@@ -51,26 +51,25 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     private func setupHeader() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerView)
-
-        // Style the header
         headerView.backgroundColor = .white
-
-        // Back Button
         backButton.setTitle("← Back", for: .normal)
         backButton.setTitleColor(.systemBlue, for: .normal)
         backButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         headerView.addSubview(backButton)
-
-        // Title Label
+        var titleLabelFontSize: CGFloat = 18
+        #if os(tvOS)
+        backButton.isHidden = true
+        titleLabelFontSize = 36
+        #endif
         titleLabel.text = "Assets"
-        titleLabel.font = .boldSystemFont(ofSize: 18)
+        titleLabel.font = .boldSystemFont(ofSize: titleLabelFontSize)
         titleLabel.textAlignment = .center
+        titleLabel.textColor = .black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(titleLabel)
 
-        // Layout
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -88,14 +87,16 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-
+        let topMargin: CGFloat = 20
+        tableView.backgroundColor = .clear
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: topMargin),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 80
         tableView.register(AssetTableViewCell.self, forCellReuseIdentifier: AssetTableViewCell.reuseIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
@@ -120,7 +121,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let asset = assetModels[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: AssetTableViewCell.reuseIdentifier, for: indexPath) as! AssetTableViewCell
-            cell.configure(with: asset)
+        cell.configure(with: asset, index: indexPath.row)
             cell.delegate = self
             return cell
         }
@@ -210,6 +211,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     private func loadVideoPlayer(videoId: String? = nil, url: String? = nil, drmConfig: VLPlayerLib.DRMConfig? = nil) {
+        #if os(iOS)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let videoPlaybackController = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackController") as! VideoPlaybackController
         videoPlaybackController.streamUrl = url
@@ -219,6 +221,16 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         videoPlaybackController.prepareView(withPlayerUIOption: videoId == nil ? .playStreamURL : .defaultControl, videoList: videoList)
         videoPlaybackController.modalPresentationStyle = .fullScreen
         self.present(videoPlaybackController, animated: true, completion: nil)
+        #else
+        let vc = PlayerViewController()
+        vc.playerOptionSelected = videoId == nil ? .playStreamURL : .defaultControl
+        vc.streamUrl = url
+        vc.videoId = videoId
+        vc.entitlementData = self.entitlementData
+        vc.drmConfig = drmConfig
+        vc.videoList = videoList
+        self.present(vc, animated: true)
+        #endif
     }
 }
 
@@ -229,10 +241,11 @@ protocol AssetTableViewCellDelegate: AnyObject {
 class AssetTableViewCell: UITableViewCell {
     static let reuseIdentifier = "AssetCell"
 
+    private let leftIndexLabel = UILabel()
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
     private let infoButton = UIButton(type: .infoLight)
-
+    private let separatorView = UIView()
     private var assetModel: AssetModel?
 
     weak var delegate: AssetTableViewCellDelegate?
@@ -247,20 +260,38 @@ class AssetTableViewCell: UITableViewCell {
     }
 
     private func setupUI() {
+        leftIndexLabel.textColor = .systemBlue
+        leftIndexLabel.textAlignment = .center
+        leftIndexLabel.setContentHuggingPriority(.required, for: .horizontal)
+        leftIndexLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        leftIndexLabel.translatesAutoresizingMaskIntoConstraints = false
+
         titleLabel.numberOfLines = 0
         subtitleLabel.numberOfLines = 0
         subtitleLabel.textColor = .darkGray
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        subtitleLabel.font = UIFont.systemFont(ofSize: 14)
+        titleLabel.textColor = .black
+       #if os(tvOS)
+       leftIndexLabel.font = UIFont.boldSystemFont(ofSize: 32)
+       titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
+       subtitleLabel.font = UIFont.systemFont(ofSize: 28)
+       infoButton.isHidden = true
+       #else
+       titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+       subtitleLabel.font = UIFont.systemFont(ofSize: 14)
+       leftIndexLabel.font = UIFont.boldSystemFont(ofSize: 16)
+       #endif
+
         let textStack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
         textStack.axis = .vertical
         textStack.spacing = 4
-
-        let horizontalStack = UIStackView(arrangedSubviews: [textStack, infoButton])
+        infoButton.setContentHuggingPriority(.required, for: .horizontal)
+        infoButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
+        let horizontalStack = UIStackView(arrangedSubviews: [leftIndexLabel, textStack, infoButton])
         horizontalStack.axis = .horizontal
         horizontalStack.spacing = 8
         horizontalStack.alignment = .top
-
+        horizontalStack.distribution = .fill
         contentView.addSubview(horizontalStack)
         horizontalStack.translatesAutoresizingMaskIntoConstraints = false
 
@@ -271,14 +302,31 @@ class AssetTableViewCell: UITableViewCell {
             horizontalStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
 
-        infoButton.setContentHuggingPriority(.required, for: .horizontal)
-        infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
+        separatorView.backgroundColor = .black.withAlphaComponent(0.4)
+        contentView.addSubview(separatorView)
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            separatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            separatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 1)
+        ])
     }
 
-    func configure(with asset: AssetModel) {
+    func setSeparatorHidden(_ hidden: Bool) {
+        separatorView.isHidden = hidden
+    }
+
+    func configure(with asset: AssetModel, index: Int) {
         assetModel = asset
+        #if os(tvOS)
+        leftIndexLabel.text = "tvOS-PL-UC-\(index + 1)"
+        #else
+        leftIndexLabel.text = "iOS-PL-UC-\(index + 1)"
+        #endif
         titleLabel.text = asset.title
         subtitleLabel.text = asset.subtitle
+        subtitleLabel.isHidden = asset.subtitle?.isEmpty ?? true
     }
 
     @objc private func infoButtonTapped() {
@@ -286,7 +334,6 @@ class AssetTableViewCell: UITableViewCell {
         delegate?.assetCellDidTapInfo(self, asset: asset)
     }
 }
-
 
 extension AssetListViewController{
     func loadAssetModelsFromFile() -> [AssetModel]? {
@@ -438,16 +485,13 @@ extension AssetListViewController: AssetTableViewCellDelegate {
 }
 
 
-
-import UIKit
-
 class AssetInfoViewController: UIViewController {
     private let asset: AssetModel
 
     init(asset: AssetModel) {
         self.asset = asset
         super.init(nibName: nil, bundle: nil)
-        modalPresentationStyle = .formSheet
+        modalPresentationStyle = .overFullScreen
     }
 
     required init?(coder: NSCoder) {
@@ -456,7 +500,7 @@ class AssetInfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         setupUI()
     }
 

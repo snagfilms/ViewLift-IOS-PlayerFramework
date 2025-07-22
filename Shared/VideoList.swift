@@ -8,6 +8,38 @@
 
 import Foundation
 
+protocol VideoListProtocol {
+    var videoList:VideoList? {get set}
+    func readVideoList()
+}
+
+enum PlayerUIOptions: String {
+    case defaultControl = "Default sdk controls"
+    case customControl = "Custom controls"
+    case debugLogEnabled = "Debug logs enabled"
+    case customControlWithDebugLog = "Custom controls and debug logs enabled"
+    case customControlWithCustomSeekDuration = "Custom controls and custom seek duration"
+    case adsEnabled = "Ads Enabled"
+    case playStreamURL = "Play Stream URL"
+    case playASATURL = "Play ASAT URL"
+    case exploreMore = "Explore Player SDK - Use Cases"
+}
+
+class ReadFromLocalJson:VideoListProtocol {
+    var videoList: VideoList?
+    
+    func readVideoList() {
+        if let path = Bundle.main.path(forResource: "VideoList", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                self.videoList = try JSONDecoder().decode(VideoList.self, from: data)
+            } catch {
+                // handle error
+            }
+        }
+    }
+}
+
 struct VideoList:Decodable {
     var videoId:String
     var streamUrl:String?
