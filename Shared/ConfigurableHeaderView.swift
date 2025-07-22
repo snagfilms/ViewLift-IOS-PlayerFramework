@@ -12,7 +12,7 @@ class ConfigurableHeaderView: UIView {
     private let titleLabel = UILabel()
     private let arrowButton = UIButton(type: .system)
     private let itemsStack = UIStackView()
-    private var isExpanded = false
+    private var isExpanded = true
 
     private var items: [ConfigurableItem] = []
 
@@ -27,22 +27,27 @@ class ConfigurableHeaderView: UIView {
     private func setupUI() {
         titleLabel.text = "Configurable Items"
         titleLabel.font = .boldSystemFont(ofSize: 16)
-        arrowButton.setTitle("▼", for: .normal)
+        titleLabel.textColor = .black
+        arrowButton.setTitle(isExpanded ? "▲" : "▼", for: .normal)
         arrowButton.addTarget(self, action: #selector(toggleExpand), for: .touchUpInside)
-
+        arrowButton.isHidden = true
         let headerStack = UIStackView(arrangedSubviews: [titleLabel, arrowButton])
         headerStack.axis = .horizontal
         headerStack.distribution = .fill
-        headerStack.alignment = .center
+        headerStack.alignment = .fill
         headerStack.spacing = 8
 
         itemsStack.axis = .vertical
-        itemsStack.spacing = 8
-        itemsStack.isHidden = true
+        itemsStack.spacing = 0
+        itemsStack.alignment = .fill
+        itemsStack.distribution = .fill
+        itemsStack.isHidden = !isExpanded
 
         let mainStack = UIStackView(arrangedSubviews: [headerStack, itemsStack])
         mainStack.axis = .vertical
-        mainStack.spacing = 8
+        mainStack.distribution = .fill
+        mainStack.alignment = .fill
+        mainStack.spacing = 0
 
         addSubview(mainStack)
         mainStack.translatesAutoresizingMaskIntoConstraints = false
@@ -58,20 +63,32 @@ class ConfigurableHeaderView: UIView {
         itemsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         for item in items {
             let row = ConfigurableItemRowView()
-            row.titleLabel.text = item.title
+            row.translatesAutoresizingMaskIntoConstraints = false
+            row.titleLabel.text = item.type.rawValue
             row.actionButton.isSelected = item.isChecked
             itemsStack.addArrangedSubview(row)
         }
     }
 
+    var onHeightChanged: (() -> Void)?
+
     @objc private func toggleExpand() {
         isExpanded.toggle()
         itemsStack.isHidden = !isExpanded
         arrowButton.setTitle(isExpanded ? "▲" : "▼", for: .normal)
+        onHeightChanged?()
     }
 }
 
 struct ConfigurableItem {
-    let title: String
+    let type: ConfigurableItemType
     var isChecked: Bool
+}
+
+enum ConfigurableItemType: String {
+    case showCustomControls = "Show Custom Controls"
+    case hideControls = "Hide Controls"
+    case loopPlay = "Loop Play"
+    case autoPlay = "Auto Play"
+    case mute = "Mute"
 }

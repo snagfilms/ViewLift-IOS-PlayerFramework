@@ -25,8 +25,29 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         setupHeader()
         setupTableView()
         assetModels = loadAssetModelsFromFile() ?? []
+        //setupTableHeaderView()
         tableView.reloadData()
     }
+    
+
+    private func setupTableHeaderView() {
+        let options: [ConfigurableItemType] = [.showCustomControls, .hideControls, .autoPlay, .loopPlay, .mute]
+        var items: [ConfigurableItem] = []
+        for option in options {
+            items.append(ConfigurableItem(type: option, isChecked: false))
+        }
+
+        let headerView = ConfigurableHeaderView(items: items)
+        headerView.onHeightChanged = { [weak self, weak headerView] in
+            guard let self = self, let headerView = headerView else { return }
+            headerView.setFrameUsingAutoLayout(width: self.tableView.bounds.width)
+            self.tableView.tableHeaderView = headerView
+        }
+
+        headerView.setFrameUsingAutoLayout(width: tableView.bounds.width)
+        tableView.tableHeaderView = headerView
+    }
+
     
     func getEntitlementData(
         source: ResponseSource,
@@ -333,3 +354,29 @@ extension AssetListViewController: AssetTableViewCellDelegate {
     }
 
 }
+
+
+extension UIView {
+    func fittedSize(width: CGFloat) -> CGSize {
+        let widthConstraint = widthAnchor.constraint(equalToConstant: width)
+        widthConstraint.isActive = true
+
+        setNeedsLayout()
+        layoutIfNeeded()
+
+        let size = systemLayoutSizeFitting(
+            UIView.layoutFittingCompressedSize,
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        )
+
+        widthConstraint.isActive = false
+        return size
+    }
+
+    func setFrameUsingAutoLayout(width: CGFloat) {
+        let size = fittedSize(width: width)
+        frame = CGRect(x: 0, y: 0, width: width, height: size.height)
+    }
+}
+
