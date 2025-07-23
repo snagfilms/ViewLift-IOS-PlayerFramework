@@ -30,7 +30,7 @@ class ConfigurableHeaderView: UIView {
         titleLabel.textColor = .black
         arrowButton.setTitle(isExpanded ? "▲" : "▼", for: .normal)
         arrowButton.addTarget(self, action: #selector(toggleExpand), for: .touchUpInside)
-        arrowButton.isHidden = true
+        arrowButton.isHidden = false
         let headerStack = UIStackView(arrangedSubviews: [titleLabel, arrowButton])
         headerStack.axis = .horizontal
         headerStack.distribution = .fill

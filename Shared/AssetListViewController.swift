@@ -17,7 +17,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     var videoList:VideoList!
     var entitlementData: VLPlayerLib.EntitlementData?
     private var assetModels: [AssetModel] = []
-
+    var configurableHeaderView: ConfigurableHeaderView?
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -25,11 +25,23 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         setupHeader()
         setupTableView()
         assetModels = loadAssetModelsFromFile() ?? []
-        //setupTableHeaderView()
-        tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+          //self?.setupTableHeaderView()
+        }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 
+        guard let headerView = self.configurableHeaderView else { return }
+
+        let height = headerView.heightFittingWidth(tableView.bounds.width)
+        if tableView.tableHeaderView?.frame.height != height {
+            headerView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: height)
+            tableView.tableHeaderView = headerView
+        }
+    }
+    
     private func setupTableHeaderView() {
         let options: [ConfigurableItemType] = [.showCustomControls, .hideControls, .autoPlay, .loopPlay, .mute]
         var items: [ConfigurableItem] = []
@@ -38,14 +50,18 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         }
 
         let headerView = ConfigurableHeaderView(items: items)
+
         headerView.onHeightChanged = { [weak self, weak headerView] in
             guard let self = self, let headerView = headerView else { return }
-            headerView.setFrameUsingAutoLayout(width: self.tableView.bounds.width)
+            let height = headerView.heightFittingWidth(self.tableView.bounds.width)
+            headerView.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: height)
             self.tableView.tableHeaderView = headerView
         }
 
-        headerView.setFrameUsingAutoLayout(width: tableView.bounds.width)
+        let height = headerView.heightFittingWidth(tableView.bounds.width)
+        headerView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: height)
         tableView.tableHeaderView = headerView
+        configurableHeaderView = headerView
     }
 
     
@@ -357,26 +373,13 @@ extension AssetListViewController: AssetTableViewCellDelegate {
 
 
 extension UIView {
-    func fittedSize(width: CGFloat) -> CGSize {
-        let widthConstraint = widthAnchor.constraint(equalToConstant: width)
-        widthConstraint.isActive = true
-
-        setNeedsLayout()
-        layoutIfNeeded()
-
-        let size = systemLayoutSizeFitting(
-            UIView.layoutFittingCompressedSize,
-            withHorizontalFittingPriority: .required,
-            verticalFittingPriority: .fittingSizeLevel
-        )
-
-        widthConstraint.isActive = false
-        return size
-    }
-
-    func setFrameUsingAutoLayout(width: CGFloat) {
-        let size = fittedSize(width: width)
-        frame = CGRect(x: 0, y: 0, width: width, height: size.height)
+    
+    func heightFittingWidth(_ width: CGFloat) -> CGFloat {
+        let targetSize = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
+        return systemLayoutSizeFitting(targetSize,
+                                       withHorizontalFittingPriority: .required,
+                                       verticalFittingPriority: .fittingSizeLevel).height
     }
 }
+
 

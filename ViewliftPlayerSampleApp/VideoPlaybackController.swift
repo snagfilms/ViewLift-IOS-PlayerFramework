@@ -11,7 +11,7 @@ import VLPlayerLib
 import VLBeaconLib
 
 class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableViewDelegate, UITableViewDataSource, fullScreenDelegate, ClientSideAdTrackingDelegate {
-
+    var customPaywallView: CustomPaywallView?
     @IBOutlet var playersTableView:UITableView!
     @IBOutlet var debugLogView:UITextView!
     @IBOutlet weak var addNextButton: UIButton!
@@ -81,7 +81,16 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     }
     
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
+        // default configuration
+//        let payWallStyle = PayWallStyle(errorMessageTextColor: .red, buttonTextColor: .blue, buttonBackgroundColor: .yellow, backgroundColor: nil)
+//        let payWallTextContent = PayWallTextContent(errorMessage: "Error", buttontext: nil)
+//        let payWallThemeConfiguration = PayWallThemeConfiguration(style: payWallStyle, textContent: payWallTextContent)
+//        let payWallConfiguration: PayWallConfiguration = PayWallConfiguration.default(payWallTheme: payWallThemeConfiguration)
         
+        // custom configuration
+        let customPaywallView = CustomPaywallView()
+        let payWallConfiguration: PayWallConfiguration = .custom(view: customPaywallView)
+        self.customPaywallView = customPaywallView
         return VLPlayer.VLPlayerFeatureSupported(fullScreenOnly: false,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
@@ -95,7 +104,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                                                  chromecastCustomReceiver: nil,
                                                  playerResponseRequired:true,
                                                  preGameStartTime: nil,
-                                                 appMacrosList: nil, vlBeacon: VLBeacon.getInstance())
+                                                 appMacrosList: nil, vlBeacon: VLBeacon.getInstance(), payWallConfiguration: payWallConfiguration)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -361,6 +370,9 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                 }
             }
         }
+        if !errorMessage.isEmpty{
+                self.showAlert(message: errorMessage)
+        }
     }
     
     func videoFetchError(error: VLError?, playerTag: String?, contentResponse: Dictionary<String, AnyObject>?) {
@@ -374,6 +386,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
         print("VideoFetchError: contentResponse:", contentResponse)
         DispatchQueue.main.async {
             self.showAlert(message: errorDescription)
+            self.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
         }
     }
     
@@ -542,6 +555,10 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
         }
     }
     
+    func loginWithTVE() {
+        debugPrint("Login with TVE called")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -637,4 +654,53 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
 //        }
 //        
 //    }
+}
+
+
+
+class CustomPaywallView: UIView {
+
+    private let messageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Subscribe"
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private let actionButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Login with TVE", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupViews()
+    }
+    
+    func update(_ message: String) {
+        messageLabel.text = message
+    }
+    
+    private func setupViews() {
+        addSubview(messageLabel)
+        addSubview(actionButton)
+
+        NSLayoutConstraint.activate([
+            messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            actionButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 20),
+            actionButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            actionButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -20)
+        ])
+    }
 }
