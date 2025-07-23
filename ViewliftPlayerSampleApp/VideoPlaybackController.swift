@@ -11,7 +11,7 @@ import VLPlayerLib
 import VLBeaconLib
 
 class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableViewDelegate, UITableViewDataSource, fullScreenDelegate, ClientSideAdTrackingDelegate {
-
+    private var customPaywallView: CustomPaywallView?
     @IBOutlet var playersTableView:UITableView!
     @IBOutlet var debugLogView:UITextView!
     @IBOutlet weak var addNextButton: UIButton!
@@ -81,7 +81,20 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     }
     
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
+        // use below code for default configuration
+        /*
+         let payWallStyle = VLPlayer.PayWallStyle(errorMessageTextColor: .red, buttonTextColor: .blue, buttonBackgroundColor: .yellow, backgroundColor: nil)
+         let payWallTextContent = VLPlayer.PayWallTextContent(errorMessage: "Error", buttontext: nil)
+         let payWallThemeConfiguration = VLPlayer.PayWallThemeConfiguration(style: payWallStyle, textContent: payWallTextContent)
+         let payWallConfiguration: VLPlayer.PayWallConfiguration = VLPlayer.PayWallConfiguration.default(payWallTheme: payWallThemeConfiguration)
+         */
         
+        // use below code for custom configuration
+        /*
+         //        let customPaywallView = CustomPaywallView()
+         //        let payWallConfiguration: VLPlayer.PayWallConfiguration = .custom(view: customPaywallView)
+         //        self.customPaywallView = customPaywallView
+         */
         return VLPlayer.VLPlayerFeatureSupported(fullScreenOnly: false,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
@@ -95,7 +108,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                                                  chromecastCustomReceiver: nil,
                                                  playerResponseRequired:true,
                                                  preGameStartTime: nil,
-                                                 appMacrosList: nil, vlBeacon: VLBeacon.getInstance())
+                                                 appMacrosList: nil, vlBeacon: VLBeacon.getInstance(), payWallConfiguration: nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -361,6 +374,9 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                 }
             }
         }
+        if !errorMessage.isEmpty{
+                self.showAlert(message: errorMessage)
+        }
     }
     
     func videoFetchError(error: VLError?, playerTag: String?, contentResponse: Dictionary<String, AnyObject>?) {
@@ -374,6 +390,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
         print("VideoFetchError: contentResponse:", contentResponse)
         DispatchQueue.main.async {
             self.showAlert(message: errorDescription)
+            self.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
         }
     }
     
@@ -542,6 +559,10 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
         }
     }
     
+    func loginWithTVE() {
+        debugPrint("Login with TVE called")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -638,3 +659,6 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
 //        
 //    }
 }
+
+
+
