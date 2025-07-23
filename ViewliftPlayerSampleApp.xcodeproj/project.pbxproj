@@ -14,6 +14,7 @@
 		5422EFFE209912C600206D66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5422EFFC209912C600206D66 /* LaunchScreen.storyboard */; };
 		5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
 		54703A0C20CAFE9A003B543D /* CustomVideoControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */; };
+		D27C147A2E31416800A3728B /* CustomPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C14782E31416800A3728B /* CustomPaywallView.swift */; };
 		D29314352E20E9E2000C2902 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314312E20E9E2000C2902 /* AssetListViewController.swift */; };
 		D29314362E20E9E2000C2902 /* AssetsListViewController+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */; };
 		D29314372E20E9E2000C2902 /* entitlement.json in Resources */ = {isa = PBXBuildFile; fileRef = D29314342E20E9E2000C2902 /* entitlement.json */; };
@@ -79,6 +80,7 @@
 		5422EFFF209912C600206D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPlayerViewController.swift; sourceTree = "<group>"; };
 		54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomVideoControls.swift; sourceTree = "<group>"; };
+		D27C14782E31416800A3728B /* CustomPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPaywallView.swift; sourceTree = "<group>"; };
 		D29314312E20E9E2000C2902 /* AssetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListViewController.swift; sourceTree = "<group>"; };
 		D29314322E20E9E2000C2902 /* assets-provider.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "assets-provider.json"; sourceTree = "<group>"; };
 		D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetsListViewController+Services.swift"; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */,
 				F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */,
+				D27C14782E31416800A3728B /* CustomPaywallView.swift */,
 				54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */,
 				5422EFF5209912C600206D66 /* ViewController.swift */,
 				5422EFF3209912C600206D66 /* AppDelegate.swift */,
@@ -282,7 +285,6 @@
 				TargetAttributes = {
 					5422EFEF209912C600206D66 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
 					};
 					D2A15D8C2E28199900F88E09 = {
 						CreatedOnToolsVersion = 16.4;
@@ -370,6 +372,7 @@
 				D2AE02592E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */,
 				54703A0C20CAFE9A003B543D /* CustomVideoControls.swift in Sources */,
 				F74E54E027461E8500016E7F /* NetworkHandler.swift in Sources */,
+				D27C147A2E31416800A3728B /* CustomPaywallView.swift in Sources */,
 				D2AE02512E2F999600C9D312 /* AssetModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,11 +564,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D8497957HH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -649,11 +650,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mmax.pfl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.sampleapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "PFL-Dev-Profile";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -667,12 +667,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D8497957HH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -757,11 +755,10 @@
 				);
 				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mmax.pfl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.sampleapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "PFL-Dev-Profile";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -796,7 +793,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ViewLiftPlayerSampleApp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.viewlift.sampleapp-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
@@ -832,7 +829,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ViewLiftPlayerSampleApp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.viewlift.sampleapp-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
@@ -867,7 +864,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ViewLiftPlayerSampleApp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.viewlift.sampleapp-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
@@ -943,11 +940,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D8497957HH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1031,11 +1026,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mmax.pfl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.sampleapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "PFL-Dev-Profile";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
