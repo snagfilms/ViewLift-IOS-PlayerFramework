@@ -282,7 +282,7 @@ extension AssetListViewController{
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             let assets = try decoder.decode([AssetModel].self, from: data)
-            detectDuplicates(assets: assets)
+            //detectDuplicates(assets: assets)
             return assets
         } catch {
             print("❌ Decoding error: \(error)")
