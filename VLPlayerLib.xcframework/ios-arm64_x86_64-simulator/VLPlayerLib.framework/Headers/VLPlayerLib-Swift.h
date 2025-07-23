@@ -949,6 +949,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 /// \param isPlayingNextContent Tell is next content is playing or user has cancelled playback for next video
 ///
 - (void)autoPlayUIDimissedWithIsPlayingNextContent:(BOOL)isPlayingNextContent;
+- (void)loginWithTVE;
 @end
 
 #endif
@@ -1910,6 +1911,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
 /// \param isPlayingNextContent Tell is next content is playing or user has cancelled playback for next video
 ///
 - (void)autoPlayUIDimissedWithIsPlayingNextContent:(BOOL)isPlayingNextContent;
+- (void)loginWithTVE;
 @end
 
 #endif

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64-apple-ios14.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name VLPlayerLib
+// swift-module-flags: -target arm64-apple-ios14-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name VLPlayerLib
 // swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
 import AVFoundation
 import AVKit
@@ -106,6 +106,29 @@ extension AmazonIVSPlayer.IVSPlayer {
   }
   @objc override dynamic public init()
   @objc deinit
+}
+extension VLPlayerLib.VLPlayer {
+  public enum PayWallConfiguration {
+    case `default`(payWallTheme: VLPlayerLib.VLPlayer.PayWallThemeConfiguration?)
+    case custom(view: UIKit.UIView)
+  }
+  public struct PayWallThemeConfiguration {
+    public let style: VLPlayerLib.VLPlayer.PayWallStyle?
+    public let textContent: VLPlayerLib.VLPlayer.PayWallTextContent?
+    public init(style: VLPlayerLib.VLPlayer.PayWallStyle?, textContent: VLPlayerLib.VLPlayer.PayWallTextContent?)
+  }
+  public struct PayWallStyle {
+    public let errorMessageTextColor: UIKit.UIColor?
+    public let buttonTextColor: UIKit.UIColor?
+    public let buttonBackgroundColor: UIKit.UIColor?
+    public let backgroundColor: UIKit.UIColor?
+    public init(errorMessageTextColor: UIKit.UIColor?, buttonTextColor: UIKit.UIColor?, buttonBackgroundColor: UIKit.UIColor?, backgroundColor: UIKit.UIColor?)
+  }
+  public struct PayWallTextContent {
+    public let errorMessage: Swift.String?
+    public let buttontext: Swift.String?
+    public init(errorMessage: Swift.String?, buttontext: Swift.String?)
+  }
 }
 public struct SSAIBeaconTracking {
   public func triggerAnalytics(eventType: VLPlayerLib.VLPlayer.AdsEventType, beaconUrls: [Swift.String])
@@ -652,6 +675,7 @@ extension VLPlayerLib.VLPlayer {
 extension VLPlayerLib.VLPlayer {
   @_Concurrency.MainActor @objc dynamic open func isPlaying() -> Swift.Bool
   @objc dynamic open func shouldPlayVideo(initially: Swift.Bool)
+  public func updateEPG(programData: VLPlayerLib.EPGSupportModel?)
   @objc dynamic open func sliderEndedTracking(newSeekValue: Swift.Double)
   @objc dynamic open func sliderBeganTracking(newSeekValue: Swift.Double)
 }
@@ -676,6 +700,7 @@ public struct TokenIdentity : Swift.Decodable {
     get
   }
   open var enablePlayerBitrateLogs: Swift.Bool?
+  public var payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration?
   public var hasEntitlementData: Swift.Bool {
     get
   }
@@ -735,6 +760,17 @@ public struct TokenIdentity : Swift.Decodable {
     public let drmconfig: VLPlayerLib.DRMConfig?
     public init(url: Swift.String, contentId: Swift.String? = nil, drmconfig: VLPlayerLib.DRMConfig? = nil)
   }
+  public enum TVEErrorCode : Swift.String {
+    case cantAccessTVEContent
+    case svodTVESubscriptionNotFound
+    case tveNoUserInfo
+    case tveSubscriptionNotFound
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
   @objc override dynamic public init()
   public func checkClosedCaption() -> Swift.Bool
   public var adManagerDelegate: (any VLPlayerLib.AdManagerDelegate)?
@@ -754,7 +790,7 @@ public struct TokenIdentity : Swift.Decodable {
 }
 extension VLPlayerLib.VLPlayer {
   public struct VLPlayerFeatureSupported {
-    public init(fullScreenOnly: Swift.Bool, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, showPlayerControlAlways: Swift.Bool = false, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, playerResponseRequired: Swift.Bool = false, preGameStartTime: Swift.Double?, appMacrosList: [Swift.String : Swift.String]? = [:], vlBeacon: VLBeaconLib.VLBeacon?, playAudioOnly: Swift.Bool? = false, epgSupportModel: VLPlayerLib.EPGSupportModel? = nil, tapToPause: Swift.Bool? = nil)
+    public init(fullScreenOnly: Swift.Bool, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, showPlayerControlAlways: Swift.Bool = false, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, playerResponseRequired: Swift.Bool = false, preGameStartTime: Swift.Double?, appMacrosList: [Swift.String : Swift.String]? = [:], vlBeacon: VLBeaconLib.VLBeacon?, playAudioOnly: Swift.Bool? = false, epgSupportModel: VLPlayerLib.EPGSupportModel? = nil, tapToPause: Swift.Bool? = nil, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil)
   }
   public struct VLClientSideAdTrackingDetails {
     public init(isClientSideAdTrackingEnabled: Swift.Bool, isWTAEnabled: Swift.Bool)
@@ -868,7 +904,14 @@ public struct VideoPlanFeatureSetting : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 public class EPGSupportModel {
-  public init(isEpg: Swift.Bool = false, epgFrame: CoreFoundation.CGRect = UIScreen.main.bounds)
+  public var isEpg: Swift.Bool
+  public var epgFrame: CoreFoundation.CGRect
+  public var currentProgramID: Swift.String?
+  public var currentProgramTitle: Swift.String?
+  public init(isEpg: Swift.Bool = false, epgFrame: CoreFoundation.CGRect = UIScreen.main.bounds, currentProgramID: Swift.String? = nil, currentProgramTitle: Swift.String? = nil)
+  public var description: Swift.String {
+    get
+  }
   @objc deinit
 }
 public enum Quartile {
@@ -949,6 +992,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func playerBitrateDebugLogs(logString: Swift.String)
   @objc optional func autoPlayUIInitiated()
   @objc optional func autoPlayUIDimissed(isPlayingNextContent: Swift.Bool)
+  @objc optional func loginWithTVE()
 }
 @objc public protocol ChromeCastPlaybackDelegate : ObjectiveC.NSObjectProtocol {
   @objc optional func chromeCastConnectionStatusUpdate(isConnected: Swift.Bool, castContextSessionInstance: GoogleCast.GCKCastContext?)
@@ -1165,6 +1209,9 @@ extension VLPlayerLib.VLPlayer.LeaderboardPlayerControls : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.ResolutionType : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.ResolutionType : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.ResolutionType : Swift.RawRepresentable {}
+extension VLPlayerLib.VLPlayer.TVEErrorCode : Swift.Equatable {}
+extension VLPlayerLib.VLPlayer.TVEErrorCode : Swift.Hashable {}
+extension VLPlayerLib.VLPlayer.TVEErrorCode : Swift.RawRepresentable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.RawRepresentable {}
