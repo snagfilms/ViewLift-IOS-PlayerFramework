@@ -108,7 +108,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                                                  chromecastCustomReceiver: nil,
                                                  playerResponseRequired:true,
                                                  preGameStartTime: nil,
-                                                 appMacrosList: nil, vlBeacon: VLBeacon.getInstance(), payWallConfiguration: self.customPaywallView)
+                                                 appMacrosList: nil, vlBeacon: VLBeacon.getInstance(), payWallConfiguration: nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
