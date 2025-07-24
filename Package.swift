@@ -25,15 +25,15 @@ let package = Package(
         .package(
             name: "BitmovinPlayer",
             url: "https://github.com/bitmovin/player-ios.git",
-            from: "3.85.2"),
+            Version("3.85.2")..<Version("3.85.2")),
         .package(
             name: "VLBeaconLib",
             url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
-            branch: "3.0.0"),
+            branch: "main"),
         .package(
             name: "MUXSDKStats",
             url: "https://github.com/muxinc/mux-stats-sdk-avplayer",
-            from: "4.0.0")
+            Version("4.0.0")..<Version("4.0.0"))
     ],
     targets: [
         .binaryTarget(name: "VLPlayerLib", path: "VLPlayerLib.xcframework"),
