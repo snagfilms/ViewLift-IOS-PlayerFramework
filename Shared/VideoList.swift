@@ -44,6 +44,7 @@ struct VideoList:Decodable {
     var videoId:String
     var streamUrl:String?
     let vlToken:String
+    let vlGuestToken:String
     var nextVideoList: [NextVideoList]?
     let apiBaseUrl: String
     let beaconBaseUrl: String?

@@ -8,10 +8,15 @@
 
 import UIKit
 
+protocol SelectionDelegate: AnyObject {
+    func didSelectItem(at index: Int, selection: Bool)
+}
+
 class ConfigurableItemRowView: UIView {
     let titleLabel = UILabel()
     let actionButton = UIButton(type: .system)
-
+    var index: Int = 0
+    weak var selectionDelegate: SelectionDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -57,6 +62,7 @@ class ConfigurableItemRowView: UIView {
     
     private func toggleCheck() {
         actionButton.isSelected.toggle()
+        selectionDelegate?.didSelectItem(at: index, selection: actionButton.isSelected)
     }
         
 }

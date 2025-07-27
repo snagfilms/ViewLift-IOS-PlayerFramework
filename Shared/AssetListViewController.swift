@@ -15,7 +15,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     private let backButton = UIButton(type: .system)
     private let titleLabel = UILabel()
     var videoList:VideoList!
-    var entitlementData: VLPlayerLib.EntitlementData?
+    var entitlementData: VLPlayer.EntitlementData?
     private var assetModels: [AssetModel] = []
     var configurableHeaderView: ConfigurableHeaderView?
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         setupTableView()
         assetModels = loadAssetModelsFromFile() ?? []
         DispatchQueue.main.async { [weak self] in
-          //self?.setupTableHeaderView()
+          self?.setupTableHeaderView()
         }
     }
     
@@ -43,10 +43,10 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     private func setupTableHeaderView() {
-        let options: [ConfigurableItemType] = [.showCustomControls, .hideControls, .autoPlay, .loopPlay, .mute]
+        let options: [ConfigurableItemType] = [.guestUser, .showCustomControls, .hideControls, .autoPlay, .loopPlay, .mute]
         var items: [ConfigurableItem] = []
         for option in options {
-            items.append(ConfigurableItem(type: option, isChecked: false))
+            items.append(ConfigurableItem(type: option, isChecked: option == .autoPlay))
         }
 
         let headerView = ConfigurableHeaderView(items: items)
@@ -67,11 +67,11 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     
     func getEntitlementData(
         source: ResponseSource,
-        completion: @escaping (Result<VLPlayerLib.EntitlementData, VLPlayerLib.VLError>) -> Void
+        completion: @escaping (Result<VLPlayer.EntitlementData, VLPlayerLib.VLError>) -> Void
     ) {
         fetchContentDetails(source: source) { (playerObject, isSuccess, vlError, playerResponse, contentResponse) in
             if isSuccess, let playerObject = playerObject {
-                let entitlementData = VLPlayerLib.EntitlementData(
+                let entitlementData = VLPlayer.EntitlementData(
                     playerObject: playerObject,
                     isSuccess: true,
                     error: vlError,
@@ -179,17 +179,17 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         switch asset.playbackType {
         case .url(let url):
             print("Play using URL: \(url)")
-            launchVideoPlayer(url: url, isExternal: asset.isExternal ?? false)
+            launchVideoPlayer(url: url, isExternal: asset.isExternal ?? false, streamConfig: VLPlayer.StreamConfig(isLive: asset.isLive, isDVR: asset.isDVR, isDRM: nil))
         case .videoId(let id):
             print("Play using videoId: \(id)")
             launchVideoPlayer(videoId: id, isExternal: asset.isExternal ?? false, responseType: asset.responseType ?? "local")
         }
     }
     
-    private func launchVideoPlayer(videoId: String? = nil, url: String? = nil, isExternal: Bool = false, responseType: String = "local") {
+    private func launchVideoPlayer(videoId: String? = nil, url: String? = nil, isExternal: Bool = false, responseType: String = "local", streamConfig: VLPlayer.StreamConfig? = nil) {
         guard (videoId != nil && !videoId!.isEmpty) || (url != nil && !url!.isEmpty) else {return}
             
-        var drmConfig: VLPlayerLib.DRMConfig?
+        var drmConfig: VLPlayer.DRMConfig?
         if let videoId = videoId, !videoId.isEmpty {
             videoList.videoId = videoId
             if isExternal{
@@ -225,14 +225,14 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                     showAlert(title: "Error", message: "DRM configuration is missing or contains invalid values.")
                     return
                 }
-                drmConfig = VLPlayerLib.DRMConfig(
+                drmConfig = VLPlayer.DRMConfig(
                     licenseUrl: licenseUrl,
                     certificateUrl: certificateUrl,
                     licenseToken: licenseToken,
                     completeSkd: completeskd
                 )
             }
-            self.loadVideoPlayer(url: url, drmConfig: drmConfig)
+            self.loadVideoPlayer(url: url, drmConfig: drmConfig, streamConfig: streamConfig)
             
             
         }
@@ -247,15 +247,28 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         self.present(alertController, animated: true, completion: nil)
     }
     
-    private func loadVideoPlayer(videoId: String? = nil, url: String? = nil, drmConfig: VLPlayerLib.DRMConfig? = nil) {
+    private func loadVideoPlayer(videoId: String? = nil, url: String? = nil, drmConfig: VLPlayer.DRMConfig? = nil, streamConfig: VLPlayer.StreamConfig? = nil) {
+        let showCustomControls = configurableHeaderView?.getConfigurableItemSelection(type: .showCustomControls) ?? false
+        let autoplayEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .autoPlay) ?? false
+        let loopEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .loopPlay) ?? false
+        let hideControls = configurableHeaderView?.getConfigurableItemSelection(type: .hideControls) ?? false
+        let muteEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .mute) ?? false
+        let isGuestUser = configurableHeaderView?.getConfigurableItemSelection(type: .guestUser) ?? false
         #if os(iOS)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let videoPlaybackController = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackController") as! VideoPlaybackController
         videoPlaybackController.streamUrl = url
         videoPlaybackController.entitlementData = self.entitlementData
+        videoPlaybackController.streamConfig = streamConfig
         videoPlaybackController.drmConfig = drmConfig
         videoPlaybackController.view.frame = self.view.bounds
         videoPlaybackController.prepareView(withPlayerUIOption: videoId == nil ? .playStreamURL : .defaultControl, videoList: videoList)
+        videoPlaybackController.enableCustomPlayerUI = showCustomControls
+        videoPlaybackController.autoplayEnabled = autoplayEnabled
+        videoPlaybackController.loopEnabled = loopEnabled
+        videoPlaybackController.hideControls = hideControls
+        videoPlaybackController.muteEnabled = muteEnabled
+        videoPlaybackController.isGuestUser = isGuestUser
         videoPlaybackController.modalPresentationStyle = .fullScreen
         self.present(videoPlaybackController, animated: true, completion: nil)
         #else

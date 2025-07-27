@@ -17,7 +17,8 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     @IBOutlet weak var addNextButton: UIButton!
     @IBOutlet weak var playNextButton: UIButton!
     private var videoList:VideoList!
-    private var enableCustomPlayerUI:Bool! = false
+    var enableCustomPlayerUI:Bool = false
+    var isGuestUser: Bool = false
     private var enableBitrateLogs:Bool! = false
     private var videoPlayerArray: Array<Dictionary<Int, VLPlayer>>?
     private var videoPlayerControlsArray: Array<Dictionary<Int, CustomVideoControls>>?
@@ -38,8 +39,9 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     private var seekBackwardDuration:Double = 10.0
     private var adUrl:String?
     private var playerOptionSelected:PlayerUIOptions!
-    var entitlementData: VLPlayerLib.EntitlementData?
-    var drmConfig: VLPlayerLib.DRMConfig?
+    var entitlementData: VLPlayer.EntitlementData?
+    var drmConfig: VLPlayer.DRMConfig?
+    var streamConfig: VLPlayer.StreamConfig?
     var loopEnabled: Bool = false
     var autoplayEnabled: Bool = true
     var hideControls: Bool = false
@@ -98,7 +100,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
         return VLPlayer.VLPlayerFeatureSupported(fullScreenOnly: false,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
-                                                 autoPlayEnabled: true,
+                                                 autoPlayEnabled: self.autoplayEnabled,
                                                  loopVideoPlayback: self.loopEnabled,
                                                  hideVideoControls: self.hideControls,
                                                  mutePlayback: self.muteEnabled,
@@ -141,7 +143,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                 let featureSupported = getPlayerFeaturesSupported()
                 let vlBaseUrl = self.videoList.apiBaseUrl
                 let vlBeaconURL: String? = self.videoList.beaconBaseUrl
-                let vlToken = self.videoList.vlToken
+                let vlToken = isGuestUser ? self.videoList.vlGuestToken : self.videoList.vlToken
                 var vlPlayer: VLPlayer!
 
                 let videoPlayerControlsView = self.enableCustomPlayerUI ? self.getCustomControls() : nil
@@ -158,7 +160,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                     vlPlayer.videoPlayerDelegate = self
                     vlPlayer.clientSideAdTrackingDelegate = self
                     vlPlayer.enablePlayerBitrateLogs = self.enableBitrateLogs
-                    vlPlayer.setSource(type: .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", contentId: nil, drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl)),customControlsView: videoPlayerControlsView, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
+                    vlPlayer.setSource(type: .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", contentId: nil,streamConfig: self.streamConfig, drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl)),customControlsView: videoPlayerControlsView, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
                         DispatchQueue.main.async {
                             loaderView.stopAnimating()
                             if let cell = cell, let playerView = playerView {

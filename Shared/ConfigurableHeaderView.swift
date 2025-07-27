@@ -61,11 +61,13 @@ class ConfigurableHeaderView: UIView {
 
     private func populateItems() {
         itemsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        for item in items {
+        for (index, item) in items.enumerated() {
             let row = ConfigurableItemRowView()
+            row.index = index
             row.translatesAutoresizingMaskIntoConstraints = false
             row.titleLabel.text = item.type.rawValue
             row.actionButton.isSelected = item.isChecked
+            row.selectionDelegate = self
             itemsStack.addArrangedSubview(row)
         }
     }
@@ -78,6 +80,10 @@ class ConfigurableHeaderView: UIView {
         arrowButton.setTitle(isExpanded ? "▲" : "▼", for: .normal)
         onHeightChanged?()
     }
+    
+    func getConfigurableItemSelection(type: ConfigurableItemType) -> Bool{
+        return items.first(where: {$0.type == type})?.isChecked ?? false
+    }
 }
 
 struct ConfigurableItem {
@@ -86,9 +92,16 @@ struct ConfigurableItem {
 }
 
 enum ConfigurableItemType: String {
+    case guestUser = "Guest User"
     case showCustomControls = "Show Custom Controls"
     case hideControls = "Hide Controls"
     case loopPlay = "Loop Play"
     case autoPlay = "Auto Play"
     case mute = "Mute"
+}
+
+extension ConfigurableHeaderView: SelectionDelegate {
+    func didSelectItem(at index: Int, selection: Bool) {
+        items[index].isChecked = selection
+    }
 }

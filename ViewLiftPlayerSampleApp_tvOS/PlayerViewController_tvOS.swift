@@ -15,8 +15,8 @@ class PlayerViewController: UIViewController {
     
     var streamUrl: String?
     var videoId: String?
-    var entitlementData: VLPlayerLib.EntitlementData?
-    var drmConfig: VLPlayerLib.DRMConfig?
+    var entitlementData: VLPlayer.EntitlementData?
+    var drmConfig: VLPlayer.DRMConfig?
     var videoList: VideoList!
     var playerOptionSelected:PlayerUIOptions!
     var vlPlayer: VLPlayer!
