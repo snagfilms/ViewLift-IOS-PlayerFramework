@@ -97,6 +97,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
          //        let payWallConfiguration: VLPlayer.PayWallConfiguration = .custom(view: customPaywallView)
          //        self.customPaywallView = customPaywallView
          */
+        let playerControls = PlayerControlsColor(iconColor: "",textColor: "", progressBarBGColor: "", progressBarColor: "")
         return VLPlayer.VLPlayerFeatureSupported(fullScreenOnly: false,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
@@ -160,10 +161,14 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                     vlPlayer.videoPlayerDelegate = self
                     vlPlayer.clientSideAdTrackingDelegate = self
                     vlPlayer.enablePlayerBitrateLogs = self.enableBitrateLogs
+                    let isDVREnabled = self.streamConfig?.isDVR ?? false
                     vlPlayer.setSource(type: .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", contentId: nil,streamConfig: self.streamConfig, drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl)),customControlsView: videoPlayerControlsView, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
                         DispatchQueue.main.async {
                             loaderView.stopAnimating()
                             if let cell = cell, let playerView = playerView {
+                                if isDVREnabled {
+                                    videoPlayerControlsView?.updateControlsBasedOnDVRFlag(isDVREnabled: isDVREnabled)
+                                }
                                 self?.addPlayer(indexPath: indexPath, cell: cell, videoPlayerControlsView: videoPlayerControlsView, playerView: playerView, vlPlayer: vlPlayer)
                                 
                             }
@@ -278,7 +283,8 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     
     //MARK: Video Player Delegates
     func videoStarted(timestamp: Double, playerTag: String) {
-        let playerIndex: Int = Int(playerTag)! - 1
+        guard let playerTag = Int(playerTag) else { return }
+        let playerIndex: Int = (playerTag > 0) ? (playerTag - 1) : 0
         for playerObj in videoPlayerArray!
         {
             if playerObj.keys.contains(playerIndex)
@@ -319,7 +325,8 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     }
     
     func videoPause(timestamp: Double, playerTag: String) {
-        let playerIndex: Int = Int(playerTag)! - 1
+        guard let playerTag = Int(playerTag) else { return }
+        let playerIndex: Int = (playerTag > 0) ? (playerTag - 1) : 0
         if videoPlayerControlsArray != nil
         {
             for playerControl in videoPlayerControlsArray!
@@ -334,7 +341,8 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     }
     
     func videoResume(timestamp: Double, playerTag: String) {
-        let playerIndex: Int = Int(playerTag)! - 1
+        guard let playerTag = Int(playerTag) else { return }
+        let playerIndex: Int = (playerTag > 0) ? (playerTag - 1) : 0
         if videoPlayerControlsArray != nil
         {
             for playerControl in videoPlayerControlsArray!
@@ -349,7 +357,8 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     }
     
     func videoFinished(playerTag: String) {
-        let playerIndex: Int = Int(playerTag)! - 1
+        guard let playerTag = Int(playerTag) else { return }
+        let playerIndex: Int = (playerTag > 0) ? (playerTag - 1) : 0
         if videoPlayerControlsArray != nil
         {
             for playerControl in videoPlayerControlsArray!
@@ -364,7 +373,8 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     }
     
     func videoPlaybackError(currentTime: Double, errorMessage: String, errorCode: String, playerTag: String) {
-        let playerIndex: Int = Int(playerTag)! - 1
+        guard let playerTag = Int(playerTag) else { return }
+        let playerIndex: Int = (playerTag > 0) ? (playerTag - 1) : 0
         if videoPlayerControlsArray != nil
         {
             for playerControl in videoPlayerControlsArray!
@@ -513,17 +523,40 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     }
     
     ///Progress delegate
-    func videoPlayerUpdateProgressby30Seconds(currentTime: Double, totalTime: Double, playerTag: String) {
+    func videoPlayerProgressByEverySecond(currentTime: Double, totalTime: Double, playerTag: String, parsedTimeStamp: String?) {
         let playerIndex: Int = Int(playerTag)! - 1
-        guard let _videoPlayerControlsArray = self.videoPlayerControlsArray else {return}
+        guard let _videoPlayerControlsArray = self.videoPlayerControlsArray, let _videoPlayerArray = self.videoPlayerArray else {return}
+        
+
+        var elapsedTime = currentTime
+
+        for player in _videoPlayerArray
+        {
+            if player.keys.contains(playerIndex)
+            {
+                if let startOverTime =  player[playerIndex]?.getStartOverTime() {
+                    if currentTime > totalTime{
+                        elapsedTime = totalTime
+                    }
+                }
+             
+                break
+            }
+        }
         for playerControl in _videoPlayerControlsArray
         {
             if playerControl.keys.contains(playerIndex)
             {
                 playerControl[playerIndex]?.updateTimeLabel(timeRemaining: (totalTime - currentTime), elapsedTime: currentTime)
+                playerControl[playerIndex]?.updateSliderDuration(sliderValue: self.getSliderDuration(currentTime: elapsedTime, totalDuration: totalTime))
                 break
             }
         }
+    }
+    
+    func getSliderDuration(currentTime: Double, totalDuration: Double) -> Double {
+        guard totalDuration > 0, currentTime <= totalDuration else {return 0}
+        return Double(currentTime/totalDuration)
     }
     
     ///Player bitrate logs
@@ -650,16 +683,13 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
         print("Cast connected>>>", vlPlayer?.getChromeCastConnectedStatus())
     }
     
-//    func getMiniCastControllerView() {
-//        guard let _videoPlayerArray = self.videoPlayerArray,
-//              let playerDict = _videoPlayerArray.first else { return }
-//        
-//        let vlPlayer = playerDict[0]
-//        if let view = vlPlayer?.getMiniCastControllerView(){
-//            //Add mini view
-//        }
-//        
-//    }
+    override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        let player = videoPlayerArray?.first?[0]
+        player?.goFullScreen()
+        
+    }
 }
 
 

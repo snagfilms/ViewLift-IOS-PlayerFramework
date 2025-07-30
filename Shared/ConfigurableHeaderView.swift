@@ -10,9 +10,8 @@ import UIKit
 
 class ConfigurableHeaderView: UIView {
     private let titleLabel = UILabel()
-    private let arrowButton = UIButton(type: .system)
+    private let arrowButton = UIButton(type: .custom)
     private let itemsStack = UIStackView()
-    private var isExpanded = true
 
     private var items: [ConfigurableItem] = []
 
@@ -26,11 +25,30 @@ class ConfigurableHeaderView: UIView {
 
     private func setupUI() {
         titleLabel.text = "Configurable Items"
-        titleLabel.font = .boldSystemFont(ofSize: 16)
         titleLabel.textColor = .black
-        arrowButton.setTitle(isExpanded ? "▲" : "▼", for: .normal)
+        var horizontalPadding = 16.0
+        var verticalPadding = 0.0
+        arrowButton.isSelected = true
+       #if os(iOS)
+        let normalImage = UIImage(systemName: "chevron.right")
+        let selectedImage = UIImage(systemName: "chevron.down")
+        arrowButton.setImage(normalImage, for: .normal)
+        arrowButton.setImage(selectedImage, for: .selected)
+        titleLabel.font = .boldSystemFont(ofSize: 13)
         arrowButton.addTarget(self, action: #selector(toggleExpand), for: .touchUpInside)
         arrowButton.isHidden = false
+        #else
+        titleLabel.font = .boldSystemFont(ofSize: 29)
+        arrowButton.addTarget(self, action: #selector(toggleExpand), for: .primaryActionTriggered)
+        arrowButton.isHidden = true
+        horizontalPadding = 80.0
+        verticalPadding = 20.0
+        #endif
+        arrowButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            arrowButton.widthAnchor.constraint(equalTo: arrowButton.heightAnchor),
+            arrowButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
         let headerStack = UIStackView(arrangedSubviews: [titleLabel, arrowButton])
         headerStack.axis = .horizontal
         headerStack.distribution = .fill
@@ -38,10 +56,10 @@ class ConfigurableHeaderView: UIView {
         headerStack.spacing = 8
 
         itemsStack.axis = .vertical
-        itemsStack.spacing = 0
+        itemsStack.spacing = verticalPadding
         itemsStack.alignment = .fill
         itemsStack.distribution = .fill
-        itemsStack.isHidden = !isExpanded
+        itemsStack.isHidden = !arrowButton.isSelected
 
         let mainStack = UIStackView(arrangedSubviews: [headerStack, itemsStack])
         mainStack.axis = .vertical
@@ -53,8 +71,8 @@ class ConfigurableHeaderView: UIView {
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             mainStack.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalPadding),
+            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalPadding),
             mainStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         ])
     }
@@ -66,7 +84,7 @@ class ConfigurableHeaderView: UIView {
             row.index = index
             row.translatesAutoresizingMaskIntoConstraints = false
             row.titleLabel.text = item.type.rawValue
-            row.actionButton.isSelected = item.isChecked
+            row.isSelected = item.isChecked
             row.selectionDelegate = self
             itemsStack.addArrangedSubview(row)
         }
@@ -75,9 +93,8 @@ class ConfigurableHeaderView: UIView {
     var onHeightChanged: (() -> Void)?
 
     @objc private func toggleExpand() {
-        isExpanded.toggle()
-        itemsStack.isHidden = !isExpanded
-        arrowButton.setTitle(isExpanded ? "▲" : "▼", for: .normal)
+        arrowButton.isSelected.toggle()
+        itemsStack.isHidden = !arrowButton.isSelected
         onHeightChanged?()
     }
     

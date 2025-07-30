@@ -10,8 +10,12 @@ import UIKit
 import VLPlayerLib
 import AVKit
 
-class CustomVideoControls: UIView {
+class CustomVideoControls: UIView, CustomPlayerSkinProtocol {
     
+    var isAdOnMainView: Bool
+    
+    var adRunningOnInternalPlayer: Bool
+
     enum PlayerControlScreen : String
     {
         case full
@@ -42,9 +46,9 @@ class CustomVideoControls: UIView {
     private var playerControlScreen: PlayerControlScreen
     private var playerControlType: PlayerControlType
     private var pictureInPictureButton: UIButton!
-    private var videoSeekSlider:UISlider!
+    private var videoSeekSlider:CustomSlider!
     private var ccButton: UIButton!
-    
+    private var isDVREnabled: Bool = false
     var seekForwardDuration:Double?
     var seekBackwardDuration:Double?
     private var zoomInOutButton: UIButton = {
@@ -57,7 +61,9 @@ class CustomVideoControls: UIView {
     
     override init(frame: CGRect) {
         self.playerControlType = .streamVideoControls
-        self.playerControlScreen = .small
+        self.playerControlScreen = .full
+        self.isAdOnMainView = false
+        self.adRunningOnInternalPlayer = false
         super.init(frame: frame)
         self.createView()
     }
@@ -66,17 +72,14 @@ class CustomVideoControls: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func viewLoad() -> Void
-    {
+    func viewLoad() -> Void{
         var controlsY: CGFloat = self.bounds.size.height - controlsHeight - 5
         
         var leftPadding:CGFloat = 0.0
-        if #available(iOS 11.0, *) {
-            let window = UIApplication.shared.keyWindow
-            let bottomPadding = window?.safeAreaInsets.bottom
-            leftPadding = window?.safeAreaInsets.left ?? 0
-            controlsY -= (bottomPadding ?? 0)
-        }
+        let window = UIApplication.shared.keyWindow
+        let bottomPadding = window?.safeAreaInsets.bottom
+        leftPadding = window?.safeAreaInsets.left ?? 0
+        controlsY -= (bottomPadding ?? 0)
         self.playButton.frame = CGRect.init(x: 13 + leftPadding, y: controlsY + 3, width: 18.5, height: 21)
         self.rewindButton.frame = CGRect.init(x: self.playButton.frame.maxX + 13, y: controlsY, width: 26, height: 26)
         self.forwardButton.frame = CGRect.init(x: self.playButton.frame.maxX + 13, y: controlsY, width: 26, height: 26)
@@ -152,8 +155,36 @@ class CustomVideoControls: UIView {
         }
         
         self.addCCButton()
+        self.setupSlider()
         self.updateControls(with: .small)
     }
+    
+    private func setupSlider(){
+        videoSeekSlider = CustomSlider(sliderType: .streamVideoSlider, frame: .zero, isDVREnabled: false)
+        self.addSubview(videoSeekSlider)
+        videoSeekSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
+        videoSeekSlider.addTarget(self, action: #selector(sliderBeganTracking(_:)), for: .touchDown)
+        videoSeekSlider.addTarget(self, action: #selector(sliderEndedTracking(_:)), for: [.touchUpInside, .touchUpOutside, .touchCancel])
+    }
+    
+    @objc private func sliderValueChanged(_ sender: UISlider) {
+        if !sender.isTracking {
+           // videoPlayer.slider
+        }
+    }
+
+    @objc private func sliderBeganTracking(_ sender: UISlider) {
+        print("Tracking Begin, \(sender.isTracking) \(sender.isContinuous)")
+        //delegate?.sliderBeganTracking(newSeekValue: Double(sender.value))
+        self.videoPlayer?.sliderBeganTracking(newSeekValue: Double(sender.value))
+    }
+
+    @objc private func sliderEndedTracking(_ sender: UISlider) {
+        print("Tracking Ended \(sender.isTracking)")
+        //delegate?.sliderEndedTracking(newSeekValue: Double(sender.value))
+        self.videoPlayer?.sliderEndedTracking(newSeekValue: Double(sender.value))
+    }
+
 
     private func addShadowOnButton(button: UIButton) {
         
@@ -200,6 +231,7 @@ class CustomVideoControls: UIView {
             self.ccButton.alpha = 0.5
         }
         self.ccButton.imageView?.tintColor = .white
+        self.ccButton.isHidden = true
     }
     
     
@@ -221,21 +253,21 @@ class CustomVideoControls: UIView {
         videoPlayer.startPictureInPictureAutomaticallyFromInline(enablePictureInPictureInline: enable)
     }
     
-    func updateControls(with playerControlScreen: PlayerControlScreen)
-    {
+    func updateControls(with playerControlScreen: PlayerControlScreen){
+        if videoPlayer?.isDVREnabled() ?? false {
+            self.isDVREnabled = true
+        }
         self.playerControlScreen = playerControlScreen
         var controlsY: CGFloat = 0.0
         var rightPadding:CGFloat = 0
         var leftPadding:CGFloat = 0.0
         
-        if #available(iOS 11.0, *) {
-            let window = UIApplication.shared.keyWindow
-            let bottomPadding = window?.safeAreaInsets.bottom
-            rightPadding = window?.safeAreaInsets.right ?? 0
-            leftPadding = window?.safeAreaInsets.left ?? 0
-            
-            controlsY -= (bottomPadding ?? 0)
-        }
+        let window = UIApplication.shared.keyWindow
+        let bottomPadding = window?.safeAreaInsets.bottom
+        rightPadding = window?.safeAreaInsets.right ?? 0
+        leftPadding = window?.safeAreaInsets.left ?? 0
+        
+        controlsY -= (bottomPadding ?? 0)
         
         if self.playButton == nil
         {
@@ -389,8 +421,17 @@ class CustomVideoControls: UIView {
                 break
             }
         }
+        let width: CGFloat = self.frame.width * 0.7
+        let x = self.frame.width - width
+            videoSeekSlider.frame = CGRect(x: x/2, y: timeRemainingLabel.center.y, width: width, height: 50)
+        videoSeekSlider.backgroundColor = .blue
+        if let isLiveVideo = videoPlayer?.isLiveVideo(), isLiveVideo, !isDVREnabled{
+            
+             videoSeekSlider.isUserInteractionEnabled = false
+        }
         addGradientView()
     }
+
     
     func updatePlayerControlsType(playerControlType:PlayerControlType) {
         self.playerControlType = playerControlType
@@ -546,5 +587,377 @@ class CustomVideoControls: UIView {
      // Drawing code
      }
      */
+    private func updateSliderConfig() {
+        
+        videoSeekSlider.updateSliderConfig(sliderType: (self.playerControlType == .liveVideoControls) ? .liveVideoSlider : .streamVideoSlider, isDVREnabled: self.isDVREnabled)
+    }
     
+    func updateControlsBasedOnDVRFlag(isDVREnabled: Bool) {
+        if playerControlType == .liveVideoControls {
+            self.isDVREnabled = isDVREnabled
+            self.updateSliderConfig()
+            DispatchQueue.main.async {
+                self.updatePlayerControlVisibility()
+            }
+        }
+    }
+    
+    private func updatePlayerControlVisibility() {
+        DispatchQueue.main.async {
+    
+            switch self.playerControlType {
+            case .liveVideoControls:
+
+                self.forwardButton.isHidden = self.isDVREnabled
+                self.rewindButton.isHidden = self.isDVREnabled
+
+
+                
+            case .streamVideoControls:
+               // self.goLivebutton.isHidden = true
+         break
+            default:
+           
+                break
+            }
+            
+        
+        }
+    }
+    func updateSliderDuration(sliderValue:Double) {
+        if self.videoSeekSlider != nil {
+            self.videoSeekSlider?.value = Float(sliderValue)
+            debugPrint("sliderValue", sliderValue)
+        }
+
+    }
+    
+}
+
+class CustomSlider: UISlider
+{
+    enum SliderType
+    {
+        case liveVideoSlider
+        case streamVideoSlider
+        case streamAudioSlider
+        case volumeSlider
+        case screenBrightnessSlider
+        case verticalVideoSlider
+    }
+    
+    var cuePoints: Array<Double> = []
+    var duration: TimeInterval!
+    var sliderColor: String!
+    private var _viewType: SliderType?
+    private var isDVRSupported: Bool = true
+    var viewType: SliderType? {
+        get {
+            return _viewType
+        } set(newValue) {
+            _viewType = newValue
+            self.setNeedsDisplay()
+        }
+    }
+    var cueViews: [CuePointView]? = []
+    var onValueChanged: ((Float) -> Void)?
+//
+//    override var value: Float {
+//        didSet {
+//            cueViews?.forEach { $0.onValueChanged?(value) }
+//        }
+//    }
+//
+    init(sliderType: SliderType, frame: CGRect, isDVREnabled:Bool = false) {
+        _viewType = sliderType
+        isDVRSupported = isDVREnabled
+        super.init(frame: CGRect.zero)
+        self.setThumbImage(nil, for: .normal)
+        if sliderType == .liveVideoSlider {
+            self.value = 1.0
+        }
+        else if sliderType == .screenBrightnessSlider {
+            self.value = Float(UIScreen.main.brightness)
+        }
+        else {
+            self.value = 0.0
+        }
+    }
+    
+    func updateSliderConfig(sliderType: SliderType, isDVREnabled:Bool = false) {
+        DispatchQueue.main.async {
+            self._viewType = sliderType
+            self.isDVRSupported = isDVREnabled
+            self.setThumbImage(nil, for: .normal)
+            if sliderType == .liveVideoSlider {
+                self.value = 1.0
+            }
+            else if sliderType == .screenBrightnessSlider {
+                self.value = Float(UIScreen.main.brightness)
+            }
+            else {
+                
+                self.value = 0.0
+            }
+            
+            if sliderType == .liveVideoSlider {
+                if isDVREnabled{
+                    self.isUserInteractionEnabled = true
+                    self.setThumbImage(nil, for: .normal)
+                }
+                else{
+                    self.isUserInteractionEnabled = false
+                    self.setThumbImage(nil, for: .normal)
+                }
+            }
+            if sliderType == .verticalVideoSlider {
+                self.isUserInteractionEnabled = true
+                self.setThumbImage(nil, for: .normal)
+            }
+        }
+    }
+    
+    private var trackHeight: CGFloat = 6
+    
+    override func trackRect(forBounds bounds: CGRect) -> CGRect {
+//        cueViews?.forEach { $0.onValueChanged?(value) }
+        if _viewType == .streamAudioSlider {
+            return CGRect(origin: bounds.origin, size: CGSize(width: bounds.width, height: trackHeight))
+        }
+        return CGRect(origin: CGPoint.init(x: bounds.origin.x, y: (bounds.height - bounds.origin.y - 2)/2), size: CGSize(width: bounds.width, height: 2))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setThumbImage(#imageLiteral(resourceName: "NoKnob.png"), for: .normal)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateCueViews()
+    }
+
+    override func draw(_ rect: CGRect) {
+        self.maximumTrackTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.4322559932)
+        self.tintColor = .clear
+
+        self.minimumTrackTintColor = .red
+
+        switch _viewType {
+        case .volumeSlider:
+            self.setThumbImage(nil, for: .normal)
+            break
+        case .screenBrightnessSlider:
+            if let image = UIImage(named: "Knob") {
+                self.setThumbImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
+            }
+            else {
+                self.setThumbImage(nil, for: .normal)
+            }
+            break
+        case .streamAudioSlider:
+            if let image = UIImage(named: "Knob") {
+                self.setThumbImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
+                self.tintColor = .blue
+            }
+            else {
+                self.setThumbImage(nil, for: .normal)
+            }
+            break
+        case .liveVideoSlider:
+            if ((self.duration != nil) && self.duration > 0) || isDVRSupported{
+                
+                if isDVRSupported{
+                    self.setThumbImage(nil, for: .normal)
+                }
+                else{
+                    self.setThumbImage(nil, for: .normal)
+                }
+                self.tintColor = .blue
+                if isDVRSupported{
+                    self.isUserInteractionEnabled = true
+                }
+                else{
+                    self.isUserInteractionEnabled = false
+                }
+                self.value = 1.0
+            }
+            break
+        case .streamVideoSlider:
+            if (self.duration != nil) && self.duration > 0 && self.cuePoints.count > 0 {
+                for view in self.subviews {
+                    if view.tag != 0
+                    {
+                        view.removeFromSuperview()
+                    }
+                }
+                cueViews?.forEach({$0.removeFromSuperview()})
+                cueViews = []
+                
+                let factor: Double = Double(rect.size.width)/self.duration
+                for cuePoint in self.cuePoints {
+                    let pos: CGFloat = CGFloat(cuePoint) * CGFloat(factor)
+                    let cueView = CuePointView(positionX: pos, centerY: rect.midY)
+                    cueView.tag = 11
+                    cueView.value = cuePoint
+                    self.addSubview(cueView)
+                    self.bringSubviewToFront(cueView)
+                    cueViews?.append(cueView)
+                }
+            }
+
+            self.setThumbImage(nil, for: .normal)
+            break
+        case .verticalVideoSlider:
+            self.isUserInteractionEnabled = false
+            self.setThumbImage(nil, for: .normal)
+//            self.setThumbImage(nil, for: .normal)
+//            self.isUserInteractionEnabled = true
+            break
+        case .none:
+            break
+        }
+
+    }
+    
+    override func accessibilityIncrement() {
+        self.value += 0.01
+        sendActions(for: .valueChanged)
+        updateAccessibilityValue()
+    }
+    
+    override func accessibilityDecrement() {
+        self.value -= 0.01
+        sendActions(for: .valueChanged)
+        updateAccessibilityValue()
+    }
+    
+    private func updateAccessibilityValue() {
+        let percentage = Int(value * 100)
+        self.accessibilityValue = "\(percentage) percent"
+    }
+    
+    func setCuePoints(cuePoints: [Double], duration: TimeInterval) -> Void {
+        if _viewType == .streamVideoSlider {
+            self.cuePoints = cuePoints
+            self.duration = duration
+            self.setNeedsDisplay()
+        }
+    }
+    
+    func updateSliderView() {
+        self.maximumTrackTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.4322559932)
+        self.tintColor = .clear
+        self.minimumTrackTintColor = .red
+
+        if let image = UIImage(named: "Knob") {
+            self.setThumbImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
+        else {
+            self.setThumbImage(nil, for: .normal)
+        }
+    }
+    
+    func updateCueViews() {
+        guard _viewType == .streamVideoSlider,
+              let duration = self.duration,
+              duration > 0,
+              self.cuePoints.count > 0 else { return }
+
+        // Clear old cue views
+        for view in self.subviews {
+            if view.tag != 0 {
+                view.removeFromSuperview()
+            }
+        }
+        cueViews?.forEach { $0.removeFromSuperview() }
+        cueViews = []
+
+        let factor: Double = Double(self.bounds.width) / duration
+        let y = (self.bounds.height / 2)
+        for cuePoint in self.cuePoints {
+            let pos: CGFloat = CGFloat(cuePoint) * CGFloat(factor)
+            let cueView = CuePointView(positionX: pos, centerY: y)
+            cueView.tag = 11
+            cueView.value = cuePoint
+            self.addSubview(cueView)
+            cueViews?.append(cueView)
+        }
+    }
+
+}
+
+
+class CuePointView: UIView {
+
+    var value: Double?
+    
+    var onValueChanged: ((Float) -> Void)?
+
+    // Initializer with position and optional size
+    init(positionX: CGFloat, centerY: CGFloat, size: CGSize = CGSize(width: 2, height: 2)) {
+        let origin = CGPoint(x: positionX, y: centerY - size.height / 2)
+        let frame = CGRect(origin: origin, size: size)
+        super.init(frame: frame)
+        
+        self.tag = 11
+        self.backgroundColor = .yellow
+        self.isUserInteractionEnabled = false // Optional
+        self.layer.cornerRadius = size.width / 2 // Make it round if width == height
+        self.clipsToBounds = true
+//        self.changeValue()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+//    func changeValue() {
+//        self.onValueChanged = { [weak self] valueOfSlider in
+//            guard let self = self else { return }
+//            if let playerMfe = self.superview?.superview?.superview?.superview?.superview?.parentViewController as? VLPlayerMFEController {
+//                let currentDuration = playerMfe.vlPlayer.getCurrentVideoDuration()
+//                if (Double(valueOfSlider) * (currentDuration ?? 0)) + 100 > Double(value ?? 0.0) {
+//                    self.backgroundColor = .clear
+//                } else {
+//                    self.backgroundColor = .yellow
+//                }
+//            }
+//        }
+//    }
+}
+
+
+
+extension String{
+    func hexStringToUIColor() -> UIColor {
+        
+        var cString:String = self.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString = String(cString[cString.index(after: cString.startIndex)...])//cString.substring(from: cString.index(after: cString.startIndex))
+        }
+        
+        if ((cString.count) != 6) {
+            return UIColor.white
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: 1.0
+        )
+    }
+}
+
+extension CustomVideoControls{
+    
+    func sliderValueChanged(newSeekValue: Double) {
+        debugPrint("newSeekValue sliderValueChanged : \(newSeekValue)")
+      
+    }
 }
