@@ -253,7 +253,6 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         let loopEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .loopPlay) ?? false
         let hideControls = configurableHeaderView?.getConfigurableItemSelection(type: .hideControls) ?? false
         let muteEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .mute) ?? false
-        let isGuestUser = configurableHeaderView?.getConfigurableItemSelection(type: .guestUser) ?? false
         #if os(iOS)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let videoPlaybackController = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackController") as! VideoPlaybackController
@@ -261,14 +260,13 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         videoPlaybackController.entitlementData = self.entitlementData
         videoPlaybackController.streamConfig = streamConfig
         videoPlaybackController.drmConfig = drmConfig
-        videoPlaybackController.view.frame = self.view.bounds
+//        videoPlaybackController.view.frame = self.view.bounds
         videoPlaybackController.prepareView(withPlayerUIOption: videoId == nil ? .playStreamURL : .defaultControl, videoList: videoList)
         videoPlaybackController.enableCustomPlayerUI = showCustomControls
         videoPlaybackController.autoplayEnabled = autoplayEnabled
         videoPlaybackController.loopEnabled = loopEnabled
         videoPlaybackController.hideControls = hideControls
         videoPlaybackController.muteEnabled = muteEnabled
-        videoPlaybackController.isGuestUser = isGuestUser
         videoPlaybackController.modalPresentationStyle = .fullScreen
         self.present(videoPlaybackController, animated: true, completion: nil)
         #else

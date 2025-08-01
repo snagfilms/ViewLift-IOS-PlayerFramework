@@ -7,14 +7,54 @@
 //
 
 import UIKit
+import VLAuthentication
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var isFullScreen: Bool = false
     var window: UIWindow?
+    
+    var apiBaseEndpoint: String = "xxxxx"
+    var graphQLEndpoint: String = "xxxxx"
+    var authorizationToken: String? = nil {
+        didSet {
+            print(authorizationToken)
+        }
+    }
+    var siteId: String = "xxxxx"
+    var xApiKey: String = "xxxxx"
+    
+    static var shared: AppDelegate {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Could not cast UIApplication delegate as AppDelegate")
+        }
+        return delegate
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        let apiConfig = APIConfig(
+            xApiKey: xApiKey,
+            siteId: siteId,
+            authorizationToken: authorizationToken,
+            apiBaseUrl: apiBaseEndpoint,
+            graphQLApiBaseUrl: graphQLEndpoint
+        )
+        
+        Task {
+            do {
+                try await VLAuthentication.sharedInstance.setupConfiguration(apiConfig: apiConfig)
+                
+                let anonymousTokenResponse = try await VLAuthentication.sharedInstance.apiToGetAnonymousToken()
+                self.authorizationToken = anonymousTokenResponse?.authorizationToken
+                VLAuthentication.sharedInstance.authorizationToken = self.authorizationToken
+                
+            } catch {
+                print("Error: ", error.localizedDescription)
+            }
+        }
+        
         return true
     }
 
