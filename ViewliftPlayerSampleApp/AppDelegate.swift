@@ -17,11 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var apiBaseEndpoint: String = "xxxxx"
     var graphQLEndpoint: String = "xxxxx"
-    var authorizationToken: String? = nil {
-        didSet {
-            print(authorizationToken)
-        }
-    }
+    
+    var authorizationToken: String? = nil
+    
     var siteId: String = "xxxxx"
     var xApiKey: String = "xxxxx"
     
@@ -32,7 +30,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return delegate
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+
+        // Get current user identity before async context
+        self.setupAuthentication()
+
+        return true
+    }
+    
+    func setupAuthentication() {
+        // Get current user identity before async context
+        let userIdentity = UserManager.shared.userIdentity
+        self.authorizationToken = userIdentity?.authorizationToken
 
         let apiConfig = APIConfig(
             xApiKey: xApiKey,
@@ -41,22 +53,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             apiBaseUrl: apiBaseEndpoint,
             graphQLApiBaseUrl: graphQLEndpoint
         )
-        
-        Task {
+
+        Task { [weak self] in
             do {
-                try await VLAuthentication.sharedInstance.setupConfiguration(apiConfig: apiConfig)
+                guard let self = self else { return }
                 
-                let anonymousTokenResponse = try await VLAuthentication.sharedInstance.apiToGetAnonymousToken()
-                self.authorizationToken = anonymousTokenResponse?.authorizationToken
+                try await VLAuthentication.sharedInstance.setupConfiguration(apiConfig: apiConfig)
+
                 VLAuthentication.sharedInstance.authorizationToken = self.authorizationToken
                 
+                if self.authorizationToken == nil {
+                    self.authorizationToken = try await VLAuthentication.sharedInstance.apiToGetAnonymousToken()?.authorizationToken
+                    VLAuthentication.sharedInstance.authorizationToken = self.authorizationToken
+                    
+                } else if let authorizationToken = self.authorizationToken, !authorizationToken.isEmpty && isJWTExpired(authorizationToken) {
+                    await self.logoutUser()
+                }
             } catch {
-                print("Error: ", error.localizedDescription)
+                print("VLAuthentication init error: \(error.localizedDescription)")
             }
         }
-        
-        return true
     }
+    
+    func logoutUser() async {
+        do {
+            UserManager.shared.userIdentity = nil
+            authorizationToken = nil
+            VLAuthentication.sharedInstance.authorizationToken = nil
+            
+            self.authorizationToken = try await VLAuthentication.sharedInstance.apiToGetAnonymousToken()?.authorizationToken
+            VLAuthentication.sharedInstance.authorizationToken = self.authorizationToken
+        } catch {
+            print("VLAuthentication init error: \(error.localizedDescription)")
+        }
+    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

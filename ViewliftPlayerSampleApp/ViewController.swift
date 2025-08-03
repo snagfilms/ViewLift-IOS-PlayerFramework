@@ -98,7 +98,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
             
         let videoPlaybackController = self.storyboard?.instantiateViewController(withIdentifier: "VideoPlaybackController") as! VideoPlaybackController
-        videoPlaybackController.view.frame = self.view.bounds
+//        videoPlaybackController.view.frame = self.view.bounds
         if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL {
             videoPlaybackController.streamUrl =  _videoList.streamUrl
         }

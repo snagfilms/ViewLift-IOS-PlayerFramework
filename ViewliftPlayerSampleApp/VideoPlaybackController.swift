@@ -24,6 +24,7 @@ private enum Constants {
 class VideoPlaybackController: UIViewController {
     
     // MARK: - IBOutlets
+    @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet private var debugLogView: UITextView!
     @IBOutlet private weak var addNextButton: UIButton!
     @IBOutlet private weak var playNextButton: UIButton!
@@ -71,9 +72,9 @@ class VideoPlaybackController: UIViewController {
         let width = UIScreen.main.bounds.width - (Constants.playerMargin * 2)
         let height = width * Constants.aspectRatio
         return CGRect(x: Constants.playerMargin,
-                     y: Constants.playerYPosition,
-                     width: width,
-                     height: height)
+                      y: Constants.playerYPosition,
+                      width: width,
+                      height: height)
     }
     
     private var vlToken: String {
@@ -85,6 +86,12 @@ class VideoPlaybackController: UIViewController {
         super.viewDidLoad()
         setupInitialState()
         loadPlayerView()
+        
+        self.logoutButton.isHidden = true
+        
+        if UserManager.shared.userIdentity != nil {
+            self.logoutButton.isHidden = false
+        }
     }
     
     deinit {
@@ -123,13 +130,34 @@ class VideoPlaybackController: UIViewController {
         switch option {
         case .customControlWithDebugLog, .debugLogEnabled:
             enableBitrateLogs = true
-        case .customControl, .customControlWithDebugLog, .customControlWithCustomSeekDuration:
+        case .customControl, .customControlWithCustomSeekDuration:
             enableCustomPlayerUI = true
         case .adsEnabled:
             adUrl = Constants.defaultAdUrl
         default:
             break
         }
+    }
+    
+    @IBAction func logoutButtonAction(_ sender: Any) {
+        //        Task { [weak self] in
+        let mvpdProvider = UserManager.shared.userIdentity?.mvpdProvider
+        
+        VLAuthentication.sharedInstance.logout(
+            client: .tvProvider(provider: .adobe, tveInitializationConfig: nil),
+            mvpdId: mvpdProvider
+        ) { [weak self] logoutSuccessful in
+            if logoutSuccessful {
+                Task { [weak self] in
+                    self?.logoutButton.isHidden = true
+                    
+                    await AppDelegate.shared.logoutUser()
+                    self?.vlPlayer.destroy()
+                    self?.loadPlayerView()
+                }
+            }
+        }
+        //        }
     }
 }
 
@@ -145,12 +173,12 @@ extension VideoPlaybackController {
         
         if shouldUseDirectStream() {
             setupDirectStreamPlayer(baseUrl: vlBaseUrl,
-                                  features: featureSupported,
-                                  loader: loaderView)
+                                    features: featureSupported,
+                                    loader: loaderView)
         } else {
             setupContentPlaybackPlayer(baseUrl: vlBaseUrl,
-                                     features: featureSupported,
-                                     loader: loaderView)
+                                       features: featureSupported,
+                                       loader: loaderView)
         }
     }
     
@@ -159,8 +187,8 @@ extension VideoPlaybackController {
     }
     
     private func setupDirectStreamPlayer(baseUrl: String,
-                                       features: VLPlayer.VLPlayerFeatureSupported,
-                                       loader: UIActivityIndicatorView) {
+                                         features: VLPlayer.VLPlayerFeatureSupported,
+                                         loader: UIActivityIndicatorView) {
         vlPlayer = createVLPlayer()
         configurePlayer()
         
@@ -182,19 +210,31 @@ extension VideoPlaybackController {
             type: .directStream(playbackConfig),
             customControlsView: videoPlayerControlsView,
             playerFeaturesSupported: features
-        ) { [weak self] isSuccess, playerView, contentResponse in
+        ) {
+            [weak self] isSuccess,
+            playerView,
+            contentResponse in
+            
+            var hasTVE = false
+            
+            if let video = contentResponse?["video"] as? [String: Any],
+               let monetizationModels = video["monetizationModels"] as? [[String: Any]] {
+                hasTVE = monetizationModels.contains { $0["type"] as? String == "TVE" }
+            }
+            
             self?.handlePlayerSetupCompletion(
                 isSuccess: isSuccess,
                 playerView: playerView,
                 isDVREnabled: isDVREnabled,
-                loader: loader
+                loader: loader,
+                hasTVE: hasTVE
             )
         }
     }
     
     private func setupContentPlaybackPlayer(baseUrl: String,
-                                          features: VLPlayer.VLPlayerFeatureSupported,
-                                          loader: UIActivityIndicatorView) {
+                                            features: VLPlayer.VLPlayerFeatureSupported,
+                                            loader: UIActivityIndicatorView) {
         vlPlayer = VLPlayer(playerType: .default)
         configurePlayer()
         
@@ -212,12 +252,23 @@ extension VideoPlaybackController {
             type: .contentPlayback(playbackConfig),
             customControlsView: videoPlayerControlsView,
             playerFeaturesSupported: features
-        ) { [weak self] isSuccess, playerView, contentResponse in
+        ) {
+            [weak self] isSuccess,
+            playerView,
+            contentResponse in
+            var hasTVE = false
+            
+            if let video = contentResponse?["video"] as? [String: Any],
+               let monetizationModels = video["monetizationModels"] as? [[String: Any]] {
+                hasTVE = monetizationModels.contains { $0["type"] as? String == "TVE" }
+            }
+            
             self?.handlePlayerSetupCompletion(
                 isSuccess: isSuccess,
                 playerView: playerView,
                 isDVREnabled: false,
-                loader: loader
+                loader: loader,
+                hasTVE: hasTVE
             )
         }
     }
@@ -245,31 +296,76 @@ extension VideoPlaybackController {
         vlPlayer.enablePlayerBitrateLogs = enableBitrateLogs
     }
     
-    private func handlePlayerSetupCompletion(isSuccess: Bool,
-                                           playerView: UIView?,
-                                           isDVREnabled: Bool,
-                                           loader: UIActivityIndicatorView) {
+    private func handlePlayerSetupCompletion(
+        isSuccess: Bool,
+        playerView: UIView?,
+        isDVREnabled: Bool,
+        loader: UIActivityIndicatorView,
+        hasTVE: Bool
+    ) {
         DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             loader.stopAnimating()
             
             guard let playerView = playerView else { return }
             
-            if isDVREnabled {
-                self?.videoPlayerControlsView?.updateControlsBasedOnDVRFlag(isDVREnabled: isDVREnabled)
+            
+            guard let user = UserManager.shared.userIdentity else {
+                if isDVREnabled {
+                    self.videoPlayerControlsView?.updateControlsBasedOnDVRFlag(isDVREnabled: isDVREnabled)
+                }
+                self.addPlayer(playerView: playerView)
+                return
             }
             
-            self?.addPlayer(playerView: playerView)
+            if user.tveUserId != nil && hasTVE {
+                self.checkAuthz(
+                    user: user,
+                    playerView: playerView,
+                    isDVREnabled: isDVREnabled
+                )
+            } else {
+                if isDVREnabled {
+                    self.videoPlayerControlsView?.updateControlsBasedOnDVRFlag(isDVREnabled: isDVREnabled)
+                }
+                self.addPlayer(playerView: playerView)
+            }
         }
     }
     
+    private func checkAuthz(user: VLUserIdentity, playerView: UIView, isDVREnabled: Bool){
+        let mvpdProvider = user.mvpdProvider ?? ""
+        
+        VLAuthentication.sharedInstance.checkAuthz(mvpdId: mvpdProvider) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    if isDVREnabled {
+                        self.videoPlayerControlsView?.updateControlsBasedOnDVRFlag(isDVREnabled: isDVREnabled)
+                    }
+                    self.addPlayer(playerView: playerView)
+                case .failure(let error):
+                    self.handleAuthzFailure(error)
+                }
+            }
+        }
+    }
+    
+    // Extract error handling for reuse/centralization
+    private func handleAuthzFailure(_ error: VLAuthenticationErrorCode) {
+        self.showAlert(title: "Error", message: "TVE Authorization denied")
+    }
+    
+    // Now addPlayer is pure, just presenting the UI
     private func addPlayer(playerView: UIView) {
         if enableCustomPlayerUI {
             setupCustomPlayerUI()
         }
-        
         playerView.frame = playerFrame
         view.addSubview(playerView)
     }
+    
     
     private func setupCustomPlayerUI() {
         videoPlayerControlsView?.setupPictureInPicture()
@@ -568,9 +664,15 @@ extension VideoPlaybackController {
             beacon: VLBeacon.getInstance()
         ) { [weak self] userIdentity, errorCode in
             DispatchQueue.main.async {
+                if userIdentity == nil, let codeString = errorCode?.codeString {
+                    self?.showAlert(message: codeString)
+                    return
+                }
+                UserManager.shared.userIdentity = userIdentity
                 AppDelegate.shared.authorizationToken = userIdentity?.authorizationToken
                 self?.vlPlayer.destroy()
                 self?.loadPlayerView()
+                self?.logoutButton.isHidden = false
             }
         }
     }
@@ -604,5 +706,16 @@ extension VideoPlaybackController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // Handle layout updates if needed
+    }
+}
+
+
+extension VideoPlaybackController: VLAuthPlayerDelegate {
+    func reloadPlayer() {
+        
+    }
+    
+    func terminatePlayer() {
+        
     }
 }
