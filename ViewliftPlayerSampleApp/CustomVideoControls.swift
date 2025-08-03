@@ -11,6 +11,10 @@ import VLPlayerLib
 import AVKit
 
 class CustomVideoControls: UIView, CustomPlayerSkinProtocol {
+    func updatePlayButton() {
+        
+    }
+
     
     var isAdOnMainView: Bool
     
