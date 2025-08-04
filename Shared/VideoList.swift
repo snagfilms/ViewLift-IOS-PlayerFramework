@@ -34,7 +34,7 @@ class ReadFromLocalJson:VideoListProtocol {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 self.videoList = try JSONDecoder().decode(VideoList.self, from: data)
             } catch {
-                // handle error
+                debugPrint("Parsing Error VideoList.json", error.localizedDescription)
             }
         }
     }

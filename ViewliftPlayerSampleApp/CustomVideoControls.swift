@@ -10,7 +10,7 @@ import UIKit
 import VLPlayerLib
 import AVKit
 
-class CustomVideoControls: UIView, CustomPlayerSkinProtocol {
+class CustomVideoControls: UIView {
     
     var isAdOnMainView: Bool
     

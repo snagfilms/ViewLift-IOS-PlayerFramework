@@ -21,6 +21,10 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        if videoList == nil {
+            showAlert(title: "Error", message: "Please provide valid video list data. Replace VideoList.json content")
+            return
+        }
         videoList.nextVideoList?.removeAll()
         setupHeader()
         setupTableView()
@@ -274,12 +278,21 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         #else
         let vc = PlayerViewController()
         vc.playerOptionSelected = videoId == nil ? .playStreamURL : .defaultControl
+        vc.enableCustomPlayerUI = showCustomControls
         vc.streamUrl = url
         vc.videoId = videoId
         vc.entitlementData = self.entitlementData
+        vc.streamConfig = streamConfig
         vc.drmConfig = drmConfig
         vc.videoList = videoList
-        self.present(vc, animated: true)
+        vc.autoplayEnabled = autoplayEnabled
+        vc.loopEnabled = loopEnabled
+        vc.hideControls = hideControls
+        vc.muteEnabled = muteEnabled
+        vc.isGuestUser = isGuestUser
+        //self.present(vc, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
         #endif
     }
 }
