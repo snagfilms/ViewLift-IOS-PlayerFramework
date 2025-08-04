@@ -43,7 +43,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     private func setupTableHeaderView() {
-        let options: [ConfigurableItemType] = [.guestUser, .showCustomControls, .hideControls, .autoPlay, .loopPlay, .mute]
+        let options: [ConfigurableItemType] = [.showCustomControls, .hideControls, .autoPlay, .loopPlay, .mute]
         var items: [ConfigurableItem] = []
         for option in options {
             items.append(ConfigurableItem(type: option, isChecked: option == .autoPlay))

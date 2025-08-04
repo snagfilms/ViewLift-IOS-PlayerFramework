@@ -700,9 +700,16 @@ extension VideoPlaybackController: fullScreenDelegate {
     }
     
     private func dismissFullScreenPlayer() {
-        videoPlayerControlsView?.frame = vlPlayer.getVideoPlayerView()?.frame ?? .zero
-        videoPlayerControlsView?.updateControls(with: .small)
-        videoPlayerControlsView?.videoPlayer?.setPlayerFitToSmallScreen(frame: .zero)
+        self.fullScreenView?.dismiss(animated: false, completion: {
+            self.videoPlayerControlsView?.frame = self.vlPlayer.getVideoPlayerView()?.frame ?? .zero
+            self.videoPlayerControlsView?.updateControls(with: .small)
+            self.videoPlayerControlsView?.videoPlayer?.setPlayerFitToSmallScreen(frame: .zero)
+            
+            if let playerView = self.vlPlayer.getVideoPlayerView() {
+                self.addPlayer(playerView: playerView)
+            }
+            
+        })
     }
     
     private func configureFullScreenControls() {
@@ -808,6 +815,14 @@ extension VideoPlaybackController {
     
     func getChromeCastConnectedStatus() {
         print("Cast connected:", vlPlayer.getChromeCastConnectedStatus())
+    }
+    
+    func seekStarted(time: TimeInterval) {
+        print("Seek Started: \(time)")
+    }
+    
+    func seekCompleted(time: TimeInterval) {
+        print("Seek Completed: \(time)")
     }
 }
 

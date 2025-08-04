@@ -109,7 +109,6 @@ struct ConfigurableItem {
 }
 
 enum ConfigurableItemType: String {
-    case guestUser = "Guest User"
     case showCustomControls = "Show Custom Controls"
     case hideControls = "Hide Controls"
     case loopPlay = "Loop Play"
