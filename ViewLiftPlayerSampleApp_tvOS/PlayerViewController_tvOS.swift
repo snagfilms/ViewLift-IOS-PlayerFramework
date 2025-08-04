@@ -78,12 +78,83 @@ class PlayerViewController: UIViewController {
         }
         vlPlayer?.setSource(type: playbackSourceType, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
-                if let playerView = playerView {
-                    self?.addPlayerViewToContainer(playerView)
-                    
+                var hasTVE = false
+                
+                if let video = contentResponse?["video"] as? [String: Any],
+                   let monetizationModels = video["monetizationModels"] as? [[String: Any]] {
+                    hasTVE = monetizationModels.contains { $0["type"] as? String == "TVE" }
+                }
+                
+                self?.handlePlayerSetupCompletion(playerView: playerView, hasTVE: hasTVE)
+                
+            }
+        }
+    }
+    
+    private func handlePlayerSetupCompletion(
+        playerView: UIView?,
+        hasTVE: Bool
+    ) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            guard let playerView = playerView else { return }
+            
+            guard let user = UserManager.shared.userIdentity else {
+                self.addPlayerViewToContainer(playerView)
+                return
+            }
+            
+            if user.tveUserId != nil && hasTVE {
+                self.checkAuthz(
+                    user: user,
+                    playerView: playerView
+                )
+            } else {
+                self.addPlayerViewToContainer(playerView)
+            }
+        }
+    }
+    
+    private func checkAuthz(user: VLUserIdentity, playerView: UIView){
+        let mvpdProvider = user.mvpdProvider ?? ""
+        
+        VLAuthentication.sharedInstance.checkAuthz(mvpdId: mvpdProvider) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.addPlayerViewToContainer(playerView)
+                case .failure(let error):
+                    self.handleAuthzFailure(error)
                 }
             }
         }
+    }
+    
+    // Extract error handling for reuse/centralization
+    private func handleAuthzFailure(_ error: VLAuthenticationErrorCode) {
+        self.showAlert(title: "Error", message: "TVE Authorization denied")
+    }
+    
+    private func showAlert(title: String, message: String, buttonTitle: String = "OK", completion: (() -> Void)? = nil) {
+            // Create the Alert Controller
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+            // Create the action for the button.
+            // The handler will execute the completion block if one was provided.
+            let alertAction = UIAlertAction(title: buttonTitle, style: .default) { _ in
+                completion?()
+            }
+
+            // Add the action to the alert controller
+            alertController.addAction(alertAction)
+
+            // Present the alert controller
+            // Ensure this is run on the main thread, especially if called from a background task.
+            DispatchQueue.main.async {
+                self.present(alertController, animated: true, completion: nil)
+            }
     }
     
    #if os(iOS)
