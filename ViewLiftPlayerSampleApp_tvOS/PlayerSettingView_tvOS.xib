@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="22155" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerSettingView_tvOS" customModule="Monumental" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="lLA-px-P08"/>
+                <outlet property="tableView" destination="dR2-ii-XU1" id="6hp-1I-tfH"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="809" height="1224"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="dR2-ii-XU1">
+                    <rect key="frame" x="80" y="55" width="649" height="1089"/>
+                </tableView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="dR2-ii-XU1" secondAttribute="bottom" constant="80" id="6jZ-HA-j9T"/>
+                <constraint firstAttribute="trailing" secondItem="dR2-ii-XU1" secondAttribute="trailing" constant="80" id="90S-kP-Y3b"/>
+                <constraint firstItem="dR2-ii-XU1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="80" id="YNc-iw-mVi"/>
+                <constraint firstItem="dR2-ii-XU1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="55" id="yeS-P5-C4v"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-599.5" y="-164"/>
+        </view>
+    </objects>
+</document>

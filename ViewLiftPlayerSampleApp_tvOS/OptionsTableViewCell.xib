@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="22155" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OptionsTableViewCell" rowHeight="302" id="fBs-An-CcD" customClass="OptionsTableViewCell" customModule="Monumental" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="2884" height="302"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fBs-An-CcD" id="S0Q-fX-qc8">
+                <rect key="frame" x="0.0" y="0.0" width="2884" height="302"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Td-Og-pCv">
+                        <rect key="frame" x="24" y="30" width="2836" height="46"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1o-Gb-5zN">
+                                <rect key="frame" x="0.0" y="0.0" width="2790" height="46"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="goK-Ei-QS9">
+                                <rect key="frame" x="2790" y="0.0" width="46" height="46"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="3te-YG-wOD">
+                                        <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="O3g-Dg-N3K"/>
+                                            <constraint firstAttribute="width" secondItem="3te-YG-wOD" secondAttribute="height" multiplier="1:1" id="PFr-M3-96N"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="5Td-Og-pCv" secondAttribute="trailing" constant="24" id="lZY-Rr-YD1"/>
+                    <constraint firstItem="5Td-Og-pCv" firstAttribute="leading" secondItem="S0Q-fX-qc8" secondAttribute="leading" constant="24" id="m92-fv-eF8"/>
+                    <constraint firstItem="5Td-Og-pCv" firstAttribute="top" secondItem="S0Q-fX-qc8" secondAttribute="top" constant="30" id="uRw-Y8-2Dl"/>
+                    <constraint firstAttribute="bottom" secondItem="5Td-Og-pCv" secondAttribute="bottom" constant="30" id="vSt-je-yAV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="ShY-dT-fyk"/>
+            <connections>
+                <outlet property="imageViewArrow" destination="3te-YG-wOD" id="MqB-2u-0ea"/>
+                <outlet property="optionLabel" destination="q1o-Gb-5zN" id="WnE-Zr-2PA"/>
+            </connections>
+            <point key="canvasLocation" x="194" y="63"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="rightArrow" width="15" height="25"/>
+    </resources>
+</document>
