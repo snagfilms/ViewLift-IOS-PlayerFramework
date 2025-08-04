@@ -9,6 +9,7 @@
 import UIKit
 import VLPlayerLib
 import VLBeaconLib
+import VLAuthentication
 
 class PlayerViewController: UIViewController {
     
@@ -20,7 +21,7 @@ class PlayerViewController: UIViewController {
     var streamConfig: VLPlayer.StreamConfig?
     var videoList: VideoList!
     var playerOptionSelected:PlayerUIOptions!
-    var vlPlayer: VLPlayer!
+    var vlPlayer: VLPlayer?
     var enableCustomPlayerUI:Bool = false
     var loopEnabled: Bool = false
     var autoplayEnabled: Bool = true
@@ -46,6 +47,10 @@ class PlayerViewController: UIViewController {
         view.addSubview(playerContainerView)
         setupConstraints()
         updateConstraintsForCurrentOrientation()
+        self.loadPlayerView()
+    }
+    
+    func loadPlayerView() {
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = self.videoList.apiBaseUrl
         let vlBeaconURL: String? = self.videoList.beaconBaseUrl
@@ -65,13 +70,13 @@ class PlayerViewController: UIViewController {
         }else{
             playbackSourceType = .contentPlayback(VLPlayer.ContentPlaybackConfig(videoId: self.videoList.videoId, token: vlToken, apiBaseURL: vlBaseUrl))
         }
-        vlPlayer.videoPlayerDelegate = self
+        vlPlayer?.videoPlayerDelegate = self
         //vlPlayer.clientSideAdTrackingDelegate = self
         // vlPlayer.enablePlayerBitrateLogs = self.enableBitrateLogs
         if let entitlementData{
-            vlPlayer.setEntitlement(data: entitlementData)
+            vlPlayer?.setEntitlement(data: entitlementData)
         }
-        vlPlayer.setSource(type: playbackSourceType, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
+        vlPlayer?.setSource(type: playbackSourceType, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
                 if let playerView = playerView {
                     self?.addPlayerViewToContainer(playerView)
@@ -185,70 +190,70 @@ class PlayerViewController: UIViewController {
     }
     
     func menuPressed() {
-        vlPlayer.destroy()
+        vlPlayer?.destroy()
         removeController()
     }
 }
 
 extension PlayerViewController: PlayerControlsDelegate {
     func setPlaybackRate(playbackSpeed: Float) {
-        vlPlayer.setPlaybackRate(playbackSpeed: playbackSpeed)
+        vlPlayer?.setPlaybackRate(playbackSpeed: playbackSpeed)
     }
     
     func getStartOverTime() -> Double? {
-        vlPlayer.getStartOverTime()
+        vlPlayer?.getStartOverTime()
     }
     
     func isLiveVideo() -> Bool {
-        vlPlayer.isLiveVideo()
+        vlPlayer?.isLiveVideo() ?? false
     }
     
     func isDVREnabled() -> Bool {
-        vlPlayer.isDVREnabled() ?? false
+        vlPlayer?.isDVREnabled() ?? false
     }
     
     func getAllClosedCaptionList() -> [String]? {
-        return vlPlayer.getAllClosedCaptionList()
+        return vlPlayer?.getAllClosedCaptionList()
     }
     
     func getAllContentAudioLanguageList() -> [String]? {
-        return vlPlayer.getAllContentAudioLanguageList()
+        return vlPlayer?.getAllContentAudioLanguageList()
     }
     
     func getAllVideoPlaybackQualityList() -> [String]? {
-        return vlPlayer.getAllVideoPlaybackQualityList()
+        return vlPlayer?.getAllVideoPlaybackQualityList()
     }
     
     func setClosedCaption(selectedKey: String, selectedIndex: Int) {
-        vlPlayer.setClosedCaption(selectedKey: selectedKey, selectedIndex: selectedIndex)
+        vlPlayer?.setClosedCaption(selectedKey: selectedKey, selectedIndex: selectedIndex)
     }
     
  
     
     func setAudioSelected(selectedAudio: String) {
-        vlPlayer.setAudioSelected(selectedAudio: selectedAudio)
+        vlPlayer?.setAudioSelected(selectedAudio: selectedAudio)
     }
     
     func setCCFontSize() {
-        vlPlayer.setCCFontSize()
+        vlPlayer?.setCCFontSize()
     }
     
     func setPlaybackQuality(playbackQuality: String) {
-        vlPlayer.setPlaybackQuality(playbackQuality: playbackQuality)
+        vlPlayer?.setPlaybackQuality(playbackQuality: playbackQuality)
     }
     
     func getCurrentVideoDuration() -> Double? {
-        self.vlPlayer.getCurrentVideoDuration()
+        self.vlPlayer?.getCurrentVideoDuration()
     }
     
     func didRequestRestart() {
-        self.vlPlayer.seekTo(seconds: 0)
+        self.vlPlayer?.seekTo(seconds: 0)
         DispatchQueue.main.async {
             self.videoPlayerControlsView?.playPause(isPlaying: true)
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
-            self.vlPlayer.play()
+            self.vlPlayer?.play()
         }
     }
     
@@ -257,11 +262,11 @@ extension PlayerViewController: PlayerControlsDelegate {
     }
     
     func seekTo(seconds: Double) {
-        self.vlPlayer.seekTo(seconds: seconds)
+        self.vlPlayer?.seekTo(seconds: seconds)
     }
     
     func seekToLivePosition() {
-        self.vlPlayer.seekToLivePosition()
+        self.vlPlayer?.seekToLivePosition()
     }
     
     
@@ -286,6 +291,27 @@ extension PlayerViewController: videoPlaybackDelegate {
     
     func loginWithTVE() {
         debugPrint("Login with TVE called")
+        VLAuthentication.sharedInstance
+            .showTVEActivationScreen(
+                presentingViewController: self,
+                activationURL: "http://spinco.staging.web.viewlift.com/tveactivate",
+                qrToggle: true) { [weak self] userIdentity, errorCode in
+                    DispatchQueue.main.async {
+                        if userIdentity == nil, let codeString = errorCode?.codeString {
+//                            self?.showAlert(message: codeString)
+                            return
+                        }
+                        
+                        UserManager.shared.userIdentity = userIdentity
+                        AppDelegate.shared.authorizationToken = userIdentity?.authorizationToken
+                        self?.vlPlayer?.destroy()
+                        self?.vlPlayer?.playerAdsAnalyticsDelegate = nil
+                        self?.vlPlayer?.playerVideoAnalyticsDelegate = nil
+                        self?.loadPlayerView()
+//                        self?.logoutButton.isHidden = false
+                    }
+                }
+        //showTVEActivationScreen
     }
     
     func customPlayerState(isPlaying: Bool) {
