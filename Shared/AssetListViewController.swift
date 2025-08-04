@@ -287,7 +287,6 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         vc.loopEnabled = loopEnabled
         vc.hideControls = hideControls
         vc.muteEnabled = muteEnabled
-        vc.isGuestUser = isGuestUser
         //self.present(vc, animated: true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.pushViewController(vc, animated: true)

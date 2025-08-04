@@ -13,6 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     private var readVideoListOperation:VideoListProtocol?
+    
+    var apiBaseEndpoint: String = "xxxxx"
+    var graphQLEndpoint: String = "xxxxx"
+    
+    var authorizationToken: String? = nil
+    
+    var siteId: String = "xxxxx"
+    var xApiKey: String = "xxxxx"
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

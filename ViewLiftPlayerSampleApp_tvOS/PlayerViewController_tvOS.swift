@@ -49,7 +49,7 @@ class PlayerViewController: UIViewController {
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = self.videoList.apiBaseUrl
         let vlBeaconURL: String? = self.videoList.beaconBaseUrl
-        let vlToken = isGuestUser ? self.videoList.vlGuestToken : self.videoList.vlToken
+        let vlToken = AppDelegate.shared.authorizationToken ?? ""
         
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""

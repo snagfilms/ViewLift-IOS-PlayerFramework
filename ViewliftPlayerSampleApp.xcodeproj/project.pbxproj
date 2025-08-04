@@ -29,6 +29,14 @@
 		BAC313892E4049CA00D111E1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC313832E4049CA00D111E1 /* UserManager.swift */; };
 		BAC3138C2E404A3500D111E1 /* VLVideoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC3138B2E404A3500D111E1 /* VLVideoResponseModel.swift */; };
 		BAC3138D2E404A3500D111E1 /* VideoPlaybackController+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC3138A2E404A3500D111E1 /* VideoPlaybackController+Analytics.swift */; };
+		BACF6D7E2E40A23C008061DD /* VLPlayerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC313612E40480700D111E1 /* VLPlayerLib.framework */; };
+		BACF6D7F2E40A23C008061DD /* VLPlayerLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC313612E40480700D111E1 /* VLPlayerLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BACF9E762E40A2A3008061DD /* VLAnalyticsLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC3137A2E40487500D111E1 /* VLAnalyticsLib.framework */; };
+		BACF9E772E40A2A3008061DD /* VLAnalyticsLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC3137A2E40487500D111E1 /* VLAnalyticsLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BACF9FA92E40AA94008061DD /* VLAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = BACF9FA82E40AA94008061DD /* VLAuthentication */; };
+		BACF9FAB2E40AAF3008061DD /* AppDelegate+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9FAA2E40AAEE008061DD /* AppDelegate+extension.swift */; };
+		BACF9FAC2E40AAF3008061DD /* AppDelegate+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9FAA2E40AAEE008061DD /* AppDelegate+extension.swift */; };
+		BACF9FAD2E40AAF3008061DD /* AppDelegate+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF9FAA2E40AAEE008061DD /* AppDelegate+extension.swift */; };
 		D27C147A2E31416800A3728B /* CustomPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C14782E31416800A3728B /* CustomPaywallView.swift */; };
 		D29314352E20E9E2000C2902 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314312E20E9E2000C2902 /* AssetListViewController.swift */; };
 		D29314362E20E9E2000C2902 /* AssetsListViewController+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */; };
@@ -154,6 +162,18 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BACF6D802E40A23C008061DD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BACF9E772E40A2A3008061DD /* VLAnalyticsLib.framework in Embed Frameworks */,
+				BACF6D7F2E40A23C008061DD /* VLPlayerLib.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -172,6 +192,7 @@
 		BAC313832E4049CA00D111E1 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		BAC3138A2E404A3500D111E1 /* VideoPlaybackController+Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoPlaybackController+Analytics.swift"; sourceTree = "<group>"; };
 		BAC3138B2E404A3500D111E1 /* VLVideoResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLVideoResponseModel.swift; sourceTree = "<group>"; };
+		BACF9FAA2E40AAEE008061DD /* AppDelegate+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+extension.swift"; sourceTree = "<group>"; };
 		D27C14782E31416800A3728B /* CustomPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPaywallView.swift; sourceTree = "<group>"; };
 		D29314312E20E9E2000C2902 /* AssetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListViewController.swift; sourceTree = "<group>"; };
 		D29314322E20E9E2000C2902 /* assets-provider.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "assets-provider.json"; sourceTree = "<group>"; };
@@ -213,6 +234,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BACF9E762E40A2A3008061DD /* VLAnalyticsLib.framework in Frameworks */,
+				BACF6D7E2E40A23C008061DD /* VLPlayerLib.framework in Frameworks */,
+				BACF9FA92E40AA94008061DD /* VLAuthentication in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +335,7 @@
 		D2A15DA52E281A7B00F88E09 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				BACF9FAA2E40AAEE008061DD /* AppDelegate+extension.swift */,
 				BAC313822E4049CA00D111E1 /* TokenIdentity.swift */,
 				BAC313832E4049CA00D111E1 /* UserManager.swift */,
 				D2AE024C2E2F994100C9D312 /* AssetInfoViewController.swift */,
@@ -369,6 +394,7 @@
 				D2A15D892E28199900F88E09 /* Sources */,
 				D2A15D8A2E28199900F88E09 /* Frameworks */,
 				D2A15D8B2E28199900F88E09 /* Resources */,
+				BACF6D802E40A23C008061DD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -379,6 +405,7 @@
 			);
 			name = ViewLiftPlayerSampleApp_tvOS;
 			packageProductDependencies = (
+				BACF9FA82E40AA94008061DD /* VLAuthentication */,
 			);
 			productName = ViewLiftPlayerSampleApp_tvOS;
 			productReference = D2A15D8D2E28199900F88E09 /* ViewLiftPlayerSampleApp_tvOS.app */;
@@ -432,12 +459,49 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
+				he,
+				ar,
+				"zh-Hans",
+				ja,
+				nb,
+				es,
+				da,
+				"es-419",
+				"te-IN",
+				it,
+				sk,
+				ms,
+				ta,
+				sv,
+				te,
+				cs,
+				ko,
+				"zh-Hant",
+				hu,
+				"ta-IN",
+				"bn-IN",
+				tr,
+				pl,
+				vi,
+				ru,
+				af,
+				fr,
+				fi,
+				id,
+				nl,
+				th,
+				pt,
+				bn,
+				"pt-PT",
+				ro,
+				hi,
 			);
 			mainGroup = 5422EFE7209912C600206D66;
 			packageReferences = (
 				BAC313672E40483400D111E1 /* XCRemoteSwiftPackageReference "player-ios" */,
 				BAC3136A2E40485100D111E1 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */,
-				BAC3137F2E4048AE00D111E1 /* XCLocalSwiftPackageReference "../../SPM/iOS-VLAuthentication-SPM" */,
+				BACF9FA72E40AA94008061DD /* XCLocalSwiftPackageReference "../../SPM/iOS-VLAuthentication-SPM" */,
 			);
 			productRefGroup = 5422EFF1209912C600206D66 /* Products */;
 			projectDirPath = "";
@@ -570,6 +634,7 @@
 				F79C538927438CBD00FFDB88 /* VideoList.swift in Sources */,
 				5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */,
 				D2AE025E2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */,
+				BACF9FAC2E40AAF3008061DD /* AppDelegate+extension.swift in Sources */,
 				D2AE02592E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */,
 				54703A0C20CAFE9A003B543D /* CustomVideoControls.swift in Sources */,
 				F74E54E027461E8500016E7F /* NetworkHandler.swift in Sources */,
@@ -591,6 +656,7 @@
 				D2AE024F2E2F994100C9D312 /* AssetInfoViewController.swift in Sources */,
 				D2A15DB02E281AD900F88E09 /* AssetsListViewController+Services.swift in Sources */,
 				D2AE02532E2F999600C9D312 /* AssetModel.swift in Sources */,
+				BACF9FAB2E40AAF3008061DD /* AppDelegate+extension.swift in Sources */,
 				D2AE02562E2F99D400C9D312 /* AssetTableViewCell.swift in Sources */,
 				D2A15DB32E281AD900F88E09 /* AssetListViewController.swift in Sources */,
 				D2AE025D2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */,
@@ -618,6 +684,7 @@
 				D293143C2E20E9E2000C2902 /* AssetsListViewController+Services.swift in Sources */,
 				D2AE024E2E2F994100C9D312 /* AssetInfoViewController.swift in Sources */,
 				F7EAFF0D275F3AA700B46BDE /* ViewliftPlayerSampleAppUITests.swift in Sources */,
+				BACF9FAD2E40AAF3008061DD /* AppDelegate+extension.swift in Sources */,
 				F7EAFF0F275F3AA700B46BDE /* ViewliftPlayerSampleAppUITestsLaunchTests.swift in Sources */,
 				BAC313862E4049CA00D111E1 /* TokenIdentity.swift in Sources */,
 				BAC313872E4049CA00D111E1 /* UserManager.swift in Sources */,
@@ -1374,7 +1441,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		BAC3137F2E4048AE00D111E1 /* XCLocalSwiftPackageReference "../../SPM/iOS-VLAuthentication-SPM" */ = {
+		BACF9FA72E40AA94008061DD /* XCLocalSwiftPackageReference "../../SPM/iOS-VLAuthentication-SPM" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../SPM/iOS-VLAuthentication-SPM";
 		};
@@ -1411,6 +1478,10 @@
 			productName = MUXSDKStats;
 		};
 		BAC313802E4048AE00D111E1 /* VLAuthentication */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VLAuthentication;
+		};
+		BACF9FA82E40AA94008061DD /* VLAuthentication */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VLAuthentication;
 		};
