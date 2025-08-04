@@ -832,6 +832,22 @@ extension VideoPlaybackController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         // Handle orientation changes if needed
+
+        coordinator.animate(alongsideTransition: { _ in
+            if size.width > size.height {
+                // Update for landscape
+                if (UIApplication.shared.delegate as? AppDelegate)?.isFullScreen == false {
+                    let player = self.videoPlayerArray?.first?[0]
+                    player?.goFullScreen()
+                }
+            } else {
+                // Update for portrait
+                if (UIApplication.shared.delegate as? AppDelegate)?.isFullScreen == true {
+                    let player = self.videoPlayerArray?.first?[0]
+                    player?.goFullScreen()
+                }
+            }
+        }, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

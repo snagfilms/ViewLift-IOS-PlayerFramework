@@ -49,7 +49,7 @@ class PlayerViewController: UIViewController {
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = self.videoList.apiBaseUrl
         let vlBeaconURL: String? = self.videoList.beaconBaseUrl
-        let vlToken = self.videoList.vlToken
+        let vlToken = isGuestUser ? self.videoList.vlGuestToken : self.videoList.vlToken
         
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""
@@ -268,6 +268,25 @@ extension PlayerViewController: PlayerControlsDelegate {
 }
 
 extension PlayerViewController: videoPlaybackDelegate {
+    
+    func videoFetchError(error: VLError?, playerTag: String?, contentResponse: Dictionary<String, AnyObject>?) {
+        let errorDescription =  "Is content playable - \(error?.isPlayable ?? false) \n" +
+        "Content Fetched successfully - \(error?.isSuccess ?? false) \n" +
+        "Error Code - \(error?.errorCode ?? "errorCode") \n" +
+        "Error Message - \(error?.errorMessage ?? "errorMessage") \n" +
+        "Error VL Code - \(error?.vl_errorCode ?? "errorVLCode")"
+        
+        print("Error VL:", errorDescription)
+        print("VideoFetchError: contentResponse:", contentResponse)
+//        DispatchQueue.main.async {
+//            self.showAlert(message: errorDescription)
+//            self.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
+//        }
+    }
+    
+    func loginWithTVE() {
+        debugPrint("Login with TVE called")
+    }
     
     func customPlayerState(isPlaying: Bool) {
         videoPlayerControlsView?.playPause(isPlaying: isPlaying)
