@@ -14,6 +14,21 @@
 		5422EFFE209912C600206D66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5422EFFC209912C600206D66 /* LaunchScreen.storyboard */; };
 		5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
 		54703A0C20CAFE9A003B543D /* CustomVideoControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */; };
+		BAC313642E40481200D111E1 /* VLPlayerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC3135F2E40480700D111E1 /* VLPlayerLib.framework */; };
+		BAC313652E40481200D111E1 /* VLPlayerLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC3135F2E40480700D111E1 /* VLPlayerLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BAC313692E40483400D111E1 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = BAC313682E40483400D111E1 /* BitmovinPlayer */; };
+		BAC3136C2E40485100D111E1 /* MUXSDKStats in Frameworks */ = {isa = PBXBuildFile; productRef = BAC3136B2E40485100D111E1 /* MUXSDKStats */; };
+		BAC3137D2E40488100D111E1 /* VLAnalyticsLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC313782E40487500D111E1 /* VLAnalyticsLib.framework */; };
+		BAC3137E2E40488100D111E1 /* VLAnalyticsLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC313782E40487500D111E1 /* VLAnalyticsLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BAC313812E4048AE00D111E1 /* VLAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = BAC313802E4048AE00D111E1 /* VLAuthentication */; };
+		BAC313842E4049CA00D111E1 /* TokenIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC313822E4049CA00D111E1 /* TokenIdentity.swift */; };
+		BAC313852E4049CA00D111E1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC313832E4049CA00D111E1 /* UserManager.swift */; };
+		BAC313862E4049CA00D111E1 /* TokenIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC313822E4049CA00D111E1 /* TokenIdentity.swift */; };
+		BAC313872E4049CA00D111E1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC313832E4049CA00D111E1 /* UserManager.swift */; };
+		BAC313882E4049CA00D111E1 /* TokenIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC313822E4049CA00D111E1 /* TokenIdentity.swift */; };
+		BAC313892E4049CA00D111E1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC313832E4049CA00D111E1 /* UserManager.swift */; };
+		BAC3138C2E404A3500D111E1 /* VLVideoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC3138B2E404A3500D111E1 /* VLVideoResponseModel.swift */; };
+		BAC3138D2E404A3500D111E1 /* VideoPlaybackController+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC3138A2E404A3500D111E1 /* VideoPlaybackController+Analytics.swift */; };
 		D27C147A2E31416800A3728B /* CustomPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C14782E31416800A3728B /* CustomPaywallView.swift */; };
 		D29314352E20E9E2000C2902 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314312E20E9E2000C2902 /* AssetListViewController.swift */; };
 		D29314362E20E9E2000C2902 /* AssetsListViewController+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29314332E20E9E2000C2902 /* AssetsListViewController+Services.swift */; };
@@ -61,6 +76,62 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BAC3135A2E40480700D111E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAC3134F2E40480700D111E1 /* VLPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F7818E45275A20D400699525;
+			remoteInfo = VLPlayerTests;
+		};
+		BAC3135C2E40480700D111E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAC3134F2E40480700D111E1 /* VLPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F7E28B9D27A3D80E0034D2BD;
+			remoteInfo = VLPlayer_test;
+		};
+		BAC3135E2E40480700D111E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAC3134F2E40480700D111E1 /* VLPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F79B0434283E365B00EF7FC8;
+			remoteInfo = VLPlayerLib;
+		};
+		BAC313602E40480700D111E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAC3134F2E40480700D111E1 /* VLPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A1C360A2988EDE400F272B8;
+			remoteInfo = VLPlayerLib_tvOS;
+		};
+		BAC313622E40480700D111E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAC3134F2E40480700D111E1 /* VLPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A1C36132988EDE400F272B8;
+			remoteInfo = VLPlayerLib_tvOSTests;
+		};
+		BAC313772E40487500D111E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAC3136D2E40487500D111E1 /* VLAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 882BBC16291383640074B7A0;
+			remoteInfo = VLAnalyticsLib;
+		};
+		BAC313792E40487500D111E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAC3136D2E40487500D111E1 /* VLAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 887C2716292F696D00BA73F7;
+			remoteInfo = VLAnalyticsLib_tvOS;
+		};
+		BAC3137B2E40487500D111E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAC3136D2E40487500D111E1 /* VLAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 882BBC20291383640074B7A0;
+			remoteInfo = VLAnalyticsTests;
+		};
 		F7EAFF10275F3AA700B46BDE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5422EFE8209912C600206D66 /* Project object */;
@@ -69,6 +140,21 @@
 			remoteInfo = ViewliftPlayerSampleApp;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BAC313662E40481200D111E1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BAC313652E40481200D111E1 /* VLPlayerLib.framework in Embed Frameworks */,
+				BAC3137E2E40488100D111E1 /* VLAnalyticsLib.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5422EFF0209912C600206D66 /* ViewliftPlayerSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViewliftPlayerSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +166,12 @@
 		5422EFFF209912C600206D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPlayerViewController.swift; sourceTree = "<group>"; };
 		54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomVideoControls.swift; sourceTree = "<group>"; };
+		BAC3134F2E40480700D111E1 /* VLPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VLPlayer.xcodeproj; path = "../iosplayer-sdk/VLPlayer/VLPlayer.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		BAC3136D2E40487500D111E1 /* VLAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VLAnalytics.xcodeproj; path = "../ios-analytics-sdk/VLAnalytics/VLAnalytics.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		BAC313822E4049CA00D111E1 /* TokenIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenIdentity.swift; sourceTree = "<group>"; };
+		BAC313832E4049CA00D111E1 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		BAC3138A2E404A3500D111E1 /* VideoPlaybackController+Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoPlaybackController+Analytics.swift"; sourceTree = "<group>"; };
+		BAC3138B2E404A3500D111E1 /* VLVideoResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLVideoResponseModel.swift; sourceTree = "<group>"; };
 		D27C14782E31416800A3728B /* CustomPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPaywallView.swift; sourceTree = "<group>"; };
 		D29314312E20E9E2000C2902 /* AssetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListViewController.swift; sourceTree = "<group>"; };
 		D29314322E20E9E2000C2902 /* assets-provider.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "assets-provider.json"; sourceTree = "<group>"; };
@@ -109,6 +201,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAC3136C2E40485100D111E1 /* MUXSDKStats in Frameworks */,
+				BAC313812E4048AE00D111E1 /* VLAuthentication in Frameworks */,
+				BAC3137D2E40488100D111E1 /* VLAnalyticsLib.framework in Frameworks */,
+				BAC313642E40481200D111E1 /* VLPlayerLib.framework in Frameworks */,
+				BAC313692E40483400D111E1 /* BitmovinPlayer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +229,8 @@
 		5422EFE7209912C600206D66 = {
 			isa = PBXGroup;
 			children = (
+				BAC3136D2E40487500D111E1 /* VLAnalytics.xcodeproj */,
+				BAC3134F2E40480700D111E1 /* VLPlayer.xcodeproj */,
 				D2A15DA52E281A7B00F88E09 /* Shared */,
 				5422EFF2209912C600206D66 /* ViewliftPlayerSampleApp */,
 				D2A15D8E2E28199900F88E09 /* ViewLiftPlayerSampleApp_tvOS */,
@@ -154,6 +253,8 @@
 		5422EFF2209912C600206D66 /* ViewliftPlayerSampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				BAC3138A2E404A3500D111E1 /* VideoPlaybackController+Analytics.swift */,
+				BAC3138B2E404A3500D111E1 /* VLVideoResponseModel.swift */,
 				5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */,
 				F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */,
 				D27C14782E31416800A3728B /* CustomPaywallView.swift */,
@@ -175,6 +276,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BAC313522E40480700D111E1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BAC3135B2E40480700D111E1 /* VLPlayerTests.xctest */,
+				BAC3135D2E40480700D111E1 /* VLPlayer_test.framework */,
+				BAC3135F2E40480700D111E1 /* VLPlayerLib.framework */,
+				BAC313612E40480700D111E1 /* VLPlayerLib.framework */,
+				BAC313632E40480700D111E1 /* VLPlayerLib_tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BAC313702E40487500D111E1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BAC313782E40487500D111E1 /* VLAnalyticsLib.framework */,
+				BAC3137A2E40487500D111E1 /* VLAnalyticsLib.framework */,
+				BAC3137C2E40487500D111E1 /* VLAnalyticsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D293143D2E20EA07000C2902 /* json-file */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +311,8 @@
 		D2A15DA52E281A7B00F88E09 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				BAC313822E4049CA00D111E1 /* TokenIdentity.swift */,
+				BAC313832E4049CA00D111E1 /* UserManager.swift */,
 				D2AE024C2E2F994100C9D312 /* AssetInfoViewController.swift */,
 				D2AE02582E2F9DB400C9D312 /* ConfigurableHeaderView.swift */,
 				D2AE025C2E2FA0C700C9D312 /* ConfigurableItemRowView.swift */,
@@ -221,6 +346,7 @@
 				5422EFEC209912C600206D66 /* Sources */,
 				5422EFED209912C600206D66 /* Frameworks */,
 				5422EFEE209912C600206D66 /* Resources */,
+				BAC313662E40481200D111E1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -228,6 +354,9 @@
 			);
 			name = ViewliftPlayerSampleApp;
 			packageProductDependencies = (
+				BAC313682E40483400D111E1 /* BitmovinPlayer */,
+				BAC3136B2E40485100D111E1 /* MUXSDKStats */,
+				BAC313802E4048AE00D111E1 /* VLAuthentication */,
 			);
 			productName = ViewliftPlayerSampleApp;
 			productReference = 5422EFF0209912C600206D66 /* ViewliftPlayerSampleApp.app */;
@@ -306,9 +435,22 @@
 			);
 			mainGroup = 5422EFE7209912C600206D66;
 			packageReferences = (
+				BAC313672E40483400D111E1 /* XCRemoteSwiftPackageReference "player-ios" */,
+				BAC3136A2E40485100D111E1 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */,
+				BAC3137F2E4048AE00D111E1 /* XCLocalSwiftPackageReference "../../SPM/iOS-VLAuthentication-SPM" */,
 			);
 			productRefGroup = 5422EFF1209912C600206D66 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BAC313702E40487500D111E1 /* Products */;
+					ProjectRef = BAC3136D2E40487500D111E1 /* VLAnalytics.xcodeproj */;
+				},
+				{
+					ProductGroup = BAC313522E40480700D111E1 /* Products */;
+					ProjectRef = BAC3134F2E40480700D111E1 /* VLPlayer.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5422EFEF209912C600206D66 /* ViewliftPlayerSampleApp */,
@@ -317,6 +459,65 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BAC3135B2E40480700D111E1 /* VLPlayerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = VLPlayerTests.xctest;
+			remoteRef = BAC3135A2E40480700D111E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BAC3135D2E40480700D111E1 /* VLPlayer_test.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VLPlayer_test.framework;
+			remoteRef = BAC3135C2E40480700D111E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BAC3135F2E40480700D111E1 /* VLPlayerLib.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VLPlayerLib.framework;
+			remoteRef = BAC3135E2E40480700D111E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BAC313612E40480700D111E1 /* VLPlayerLib.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VLPlayerLib.framework;
+			remoteRef = BAC313602E40480700D111E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BAC313632E40480700D111E1 /* VLPlayerLib_tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = VLPlayerLib_tvOSTests.xctest;
+			remoteRef = BAC313622E40480700D111E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BAC313782E40487500D111E1 /* VLAnalyticsLib.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VLAnalyticsLib.framework;
+			remoteRef = BAC313772E40487500D111E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BAC3137A2E40487500D111E1 /* VLAnalyticsLib.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VLAnalyticsLib.framework;
+			remoteRef = BAC313792E40487500D111E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BAC3137C2E40487500D111E1 /* VLAnalyticsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = VLAnalyticsTests.xctest;
+			remoteRef = BAC3137B2E40487500D111E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5422EFEE209912C600206D66 /* Resources */ = {
@@ -372,8 +573,12 @@
 				D2AE02592E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */,
 				54703A0C20CAFE9A003B543D /* CustomVideoControls.swift in Sources */,
 				F74E54E027461E8500016E7F /* NetworkHandler.swift in Sources */,
+				BAC3138C2E404A3500D111E1 /* VLVideoResponseModel.swift in Sources */,
+				BAC3138D2E404A3500D111E1 /* VideoPlaybackController+Analytics.swift in Sources */,
 				D27C147A2E31416800A3728B /* CustomPaywallView.swift in Sources */,
 				D2AE02512E2F999600C9D312 /* AssetModel.swift in Sources */,
+				BAC313882E4049CA00D111E1 /* TokenIdentity.swift in Sources */,
+				BAC313892E4049CA00D111E1 /* UserManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +595,8 @@
 				D2A15DB32E281AD900F88E09 /* AssetListViewController.swift in Sources */,
 				D2AE025D2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */,
 				D2AE025B2E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */,
+				BAC313842E4049CA00D111E1 /* TokenIdentity.swift in Sources */,
+				BAC313852E4049CA00D111E1 /* UserManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +619,8 @@
 				D2AE024E2E2F994100C9D312 /* AssetInfoViewController.swift in Sources */,
 				F7EAFF0D275F3AA700B46BDE /* ViewliftPlayerSampleAppUITests.swift in Sources */,
 				F7EAFF0F275F3AA700B46BDE /* ViewliftPlayerSampleAppUITestsLaunchTests.swift in Sources */,
+				BAC313862E4049CA00D111E1 /* TokenIdentity.swift in Sources */,
+				BAC313872E4049CA00D111E1 /* UserManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,7 +853,7 @@
 					"$(PROJECT_DIR)/ViewliftPlayerSampleApp/VLPlayer\\ Frameworks",
 				);
 				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -748,7 +957,7 @@
 					"$(PROJECT_DIR)/ViewliftPlayerSampleApp/VLPlayer\\ Frameworks",
 				);
 				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1020,7 +1229,7 @@
 					"$(PROJECT_DIR)/ViewliftPlayerSampleApp/VLPlayer\\ Frameworks",
 				);
 				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1163,6 +1372,49 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		BAC3137F2E4048AE00D111E1 /* XCLocalSwiftPackageReference "../../SPM/iOS-VLAuthentication-SPM" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../SPM/iOS-VLAuthentication-SPM";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BAC313672E40483400D111E1 /* XCRemoteSwiftPackageReference "player-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bitmovin/player-ios.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.85.2;
+			};
+		};
+		BAC3136A2E40485100D111E1 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/muxinc/mux-stats-sdk-avplayer.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BAC313682E40483400D111E1 /* BitmovinPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BAC313672E40483400D111E1 /* XCRemoteSwiftPackageReference "player-ios" */;
+			productName = BitmovinPlayer;
+		};
+		BAC3136B2E40485100D111E1 /* MUXSDKStats */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BAC3136A2E40485100D111E1 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */;
+			productName = MUXSDKStats;
+		};
+		BAC313802E4048AE00D111E1 /* VLAuthentication */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VLAuthentication;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5422EFE8209912C600206D66 /* Project object */;
 }
