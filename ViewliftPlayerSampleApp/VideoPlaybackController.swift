@@ -686,8 +686,27 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        let player = videoPlayerArray?.first?[0]
-        player?.goFullScreen()
+//        guard let videoPlayerControlsArray = self.videoPlayerControlsArray,
+//              !videoPlayerControlsArray.isEmpty
+//        else { return }
+        
+        coordinator.animate(alongsideTransition: { _ in
+            if size.width > size.height {
+                // Update for landscape
+                if (UIApplication.shared.delegate as? AppDelegate)?.isFullScreen == false {
+                    let player = self.videoPlayerArray?.first?[0]
+                    player?.goFullScreen()
+                }
+            } else {
+                // Update for portrait
+                if (UIApplication.shared.delegate as? AppDelegate)?.isFullScreen == true {
+                    let player = self.videoPlayerArray?.first?[0]
+                    player?.goFullScreen()
+                }
+            }
+        }, completion: nil)
+        
+       
         
     }
 }
