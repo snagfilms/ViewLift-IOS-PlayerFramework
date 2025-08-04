@@ -794,6 +794,7 @@ extension VideoPlaybackController {
                     self?.showAlert(message: codeString)
                     return
                 }
+                
                 UserManager.shared.userIdentity = userIdentity
                 AppDelegate.shared.authorizationToken = userIdentity?.authorizationToken
                 self?.vlPlayer.destroy()
@@ -831,20 +832,18 @@ extension VideoPlaybackController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        // Handle orientation changes if needed
 
         coordinator.animate(alongsideTransition: { _ in
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            
             if size.width > size.height {
-                // Update for landscape
-                if (UIApplication.shared.delegate as? AppDelegate)?.isFullScreen == false {
-                    let player = self.videoPlayerArray?.first?[0]
-                    player?.goFullScreen()
+                if appDelegate?.isFullScreen == false {
+                    self.vlPlayer.goFullScreen()
                 }
-            } else {
-                // Update for portrait
-                if (UIApplication.shared.delegate as? AppDelegate)?.isFullScreen == true {
-                    let player = self.videoPlayerArray?.first?[0]
-                    player?.goFullScreen()
+            }
+            else {
+                if appDelegate?.isFullScreen == true {
+                    self.vlPlayer.removeFullScreen()
                 }
             }
         }, completion: nil)
