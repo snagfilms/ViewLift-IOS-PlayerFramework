@@ -3,7 +3,7 @@
 import UIKit
 import GameController
 
-private let trackViewHeight: CGFloat = 14
+private var trackViewHeight: CGFloat = 14
 private let thumbSize: CGSize = CGSize(width: 2, height: 16)
 private let animationDuration: TimeInterval = 0.3
 private let defaultValue: Float = 0
@@ -94,6 +94,7 @@ public final class TvOSSlider: UIControl {
     
     /// Value added or subtracted from the current value on steps left or right updates
     public var stepValue: Float = defaultStepValue
+    public var _isTracking: Bool = false
     
     /**
      Sets the slider’s current value, allowing you to animate the change visually.
@@ -206,6 +207,7 @@ public final class TvOSSlider: UIControl {
     /// :nodoc:
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        trackViewHeight = frame.height
         setUpView()
     }
     
@@ -242,12 +244,7 @@ public final class TvOSSlider: UIControl {
             updateStateDependantViews()
         }
     }
-    
-    public override var canBecomeFocused: Bool
-    {
-        return true
-    }
-    
+        
     /// :nodoc:
     public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         coordinator.addCoordinatedAnimations({
@@ -386,14 +383,10 @@ public final class TvOSSlider: UIControl {
         
         if isFocused {
             transform = CGAffineTransform(scaleX: focusScaleFactor, y: focusScaleFactor)
-            minimumTrackTintColor = .white.withAlphaComponent(0.5)
             layer.borderWidth = 2
             layer.borderColor = UIColor.white.cgColor
-
         }
         else {
-            minimumTrackTintColor = .blue
-
             transform = CGAffineTransform.identity
             layer.borderWidth = 0
             layer.borderColor = UIColor.clear.cgColor
@@ -467,6 +460,8 @@ public final class TvOSSlider: UIControl {
         
         switch panGestureRecognizer.state {
         case .began:
+            sendActions(for: .touchDragEnter)
+            _isTracking = true
             stopDeceleratingTimer()
             thumbViewCenterXConstraintConstant = Float(thumbViewCenterXConstraint.constant)
         case .changed:
@@ -477,15 +472,10 @@ public final class TvOSSlider: UIControl {
                 sendActions(for: .valueChanged)
             }
         case .ended, .cancelled:
+            _isTracking = false
+            sendActions(for: .valueChanged)
             thumbViewCenterXConstraintConstant = Float(thumbViewCenterXConstraint.constant)
-            
-//            stopDeceleratingTimer()
-//            guard deceleratingTimer == nil else { return }
-//
-//            let direction: Float = velocity > 0 ? 1 : -1
-//            deceleratingVelocity = abs(velocity) > decelerationMaxVelocity ? decelerationMaxVelocity * direction : velocity
-//            deceleratingTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(handleDeceleratingTimer(timer:)), userInfo: nil, repeats: true)
-            
+            sendActions(for: .touchDragExit)
         default:
             break
         }
@@ -526,4 +516,35 @@ enum DPadState {
     case left
     case up
     case down
+}
+
+extension TvOSSlider {
+    
+    var cueTag: Int { return 12345 }
+    func setCuePoints(cuePoints: [TimeInterval], duration: TimeInterval) {
+        guard !cuePoints.isEmpty else { return }
+        // Clear old cue views
+        for view in self.subviews {
+            if view.tag == cueTag {
+                view.removeFromSuperview()
+            }
+        }
+        for cuePoint in cuePoints {
+            if cuePoint >= 0 && cuePoint <= duration {
+                updateCueViews(cueTime: cuePoint, duration: duration)
+            }
+        }
+    }
+    
+    func updateCueViews(cueTime: TimeInterval, duration: TimeInterval) {
+        let minX = trackView.bounds.width * CGFloat(cueTime) / CGFloat(duration)
+        let origin = CGPoint(x: minX, y: trackView.frame.minY)
+        let size = CGSize(width: 10, height: trackView.bounds.height)
+        
+        let cueView = UIImageView(frame: .init(origin: origin, size: size))
+        cueView.tag = cueTag
+        cueView.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        cueView.isUserInteractionEnabled = false
+        self.addSubview(cueView)
+    }
 }

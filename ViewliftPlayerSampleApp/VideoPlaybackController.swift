@@ -83,7 +83,7 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
     }
     
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
-        // use below code for default configuration
+        // use below code for configuring Default paywall view
         /*
          let payWallStyle = VLPlayer.PayWallStyle(errorMessageTextColor: .red, buttonTextColor: .blue, buttonBackgroundColor: .yellow, backgroundColor: nil)
          let payWallTextContent = VLPlayer.PayWallTextContent(errorMessage: "Error", buttontext: nil)
@@ -91,14 +91,14 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
          let payWallConfiguration: VLPlayer.PayWallConfiguration = VLPlayer.PayWallConfiguration.default(payWallTheme: payWallThemeConfiguration)
          */
         
-        // use below code for custom configuration
+        // use below code for custom view
         /*
          //        let customPaywallView = CustomPaywallView()
          //        let payWallConfiguration: VLPlayer.PayWallConfiguration = .custom(view: customPaywallView)
          //        self.customPaywallView = customPaywallView
          */
-        let playerControls = PlayerControlsColor(iconColor: "",textColor: "", progressBarBGColor: "", progressBarColor: "")
-        return VLPlayer.VLPlayerFeatureSupported(fullScreenOnly: false,
+        let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
+        return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
                                                  autoPlayEnabled: self.autoplayEnabled,
@@ -106,12 +106,10 @@ class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableV
                                                  hideVideoControls: self.hideControls,
                                                  mutePlayback: self.muteEnabled,
                                                  customPlayerControlsColor: nil,
-                                                 clientSideAdTrackingDetails: VLPlayer.VLClientSideAdTrackingDetails.init(isClientSideAdTrackingEnabled: true, isWTAEnabled: true), showPlayerControlAlways: false,
+                                                 showPlayerControlAlways: false,
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
-                                                 playerResponseRequired:true,
-                                                 preGameStartTime: nil,
-                                                 appMacrosList: nil, vlBeacon: VLBeacon.getInstance(), payWallConfiguration: nil)
+                                                 payWallConfiguration: nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

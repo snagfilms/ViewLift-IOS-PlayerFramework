@@ -141,29 +141,37 @@ class PlayerViewController: UIViewController {
         ])
     }
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
-        var config: VLPlayer.PlayerControlsViewConfiguration?
+        /*
+        // use below code configuring Default Player Controls View
+        var playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration?
+        let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .yellow)
+        let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", settingText: "PLAYBACK QUALITY")
+        let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent)
         if enableCustomPlayerUI{
+            // use this for Custom View
             let view = VLCustomPlayerControlsView(frame: .zero, config: nil)
             view.updateTitleLabel(text: nil)
             view.delegate = self
-            config = .custom(view: view)
+         playerControlsViewConfiguration = .custom(view: view)
             self.videoPlayerControlsView = view
+        }else{
+         playerControlsViewConfiguration = .default(controlsTheme: controlsTheme)
         }
-
-        return VLPlayer.VLPlayerFeatureSupported(fullScreenOnly: true,
+        */
+        let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
+        return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
-                                                 autoPlayEnabled: autoplayEnabled,
-                                                 loopVideoPlayback: loopEnabled,
-                                                 hideVideoControls: hideControls,
-                                                 mutePlayback: muteEnabled,
+                                                 autoPlayEnabled: self.autoplayEnabled,
+                                                 loopVideoPlayback: self.loopEnabled,
+                                                 hideVideoControls: self.hideControls,
+                                                 mutePlayback: self.muteEnabled,
                                                  customPlayerControlsColor: nil,
-                                                 clientSideAdTrackingDetails: VLPlayer.VLClientSideAdTrackingDetails.init(isClientSideAdTrackingEnabled: true, isWTAEnabled: true), showPlayerControlAlways: false,
+                                                 showPlayerControlAlways: false,
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
-                                                 playerResponseRequired:true,
-                                                 preGameStartTime: nil,
-                                                 appMacrosList: nil, vlBeacon: VLBeacon.getInstance(), payWallConfiguration: nil, playerControlsViewConfiguration: config)
+                                                 payWallConfiguration: nil,
+                                                 playerControlsViewConfiguration: nil)
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
