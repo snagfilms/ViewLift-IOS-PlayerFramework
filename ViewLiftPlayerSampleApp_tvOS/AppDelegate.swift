@@ -14,13 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private var readVideoListOperation:VideoListProtocol?
     
-    var apiBaseEndpoint: String = "xxxxx"
-    var graphQLEndpoint: String = "xxxxx"
+    var apiBaseEndpoint: String = "https://spinco.staging.api.viewlift.com"
+    var graphQLEndpoint: String = "https://spinco.staging.api.viewlift.com/graphql"
     
     var authorizationToken: String? = nil
     
-    var siteId: String = "xxxxx"
-    var xApiKey: String = "xxxxx"
+    var siteId: String = "cea398b9-09ab-4331-958f-8c3d6a356b88"
+    var xApiKey: String = "3c32790a-967c-4abf-beeb-64d29bcc90b9"
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

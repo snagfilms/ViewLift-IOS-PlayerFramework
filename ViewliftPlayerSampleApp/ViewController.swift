@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak private var muteControls: UISwitch!
     private var readVideoListOperation:VideoListProtocol?
     private var playerOptionSelected:PlayerUIOptions = .defaultControl
-    private var playerUIOptions: [PlayerUIOptions] = [.exploreMore, .defaultControl, .customControl]
+    private var playerUIOptions: [PlayerUIOptions] = [.exploreMore]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        readVideoList(readVideoListOperation: ReadFromAPI())
         multiplePlayerOptionTable.reloadData()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.showAlertIfConfigInvalid(apiBaseEndpoint: AppDelegate.shared.apiBaseEndpoint,
+                                      graphQLEndpoint: AppDelegate.shared.graphQLEndpoint,
+                                      authorizationToken: AppDelegate.shared.authorizationToken,
+                                      siteId: AppDelegate.shared.siteId,
+                                      xApiKey: AppDelegate.shared.xApiKey,
+                                          alertMessage: "Detected invalid configuration! Please update your settings.")
     }
     
     override func didReceiveMemoryWarning() {

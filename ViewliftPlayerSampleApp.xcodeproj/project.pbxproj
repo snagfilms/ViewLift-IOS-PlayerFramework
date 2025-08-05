@@ -15,6 +15,9 @@
 		5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
 		54703A0C20CAFE9A003B543D /* CustomVideoControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */; };
 		BAAF5A2A2E425F840046FF2C /* VLAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = BAAF5A292E425F840046FF2C /* VLAuthentication */; };
+		BAAF5A342E426F500046FF2C /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF5A332E426F470046FF2C /* UIViewController+extension.swift */; };
+		BAAF5A352E426F500046FF2C /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF5A332E426F470046FF2C /* UIViewController+extension.swift */; };
+		BAAF5A362E426F500046FF2C /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF5A332E426F470046FF2C /* UIViewController+extension.swift */; };
 		BAC313642E40481200D111E1 /* VLPlayerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC3135F2E40480700D111E1 /* VLPlayerLib.framework */; };
 		BAC313652E40481200D111E1 /* VLPlayerLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC3135F2E40480700D111E1 /* VLPlayerLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAC313692E40483400D111E1 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = BAC313682E40483400D111E1 /* BitmovinPlayer */; };
@@ -187,6 +190,7 @@
 		5422EFFF209912C600206D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPlayerViewController.swift; sourceTree = "<group>"; };
 		54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomVideoControls.swift; sourceTree = "<group>"; };
+		BAAF5A332E426F470046FF2C /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		BAC3134F2E40480700D111E1 /* VLPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VLPlayer.xcodeproj; path = "../iosplayer-sdk/VLPlayer/VLPlayer.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		BAC3136D2E40487500D111E1 /* VLAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VLAnalytics.xcodeproj; path = "../ios-analytics-sdk/VLAnalytics/VLAnalytics.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		BAC313822E4049CA00D111E1 /* TokenIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenIdentity.swift; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 		D2A15DA52E281A7B00F88E09 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				BAAF5A332E426F470046FF2C /* UIViewController+extension.swift */,
 				BACF9FAA2E40AAEE008061DD /* AppDelegate+extension.swift */,
 				BAC313822E4049CA00D111E1 /* TokenIdentity.swift */,
 				BAC313832E4049CA00D111E1 /* UserManager.swift */,
@@ -629,6 +634,7 @@
 			files = (
 				5422EFF6209912C600206D66 /* ViewController.swift in Sources */,
 				5422EFF4209912C600206D66 /* AppDelegate.swift in Sources */,
+				BAAF5A362E426F500046FF2C /* UIViewController+extension.swift in Sources */,
 				D2AE02552E2F99D400C9D312 /* AssetTableViewCell.swift in Sources */,
 				D29314352E20E9E2000C2902 /* AssetListViewController.swift in Sources */,
 				D29314362E20E9E2000C2902 /* AssetsListViewController+Services.swift in Sources */,
@@ -662,6 +668,7 @@
 				BACF9FAB2E40AAF3008061DD /* AppDelegate+extension.swift in Sources */,
 				D2AE02562E2F99D400C9D312 /* AssetTableViewCell.swift in Sources */,
 				D2A15DB32E281AD900F88E09 /* AssetListViewController.swift in Sources */,
+				BAAF5A352E426F500046FF2C /* UIViewController+extension.swift in Sources */,
 				D2AE025D2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */,
 				D2AE025B2E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */,
 				BAC313842E4049CA00D111E1 /* TokenIdentity.swift in Sources */,
@@ -680,6 +687,7 @@
 				D2A15DA82E281AD900F88E09 /* CustomVideoControls.swift in Sources */,
 				D2AE025A2E2F9DB400C9D312 /* ConfigurableHeaderView.swift in Sources */,
 				D2AE02522E2F999600C9D312 /* AssetModel.swift in Sources */,
+				BAAF5A342E426F500046FF2C /* UIViewController+extension.swift in Sources */,
 				D2A15DA92E281AD900F88E09 /* FullScreenPlayerViewController.swift in Sources */,
 				D2AE02572E2F99D400C9D312 /* AssetTableViewCell.swift in Sources */,
 				D2A15DAA2E281AD900F88E09 /* VideoPlaybackController.swift in Sources */,

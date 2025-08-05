@@ -15,13 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isFullScreen: Bool = false
     var window: UIWindow?
     
-    var apiBaseEndpoint: String = "xxxxx"
-    var graphQLEndpoint: String = "xxxxx"
-    
+    let siteId = "cea398b9-09ab-4331-958f-8c3d6a356b88"
     var authorizationToken: String? = nil
-    
-    var siteId: String = "xxxxx"
-    var xApiKey: String = "xxxxx"
+    let xApiKey = "3c32790a-967c-4abf-beeb-64d29bcc90b9"
+    let apiBaseEndpoint = "https://spinco.staging.api.viewlift.com"
+    let graphQLEndpoint = "https://spinco.staging.api.viewlift.com/graphql"
     
     
 

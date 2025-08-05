@@ -36,9 +36,9 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         setupHeader()
         setupTableView()
         assetModels = loadAssetModelsFromFile() ?? []
-        DispatchQueue.main.async { [weak self] in
-          self?.setupTableHeaderView()
-        }
+//        DispatchQueue.main.async { [weak self] in
+//          self?.setupTableHeaderView()
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +51,13 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                 logoutButton.isHidden = false
             }
         #endif
+        
+        self.showAlertIfConfigInvalid(apiBaseEndpoint: AppDelegate.shared.apiBaseEndpoint,
+                                      graphQLEndpoint: AppDelegate.shared.graphQLEndpoint,
+                                      authorizationToken: AppDelegate.shared.authorizationToken,
+                                      siteId: AppDelegate.shared.siteId,
+                                      xApiKey: AppDelegate.shared.xApiKey,
+                                          alertMessage: "Detected invalid configuration! Please update your settings.")
     }
     
     override func viewDidLayoutSubviews() {
