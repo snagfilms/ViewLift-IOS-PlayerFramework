@@ -29,9 +29,6 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         setupHeader()
         setupTableView()
         assetModels = loadAssetModelsFromFile() ?? []
-        DispatchQueue.main.async { [weak self] in
-          self?.setupTableHeaderView()
-        }
     }
     
     override func viewDidLayoutSubviews() {

@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak private var muteControls: UISwitch!
     private var readVideoListOperation:VideoListProtocol?
     private var playerOptionSelected:PlayerUIOptions = .defaultControl
-    private var playerUIOptions: [PlayerUIOptions] = [.exploreMore, .defaultControl, .customControl]
+    private var playerUIOptions: [PlayerUIOptions] = [.exploreMore]
     
     override func viewDidLoad() {
         super.viewDidLoad()
