@@ -284,6 +284,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import CoreFoundation;
 @import Foundation;
 @import ObjectiveC;
+@import UIKit;
 #endif
 
 #endif
@@ -321,6 +322,46 @@ SWIFT_CLASS("_TtC11VLPlayerLib12PlayerObject")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class UIColor;
+@class NSCoder;
+@class UIFocusUpdateContext;
+@class UIFocusAnimationCoordinator;
+@class UIPress;
+@class UIPressesEvent;
+/// A control used to select a single value from a continuous range of values.
+SWIFT_CLASS("_TtC11VLPlayerLib10TvOSSlider")
+@interface TvOSSlider : UIControl
+/// The slider’s current value.
+@property (nonatomic) IBInspectable float value;
+/// The minimum value of the slider.
+@property (nonatomic) IBInspectable float minimumValue;
+/// The maximum value of the slider.
+@property (nonatomic) IBInspectable float maximumValue;
+/// A Boolean value indicating whether changes in the slider’s value generate continuous update events.
+@property (nonatomic) IBInspectable BOOL isContinuous;
+/// The color used to tint the default minimum track images.
+@property (nonatomic, strong) IBInspectable UIColor * _Nullable minimumTrackTintColor;
+/// The color used to tint the default maximum track images.
+@property (nonatomic, strong) IBInspectable UIColor * _Nullable maximumTrackTintColor;
+/// The color used to tint the default thumb images.
+@property (nonatomic, strong) IBInspectable UIColor * _Nonnull thumbTintColor;
+/// Scale factor applied to the slider when receiving the focus
+@property (nonatomic) IBInspectable CGFloat focusScaleFactor;
+/// :nodoc:
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+/// :nodoc:
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// :nodoc:
+@property (nonatomic, getter=isEnabled) BOOL enabled;
+/// :nodoc:
+@property (nonatomic, getter=isSelected) BOOL selected;
+/// :nodoc:
+@property (nonatomic, getter=isHighlighted) BOOL highlighted;
+/// :nodoc:
+- (void)didUpdateFocusInContext:(UIFocusUpdateContext * _Nonnull)context withAnimationCoordinator:(UIFocusAnimationCoordinator * _Nonnull)coordinator;
+- (void)pressesBegan:(NSSet<UIPress *> * _Nonnull)presses withEvent:(UIPressesEvent * _Nullable)event;
+@end
+
 @class NSString;
 SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 @interface VLError : NSObject
@@ -337,7 +378,6 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 
 @interface VLPlayer (SWIFT_EXTENSION(VLPlayerLib))
 - (BOOL)isPlaying SWIFT_WARN_UNUSED_RESULT;
-- (void)seekBarInUse;
 - (void)shouldPlayVideoWithInitially:(BOOL)initially;
 - (void)sliderEndedTrackingWithNewSeekValue:(double)newSeekValue;
 - (void)sliderBeganTrackingWithNewSeekValue:(double)newSeekValue;
@@ -464,6 +504,10 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 ///
 /// Method - Used to mute video
 - (void)shouldPlayMutedWithIsMuted:(BOOL)isMuted;
+/// important:
+///
+/// Method - Used to reset timer which hides control
+- (void)resetTimer;
 /// important:
 ///
 /// Method - Used to get player version number

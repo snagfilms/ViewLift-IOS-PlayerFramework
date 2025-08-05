@@ -631,6 +631,10 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)shouldPlayMutedWithIsMuted:(BOOL)isMuted;
 /// important:
 ///
+/// Method - Used to reset timer which hides control
+- (void)resetTimer;
+/// important:
+///
 /// Method - Used to set volume level
 /// <ul>
 ///   <li>
@@ -1591,6 +1595,10 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 ///
 /// Method - Used to mute video
 - (void)shouldPlayMutedWithIsMuted:(BOOL)isMuted;
+/// important:
+///
+/// Method - Used to reset timer which hides control
+- (void)resetTimer;
 /// important:
 ///
 /// Method - Used to set volume level
