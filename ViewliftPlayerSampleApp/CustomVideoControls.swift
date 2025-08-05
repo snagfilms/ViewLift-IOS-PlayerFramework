@@ -93,7 +93,6 @@ class CustomVideoControls: UIView, CustomPlayerSkinProtocol {
     }
     
     private func createView() -> Void {
-        
         self.fullScreenButton = UIButton(type: .custom)
         self.fullScreenButton.addTarget(self, action: #selector(fullScreenButtonTapped(sender:)), for: .touchUpInside)
         self.fullScreenButton.setImage(UIImage.init(named: "Fullscreen"), for: .normal)
@@ -169,6 +168,7 @@ class CustomVideoControls: UIView, CustomPlayerSkinProtocol {
         videoSeekSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
         videoSeekSlider.addTarget(self, action: #selector(sliderBeganTracking(_:)), for: .touchDown)
         videoSeekSlider.addTarget(self, action: #selector(sliderEndedTracking(_:)), for: [.touchUpInside, .touchUpOutside, .touchCancel])
+        videoSeekSlider.isHidden = true
     }
     
     @objc private func sliderValueChanged(_ sender: UISlider) {
