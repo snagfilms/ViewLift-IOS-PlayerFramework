@@ -6,7 +6,11 @@
 //  Copyright © 2025 Viewlift. All rights reserved.
 //
 import Foundation
-import VLAuthentication
+#if os(iOS)
+import VLAuthenticationFramework
+#else
+import VLAuthenticationFramework_tvOS
+#endif
 
 final class UserManager {
     static let shared = UserManager()

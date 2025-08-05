@@ -7,12 +7,19 @@
 //
 import UIKit
 import VLPlayerLib
+#if os(iOS)
+import VLAuthenticationFramework
+#else
+import VLAuthenticationFramework_tvOS
+#endif
+
 
 class AssetListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     private let tableView = UITableView()
     private let headerView = UIView()
     private let backButton = UIButton(type: .system)
+    private let logoutButton = UIButton(type: .system)
     private let titleLabel = UILabel()
     var videoList:VideoList!
     var entitlementData: VLPlayer.EntitlementData?
@@ -32,6 +39,18 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         DispatchQueue.main.async { [weak self] in
           self?.setupTableHeaderView()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        logoutButton.isHidden = true
+        
+        #if os(tvOS)
+            if UserManager.shared.userIdentity != nil {
+                logoutButton.isHidden = false
+            }
+        #endif
     }
     
     override func viewDidLayoutSubviews() {
@@ -93,17 +112,40 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         headerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerView)
         headerView.backgroundColor = .white
+        
+        // --- Back Button (Left) ---
         backButton.setTitle("← Back", for: .normal)
         backButton.setTitleColor(.systemBlue, for: .normal)
         backButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         headerView.addSubview(backButton)
+        
         var titleLabelFontSize: CGFloat = 18
         #if os(tvOS)
         backButton.isHidden = true
         titleLabelFontSize = 36
         #endif
+        
+        // --- Logout Button (Right) ---
+        logoutButton.setTitle("Logout", for: .normal) // Corrected title
+        logoutButton.setTitleColor(.systemRed, for: .normal) // Changed color for visibility
+        logoutButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.addTarget(self, action: #selector(logoutTapped), for: .primaryActionTriggered)
+        headerView.addSubview(logoutButton)
+        
+        headerView.addSubview(logoutButton)
+        
+        logoutButton.isHidden = true
+        
+        #if os(tvOS)
+            if UserManager.shared.userIdentity != nil {
+                logoutButton.isHidden = false
+            }
+        #endif
+        
+        // --- Title Label (Center) ---
         titleLabel.text = "Assets"
         titleLabel.font = .boldSystemFont(ofSize: titleLabelFontSize)
         titleLabel.textAlignment = .center
@@ -111,17 +153,25 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(titleLabel)
 
+        // --- Activate Constraints ---
         NSLayoutConstraint.activate([
+            // Header constraints
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 50),
 
+            // Back button constraints (left)
             backButton.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
             backButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
 
+            // Title label constraints (center)
             titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+            
+            // **Added: Logout button constraints (right)**
+            logoutButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
+            logoutButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
         ])
     }
 
@@ -152,12 +202,31 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
             dismiss(animated: true)
         }
     }
+    
+    @objc private func logoutTapped() {
+        let mvpdProvider = UserManager.shared.userIdentity?.mvpdProvider
+        
+        VLAuthentication.sharedInstance.logout(
+            client: .tvProvider(provider: .adobe, tveInitializationConfig: nil),
+            mvpdId: mvpdProvider
+        ) { [weak self] logoutSuccessful in
+            if logoutSuccessful {
+                Task { [weak self] in
+                    self?.logoutButton.isHidden = true
+                    
+                    await AppDelegate.shared.logoutUser()
+                    
+                }
+            }
+        }
+    }
 
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return assetModels.count
     }
+
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let asset = assetModels[indexPath.row]

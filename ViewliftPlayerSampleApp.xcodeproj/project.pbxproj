@@ -14,6 +14,7 @@
 		5422EFFE209912C600206D66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5422EFFC209912C600206D66 /* LaunchScreen.storyboard */; };
 		5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
 		54703A0C20CAFE9A003B543D /* CustomVideoControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54703A0A20CAFE9A003B543D /* CustomVideoControls.swift */; };
+		BAAF5A2A2E425F840046FF2C /* VLAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = BAAF5A292E425F840046FF2C /* VLAuthentication */; };
 		BAC313642E40481200D111E1 /* VLPlayerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC3135F2E40480700D111E1 /* VLPlayerLib.framework */; };
 		BAC313652E40481200D111E1 /* VLPlayerLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC3135F2E40480700D111E1 /* VLPlayerLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAC313692E40483400D111E1 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = BAC313682E40483400D111E1 /* BitmovinPlayer */; };
@@ -224,6 +225,7 @@
 			files = (
 				BAC3136C2E40485100D111E1 /* MUXSDKStats in Frameworks */,
 				BAC313812E4048AE00D111E1 /* VLAuthentication in Frameworks */,
+				BAAF5A2A2E425F840046FF2C /* VLAuthentication in Frameworks */,
 				BAC3137D2E40488100D111E1 /* VLAnalyticsLib.framework in Frameworks */,
 				BAC313642E40481200D111E1 /* VLPlayerLib.framework in Frameworks */,
 				BAC313692E40483400D111E1 /* BitmovinPlayer in Frameworks */,
@@ -382,6 +384,7 @@
 				BAC313682E40483400D111E1 /* BitmovinPlayer */,
 				BAC3136B2E40485100D111E1 /* MUXSDKStats */,
 				BAC313802E4048AE00D111E1 /* VLAuthentication */,
+				BAAF5A292E425F840046FF2C /* VLAuthentication */,
 			);
 			productName = ViewliftPlayerSampleApp;
 			productReference = 5422EFF0209912C600206D66 /* ViewliftPlayerSampleApp.app */;
@@ -501,7 +504,7 @@
 			packageReferences = (
 				BAC313672E40483400D111E1 /* XCRemoteSwiftPackageReference "player-ios" */,
 				BAC3136A2E40485100D111E1 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */,
-				BACF9FA72E40AA94008061DD /* XCLocalSwiftPackageReference "../../SPM/iOS-VLAuthentication-SPM" */,
+				BAAF5A282E425F840046FF2C /* XCRemoteSwiftPackageReference "AuthenticationFramework" */,
 			);
 			productRefGroup = 5422EFF1209912C600206D66 /* Products */;
 			projectDirPath = "";
@@ -1440,14 +1443,15 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		BACF9FA72E40AA94008061DD /* XCLocalSwiftPackageReference "../../SPM/iOS-VLAuthentication-SPM" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../SPM/iOS-VLAuthentication-SPM";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
+		BAAF5A282E425F840046FF2C /* XCRemoteSwiftPackageReference "AuthenticationFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/snagfilms/AuthenticationFramework";
+			requirement = {
+				branch = 3.1.2;
+				kind = branch;
+			};
+		};
 		BAC313672E40483400D111E1 /* XCRemoteSwiftPackageReference "player-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bitmovin/player-ios.git";
@@ -1467,6 +1471,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BAAF5A292E425F840046FF2C /* VLAuthentication */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BAAF5A282E425F840046FF2C /* XCRemoteSwiftPackageReference "AuthenticationFramework" */;
+			productName = VLAuthentication;
+		};
 		BAC313682E40483400D111E1 /* BitmovinPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BAC313672E40483400D111E1 /* XCRemoteSwiftPackageReference "player-ios" */;

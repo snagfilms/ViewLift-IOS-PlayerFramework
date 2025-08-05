@@ -9,7 +9,7 @@
 import UIKit
 import VLPlayerLib
 import VLBeaconLib
-import VLAuthentication
+import VLAuthenticationFramework_tvOS
 
 class PlayerViewController: UIViewController {
     
