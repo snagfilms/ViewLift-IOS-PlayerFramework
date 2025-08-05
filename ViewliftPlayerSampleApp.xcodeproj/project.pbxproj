@@ -52,6 +52,9 @@
 		D2AE025D2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE025C2E2FA0C700C9D312 /* ConfigurableItemRowView.swift */; };
 		D2AE025E2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE025C2E2FA0C700C9D312 /* ConfigurableItemRowView.swift */; };
 		D2AE025F2E2FA0C700C9D312 /* ConfigurableItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AE025C2E2FA0C700C9D312 /* ConfigurableItemRowView.swift */; };
+		D2E78D3A2E42A09A00C98C1A /* GoogleCast-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = D2E78D392E42A09A00C98C1A /* GoogleCast-iOS */; };
+		D2E78D3C2E42A09A00C98C1A /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = D2E78D3B2E42A09A00C98C1A /* VLPlayerLib */; };
+		D2E78D3E2E42A0AA00C98C1A /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = D2E78D3D2E42A0AA00C98C1A /* VLPlayerLib */; };
 		F74E54E027461E8500016E7F /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74E54DF27461E8500016E7F /* NetworkHandler.swift */; };
 		F79C5385274384C400FFDB88 /* VideoPlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79C5384274384C400FFDB88 /* VideoPlaybackController.swift */; };
 		F79C538727438BD700FFDB88 /* VideoList.json in Resources */ = {isa = PBXBuildFile; fileRef = F79C538627438BD700FFDB88 /* VideoList.json */; };
@@ -109,6 +112,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E78D3A2E42A09A00C98C1A /* GoogleCast-iOS in Frameworks */,
+				D2E78D3C2E42A09A00C98C1A /* VLPlayerLib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E78D3E2E42A0AA00C98C1A /* VLPlayerLib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +234,8 @@
 			);
 			name = ViewliftPlayerSampleApp;
 			packageProductDependencies = (
+				D2E78D392E42A09A00C98C1A /* GoogleCast-iOS */,
+				D2E78D3B2E42A09A00C98C1A /* VLPlayerLib */,
 			);
 			productName = ViewliftPlayerSampleApp;
 			productReference = 5422EFF0209912C600206D66 /* ViewliftPlayerSampleApp.app */;
@@ -250,6 +258,7 @@
 			);
 			name = ViewLiftPlayerSampleApp_tvOS;
 			packageProductDependencies = (
+				D2E78D3D2E42A0AA00C98C1A /* VLPlayerLib */,
 			);
 			productName = ViewLiftPlayerSampleApp_tvOS;
 			productReference = D2A15D8D2E28199900F88E09 /* ViewLiftPlayerSampleApp_tvOS.app */;
@@ -306,6 +315,7 @@
 			);
 			mainGroup = 5422EFE7209912C600206D66;
 			packageReferences = (
+				D2E78D382E42A09A00C98C1A /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */,
 			);
 			productRefGroup = 5422EFF1209912C600206D66 /* Products */;
 			projectDirPath = "";
@@ -1163,6 +1173,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D2E78D382E42A09A00C98C1A /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework";
+			requirement = {
+				branch = 3.2.5;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D2E78D392E42A09A00C98C1A /* GoogleCast-iOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2E78D382E42A09A00C98C1A /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
+			productName = "GoogleCast-iOS";
+		};
+		D2E78D3B2E42A09A00C98C1A /* VLPlayerLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2E78D382E42A09A00C98C1A /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
+			productName = VLPlayerLib;
+		};
+		D2E78D3D2E42A0AA00C98C1A /* VLPlayerLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2E78D382E42A09A00C98C1A /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
+			productName = VLPlayerLib;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5422EFE8209912C600206D66 /* Project object */;
 }
