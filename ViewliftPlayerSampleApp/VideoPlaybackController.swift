@@ -489,6 +489,10 @@ extension VideoPlaybackController {
 }
 
 extension VideoPlaybackController: VLAnalyticsPlayerClientProtocol {
+    func playerDidStart(player: AVPlayer?) {
+        
+    }
+
 
     func setAdInfo(adId: String, adName: String, podName: String?, podLength: Double?, podPosition: Int?, podOffset: Double?, startTime: Double?) {
         self.currentAdAssetInfo = VLAdAssetInfo(adId: adId, adName: adName, podName: podName, podLength: podLength, podPosition: podPosition, podOffset: podOffset, startTime: startTime)
