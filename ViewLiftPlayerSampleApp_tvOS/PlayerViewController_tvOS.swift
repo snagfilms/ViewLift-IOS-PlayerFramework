@@ -235,6 +235,8 @@ class PlayerViewController: UIViewController {
         }
         */
         let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
+        // You can find list of macros in VLPlayer documentation for SSAI functioning
+        //https://developer.viewlift.com/docs/vlplayerfeaturesupported
         return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
