@@ -329,7 +329,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     
     private func loadVideoPlayer(videoId: String? = nil, url: String? = nil, drmConfig: VLPlayer.DRMConfig? = nil, streamConfig: VLPlayer.StreamConfig? = nil) {
         let showCustomControls = configurableHeaderView?.getConfigurableItemSelection(type: .showCustomControls) ?? false
-        let autoplayEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .autoPlay) ?? false
+        let autoplayEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .autoPlay) ?? true
         let loopEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .loopPlay) ?? false
         let hideControls = configurableHeaderView?.getConfigurableItemSelection(type: .hideControls) ?? false
         let muteEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .mute) ?? false
