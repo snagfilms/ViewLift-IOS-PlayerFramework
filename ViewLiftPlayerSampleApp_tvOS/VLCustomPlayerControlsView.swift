@@ -10,7 +10,6 @@ import UIKit
 import VLPlayerLib
 import AVFoundation
 import AVKit
-import Kingfisher
 
 enum ControlsType{
     case videoStream
