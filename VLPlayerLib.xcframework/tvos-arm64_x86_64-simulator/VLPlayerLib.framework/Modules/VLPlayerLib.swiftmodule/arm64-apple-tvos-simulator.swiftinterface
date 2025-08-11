@@ -161,8 +161,10 @@ extension VLPlayerLib.VLPlayer {
     public init(style: VLPlayerLib.VLPlayer.PayWallStyle?, textContent: VLPlayerLib.VLPlayer.PayWallTextContent?)
   }
   public struct PayWallStyle {
+    public init(errorMessageTextColor: UIKit.UIColor?, buttonTextColor: UIKit.UIColor?, buttonBackgroundColor: UIKit.UIColor?, backgroundColor: UIKit.UIColor?)
   }
   public struct PayWallTextContent {
+    public init(errorMessage: Swift.String?, buttontext: Swift.String?)
   }
 }
 extension VLPlayerLib.VLPlayer {
@@ -179,6 +181,13 @@ extension VLPlayerLib.VLPlayer {
   public struct PlayerControlsViewTextContent {
     public init(slowmoText: Swift.String? = nil, liveText: Swift.String? = nil, startFromBeginningText: Swift.String? = nil, closeCaptionHeaderText: Swift.String? = nil, closeCaptionText: Swift.String? = nil, settingHeaderText: Swift.String? = nil, settingText: Swift.String? = nil)
   }
+}
+public protocol PlayerControlsViewDelegate : AnyObject {
+  func videoStartedPlaying(timestamp: Swift.Double)
+  func updateCurrentTime(currentTime: Swift.Double, totalTime: Swift.Double)
+  func playPause(isPlaying: Swift.Bool)
+  func customPlayerControls(isHidden: Swift.Bool)
+  func getOriginBuffer() -> CoreFoundation.CGPoint
 }
 public protocol VideoPlayerDataSource : AnyObject {
   func isUserLoggedIn() -> Swift.Bool

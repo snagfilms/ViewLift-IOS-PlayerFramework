@@ -117,8 +117,10 @@ extension VLPlayerLib.VLPlayer {
     public init(style: VLPlayerLib.VLPlayer.PayWallStyle?, textContent: VLPlayerLib.VLPlayer.PayWallTextContent?)
   }
   public struct PayWallStyle {
+    public init(errorMessageTextColor: UIKit.UIColor?, buttonTextColor: UIKit.UIColor?, buttonBackgroundColor: UIKit.UIColor?, backgroundColor: UIKit.UIColor?)
   }
   public struct PayWallTextContent {
+    public init(errorMessage: Swift.String?, buttontext: Swift.String?)
   }
 }
 extension VLPlayerLib.VLPlayer {
