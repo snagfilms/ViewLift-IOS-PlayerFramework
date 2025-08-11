@@ -892,7 +892,8 @@ public struct PlayerControlsColor {
   public var textColor: Swift.String?
   public var progressBarBGColor: Swift.String?
   public var progressBarColor: Swift.String?
-  public init(iconColor: Swift.String? = nil, textColor: Swift.String? = nil, progressBarBGColor: Swift.String? = nil, progressBarColor: Swift.String? = nil)
+  public var cueIconColor: Swift.String?
+  public init(iconColor: Swift.String? = nil, textColor: Swift.String? = nil, progressBarBGColor: Swift.String? = nil, progressBarColor: Swift.String? = nil, cueIconColor: Swift.String? = nil)
 }
 public struct VLBitmovinConfig : Swift.Equatable {
   public struct VLBitmovinLicenseConfig : Swift.Equatable {
