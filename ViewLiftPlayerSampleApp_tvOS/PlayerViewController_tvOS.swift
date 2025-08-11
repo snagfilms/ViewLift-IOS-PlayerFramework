@@ -11,7 +11,11 @@ import VLPlayerLib
 import VLBeaconLib
 
 class PlayerViewController: UIViewController {
-    
+    enum Configuration{
+        case `default`
+        case customTheme
+        case custom
+    }
     private let playerContainerView = UIView()
     var streamUrl: String?
     var videoId: String?
@@ -28,6 +32,7 @@ class PlayerViewController: UIViewController {
     var muteEnabled: Bool = false
     var isGuestUser: Bool = false
     var videoPlayerControlsView: VLCustomPlayerControlsView?
+    private var customPaywallView: CustomPaywallView?
     var portraitConstraints: [NSLayoutConstraint] = []
     var landscapeConstraints: [NSLayoutConstraint] = []
     
@@ -141,23 +146,7 @@ class PlayerViewController: UIViewController {
         ])
     }
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
-        /*
-        // use below code configuring Default Player Controls View
-        var playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration?
-        let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .yellow)
-        let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", settingText: "PLAYBACK QUALITY")
-        let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent)
-        if enableCustomPlayerUI{
-            // use this for Custom View
-            let view = VLCustomPlayerControlsView(frame: .zero, config: nil)
-            view.updateTitleLabel(text: nil)
-            view.delegate = self
-         playerControlsViewConfiguration = .custom(view: view)
-            self.videoPlayerControlsView = view
-        }else{
-         playerControlsViewConfiguration = .default(controlsTheme: controlsTheme)
-        }
-        */
+
         let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
         return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  isCustomLoaderAdded: false,
@@ -170,8 +159,58 @@ class PlayerViewController: UIViewController {
                                                  showPlayerControlAlways: false,
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
-                                                 payWallConfiguration: nil,
-                                                 playerControlsViewConfiguration: nil)
+                                                 payWallConfiguration: getPayWallConfiguration(type: .default),
+                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default))
+    }
+    
+    private func getPlayerControlsViewConfiguration(type: Configuration) -> VLPlayer.PlayerControlsViewConfiguration? {
+        
+        switch type {
+        case .customTheme:
+            // use below code configuring Default Player Controls View theme
+            
+            let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .yellow)
+            let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", settingText: "PLAYBACK QUALITY")
+            let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent)
+            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(controlsTheme: controlsTheme)
+            return playerControlsViewConfiguration
+        case .custom:
+            // use this for Custom View
+            
+            let view = VLCustomPlayerControlsView(frame: .zero, config: nil)
+            view.updateTitleLabel(text: nil)
+            view.delegate = self
+            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .custom(view: view)
+            self.videoPlayerControlsView = view
+            return playerControlsViewConfiguration
+        case .default:
+            // if you do not return anything default view with default theme will be used
+            return nil
+        }
+    }
+    
+    private func getPayWallConfiguration(type: Configuration) -> VLPlayer.PayWallConfiguration?{
+        switch type {
+        case .customTheme:
+            // use below code for configuring Default paywall view
+            
+            let payWallStyle = VLPlayer.PayWallStyle(errorMessageTextColor: .red, buttonTextColor: .blue, buttonBackgroundColor: .yellow, backgroundColor: nil)
+            let payWallTextContent = VLPlayer.PayWallTextContent(errorMessage: "Error", buttontext: nil)
+            let payWallThemeConfiguration = VLPlayer.PayWallThemeConfiguration(style: payWallStyle, textContent: payWallTextContent)
+            let payWallConfiguration: VLPlayer.PayWallConfiguration = VLPlayer.PayWallConfiguration.default(payWallTheme: payWallThemeConfiguration)
+            return payWallConfiguration
+        case .custom:
+            // use below code for custom view
+            
+            let customPaywallView = CustomPaywallView()
+            let payWallConfiguration: VLPlayer.PayWallConfiguration = .custom(view: customPaywallView)
+            self.customPaywallView = customPaywallView
+            return payWallConfiguration
+        case .default:
+            // if you do not return anything default view with default theme will be used
+            
+            return nil
+        }
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -286,10 +325,17 @@ extension PlayerViewController: videoPlaybackDelegate {
         
         print("Error VL:", errorDescription)
         print("VideoFetchError: contentResponse:", contentResponse)
-//        DispatchQueue.main.async {
-//            self.showAlert(message: errorDescription)
-//            self.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
-//        }
+        DispatchQueue.main.async {
+            self.showAlert(message: errorDescription)
+            self.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
+        }
+    }
+    
+    func showAlert(title: String = "Alert!", message: String = "Description") {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func loginWithTVE() {
@@ -316,9 +362,6 @@ extension PlayerViewController: videoPlaybackDelegate {
     }
     
     func videoStarted(timestamp: Double, playerTag: String) {
-//        videoPlayerControlsView?.setPlayButtonState(state: true)
-//        videoPlayerControlsView?.updateTimeLabelOnStart()
-//        videoPlayerControlsView?.playPauseImageView
         videoPlayerControlsView?.videoStartedPlaying(timestamp: timestamp)
         debugPrint("PlayerViewController videoStarted: \(timestamp)")
     }
