@@ -28,7 +28,11 @@ private enum Constants {
 }
 
 class VideoPlaybackController: UIViewController {
-    
+     enum Configuration{
+        case `default`
+        case customTheme
+        case custom
+    }
     // MARK: - IBOutlets
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet private var debugLogView: UITextView!
@@ -404,20 +408,7 @@ extension VideoPlaybackController {
     }
     
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
-        // use below code for configuring Default paywall view
-        /*
-         let payWallStyle = VLPlayer.PayWallStyle(errorMessageTextColor: .red, buttonTextColor: .blue, buttonBackgroundColor: .yellow, backgroundColor: nil)
-         let payWallTextContent = VLPlayer.PayWallTextContent(errorMessage: "Error", buttontext: nil)
-         let payWallThemeConfiguration = VLPlayer.PayWallThemeConfiguration(style: payWallStyle, textContent: payWallTextContent)
-         let payWallConfiguration: VLPlayer.PayWallConfiguration = VLPlayer.PayWallConfiguration.default(payWallTheme: payWallThemeConfiguration)
-         */
         
-        // use below code for custom view
-        /*
-         //        let customPaywallView = CustomPaywallView()
-         //        let payWallConfiguration: VLPlayer.PayWallConfiguration = .custom(view: customPaywallView)
-         //        self.customPaywallView = customPaywallView
-         */
         let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
         // You can find list of macros in VLPlayer documentation for SSAI functioning
         //https://developer.viewlift.com/docs/vlplayerfeaturesupported
@@ -432,7 +423,31 @@ extension VideoPlaybackController {
                                                  showPlayerControlAlways: false,
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
-                                                 payWallConfiguration: nil)
+                                                 payWallConfiguration: getPayWallConfiguration(type: .default))
+    }
+    
+    private func getPayWallConfiguration(type: Configuration) -> VLPlayer.PayWallConfiguration?{
+        switch type {
+        case .customTheme:
+            // use below code for configuring Default paywall view
+            
+            let payWallStyle = VLPlayer.PayWallStyle(errorMessageTextColor: .red, buttonTextColor: .blue, buttonBackgroundColor: .yellow, backgroundColor: nil)
+            let payWallTextContent = VLPlayer.PayWallTextContent(errorMessage: "Error", buttontext: nil)
+            let payWallThemeConfiguration = VLPlayer.PayWallThemeConfiguration(style: payWallStyle, textContent: payWallTextContent)
+            let payWallConfiguration: VLPlayer.PayWallConfiguration = VLPlayer.PayWallConfiguration.default(payWallTheme: payWallThemeConfiguration)
+            return payWallConfiguration
+        case .custom:
+            // use below code for custom view
+            
+            let customPaywallView = CustomPaywallView()
+            let payWallConfiguration: VLPlayer.PayWallConfiguration = .custom(view: customPaywallView)
+            self.customPaywallView = customPaywallView
+            return payWallConfiguration
+        case .default:
+            // if you do not return anything default view with default theme will be used
+            
+            return nil
+        }
     }
 }
 
