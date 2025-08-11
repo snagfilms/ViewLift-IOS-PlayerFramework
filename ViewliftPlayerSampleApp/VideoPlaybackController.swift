@@ -8,7 +8,6 @@
 
 import UIKit
 import VLPlayerLib
-import VLBeaconLib
 
 class VideoPlaybackController: UIViewController, videoPlaybackDelegate, UITableViewDelegate, UITableViewDataSource, fullScreenDelegate, ClientSideAdTrackingDelegate {
     private var customPaywallView: CustomPaywallView?
