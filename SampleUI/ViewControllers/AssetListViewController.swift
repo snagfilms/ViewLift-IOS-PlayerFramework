@@ -29,7 +29,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         view.backgroundColor = .white
         if videoList == nil {
-            showAlert(title: "Error", message: "Please provide valid video list data. Replace VideoList.json content")
+            showAlert(title: "Error", message: "Please provide valid video list data. Replace configs.json content")
             return
         }
         videoList.nextVideoList?.removeAll()
@@ -51,12 +51,18 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                 logoutButton.isHidden = false
             }
         #endif
-        
-        self.showAlertIfConfigInvalid(apiBaseEndpoint: AppDelegate.shared.apiBaseEndpoint,
-                                      graphQLEndpoint: AppDelegate.shared.graphQLEndpoint,
+        guard let videoList = AppDelegate.shared.readVideoListOperation?.videoList else{
+            return
+        }
+        let xApiKey: String = videoList.xApiKey
+        let siteId: String = videoList.authKeys.siteId
+        let apiBaseEndpoint: String = videoList.authKeys.apiBaseEndpoint
+        let graphQLEndpoint: String = videoList.authKeys.graphQLEndpoint
+        self.showAlertIfConfigInvalid(apiBaseEndpoint: apiBaseEndpoint,
+                                      graphQLEndpoint: graphQLEndpoint,
                                       authorizationToken: AppDelegate.shared.authorizationToken,
-                                      siteId: AppDelegate.shared.siteId,
-                                      xApiKey: AppDelegate.shared.xApiKey,
+                                      siteId: siteId,
+                                      xApiKey: xApiKey,
                                           alertMessage: "Detected invalid configuration! Please update your settings.")
     }
     
@@ -96,10 +102,10 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
 
     
     func getEntitlementData(
-        source: ResponseSource,
+        videoId: String,
         completion: @escaping (Result<VLPlayer.EntitlementData, VLPlayerLib.VLError>) -> Void
     ) {
-        fetchContentDetails(source: source) { (playerObject, isSuccess, vlError, playerResponse, contentResponse) in
+        fetchContentDetails(videoId: videoId) { (playerObject, isSuccess, vlError, playerResponse, contentResponse) in
             if isSuccess, let playerObject = playerObject {
                 let entitlementData = VLPlayer.EntitlementData(
                     playerObject: playerObject,
@@ -262,18 +268,18 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
             launchVideoPlayer(url: url, isExternal: asset.isExternal ?? false, streamConfig: VLPlayer.StreamConfig(isLive: asset.isLive, isDVR: asset.isDVR, isDRM: nil))
         case .videoId(let id):
             print("Play using videoId: \(id)")
-            launchVideoPlayer(videoId: id, isExternal: asset.isExternal ?? false, responseType: asset.responseType ?? "local")
+            launchVideoPlayer(videoId: id, isExternal: asset.isExternal ?? false)
         }
     }
     
-    private func launchVideoPlayer(videoId: String? = nil, url: String? = nil, isExternal: Bool = false, responseType: String = "local", streamConfig: VLPlayer.StreamConfig? = nil) {
+    private func launchVideoPlayer(videoId: String? = nil, url: String? = nil, isExternal: Bool = false, streamConfig: VLPlayer.StreamConfig? = nil) {
         guard (videoId != nil && !videoId!.isEmpty) || (url != nil && !url!.isEmpty) else {return}
             
         var drmConfig: VLPlayer.DRMConfig?
         if let videoId = videoId, !videoId.isEmpty {
             videoList.videoId = videoId
             if isExternal{
-                getEntitlementData(source: responseType == "local" ? .local : .server(videoId: videoId)) { [weak self] result in
+                getEntitlementData(videoId: videoId) { [weak self] result in
                     switch result {
                     case .success(let data):
                         self?.entitlementData = data
@@ -335,7 +341,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         let muteEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .mute) ?? false
         #if os(iOS)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let videoPlaybackController = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackController") as! VideoPlaybackController
+        let videoPlaybackController = storyboard.instantiateViewController(withIdentifier: "PlayerViewController_iOS") as! PlayerViewController_iOS
         videoPlaybackController.streamUrl = url
         videoPlaybackController.entitlementData = self.entitlementData
         videoPlaybackController.streamConfig = streamConfig
@@ -350,7 +356,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         videoPlaybackController.modalPresentationStyle = .fullScreen
         self.present(videoPlaybackController, animated: true, completion: nil)
         #else
-        let vc = PlayerViewController()
+        let vc = PlayerViewController_tvOS()
         vc.playerOptionSelected = videoId == nil ? .playStreamURL : .defaultControl
         vc.enableCustomPlayerUI = showCustomControls
         vc.streamUrl = url

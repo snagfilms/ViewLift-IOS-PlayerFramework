@@ -10,8 +10,11 @@ import UIKit
 import VLPlayerLib
 import VLBeaconLib
 import VLAuthenticationFramework_tvOS
+import AVKit
+import VLAnalyticsLib
 
-class PlayerViewController: UIViewController {
+// Main player view controller for tvOS, handles player setup, UI, and playback logic
+class PlayerViewController_tvOS: UIViewController {
     enum Configuration{
         case `default`
         case customTheme
@@ -33,10 +36,12 @@ class PlayerViewController: UIViewController {
     var muteEnabled: Bool = false
     var isGuestUser: Bool = false
     var videoPlayerControlsView: VLCustomPlayerControlsView?
-    private var customPaywallView: CustomPaywallView?
+    var customPaywallView: CustomPaywallView?
     var portraitConstraints: [NSLayoutConstraint] = []
     var landscapeConstraints: [NSLayoutConstraint] = []
-    
+    weak var player: AVPlayer?
+    var currentAdAssetInfo: VLAdAssetInfo?
+    var videoResponse: VLVideoResponseModel?
     override var canBecomeFirstResponder: Bool {
         return true
     }
@@ -45,6 +50,7 @@ class PlayerViewController: UIViewController {
         super.viewDidAppear(animated)
     }
 
+    // Initial setup for the view and player
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -55,6 +61,7 @@ class PlayerViewController: UIViewController {
         self.loadPlayerView()
     }
     
+    // Loads and configures the player view
     func loadPlayerView() {
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = self.videoList.apiBaseUrl
@@ -64,23 +71,28 @@ class PlayerViewController: UIViewController {
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""
         let userId: String? = nil
+        // Initialize player with license if available
         if let playerLicenseKey = playerLicenseKey, !playerLicenseKey.isEmpty {
             vlPlayer = VLPlayer(playerType: .bitmovin(config: VLBitmovinConfig(license: VLBitmovinConfig.VLBitmovinLicenseConfig(playerKey: playerLicenseKey, analyticsKey: analyticsLicenseKey), userId: userId)))
         }else{
             vlPlayer = VLPlayer(playerType: .default)
         }
+        // Select playback source type based on user option
         let playbackSourceType: VLPlayer.PlaybackSourceType
         if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
             playbackSourceType = .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", contentId: nil, streamConfig: self.streamConfig, drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl))
         }else{
             playbackSourceType = .contentPlayback(VLPlayer.ContentPlaybackConfig(videoId: self.videoList.videoId, token: vlToken, apiBaseURL: vlBaseUrl))
         }
+        // Set delegates for player events and analytics
         vlPlayer?.videoPlayerDelegate = self
-        //vlPlayer.clientSideAdTrackingDelegate = self
-        // vlPlayer.enablePlayerBitrateLogs = self.enableBitrateLogs
+        vlPlayer?.playerAdsAnalyticsDelegate = self
+        vlPlayer?.playerVideoAnalyticsDelegate = self
+        // Set entitlement if available
         if let entitlementData{
             vlPlayer?.setEntitlement(data: entitlementData)
         }
+        // Set player source and handle completion
         vlPlayer?.setSource(type: playbackSourceType, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
                 var hasTVE = false
@@ -96,6 +108,7 @@ class PlayerViewController: UIViewController {
         }
     }
     
+    // Handles player setup completion, checks for TVE authorization
     private func handlePlayerSetupCompletion(
         playerView: UIView?,
         hasTVE: Bool
@@ -121,6 +134,7 @@ class PlayerViewController: UIViewController {
         }
     }
     
+    // Checks TVE authorization for the user
     private func checkAuthz(user: VLUserIdentity, playerView: UIView){
         let mvpdProvider = user.mvpdProvider ?? ""
         
@@ -137,33 +151,25 @@ class PlayerViewController: UIViewController {
         }
     }
     
-    // Extract error handling for reuse/centralization
+    // Handles TVE authorization failure
     private func handleAuthzFailure(_ error: VLAuthenticationErrorCode) {
         self.showAlert(title: "Error", message: "TVE Authorization denied")
     }
     
+    // Shows an alert with a title and message
     private func showAlert(title: String, message: String, buttonTitle: String = "OK", completion: (() -> Void)? = nil) {
-            // Create the Alert Controller
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-            // Create the action for the button.
-            // The handler will execute the completion block if one was provided.
             let alertAction = UIAlertAction(title: buttonTitle, style: .default) { _ in
                 completion?()
             }
-
-            // Add the action to the alert controller
             alertController.addAction(alertAction)
-
-            // Present the alert controller
-            // Ensure this is run on the main thread, especially if called from a background task.
             DispatchQueue.main.async {
                 self.present(alertController, animated: true, completion: nil)
             }
     }
     
    #if os(iOS)
-
+    // Handles orientation changes
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
@@ -179,6 +185,7 @@ class PlayerViewController: UIViewController {
     }
     #endif
     
+    // Updates constraints based on current orientation
     func updateConstraintsForCurrentOrientation() {
         let isLandscape = view.bounds.width > view.bounds.height
 
@@ -191,6 +198,7 @@ class PlayerViewController: UIViewController {
         }
     }
     
+    // Sets up portrait and landscape constraints for the player container
     func setupConstraints() {
         // Portrait: 16:9, top-aligned
         portraitConstraints = [
@@ -209,10 +217,10 @@ class PlayerViewController: UIViewController {
         ]
     }
     
+    // Adds the player view to the container and sets constraints
     func addPlayerViewToContainer(_ playerView: UIView) {
         playerContainerView.addSubview(playerView)
         playerContainerView.backgroundColor = .white
-        //playerView.frame = CGRect.init(x: 0, y: 0, width: view.bounds.width , height: (view.bounds.width) * 9/16)
         playerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             playerView.topAnchor.constraint(equalTo: playerContainerView.topAnchor),
@@ -221,11 +229,11 @@ class PlayerViewController: UIViewController {
             playerView.trailingAnchor.constraint(equalTo: playerContainerView.trailingAnchor)
         ])
     }
-    private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
 
+    // Returns player features supported configuration
+    private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
         let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
-        // You can find list of macros in VLPlayer documentation for SSAI functioning
-        //https://developer.viewlift.com/docs/vlplayerfeaturesupported
+        // See VLPlayer documentation for available macros
         return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
@@ -241,20 +249,18 @@ class PlayerViewController: UIViewController {
                                                  playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default))
     }
     
+    // Returns player controls view configuration based on type
     private func getPlayerControlsViewConfiguration(type: Configuration) -> VLPlayer.PlayerControlsViewConfiguration? {
-        
         switch type {
         case .customTheme:
-            // use below code configuring Default Player Controls View theme
-            
+            // Configure default player controls view with custom theme
             let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .yellow)
             let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", settingText: "PLAYBACK QUALITY")
             let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent)
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(controlsTheme: controlsTheme)
             return playerControlsViewConfiguration
         case .custom:
-            // use this for Custom View
-            
+            // Use a custom controls view
             let view = VLCustomPlayerControlsView(frame: .zero, config: nil)
             view.updateTitleLabel(text: nil)
             view.delegate = self
@@ -262,35 +268,34 @@ class PlayerViewController: UIViewController {
             self.videoPlayerControlsView = view
             return playerControlsViewConfiguration
         case .default:
-            // if you do not return anything default view with default theme will be used
+            // Use default controls view and theme
             return nil
         }
     }
     
+    // Returns paywall configuration based on type
     private func getPayWallConfiguration(type: Configuration) -> VLPlayer.PayWallConfiguration?{
         switch type {
         case .customTheme:
-            // use below code for configuring Default paywall view
-            
+            // Configure default paywall view with custom theme
             let payWallStyle = VLPlayer.PayWallStyle(errorMessageTextColor: .red, buttonTextColor: .blue, buttonBackgroundColor: .yellow, backgroundColor: nil)
             let payWallTextContent = VLPlayer.PayWallTextContent(errorMessage: "Error", buttontext: nil)
             let payWallThemeConfiguration = VLPlayer.PayWallThemeConfiguration(style: payWallStyle, textContent: payWallTextContent)
             let payWallConfiguration: VLPlayer.PayWallConfiguration = VLPlayer.PayWallConfiguration.default(payWallTheme: payWallThemeConfiguration)
             return payWallConfiguration
         case .custom:
-            // use below code for custom view
-            
+            // Use a custom paywall view
             let customPaywallView = CustomPaywallView()
             let payWallConfiguration: VLPlayer.PayWallConfiguration = .custom(view: customPaywallView)
             self.customPaywallView = customPaywallView
             return payWallConfiguration
         case .default:
-            // if you do not return anything default view with default theme will be used
-            
+            // Use default paywall view and theme
             return nil
         }
     }
     
+    // Handles remote control presses (menu button)
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         if presses.contains(where: { $0.type == .menu }) {
             print("CustomVideoController Menu button pressed – handle custom back")
@@ -300,201 +305,115 @@ class PlayerViewController: UIViewController {
         super.pressesBegan(presses, with: event)
     }
     
+    // Removes the controller from navigation stack or dismisses it
     func removeController(){
         if let nav = navigationController {
             nav.popViewController(animated: true)
         } else {
             dismiss(animated: true, completion: nil)
-            
         }
     }
     
+    // Handles menu button press to destroy player and remove controller
     func menuPressed() {
         vlPlayer?.destroy()
         removeController()
     }
-}
-
-extension PlayerViewController: PlayerControlsDelegate {
-    func setPlaybackRate(playbackSpeed: Float) {
-        vlPlayer?.setPlaybackRate(playbackSpeed: playbackSpeed)
-    }
     
-    func getStartOverTime() -> Double? {
-        vlPlayer?.getStartOverTime()
-    }
-    
-    func isLiveVideo() -> Bool {
-        vlPlayer?.isLiveVideo() ?? false
-    }
-    
-    func isDVREnabled() -> Bool {
-        vlPlayer?.isDVREnabled() ?? false
-    }
-    
-    func getAllClosedCaptionList() -> [String]? {
-        return vlPlayer?.getAllClosedCaptionList()
-    }
-    
-    func getAllContentAudioLanguageList() -> [String]? {
-        return vlPlayer?.getAllContentAudioLanguageList()
-    }
-    
-    func getAllVideoPlaybackQualityList() -> [String]? {
-        return vlPlayer?.getAllVideoPlaybackQualityList()
-    }
-    
-    func setClosedCaption(selectedKey: String, selectedIndex: Int) {
-        vlPlayer?.setClosedCaption(selectedKey: selectedKey, selectedIndex: selectedIndex)
-    }
-    
- 
-    
-    func setAudioSelected(selectedAudio: String) {
-        vlPlayer?.setAudioSelected(selectedAudio: selectedAudio)
-    }
-    
-    func setCCFontSize() {
-        vlPlayer?.setCCFontSize()
-    }
-    
-    func setPlaybackQuality(playbackQuality: String) {
-        vlPlayer?.setPlaybackQuality(playbackQuality: playbackQuality)
-    }
-    
-    func getCurrentVideoDuration() -> Double? {
-        self.vlPlayer?.getCurrentVideoDuration()
-    }
-    
-    func didRequestRestart() {
-        self.vlPlayer?.seekTo(seconds: 0)
-        DispatchQueue.main.async {
-            self.videoPlayerControlsView?.playPause(isPlaying: true)
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
-            self.vlPlayer?.play()
-        }
-    }
-    
-    func didTogglePlayPause() {
-        
-    }
-    
-    func seekTo(seconds: Double) {
-        self.vlPlayer?.seekTo(seconds: seconds)
-    }
-    
-    func seekToLivePosition() {
-        self.vlPlayer?.seekToLivePosition()
-    }
-    
-    
-}
-
-extension PlayerViewController: videoPlaybackDelegate {
-    
-    func videoFetchError(error: VLError?, playerTag: String?, contentResponse: Dictionary<String, AnyObject>?) {
-        let errorDescription =  "Is content playable - \(error?.isPlayable ?? false) \n" +
-        "Content Fetched successfully - \(error?.isSuccess ?? false) \n" +
-        "Error Code - \(error?.errorCode ?? "errorCode") \n" +
-        "Error Message - \(error?.errorMessage ?? "errorMessage") \n" +
-        "Error VL Code - \(error?.vl_errorCode ?? "errorVLCode")"
-        
-        print("Error VL:", errorDescription)
-        print("VideoFetchError: contentResponse:", contentResponse)
-        DispatchQueue.main.async {
-            self.showAlert(message: errorDescription)
-            self.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
-        }
-    }
-    
+    // Shows a simple alert with a message
     func showAlert(title: String = "Alert!", message: String = "Description") {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    func loginWithTVE() {
-        debugPrint("Login with TVE called")
-        VLAuthentication.sharedInstance
-            .showTVEActivationScreen(
-                presentingViewController: self,
-                activationURL: "http://spinco.staging.web.viewlift.com/tveactivate",
-                qrToggle: true) { [weak self] userIdentity, errorCode in
-                    DispatchQueue.main.async {
-                        if userIdentity == nil, let codeString = errorCode?.codeString {
-//                            self?.showAlert(message: codeString)
-                            return
-                        }
-                        
-                        UserManager.shared.userIdentity = userIdentity
-                        AppDelegate.shared.authorizationToken = userIdentity?.authorizationToken
-                        self?.vlPlayer?.destroy()
-                        self?.vlPlayer?.playerAdsAnalyticsDelegate = nil
-                        self?.vlPlayer?.playerVideoAnalyticsDelegate = nil
-                        self?.loadPlayerView()
-//                        self?.logoutButton.isHidden = false
-                    }
-                }
-        //showTVEActivationScreen
+}
+
+// Delegate for player controls actions
+extension PlayerViewController_tvOS: PlayerControlsDelegate {
+    // Sets playback rate for the player
+    func setPlaybackRate(playbackSpeed: Float) {
+        vlPlayer?.setPlaybackRate(playbackSpeed: playbackSpeed)
     }
     
-    func customPlayerState(isPlaying: Bool) {
-        videoPlayerControlsView?.playPause(isPlaying: isPlaying)
+    // Returns start over time if available
+    func getStartOverTime() -> Double? {
+        vlPlayer?.getStartOverTime()
     }
     
-    func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Bool) {
-        debugPrint("PlayerViewController isSubtitlesEmbeddedInUrlChanged: \(isEmbedded)")
+    // Checks if the current video is live
+    func isLiveVideo() -> Bool {
+        vlPlayer?.isLiveVideo() ?? false
     }
     
-    func didFinishPlaying() {
-        print("PlayerViewController didFinishPlaying")
+    // Checks if DVR is enabled
+    func isDVREnabled() -> Bool {
+        vlPlayer?.isDVREnabled() ?? false
     }
     
-    func customPlayerControls(isHidden: Bool) {
-        print("PlayerViewController customPlayerControls: \(isHidden)")
-        if isHidden{
-            videoPlayerControlsView?.customPlayerControls(isHidden: isHidden)
+    // Returns all closed caption options
+    func getAllClosedCaptionList() -> [String]? {
+        return vlPlayer?.getAllClosedCaptionList()
+    }
+    
+    // Returns all available audio languages
+    func getAllContentAudioLanguageList() -> [String]? {
+        return vlPlayer?.getAllContentAudioLanguageList()
+    }
+    
+    // Returns all available playback quality options
+    func getAllVideoPlaybackQualityList() -> [String]? {
+        return vlPlayer?.getAllVideoPlaybackQualityList()
+    }
+    
+    // Sets the selected closed caption
+    func setClosedCaption(selectedKey: String, selectedIndex: Int) {
+        vlPlayer?.setClosedCaption(selectedKey: selectedKey, selectedIndex: selectedIndex)
+    }
+    
+    // Sets the selected audio language
+    func setAudioSelected(selectedAudio: String) {
+        vlPlayer?.setAudioSelected(selectedAudio: selectedAudio)
+    }
+    
+    // Sets closed caption font size
+    func setCCFontSize() {
+        vlPlayer?.setCCFontSize()
+    }
+    
+    // Sets the selected playback quality
+    func setPlaybackQuality(playbackQuality: String) {
+        vlPlayer?.setPlaybackQuality(playbackQuality: playbackQuality)
+    }
+    
+    // Returns the current video duration
+    func getCurrentVideoDuration() -> Double? {
+        self.vlPlayer?.getCurrentVideoDuration()
+    }
+    
+    // Handles restart request from controls
+    func didRequestRestart() {
+        self.vlPlayer?.seekTo(seconds: 0)
+        DispatchQueue.main.async {
+            self.videoPlayerControlsView?.playPause(isPlaying: true)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+            self.vlPlayer?.play()
         }
     }
     
-    func videoStarted(timestamp: Double, playerTag: String) {
-        videoPlayerControlsView?.videoStartedPlaying(timestamp: timestamp)
-        debugPrint("PlayerViewController videoStarted: \(timestamp)")
+    // Handles play/pause toggle
+    func didTogglePlayPause() {
+        
     }
     
-    func videoPlayerProgressByEverySecond(currentTime: Double, totalTime: Double, playerTag: String, parsedTimeStamp: String?) {
-        debugPrint("PlayerViewController videoPlayerProgre]ssByEverySecond: \(currentTime), \(totalTime)")
-        videoPlayerControlsView?.updateCurrentTime(currentTime: currentTime, totalTime: totalTime)
-
+    // Seeks to a specific time in the video
+    func seekTo(seconds: Double) {
+        self.vlPlayer?.seekTo(seconds: seconds)
     }
     
-    func videoPlayerUpdateByProgressInterveral(currentTime: Double, totalTime: Double, playerTag: String) {
-        debugPrint("PlayerViewController videoPlayerProgre]ssByEverySecond: \(currentTime), \(totalTime)")
-
-        videoPlayerControlsView?.updateCurrentTime(currentTime: currentTime, totalTime: totalTime)
-
-    }
-    
-    func onBackButtonTapped() {
-        menuPressed()
+    // Seeks to the live position in the stream
+    func seekToLivePosition() {
+        self.vlPlayer?.seekToLivePosition()
     }
 }
-
-extension UIView {
-    func parentViewController() -> UIViewController? {
-        var responder: UIResponder? = self
-        while let next = responder?.next {
-            if let vc = next as? UIViewController {
-                return vc
-            }
-            responder = next
-        }
-        return nil
-    }
-}
-
-
-

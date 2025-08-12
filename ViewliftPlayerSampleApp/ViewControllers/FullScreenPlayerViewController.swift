@@ -9,14 +9,14 @@
 import UIKit
 import VLPlayerLib
 
-@objc protocol fullScreenDelegate: NSObjectProtocol {
+@objc protocol FullScreenDelegate: NSObjectProtocol {
     @objc func fullScreenViewRemoved(playerTag: String)
 }
 
 class FullScreenPlayerViewController: UIViewController {
 
     var playerFullScreenView: UIView?
-    var delegate: fullScreenDelegate?
+    var delegate: FullScreenDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
 

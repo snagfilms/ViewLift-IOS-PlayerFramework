@@ -9,8 +9,6 @@
 
 import Foundation
 
-import Foundation
-
 func isJWTExpired(_ jwt: String) -> Bool {
     let segments = jwt.components(separatedBy: ".")
     guard segments.count == 3,

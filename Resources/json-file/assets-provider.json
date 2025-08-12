@@ -11,7 +11,7 @@
     "title": "Asset Type - CMAF/HLS (Linear)",
     "url": "https://cdn-vl-gcp-l-01.vos360.video/Content/HLS_HLS_CLEAR/Live/channel(886a397d-ff30-4021-eb16-bb73c658c033)/index.m3u8",
     "isLive": true,
-    "isDVR": true
+    "isDVR": false
   },
   {
     "title": "Asset Type - HLS/TS (tokenized) (linear)",
@@ -31,10 +31,9 @@
   },
   {
     "title": "Asset Type - VOD content from CVP",
-    "subtitle": "IP should be whitelisted.Please provide partnerApiBaseUrl, xApiKey and site in the VideoList.json",
+    "subtitle": "IP should be whitelisted.Please provide partnerApiBaseUrl, xApiKey and site in the configs.json",
     "videoId": "ceaada6c-88a7-492c-baa5-86dea10a14a2",
-    "isExternal": true,
-    "responseType": "server"
+    "isExternal": true
   },
   {
       "title": "HLS/TS (tokenized + DRM) (linear)",
@@ -74,7 +73,7 @@
   },
   {
       "title": "Viewlift player natively support content that is DRMd outside of the Viewlift supply chain",
-      "subtitle": "Please provide DRM Configs in the VideoList.json",
+      "subtitle": "Please provide DRM Configs in the configs.json",
       "url": "https://cdn-vl-gcp-spinco-e-01.vos360.video/Content/Channel/a9e5701f-710e-f6fd-a89c-36cd5b25932f/HLS_ENC/index.m3u8",
       
       "isExternal": true

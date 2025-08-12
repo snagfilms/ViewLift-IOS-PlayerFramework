@@ -2,7 +2,7 @@
 //  VLVideoResponseModel.swift
 //  ViewliftPlayerSampleApp
 //
-//  Created by Nexgen on 03/08/25.
+//  Created by ViewLift on 03/08/25.
 //  Copyright © 2025 Viewlift. All rights reserved.
 //
 

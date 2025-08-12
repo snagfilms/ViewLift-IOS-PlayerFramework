@@ -8,10 +8,6 @@
 
 import VLPlayerLib
 import Foundation
-enum ResponseSource {
-    case local
-    case server(videoId: String)
-}
 
 extension AssetListViewController {
     private func parseEntitlementData(
@@ -117,60 +113,44 @@ extension AssetListViewController {
             apiResponse(nil, false, vlError, nil, nil)
         }
     }
-
+    
     func fetchContentDetails(
-        source: ResponseSource,
+        videoId: String,
         apiResponse: @escaping (_ playerObject: VLPlayerLib.PlayerObject?, _ isSuccess: Bool, _ vlError: VLPlayerLib.VLError?, _ playerResponse: VLPlayerLib.VLPlayerResponse?, _ contentResponse: Dictionary<String, AnyObject>?) -> Void
     ) {
-        switch source {
-        case .local:
-            guard let fallbackURL = Bundle.main.url(forResource: "entitlement", withExtension: "json"),
-                  let localData = try? Data(contentsOf: fallbackURL) else {
-                let error = VLPlayerLib.VLError()
-                error.errorCode = ""
-                error.errorMessage = ""
-                error.vl_errorCode = ""
-                error.isPlayable = false
-                error.isSuccess = false
-                apiResponse(nil, false, error, nil, nil)
-                return
-            }
-            parseEntitlementData(from: localData, apiResponse: apiResponse)
-        case .server(let contentId):
-            let urlString = "\(videoList.partnerApiBaseUrl)/partner/video/assests?id=\(contentId)&site=\(videoList.site)"
-            if urlString.contains("xxxxx"){
-                self.showAlert(message: "Please update the URL with Api base url and site.\n\(urlString)")
-                return
-            }
-            debugPrint("URL to fetch entitlement data: \(urlString)")
-            guard let url = URL(string: urlString) else {
-                let error = VLPlayerLib.VLError()
-                error.errorCode = ""
-                error.errorMessage = ""
-                error.vl_errorCode = ""
-                error.isPlayable = false
-                error.isSuccess = false
-                apiResponse(nil, false, error, nil, nil)
-                return
-            }
-            var request = URLRequest(url: url)
-            request.setValue(videoList.xApiKey, forHTTPHeaderField: "x-api-key")
-            request.httpMethod = "GET"
-
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {
-                    let error = VLPlayerLib.VLError()
-                    error.errorCode = ""
-                    error.errorMessage = ""
-                    error.vl_errorCode = ""
-                    error.isPlayable = false
-                    error.isSuccess = false
-                    apiResponse(nil, false, error, nil, nil)
-                    return
-                }
-                self.parseEntitlementData(from: data, apiResponse: apiResponse)
-            }
-            task.resume()
+        let urlString = "\(videoList.partnerApiBaseUrl)/partner/video/assests?id=\(videoId)&site=\(videoList.site)"
+        if urlString.contains("xxxxx"){
+            self.showAlert(message: "Please update the URL with Api base url and site.\n\(urlString)")
+            return
         }
+        debugPrint("URL to fetch entitlement data: \(urlString)")
+        guard let url = URL(string: urlString) else {
+            let error = VLPlayerLib.VLError()
+            error.errorCode = ""
+            error.errorMessage = ""
+            error.vl_errorCode = ""
+            error.isPlayable = false
+            error.isSuccess = false
+            apiResponse(nil, false, error, nil, nil)
+            return
+        }
+        var request = URLRequest(url: url)
+        request.setValue(videoList.xApiKey, forHTTPHeaderField: "x-api-key")
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                let error = VLPlayerLib.VLError()
+                error.errorCode = ""
+                error.errorMessage = ""
+                error.vl_errorCode = ""
+                error.isPlayable = false
+                error.isSuccess = false
+                apiResponse(nil, false, error, nil, nil)
+                return
+            }
+            self.parseEntitlementData(from: data, apiResponse: apiResponse)
+        }
+        task.resume()
     }
 }

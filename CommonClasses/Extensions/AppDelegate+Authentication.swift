@@ -1,5 +1,5 @@
 //
-//  AppDelegate+extension.swift
+//  AppDelegate+Authentication.swift
 //  ViewliftPlayerSampleApp
 //
 //  Created by rakeshkrsharma@viewlift.com on 04/08/25.
@@ -12,7 +12,9 @@ import VLAuthenticationFramework
 import VLAuthenticationFramework_tvOS
 #endif
 
+// Extension to AppDelegate for handling authentication logic
 extension AppDelegate {
+    // Shared instance of AppDelegate for easy access
     static var shared: AppDelegate {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("Could not cast UIApplication delegate as AppDelegate")
@@ -20,11 +22,22 @@ extension AppDelegate {
         return delegate
     }
     
+    // Sets up authentication configuration and manages tokens
     func setupAuthentication() {
-        // Get current user identity before async context
+        // Retrieve current user identity and authorization token
         let userIdentity = UserManager.shared.userIdentity
         self.authorizationToken = userIdentity?.authorizationToken
-
+        
+        // Ensure video list and authentication keys are available
+        guard let videoList = AppDelegate.shared.readVideoListOperation?.videoList else{
+            return
+        }
+        let xApiKey: String = videoList.xApiKey
+        let siteId: String = videoList.authKeys.siteId
+        let apiBaseEndpoint: String = videoList.authKeys.apiBaseEndpoint
+        let graphQLEndpoint: String = videoList.authKeys.graphQLEndpoint
+        
+        // Create API configuration object
         let apiConfig = APIConfig(
             xApiKey: xApiKey,
             siteId: siteId,
@@ -32,20 +45,33 @@ extension AppDelegate {
             apiBaseUrl: apiBaseEndpoint,
             graphQLApiBaseUrl: graphQLEndpoint
         )
-
+        
+        // Perform authentication
         Task { [weak self] in
             do {
                 guard let self = self else { return }
                 
+                // Initialize authentication framework with API config
                 try await VLAuthentication.sharedInstance.setupConfiguration(apiConfig: apiConfig)
-
+                
+                // Set current authorization token in authentication framework
                 VLAuthentication.sharedInstance.authorizationToken = self.authorizationToken
                 
+                // If no token, fetch anonymous token
                 if self.authorizationToken == nil {
                     self.authorizationToken = try await VLAuthentication.sharedInstance.apiToGetAnonymousToken()?.authorizationToken
                     VLAuthentication.sharedInstance.authorizationToken = self.authorizationToken
                     
-                } else if let authorizationToken = self.authorizationToken, !authorizationToken.isEmpty && isJWTExpired(authorizationToken) {
+                // If tokens exist, try to refresh them
+                } else if let authorizationToken = self.authorizationToken, let refreshToken = userIdentity?.refreshToken, !authorizationToken.isEmpty && !refreshToken.isEmpty {
+                    self.authorizationToken = try await VLAuthentication.sharedInstance
+                        .fetchUpdatedAuthToken(
+                            refreshToken: refreshToken,
+                        )?.authorizationToken
+                    
+                    VLAuthentication.sharedInstance.authorizationToken = self.authorizationToken
+                // If unable to authenticate, log out user
+                } else {
                     await self.logoutUser()
                 }
             } catch {
@@ -54,12 +80,15 @@ extension AppDelegate {
         }
     }
     
+    // Logs out the user and resets authentication tokens
     func logoutUser() async {
         do {
+            // Clear user identity and tokens
             UserManager.shared.userIdentity = nil
             authorizationToken = nil
             VLAuthentication.sharedInstance.authorizationToken = nil
             
+            // Fetch and set anonymous token after logout
             self.authorizationToken = try await VLAuthentication.sharedInstance.apiToGetAnonymousToken()?.authorizationToken
             VLAuthentication.sharedInstance.authorizationToken = self.authorizationToken
         } catch {

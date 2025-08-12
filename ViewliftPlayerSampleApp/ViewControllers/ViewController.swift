@@ -15,14 +15,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak private var loopPlaybackToggle: UISwitch!
     @IBOutlet weak private var hideControls: UISwitch!
     @IBOutlet weak private var muteControls: UISwitch!
-    private var readVideoListOperation:VideoListProtocol?
     private var playerOptionSelected:PlayerUIOptions = .defaultControl
     private var playerUIOptions: [PlayerUIOptions] = [.exploreMore]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        readVideoList(readVideoListOperation: ReadFromLocalJson())
-//        readVideoList(readVideoListOperation: ReadFromAPI())
         multiplePlayerOptionTable.reloadData()
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -31,12 +28,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.showAlertIfConfigInvalid(apiBaseEndpoint: AppDelegate.shared.apiBaseEndpoint,
-                                      graphQLEndpoint: AppDelegate.shared.graphQLEndpoint,
+        guard let videoList = AppDelegate.shared.readVideoListOperation?.videoList else{
+            return
+        }
+        let xApiKey: String = videoList.xApiKey
+        let siteId: String = videoList.authKeys.siteId
+        let apiBaseEndpoint: String = videoList.authKeys.apiBaseEndpoint
+        let graphQLEndpoint: String = videoList.authKeys.graphQLEndpoint
+        self.showAlertIfConfigInvalid(apiBaseEndpoint: apiBaseEndpoint,
+                                      graphQLEndpoint: graphQLEndpoint,
                                       authorizationToken: AppDelegate.shared.authorizationToken,
-                                      siteId: AppDelegate.shared.siteId,
-                                      xApiKey: AppDelegate.shared.xApiKey,
+                                      siteId: siteId,
+                                      xApiKey: xApiKey,
                                           alertMessage: "Detected invalid configuration! Please update your settings.")
     }
     
@@ -47,11 +50,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-    }
-    
-    private func readVideoList(readVideoListOperation: VideoListProtocol) {
-        self.readVideoListOperation = readVideoListOperation
-        self.readVideoListOperation?.readVideoList()
     }
   
     //TableViewMethods
@@ -70,7 +68,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         playerOptionSelected = playerUIOptions[indexPath.row]
         if playerOptionSelected == .exploreMore{
-            guard let _videoList = self.readVideoListOperation?.videoList else {return}
+            guard let _videoList = AppDelegate.shared.readVideoListOperation?.videoList else {return}
             let assetVC = AssetListViewController()
             assetVC.videoList = _videoList
             navigationController?.pushViewController(assetVC, animated: true)
@@ -100,17 +98,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     ///Private methods
     private func launchVideoPlayer() {
-        guard let _videoList = self.readVideoListOperation?.videoList else {return}
+        guard let _videoList = AppDelegate.shared.readVideoListOperation?.videoList else {return}
         if let message = _videoList.checkForConfigurationErrorMessage() {
             showAlert(message: message)
             return
         }
         if _videoList.videoId.contains("xxxxx"){
-            showAlert(title: "Alert!", message: "Please update the videoId in VideoList.json file to play the video.")
+            showAlert(title: "Alert!", message: "Please update the videoId in configs.json file to play the video.")
             return
         }
             
-        let videoPlaybackController = self.storyboard?.instantiateViewController(withIdentifier: "VideoPlaybackController") as! VideoPlaybackController
+        let videoPlaybackController = self.storyboard?.instantiateViewController(withIdentifier: "PlayerViewController_iOS") as! PlayerViewController_iOS
 //        videoPlaybackController.view.frame = self.view.bounds
         if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL {
             videoPlaybackController.streamUrl =  _videoList.streamUrl
@@ -125,21 +123,5 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     @IBAction func valueChangeForToggle(sender: UISwitch){
         
-    }
-}
-
-class ReadFromAPI:VideoListProtocol {
-    var videoList: VideoList?
-    
-    func readVideoList() {
-        NetworkHandler.sharedInstance.fetchDataFromAPI { responseConfigData, responseErrorData, isSuccess in
-            if responseConfigData != nil {
-                do {
-                    self.videoList = try JSONDecoder().decode(VideoList.self, from: responseConfigData!)
-                } catch {
-                    // handle error
-                }
-            }
-        }
     }
 }

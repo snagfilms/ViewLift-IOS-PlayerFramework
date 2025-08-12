@@ -12,26 +12,19 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private var readVideoListOperation:VideoListProtocol?
-    
-    var apiBaseEndpoint: String = "https://spinco.staging.api.viewlift.com"
-    var graphQLEndpoint: String = "https://spinco.staging.api.viewlift.com/graphql"
+    var readVideoListOperation:VideoListProtocol?
     
     var authorizationToken: String? = nil
-    
-    var siteId: String = "cea398b9-09ab-4331-958f-8c3d6a356b88"
-    var xApiKey: String = "3c32790a-967c-4abf-beeb-64d29bcc90b9"
-    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        readVideoList(readVideoListOperation: ReadFromLocalJson())
+
         self.setupAuthentication()
         
         
         window = UIWindow(frame: UIScreen.main.bounds)
         let assetVC = AssetListViewController()
-        readVideoList(readVideoListOperation: ReadFromLocalJson())
         assetVC.videoList = readVideoListOperation?.videoList
         let navController = UINavigationController(rootViewController: assetVC)
         navController.setNavigationBarHidden(true, animated: false)
