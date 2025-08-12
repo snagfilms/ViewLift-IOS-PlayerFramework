@@ -29,12 +29,12 @@ class ReadFromLocalJson:VideoListProtocol {
     var videoList: VideoList?
     
     func readVideoList() {
-        if let path = Bundle.main.path(forResource: "VideoList", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "configs", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 self.videoList = try JSONDecoder().decode(VideoList.self, from: data)
             } catch {
-                debugPrint("Parsing Error VideoList.json", error.localizedDescription)
+                debugPrint("Parsing Error configs.json", error.localizedDescription)
             }
         }
     }
@@ -50,6 +50,7 @@ struct VideoList:Decodable {
     let partnerApiBaseUrl: String
     let site: String
     let drmConfig: DRMConfigAsset?
+    let authKeys: AuthKeys
     func checkForConfigurationErrorMessage() -> String?{
         if apiBaseUrl.contains("xxxxx") {
             return "Please set the API base URL and ViewLift token in the VideoList json file."
@@ -61,6 +62,12 @@ struct VideoList:Decodable {
         return nil
         
     }
+}
+
+struct AuthKeys: Codable {
+    let siteId: String
+    let apiBaseEndpoint: String
+    let graphQLEndpoint: String
 }
 
 struct NextVideoList:Codable {

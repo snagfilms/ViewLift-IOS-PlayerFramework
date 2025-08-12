@@ -1,5 +1,5 @@
 //
-//  VideoPlaybackController.swift
+//  PlayerViewController_iOS.swift
 //  ViewliftPlayerSampleApp
 //
 //  Created by Gaurav Vig on 16/11/21.
@@ -18,6 +18,7 @@ import VLAnalyticsLib
 import AVKit
 
 // MARK: - Constants
+/// Contains static constants used for player layout and configuration
 private enum Constants {
     static let playerMargin: CGFloat = 10
     static let aspectRatio: CGFloat = 9/16
@@ -27,28 +28,30 @@ private enum Constants {
     static let defaultAdUrl = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=1"
 }
 
-class VideoPlaybackController: UIViewController {
-     enum Configuration{
+/// Main view controller for player screen on iOS
+class PlayerViewController_iOS: UIViewController {
+    /// Player configuration options
+    enum Configuration{
         case `default`
         case customTheme
         case custom
     }
     // MARK: - IBOutlets
     @IBOutlet weak var logoutButton: UIButton!
-    @IBOutlet private var debugLogView: UITextView!
+    @IBOutlet var debugLogView: UITextView!
     @IBOutlet private weak var addNextButton: UIButton!
     @IBOutlet private weak var playNextButton: UIButton!
     
     // MARK: - Properties
-    private var customPaywallView: CustomPaywallView?
+    var customPaywallView: CustomPaywallView?
     private var videoList: VideoList!
-    private var vlPlayer: VLPlayer!
-    private var videoPlayerControlsView: CustomVideoControls?
-    private var fullScreenView: FullScreenPlayerViewController?
+    var vlPlayer: VLPlayer!
+    var videoPlayerControlsView: CustomVideoControls?
+    var fullScreenView: FullScreenPlayerViewController?
     
     // Configuration Properties
     var enableCustomPlayerUI: Bool = false
-    private var enableBitrateLogs: Bool = false
+    var enableBitrateLogs: Bool = false
     var entitlementData: VLPlayer.EntitlementData?
     var drmConfig: VLPlayer.DRMConfig?
     var streamConfig: VLPlayer.StreamConfig?
@@ -57,22 +60,19 @@ class VideoPlaybackController: UIViewController {
     var hideControls: Bool = false
     var muteEnabled: Bool = false
     var streamUrl: String?
-    var player: AVPlayer?
+    weak var player: AVPlayer?
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
-    // Private Properties
     private var nextVideoLists: [String] = [] {
         didSet {
             updateButtonStates()
         }
     }
-    
     private lazy var addedNextVideoList: [String] = [] {
         didSet {
             updateButtonStates()
         }
     }
-    
     private var playableVideoId: String?
     private var seekForwardDuration: Double = Constants.defaultSeekForward
     private var seekBackwardDuration: Double = Constants.defaultSeekBackward
@@ -80,7 +80,8 @@ class VideoPlaybackController: UIViewController {
     private var playerOptionSelected: PlayerUIOptions!
     
     // MARK: - Computed Properties
-    private var playerFrame: CGRect {
+    /// Calculates the frame for the player view based on screen size and constants
+    var playerFrame: CGRect {
         let width = UIScreen.main.bounds.width - (Constants.playerMargin * 2)
         let height = width * Constants.aspectRatio
         return CGRect(x: Constants.playerMargin,
@@ -89,11 +90,11 @@ class VideoPlaybackController: UIViewController {
                       height: height)
     }
     
+    /// Returns the current authorization token from AppDelegate
     private var vlToken: String {
         return AppDelegate.shared.authorizationToken ?? ""
     }
     
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialState()
@@ -101,6 +102,7 @@ class VideoPlaybackController: UIViewController {
         
         self.logoutButton.isHidden = true
         
+        // Show logout button if user is logged in
         if UserManager.shared.userIdentity != nil {
             self.logoutButton.isHidden = false
         }
@@ -110,7 +112,7 @@ class VideoPlaybackController: UIViewController {
         cleanupResources()
     }
     
-    // MARK: - Setup Methods
+    /// Sets up initial UI state and debug log visibility
     private func setupInitialState() {
         updateButtonStates()
         if enableBitrateLogs {
@@ -123,6 +125,7 @@ class VideoPlaybackController: UIViewController {
         playNextButton.isEnabled = !addedNextVideoList.isEmpty
     }
     
+    /// Cleans up player and UI resources
     private func cleanupResources() {
         vlPlayer?.destroy()
         vlPlayer?.playerAdsAnalyticsDelegate = nil
@@ -131,7 +134,7 @@ class VideoPlaybackController: UIViewController {
         fullScreenView?.dismiss(animated: false)
     }
     
-    // MARK: - Public Configuration
+    /// Prepares the view with selected player UI option and video list
     func prepareView(withPlayerUIOption playerOptionSelected: PlayerUIOptions, videoList: VideoList) {
         self.videoList = videoList
         self.playerOptionSelected = playerOptionSelected
@@ -140,6 +143,7 @@ class VideoPlaybackController: UIViewController {
         configurePlayerOptions(playerOptionSelected)
     }
     
+    /// Configures player options based on selected UI option
     private func configurePlayerOptions(_ option: PlayerUIOptions) {
         switch option {
         case .customControlWithDebugLog, .debugLogEnabled:
@@ -153,6 +157,7 @@ class VideoPlaybackController: UIViewController {
         }
     }
     
+    /// Handles logout button tap, logs out user and resets player
     @IBAction func logoutButtonAction(_ sender: Any) {
         //        Task { [weak self] in
         let mvpdProvider = UserManager.shared.userIdentity?.mvpdProvider
@@ -176,8 +181,9 @@ class VideoPlaybackController: UIViewController {
 }
 
 // MARK: - Player Setup
-extension VideoPlaybackController {
+extension PlayerViewController_iOS {
     
+    /// Loads and configures the player view
     func loadPlayerView() {
         let loaderView = addLoaderView(to: view)
         loaderView.startAnimating()
@@ -196,10 +202,12 @@ extension VideoPlaybackController {
         }
     }
     
+    /// Determines if direct stream should be used based on player option
     private func shouldUseDirectStream() -> Bool {
         return playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL
     }
     
+    /// Sets up player for direct stream playback
     private func setupDirectStreamPlayer(baseUrl: String,
                                          features: VLPlayer.VLPlayerFeatureSupported,
                                          loader: UIActivityIndicatorView) {
@@ -231,6 +239,7 @@ extension VideoPlaybackController {
             
             var hasTVE = false
             
+            // Check if content has TVE monetization model
             if let video = contentResponse?["video"] as? [String: Any],
                let monetizationModels = video["monetizationModels"] as? [[String: Any]] {
                 hasTVE = monetizationModels.contains { $0["type"] as? String == "TVE" }
@@ -249,6 +258,7 @@ extension VideoPlaybackController {
         }
     }
     
+    /// Sets up player for content playback (non-direct stream)
     private func setupContentPlaybackPlayer(baseUrl: String,
                                             features: VLPlayer.VLPlayerFeatureSupported,
                                             loader: UIActivityIndicatorView) {
@@ -275,6 +285,7 @@ extension VideoPlaybackController {
             contentResponse in
             var hasTVE = false
             
+            // Check if content has TVE monetization model
             if let video = contentResponse?["video"] as? [String: Any],
                let monetizationModels = video["monetizationModels"] as? [[String: Any]] {
                 hasTVE = monetizationModels.contains { $0["type"] as? String == "TVE" }
@@ -293,6 +304,7 @@ extension VideoPlaybackController {
         }
     }
     
+    /// Creates a VLPlayer instance, optionally with Bitmovin config
     private func createVLPlayer() -> VLPlayer {
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""
@@ -306,18 +318,19 @@ extension VideoPlaybackController {
             let config = VLBitmovinConfig(license: licenseConfig, userId: userId)
             return VLPlayer(playerType: .bitmovin(config: config))
         }
-        return VLPlayer()
+        return VLPlayer(playerType: .default)
     }
     
+    /// Configures player delegates and settings
     private func configurePlayer() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
         vlPlayer.videoPlayerDelegate = self
-        vlPlayer.clientSideAdTrackingDelegate = self
         vlPlayer.playerAdsAnalyticsDelegate = self
         vlPlayer.playerVideoAnalyticsDelegate = self
         vlPlayer.enablePlayerBitrateLogs = enableBitrateLogs
     }
     
+    /// Handles completion of player setup, including TVE checks and UI updates
     private func handlePlayerSetupCompletion(
         isSuccess: Bool,
         playerView: UIView?,
@@ -331,7 +344,7 @@ extension VideoPlaybackController {
             
             guard let playerView = playerView else { return }
             
-            
+            // If user is not logged in, just add player
             guard let user = UserManager.shared.userIdentity else {
                 if isDVREnabled {
                     self.videoPlayerControlsView?.updateControlsBasedOnDVRFlag(isDVREnabled: isDVREnabled)
@@ -340,6 +353,7 @@ extension VideoPlaybackController {
                 return
             }
             
+            // If user is TVE and content requires TVE, check authorization
             if user.tveUserId != nil && hasTVE {
                 self.checkAuthz(
                     user: user,
@@ -355,6 +369,7 @@ extension VideoPlaybackController {
         }
     }
     
+    /// Checks TVE authorization for the user before playback
     private func checkAuthz(user: VLUserIdentity, playerView: UIView, isDVREnabled: Bool){
         let mvpdProvider = user.mvpdProvider ?? ""
         
@@ -374,13 +389,13 @@ extension VideoPlaybackController {
         }
     }
     
-    // Extract error handling for reuse/centralization
+    /// Handles TVE authorization failure
     private func handleAuthzFailure(_ error: VLAuthenticationErrorCode) {
         self.showAlert(title: "Error", message: "TVE Authorization denied")
     }
     
-    // Now addPlayer is pure, just presenting the UI
-    private func addPlayer(playerView: UIView) {
+    /// Adds the player view to the main view and sets up custom UI if enabled
+    func addPlayer(playerView: UIView) {
         if enableCustomPlayerUI {
             setupCustomPlayerUI()
         }
@@ -388,7 +403,7 @@ extension VideoPlaybackController {
         view.addSubview(playerView)
     }
     
-    
+    /// Sets up custom player UI controls and PiP
     private func setupCustomPlayerUI() {
         videoPlayerControlsView?.setupPictureInPicture()
         videoPlayerControlsView?.startPictureInPictureInline(enable: true)
@@ -396,6 +411,7 @@ extension VideoPlaybackController {
         videoPlayerControlsView?.updatePlayerControlsType(playerControlType: self.vlPlayer.isLiveVideo() ? .liveVideoControls : .streamVideoControls)
     }
     
+    /// Returns a custom controls view, optionally with custom seek durations
     private func getCustomControls() -> CustomVideoControls {
         let controlsView = CustomVideoControls(frame: playerFrame)
         
@@ -407,8 +423,8 @@ extension VideoPlaybackController {
         return controlsView
     }
     
+    /// Returns the supported player features configuration
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
-        
         let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
         // You can find list of macros in VLPlayer documentation for SSAI functioning
         //https://developer.viewlift.com/docs/vlplayerfeaturesupported
@@ -426,34 +442,33 @@ extension VideoPlaybackController {
                                                  payWallConfiguration: getPayWallConfiguration(type: .default))
     }
     
+    /// Returns the paywall configuration based on the type
     private func getPayWallConfiguration(type: Configuration) -> VLPlayer.PayWallConfiguration?{
         switch type {
         case .customTheme:
-            // use below code for configuring Default paywall view
-            
+            // Configure default paywall view with custom theme
             let payWallStyle = VLPlayer.PayWallStyle(errorMessageTextColor: .red, buttonTextColor: .blue, buttonBackgroundColor: .yellow, backgroundColor: nil)
             let payWallTextContent = VLPlayer.PayWallTextContent(errorMessage: "Error", buttontext: nil)
             let payWallThemeConfiguration = VLPlayer.PayWallThemeConfiguration(style: payWallStyle, textContent: payWallTextContent)
             let payWallConfiguration: VLPlayer.PayWallConfiguration = VLPlayer.PayWallConfiguration.default(payWallTheme: payWallThemeConfiguration)
             return payWallConfiguration
         case .custom:
-            // use below code for custom view
-            
+            // Use a custom paywall view
             let customPaywallView = CustomPaywallView()
             let payWallConfiguration: VLPlayer.PayWallConfiguration = .custom(view: customPaywallView)
             self.customPaywallView = customPaywallView
             return payWallConfiguration
         case .default:
-            // if you do not return anything default view with default theme will be used
-            
+            // Use default paywall view
             return nil
         }
     }
 }
 
 // MARK: - UI Helpers
-extension VideoPlaybackController {
+extension PlayerViewController_iOS {
     
+    /// Adds and returns a loader (activity indicator) to the given container view
     private func addLoaderView(to containerView: UIView) -> UIActivityIndicatorView {
         let loaderView: UIActivityIndicatorView
         
@@ -474,29 +489,34 @@ extension VideoPlaybackController {
         return loaderView
     }
     
-    private func showAlert(title: String = "Alert!", message: String = "Description") {
+    /// Shows a simple alert with a title and message
+    func showAlert(title: String = "Alert!", message: String = "Description") {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default)
         alertController.addAction(okAction)
         present(alertController, animated: true)
     }
     
+    /// Dismisses the current view controller
     private func dismissViewController() {
         dismiss(animated: true)
     }
 }
 
 // MARK: - Actions
-extension VideoPlaybackController {
+extension PlayerViewController_iOS {
     
+    /// Handles add next video button tap
     @IBAction private func addNextVideo(sender: Any) {
         // Implementation for adding next video
     }
     
+    /// Handles play next video button tap
     @IBAction private func playNextVideo(sender: Any) {
         // Implementation for playing next video
     }
     
+    /// Handles back button tap, destroys player and dismisses view
     @IBAction private func backButtonClicked(_ sender: Any) {
         vlPlayer.destroy()
         vlPlayer.playerAdsAnalyticsDelegate = nil
@@ -505,362 +525,13 @@ extension VideoPlaybackController {
     }
 }
 
-extension VideoPlaybackController: VLAnalyticsPlayerClientProtocol {
-    func playerDidStart(player: AVPlayer?) {
-        
-    }
-
-
-    func setAdInfo(adId: String, adName: String, podName: String?, podLength: Double?, podPosition: Int?, podOffset: Double?, startTime: Double?) {
-        self.currentAdAssetInfo = VLAdAssetInfo(adId: adId, adName: adName, podName: podName, podLength: podLength, podPosition: podPosition, podOffset: podOffset, startTime: startTime)
-    }
-    
-    
-    func setAdInfo(adId: String, adName: String, podName: String?, podLength: Double?, podPosition: Int?, podOffset: Double?, startTime: Double?, adSystem: String?) {
-        self.currentAdAssetInfo = VLAdAssetInfo(adId: adId, adName: adName, podName: podName, podLength: podLength, podPosition: podPosition, podOffset: podOffset, startTime: startTime, adSystem: adSystem)
-    }
-    
-    func setAdComplete() {
-        self.currentAdAssetInfo = nil
-    }
-    
-    func getAdsInfo() -> VLAdAssetInfo? {
-        return self.currentAdAssetInfo
-    }
-    
-    func parseVLVideoResponse(from dictionary: [String: Any]) {
-        do {
-            // Convert dictionary to JSON Data
-            let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
-
-            // Decode using JSONDecoder
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .useDefaultKeys
-            let response = try decoder.decode(VLVideoResponseModel.self, from: jsonData)
-
-            self.videoResponse = response
-            
-        } catch {
-            print("❌ Failed to decode from dictionary:", error)
-        }
-    }
-    
-    func getFormattedDateFromTimestamp(timestamp: TimeInterval?) -> String? {
-        guard let timestamp = timestamp else {
-            return nil
-        }
-        let date = Date(timeIntervalSince1970: timestamp)
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy" // <- DD/MM/YYYY format
-        formatter.timeZone = .current       // or use .utc for UTC time
-        
-        let formattedDate = formatter.string(from: date)
-        print("Publish Date: \(formattedDate)")
-        return formattedDate
-    }
-    
-    func getVideoInfo() -> VLContentInfo? {
-        var streamType: String = ""
-        var isContentFree: Bool = false
-        var isFullScreen: Bool = false
-        
-        if let mediaTyp = self.videoResponse?.video?.streamingInfo?.isLiveStream {
-            streamType = mediaTyp ? "live" : "vod"
-        }
-
-        if let monetizationModel = self.videoResponse?.video?.monetizationModels {
-            isContentFree = monetizationModel.contains(where: { $0.type == "FREE" })
-        }
-        
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            isFullScreen = appDelegate.isFullScreen
-        }
-        
-        let data = self.videoResponse?.video
-        let isFree = !(self.videoResponse?.plans?.isEmpty ?? false) && isContentFree
-        let status = isFree ? "free" : "premium"
-        let videobroadcast = self.videoResponse?.video?.streamingInfo?.isLiveStream ?? false ? "Broadcast" : "Digital"
-
-        return VLContentInfo(
-            id: data?.id,
-            title: data?.title,
-            seriesTitle: data?.title,
-            contentType: streamType,
-            airDate: self.getFormattedDateFromTimestamp(timestamp: self.videoResponse?.video?.publishDate),
-            streamType: streamType,
-            screenSize: isFullScreen ? "FullScreen" : "Normal",
-            videostatus: status,
-            videotmsid: data?.id,
-            videobroadcast: videobroadcast,
-            videoInitiate: "Manual"
-        )
-    }
-    
-    func trackVideoStart() {
-        let eventBuilder = VLEventModelBuilder()
-            .eventType(.mediaPlay)
-            .contentInfo(getVideoInfo())
-            .tvProviderInfo(VLTVProviderInfo(tvProviderName: /*ParentalControlHelper.getUserDetails()?.mvpdProvider*/ "",
-                                             requestorId:/* AppConfiguration.shared.tveSettings?.requestorId*/ "")
-            )
-            .adsInfo(getAdsInfo())
-            .setPlayer(player)
-            .build()
-        VLAnalytics.shared.trackEvent(data: eventBuilder)
-    }
-}
-
-// MARK: - VideoPlaybackDelegate
-extension VideoPlaybackController: videoPlaybackDelegate {
-    
-    func videoStarted(timestamp: Double, playerTag: String) {
-        videoPlayerControlsView?.setPlayButtonState(state: true)
-        videoPlayerControlsView?.updateTimeLabelOnStart()
-        self.trackVideoStart()
-    }
-    
-    func videoPause(timestamp: Double, playerTag: String) {
-        videoPlayerControlsView?.setPlayButtonState(state: false)
-    }
-    
-    func videoResume(timestamp: Double, playerTag: String) {
-        videoPlayerControlsView?.setPlayButtonState(state: true)
-    }
-    
-    func videoFinished(playerTag: String) {
-        videoPlayerControlsView?.setPlayButtonState(state: false)
-    }
-    
-    func videoPlaybackError(currentTime: Double, errorMessage: String, errorCode: String, playerTag: String) {
-        videoPlayerControlsView?.setPlayButtonState(state: false)
-        
-        if !errorMessage.isEmpty {
-            showAlert(message: errorMessage)
-        }
-    }
-    
-    func videoFetchError(error: VLError?, playerTag: String?, contentResponse: Dictionary<String, AnyObject>?) {
-        let errorDescription = buildErrorDescription(from: error)
-        
-        print("Error VL:", errorDescription)
-        print("VideoFetchError: contentResponse:", contentResponse as Any)
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.showAlert(message: errorDescription)
-            self?.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
-        }
-    }
-    
-    private func buildErrorDescription(from error: VLError?) -> String {
-        guard let error = error else { return "Unknown error occurred" }
-        
-        return """
-        Is content playable - \(error.isPlayable)
-        Content Fetched successfully - \(error.isSuccess)
-        Error Code - \(error.errorCode)
-        Error Message - \(error.errorMessage)
-        Error VL Code - \(error.vl_errorCode)
-        """
-    }
-    
-    func videoPlayerProgressByEverySecond(currentTime: Double, totalTime: Double, playerTag: String, parsedTimeStamp: String?) {
-        let elapsedTime = calculateElapsedTime(currentTime: currentTime, totalTime: totalTime)
-        
-        videoPlayerControlsView?.updateTimeLabel(
-            timeRemaining: totalTime - currentTime,
-            elapsedTime: currentTime
-        )
-        
-        let sliderValue = getSliderDuration(currentTime: elapsedTime, totalDuration: totalTime)
-        videoPlayerControlsView?.updateSliderDuration(sliderValue: sliderValue)
-    }
-    
-    private func calculateElapsedTime(currentTime: Double, totalTime: Double) -> Double {
-        guard let _ = vlPlayer.getStartOverTime() else { return currentTime }
-        return currentTime > totalTime ? totalTime : currentTime
-    }
-    
-    private func getSliderDuration(currentTime: Double, totalDuration: Double) -> Double {
-        guard totalDuration > 0, currentTime <= totalDuration else { return 0 }
-        return currentTime / totalDuration
-    }
-    
-    func playerBitrateDebugLogs(logString: String) {
-        guard enableBitrateLogs else { return }
-        
-        debugLogView.isHidden = false
-        debugLogView.text.append(logString + "\n\n")
-        
-        let range = NSRange(location: debugLogView.text.count - 1, length: 0)
-        debugLogView.scrollRangeToVisible(range)
-    }
-}
-
-// MARK: - FullScreenDelegate
-extension VideoPlaybackController: fullScreenDelegate {
-    
-    func onFullScreenChange(currentTime: Double, isFullScreen: Bool, playerTag: String) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        appDelegate.isFullScreen = isFullScreen
-        
-        if isFullScreen {
-            presentFullScreenPlayer()
-        } else {
-            dismissFullScreenPlayer()
-        }
-    }
-    
-    private func presentFullScreenPlayer() {
-        vlPlayer.getVideoPlayerView()?.removeFromSuperview()
-        
-        fullScreenView = FullScreenPlayerViewController()
-        fullScreenView?.modalPresentationStyle = .fullScreen
-        fullScreenView?.view.frame = UIScreen.main.bounds
-        
-        present(fullScreenView!, animated: false) { [weak self] in
-            self?.configureFullScreenControls()
-        }
-        
-        if let playerView = vlPlayer.getVideoPlayerView() {
-            fullScreenView?.loadPlayerView(playerView: playerView)
-        }
-    }
-    
-    private func dismissFullScreenPlayer() {
-        self.fullScreenView?.dismiss(animated: false, completion: {
-            self.videoPlayerControlsView?.frame = self.vlPlayer.getVideoPlayerView()?.frame ?? .zero
-            self.videoPlayerControlsView?.updateControls(with: .small)
-            self.videoPlayerControlsView?.videoPlayer?.setPlayerFitToSmallScreen(frame: .zero)
-            
-            if let playerView = self.vlPlayer.getVideoPlayerView() {
-                self.addPlayer(playerView: playerView)
-            }
-            
-        })
-    }
-    
-    private func configureFullScreenControls() {
-        videoPlayerControlsView?.frame = vlPlayer.getVideoPlayerView()?.frame ?? .zero
-        videoPlayerControlsView?.updateControls(with: .full)
-        videoPlayerControlsView?.videoPlayer?.setPlayerFitToFullScreen()
-    }
-    
-    func fullScreenViewRemoved(playerTag: String) {
-        vlPlayer.getVideoPlayerView()?.removeFromSuperview()
-        vlPlayer.videoPlayerDelegate = self
-        vlPlayer.getVideoPlayerView()?.frame = playerFrame
-    }
-}
-
-// MARK: - Picture in Picture Delegates
-extension VideoPlaybackController {
-    
-    func pictureInPictureSetupCompleted(isPIPSelected: Bool) {
-        print(#function)
-    }
-    
-    func pictureInPictureWillStart() {
-        print(#function)
-    }
-    
-    func pictureInPictureDidStart() {
-        vlPlayer.requireLinearPlaybackInPictureInPicture(isRequired: false)
-    }
-    
-    func pictureInPictureRestoreFullPlayer() {
-        print(#function)
-    }
-    
-    func pictureInPictureWillStop() {
-        print(#function)
-    }
-    
-    func pictureInPictureDidStop() {
-        print(#function)
-    }
-    
-    func pictureInPictureDidFailedToStart(error: VLError, playerTag: String) {
-        print(#function)
-    }
-}
-
-// MARK: - ClientSideAdTrackingDelegate
-extension VideoPlaybackController: ClientSideAdTrackingDelegate {
-    
-    func additionalTrackingDetailsForClientSideAdTracking() -> [String: Any]? {
-        return ["hello": "value"]
-    }
-    
-    func initalisationForExternalAdTrackingSdk(playerView: UIView, playerSize: CGSize, completion: (() -> Void)) {
-        completion()
-    }
-    
-    func clientSideAdTrackingEvents(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType, eventTrackingProperties: [String: Any]) {
-        // Handle ad tracking events
-    }
-}
-
-// MARK: - Authentication
-extension VideoPlaybackController {
-    
-    func loginWithTVE() {
-        debugPrint("Login with TVE called")
-        proceedTVELogin()
-    }
-    
-    private func proceedTVELogin() {
-        VLAuthentication.sharedInstance.initiateAuthentication(
-            authenticationType: .signin,
-            authenticationObject: nil,
-            authenticationClient: .tvProvider(provider: .adobe, tveInitializationConfig: nil),
-            presentingViewController: self,
-            beacon: VLBeacon.getInstance()
-        ) { [weak self] userIdentity, errorCode in
-            DispatchQueue.main.async {
-                if userIdentity == nil, let codeString = errorCode?.codeString {
-                    self?.showAlert(message: codeString)
-                    return
-                }
-                
-                UserManager.shared.userIdentity = userIdentity
-                AppDelegate.shared.authorizationToken = userIdentity?.authorizationToken
-                self?.vlPlayer.destroy()
-                self?.vlPlayer.playerAdsAnalyticsDelegate = nil
-                self?.vlPlayer.playerVideoAnalyticsDelegate = nil
-                self?.loadPlayerView()
-                self?.logoutButton.isHidden = false
-            }
-        }
-    }
-}
-
-// MARK: - ChromeCast
-extension VideoPlaybackController {
-    
-    func chromeCastConnectionStatusUpdate(isConnected: Bool) {
-        print("Cast connected:", isConnected)
-    }
-    
-    func getChromeCastConnectedStatus() {
-        print("Cast connected:", vlPlayer.getChromeCastConnectedStatus())
-    }
-    
-    func seekStarted(time: TimeInterval) {
-        print("Seek Started: \(time)")
-    }
-    
-    func seekCompleted(time: TimeInterval) {
-        print("Seek Completed: \(time)")
-    }
-}
-
 // MARK: - Orientation Handling
-extension VideoPlaybackController {
+extension PlayerViewController_iOS {
     
+    /// Handles device orientation changes for fullscreen player
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-
+        
         coordinator.animate(alongsideTransition: { _ in
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
             
@@ -885,16 +556,5 @@ extension VideoPlaybackController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // Handle layout updates if needed
-    }
-}
-
-
-extension VideoPlaybackController: VLAuthPlayerDelegate {
-    func reloadPlayer() {
-        
-    }
-    
-    func terminatePlayer() {
-        
     }
 }

@@ -14,26 +14,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var isFullScreen: Bool = false
     var window: UIWindow?
-    
-    let siteId = "cea398b9-09ab-4331-958f-8c3d6a356b88"
     var authorizationToken: String? = nil
-    let xApiKey = "3c32790a-967c-4abf-beeb-64d29bcc90b9"
-    let apiBaseEndpoint = "https://spinco.staging.api.viewlift.com"
-    let graphQLEndpoint = "https://spinco.staging.api.viewlift.com/graphql"
-    
-    
+    var readVideoListOperation:VideoListProtocol?
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-
+        self.readVideoList(readVideoListOperation: ReadFromLocalJson())
         // Get current user identity before async context
         self.setupAuthentication()
 
         return true
     }
-
+    
+    private func readVideoList(readVideoListOperation: VideoListProtocol) {
+        self.readVideoListOperation = readVideoListOperation
+        self.readVideoListOperation?.readVideoList()
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
