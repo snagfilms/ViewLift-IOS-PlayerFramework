@@ -48,7 +48,7 @@ struct VideoList:Decodable {
     let beaconBaseUrl: String?
     let xApiKey: String
     let partnerApiBaseUrl: String
-    let site: String
+    let domain: String
     let drmConfig: DRMConfigAsset?
     let authKeys: AuthKeys
     func checkForConfigurationErrorMessage() -> String?{

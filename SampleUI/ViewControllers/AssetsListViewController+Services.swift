@@ -118,7 +118,7 @@ extension AssetListViewController {
         videoId: String,
         apiResponse: @escaping (_ playerObject: VLPlayerLib.PlayerObject?, _ isSuccess: Bool, _ vlError: VLPlayerLib.VLError?, _ playerResponse: VLPlayerLib.VLPlayerResponse?, _ contentResponse: Dictionary<String, AnyObject>?) -> Void
     ) {
-        let urlString = "\(videoList.partnerApiBaseUrl)/partner/video/assests?id=\(videoId)&site=\(videoList.site)"
+        let urlString = "\(videoList.partnerApiBaseUrl)/partner/video/assests?id=\(videoId)&site=\(videoList.domain)"
         if urlString.contains("xxxxx"){
             self.showAlert(message: "Please update the URL with Api base url and site.\n\(urlString)")
             return

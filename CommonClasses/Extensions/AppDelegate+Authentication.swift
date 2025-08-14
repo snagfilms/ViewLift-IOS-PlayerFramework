@@ -33,14 +33,14 @@ extension AppDelegate {
             return
         }
         let xApiKey: String = videoList.xApiKey
-        let siteId: String = videoList.authKeys.siteId
+        let domain: String = videoList.domain
         let apiBaseEndpoint: String = videoList.authKeys.apiBaseEndpoint
         let graphQLEndpoint: String = videoList.authKeys.graphQLEndpoint
         
         // Create API configuration object
         let apiConfig = APIConfig(
             xApiKey: xApiKey,
-            siteId: siteId,
+            domain: domain,
             authorizationToken: authorizationToken,
             apiBaseUrl: apiBaseEndpoint,
             graphQLApiBaseUrl: graphQLEndpoint
