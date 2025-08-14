@@ -15,6 +15,7 @@ extension PlayerViewController_iOS {
         appDelegate.isFullScreen = isFullScreen
         isFullscreen = isFullScreen
         allowLandscapeRotation = isFullScreen // only allow rotation when fullscreen
+        videoPlayerCustomView?.viewModel?.isLandscape = isFullScreen
         if isFullScreen {
             // Activate fullscreen constraints
             NSLayoutConstraint.deactivate(normalConstraints)

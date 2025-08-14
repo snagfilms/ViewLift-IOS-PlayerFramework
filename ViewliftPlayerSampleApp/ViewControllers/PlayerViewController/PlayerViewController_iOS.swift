@@ -46,7 +46,9 @@ class PlayerViewController_iOS: UIViewController {
     var customPaywallView: CustomPaywallView?
     private var videoList: VideoList!
     var vlPlayer: VLPlayer!
-    var videoPlayerControlsView: CustomVideoControls?
+    var videoPlayerControlsView: CustomVideoControls? // using UIKIT
+    var videoPlayerCustomView: (view: UIView?, viewModel: PlayerControlsViewModel?)? // using SwiftUI
+
     // Configuration Properties
     var enableCustomPlayerUI: Bool = false
     var enableBitrateLogs: Bool = false
@@ -160,6 +162,7 @@ class PlayerViewController_iOS: UIViewController {
         vlPlayer?.playerAdsAnalyticsDelegate = nil
         vlPlayer?.playerVideoAnalyticsDelegate = nil
         videoPlayerControlsView?.removeFromSuperview()
+        videoPlayerCustomView?.view?.removeFromSuperview()
     }
     
     /// Prepares the view with selected player UI option and video list
@@ -259,7 +262,7 @@ extension PlayerViewController_iOS {
 //        videoPlayerControlsView = controls
         vlPlayer.setSource(
             type: .directStream(playbackConfig),
-            customControlsView: videoPlayerControlsView,
+            customControlsView: getCustomPlayerSkin().view,
             playerFeaturesSupported: features
         ) {
             [weak self] isSuccess,
@@ -281,6 +284,22 @@ extension PlayerViewController_iOS {
                 loader: loader,
                 hasTVE: hasTVE
             )
+            
+            if let video = contentResponse?["video"] as? [String: Any] {
+                let title = (video["title"] as? String) ?? ""
+                let isLive = ((video["streamingInfo"] as? [String: Any])?["isLiveStream"] as? Bool ) ?? false
+                
+                var isDVR = false
+                if let liveDetailsDict = video["liveDetails"] as? Dictionary<String, Any>{
+                    if let isDVREnabled = liveDetailsDict["isDvrEnabled"] as? Bool,
+                        isDVREnabled == true,
+                       let startOverTime = liveDetailsDict["startOverTime"] as? Double, startOverTime > 0 {
+                        isDVR = isDVREnabled
+                    }
+                }
+                self?.videoPlayerCustomView?.viewModel?.updateSkin(title: title, isLive: isLive, isDVREnabled: isDVR)
+            }
+            
             if let contentResponse = contentResponse {
                 self?.parseVLVideoResponse(from: contentResponse)
             }
@@ -306,7 +325,7 @@ extension PlayerViewController_iOS {
         
         vlPlayer.setSource(
             type: .contentPlayback(playbackConfig),
-            customControlsView: videoPlayerControlsView,
+            customControlsView: getCustomPlayerSkin().view,
             playerFeaturesSupported: features
         ) {
             [weak self] isSuccess,
@@ -327,6 +346,22 @@ extension PlayerViewController_iOS {
                 loader: loader,
                 hasTVE: hasTVE
             )
+            
+            if let video = contentResponse?["video"] as? [String: Any] {
+                let title = (video["title"] as? String) ?? ""
+                let isLive = ((video["streamingInfo"] as? [String: Any])?["isLiveStream"] as? Bool ) ?? false
+                
+                var isDVR = false
+                if let liveDetailsDict = video["liveDetails"] as? Dictionary<String, Any>{
+                    if let isDVREnabled = liveDetailsDict["isDvrEnabled"] as? Bool,
+                        isDVREnabled == true,
+                       let startOverTime = liveDetailsDict["startOverTime"] as? Double, startOverTime > 0 {
+                        isDVR = isDVREnabled
+                    }
+                }
+                self?.videoPlayerCustomView?.viewModel?.updateSkin(title: title, isLive: isLive, isDVREnabled: isDVR)
+            }
+            
             if let contentResponse = contentResponse {
                 self?.parseVLVideoResponse(from: contentResponse)
             }
@@ -354,6 +389,7 @@ extension PlayerViewController_iOS {
     private func configurePlayer() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
         vlPlayer.videoPlayerDelegate = self
+        vlPlayer.adManagerDelegate = self
         vlPlayer.playerAdsAnalyticsDelegate = self
         vlPlayer.playerVideoAnalyticsDelegate = self
         vlPlayer.enablePlayerBitrateLogs = enableBitrateLogs
@@ -435,10 +471,11 @@ extension PlayerViewController_iOS {
     
     /// Sets up custom player UI controls and PiP
     private func setupCustomPlayerUI() {
-        videoPlayerControlsView?.setupPictureInPicture()
-        videoPlayerControlsView?.startPictureInPictureInline(enable: true)
+//        videoPlayerControlsView?.setupPictureInPicture()
+//        videoPlayerControlsView?.startPictureInPictureInline(enable: true)
+//        videoPlayerControlsView?.updatePlayerControlsType(playerControlType: self.vlPlayer.isLiveVideo() ? .liveVideoControls : .streamVideoControls)
         
-        videoPlayerControlsView?.updatePlayerControlsType(playerControlType: self.vlPlayer.isLiveVideo() ? .liveVideoControls : .streamVideoControls)
+//        vlPlayer.setupPictureInPicture()
     }
     
     /// Returns a custom controls view, optionally with custom seek durations
@@ -452,7 +489,36 @@ extension PlayerViewController_iOS {
         
         return controlsView
     }
-    
+
+    func getCustomPlayerSkin() -> (view: UIView?, viewModel: PlayerControlsViewModel?) {
+        if self.videoPlayerCustomView?.view != nil {
+            self.videoPlayerCustomView?.view?.removeFromSuperview()
+            self.videoPlayerCustomView?.view = nil
+            self.videoPlayerCustomView?.viewModel = nil
+            self.videoPlayerCustomView = nil
+        }
+
+        let playerControlsConfig = PlayerControlsConfig(
+            isChromeCastSupported: true,
+            isAirPlaySupported: true,
+            isPIPSupported: true,
+            isSettingsSupported: true,
+            isSlowMoSupported: true,
+            isVideoLiveStream: streamConfig?.isLive ?? false,
+            isDVREnabled: streamConfig?.isDVR ?? false,
+            videoTitle: "",
+            playerControlsColor: nil
+        )
+
+        let viewModel = PlayerControlsViewModel(delegate: self,
+                                                playerControlsConfig: playerControlsConfig)
+
+        let customView = PlayerControlsHostingView(viewModel: viewModel)
+        self.videoPlayerCustomView = (view: customView, viewModel: viewModel)
+        
+        return self.videoPlayerCustomView!
+    }
+
     /// Returns the supported player features configuration
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
         let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]

@@ -16,27 +16,38 @@ extension PlayerViewController_iOS: videoPlaybackDelegate {
     func videoStarted(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: true)
         videoPlayerControlsView?.updateTimeLabelOnStart()
+        
+        videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: true)
+        if let currentTime = vlPlayer?.getCurrentTime(), let remainingTime = vlPlayer?.getCurrentVideoTimeLeft() {
+            videoPlayerCustomView?.viewModel?.updateTimeLabel(totalTime: remainingTime, currentTime: currentTime)
+        }
+        videoPlayerCustomView?.viewModel?.setupPiP()
+        
         self.trackVideoStart()
     }
     
     // Called when video is paused
     func videoPause(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: false)
+        videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: false)
     }
     
     // Called when video resumes from pause
     func videoResume(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: true)
+        videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: true)
     }
     
     // Called when video finishes playback
     func videoFinished(playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: false)
+        videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: false)
     }
     
     // Handles playback errors and shows alert if needed
     func videoPlaybackError(currentTime: Double, errorMessage: String, errorCode: String, playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: false)
+        videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: false)
         
         if !errorMessage.isEmpty {
             showAlert(message: errorMessage)
@@ -77,9 +88,11 @@ extension PlayerViewController_iOS: videoPlaybackDelegate {
             timeRemaining: totalTime - currentTime,
             elapsedTime: currentTime
         )
+        videoPlayerCustomView?.viewModel?.updateTimeLabel(totalTime: (totalTime - currentTime), currentTime: currentTime)
         
         let sliderValue = getSliderDuration(currentTime: elapsedTime, totalDuration: totalTime)
         videoPlayerControlsView?.updateSliderDuration(sliderValue: sliderValue)
+        videoPlayerCustomView?.viewModel?.seekTo(time: sliderValue)
     }
     
     // Calculates elapsed time, considering start-over if available
@@ -104,4 +117,5 @@ extension PlayerViewController_iOS: videoPlaybackDelegate {
         let range = NSRange(location: debugLogView.text.count - 1, length: 0)
         debugLogView.scrollRangeToVisible(range)
     }
+    
 }

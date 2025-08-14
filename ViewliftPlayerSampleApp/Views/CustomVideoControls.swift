@@ -11,6 +11,7 @@ import VLPlayerLib
 import AVKit
 
 class CustomVideoControls: UIView, CustomPlayerSkinProtocol {
+    
     func updatePlayButton() {
         
     }
@@ -532,7 +533,7 @@ class CustomVideoControls: UIView, CustomPlayerSkinProtocol {
     
     @objc func fullScreenButtonTapped(sender: UIButton)
     {
-        self.videoPlayer?.goFullScreen()
+        self.videoPlayer?.goFullScreen(true)
     }
     
     @objc func playButtonTapped(sender: UIButton) -> Void
