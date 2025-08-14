@@ -41,14 +41,12 @@ class PlayerViewController_iOS: UIViewController {
     @IBOutlet var debugLogView: UITextView!
     @IBOutlet private weak var addNextButton: UIButton!
     @IBOutlet private weak var playNextButton: UIButton!
-    
+    @IBOutlet private weak var backButton: UIButton!
     // MARK: - Properties
     var customPaywallView: CustomPaywallView?
     private var videoList: VideoList!
     var vlPlayer: VLPlayer!
     var videoPlayerControlsView: CustomVideoControls?
-    var fullScreenView: FullScreenPlayerViewController?
-    
     // Configuration Properties
     var enableCustomPlayerUI: Bool = false
     var enableBitrateLogs: Bool = false
@@ -63,6 +61,11 @@ class PlayerViewController_iOS: UIViewController {
     weak var player: AVPlayer?
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
+    private let playerContainerView = UIView()
+    var fullscreenConstraints: [NSLayoutConstraint] = []
+    var normalConstraints: [NSLayoutConstraint] = []
+    var isFullscreen = false
+    var allowLandscapeRotation: Bool = true
     private var nextVideoLists: [String] = [] {
         didSet {
             updateButtonStates()
@@ -97,6 +100,9 @@ class PlayerViewController_iOS: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        playerContainerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(playerContainerView)
+        setupConstraints()
         setupInitialState()
         loadPlayerView()
         
@@ -107,6 +113,29 @@ class PlayerViewController_iOS: UIViewController {
             self.logoutButton.isHidden = false
         }
     }
+    
+    func setupConstraints() {
+        // Normal constraints (small mode)
+        normalConstraints = [
+            playerContainerView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 8),
+            playerContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            playerContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            // Maintain 16:9 aspect ratio
+            playerContainerView.heightAnchor.constraint(equalTo: playerContainerView.widthAnchor, multiplier: 9.0/16.0)
+        ]
+
+        // Fullscreen constraints
+        fullscreenConstraints = [
+            playerContainerView.topAnchor.constraint(equalTo: view.topAnchor),
+            playerContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            playerContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            playerContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ]
+
+        NSLayoutConstraint.activate(normalConstraints)
+    }
+    
+
     
     deinit {
         cleanupResources()
@@ -131,7 +160,6 @@ class PlayerViewController_iOS: UIViewController {
         vlPlayer?.playerAdsAnalyticsDelegate = nil
         vlPlayer?.playerVideoAnalyticsDelegate = nil
         videoPlayerControlsView?.removeFromSuperview()
-        fullScreenView?.dismiss(animated: false)
     }
     
     /// Prepares the view with selected player UI option and video list
@@ -185,7 +213,7 @@ extension PlayerViewController_iOS {
     
     /// Loads and configures the player view
     func loadPlayerView() {
-        let loaderView = addLoaderView(to: view)
+        let loaderView = addLoaderView(to: playerContainerView)
         loaderView.startAnimating()
         
         let featureSupported = getPlayerFeaturesSupported()
@@ -224,10 +252,11 @@ extension PlayerViewController_iOS {
         
         let playbackConfig = VLPlayer.DirectStreamPlaybackConfig(
             stream: streamType,
-            token: vlToken,
-            apiBaseURL: baseUrl
+            token: "",
+            apiBaseURL: ""
         )
-        
+//        let controls = getCustomControls()
+//        videoPlayerControlsView = controls
         vlPlayer.setSource(
             type: .directStream(playbackConfig),
             customControlsView: videoPlayerControlsView,
@@ -399,8 +428,9 @@ extension PlayerViewController_iOS {
         if enableCustomPlayerUI {
             setupCustomPlayerUI()
         }
-        playerView.frame = playerFrame
-        view.addSubview(playerView)
+       // playerView.frame = playerFrame
+        playerContainerView.addSubview(playerView)
+        playerView.pinToSuperview(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
     }
     
     /// Sets up custom player UI controls and PiP
@@ -459,7 +489,7 @@ extension PlayerViewController_iOS {
             self.customPaywallView = customPaywallView
             return payWallConfiguration
         case .default:
-            // Use default paywall view
+            // Uses default paywall view
             return nil
         }
     }
@@ -471,21 +501,13 @@ extension PlayerViewController_iOS {
     /// Adds and returns a loader (activity indicator) to the given container view
     private func addLoaderView(to containerView: UIView) -> UIActivityIndicatorView {
         let loaderView: UIActivityIndicatorView
-        
-        if #available(iOS 13.0, *) {
-            loaderView = UIActivityIndicatorView(style: .large)
-            loaderView.color = .black
-        } else {
-            loaderView = UIActivityIndicatorView(style: .whiteLarge)
-        }
-        
+        loaderView = UIActivityIndicatorView(style: .whiteLarge)
         containerView.addSubview(loaderView)
         loaderView.center = CGPoint(
             x: playerFrame.midX,
             y: playerFrame.midY
         )
         loaderView.hidesWhenStopped = true
-        
         return loaderView
     }
     
@@ -521,7 +543,7 @@ extension PlayerViewController_iOS {
         vlPlayer.destroy()
         vlPlayer.playerAdsAnalyticsDelegate = nil
         vlPlayer.playerVideoAnalyticsDelegate = nil
-        dismissViewController()
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -532,22 +554,31 @@ extension PlayerViewController_iOS {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        coordinator.animate(alongsideTransition: { _ in
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        coordinator.animate(alongsideTransition:nil) { _ in
+            guard let orientation = self.view.window?.windowScene?.interfaceOrientation else { return }
             
-            if size.width > size.height {
-                if appDelegate?.isFullScreen == false {
-                    self.vlPlayer.goFullScreen()
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                // If we are on fullscreen and user rotates to portrait, exit fullscreen
+                if self.isFullscreen && orientation.isPortrait {
+                    self.vlPlayer.goFullScreen(false)// will trigger onFullScreenChange(false)
+                }
+            } else {
+                if orientation.isLandscape {
+                    if !self.isFullscreen {
+                        self.isFullscreen = true
+                        self.vlPlayer.goFullScreen(true)
+                    }
+                } else if orientation.isPortrait {
+                    if self.isFullscreen {
+                        self.isFullscreen = false
+                        self.vlPlayer.goFullScreen(false)
+                    }
                 }
             }
-            else {
-                if appDelegate?.isFullScreen == true {
-                    self.vlPlayer.removeFullScreen()
-                }
-            }
-        }, completion: nil)
+        }
     }
-    
+
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Clean up any non-essential resources
@@ -556,5 +587,88 @@ extension PlayerViewController_iOS {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // Handle layout updates if needed
+    }
+}
+
+extension UIView {
+    
+    func setupConstraints(superView: UIView, withHeightConstraint: Bool? = false, topOffset: CGFloat = 0) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint(item: self,
+                           attribute: .top,
+                           relatedBy: .equal,
+                           toItem: superView,
+                           attribute: .top,
+                           multiplier: 1,
+                           constant: topOffset).isActive = true
+        NSLayoutConstraint(item: self,
+                           attribute: .leading,
+                           relatedBy: .equal,
+                           toItem: superView,
+                           attribute: .leading,
+                           multiplier: 1,
+                           constant: 0).isActive = true
+        NSLayoutConstraint(item: self,
+                           attribute: .trailing,
+                           relatedBy: .equal,
+                           toItem: superView,
+                           attribute: .trailing,
+                           multiplier: 1,
+                           constant: 0).isActive = true
+        if withHeightConstraint == true {
+            NSLayoutConstraint(item: self,
+                               attribute: .height,
+                               relatedBy: .equal,
+                               toItem: nil,
+                               attribute: .notAnAttribute,
+                               multiplier: 1,
+                               constant: self.bounds.height).isActive = true
+        } else {
+            NSLayoutConstraint(item: self,
+                               attribute: .bottom,
+                               relatedBy: .equal,
+                               toItem: superView,
+                               attribute: .bottom,
+                               multiplier: 1,
+                               constant: 0).isActive = true
+        }
+    }
+    
+    func pinToSuperview(edges: UIRectEdge = .all, insets: UIEdgeInsets = .zero) {
+        guard let superview = superview else {
+            debugPrint("⚠️ No superview to pin to.")
+            return
+        }
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraints = [NSLayoutConstraint]()
+        
+        if edges.contains(.top) || edges == .all {
+            constraints.append(topAnchor.constraint(equalTo: superview.topAnchor, constant: insets.top))
+        }
+        if edges.contains(.left) || edges == .all {
+            constraints.append(leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: insets.left))
+        }
+        if edges.contains(.bottom) || edges == .all {
+            constraints.append(bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -insets.bottom))
+        }
+        if edges.contains(.right) || edges == .all {
+            constraints.append(trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right))
+        }
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+}
+extension UIWindow {
+    static var isLandscape: Bool {
+        if #available(iOS 13.0, *) {
+            return UIApplication.shared.windows
+                .last?
+                .windowScene?
+                .interfaceOrientation
+                .isLandscape ?? false
+        } else {
+            return UIApplication.shared.statusBarOrientation.isLandscape
+        }
     }
 }

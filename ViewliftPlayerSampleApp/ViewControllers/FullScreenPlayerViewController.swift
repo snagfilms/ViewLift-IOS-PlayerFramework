@@ -39,6 +39,7 @@ class FullScreenPlayerViewController: UIViewController {
     }
 
     func loadPlayerView(playerView:UIView) {
+        playerView.translatesAutoresizingMaskIntoConstraints = true
         playerFullScreenView = playerView
         playerFullScreenView?.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         self.view.addSubview(playerFullScreenView!)

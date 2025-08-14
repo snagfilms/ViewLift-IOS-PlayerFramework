@@ -353,8 +353,9 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         videoPlaybackController.loopEnabled = loopEnabled
         videoPlaybackController.hideControls = hideControls
         videoPlaybackController.muteEnabled = muteEnabled
-        videoPlaybackController.modalPresentationStyle = .fullScreen
-        self.present(videoPlaybackController, animated: true, completion: nil)
+       // videoPlaybackController.modalPresentationStyle = .fullScreen
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.pushViewController(videoPlaybackController, animated: true)
         #else
         let vc = PlayerViewController_tvOS()
         vc.playerOptionSelected = videoId == nil ? .playStreamURL : .defaultControl
