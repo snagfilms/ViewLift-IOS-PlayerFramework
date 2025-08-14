@@ -37,6 +37,7 @@
 		D20164D12E4B8CA4009CD41B /* GoogleCast-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = D20164D02E4B8CA4009CD41B /* GoogleCast-iOS */; };
 		D20164D32E4B8CA4009CD41B /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = D20164D22E4B8CA4009CD41B /* VLPlayerLib */; };
 		D20164D52E4B8CB1009CD41B /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = D20164D42E4B8CB1009CD41B /* VLPlayerLib */; };
+		D23998712E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23998702E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift */; };
 		D27C147A2E31416800A3728B /* CustomPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C14782E31416800A3728B /* CustomPaywallView.swift */; };
 		D2A15DA72E281AD900F88E09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5422EFF5209912C600206D66 /* ViewController.swift */; };
 		D2A15DA92E281AD900F88E09 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
@@ -152,6 +153,7 @@
 		9D3AAA882E4E2E7100FFDA9A /* UIDeviceViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceViewModifier.swift; sourceTree = "<group>"; };
 		9D3AAA8A2E4E2E7100FFDA9A /* PlayerControlsHostingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlsHostingView.swift; sourceTree = "<group>"; };
 		9D3AAA8B2E4E2E7100FFDA9A /* PlayerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlsView.swift; sourceTree = "<group>"; };
+		D23998702E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController+PlayerControlsDelegate.swift"; sourceTree = "<group>"; };
 		D2493F642E4B89DA009AA6CD /* GoogleInteractiveMediaAds-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-iOS.xcframework"; path = "../iOSPlayerSDK/VLPlayer/Framework/iOS/GoogleInteractiveMediaAds-iOS.xcframework"; sourceTree = "<group>"; };
 		D2493F652E4B89DA009AA6CD /* GoogleCast-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleCast-iOS.xcframework"; path = "../iOSPlayerSDK/VLPlayer/Framework/iOS/GoogleCast-iOS.xcframework"; sourceTree = "<group>"; };
 		D2493F662E4B89DA009AA6CD /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "../iOSPlayerSDK/VLPlayer/Framework/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 		D2A759852E4B27410089B4D1 /* PlayerViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D23998702E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift */,
 				D2A7597F2E4B27410089B4D1 /* PlayerViewController_iOS.swift */,
 				D2A759842E4B27410089B4D1 /* PlayerViewController_iOS+VideoPlaybackDelegate.swift */,
 				D2A759832E4B27410089B4D1 /* PlayerViewController_iOS+TVEAuthentication.swift */,
@@ -755,6 +758,7 @@
 				D2A759C92E4B5AB50089B4D1 /* PlayerViewController_iOS+FullScreenPlayer.swift in Sources */,
 				D2A758FF2E4B0D1F0089B4D1 /* VideoList.swift in Sources */,
 				D2A759002E4B0D1F0089B4D1 /* AssetModel.swift in Sources */,
+				D23998712E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift in Sources */,
 				5422EFF4209912C600206D66 /* AppDelegate.swift in Sources */,
 				5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */,
 				D2A759872E4B27410089B4D1 /* PlayerViewController_iOS+VideoPlaybackDelegate.swift in Sources */,
