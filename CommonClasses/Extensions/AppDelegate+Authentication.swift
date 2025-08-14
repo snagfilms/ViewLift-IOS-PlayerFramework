@@ -40,7 +40,7 @@ extension AppDelegate {
         // Create API configuration object
         let apiConfig = APIConfig(
             xApiKey: xApiKey,
-            domain: domain,
+            identifier: .domain(domain),
             authorizationToken: authorizationToken,
             apiBaseUrl: apiBaseEndpoint,
             graphQLApiBaseUrl: graphQLEndpoint

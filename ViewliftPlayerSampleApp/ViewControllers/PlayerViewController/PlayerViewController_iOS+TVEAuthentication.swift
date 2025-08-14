@@ -9,6 +9,7 @@
 import VLPlayerLib
 import VLAuthenticationFramework
 import VLBeaconLib
+import Foundation
 
 // Handles TVE authentication logic for the player view controller
 extension PlayerViewController_iOS {
