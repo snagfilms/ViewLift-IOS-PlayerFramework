@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40594B7B2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40594B7A2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift */; };
+		40594B7D2E50AC2B00176629 /* GoogleCast-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = 40594B7C2E50AC2B00176629 /* GoogleCast-iOS */; };
+		40594B7F2E50AC2B00176629 /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = 40594B7E2E50AC2B00176629 /* VLPlayerLib */; };
 		5422EFF4209912C600206D66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5422EFF3209912C600206D66 /* AppDelegate.swift */; };
 		5422EFF6209912C600206D66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5422EFF5209912C600206D66 /* ViewController.swift */; };
 		5422EFF9209912C600206D66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5422EFF7209912C600206D66 /* Main.storyboard */; };
@@ -34,8 +37,6 @@
 		BAC3136C2E40485100D111E1 /* MUXSDKStats in Frameworks */ = {isa = PBXBuildFile; productRef = BAC3136B2E40485100D111E1 /* MUXSDKStats */; };
 		BAC313812E4048AE00D111E1 /* VLAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = BAC313802E4048AE00D111E1 /* VLAuthentication */; };
 		BACF9FA92E40AA94008061DD /* VLAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = BACF9FA82E40AA94008061DD /* VLAuthentication */; };
-		D20164D12E4B8CA4009CD41B /* GoogleCast-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = D20164D02E4B8CA4009CD41B /* GoogleCast-iOS */; };
-		D20164D32E4B8CA4009CD41B /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = D20164D22E4B8CA4009CD41B /* VLPlayerLib */; };
 		D20164D52E4B8CB1009CD41B /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = D20164D42E4B8CB1009CD41B /* VLPlayerLib */; };
 		D23998712E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23998702E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift */; };
 		D27C147A2E31416800A3728B /* CustomPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C14782E31416800A3728B /* CustomPaywallView.swift */; };
@@ -129,6 +130,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		40594B7A2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+SSAI.swift"; sourceTree = "<group>"; };
 		5422EFF0209912C600206D66 /* ViewliftPlayerSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViewliftPlayerSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5422EFF3209912C600206D66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5422EFF5209912C600206D66 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -213,9 +215,9 @@
 				BAC3136C2E40485100D111E1 /* MUXSDKStats in Frameworks */,
 				BAC313812E4048AE00D111E1 /* VLAuthentication in Frameworks */,
 				D2E78D172E428ED800C98C1A /* VLAnalytics in Frameworks */,
-				D20164D32E4B8CA4009CD41B /* VLPlayerLib in Frameworks */,
+				40594B7F2E50AC2B00176629 /* VLPlayerLib in Frameworks */,
 				BAAF5A2A2E425F840046FF2C /* VLAuthentication in Frameworks */,
-				D20164D12E4B8CA4009CD41B /* GoogleCast-iOS in Frameworks */,
+				40594B7D2E50AC2B00176629 /* GoogleCast-iOS in Frameworks */,
 				BAC313692E40483400D111E1 /* BitmovinPlayer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,6 +477,7 @@
 		D2A759852E4B27410089B4D1 /* PlayerViewController */ = {
 			isa = PBXGroup;
 			children = (
+				40594B7A2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift */,
 				D23998702E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift */,
 				D2A7597F2E4B27410089B4D1 /* PlayerViewController_iOS.swift */,
 				D2A759842E4B27410089B4D1 /* PlayerViewController_iOS+VideoPlaybackDelegate.swift */,
@@ -566,8 +569,8 @@
 				BAC313802E4048AE00D111E1 /* VLAuthentication */,
 				BAAF5A292E425F840046FF2C /* VLAuthentication */,
 				D2E78D162E428ED800C98C1A /* VLAnalytics */,
-				D20164D02E4B8CA4009CD41B /* GoogleCast-iOS */,
-				D20164D22E4B8CA4009CD41B /* VLPlayerLib */,
+				40594B7C2E50AC2B00176629 /* GoogleCast-iOS */,
+				40594B7E2E50AC2B00176629 /* VLPlayerLib */,
 			);
 			productName = ViewliftPlayerSampleApp;
 			productReference = 5422EFF0209912C600206D66 /* ViewliftPlayerSampleApp.app */;
@@ -763,6 +766,7 @@
 				5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */,
 				D2A759872E4B27410089B4D1 /* PlayerViewController_iOS+VideoPlaybackDelegate.swift in Sources */,
 				D2A759882E4B27410089B4D1 /* PlayerViewController_iOS+Chromecast.swift in Sources */,
+				40594B7B2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift in Sources */,
 				D2A759972E4B2B800089B4D1 /* AnalyticsProtocol.swift in Sources */,
 				D2A759892E4B27410089B4D1 /* PlayerViewController_iOS+Analytics.swift in Sources */,
 				9D3AAA792E4E2E5C00FFDA9A /* Utility.swift in Sources */,
@@ -1642,6 +1646,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		40594B7C2E50AC2B00176629 /* GoogleCast-iOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D20164CF2E4B8CA4009CD41B /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
+			productName = "GoogleCast-iOS";
+		};
+		40594B7E2E50AC2B00176629 /* VLPlayerLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D20164CF2E4B8CA4009CD41B /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
+			productName = VLPlayerLib;
+		};
 		BAAF5A292E425F840046FF2C /* VLAuthentication */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BAAF5A282E425F840046FF2C /* XCRemoteSwiftPackageReference "AuthenticationFramework" */;
@@ -1664,16 +1678,6 @@
 		BACF9FA82E40AA94008061DD /* VLAuthentication */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VLAuthentication;
-		};
-		D20164D02E4B8CA4009CD41B /* GoogleCast-iOS */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D20164CF2E4B8CA4009CD41B /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
-			productName = "GoogleCast-iOS";
-		};
-		D20164D22E4B8CA4009CD41B /* VLPlayerLib */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D20164CF2E4B8CA4009CD41B /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
-			productName = VLPlayerLib;
 		};
 		D20164D42E4B8CB1009CD41B /* VLPlayerLib */ = {
 			isa = XCSwiftPackageProductDependency;
