@@ -12,10 +12,24 @@ import AVKit
 
 // Handles analytics integration for player events and content/ad info
 extension PlayerViewController_iOS: VLAnalyticsPlayerClientProtocol {
-    
     // Called when the player starts playback
-    func playerDidStart(player: AVPlayer?) {
-        self.player = player
+    func trackVideoStartAnalytics() {
+        
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.playStarted)
+            .contentInfo(getVideoInfo())
+            .adsInfo(getAdsInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func trackVideoPauseAnalytics() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.videoPauseStarted)
+            .contentInfo(getVideoInfo())
+            .adsInfo(getAdsInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
     
     // Stores current ad asset info for analytics
@@ -96,19 +110,5 @@ extension PlayerViewController_iOS: VLAnalyticsPlayerClientProtocol {
             videobroadcast: videobroadcast,
             videoInitiate: "Manual"
         )
-    }
-    
-    // Tracks the start of video playback for analytics
-    func trackVideoStart() {
-        let eventBuilder = VLEventModelBuilder()
-            .eventType(.mediaPlay)
-            .contentInfo(getVideoInfo())
-            .tvProviderInfo(VLTVProviderInfo(tvProviderName: UserManager.shared.userIdentity?.mvpdProvider,
-                                             requestorId:/*requestorId*/ "")
-            )
-            .adsInfo(getAdsInfo())
-            .setPlayer(player)
-            .build()
-        VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
 }

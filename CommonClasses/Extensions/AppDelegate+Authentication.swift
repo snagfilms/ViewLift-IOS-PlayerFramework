@@ -11,6 +11,7 @@ import VLAuthenticationFramework
 #else
 import VLAuthenticationFramework_tvOS
 #endif
+import VLAnalyticsLib
 
 // Extension to AppDelegate for handling authentication logic
 extension AppDelegate {
@@ -94,5 +95,9 @@ extension AppDelegate {
         } catch {
             print("VLAuthentication init error: \(error.localizedDescription)")
         }
+    }
+    
+    func setupAnalytics() {
+        VLAnalytics.shared.setupAnalytics(clients: [.adobe])
     }
 }

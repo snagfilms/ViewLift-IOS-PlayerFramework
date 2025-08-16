@@ -12,24 +12,20 @@ import VLAnalyticsLib
 import AVFoundation
 
 public protocol VLAnalyticsPlayerClientProtocol: PlayerVideoAnalyticsTrackDelegate, PlayerAdsAnalyticsTrackDelegate {
-    func playerDidLoadVideo(player: AVPlayer?)
-    func playerFirstFrameLoaded()
-    func playerDidStart()
-    func playerDidPause()
-    func playerSeekDidStart()
-    func playerSeekDidComplete()
-    func playerDidEnded()
-    func playerDidComplete()
-    func playerDidFail(errorMessage: String, isFatal: Bool)
-    func playerDidChangeAudioLanguage(language: String?)
-    func playerDidChangeClosedCaptionLanguage(language: String?)
-    func playerDidDropFrames(count: Int)
-    func playerChapterDidStart()
-    func playerChapterDidComplete()
-    func playerDidStartBuffering()
-    func playerDidBitRateChange()
-    func updatePlayhead(time: Double)
+    func playerDidLoadVideo(player: AVPlayer?) //using
+    func playerFirstFrameLoaded() //using
+    func playerSeekDidStart(fromTimeInterval: Double) //using
+    func playerSeekDidComplete(toTimeInterval: Double) //using
+    func playerSessionEnded() //using
+    func playerDidChangeAudioLanguage(language: String?) //using
+    func playerDidChangeClosedCaptionLanguage(language: String?) //using
+    func playerDidDropFrames(count: Int) //using
+    func playerDidStartBuffering() //using
+    func playerDidBitRateChange() //using
     
+    func updatePlayhead(time: Double)
+    func playerChapterDidStart() //using. currently its being call when video is completed. handle when ads break stop
+    func playerChapterDidComplete() //using. currently its being call when video is completed. handle when ads break starts
     
     func setAdInfo(adId: String, adName: String, podName: String?, podLength: Double?, podPosition: Int?, podOffset: Double?, startTime: Double?, adSystem: String?)
     func setAdComplete()
@@ -63,11 +59,12 @@ extension VLAnalyticsPlayerClientProtocol {
     }
     
     func playerDidLoadVideo(player: AVPlayer?) {
+        let loggedUser = UserManager.shared.userIdentity
+        
         let eventBuilder = VLEventModelBuilder()
             .eventType(.mediaPlay)
             .contentInfo(getVideoInfo())
-            .tvProviderInfo(VLTVProviderInfo(tvProviderName: /*ParentalControlHelper.getUserDetails()?.mvpdProvider*/ "",
-                                             requestorId:/* AppConfiguration.shared.tveSettings?.requestorId*/ "")
+            .tvProviderInfo(VLTVProviderInfo(tvProviderName: loggedUser?.mvpdProvider ?? "", requestorId: /* AppConfiguration.shared.tveSettings?.requestorId*/ "")
             )
             .adsInfo(getAdsInfo())
             .setPlayer(player)
@@ -75,25 +72,8 @@ extension VLAnalyticsPlayerClientProtocol {
         VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
     
-    func playerDidStart() {
-        let eventBuilder = VLEventModelBuilder()
-            .eventType(.playStarted)
-            .contentInfo(getVideoInfo())
-            .adsInfo(getAdsInfo())
-            .build()
-        VLAnalytics.shared.trackEvent(data: eventBuilder)
-    }
     
-    func playerDidPause() {
-        let eventBuilder = VLEventModelBuilder()
-            .eventType(.videoPauseStarted)
-            .contentInfo(getVideoInfo())
-            .adsInfo(getAdsInfo())
-            .build()
-        VLAnalytics.shared.trackEvent(data: eventBuilder)
-    }
-    
-    func playerSeekDidStart() {
+    func playerSeekDidStart(fromTimeInterval: Double) {
         let eventBuilder = VLEventModelBuilder()
             .eventType(.videoSeekStarted)
             .contentInfo(getVideoInfo())
@@ -101,8 +81,8 @@ extension VLAnalyticsPlayerClientProtocol {
             .build()
         VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
-    
-    func playerSeekDidComplete() {
+
+    func playerSeekDidComplete(toTimeInterval: Double) {
         let eventBuilder = VLEventModelBuilder()
             .eventType(.videoSeekCompleted)
             .contentInfo(getVideoInfo())
@@ -110,8 +90,8 @@ extension VLAnalyticsPlayerClientProtocol {
             .build()
         VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
-    
-    func playerDidEnded() {
+
+    func playerSessionEnded() {
         let eventBuilder = VLEventModelBuilder()
             .eventType(.trackSessionEnd)
             .contentInfo(getVideoInfo())
@@ -120,7 +100,7 @@ extension VLAnalyticsPlayerClientProtocol {
         VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
     
-    func playerDidComplete() {
+    func trackVideoCompletedAnalytics() {
         let eventBuilder = VLEventModelBuilder()
             .eventType(.videoComplete)
             .contentInfo(getVideoInfo())
@@ -133,8 +113,12 @@ extension VLAnalyticsPlayerClientProtocol {
         
     }
     
-    func playerDidFail(errorMessage: String, isFatal: Bool) {
-        
+    func trackVideoFailErrorAnalytics(errorMessage: String) {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.errorEvent)
+            .errorMessage(errorMessage)
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
     
     func playerDidChangeAudioLanguage(language: String?) {

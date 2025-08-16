@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.readVideoList(readVideoListOperation: ReadFromLocalJson())
         // Get current user identity before async context
         self.setupAuthentication()
+        self.setupAnalytics()
 
         return true
     }
