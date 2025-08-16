@@ -83,7 +83,8 @@ class PlayerViewController_iOS: UIViewController {
     private var seekBackwardDuration: Double = Constants.defaultSeekBackward
     private var adUrl: String?
     private var playerOptionSelected: PlayerUIOptions!
-    
+    var enableCustomAdUI: Bool = false
+
     // MARK: - Computed Properties
     /// Calculates the frame for the player view based on screen size and constants
     var playerFrame: CGRect {
@@ -389,10 +390,10 @@ extension PlayerViewController_iOS {
     private func configurePlayer() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
         vlPlayer.videoPlayerDelegate = self
-        vlPlayer.adManagerDelegate = self
         vlPlayer.playerAdsAnalyticsDelegate = self
         vlPlayer.playerVideoAnalyticsDelegate = self
         vlPlayer.enablePlayerBitrateLogs = enableBitrateLogs
+        vlPlayer.serverSideAdTrackingDelegate = self
     }
     
     /// Handles completion of player setup, including TVE checks and UI updates
@@ -535,7 +536,10 @@ extension PlayerViewController_iOS {
                                                  showPlayerControlAlways: false,
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
-                                                 payWallConfiguration: getPayWallConfiguration(type: .default))
+                                                 payWallConfiguration: getPayWallConfiguration(type: .default),
+                                                 isTrickPlayEnabled: false,
+                                                 isCustomAdViewEnabled: enableCustomAdUI,
+                                                 isServerSideAdTrackingEnabled: true)
     }
     
     /// Returns the paywall configuration based on the type

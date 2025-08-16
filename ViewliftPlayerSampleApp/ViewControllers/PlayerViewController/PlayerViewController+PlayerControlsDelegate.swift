@@ -10,14 +10,6 @@ import VLPlayerLib
 import UIKit
 import SwiftUI
 
-//Ad manager
-extension PlayerViewController_iOS: AdManagerDelegate {
-    
-    func setCuePointsFromPlayer(adModel: SSAIAdsModel?, duration: TimeInterval) {
-        videoPlayerCustomView?.viewModel?.setCuePointsFromPlayer(adModel: adModel, duration: duration)
-    }
-}
-
 //Delegate methods
 extension PlayerViewController_iOS: PlayerControlsViewDelegate {
     
