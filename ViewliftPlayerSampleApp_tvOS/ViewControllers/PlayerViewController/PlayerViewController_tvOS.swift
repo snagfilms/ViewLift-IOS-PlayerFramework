@@ -42,6 +42,7 @@ class PlayerViewController_tvOS: UIViewController {
     weak var player: AVPlayer?
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
+    var enableCustomAdUI: Bool = false
     override var canBecomeFirstResponder: Bool {
         return true
     }

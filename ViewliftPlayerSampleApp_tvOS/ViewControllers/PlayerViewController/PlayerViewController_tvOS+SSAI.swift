@@ -1,17 +1,18 @@
 //
-//  PlayerViewController_iOS+AdsAnalytics.swift
+//  PlayerViewController_tvOS+SSAI.swift
 //  ViewliftPlayerSampleApp
 //
-//  Created by Shivamsharma@viewlift.com on 14/08/25.
+//  Created by Shivamsharma@viewlift.com on 16/08/25.
 //  Copyright © 2025 Viewlift. All rights reserved.
 //
 
 import VLPlayerLib
 import Foundation
 
+
 /// Extension to handle server-side ad tracking callbacks for the video player.
 /// These methods are triggered automatically by `VLPlayerLib` during ad playback events.
-extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
+extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
     
     // MARK: - Auto-triggered (Default + Custom Events)
     
@@ -21,8 +22,8 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
     ///   - duration: The total content duration in seconds.
     func adCuePoints(adModel: VLPlayerLib.SSAIAdsModel?, duration: TimeInterval) {
         debugPrint(adModel as Any, duration)
-        if let videoPlayerCustomView {
-            videoPlayerCustomView.viewModel?.setCuePointsFromPlayer(adModel: adModel, duration: duration)
+        if let videoPlayerControlsView {
+            videoPlayerControlsView.setCuePointsFromPlayer(adModel: adModel, duration: duration)
         }
     }
     
