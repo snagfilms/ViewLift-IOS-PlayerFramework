@@ -45,8 +45,6 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
         }
 //        trigger ad finish analytics
         // showControls in order to access Player controls
-        
-
     }
     
     // MARK: - Interactive (Default Controls)
@@ -68,6 +66,17 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
     func adMuteButton(enabled: Bool) {
         
     }
+    
+    
+    func updateAdPlayback(model: VLPlayerLib.AdModel) {
+        debugPrint(model.progress)
+       //  adSlider?.value = model.progress
+        
+      //   lblTimer?.text = formatTime(Double(model.remainingPodTime))
+        
+         //lblAdCounter?.text = "\(model.currentAdNumber) of \(model.totalAds) •"
+     }
+    
     
     // MARK: - Detailed Server-side Tracking Events
     

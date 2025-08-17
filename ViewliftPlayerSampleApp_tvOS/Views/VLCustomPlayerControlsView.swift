@@ -879,6 +879,22 @@ extension VLCustomPlayerControlsView: PlayerSettingViewDelegate_tvOS {
     }
 
 }
+
+extension VLCustomPlayerControlsView {
+    func setCuePointsFromPlayer(adModel adsModel: SSAIAdsModel?, duration: TimeInterval) {
+        if let adsModel, let avails = adsModel.avails, avails.isEmpty == false {
+            var adModelStarTime: [Double] = [Double]()
+            for adModel in avails {
+                if let adsDuration = adModel.adsDuration, adsDuration > 0, let adStartTime = adModel.startTimeDuration {
+                    if adModel.adsDuration != nil, let adStartTime = adModel.startTimeDuration {
+                        adModelStarTime.append(adStartTime)
+                    }
+                }
+            }
+            self.sliderView.setCuePoints(cuePoints: adModelStarTime, duration: duration)
+        }
+    }
+}
 #endif
 
 
