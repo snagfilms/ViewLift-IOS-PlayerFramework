@@ -8,6 +8,7 @@
 
 import UIKit
 import VLAuthentication
+import GoogleCast
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var authorizationToken: String? = nil
     var readVideoListOperation:VideoListProtocol?
-
+    var isCastingViewVisible: Bool = false
+    var castContextSharedInstance: GCKCastContext?
+    
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?

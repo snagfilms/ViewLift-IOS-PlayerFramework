@@ -84,7 +84,9 @@ class PlayerViewController_iOS: UIViewController {
     private var adUrl: String?
     private var playerOptionSelected: PlayerUIOptions!
     var enableCustomAdUI: Bool = false
-
+    var playerRateBeforeSeek: Float = 1.0
+    var isVideoPlayingBeforeSeek = true
+    
     // MARK: - Computed Properties
     /// Calculates the frame for the player view based on screen size and constants
     var playerFrame: CGRect {
@@ -259,8 +261,7 @@ extension PlayerViewController_iOS {
             token: "",
             apiBaseURL: ""
         )
-//        let controls = getCustomControls()
-//        videoPlayerControlsView = controls
+        
         vlPlayer.setSource(
             type: .directStream(playbackConfig),
             customControlsView: getCustomPlayerSkin().view,
@@ -505,6 +506,7 @@ extension PlayerViewController_iOS {
             isAirPlaySupported: true,
             isPIPSupported: true,
             isSettingsSupported: true,
+            isSubTitleSupported: false,
             isSlowMoSupported: true,
             isVideoLiveStream: streamConfig?.isLive ?? false,
             isDVREnabled: streamConfig?.isDVR ?? false,

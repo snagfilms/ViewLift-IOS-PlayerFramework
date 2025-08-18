@@ -40,7 +40,7 @@ extension PlayerControlsViewModel {
     
     func systemVolumeDidChange(systemVolume: Float) {
         playerState.volume = systemVolume
-        delegate?.volumeChange(sliderValue: Int(systemVolume))
+        delegate?.volumeChange(sliderValue: systemVolume)
         debugPrint("systemVolumeDidChange: \(systemVolume)")
         
         if systemVolume == 0.0 {

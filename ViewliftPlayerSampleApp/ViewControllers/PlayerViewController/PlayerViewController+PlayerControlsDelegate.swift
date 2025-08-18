@@ -9,6 +9,7 @@
 import VLPlayerLib
 import UIKit
 import SwiftUI
+import AVFAudio
 
 //Delegate methods
 extension PlayerViewController_iOS: PlayerControlsViewDelegate {
@@ -18,7 +19,7 @@ extension PlayerViewController_iOS: PlayerControlsViewDelegate {
     }
     
     func muteTapped(isMuted: Bool) {
-        vlPlayer.muteTapped(isMuted: isMuted)
+        vlPlayer?.shouldPlayMuted(isMuted: isMuted)
     }
     
     func slowMotionTapped(isSlowMotion: Bool) {
@@ -26,27 +27,28 @@ extension PlayerViewController_iOS: PlayerControlsViewDelegate {
     }
     
     func controlsLockTapped(isLocked: Bool) {
-        vlPlayer.controlsLockTapped(isLocked: isLocked)
+        debugPrint("controlsLockTapped: \(isLocked)")
     }
     
     func subtitleTapped(isEnabled: Bool) {
-        vlPlayer.subtitleTapped(isEnabled: isEnabled)
+        debugPrint("subtitleTapped: \(isEnabled)")
     }
     
     func piPTapped() {
-        vlPlayer.piPTapped()
+        self.vlPlayer.pictureInPictureClicked(isPipSelected: true)
     }
     
     func castingTapped(button: UIButton) {
-        vlPlayer.castingTapped(button: button)
+        self.vlPlayer.castButtonTapped(sender: button)
+        self.vlPlayer.play()
     }
     
     func airPlayTapped() {
-        vlPlayer.airPlayTapped()
+        debugPrint("airPlayTapped")
     }
     
     func fullScreenTapped(isFullScreen: Bool) {
-        vlPlayer.fullScreenTapped(isFullScreen: isFullScreen)
+        vlPlayer.goFullScreen(isFullScreen)
     }
     
     func rewindTapped() {
@@ -58,11 +60,11 @@ extension PlayerViewController_iOS: PlayerControlsViewDelegate {
     }
     
     func settingsTapped() {
-        vlPlayer.settingsTapped()
+        vlPlayer.defaultSettingsTapped()
     }
     
     func seekToLive() {
-        vlPlayer.seekToLive()
+        vlPlayer?.seekToLivePosition()
     }
     
     func sliderBeginTracking(time: TimeInterval) {
@@ -81,7 +83,7 @@ extension PlayerViewController_iOS: PlayerControlsViewDelegate {
         vlPlayer.setupPictureInPicture()
     }
     
-    func volumeChange(sliderValue: Int) {
-        vlPlayer.volumeChange(sliderValue: sliderValue)
+    func volumeChange(sliderValue: Float) {
+        vlPlayer.setVolumeLevel(volumeLevel: Int(sliderValue * 100))
     }
 }

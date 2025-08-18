@@ -8,6 +8,7 @@
 
 import VLPlayerLib
 import Foundation
+import GoogleCast
 
 // Handles video playback delegate events for the player view controller
 extension PlayerViewController_iOS: VideoPlaybackDelegate {
@@ -116,6 +117,12 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         
         let range = NSRange(location: debugLogView.text.count - 1, length: 0)
         debugLogView.scrollRangeToVisible(range)
+    }
+    
+    //GoogleCasting Delegate
+    func chromeCastConnectionStatusUpdate(isConnected: Bool, castContextSessionInstance: GCKCastContext?) {
+        AppDelegate.shared.isCastingViewVisible = isConnected
+        AppDelegate.shared.castContextSharedInstance = castContextSessionInstance
     }
     
 }
