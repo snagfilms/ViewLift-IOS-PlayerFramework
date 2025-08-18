@@ -42,7 +42,6 @@ extension PlayerViewController_iOS {
 
                 // Destroy the current player and its delegates to reset state
                 self?.vlPlayer.destroy()
-                self?.vlPlayer.playerAdsAnalyticsDelegate = nil
                 self?.vlPlayer.playerVideoAnalyticsDelegate = nil
 
                 // Reload the player view with the new authentication context
