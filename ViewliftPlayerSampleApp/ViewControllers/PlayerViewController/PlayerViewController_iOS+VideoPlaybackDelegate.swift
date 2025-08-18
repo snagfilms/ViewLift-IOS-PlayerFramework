@@ -11,7 +11,7 @@ import Foundation
 import VLAnalyticsLib
 
 // Handles video playback delegate events for the player view controller
-extension PlayerViewController_iOS: videoPlaybackDelegate {
+extension PlayerViewController_iOS: VideoPlaybackDelegate {
     
     // Called when video playback starts
     func videoStarted(timestamp: Double, playerTag: String) {
@@ -24,23 +24,20 @@ extension PlayerViewController_iOS: videoPlaybackDelegate {
         }
         videoPlayerCustomView?.viewModel?.setupPiP()
         
-        self.trackVideoStartAnalytics()
+        self.playerDidStartPlaying()
     }
     
     // Called when video is paused
     func videoPause(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: false)
         videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: false)
-        
-        self.trackVideoPauseAnalytics()
+
     }
     
     // Called when video resumes from pause
     func videoResume(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: true)
         videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: true)
-        
-        self.trackVideoStartAnalytics()
     }
     
     // Called when video finishes playback

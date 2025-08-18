@@ -11,7 +11,7 @@ import VLPlayerLib
 import VLAnalyticsLib
 import AVFoundation
 
-public protocol VLAnalyticsPlayerClientProtocol: PlayerVideoAnalyticsTrackDelegate, PlayerAdsAnalyticsTrackDelegate {
+public protocol VLAnalyticsPlayerClientProtocol: PlayerVideoAnalyticsTrackDelegate {
     func playerDidLoadVideo(player: AVPlayer?) //using
     func playerFirstFrameLoaded() //using
     func playerSeekDidStart(fromTimeInterval: Double) //using
@@ -22,21 +22,9 @@ public protocol VLAnalyticsPlayerClientProtocol: PlayerVideoAnalyticsTrackDelega
     func playerDidDropFrames(count: Int) //using
     func playerDidStartBuffering() //using
     func playerDidBitRateChange() //using
-    
     func updatePlayhead(time: Double)
-    func playerChapterDidStart() //using. currently its being call when video is completed. handle when ads break stop
-    func playerChapterDidComplete() //using. currently its being call when video is completed. handle when ads break starts
-    
-    func setAdInfo(adId: String, adName: String, podName: String?, podLength: Double?, podPosition: Int?, podOffset: Double?, startTime: Double?, adSystem: String?)
-    func setAdComplete()
-    
-    func adDidStarts()
-    
-    func adDidPause()
-    func adsDidLoad()
-    func adDidComplete()
-    func adBreakStarts()
-    func adBreakComplete()
+    func playerChapterDidStart(currentTime: Double)
+    func playerChapterDidComplete() //using.
     
     func getVideoInfo() -> VLContentInfo?
     func getAdsInfo() -> VLAdAssetInfo?
@@ -47,13 +35,9 @@ public protocol VLAnalyticsPlayerClientProtocol: PlayerVideoAnalyticsTrackDelega
 extension VLAnalyticsPlayerClientProtocol {
     
     func updatePlayhead(time: Double) {
-        let videoInfo = self.getVideoInfo()
-        videoInfo?.playbackPositionInSeconds = time
        
         let eventBuilder = VLEventModelBuilder()
-            .eventType(.updateCurrentPlayHead)
-            .contentInfo(videoInfo)
-            .adsInfo(getAdsInfo())
+            .eventType(.updateCurrentPlayHead(time))
             .build()
         VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
@@ -133,9 +117,9 @@ extension VLAnalyticsPlayerClientProtocol {
         
     }
     
-    func playerChapterDidStart() {
+    func playerChapterDidStart(currentTime: Double) {
         let eventBuilder = VLEventModelBuilder()
-            .eventType(.videochapterStart)
+            .eventType(.videochapterStart(currentTime))
             .contentInfo(getVideoInfo())
             .build()
         VLAnalytics.shared.trackEvent(data: eventBuilder)
@@ -168,49 +152,5 @@ extension VLAnalyticsPlayerClientProtocol {
         VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
     
-    func adDidStarts() {
-        
-        let eventBuilder = VLEventModelBuilder()
-            .eventType(.adsStart)
-            .adsInfo(getAdsInfo())
-            .contentInfo(getVideoInfo())
-            .build()
-        VLAnalytics.shared.trackEvent(data: eventBuilder)
-    }
     
-    func adsDidLoad() {
-        
-    }
-    
-    func adDidPause() {
-        
-    }
-    
-    func adDidComplete() {
-        let eventBuilder = VLEventModelBuilder()
-            .eventType(.adsComplete)
-            .adsInfo(getAdsInfo())
-            .contentInfo(getVideoInfo())
-            .build()
-        VLAnalytics.shared.trackEvent(data: eventBuilder)
-    }
-    
-    
-    func adBreakStarts() {
-        let eventBuilder = VLEventModelBuilder()
-            .eventType(.adsBreakStart)
-            .adsInfo(getAdsInfo())
-            .contentInfo(getVideoInfo())
-            .build()
-        VLAnalytics.shared.trackEvent(data: eventBuilder)
-    }
-    
-    func adBreakComplete() {
-        let eventBuilder = VLEventModelBuilder()
-            .eventType(.adsBreakComplete)
-            .adsInfo(getAdsInfo())
-            .contentInfo(getVideoInfo())
-            .build()
-        VLAnalytics.shared.trackEvent(data: eventBuilder)
-    }
 }

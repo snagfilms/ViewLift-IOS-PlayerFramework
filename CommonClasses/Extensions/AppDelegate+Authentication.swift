@@ -34,14 +34,14 @@ extension AppDelegate {
             return
         }
         let xApiKey: String = videoList.xApiKey
-        let domain: String = videoList.domain
+        let siteId: String = videoList.authKeys.siteId
         let apiBaseEndpoint: String = videoList.authKeys.apiBaseEndpoint
         let graphQLEndpoint: String = videoList.authKeys.graphQLEndpoint
         
         // Create API configuration object
         let apiConfig = APIConfig(
             xApiKey: xApiKey,
-            identifier: .domain(domain),
+            identifier: .siteId(siteId), //here you can also pass web domain.
             authorizationToken: authorizationToken,
             apiBaseUrl: apiBaseEndpoint,
             graphQLApiBaseUrl: graphQLEndpoint
@@ -75,8 +75,8 @@ extension AppDelegate {
                 } else {
                     await self.logoutUser()
                 }
-            } catch {
-                print("VLAuthentication init error: \(error.localizedDescription)")
+            } catch let error as VLAuthenticationErrorCode {
+                print("VLAuthentication init error: \(error.codeString)")
             }
         }
     }

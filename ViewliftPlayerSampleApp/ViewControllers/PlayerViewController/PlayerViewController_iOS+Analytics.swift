@@ -13,8 +13,7 @@ import AVKit
 // Handles analytics integration for player events and content/ad info
 extension PlayerViewController_iOS: VLAnalyticsPlayerClientProtocol {
     // Called when the player starts playback
-    func trackVideoStartAnalytics() {
-        
+    func playerDidStartPlaying() {
         let eventBuilder = VLEventModelBuilder()
             .eventType(.playStarted)
             .contentInfo(getVideoInfo())
@@ -23,7 +22,7 @@ extension PlayerViewController_iOS: VLAnalyticsPlayerClientProtocol {
         VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
     
-    func trackVideoPauseAnalytics() {
+    func playerDidPaused() {
         let eventBuilder = VLEventModelBuilder()
             .eventType(.videoPauseStarted)
             .contentInfo(getVideoInfo())
@@ -32,14 +31,41 @@ extension PlayerViewController_iOS: VLAnalyticsPlayerClientProtocol {
         VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
     
-    // Stores current ad asset info for analytics
-    func setAdInfo(adId: String, adName: String, podName: String?, podLength: Double?, podPosition: Int?, podOffset: Double?, startTime: Double?, adSystem: String?) {
-        self.currentAdAssetInfo = VLAdAssetInfo(adId: adId, adName: adName, podName: podName, podLength: podLength, podPosition: podPosition, podOffset: podOffset, startTime: startTime, adSystem: adSystem)
+    func trackAdDidStartsAnalytics() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.adsStart)
+            .adsInfo(getAdsInfo())
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+   
+    func trackAdDidCompleteAnalytics() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.adsComplete)
+            .adsInfo(getAdsInfo())
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
     
-    // Clears ad asset info when ad completes
-    func setAdComplete() {
-        self.currentAdAssetInfo = nil
+    
+    func trackAdBreakStartAnalytics() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.adsBreakStart)
+            .adsInfo(getAdsInfo())
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func trackAdBreakCompleteAnalytics() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.adsBreakComplete)
+            .adsInfo(getAdsInfo())
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
     
     // Returns current ad asset info for analytics

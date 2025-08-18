@@ -7,11 +7,15 @@
 //
 
 import VLPlayerLib
+#if os(iOS)
+import VLAuthenticationFramework
+#else
 import VLAuthenticationFramework_tvOS
+#endif
 import Foundation
 
 // Handle video playback delegate events for the player view controller
-extension PlayerViewController_tvOS: videoPlaybackDelegate {
+extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     
     // Handles errors during video fetch and updates UI accordingly
     func videoFetchError(error: VLError?, playerTag: String?, contentResponse: Dictionary<String, AnyObject>?) {

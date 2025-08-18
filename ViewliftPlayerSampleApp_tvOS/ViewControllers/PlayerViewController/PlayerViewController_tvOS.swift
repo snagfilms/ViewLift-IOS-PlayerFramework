@@ -9,7 +9,11 @@
 import UIKit
 import VLPlayerLib
 import VLBeaconLib
+#if os(iOS)
+import VLAuthenticationFramework
+#else
 import VLAuthenticationFramework_tvOS
+#endif
 import AVKit
 import VLAnalyticsLib
 
@@ -87,7 +91,7 @@ class PlayerViewController_tvOS: UIViewController {
         }
         // Set delegates for player events and analytics
         vlPlayer?.videoPlayerDelegate = self
-        vlPlayer?.playerAdsAnalyticsDelegate = self
+        
         vlPlayer?.playerVideoAnalyticsDelegate = self
         // Set entitlement if available
         if let entitlementData{

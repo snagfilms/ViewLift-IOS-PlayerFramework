@@ -7,7 +7,11 @@
 //
 
 import VLPlayerLib
+#if os(iOS)
+import VLAuthenticationFramework
+#else
 import VLAuthenticationFramework_tvOS
+#endif
 import Foundation
 
 // Handle TVE authentication flow for the player view controller
@@ -33,7 +37,7 @@ extension PlayerViewController_tvOS {
                         AppDelegate.shared.authorizationToken = userIdentity?.authorizationToken
                         // Destroy current player and clear delegates
                         self?.vlPlayer?.destroy()
-                        self?.vlPlayer?.playerAdsAnalyticsDelegate = nil
+                        
                         self?.vlPlayer?.playerVideoAnalyticsDelegate = nil
                         // Reload player view with new authentication context
                         self?.loadPlayerView()
