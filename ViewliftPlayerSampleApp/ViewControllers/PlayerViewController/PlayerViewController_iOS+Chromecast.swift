@@ -9,28 +9,22 @@
 import VLPlayerLib
 import Foundation
 
-extension PlayerViewController_iOS {
+extension PlayerViewController_iOS: ChromeCastPlaybackDelegate {
     
     /// Called when the Chromecast connection status changes
     /// - Parameter isConnected: Indicates whether Chromecast is connected
     func chromeCastConnectionStatusUpdate(isConnected: Bool) {
-        print("Cast connected:", isConnected)
+        debugPrint("Cast connected:", isConnected)
+    }
+    
+    /// Called when ChromeCast starts connecting device
+    func chromeCastStartedConnectingDevice() {
+        debugPrint("Cast started connecting:")
     }
     
     /// Gets the current Chromecast connection status from the player
-    func getChromeCastConnectedStatus() {
-        print("Cast connected:", vlPlayer.getChromeCastConnectedStatus())
+    private func getChromeCastConnectedStatus() {
+        debugPrint("Cast connected:", vlPlayer.getChromeCastConnectedStatus())
     }
     
-    /// Called when a seek operation starts on Chromecast
-    /// - Parameter time: The time (in seconds) where the seek started
-    func seekStarted(time: TimeInterval) {
-        print("Seek Started: \(time)")
-    }
-    
-    /// Called when a seek operation completes on Chromecast
-    /// - Parameter time: The time (in seconds) where the seek completed
-    func seekCompleted(time: TimeInterval) {
-        print("Seek Completed: \(time)")
-    }
 }

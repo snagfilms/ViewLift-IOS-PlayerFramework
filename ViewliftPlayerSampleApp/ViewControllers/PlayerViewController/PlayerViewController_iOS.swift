@@ -394,6 +394,7 @@ extension PlayerViewController_iOS {
         vlPlayer.playerVideoAnalyticsDelegate = self
         vlPlayer.enablePlayerBitrateLogs = enableBitrateLogs
         vlPlayer.serverSideAdTrackingDelegate = self
+        vlPlayer.castDelegate = self
     }
     
     /// Handles completion of player setup, including TVE checks and UI updates
