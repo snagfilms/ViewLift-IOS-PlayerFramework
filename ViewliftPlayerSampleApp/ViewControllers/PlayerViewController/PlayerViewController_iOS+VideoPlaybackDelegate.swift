@@ -10,7 +10,7 @@ import VLPlayerLib
 import Foundation
 
 // Handles video playback delegate events for the player view controller
-extension PlayerViewController_iOS: videoPlaybackDelegate {
+extension PlayerViewController_iOS: VideoPlaybackDelegate {
     
     // Called when video playback starts
     func videoStarted(timestamp: Double, playerTag: String) {
