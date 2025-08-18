@@ -10,14 +10,14 @@ import AVFoundation
 import VLPlayerLib
 
 // MARK: Player Control Type
-public enum PlayerControlsLayoutType {
+enum PlayerControlsLayoutType {
     case streamControls
     case liveControls
     case dvrControls
 }
 
 // MARK: PlayerControlsView Delegate
-public protocol PlayerControlsViewDelegate: AnyObject {
+protocol PlayerControlsViewDelegate: AnyObject {
     func playPauseTapped(isPlaying: Bool)
     func muteTapped(isMuted: Bool)
     func slowMotionTapped(isSlowMotion: Bool)
@@ -35,10 +35,10 @@ public protocol PlayerControlsViewDelegate: AnyObject {
     func sliderChangedTracking(time: TimeInterval)
     func sliderEndedTracking(time: TimeInterval)
     func setupPictureInPicture()
-    func volumeChange(sliderValue: Int)
+    func volumeChange(sliderValue: Float)
 }
 
-public struct PlayerControlsConfig {
+struct PlayerControlsConfig {
     var isChromeCastSupported: Bool
     var isAirPlaySupported: Bool
     var isPIPSupported: Bool
@@ -129,8 +129,10 @@ class PlayerControlsViewModel: ObservableObject {
     func togglePlayPause() {
         if playerState.isPlaying {
             delegate?.playPauseTapped(isPlaying: false)
+            playerState.isPlaying = false
         } else {
             delegate?.playPauseTapped(isPlaying: true)
+            playerState.isPlaying = true
         }
     }
     
@@ -347,10 +349,8 @@ extension PlayerControlsViewModel {
     func showPlayButtonAfterBuffering() {
     }
     
-    func showClosedCaptionButton() {
-    }
-    
-    func hideClosedCaptionButton() {
+    func closedCaptionButton(isHidden: Bool) {
+        playerControlsConfig.isSubTitleSupported = !isHidden
     }
     
     func enableSettingButtonUserInteraction(isEnabled: Bool) {

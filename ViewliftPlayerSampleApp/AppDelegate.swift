@@ -7,11 +7,13 @@
 //
 
 import UIKit
+
 #if os(iOS)
 import VLAuthenticationFramework
 #else
 import VLAuthenticationFramework_tvOS
 #endif
+import GoogleCast
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var authorizationToken: String? = nil
     var readVideoListOperation:VideoListProtocol?
+    var isCastingViewVisible: Bool = false
+    var castContextSharedInstance: GCKCastContext?
 
     func application(
         _ application: UIApplication,
@@ -32,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
-    
+
     private func readVideoList(readVideoListOperation: VideoListProtocol) {
         self.readVideoListOperation = readVideoListOperation
         self.readVideoListOperation?.readVideoList()
@@ -59,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
+
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return .all
