@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         readVideoList(readVideoListOperation: ReadFromLocalJson())
 
         self.setupAuthentication()
+        self.setupAnalytics()
         
         
         window = UIWindow(frame: UIScreen.main.bounds)

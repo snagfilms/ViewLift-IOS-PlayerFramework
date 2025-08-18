@@ -7,7 +7,11 @@
 //
 
 import UIKit
-import VLAuthentication
+#if os(iOS)
+import VLAuthenticationFramework
+#else
+import VLAuthenticationFramework_tvOS
+#endif
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.readVideoList(readVideoListOperation: ReadFromLocalJson())
         // Get current user identity before async context
         self.setupAuthentication()
+        self.setupAnalytics()
 
         return true
     }

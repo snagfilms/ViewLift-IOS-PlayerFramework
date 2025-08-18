@@ -61,6 +61,7 @@ class PlayerViewController_iOS: UIViewController {
     var muteEnabled: Bool = false
     var streamUrl: String?
     weak var player: AVPlayer?
+    var analyticsAdDictionary = AnalyticsAdDictionary()
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
     private let playerContainerView = UIView()
@@ -160,7 +161,6 @@ class PlayerViewController_iOS: UIViewController {
     /// Cleans up player and UI resources
     private func cleanupResources() {
         vlPlayer?.destroy()
-        vlPlayer?.playerAdsAnalyticsDelegate = nil
         vlPlayer?.playerVideoAnalyticsDelegate = nil
         videoPlayerControlsView?.removeFromSuperview()
         videoPlayerCustomView?.view?.removeFromSuperview()
@@ -390,7 +390,6 @@ extension PlayerViewController_iOS {
     private func configurePlayer() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
         vlPlayer.videoPlayerDelegate = self
-        vlPlayer.playerAdsAnalyticsDelegate = self
         vlPlayer.playerVideoAnalyticsDelegate = self
         vlPlayer.enablePlayerBitrateLogs = enableBitrateLogs
         vlPlayer.serverSideAdTrackingDelegate = self
@@ -612,7 +611,6 @@ extension PlayerViewController_iOS {
     /// Handles back button tap, destroys player and dismisses view
     @IBAction private func backButtonClicked(_ sender: Any) {
         vlPlayer.destroy()
-        vlPlayer.playerAdsAnalyticsDelegate = nil
         vlPlayer.playerVideoAnalyticsDelegate = nil
         navigationController?.popViewController(animated: true)
     }

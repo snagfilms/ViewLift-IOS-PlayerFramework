@@ -8,6 +8,7 @@
 
 import VLPlayerLib
 import Foundation
+import VLAnalyticsLib
 
 // Handles video playback delegate events for the player view controller
 extension PlayerViewController_iOS: VideoPlaybackDelegate {
@@ -23,13 +24,14 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         }
         videoPlayerCustomView?.viewModel?.setupPiP()
         
-        self.trackVideoStart()
+        self.playerDidStartPlaying()
     }
     
     // Called when video is paused
     func videoPause(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: false)
         videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: false)
+
     }
     
     // Called when video resumes from pause
@@ -42,6 +44,8 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
     func videoFinished(playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: false)
         videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: false)
+        
+        self.trackVideoCompletedAnalytics()
     }
     
     // Handles playback errors and shows alert if needed
@@ -51,6 +55,8 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         
         if !errorMessage.isEmpty {
             showAlert(message: errorMessage)
+            
+            self.trackVideoFailErrorAnalytics(errorMessage: errorMessage)
         }
     }
     
@@ -117,5 +123,11 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         let range = NSRange(location: debugLogView.text.count - 1, length: 0)
         debugLogView.scrollRangeToVisible(range)
     }
+    
+    
+    func onSeek(currentTime: Double, playerTag: String) {
+        
+    }
+    
     
 }
