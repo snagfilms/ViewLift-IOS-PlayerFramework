@@ -68,19 +68,15 @@ extension PlayerViewController_iOS: PlayerControlsViewDelegate {
     }
     
     func sliderBeginTracking(time: TimeInterval) {
-//        vlPlayer.sliderBeginTracking(time: time)
-        
-        self.playerSeekDidStart(fromTimeInterval: Double(time))
+        vlPlayer.sliderBeginTracking(time: time)
     }
     
     func sliderChangedTracking(time: TimeInterval) {
-//        vlPlayer.sliderChangedTracking(time: time)
+        vlPlayer.sliderChangedTracking(time: time)
     }
     
     func sliderEndedTracking(time: TimeInterval) {
-//        vlPlayer.sliderEndedTracking(time: time)
-        
-        self.playerSeekDidComplete(toTimeInterval: Double(time))
+        vlPlayer.sliderEndedTracking(time: time)
     }
     
     func setupPictureInPicture() {
