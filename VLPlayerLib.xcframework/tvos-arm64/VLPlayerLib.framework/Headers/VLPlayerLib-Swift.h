@@ -307,6 +307,11 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 
+SWIFT_CLASS("_TtC11VLPlayerLib7AdModel")
+@interface AdModel : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 SWIFT_CLASS("_TtC11VLPlayerLib12BeaconHelper")
 @interface BeaconHelper : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -320,6 +325,12 @@ SWIFT_CLASS("_TtC11VLPlayerLib10DataParser")
 SWIFT_CLASS("_TtC11VLPlayerLib12PlayerObject")
 @interface PlayerObject : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+SWIFT_CLASS("_TtC11VLPlayerLib15PlayheadTracker")
+@interface PlayheadTracker : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 @class UIColor;
@@ -369,10 +380,10 @@ SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@protocol videoPlaybackDelegate;
+@protocol VideoPlaybackDelegate;
 SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 @interface VLPlayer : NSObject
-@property (nonatomic, weak) id <videoPlaybackDelegate> _Nullable videoPlayerDelegate;
+@property (nonatomic, weak) id <VideoPlaybackDelegate> _Nullable videoPlayerDelegate;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -392,7 +403,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)deinitialisePlayer;
 - (void)setPlayerFitToFullScreen;
 - (void)setPlayerFitToSmallScreenWithFrame:(CGRect)frame;
-- (void)goFullScreen;
+- (void)goFullScreen:(BOOL)isFullScreen;
 - (void)removeFullScreen;
 /// important:
 ///
@@ -527,8 +538,8 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)updateCaptionWithSelectedIndex:(NSInteger)selectedIndex selectedKey:(NSString * _Nonnull)selectedKey;
 @end
 
-SWIFT_PROTOCOL("_TtP11VLPlayerLib21videoPlaybackDelegate_")
-@protocol videoPlaybackDelegate <NSObject>
+SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
+@protocol VideoPlaybackDelegate <NSObject>
 @optional
 - (void)customPlayerStateWithIsPlaying:(BOOL)isPlaying;
 - (void)manageClosedCaptionButtonWithIsHidden:(BOOL)isHidden;
