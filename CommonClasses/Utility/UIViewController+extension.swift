@@ -17,7 +17,6 @@ extension UIViewController {
     ///   - xApiKey: String to check
     ///   - alertMessage: The message to show in alert if condition met
     func showAlertIfConfigInvalid(apiBaseEndpoint: String,
-                                  graphQLEndpoint: String,
                                   authorizationToken: String?,
                                   siteId: String,
                                   xApiKey: String,
@@ -28,7 +27,6 @@ extension UIViewController {
 
         // Check each relevant property for the repeated "xxxxx"
         let isInvalid = containsFiveTimesX(apiBaseEndpoint) ||
-                        containsFiveTimesX(graphQLEndpoint) ||
                         containsFiveTimesX(siteId) ||
                         containsFiveTimesX(xApiKey)
 

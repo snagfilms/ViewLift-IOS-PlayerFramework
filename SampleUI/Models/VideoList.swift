@@ -67,7 +67,6 @@ struct VideoList:Decodable {
 struct AuthKeys: Codable {
     let siteId: String
     let apiBaseEndpoint: String
-    let graphQLEndpoint: String
 }
 
 struct NextVideoList:Codable {

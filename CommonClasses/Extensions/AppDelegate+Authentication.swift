@@ -36,15 +36,13 @@ extension AppDelegate {
         let xApiKey: String = videoList.xApiKey
         let siteId: String = videoList.authKeys.siteId
         let apiBaseEndpoint: String = videoList.authKeys.apiBaseEndpoint
-        let graphQLEndpoint: String = videoList.authKeys.graphQLEndpoint
         
         // Create API configuration object
         let apiConfig = APIConfig(
             xApiKey: xApiKey,
             identifier: .siteId(siteId), //here you can also pass web domain.
             authorizationToken: authorizationToken,
-            apiBaseUrl: apiBaseEndpoint,
-            graphQLApiBaseUrl: graphQLEndpoint
+            apiBaseUrl: apiBaseEndpoint
         )
         
         // Perform authentication

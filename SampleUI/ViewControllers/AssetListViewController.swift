@@ -57,9 +57,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         let xApiKey: String = videoList.xApiKey
         let siteId: String = videoList.authKeys.siteId
         let apiBaseEndpoint: String = videoList.authKeys.apiBaseEndpoint
-        let graphQLEndpoint: String = videoList.authKeys.graphQLEndpoint
         self.showAlertIfConfigInvalid(apiBaseEndpoint: apiBaseEndpoint,
-                                      graphQLEndpoint: graphQLEndpoint,
                                       authorizationToken: AppDelegate.shared.authorizationToken,
                                       siteId: siteId,
                                       xApiKey: xApiKey,
