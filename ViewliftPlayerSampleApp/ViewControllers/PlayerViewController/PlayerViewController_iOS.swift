@@ -249,7 +249,6 @@ extension PlayerViewController_iOS {
         let isDVREnabled = streamConfig?.isDVR ?? false
         let streamType = VLPlayer.DirectStreamType(
             url: streamUrl ?? "",
-            contentId: nil,
             streamConfig: streamConfig,
             drmconfig: drmConfig
         )
