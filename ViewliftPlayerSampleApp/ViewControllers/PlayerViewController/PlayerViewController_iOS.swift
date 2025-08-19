@@ -61,6 +61,7 @@ class PlayerViewController_iOS: UIViewController {
     var muteEnabled: Bool = false
     var streamUrl: String?
     weak var player: AVPlayer?
+    var analyticsAdDictionary = AnalyticsAdDictionary()
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
     private let playerContainerView = UIView()
@@ -84,7 +85,9 @@ class PlayerViewController_iOS: UIViewController {
     private var adUrl: String?
     private var playerOptionSelected: PlayerUIOptions!
     var enableCustomAdUI: Bool = false
-
+    var playerRateBeforeSeek: Float = 1.0
+    var isVideoPlayingBeforeSeek = true
+    
     // MARK: - Computed Properties
     /// Calculates the frame for the player view based on screen size and constants
     var playerFrame: CGRect {
@@ -160,7 +163,6 @@ class PlayerViewController_iOS: UIViewController {
     /// Cleans up player and UI resources
     private func cleanupResources() {
         vlPlayer?.destroy()
-        vlPlayer?.playerAdsAnalyticsDelegate = nil
         vlPlayer?.playerVideoAnalyticsDelegate = nil
         videoPlayerControlsView?.removeFromSuperview()
         videoPlayerCustomView?.view?.removeFromSuperview()
@@ -258,8 +260,7 @@ extension PlayerViewController_iOS {
             token: "",
             apiBaseURL: ""
         )
-//        let controls = getCustomControls()
-//        videoPlayerControlsView = controls
+        
         vlPlayer.setSource(
             type: .directStream(playbackConfig),
             customControlsView: getCustomPlayerSkin().view,
@@ -389,7 +390,6 @@ extension PlayerViewController_iOS {
     private func configurePlayer() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
         vlPlayer.videoPlayerDelegate = self
-        vlPlayer.playerAdsAnalyticsDelegate = self
         vlPlayer.playerVideoAnalyticsDelegate = self
         vlPlayer.enablePlayerBitrateLogs = enableBitrateLogs
         vlPlayer.serverSideAdTrackingDelegate = self
@@ -504,6 +504,7 @@ extension PlayerViewController_iOS {
             isAirPlaySupported: true,
             isPIPSupported: true,
             isSettingsSupported: true,
+            isSubTitleSupported: false,
             isSlowMoSupported: true,
             isVideoLiveStream: streamConfig?.isLive ?? false,
             isDVREnabled: streamConfig?.isDVR ?? false,
@@ -611,7 +612,6 @@ extension PlayerViewController_iOS {
     /// Handles back button tap, destroys player and dismisses view
     @IBAction private func backButtonClicked(_ sender: Any) {
         vlPlayer.destroy()
-        vlPlayer.playerAdsAnalyticsDelegate = nil
         vlPlayer.playerVideoAnalyticsDelegate = nil
         navigationController?.popViewController(animated: true)
     }

@@ -13,21 +13,6 @@ import AVKit
 // Handles analytics integration for player events and content/ad info
 extension PlayerViewController_tvOS: VLAnalyticsPlayerClientProtocol {
     
-    // Called when the player starts playback
-    func playerDidStart(player: AVPlayer?) {
-        self.player = player
-    }
-    
-    // Stores current ad asset info for analytics
-    func setAdInfo(adId: String, adName: String, podName: String?, podLength: Double?, podPosition: Int?, podOffset: Double?, startTime: Double?, adSystem: String?) {
-        self.currentAdAssetInfo = VLAdAssetInfo(adId: adId, adName: adName, podName: podName, podLength: podLength, podPosition: podPosition, podOffset: podOffset, startTime: startTime, adSystem: adSystem)
-    }
-    
-    // Clears ad asset info when ad completes
-    func setAdComplete() {
-        self.currentAdAssetInfo = nil
-    }
-    
     // Returns current ad asset info for analytics
     func getAdsInfo() -> VLAdAssetInfo? {
         return self.currentAdAssetInfo
