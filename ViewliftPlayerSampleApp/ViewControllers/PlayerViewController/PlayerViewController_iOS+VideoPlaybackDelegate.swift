@@ -132,8 +132,10 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
     }
     
     func playerDidChangeClosedCaptionLanguage(language: String?) {
-        let ccEnabled = UserDefaults.standard.bool(forKey: "CLOSED CAPTION AVAILABLE")
-        videoPlayerCustomView?.viewModel?.updateSubtitleState(isEnabled: ccEnabled)
+        DispatchQueue.main.async { [weak self] in
+            let ccEnabled = UserDefaults.standard.bool(forKey: "CLOSED CAPTION AVAILABLE")
+            self?.videoPlayerCustomView?.viewModel?.updateSubtitleState(isEnabled: ccEnabled)
+        }
     }
     
 }
