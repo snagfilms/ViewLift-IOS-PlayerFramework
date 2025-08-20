@@ -107,7 +107,7 @@ class PlayerControlsViewModel: ObservableObject {
         if playerControlsConfig.isVideoLiveStream == true {
             if playerControlsConfig.isDVREnabled == true {
                 playerControlsType = .dvrControls
-                playerState.timeLabel = "00:00"
+                playerState.timeLabel = ""
                 playerState.currentTime = 100
             } else {
                 playerControlsType = .liveControls
@@ -252,6 +252,10 @@ extension PlayerControlsViewModel {
         playerState.liveLabel
     }
     
+    var getLiveButonColor: Color {
+        playerState.liveLabel == "LIVE" ? .gray : .red
+    }
+    
     func getIconColor() -> Color {
         return Color(Utility.hexStringToUIColor(hex: playerControlsConfig.playerControlsColor?.iconColor ?? "#ffffff"))
     }
@@ -292,7 +296,13 @@ extension PlayerControlsViewModel {
     
     func updateTimeLabel(totalTime: Double, currentTime: Double) {
         if playerControlsConfig.isDVREnabled {
-            updateTimeLabel(text: "-\(formatTime(totalTime))")
+            if totalTime > 3 {
+                updateTimeLabel(text: "-\(formatTime(totalTime))")
+                setLiveButtonText(text: "GO LIVE")
+            } else {
+                updateTimeLabel(text: "")
+                setLiveButtonText(text: "LIVE")
+            }
         } else {
             let displayString = "\(formatTime(currentTime)) / \(formatTime(totalTime))"
             updateTimeLabel(text: displayString)
@@ -307,7 +317,7 @@ extension PlayerControlsViewModel {
         if isLive {
             if isDVREnabled {
                 playerControlsType = .dvrControls
-                playerState.timeLabel = "00:00"
+                playerState.timeLabel = ""
                 playerState.currentTime = 100
             } else {
                 playerControlsType = .liveControls

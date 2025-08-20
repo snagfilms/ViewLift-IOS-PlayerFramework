@@ -23,7 +23,7 @@ extension PlayerViewController_iOS: PlayerControlsViewDelegate {
     }
     
     func slowMotionTapped(isSlowMotion: Bool) {
-        vlPlayer.slowMotionTapped(isSlowMotion: isSlowMotion)
+        vlPlayer.setPlaybackRate(playbackSpeed: isSlowMotion ? 0.3 : 1)
     }
     
     func controlsLockTapped(isLocked: Bool) {
@@ -31,7 +31,7 @@ extension PlayerViewController_iOS: PlayerControlsViewDelegate {
     }
     
     func subtitleTapped(isEnabled: Bool) {
-        debugPrint("subtitleTapped: \(isEnabled)")
+        vlPlayer.subtitleTapped(isEnabled: isEnabled)
     }
     
     func piPTapped() {

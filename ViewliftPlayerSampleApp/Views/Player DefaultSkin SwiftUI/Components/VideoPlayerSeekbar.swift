@@ -42,7 +42,7 @@ struct VideoPlayerSeekbar: View {
                     .padding(.vertical, 6 * iconScale)
                     .background(
                         RoundedRectangle(cornerRadius: 2)
-                            .fill(Color.red)
+                            .fill(viewModel.getLiveButonColor)
                     )
             }
         }
@@ -128,7 +128,7 @@ struct VideoPlayerSeekbar: View {
                             .padding(.vertical, 6 * iconScale)
                             .background(
                                 RoundedRectangle(cornerRadius: 2)
-                                    .fill(Color.red)
+                                    .fill(viewModel.getLiveButonColor)
                             )
                     }
                 }
