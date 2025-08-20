@@ -504,7 +504,7 @@ extension PlayerViewController_iOS {
             isAirPlaySupported: true,
             isPIPSupported: true,
             isSettingsSupported: true,
-            isSubTitleSupported: false,
+            isSubTitleSupported: true,
             isSlowMoSupported: true,
             isVideoLiveStream: streamConfig?.isLive ?? false,
             isDVREnabled: streamConfig?.isDVR ?? false,

@@ -107,7 +107,7 @@ class PlayerControlsViewModel: ObservableObject {
         if playerControlsConfig.isVideoLiveStream == true {
             if playerControlsConfig.isDVREnabled == true {
                 playerControlsType = .dvrControls
-                playerState.timeLabel = "00:00"
+                playerState.timeLabel = ""
                 playerState.currentTime = 100
             } else {
                 playerControlsType = .liveControls
@@ -317,7 +317,7 @@ extension PlayerControlsViewModel {
         if isLive {
             if isDVREnabled {
                 playerControlsType = .dvrControls
-                playerState.timeLabel = "00:00"
+                playerState.timeLabel = ""
                 playerState.currentTime = 100
             } else {
                 playerControlsType = .liveControls

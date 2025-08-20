@@ -31,7 +31,7 @@ extension PlayerViewController_iOS: PlayerControlsViewDelegate {
     }
     
     func subtitleTapped(isEnabled: Bool) {
-        debugPrint("subtitleTapped: \(isEnabled)")
+        vlPlayer.subtitleTapped(isEnabled: isEnabled)
     }
     
     func piPTapped() {
