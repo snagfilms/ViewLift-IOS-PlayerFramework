@@ -1,46 +1,63 @@
 // swift-tools-version:5.8.0
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "VLPlayerLib",
-    platforms: [.iOS(.v14)],
+    platforms: [
+        .iOS(.v14),
+        .tvOS(.v14)
+    ],
     products: [
         .library(name: "VLPlayerLib", targets: ["VLPlayerLibWrapper"]),
-        .library(name: "GoogleInteractiveMediaAds", targets: ["GoogleInteractiveMediaAds"]),
-        .library(name: "AmazonIVSPlayer", targets: ["AmazonIVSPlayer"]),
-        .library(name: "GoogleCast", targets: ["GoogleCast"]),
+        .library(name: "GoogleCast-iOS", targets: ["GoogleCast-iOS"]),
     ],
     dependencies: [
         .package(
             name: "VisualEffectView",
             url: "https://github.com/efremidze/VisualEffectView.git",
-            from: "4.1.4"),
+            branch: "master"),
         .package(
             name: "M3U8Parser",
             url: "https://github.com/M3U8Kit/M3U8Parser.git",
             from: "1.0.2"),
         .package(
+            name: "BitmovinPlayer",
+            url: "https://github.com/bitmovin/player-ios.git",
+            Version("3.85.2")..<Version("3.85.2")),
+        .package(
             name: "VLBeaconLib",
             url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
-            branch: "main")
+            branch: "3.2.2"),
+        .package(
+            name: "MUXSDKStats",
+            url: "https://github.com/muxinc/mux-stats-sdk-avplayer",
+            Version("4.0.0")..<Version("4.0.0"))
     ],
     targets: [
         .binaryTarget(name: "VLPlayerLib", path: "VLPlayerLib.xcframework"),
-        .target(name: "VLPlayerLibWrapper",
-                dependencies: [
-                    .byName(name: "GoogleInteractiveMediaAds"),
-                    .byName(name: "GoogleCast"),
-                    .byName(name: "AmazonIVSPlayer"),
-                    .product(name: "VLBeaconLib", package: "VLBeaconLib"),
-                    .product(name: "VisualEffectView", package: "VisualEffectView"),
-                    .product(name: "M3U8Parser", package: "M3U8Parser"),
-                    .target(name: "VLPlayerLib")
-                ],
-                path: "VLPlayerLibWrapper/Sources"),
-        .binaryTarget(name: "GoogleInteractiveMediaAds", path: "DependentFrameworks/GoogleInteractiveMediaAds.xcframework"),
-        .binaryTarget(name: "AmazonIVSPlayer", path: "DependentFrameworks/AmazonIVSPlayer.xcframework"),
-        .binaryTarget(name: "GoogleCast", path: "DependentFrameworks/GoogleCast.xcframework"),
+        
+        .target(
+            name: "VLPlayerLibWrapper",
+            dependencies: [
+                .byName(name: "GoogleInteractiveMediaAds-iOS", condition: .when(platforms: [.iOS])),
+                .byName(name: "GoogleInteractiveMediaAds-tvOS", condition: .when(platforms: [.tvOS])),
+
+                .byName(name: "GoogleCast-iOS", condition: .when(platforms: [.iOS])),
+                .byName(name: "AmazonIVSPlayer-iOS", condition: .when(platforms: [.iOS])),
+                .product(name: "VLBeaconLib", package: "VLBeaconLib"),
+                .product(name: "VisualEffectView", package: "VisualEffectView"),
+                .product(name: "M3U8Parser", package: "M3U8Parser"),
+                .product(name: "BitmovinPlayer", package: "BitmovinPlayer"),
+                .product(name: "MUXSDKStats", package: "MUXSDKStats"),
+                .target(name: "VLPlayerLib")
+            ],
+            path: "VLPlayerLibWrapper/Sources"
+        ),
+        .binaryTarget(name: "GoogleInteractiveMediaAds-tvOS", path: "DependentFrameworks/tvOS/GoogleInteractiveMediaAds-tvOS.xcframework"),
+
+        .binaryTarget(name: "GoogleInteractiveMediaAds-iOS", path: "DependentFrameworks/iOS/GoogleInteractiveMediaAds-iOS.xcframework"),
+        .binaryTarget(name: "AmazonIVSPlayer-iOS", path: "DependentFrameworks/iOS/AmazonIVSPlayer-iOS.xcframework"),
+        .binaryTarget(name: "GoogleCast-iOS", path: "DependentFrameworks/iOS/GoogleCast-iOS.xcframework"),
     ]
 )
