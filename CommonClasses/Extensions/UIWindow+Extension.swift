@@ -6,6 +6,7 @@
 //  Copyright © 2025 Viewlift. All rights reserved.
 //
 
+import UIKit
 
 extension UIWindow {
     static var isLandscape: Bool{

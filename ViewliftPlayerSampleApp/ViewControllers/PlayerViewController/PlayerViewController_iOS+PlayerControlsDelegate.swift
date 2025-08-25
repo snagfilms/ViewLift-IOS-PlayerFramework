@@ -1,5 +1,5 @@
 //
-//  PlayerViewController+PlayerControlsDelegate.swift
+//  PlayerViewController_iOS+PlayerControlsDelegate.swift
 //  ViewliftPlayerSampleApp
 //
 //  Created by Japneet Singh on 14/08/25.
