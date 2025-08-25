@@ -12,13 +12,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private var readVideoListOperation:VideoListProtocol?
+    var readVideoListOperation:VideoListProtocol?
+    
+    var authorizationToken: String? = nil
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        readVideoList(readVideoListOperation: ReadFromLocalJson())
+        authorizationToken = AppDelegate.shared.readVideoListOperation?.videoList?.vlToken
         window = UIWindow(frame: UIScreen.main.bounds)
         let assetVC = AssetListViewController()
-        readVideoList(readVideoListOperation: ReadFromLocalJson())
         assetVC.videoList = readVideoListOperation?.videoList
         let navController = UINavigationController(rootViewController: assetVC)
         navController.setNavigationBarHidden(true, animated: false)
