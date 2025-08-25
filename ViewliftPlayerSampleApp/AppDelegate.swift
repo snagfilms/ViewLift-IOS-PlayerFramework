@@ -7,15 +7,32 @@
 //
 
 import UIKit
+import GoogleCast
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var isFullScreen: Bool = false
     var window: UIWindow?
+    var authorizationToken: String? = nil
+    var readVideoListOperation:VideoListProtocol?
+    var isCastingViewVisible: Bool = false
+    var castContextSharedInstance: GCKCastContext?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        self.readVideoList(readVideoListOperation: ReadFromLocalJson())
+        authorizationToken = AppDelegate.shared.readVideoListOperation?.videoList?.vlToken
+        
         return true
+    }
+
+    private func readVideoList(readVideoListOperation: VideoListProtocol) {
+        self.readVideoListOperation = readVideoListOperation
+        self.readVideoListOperation?.readVideoList()
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -39,16 +56,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
+
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        if self.isFullScreen
-        {
-            return [.landscape]
-        }
-        else
-        {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return .all
+        }else{
+            if let topVC = topViewController(window?.rootViewController), let vc = topVC as? PlayerViewController_iOS {
+                return [.portrait, .landscapeLeft, .landscapeRight]
+            }
             return [.portrait]
         }
+    }
+
+    private func topViewController(_ rootViewController: UIViewController?) -> UIViewController? {
+        if let nav = rootViewController as? UINavigationController {
+            return topViewController(nav.visibleViewController)
+        }
+        if let tab = rootViewController as? UITabBarController {
+            return topViewController(tab.selectedViewController)
+        }
+        if let presented = rootViewController?.presentedViewController {
+            return topViewController(presented)
+        }
+        return rootViewController
     }
 }
 
