@@ -260,7 +260,7 @@ extension PlayerViewController_iOS {
         vlPlayer.setSource(
             type: playbackSourceType,
             vlPlayerTag: "1", customControlsView: nil,
-            playerFeaturesSupported: featureSupported, nextVideoList: ["1a3ea508-f519-424e-bc10-5c3b4e069eb5","a03595b8-219b-4706-9e21-376b3da3ac93"]
+            playerFeaturesSupported: featureSupported
         ) {
             [weak self] isSuccess,
             playerView,
@@ -475,6 +475,8 @@ extension PlayerViewController_iOS {
         case .custom:
             return VLPlayer.AutoPlayConfiguration.custom(view: UIView())// Your view
         }
+        // To disable AutoPlay
+        //VLPlayer.AutoPlayConfiguration.disabled
     }
     
     /// Returns the paywall configuration based on the type
