@@ -487,3 +487,41 @@ extension UIView {
 }
 
 
+extension AssetListViewController{// Used to parse local response data.
+    
+    func getEntitlementDataLocal(completion: @escaping (Result<VLPlayer.EntitlementData, VLPlayerLib.VLError>) -> Void
+    ) {
+        fetchContentDetailsLocal() { (playerObject, isSuccess, vlError, playerResponse, contentResponse) in
+            if isSuccess, let playerObject = playerObject {
+                let entitlementData = VLPlayer.EntitlementData(
+                    playerObject: playerObject,
+                    isSuccess: true,
+                    error: vlError,
+                    playerResponse: playerResponse,
+                    contentResponse: contentResponse
+                )
+                completion(.success(entitlementData))
+            } else {
+                completion(.failure(vlError ?? VLPlayerLib.VLError()))
+            }
+        }
+    }
+    
+    func fetchContentDetailsLocal(apiResponse: @escaping (_ playerObject: VLPlayerLib.PlayerObject?, _ isSuccess: Bool, _ vlError: VLPlayerLib.VLError?, _ playerResponse: VLPlayerLib.VLPlayerResponse?, _ contentResponse: Dictionary<String, AnyObject>?) -> Void
+    ) {
+
+            guard let fallbackURL = Bundle.main.url(forResource: "entitlement", withExtension: "json"),
+                  let localData = try? Data(contentsOf: fallbackURL) else {
+                let error = VLPlayerLib.VLError()
+                error.errorCode = ""
+                error.errorMessage = ""
+                error.vl_errorCode = ""
+                error.isPlayable = false
+                error.isSuccess = false
+                apiResponse(nil, false, error, nil, nil)
+                return
+            }
+            parseEntitlementData(from: localData, apiResponse: apiResponse)
+
+        }
+    }

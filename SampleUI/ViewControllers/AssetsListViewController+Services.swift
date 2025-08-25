@@ -10,7 +10,7 @@ import VLPlayerLib
 import Foundation
 
 extension AssetListViewController {
-    private func parseEntitlementData(
+     func parseEntitlementData(
         from data: Data,apiResponse: @escaping (_ playerObject: VLPlayerLib.PlayerObject?, _ isSuccess: Bool, _ vlError: VLPlayerLib.VLError?, _ playerResponse: VLPlayerLib.VLPlayerResponse?, _ contentResponse: Dictionary<String, AnyObject>?) -> Void
     ) {
         do {

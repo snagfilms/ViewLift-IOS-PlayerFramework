@@ -39,8 +39,10 @@
 		BADCC39A2E54468F00A5E3F2 /* VLAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BADCC3992E54468F00A5E3F2 /* VLAnalytics */; };
 		BADCC39D2E5446AB00A5E3F2 /* VLAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = BADCC39C2E5446AB00A5E3F2 /* VLAuthentication */; };
 		BADCC3B92E5446FF00A5E3F2 /* VLAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BADCC3B82E5446FF00A5E3F2 /* VLAnalytics */; };
-		D23998712E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23998702E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift */; };
+		D23998712E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23998702E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift */; };
 		D27C147A2E31416800A3728B /* CustomPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C14782E31416800A3728B /* CustomPaywallView.swift */; };
+		D280CCA02E5C197D0070CDA5 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D280CC9F2E5C197D0070CDA5 /* UIWindow+Extension.swift */; };
+		D280CCA22E5C27E40070CDA5 /* PlayerViewController_iOS+AutoPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D280CCA12E5C27C50070CDA5 /* PlayerViewController_iOS+AutoPlay.swift */; };
 		D2A15DA72E281AD900F88E09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5422EFF5209912C600206D66 /* ViewController.swift */; };
 		D2A15DA92E281AD900F88E09 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
 		D2A758FD2E4B0D1F0089B4D1 /* VideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A758FB2E4B0D1F0089B4D1 /* VideoList.swift */; };
@@ -159,11 +161,13 @@
 		BADCC2F02E51DF6C00A5E3F2 /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "../iosplayer-sdk/VLPlayer/Framework/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
 		BADCC30C2E51FC0200A5E3F2 /* BoolDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolDictionary.swift; sourceTree = "<group>"; };
 		BADCC3A12E5446DE00A5E3F2 /* VLPlayerLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = VLPlayerLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D23998702E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController+PlayerControlsDelegate.swift"; sourceTree = "<group>"; };
+		D23998702E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+PlayerControlsDelegate.swift"; sourceTree = "<group>"; };
 		D2493F642E4B89DA009AA6CD /* GoogleInteractiveMediaAds-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-iOS.xcframework"; path = "../iOSPlayerSDK/VLPlayer/Framework/iOS/GoogleInteractiveMediaAds-iOS.xcframework"; sourceTree = "<group>"; };
 		D2493F652E4B89DA009AA6CD /* GoogleCast-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleCast-iOS.xcframework"; path = "../iOSPlayerSDK/VLPlayer/Framework/iOS/GoogleCast-iOS.xcframework"; sourceTree = "<group>"; };
 		D2493F662E4B89DA009AA6CD /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "../iOSPlayerSDK/VLPlayer/Framework/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
 		D27C14782E31416800A3728B /* CustomPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPaywallView.swift; sourceTree = "<group>"; };
+		D280CC9F2E5C197D0070CDA5 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
+		D280CCA12E5C27C50070CDA5 /* PlayerViewController_iOS+AutoPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+AutoPlay.swift"; sourceTree = "<group>"; };
 		D2A15D8D2E28199900F88E09 /* Demo App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A758FA2E4B0D1F0089B4D1 /* AssetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetModel.swift; sourceTree = "<group>"; };
 		D2A758FB2E4B0D1F0089B4D1 /* VideoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoList.swift; sourceTree = "<group>"; };
@@ -375,6 +379,7 @@
 		D2A759022E4B0E130089B4D1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D280CC9F2E5C197D0070CDA5 /* UIWindow+Extension.swift */,
 				D2A759012E4B0E130089B4D1 /* AppDelegate+Authentication.swift */,
 			);
 			path = Extensions;
@@ -484,13 +489,14 @@
 		D2A759852E4B27410089B4D1 /* PlayerViewController */ = {
 			isa = PBXGroup;
 			children = (
-				40594B7A2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift */,
-				D23998702E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift */,
 				D2A7597F2E4B27410089B4D1 /* PlayerViewController_iOS.swift */,
+				D23998702E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift */,
 				D2A759842E4B27410089B4D1 /* PlayerViewController_iOS+VideoPlaybackDelegate.swift */,
 				D2A759832E4B27410089B4D1 /* PlayerViewController_iOS+TVEAuthentication.swift */,
 				D2A759812E4B27410089B4D1 /* PlayerViewController_iOS+Chromecast.swift */,
 				D2A759822E4B27410089B4D1 /* PlayerViewController_iOS+PIP.swift */,
+				40594B7A2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift */,
+				D280CCA12E5C27C50070CDA5 /* PlayerViewController_iOS+AutoPlay.swift */,
 				D2A759802E4B27410089B4D1 /* PlayerViewController_iOS+Analytics.swift */,
 				D2A759C82E4B5AA10089B4D1 /* PlayerViewController_iOS+FullScreenPlayer.swift */,
 			);
@@ -764,12 +770,14 @@
 				D2A759C92E4B5AB50089B4D1 /* PlayerViewController_iOS+FullScreenPlayer.swift in Sources */,
 				D2A758FF2E4B0D1F0089B4D1 /* VideoList.swift in Sources */,
 				D2A759002E4B0D1F0089B4D1 /* AssetModel.swift in Sources */,
-				D23998712E4E351900BC0AA9 /* PlayerViewController+PlayerControlsDelegate.swift in Sources */,
+				D23998712E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift in Sources */,
+				D280CCA02E5C197D0070CDA5 /* UIWindow+Extension.swift in Sources */,
 				5422EFF4209912C600206D66 /* AppDelegate.swift in Sources */,
 				5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */,
 				D2A759872E4B27410089B4D1 /* PlayerViewController_iOS+VideoPlaybackDelegate.swift in Sources */,
 				D2A759882E4B27410089B4D1 /* PlayerViewController_iOS+Chromecast.swift in Sources */,
 				40594B7B2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift in Sources */,
+				D280CCA22E5C27E40070CDA5 /* PlayerViewController_iOS+AutoPlay.swift in Sources */,
 				D2A759972E4B2B800089B4D1 /* AnalyticsProtocol.swift in Sources */,
 				D2A759892E4B27410089B4D1 /* PlayerViewController_iOS+Analytics.swift in Sources */,
 				9D3AAA792E4E2E5C00FFDA9A /* Utility.swift in Sources */,
@@ -1620,7 +1628,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework.git";
 			requirement = {
-				branch = 3.2.5;
+				branch = 3.2.6;
 				kind = branch;
 			};
 		};
