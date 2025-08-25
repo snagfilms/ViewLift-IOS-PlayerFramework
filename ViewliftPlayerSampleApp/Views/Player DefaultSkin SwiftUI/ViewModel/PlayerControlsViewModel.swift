@@ -76,14 +76,13 @@ struct PlayerControlsConfig {
 // MARK: - Player ViewModel
 class PlayerControlsViewModel: ObservableObject {
     @Published var playerState = PlayerState()
-    @Published var isLandscape: Bool = false
-    @Published var isSliderDragging: Bool = false
-    @Published var adRunningOnPlayer: Bool = false
-    var playerControlsConfig: PlayerControlsConfig
+    @Published var playerControlsConfig: PlayerControlsConfig
     
-    weak internal var delegate: PlayerControlsViewDelegate?
+    @Published var isLandscape: Bool = false
+    @Published var adRunningOnPlayer: Bool = false
     @Published var playerControlsType: PlayerControlsLayoutType = .streamControls
     
+    weak internal var delegate: PlayerControlsViewDelegate?
     private var sentSliderBeginTracking: Bool = false
     
     internal var volumeObserver: NSKeyValueObservation?
@@ -111,15 +110,13 @@ class PlayerControlsViewModel: ObservableObject {
                 playerState.currentTime = 100
             } else {
                 playerControlsType = .liveControls
+                self.playerControlsConfig.isSlowMoSupported = false
             }
         } else {
             playerControlsType = .streamControls
         }
         
         startVolumeMonitoring()
-//        if playerControlsConfig.isPIPSupported {
-//            self.delegate?.setupPictureInPicture()
-//        }
     }
     
     deinit{
@@ -276,6 +273,10 @@ extension PlayerControlsViewModel {
         return Color(Utility.hexStringToUIColor(hex: playerControlsConfig.playerControlsColor?.progressBarBGColor ?? "#999797"))
     }
     
+}
+
+extension PlayerControlsViewModel {
+    
     // Format seconds into HH:MM:SS
     func formatTime(_ seconds: Double) -> String {
         guard seconds.isFinite, !seconds.isNaN else {
@@ -359,10 +360,6 @@ extension PlayerControlsViewModel {
     func showPlayButtonAfterBuffering() {
     }
     
-    func closedCaptionButton(isHidden: Bool) {
-        playerControlsConfig.isSubTitleSupported = !isHidden
-    }
-    
     func enableSettingButtonUserInteraction(isEnabled: Bool) {
     }
     
@@ -432,4 +429,35 @@ extension PlayerControlsViewModel {
         }
     }
     
+}
+
+extension PlayerControlsViewModel {
+    
+    func chromeCastButton(isHidden: Bool) {
+        playerControlsConfig.isChromeCastSupported = !isHidden
+    }
+    
+    func airPlayButton(isHidden: Bool) {
+        playerControlsConfig.isAirPlaySupported = !isHidden
+    }
+    
+    func closedCaptionButton(isHidden: Bool) {
+        playerControlsConfig.isSubTitleSupported = !isHidden
+    }
+    
+    func pipButton(isHidden: Bool) {
+        playerControlsConfig.isPIPSupported = !isHidden
+    }
+    
+    func settingsButton(isHidden: Bool) {
+        playerControlsConfig.isSettingsSupported = !isHidden
+    }
+    
+    func slowMoButton(isHidden: Bool) {
+        playerControlsConfig.isSlowMoSupported = !isHidden
+    }
+    
+    func playerControlsConfig(config: PlayerControlsColor) {
+        playerControlsConfig.playerControlsColor = config
+    }
 }
