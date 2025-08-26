@@ -231,109 +231,42 @@ extension PlayerViewController_iOS {
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = videoList.apiBaseUrl
         
-        if shouldUseDirectStream() {
-            setupDirectStreamPlayer(baseUrl: vlBaseUrl,
-                                    features: featureSupported,
-                                    loader: loaderView)
-        } else {
-            setupContentPlaybackPlayer(baseUrl: vlBaseUrl,
-                                       features: featureSupported,
-                                       loader: loaderView)
+        let playerLicenseKey: String? = ""
+        let analyticsLicenseKey: String? = ""
+        let userId: String? = nil
+        // Initialize player with license if available
+        if let playerLicenseKey = playerLicenseKey, !playerLicenseKey.isEmpty {
+            vlPlayer = VLPlayer(playerType: .bitmovin(config: VLBitmovinConfig(license: VLBitmovinConfig.VLBitmovinLicenseConfig(playerKey: playerLicenseKey, analyticsKey: analyticsLicenseKey), userId: userId)))
+        }else{
+            vlPlayer = VLPlayer(playerType: .default)
         }
-    }
-    
-    /// Determines if direct stream should be used based on player option
-    private func shouldUseDirectStream() -> Bool {
-        return playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL
-    }
-    
-    /// Sets up player for direct stream playback
-    private func setupDirectStreamPlayer(baseUrl: String,
-                                         features: VLPlayer.VLPlayerFeatureSupported,
-                                         loader: UIActivityIndicatorView) {
-        vlPlayer = createVLPlayer()
-        configurePlayer()
-        
-        let isDVREnabled = streamConfig?.isDVR ?? false
-        let streamType = VLPlayer.DirectStreamType(
-            url: streamUrl ?? "",
-            streamConfig: streamConfig,
-            drmconfig: drmConfig
-        )
-        
-        let playbackConfig = VLPlayer.DirectStreamPlaybackConfig(
-            stream: streamType,
-            token: "",
-            apiBaseURL: ""
-        )
-        
-        vlPlayer.setSource(
-            type: .directStream(playbackConfig),
-            customControlsView: getCustomPlayerSkin().view,
-            playerFeaturesSupported: features
-        ) {
-            [weak self] isSuccess,
-            playerView,
-            contentResponse in
-            
-            var hasTVE = false
-            
-            // Check if content has TVE monetization model
-            if let video = contentResponse?["video"] as? [String: Any],
-               let monetizationModels = video["monetizationModels"] as? [[String: Any]] {
-                hasTVE = monetizationModels.contains { $0["type"] as? String == "TVE" }
-            }
-            
-            self?.handlePlayerSetupCompletion(
-                isSuccess: isSuccess,
-                playerView: playerView,
-                isDVREnabled: isDVREnabled,
-                loader: loader,
-                hasTVE: hasTVE
+        // Select playback source type based on user option
+        let playbackSourceType: VLPlayer.PlaybackSourceType
+        if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
+            let isDVREnabled = streamConfig?.isDVR ?? false
+            let streamType = VLPlayer.DirectStreamType(
+                url: streamUrl ?? "",
+                streamConfig: streamConfig,
+                drmconfig: drmConfig
             )
             
-            if let video = contentResponse?["video"] as? [String: Any] {
-                let title = (video["title"] as? String) ?? ""
-                let isLive = ((video["streamingInfo"] as? [String: Any])?["isLiveStream"] as? Bool ) ?? false
-                
-                var isDVR = false
-                if let liveDetailsDict = video["liveDetails"] as? Dictionary<String, Any>{
-                    if let isDVREnabled = liveDetailsDict["isDvrEnabled"] as? Bool,
-                        isDVREnabled == true,
-                       let startOverTime = liveDetailsDict["startOverTime"] as? Double, startOverTime > 0 {
-                        isDVR = isDVREnabled
-                    }
-                }
-                self?.videoPlayerCustomView?.viewModel?.updateSkin(title: title, isLive: isLive, isDVREnabled: isDVR)
-            }
-            
-            if let contentResponse = contentResponse {
-                self?.parseVLVideoResponse(from: contentResponse)
-            }
+            let playbackConfig = VLPlayer.DirectStreamPlaybackConfig(
+                stream: streamType
+            )
+            playbackSourceType = .directStream(playbackConfig)
+        }else{
+            playbackSourceType = .contentPlayback(VLPlayer.ContentPlaybackConfig(videoId: self.videoList.videoId, token: vlToken, apiBaseURL: vlBaseUrl))
         }
-    }
-    
-    /// Sets up player for content playback (non-direct stream)
-    private func setupContentPlaybackPlayer(baseUrl: String,
-                                            features: VLPlayer.VLPlayerFeatureSupported,
-                                            loader: UIActivityIndicatorView) {
-        vlPlayer = VLPlayer(playerType: .default)
-        configurePlayer()
+        setPlayerDelegates()
         
-        if let entitlementData = entitlementData {
-            vlPlayer.setEntitlement(data: entitlementData)
+
+        if let data = entitlementData{
+            vlPlayer.setEntitlement(data: data)
         }
-        
-        let playbackConfig = VLPlayer.ContentPlaybackConfig(
-            videoId: videoList.videoId,
-            token: vlToken,
-            apiBaseURL: baseUrl
-        )
-        
         vlPlayer.setSource(
-            type: .contentPlayback(playbackConfig),
-            customControlsView: getCustomPlayerSkin().view,
-            playerFeaturesSupported: features
+            type: playbackSourceType,
+            vlPlayerTag: "1", customControlsView: nil,
+            playerFeaturesSupported: featureSupported
         ) {
             [weak self] isSuccess,
             playerView,
@@ -350,7 +283,7 @@ extension PlayerViewController_iOS {
                 isSuccess: isSuccess,
                 playerView: playerView,
                 isDVREnabled: false,
-                loader: loader,
+                loader: loaderView,
                 hasTVE: hasTVE
             )
             
@@ -373,27 +306,17 @@ extension PlayerViewController_iOS {
                 self?.parseVLVideoResponse(from: contentResponse)
             }
         }
-    }
-    
-    /// Creates a VLPlayer instance, optionally with Bitmovin config
-    private func createVLPlayer() -> VLPlayer {
-        let playerLicenseKey: String? = ""
-        let analyticsLicenseKey: String? = ""
-        let userId: String? = nil
         
-        if let playerLicenseKey = playerLicenseKey, !playerLicenseKey.isEmpty {
-            let licenseConfig = VLBitmovinConfig.VLBitmovinLicenseConfig(
-                playerKey: playerLicenseKey,
-                analyticsKey: analyticsLicenseKey
-            )
-            let config = VLBitmovinConfig(license: licenseConfig, userId: userId)
-            return VLPlayer(playerType: .bitmovin(config: config))
-        }
-        return VLPlayer(playerType: .default)
+
     }
     
+    /// Determines if direct stream should be used based on player option
+    private func shouldUseDirectStream() -> Bool {
+        return playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL
+    }
+
     /// Configures player delegates and settings
-    private func configurePlayer() {
+    private func setPlayerDelegates() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
         vlPlayer.videoPlayerDelegate = self
         vlPlayer.playerVideoAnalyticsDelegate = self
@@ -535,18 +458,31 @@ extension PlayerViewController_iOS {
         return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
-                                                 autoPlayEnabled: self.autoplayEnabled,
                                                  loopVideoPlayback: self.loopEnabled,
-                                                 hideVideoControls: self.hideControls,
                                                  mutePlayback: self.muteEnabled,
                                                  customPlayerControlsColor: nil,
-                                                 showPlayerControlAlways: false,
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
+                                                 controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
+                                                 autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: false,
                                                  isCustomAdViewEnabled: enableCustomAdUI,
                                                  isServerSideAdTrackingEnabled: true)
+    }
+    /// Returns the AutoPlay configuration based on the type
+    private func getAutoPlayConfig(type: Configuration) -> VLPlayer.AutoPlayConfiguration?{
+        switch type {
+            
+        case .default:
+            return VLPlayer.AutoPlayConfiguration.default()
+        case .customTheme:
+            return VLPlayer.AutoPlayConfiguration.default(countdown: 15, theme: VLPlayer.AutoPlayTheme())
+        case .custom:
+            return VLPlayer.AutoPlayConfiguration.custom(view: UIView())// Your view
+        }
+        // To disable AutoPlay
+        //VLPlayer.AutoPlayConfiguration.disabled
     }
     
     /// Returns the paywall configuration based on the type
@@ -741,18 +677,5 @@ extension UIView {
         }
         
         NSLayoutConstraint.activate(constraints)
-    }
-}
-extension UIWindow {
-    static var isLandscape: Bool {
-        if #available(iOS 13.0, *) {
-            return UIApplication.shared.windows
-                .last?
-                .windowScene?
-                .interfaceOrientation
-                .isLandscape ?? false
-        } else {
-            return UIApplication.shared.statusBarOrientation.isLandscape
-        }
     }
 }
