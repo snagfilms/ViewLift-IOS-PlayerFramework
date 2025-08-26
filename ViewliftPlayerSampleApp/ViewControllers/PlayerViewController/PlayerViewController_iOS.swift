@@ -10,9 +10,9 @@ import UIKit
 import VLPlayerLib
 import VLBeaconLib
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 #endif
 import VLAnalyticsLib
 import AVKit
@@ -195,10 +195,17 @@ class PlayerViewController_iOS: UIViewController {
     @IBAction func logoutButtonAction(_ sender: Any) {
         //        Task { [weak self] in
         let mvpdProvider = UserManager.shared.userIdentity?.mvpdProvider
+        self.performLogout()
+        //        }
+    }
+    
+    func performLogout(isForceLogout: Bool = false) {
+        let mvpdProvider = UserManager.shared.userIdentity?.mvpdProvider
         
         VLAuthentication.sharedInstance.logout(
             client: .tvProvider(provider: .adobe, tveInitializationConfig: nil),
-            mvpdId: mvpdProvider
+            mvpdId: mvpdProvider,
+            performForceLogout: isForceLogout
         ) { [weak self] logoutSuccessful in
             if logoutSuccessful {
                 Task { [weak self] in
@@ -210,7 +217,6 @@ class PlayerViewController_iOS: UIViewController {
                 }
             }
         }
-        //        }
     }
 }
 
@@ -583,9 +589,17 @@ extension PlayerViewController_iOS {
     }
     
     /// Shows a simple alert with a title and message
-    func showAlert(title: String = "Alert!", message: String = "Description") {
+    func showAlert(
+        title: String = "Alert!",
+        message: String = "Description",
+        okActionHandler: (() -> Void)? = nil
+    ) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            okActionHandler?()
+        }
+        
         alertController.addAction(okAction)
         present(alertController, animated: true)
     }
