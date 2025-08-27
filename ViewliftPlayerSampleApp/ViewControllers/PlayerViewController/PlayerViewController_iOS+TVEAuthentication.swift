@@ -8,9 +8,9 @@
 
 import VLPlayerLib
 #if os(iOS)
-import VLAuthentication
+import VLAuthenticationFramework
 #else
-import VLAuthentication_tvOS
+import VLAuthenticationFramework_tvOS
 #endif
 import VLBeaconLib
 import Foundation

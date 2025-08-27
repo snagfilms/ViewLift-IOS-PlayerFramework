@@ -10,9 +10,9 @@ import UIKit
 import VLPlayerLib
 import VLBeaconLib
 #if os(iOS)
-import VLAuthentication
+import VLAuthenticationFramework
 #else
-import VLAuthentication_tvOS
+import VLAuthenticationFramework_tvOS
 #endif
 import VLAnalyticsLib
 import AVKit
@@ -193,10 +193,7 @@ class PlayerViewController_iOS: UIViewController {
     
     /// Handles logout button tap, logs out user and resets player
     @IBAction func logoutButtonAction(_ sender: Any) {
-        //        Task { [weak self] in
-        let mvpdProvider = UserManager.shared.userIdentity?.mvpdProvider
         self.performLogout()
-        //        }
     }
     
     func performLogout(isForceLogout: Bool = false) {
@@ -204,8 +201,7 @@ class PlayerViewController_iOS: UIViewController {
         
         VLAuthentication.sharedInstance.logout(
             client: .tvProvider(provider: .adobe, tveInitializationConfig: nil),
-            mvpdId: mvpdProvider,
-            performForceLogout: isForceLogout
+            mvpdId: mvpdProvider
         ) { [weak self] logoutSuccessful in
             if logoutSuccessful {
                 Task { [weak self] in
@@ -215,6 +211,10 @@ class PlayerViewController_iOS: UIViewController {
                     self?.vlPlayer.destroy()
                     self?.loadPlayerView()
                 }
+            }
+            
+            if isForceLogout {
+                VLAuthentication.sharedInstance.clearTveAuthDetails()
             }
         }
     }
