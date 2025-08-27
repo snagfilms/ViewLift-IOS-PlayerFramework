@@ -241,11 +241,8 @@ class PlayerViewController_tvOS: UIViewController {
         // See VLPlayer documentation for available macros
         return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  isCustomLoaderAdded: false,
-                                                 shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
                                                  mutePlayback: self.muteEnabled,
-                                                 customPlayerControlsColor: nil,
-                                                 supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
                                                  playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default))
