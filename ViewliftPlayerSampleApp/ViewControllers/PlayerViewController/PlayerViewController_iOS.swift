@@ -451,11 +451,8 @@ extension PlayerViewController_iOS {
         //https://developer.viewlift.com/docs/vlplayerfeaturesupported
         return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  isCustomLoaderAdded: false,
-                                                 shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
                                                  mutePlayback: self.muteEnabled,
-                                                 customPlayerControlsColor: nil,
-                                                 supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),

@@ -48,7 +48,7 @@ struct PlayerControlsConfig {
     var isVideoLiveStream: Bool
     var isDVREnabled: Bool
     var videoTitle: String
-    var playerControlsColor: PlayerControlsColor?
+    var playerControlsColor: VLPlayer.PlayerControlsColor?
     
     init(isChromeCastSupported: Bool = true,
          isAirPlaySupported: Bool = true,
@@ -59,7 +59,7 @@ struct PlayerControlsConfig {
          isVideoLiveStream: Bool = false,
          isDVREnabled: Bool = false,
          videoTitle: String = "",
-         playerControlsColor: PlayerControlsColor? = nil) {
+         playerControlsColor: VLPlayer.PlayerControlsColor? = nil) {
         self.isChromeCastSupported = isChromeCastSupported
         self.isAirPlaySupported = isAirPlaySupported
         self.isPIPSupported = isPIPSupported
@@ -457,7 +457,7 @@ extension PlayerControlsViewModel {
         playerControlsConfig.isSlowMoSupported = !isHidden
     }
     
-    func playerControlsConfig(config: PlayerControlsColor) {
+    func playerControlsConfig(config: VLPlayer.PlayerControlsColor) {
         playerControlsConfig.playerControlsColor = config
     }
 }
