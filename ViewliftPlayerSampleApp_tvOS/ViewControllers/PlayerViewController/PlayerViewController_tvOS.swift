@@ -23,6 +23,9 @@ class PlayerViewController_tvOS: UIViewController {
         case `default`
         case customTheme
         case custom
+        #if os(tvOS)
+        case native
+        #endif
     }
     private let playerContainerView = UIView()
     var streamUrl: String?
@@ -248,7 +251,7 @@ class PlayerViewController_tvOS: UIViewController {
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
-                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default))
+                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .native))
     }
     
     // Returns player controls view configuration based on type
@@ -269,6 +272,11 @@ class PlayerViewController_tvOS: UIViewController {
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .custom(view: view)
             self.videoPlayerControlsView = view
             return playerControlsViewConfiguration
+        #if os(tvOS)
+        case .native:
+            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .native
+            return playerControlsViewConfiguration
+        #endif
         case .default:
             // Use default controls view and theme
             return nil
@@ -294,6 +302,10 @@ class PlayerViewController_tvOS: UIViewController {
         case .default:
             // Use default paywall view and theme
             return nil
+        #if os(tvOS)
+        case .native:
+            return nil
+        #endif
         }
     }
     
