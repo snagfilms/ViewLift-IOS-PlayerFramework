@@ -8,6 +8,8 @@
 import UIKit
 import VLPlayerLib
 import Kingfisher
+
+
 class AutoPlayView: UIView {
     
     // MARK: - UI Elements
@@ -78,6 +80,12 @@ class AutoPlayView: UIView {
         setupActions()
     }
     
+    #if os(tvOS)
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+           return [playButton]   // or [closeButton] if you want close first
+       }
+    #endif
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -95,10 +103,23 @@ class AutoPlayView: UIView {
         addSubview(subtitleLabel)
         addSubview(closeButton)
         
-        NSLayoutConstraint.activate([
+        var constraints: [NSLayoutConstraint] = []
+        
+        #if os(tvOS)
+        // tvOS → Close button on top-left
+        constraints.append(contentsOf: [
             closeButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            closeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            
+            closeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
+        ])
+        #else
+        // iOS → Close button on top-right
+        constraints.append(contentsOf: [
+            closeButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            closeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
+        #endif
+        
+        constraints.append(contentsOf: [
             thumbnailImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             thumbnailImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
             thumbnailImageView.widthAnchor.constraint(equalToConstant: 160),
@@ -121,6 +142,8 @@ class AutoPlayView: UIView {
             subtitleLabel.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: 15),
             subtitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func setupActions() {
@@ -130,6 +153,8 @@ class AutoPlayView: UIView {
     
     // MARK: - Timer Logic
     private func startCountdown() {
+        setNeedsFocusUpdate()
+        updateFocusIfNeeded()
         stopCountdown()
         secondsRemaining = 10
         updateCountdownLabel()
@@ -155,11 +180,15 @@ class AutoPlayView: UIView {
         }
     }
     
-    func updateView(data: VLPlayer.ContentData?){
+    func updateView(data: VLPlayer.ContentData?) {
         stopCountdown()
         titleLabel.text = data?.contentTitle
         subtitleLabel.text = data?.contentDescription
-        thumbnailImageView.kf.setImage(with: URL(string: data?.thumbnail ?? ""))
+        if let urlString = data?.thumbnail, let url = URL(string: urlString) {
+            thumbnailImageView.kf.setImage(with: url)
+        } else {
+            thumbnailImageView.image = nil
+        }
         startCountdown()
     }
     

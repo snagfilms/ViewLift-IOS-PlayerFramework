@@ -47,6 +47,9 @@ class PlayerViewController_tvOS: UIViewController {
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
     var enableCustomAdUI: Bool = false
+    var autoPlayList = [String: VLPlayer.StreamMetadata]()
+    internal var autoPlayView: AutoPlayView?
+
     override var canBecomeFirstResponder: Bool {
         return true
     }
@@ -61,6 +64,7 @@ class PlayerViewController_tvOS: UIViewController {
         view.backgroundColor = .white
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
+        setupAutoPlayList()
         setupConstraints()
         updateConstraintsForCurrentOrientation()
         self.loadPlayerView()
@@ -98,7 +102,10 @@ class PlayerViewController_tvOS: UIViewController {
             vlPlayer?.setEntitlement(data: entitlementData)
         }
         // Set player source and handle completion
-        vlPlayer?.setSource(type: playbackSourceType, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
+        vlPlayer?.setSource(type: playbackSourceType,
+                            vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
+                            playerFeaturesSupported: featureSupported, nextVideoList: ["https://cnbcawsmpvod.akamaized.net/out/v1/066a8886bd124848a72eb770e89ba5b7/54fbf64382f04b94bb69340d5528ff8b/26cdcccd8cb84f5398bc0124836d47ee/master.m3u8", "https://cdn-vl-gcp-l-01.vos360.video/Content/HLS_HLS_CLEAR/Live/channel(886a397d-ff30-4021-eb16-bb73c658c033)/index.m3u8"]
+                        ) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
                 var hasTVE = false
                 
@@ -111,6 +118,22 @@ class PlayerViewController_tvOS: UIViewController {
                 
             }
         }
+    }
+    
+    private func setupAutoPlayList(){
+        let streamConfig1 = VLPlayer.StreamConfig(isLive: false, isDVR: nil, isDRM: nil)
+        let drmConfig1 = VLPlayer.DRMConfig(licenseUrl: "", certificateUrl: "", licenseToken: "", completeSkd: "")
+        let contentData1 = VLPlayer.ContentData(contentTitle: "Title 1", contentDescription: "Description 1", thumbnail: nil)
+        let metaData1 = VLPlayer.StreamMetadata(streamConfig: streamConfig1, drmconfig: nil, contentData: contentData1)
+        let url1 = "https://cnbcawsmpvod.akamaized.net/out/v1/066a8886bd124848a72eb770e89ba5b7/54fbf64382f04b94bb69340d5528ff8b/26cdcccd8cb84f5398bc0124836d47ee/master.m3u8"
+        autoPlayList[url1] = metaData1
+        
+        let streamConfig2 = VLPlayer.StreamConfig(isLive: true, isDVR: nil, isDRM: nil)
+        let drmConfig2 = VLPlayer.DRMConfig(licenseUrl: "", certificateUrl: "", licenseToken: "", completeSkd: "")
+        let contentData2 = VLPlayer.ContentData(contentTitle: "Title 2", contentDescription: "Description 2", thumbnail: nil)
+        let metaData2 = VLPlayer.StreamMetadata(streamConfig: streamConfig2, drmconfig: nil, contentData: contentData2)
+        let url2 = "https://cdn-vl-gcp-l-01.vos360.video/Content/HLS_HLS_CLEAR/Live/channel(886a397d-ff30-4021-eb16-bb73c658c033)/index.m3u8"
+        autoPlayList[url2] = metaData2
     }
     
     // Handles player setup completion, checks for TVE authorization
@@ -249,7 +272,8 @@ class PlayerViewController_tvOS: UIViewController {
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
-                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default))
+                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default),
+                                                 autoPlayConfiguration: getAutoPlayConfig(type: .custom))
     }
     
     // Returns player controls view configuration based on type
