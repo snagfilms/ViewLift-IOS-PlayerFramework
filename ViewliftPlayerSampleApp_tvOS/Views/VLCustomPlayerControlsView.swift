@@ -45,7 +45,8 @@ protocol PlayerControlsDelegate :AnyObject {
     func getStartOverTime() -> Double?
     func isLiveVideo() -> Bool
     func isDVREnabled () -> Bool
-    func setPlaybackRate(playbackSpeed:Float)    
+    func setPlaybackRate(playbackSpeed:Float)
+    func getTrickPlayData(_ value: Double) -> (image: UIImage?, time: String?)
 }
 
 enum FontStyleValues : String, CaseIterable {
@@ -115,7 +116,14 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
     private var currentControlsType: ControlsType = .videoStream
     var isAdOnMainView: Bool = false
     var adRunningOnInternalPlayer: Bool = false
-
+    
+    internal var trickPlayImageView: UIImageView?
+    internal var trickPlayTimeView: UILabel?
+    internal var trickPlayType: TrickPlayType = .auto
+    internal enum TrickPlayType {
+        case thumbnail, time, auto, none
+    }
+    
      init(frame: CGRect, config: VLPlayer.PlayerControlsViewThemeConfiguration?){
         super.init(frame: frame)
         loadView()
@@ -196,7 +204,9 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
     @objc func sliderValueChanges(slider: TvOSSlider) {
         let timeToSeek = Double(slider.value) * (delegate?.getCurrentVideoDuration() ?? 0.0)
         self.delegate?.seekTo(seconds: timeToSeek)
-        updateLabelPosition()
+        updateLabelPosition(CGFloat(slider.value))
+        elapsedDurationLabel.text = timeToSeek.getTimeInString()
+        updateSeekingThumbnail(slider)
     }
 
 
@@ -279,8 +289,8 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
         #endif
     }
 
-    func updateLabelPosition() {
-        let sliderValue: CGFloat = CGFloat(sliderView.value)
+    func updateLabelPosition(_ value: CGFloat? = nil) {
+        let sliderValue: CGFloat = value ?? CGFloat(sliderView.value)
         let value = sliderValue * sliderView.frame.width
         let labelX = sliderView.frame.origin.x +  value
         let maxX = (sliderView.frame.width - elapsedDurationLabel.frame.width)
@@ -513,6 +523,7 @@ extension VLCustomPlayerControlsView{
                 self.totalDurationLabel.backgroundColor = .clear
                 self.sliderView.value = Float(sliderValue)
                 self.updateLabelPosition()
+                self.removeTrickPlayView()
             }
 
 

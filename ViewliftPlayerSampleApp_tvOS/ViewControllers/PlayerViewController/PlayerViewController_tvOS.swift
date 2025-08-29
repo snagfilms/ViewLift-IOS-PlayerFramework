@@ -50,6 +50,8 @@ class PlayerViewController_tvOS: UIViewController {
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
     var enableCustomAdUI: Bool = false
+    var analyticsAdDictionary = AnalyticsAdDictionary()
+    
     override var canBecomeFirstResponder: Bool {
         return true
     }
@@ -94,6 +96,9 @@ class PlayerViewController_tvOS: UIViewController {
         }
         // Set delegates for player events and analytics
         vlPlayer?.videoPlayerDelegate = self
+        
+        // Set delegates for SSAID events
+        vlPlayer?.serverSideAdTrackingDelegate = self
         
         vlPlayer?.playerVideoAnalyticsDelegate = self
         // Set entitlement if available
@@ -251,7 +256,9 @@ class PlayerViewController_tvOS: UIViewController {
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
-                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .native))
+                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .custom),
+                                                 isTrickPlayEnabled: true,
+                                                 isServerSideAdTrackingEnabled: true)
     }
     
     // Returns player controls view configuration based on type
@@ -429,5 +436,10 @@ extension PlayerViewController_tvOS: PlayerControlsDelegate {
     // Seeks to the live position in the stream
     func seekToLivePosition() {
         self.vlPlayer?.seekToLivePosition()
+    }
+    
+    //get trick play image data
+    func getTrickPlayData(_ value: Double) -> (image: UIImage?, time: String?) {
+        self.vlPlayer?.getTrickPlayData(value) ?? (nil, nil)
     }
 }
