@@ -247,6 +247,7 @@ class PlayerViewController_tvOS: UIViewController {
                                                  customPlayerControlsColor: nil,
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
+                                                 controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
                                                  playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default))
     }

@@ -6,19 +6,72 @@
 //  Copyright © 2025 Viewlift. All rights reserved.
 //
 import Foundation
-
+import VLPlayerLib
+import UIKit
 
 extension PlayerViewController_iOS {
-    /// This is called when AutoPlay UI is shown
-    func autoPlayUIInitiated() {
-        // make changes to your AutoPlay ui
-    }
+    
     /// This is called when AutoPlay UI is dismissed. This is called for default UI
-    func autoPlayUIDimissed(isPlayingNextContent: Bool) {
+    func autoPlayUIDismissed(isPlayingNextContent: Bool) {
         if isPlayingNextContent{
             // nextcontent will play and ui dismissed
         }else{
             // ui dismissed
         }
     }
+    
+    /// This is called when Next Video with URL is about to play. You need to pass all the Metadata required to play this URL.Here you can update your AutoPlay UI with the new content.
+    func autoPlayMetadataProvider(stream: String) -> VLPlayer.StreamMetadata? {
+       let data =  autoPlayList[stream]
+        autoPlayView?.updateView(data: data?.contentData)
+        return data
+    }
+}
+
+extension PlayerViewController_iOS{
+    
+    private func createAutoPlayView() -> AutoPlayView {
+        let autoPlay = AutoPlayView()
+        autoPlay.translatesAutoresizingMaskIntoConstraints = false
+        
+        autoPlay.onPlay = { [weak self] in
+            print("Play button tapped")
+            self?.removeAutoPlayView()
+            self?.vlPlayer.playNextVideo()
+        }
+        
+        autoPlay.onClose = { [weak self] in
+            print("Closed autoplay")
+            self?.removeAutoPlayView()
+        }
+        
+        autoPlay.onAutoPlay = { [weak self] in
+            print("Autoplay finished, play next video")
+            self?.removeAutoPlayView()
+            self?.vlPlayer.playNextVideo()
+        }
+        self .autoPlayView = autoPlay
+        return autoPlay
+    }
+    
+    private func removeAutoPlayView() {
+        autoPlayView?.removeFromSuperview()
+    }
+    
+    /// Returns the AutoPlay configuration based on the type
+    internal func getAutoPlayConfig(type: Configuration) -> VLPlayer.AutoPlayConfiguration?{
+        switch type {
+            
+        case .default:
+            return VLPlayer.AutoPlayConfiguration.default()
+        case .customTheme:
+            return VLPlayer.AutoPlayConfiguration.default(countdown: 15, theme: VLPlayer.AutoPlayTheme())
+        case .custom:
+            return VLPlayer.AutoPlayConfiguration.custom(view: createAutoPlayView())// Your view
+        default :
+            return VLPlayer.AutoPlayConfiguration.disabled
+        }
+        
+    }
+    
 }
