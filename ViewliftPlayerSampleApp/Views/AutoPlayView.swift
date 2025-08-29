@@ -24,7 +24,7 @@ class AutoPlayView: UIView {
     }()
     
     private let playButton: UIButton = {
-        let btn = UIButton(type: .system)
+        let btn = UIButton(type: .custom)
         btn.setImage(UIImage(systemName: "play.fill"), for: .normal)
         btn.tintColor = .white
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -33,24 +33,18 @@ class AutoPlayView: UIView {
     
     private let countdownLabel: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = .white
-        lbl.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
     private let titleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = .red
-        lbl.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
     private let subtitleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = .blue
-        lbl.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
@@ -58,10 +52,17 @@ class AutoPlayView: UIView {
     private let closeButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(systemName: "xmark"), for: .normal)
-        btn.tintColor = .white
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
+    
+    private func getMultiplier(_ height: CGFloat) -> CGFloat{
+       #if os(tvOS)
+        return height * 1.8
+        #else
+        return height
+        #endif
+    }
     
     // MARK: - Callbacks
     var onPlay: (() -> Void)?
@@ -104,7 +105,6 @@ class AutoPlayView: UIView {
         addSubview(closeButton)
         
         var constraints: [NSLayoutConstraint] = []
-        
         #if os(tvOS)
         // tvOS → Close button on top-left
         constraints.append(contentsOf: [
@@ -122,13 +122,13 @@ class AutoPlayView: UIView {
         constraints.append(contentsOf: [
             thumbnailImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             thumbnailImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
-            thumbnailImageView.widthAnchor.constraint(equalToConstant: 160),
-            thumbnailImageView.heightAnchor.constraint(equalToConstant: 90),
+            thumbnailImageView.widthAnchor.constraint(equalToConstant: getMultiplier(160)),
+            thumbnailImageView.heightAnchor.constraint(equalToConstant: getMultiplier(90)),
             
             playButton.centerXAnchor.constraint(equalTo: thumbnailImageView.centerXAnchor),
             playButton.centerYAnchor.constraint(equalTo: thumbnailImageView.centerYAnchor),
-            playButton.widthAnchor.constraint(equalToConstant: 40),
-            playButton.heightAnchor.constraint(equalToConstant: 40),
+            playButton.widthAnchor.constraint(equalToConstant: getMultiplier(40)),
+            playButton.heightAnchor.constraint(equalToConstant: getMultiplier(40)),
             
             countdownLabel.topAnchor.constraint(equalTo: thumbnailImageView.topAnchor, constant: 5),
             countdownLabel.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: 15),
@@ -144,6 +144,10 @@ class AutoPlayView: UIView {
         ])
         
         NSLayoutConstraint.activate(constraints)
+        
+        countdownLabel.font = UIFont.systemFont(ofSize: getMultiplier(14), weight: .regular)
+        subtitleLabel.font = UIFont.systemFont(ofSize: getMultiplier(16), weight: .semibold)
+        titleLabel.font = UIFont.systemFont(ofSize: getMultiplier(16), weight: .bold)
     }
     
     private func setupActions() {

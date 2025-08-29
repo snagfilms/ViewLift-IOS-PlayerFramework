@@ -280,7 +280,7 @@ class PlayerViewController_tvOS: UIViewController {
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
                                                  playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default),
-                                                 autoPlayConfiguration: getAutoPlayConfig(type: .custom))
+                                                 autoPlayConfiguration: getAutoPlayConfig(type: .custom),
                                                  isTrickPlayEnabled: true,
                                                  isServerSideAdTrackingEnabled: true)
     }

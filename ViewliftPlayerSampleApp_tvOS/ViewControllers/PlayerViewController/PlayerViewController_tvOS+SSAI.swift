@@ -8,7 +8,7 @@
 
 import VLPlayerLib
 import Foundation
-
+import VLAnalyticsLib
 
 /// Extension to handle server-side ad tracking callbacks for the video player.
 /// These methods are triggered automatically by `VLPlayerLib` during ad playback events.
@@ -71,11 +71,24 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
     
     func updateAdPlayback(model: VLPlayerLib.AdModel) {
         debugPrint(model.progress)
-       //  adSlider?.value = model.progress
-        
-      //   lblTimer?.text = formatTime(Double(model.remainingPodTime))
-        
-         //lblAdCounter?.text = "\(model.currentAdNumber) of \(model.totalAds) •"
+        Task {
+            if let ad = model.currentAd, let adId = ad.adId, let analyticsAdInfo = model.analyticsAdInfo {
+                let currentAd = await self.analyticsAdDictionary.get(adId)
+                if currentAd == nil {
+                    await self.analyticsAdDictionary.set(adId, true)
+                    
+                    self.currentAdAssetInfo = VLAdAssetInfo(
+                        adId: analyticsAdInfo.adId,
+                        adName: analyticsAdInfo.adName,
+                        podName: analyticsAdInfo.podName,
+                        podLength: analyticsAdInfo.podLength,
+                        podPosition: analyticsAdInfo.podPosition,
+                        podOffset: analyticsAdInfo.podOffset, startTime: analyticsAdInfo.startTime, adSystem: analyticsAdInfo.adSystem
+                    )
+                }
+                
+            }
+        }
      }
     
     
@@ -89,16 +102,26 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
         trackingEventType: VLPlayerLib.VLPlayer.AdsEventType,
         eventTrackingProperties: [String : Any]
     ) {
+        
+        let playerCurrentTime: Double = Double(
+            eventTrackingProperties["playerCurrentTime"] as? Double ?? 0.0
+        )
+        
         switch trackingEventType {
        
         case .breakStart:
             debugPrint("slot impression") // Ad break has started
+        
+            self.trackAdBreakStartAnalytics()
             
         case .impression:
             debugPrint("default impression") // Ad impression logged
             
         case .start:
             debugPrint("impression") // Ad has started playing
+            
+            self.trackAdDidStartsAnalytics()
+            
 
         case .firstQuartile:
             debugPrint("first quartile") // 25% of ad completed
@@ -111,9 +134,14 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
 
         case .complete:
             debugPrint("complete") // 100% of ad completed
+            
+            self.trackAdDidCompleteAnalytics()
 
         case .breakEnd:
             debugPrint("slot end") // Ad break has ended
+            
+            self.trackAdBreakCompleteAnalytics()
+            self.playerChapterDidStart(currentTime: playerCurrentTime)
 
         case .mute:
             debugPrint("mute") // Ad muted
@@ -129,6 +157,8 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
 
         case .resume:
             debugPrint("resume") // Ad resumed after pause
+            
+            self.playerDidStartPlaying()
 
         case .closeLinear:
             debugPrint("close") // Linear ad closed
@@ -138,6 +168,8 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
 
         case .pause:
             debugPrint("pause") // Ad paused
+            
+            self.playerDidPaused()
 
         case .acceptInvitationLinear:
             debugPrint("accept invitation") // User accepted invitation ad
