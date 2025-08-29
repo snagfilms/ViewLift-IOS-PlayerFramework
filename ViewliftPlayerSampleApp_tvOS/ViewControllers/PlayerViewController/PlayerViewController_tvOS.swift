@@ -23,6 +23,9 @@ class PlayerViewController_tvOS: UIViewController {
         case `default`
         case customTheme
         case custom
+        #if os(tvOS)
+        case native
+        #endif
     }
     private let playerContainerView = UIView()
     var streamUrl: String?
@@ -47,6 +50,8 @@ class PlayerViewController_tvOS: UIViewController {
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
     var enableCustomAdUI: Bool = false
+    var analyticsAdDictionary = AnalyticsAdDictionary()
+    
     override var canBecomeFirstResponder: Bool {
         return true
     }
@@ -91,6 +96,9 @@ class PlayerViewController_tvOS: UIViewController {
         }
         // Set delegates for player events and analytics
         vlPlayer?.videoPlayerDelegate = self
+        
+        // Set delegates for SSAID events
+        vlPlayer?.serverSideAdTrackingDelegate = self
         
         vlPlayer?.playerVideoAnalyticsDelegate = self
         // Set entitlement if available
@@ -248,7 +256,9 @@ class PlayerViewController_tvOS: UIViewController {
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
-                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default))
+                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .custom),
+                                                 isTrickPlayEnabled: true,
+                                                 isServerSideAdTrackingEnabled: true)
     }
     
     // Returns player controls view configuration based on type
@@ -269,6 +279,11 @@ class PlayerViewController_tvOS: UIViewController {
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .custom(view: view)
             self.videoPlayerControlsView = view
             return playerControlsViewConfiguration
+        #if os(tvOS)
+        case .native:
+            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .native
+            return playerControlsViewConfiguration
+        #endif
         case .default:
             // Use default controls view and theme
             return nil
@@ -294,6 +309,10 @@ class PlayerViewController_tvOS: UIViewController {
         case .default:
             // Use default paywall view and theme
             return nil
+        #if os(tvOS)
+        case .native:
+            return nil
+        #endif
         }
     }
     
@@ -417,5 +436,10 @@ extension PlayerViewController_tvOS: PlayerControlsDelegate {
     // Seeks to the live position in the stream
     func seekToLivePosition() {
         self.vlPlayer?.seekToLivePosition()
+    }
+    
+    //get trick play image data
+    func getTrickPlayData(_ value: Double) -> (image: UIImage?, time: String?) {
+        self.vlPlayer?.getTrickPlayData(value) ?? (nil, nil)
     }
 }

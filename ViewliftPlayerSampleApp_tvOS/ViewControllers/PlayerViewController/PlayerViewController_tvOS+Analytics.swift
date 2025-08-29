@@ -92,4 +92,59 @@ extension PlayerViewController_tvOS: VLAnalyticsPlayerClientProtocol {
             .build()
         VLAnalytics.shared.trackEvent(data: eventBuilder)
     }
+    
+    func trackAdDidStartsAnalytics() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.adsStart)
+            .adsInfo(getAdsInfo())
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+   
+    func trackAdDidCompleteAnalytics() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.adsComplete)
+            .adsInfo(getAdsInfo())
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    
+    func trackAdBreakStartAnalytics() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.adsBreakStart)
+            .adsInfo(getAdsInfo())
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func trackAdBreakCompleteAnalytics() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.adsBreakComplete)
+            .adsInfo(getAdsInfo())
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func playerDidStartPlaying() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.playStarted)
+            .contentInfo(getVideoInfo())
+            .adsInfo(getAdsInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func playerDidPaused() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.videoPauseStarted)
+            .contentInfo(getVideoInfo())
+            .adsInfo(getAdsInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
 }

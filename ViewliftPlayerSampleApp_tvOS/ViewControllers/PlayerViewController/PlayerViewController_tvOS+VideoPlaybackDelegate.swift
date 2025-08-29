@@ -7,6 +7,7 @@
 //
 
 import VLPlayerLib
+import AVKit
 #if os(iOS)
 import VLAuthenticationFramework
 #else
@@ -78,4 +79,16 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     func onBackButtonTapped() {
         menuPressed()
     }
+    
+    func avPlayerControllerInstance(_ avPlayerControllerInstance: AVPlayerViewController) {
+        avPlayerControllerInstance.delegate = self
+    }
+}
+
+extension PlayerViewController_tvOS: AVPlayerViewControllerDelegate {
+    
+    func playerViewController(_ playerViewController: AVPlayerViewController, willResumePlaybackAfterUserNavigatedFrom oldTime: CMTime, to targetTime: CMTime) {
+        debugPrint("willResumePlaybackAfterUserNavigatedFrom: oldTime: \(oldTime), targetTime: \(targetTime)")
+    }
+    
 }

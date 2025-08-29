@@ -262,7 +262,7 @@ public final class TvOSSlider: UIControl {
     private var thumbView: UIImageView!
     
     private var trackViewImages: [ControlState: UIImage] = [:]
-    private var trackView: UIImageView!
+    var trackView: UIImageView!
     
     private var minimumTrackViewImages: [ControlState: UIImage] = [:]
     private var minimumTrackView: UIImageView!
