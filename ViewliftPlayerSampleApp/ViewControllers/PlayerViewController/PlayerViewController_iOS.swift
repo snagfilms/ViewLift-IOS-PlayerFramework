@@ -25,7 +25,7 @@ private enum Constants {
     static let defaultSeekForward: Double = 30.0
     static let defaultSeekBackward: Double = 10.0
     static let playerYPosition: CGFloat = 100
-    static let defaultAdUrl = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=1"
+    static let defaultAdUrl = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_ad_samples&sz=640x480&cust_params=sample_ct%3Dlinear&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator="
 }
 
 /// Main view controller for player screen on iOS
@@ -35,6 +35,8 @@ class PlayerViewController_iOS: UIViewController {
         case `default`
         case customTheme
         case custom
+        case disabled
+        case native
     }
     // MARK: - IBOutlets
     @IBOutlet weak var logoutButton: UIButton!
@@ -69,6 +71,7 @@ class PlayerViewController_iOS: UIViewController {
     var normalConstraints: [NSLayoutConstraint] = []
     var isFullscreen = false
     var allowLandscapeRotation: Bool = true
+    var autoPlayList = [String: VLPlayer.StreamMetadata]()
     private var nextVideoLists: [String] = [] {
         didSet {
             updateButtonStates()
@@ -87,7 +90,7 @@ class PlayerViewController_iOS: UIViewController {
     var enableCustomAdUI: Bool = false
     var playerRateBeforeSeek: Float = 1.0
     var isVideoPlayingBeforeSeek = true
-    
+    internal var autoPlayView: AutoPlayView?
     // MARK: - Computed Properties
     /// Calculates the frame for the player view based on screen size and constants
     var playerFrame: CGRect {
@@ -108,6 +111,7 @@ class PlayerViewController_iOS: UIViewController {
         super.viewDidLoad()
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
+        self.setupAutoPlayList()
         setupConstraints()
         setupInitialState()
         loadPlayerView()
@@ -118,6 +122,22 @@ class PlayerViewController_iOS: UIViewController {
         if UserManager.shared.userIdentity != nil {
             self.logoutButton.isHidden = false
         }
+    }
+    /// Create Metadaa for AutoPlay 
+    private func setupAutoPlayList(){
+        let streamConfig1 = VLPlayer.StreamConfig(isLive: false, isDVR: nil, isDRM: nil)
+        let drmConfig1 = VLPlayer.DRMConfig(licenseUrl: "", certificateUrl: "", licenseToken: "", completeSkd: "")
+        let contentData1 = VLPlayer.ContentData(contentTitle: "Title 1", contentDescription: "Description 1", thumbnail: nil)
+        let metaData1 = VLPlayer.StreamMetadata(streamConfig: streamConfig1, drmconfig: nil, contentData: contentData1)
+        let url1 = "https://cnbcawsmpvod.akamaized.net/out/v1/066a8886bd124848a72eb770e89ba5b7/54fbf64382f04b94bb69340d5528ff8b/26cdcccd8cb84f5398bc0124836d47ee/master.m3u8"
+        autoPlayList[url1] = metaData1
+        
+        let streamConfig2 = VLPlayer.StreamConfig(isLive: true, isDVR: nil, isDRM: nil)
+        let drmConfig2 = VLPlayer.DRMConfig(licenseUrl: "", certificateUrl: "", licenseToken: "", completeSkd: "")
+        let contentData2 = VLPlayer.ContentData(contentTitle: "Title 2", contentDescription: "Description 2", thumbnail: nil)
+        let metaData2 = VLPlayer.StreamMetadata(streamConfig: streamConfig2, drmconfig: nil, contentData: contentData2)
+        let url2 = "https://cdn-vl-gcp-l-01.vos360.video/Content/HLS_HLS_CLEAR/Live/channel(886a397d-ff30-4021-eb16-bb73c658c033)/index.m3u8"
+        autoPlayList[url2] = metaData2
     }
     
     func setupConstraints() {
@@ -259,14 +279,13 @@ extension PlayerViewController_iOS {
         }
         setPlayerDelegates()
         
-
         if let data = entitlementData{
             vlPlayer.setEntitlement(data: data)
         }
         vlPlayer.setSource(
             type: playbackSourceType,
-            vlPlayerTag: "1", customControlsView: nil,
-            playerFeaturesSupported: featureSupported
+            vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
+            playerFeaturesSupported: featureSupported, nextVideoList: ["https://cnbcawsmpvod.akamaized.net/out/v1/066a8886bd124848a72eb770e89ba5b7/54fbf64382f04b94bb69340d5528ff8b/26cdcccd8cb84f5398bc0124836d47ee/master.m3u8", "https://cdn-vl-gcp-l-01.vos360.video/Content/HLS_HLS_CLEAR/Live/channel(886a397d-ff30-4021-eb16-bb73c658c033)/index.m3u8"]
         ) {
             [weak self] isSuccess,
             playerView,
@@ -465,26 +484,12 @@ extension PlayerViewController_iOS {
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
-                                                 autoPlayConfiguration: getAutoPlayConfig(type: .default),
+                                                 autoPlayConfiguration: getAutoPlayConfig(type: .custom),
                                                  isTrickPlayEnabled: false,
                                                  isCustomAdViewEnabled: enableCustomAdUI,
                                                  isServerSideAdTrackingEnabled: true)
     }
-    /// Returns the AutoPlay configuration based on the type
-    private func getAutoPlayConfig(type: Configuration) -> VLPlayer.AutoPlayConfiguration?{
-        switch type {
-            
-        case .default:
-            return VLPlayer.AutoPlayConfiguration.default()
-        case .customTheme:
-            return VLPlayer.AutoPlayConfiguration.default(countdown: 15, theme: VLPlayer.AutoPlayTheme())
-        case .custom:
-            return VLPlayer.AutoPlayConfiguration.custom(view: UIView())// Your view
-        }
-        // To disable AutoPlay
-        //VLPlayer.AutoPlayConfiguration.disabled
-    }
-    
+        
     /// Returns the paywall configuration based on the type
     private func getPayWallConfiguration(type: Configuration) -> VLPlayer.PayWallConfiguration?{
         switch type {
@@ -503,7 +508,9 @@ extension PlayerViewController_iOS {
             return payWallConfiguration
         case .default:
             // Uses default paywall view
-            return nil
+            return .default(payWallTheme: nil)
+        default :
+            return .disabled
         }
     }
 }
@@ -607,75 +614,5 @@ extension PlayerViewController_iOS {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // Handle layout updates if needed
-    }
-}
-
-extension UIView {
-    
-    func setupConstraints(superView: UIView, withHeightConstraint: Bool? = false, topOffset: CGFloat = 0) {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint(item: self,
-                           attribute: .top,
-                           relatedBy: .equal,
-                           toItem: superView,
-                           attribute: .top,
-                           multiplier: 1,
-                           constant: topOffset).isActive = true
-        NSLayoutConstraint(item: self,
-                           attribute: .leading,
-                           relatedBy: .equal,
-                           toItem: superView,
-                           attribute: .leading,
-                           multiplier: 1,
-                           constant: 0).isActive = true
-        NSLayoutConstraint(item: self,
-                           attribute: .trailing,
-                           relatedBy: .equal,
-                           toItem: superView,
-                           attribute: .trailing,
-                           multiplier: 1,
-                           constant: 0).isActive = true
-        if withHeightConstraint == true {
-            NSLayoutConstraint(item: self,
-                               attribute: .height,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1,
-                               constant: self.bounds.height).isActive = true
-        } else {
-            NSLayoutConstraint(item: self,
-                               attribute: .bottom,
-                               relatedBy: .equal,
-                               toItem: superView,
-                               attribute: .bottom,
-                               multiplier: 1,
-                               constant: 0).isActive = true
-        }
-    }
-    
-    func pinToSuperview(edges: UIRectEdge = .all, insets: UIEdgeInsets = .zero) {
-        guard let superview = superview else {
-            debugPrint("⚠️ No superview to pin to.")
-            return
-        }
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        var constraints = [NSLayoutConstraint]()
-        
-        if edges.contains(.top) || edges == .all {
-            constraints.append(topAnchor.constraint(equalTo: superview.topAnchor, constant: insets.top))
-        }
-        if edges.contains(.left) || edges == .all {
-            constraints.append(leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: insets.left))
-        }
-        if edges.contains(.bottom) || edges == .all {
-            constraints.append(bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -insets.bottom))
-        }
-        if edges.contains(.right) || edges == .all {
-            constraints.append(trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right))
-        }
-        
-        NSLayoutConstraint.activate(constraints)
     }
 }

@@ -1,15 +1,16 @@
 //
-//  PlayerViewController_iOS+AutoPlay.swift
+//  PlayerViewController_tvOS+AutoPlay.swift
 //  ViewliftPlayerSampleApp
 //
-//  Created by vikassachan@viewlift.com on 25/08/25.
+//  Created by vikassachan@viewlift.com on 29/08/25.
 //  Copyright © 2025 Viewlift. All rights reserved.
 //
+
 import Foundation
 import VLPlayerLib
 import UIKit
 
-extension PlayerViewController_iOS {
+extension PlayerViewController_tvOS {
     
     /// This is called when AutoPlay UI is dismissed. This is called for default UI
     func autoPlayUIDismissed(isPlayingNextContent: Bool) {
@@ -28,7 +29,7 @@ extension PlayerViewController_iOS {
     }
 }
 
-extension PlayerViewController_iOS{
+extension PlayerViewController_tvOS{
     
     private func createAutoPlayView() -> AutoPlayView {
         let autoPlay = AutoPlayView()
@@ -37,7 +38,7 @@ extension PlayerViewController_iOS{
         autoPlay.onPlay = { [weak self] in
             print("Play button tapped")
             self?.removeAutoPlayView()
-            self?.vlPlayer.playNextVideo()
+            self?.vlPlayer?.playNextVideo()
         }
         
         autoPlay.onClose = { [weak self] in
@@ -48,7 +49,7 @@ extension PlayerViewController_iOS{
         autoPlay.onAutoPlay = { [weak self] in
             print("Autoplay finished, play next video")
             self?.removeAutoPlayView()
-            self?.vlPlayer.playNextVideo()
+            self?.vlPlayer?.playNextVideo()
         }
         self .autoPlayView = autoPlay
         return autoPlay
