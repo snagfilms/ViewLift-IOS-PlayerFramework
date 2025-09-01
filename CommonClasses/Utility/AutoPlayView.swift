@@ -83,8 +83,12 @@ class AutoPlayView: UIView {
     
     #if os(tvOS)
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
-           return [playButton]   // or [closeButton] if you want close first
+           return [playButton]
        }
+    
+    override var canBecomeFocused: Bool {
+        return true
+    }
     #endif
     
     required init?(coder: NSCoder) {
@@ -157,8 +161,10 @@ class AutoPlayView: UIView {
     
     // MARK: - Timer Logic
     private func startCountdown() {
+        #if os(tvOS)
         setNeedsFocusUpdate()
         updateFocusIfNeeded()
+        #endif
         stopCountdown()
         secondsRemaining = 10
         updateCountdownLabel()
@@ -211,4 +217,11 @@ class AutoPlayView: UIView {
         removeFromSuperview()
         onClose?()
     }
+    
+   #if os(tvOS)
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        debugPrint("didUpdateFocus")
+    }
+    #endif
 }

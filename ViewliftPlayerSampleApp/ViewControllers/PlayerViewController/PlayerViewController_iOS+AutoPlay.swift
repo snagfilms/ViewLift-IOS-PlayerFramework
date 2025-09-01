@@ -21,14 +21,18 @@ extension PlayerViewController_iOS {
     }
     
     /// This is called when Next Video with URL is about to play. You need to pass all the Metadata required to play this URL.Here you can update your AutoPlay UI with the new content.
-    func autoPlayMetadataProvider(stream: String) -> VLPlayer.StreamMetadata? {
-       let data =  autoPlayList[stream]
+    func autoPlayMetadataProvider(streamId: String) -> VLPlayer.StreamMetadata? {
+        let data =  autoPlayListdataManager?.autoPlayList[streamId]
         autoPlayView?.updateView(data: data?.contentData)
         return data
     }
 }
 
 extension PlayerViewController_iOS{
+    
+    func createAutoPlayMetaData(){
+        autoPlayListdataManager = AutoPlayDataManager()
+    }
     
     private func createAutoPlayView() -> AutoPlayView {
         let autoPlay = AutoPlayView()

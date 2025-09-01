@@ -71,7 +71,6 @@ class PlayerViewController_iOS: UIViewController {
     var normalConstraints: [NSLayoutConstraint] = []
     var isFullscreen = false
     var allowLandscapeRotation: Bool = true
-    var autoPlayList = [String: VLPlayer.StreamMetadata]()
     private var nextVideoLists: [String] = [] {
         didSet {
             updateButtonStates()
@@ -90,6 +89,7 @@ class PlayerViewController_iOS: UIViewController {
     var enableCustomAdUI: Bool = false
     var playerRateBeforeSeek: Float = 1.0
     var isVideoPlayingBeforeSeek = true
+    var autoPlayListdataManager: AutoPlayDataManager?
     internal var autoPlayView: AutoPlayView?
     // MARK: - Computed Properties
     /// Calculates the frame for the player view based on screen size and constants
@@ -111,9 +111,9 @@ class PlayerViewController_iOS: UIViewController {
         super.viewDidLoad()
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
-        self.setupAutoPlayList()
         setupConstraints()
         setupInitialState()
+        createAutoPlayMetaData()
         loadPlayerView()
         
         self.logoutButton.isHidden = true
@@ -122,22 +122,6 @@ class PlayerViewController_iOS: UIViewController {
         if UserManager.shared.userIdentity != nil {
             self.logoutButton.isHidden = false
         }
-    }
-    /// Create Metadaa for AutoPlay 
-    private func setupAutoPlayList(){
-        let streamConfig1 = VLPlayer.StreamConfig(isLive: false, isDVR: nil, isDRM: nil)
-        let drmConfig1 = VLPlayer.DRMConfig(licenseUrl: "", certificateUrl: "", licenseToken: "", completeSkd: "")
-        let contentData1 = VLPlayer.ContentData(contentTitle: "Title 1", contentDescription: "Description 1", thumbnail: nil)
-        let metaData1 = VLPlayer.StreamMetadata(streamConfig: streamConfig1, drmconfig: nil, contentData: contentData1)
-        let url1 = "https://cnbcawsmpvod.akamaized.net/out/v1/066a8886bd124848a72eb770e89ba5b7/54fbf64382f04b94bb69340d5528ff8b/26cdcccd8cb84f5398bc0124836d47ee/master.m3u8"
-        autoPlayList[url1] = metaData1
-        
-        let streamConfig2 = VLPlayer.StreamConfig(isLive: true, isDVR: nil, isDRM: nil)
-        let drmConfig2 = VLPlayer.DRMConfig(licenseUrl: "", certificateUrl: "", licenseToken: "", completeSkd: "")
-        let contentData2 = VLPlayer.ContentData(contentTitle: "Title 2", contentDescription: "Description 2", thumbnail: nil)
-        let metaData2 = VLPlayer.StreamMetadata(streamConfig: streamConfig2, drmconfig: nil, contentData: contentData2)
-        let url2 = "https://cdn-vl-gcp-l-01.vos360.video/Content/HLS_HLS_CLEAR/Live/channel(886a397d-ff30-4021-eb16-bb73c658c033)/index.m3u8"
-        autoPlayList[url2] = metaData2
     }
     
     func setupConstraints() {
@@ -285,7 +269,7 @@ extension PlayerViewController_iOS {
         vlPlayer.setSource(
             type: playbackSourceType,
             vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
-            playerFeaturesSupported: featureSupported, nextVideoList: ["https://cnbcawsmpvod.akamaized.net/out/v1/066a8886bd124848a72eb770e89ba5b7/54fbf64382f04b94bb69340d5528ff8b/26cdcccd8cb84f5398bc0124836d47ee/master.m3u8", "https://cdn-vl-gcp-l-01.vos360.video/Content/HLS_HLS_CLEAR/Live/channel(886a397d-ff30-4021-eb16-bb73c658c033)/index.m3u8"]
+            playerFeaturesSupported: featureSupported, nextPlaybackList: autoPlayListdataManager?.getAutoPlayUrlList()
         ) {
             [weak self] isSuccess,
             playerView,
