@@ -39,18 +39,18 @@ extension PlayerViewController_iOS{
         autoPlay.translatesAutoresizingMaskIntoConstraints = false
         
         autoPlay.onPlay = { [weak self] in
-            print("Play button tapped")
+            debugPrint("AutoPlayView Play button tapped")
             self?.removeAutoPlayView()
             self?.vlPlayer.playNextVideo()
         }
         
         autoPlay.onClose = { [weak self] in
-            print("Closed autoplay")
+            debugPrint("AutoPlayView Closed autoplay")
             self?.removeAutoPlayView()
         }
         
         autoPlay.onAutoPlay = { [weak self] in
-            print("Autoplay finished, play next video")
+            debugPrint("AutoPlayView finished, play next video")
             self?.removeAutoPlayView()
             self?.vlPlayer.playNextVideo()
         }

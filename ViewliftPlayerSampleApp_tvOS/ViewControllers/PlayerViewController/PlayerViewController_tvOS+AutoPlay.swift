@@ -42,18 +42,19 @@ extension PlayerViewController_tvOS{
         autoPlay.onPlay = { [weak self] in
             print("Play button tapped")
             self?.removeAutoPlayView()
-            self?.vlPlayer?.playNextVideo()
+            self?.vlPlayer?.dismissAutoPlayView(playNext: true)
         }
         
         autoPlay.onClose = { [weak self] in
             print("Closed autoplay")
+            self?.vlPlayer?.dismissAutoPlayView(playNext: false)
             self?.removeAutoPlayView()
         }
         
         autoPlay.onAutoPlay = { [weak self] in
             print("Autoplay finished, play next video")
             self?.removeAutoPlayView()
-            self?.vlPlayer?.playNextVideo()
+            self?.vlPlayer?.dismissAutoPlayView(playNext: true)
         }
         self .autoPlayView = autoPlay
         return autoPlay

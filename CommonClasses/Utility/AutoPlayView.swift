@@ -13,51 +13,48 @@ import Kingfisher
 class AutoPlayView: UIView {
     
     // MARK: - UI Elements
-    private let thumbnailImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.backgroundColor = .black
-        iv.layer.borderColor = UIColor.green.cgColor
-        iv.layer.borderWidth = 1
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
+    private let thumbnailButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.imageView?.contentMode = .scaleAspectFit
+        btn.backgroundColor = .black
+        btn.layer.borderColor = UIColor.green.cgColor
+        btn.layer.borderWidth = 1
+        btn.translatesAutoresizingMaskIntoConstraints = false
+       #if os(tvOS)
+        btn.isUserInteractionEnabled = true
+       #else
+        btn.isUserInteractionEnabled = false
+        #endif
+        return btn
     }()
     
     private let playButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(systemName: "play.fill"), for: .normal)
         btn.tintColor = .white
+        #if os(tvOS)
+        btn.isUserInteractionEnabled = false //disables focus on tvOS
+        #else
+        btn.isUserInteractionEnabled = true
+        #endif
+        
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
     
-    private let countdownLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }()
-    
-    private let titleLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }()
-    
-    private let subtitleLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }()
+    private let countdownLabel = UILabel()
+    private let titleLabel = UILabel()
+    private let subtitleLabel = UILabel()
     
     private let closeButton: UIButton = {
-        let btn = UIButton(type: .system)
+        let btn = UIButton(type: .custom)
         btn.setImage(UIImage(systemName: "xmark"), for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
     
-    private func getMultiplier(_ height: CGFloat) -> CGFloat{
-       #if os(tvOS)
+    private func getMultiplier(_ height: CGFloat) -> CGFloat {
+        #if os(tvOS)
         return height * 1.8
         #else
         return height
@@ -67,7 +64,7 @@ class AutoPlayView: UIView {
     // MARK: - Callbacks
     var onPlay: (() -> Void)?
     var onClose: (() -> Void)?
-    var onAutoPlay: (() -> Void)?   // when countdown finishes
+    var onAutoPlay: (() -> Void)?
     
     // MARK: - Timer
     private var timer: Timer?
@@ -81,15 +78,19 @@ class AutoPlayView: UIView {
         setupActions()
     }
     
-    #if os(tvOS)
-    override var preferredFocusEnvironments: [UIFocusEnvironment] {
-           return [playButton]
-       }
-    
-    override var canBecomeFocused: Bool {
-        return true
+   #if os(tvOS)
+//    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+//            return [closeButton, thumbnailButton]
+//
+//    }
+
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+//        thumbnailButton.isUserInteractionEnabled = true
+//        closeButton.isUserInteractionEnabled = true
     }
     #endif
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -101,70 +102,93 @@ class AutoPlayView: UIView {
     
     // MARK: - Setup
     private func setupUI() {
-        addSubview(thumbnailImageView)
-        addSubview(playButton)
-        addSubview(countdownLabel)
-        addSubview(titleLabel)
-        addSubview(subtitleLabel)
-        addSubview(closeButton)
         
-        var constraints: [NSLayoutConstraint] = []
+        // Thumbnail stack (thumbnail + play overlay)
+        let thumbnailContainer = UIView()
+        thumbnailContainer.translatesAutoresizingMaskIntoConstraints = false
+        thumbnailContainer.addSubview(thumbnailButton)
+        thumbnailContainer.addSubview(playButton)
+        
+        NSLayoutConstraint.activate([
+            thumbnailButton.leadingAnchor.constraint(equalTo: thumbnailContainer.leadingAnchor),
+            thumbnailButton.trailingAnchor.constraint(equalTo: thumbnailContainer.trailingAnchor),
+            thumbnailButton.topAnchor.constraint(equalTo: thumbnailContainer.topAnchor),
+            thumbnailButton.bottomAnchor.constraint(equalTo: thumbnailContainer.bottomAnchor),
+            
+            thumbnailButton.widthAnchor.constraint(equalToConstant: getMultiplier(160)),
+            thumbnailButton.heightAnchor.constraint(equalToConstant: getMultiplier(90)),
+            
+            playButton.centerXAnchor.constraint(equalTo: thumbnailButton.centerXAnchor),
+            playButton.centerYAnchor.constraint(equalTo: thumbnailButton.centerYAnchor),
+            playButton.widthAnchor.constraint(equalToConstant: getMultiplier(40)),
+            playButton.heightAnchor.constraint(equalToConstant: getMultiplier(40))
+        ])
+        
+        // Labels vertical stack
+        let labelsStack = UIStackView(arrangedSubviews: [countdownLabel, titleLabel, subtitleLabel])
+        labelsStack.axis = .vertical
+        labelsStack.alignment = .leading
+        labelsStack.spacing = 6
+        labelsStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Main horizontal stack (thumbnail + labels)
+        let mainStack = UIStackView(arrangedSubviews: [thumbnailContainer, labelsStack])
+        mainStack.axis = .horizontal
+        mainStack.spacing = 15
+        mainStack.alignment = .center
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(mainStack)
+        addSubview(closeButton)
+        closeButton.backgroundColor = .purple.withAlphaComponent(0.5)
+        // Close button constraints
         #if os(tvOS)
-        // tvOS → Close button on top-left
-        constraints.append(contentsOf: [
-            closeButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            closeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
+        NSLayoutConstraint.activate([
+            closeButton.topAnchor.constraint(equalTo: topAnchor, constant: 220),
+            closeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            closeButton.widthAnchor.constraint(equalToConstant: 200),
+            closeButton.heightAnchor.constraint(equalToConstant: 200),
         ])
         #else
-        // iOS → Close button on top-right
-        constraints.append(contentsOf: [
+        NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            closeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            closeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
         ])
         #endif
         
-        constraints.append(contentsOf: [
-            thumbnailImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            thumbnailImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
-            thumbnailImageView.widthAnchor.constraint(equalToConstant: getMultiplier(160)),
-            thumbnailImageView.heightAnchor.constraint(equalToConstant: getMultiplier(90)),
-            
-            playButton.centerXAnchor.constraint(equalTo: thumbnailImageView.centerXAnchor),
-            playButton.centerYAnchor.constraint(equalTo: thumbnailImageView.centerYAnchor),
-            playButton.widthAnchor.constraint(equalToConstant: getMultiplier(40)),
-            playButton.heightAnchor.constraint(equalToConstant: getMultiplier(40)),
-            
-            countdownLabel.topAnchor.constraint(equalTo: thumbnailImageView.topAnchor, constant: 5),
-            countdownLabel.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: 15),
-            countdownLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            
-            titleLabel.topAnchor.constraint(equalTo: countdownLabel.bottomAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: 15),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            
-            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-            subtitleLabel.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: 15),
-            subtitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        NSLayoutConstraint.activate([
+            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            mainStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
         ])
         
-        NSLayoutConstraint.activate(constraints)
-        
-        countdownLabel.font = UIFont.systemFont(ofSize: getMultiplier(14), weight: .regular)
-        subtitleLabel.font = UIFont.systemFont(ofSize: getMultiplier(16), weight: .semibold)
+        // Fonts
+        countdownLabel.font = UIFont.systemFont(ofSize: getMultiplier(14))
         titleLabel.font = UIFont.systemFont(ofSize: getMultiplier(16), weight: .bold)
+        subtitleLabel.font = UIFont.systemFont(ofSize: getMultiplier(16), weight: .semibold)
+        // Remove padding
+        closeButton.contentEdgeInsets = .zero
+        closeButton.imageEdgeInsets = .zero
+        closeButton.titleEdgeInsets = .zero
+
+        // Make image fill the button
+        closeButton.imageView?.contentMode = .scaleAspectFill
+        closeButton.imageView?.clipsToBounds = true
     }
     
     private func setupActions() {
+        #if os(iOS)
+        thumbnailButton.addTarget(self, action: #selector(playTapped), for: .touchUpInside)
         playButton.addTarget(self, action: #selector(playTapped), for: .touchUpInside)
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
+        #else
+        thumbnailButton.addTarget(self, action: #selector(playTapped), for: .primaryActionTriggered)
+        closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
+        #endif
     }
     
-    // MARK: - Timer Logic
+    // MARK: - Timer
     private func startCountdown() {
-        #if os(tvOS)
-        setNeedsFocusUpdate()
-        updateFocusIfNeeded()
-        #endif
         stopCountdown()
         secondsRemaining = 10
         updateCountdownLabel()
@@ -195,9 +219,9 @@ class AutoPlayView: UIView {
         titleLabel.text = data?.contentTitle
         subtitleLabel.text = data?.contentDescription
         if let urlString = data?.thumbnail, let url = URL(string: urlString) {
-            thumbnailImageView.kf.setImage(with: url)
+            thumbnailButton.kf.setImage(with: url, for: .normal)
         } else {
-            thumbnailImageView.image = nil
+            thumbnailButton.setImage(nil, for: .normal)
         }
         startCountdown()
     }
@@ -214,14 +238,38 @@ class AutoPlayView: UIView {
     
     @objc private func closeTapped() {
         stopCountdown()
-        removeFromSuperview()
         onClose?()
     }
     
-   #if os(tvOS)
-    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        super.didUpdateFocus(in: context, with: coordinator)
-        debugPrint("didUpdateFocus")
+#if os(tvOS)
+override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+    super.didUpdateFocus(in: context, with: coordinator)
+    
+    // Thumbnail focus handling
+    if let nextFocused = context.nextFocusedView, nextFocused == thumbnailButton {
+        coordinator.addCoordinatedAnimations({
+            self.thumbnailButton.layer.borderWidth = 4
+            self.thumbnailButton.layer.borderColor = UIColor.systemGreen.cgColor
+        })
+    } else if let previouslyFocused = context.previouslyFocusedView, previouslyFocused == thumbnailButton {
+        coordinator.addCoordinatedAnimations({
+            self.thumbnailButton.layer.borderWidth = 0
+        })
     }
-    #endif
+    
+    // Close button focus handling
+    if let nextFocused = context.nextFocusedView, nextFocused == closeButton {
+        coordinator.addCoordinatedAnimations({
+            self.closeButton.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            self.closeButton.tintColor = .systemRed
+        })
+    } else if let previouslyFocused = context.previouslyFocusedView, previouslyFocused == closeButton {
+        coordinator.addCoordinatedAnimations({
+            self.closeButton.transform = .identity
+            self.closeButton.tintColor = .white
+        })
+    }
+}
+#endif
+
 }
