@@ -18,7 +18,45 @@ import AVKit
 import VLAnalyticsLib
 
 // Main player view controller for tvOS, handles player setup, UI, and playback logic
-class PlayerViewController_tvOS: UIViewController {
+class PlayerViewController_tvOS: UIViewController, ServerSideAdTrackingDelegate {
+    func serverSideAdTrackingEvents(
+        trackingEventType: VLPlayerLib.VLPlayer.AdsEventType,
+        eventTrackingProperties: [String : Any]
+    ) {
+        
+    }
+
+    func adCuePoints(
+        adModel: VLPlayerLib.SSAIAdsModel?,
+        duration: TimeInterval
+    ) {
+        
+    }
+
+    func adDidStart(currentPod: VLPlayerLib.SSAIAvailableAds?) {
+        
+    }
+
+    func updateAdPlayback(model: VLPlayerLib.AdModel) {
+        
+    }
+
+    func adDidFinish() {
+        
+    }
+
+    func adPlayPause(isPlaying: Bool) {
+        
+    }
+
+    func adFullScreenBtnTapped(status: Bool) {
+        
+    }
+
+    func adMuteButton(enabled: Bool) {
+        
+    }
+
     enum Configuration{
         case `default`
         case customTheme
@@ -50,7 +88,7 @@ class PlayerViewController_tvOS: UIViewController {
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
     var enableCustomAdUI: Bool = false
-    var analyticsAdDictionary = AnalyticsAdDictionary()
+//    var analyticsAdDictionary = AnalyticsAdDictionary()
     
     override var canBecomeFirstResponder: Bool {
         return true
@@ -281,7 +319,9 @@ class PlayerViewController_tvOS: UIViewController {
             return playerControlsViewConfiguration
         #if os(tvOS)
         case .native:
-            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .native
+            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(
+                controlsTheme: .none
+            )
             return playerControlsViewConfiguration
         #endif
         case .default:

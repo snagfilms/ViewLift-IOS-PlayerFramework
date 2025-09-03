@@ -206,7 +206,7 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
         self.delegate?.seekTo(seconds: timeToSeek)
         updateLabelPosition(CGFloat(slider.value))
         elapsedDurationLabel.text = timeToSeek.getTimeInString()
-        updateSeekingThumbnail(slider)
+//        updateSeekingThumbnail(slider)
     }
 
 
@@ -523,7 +523,7 @@ extension VLCustomPlayerControlsView{
                 self.totalDurationLabel.backgroundColor = .clear
                 self.sliderView.value = Float(sliderValue)
                 self.updateLabelPosition()
-                self.removeTrickPlayView()
+//                self.removeTrickPlayView()
             }
 
 
