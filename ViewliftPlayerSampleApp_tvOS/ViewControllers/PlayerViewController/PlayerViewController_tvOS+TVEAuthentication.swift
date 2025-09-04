@@ -15,6 +15,7 @@ import VLAuthentication
 import Foundation
 import SwiftUI
 
+
 // MARK: - TVE Authentication Flow
 extension PlayerViewController_tvOS {
     
@@ -34,8 +35,18 @@ extension PlayerViewController_tvOS {
     
     /// Presents a fully-custom activation UI and handles polling.
     private func customUIForLogin() {
+        var tvePollingQRView = TVEPollingQRCodeView()
+        
+        tvePollingQRView.authCallback = { [weak self] userIdentity, error in
+            self?.handleTVESigninError(
+                userIdentity: userIdentity,
+                error: error
+            )
+            
+        }
+        
         let hostingController = UIHostingController(
-            rootView: TVEPollingQRCodeView()
+            rootView: tvePollingQRView
         )
         
         self.present(hostingController, animated: true)
@@ -47,18 +58,30 @@ extension PlayerViewController_tvOS {
             presentingViewController: self,
             activationURL: "http://spinco.staging.web.viewlift.com/tveactivate",
             qrToggle: true
-        ) { [weak self] userIdentity, errorCode in
+        ) {
+            [weak self] userIdentity,
+            error in
             // Handle error state (optional).
-            if userIdentity == nil, let message = errorCode?.codeString {
-                // self?.showAlert(message: message)
-                print("Activation failed: \(message)")
-                return
-            }
-            
-            // Successful authentication.
-            if let user = userIdentity {
-                self?.reloadPlayer(userIdentity: user)
-            }
+            self?.handleTVESigninError(
+                userIdentity: userIdentity,
+                error: error
+            )
+        }
+    }
+    
+    private func handleTVESigninError(
+        userIdentity: VLUserIdentity?,
+        error: VLAuthenticationErrorCode?
+    ) {
+        if userIdentity == nil, let message = error?.codeString {
+            // self?.showAlert(message: message)
+            print("Activation failed: \(message)")
+            return
+        }
+        
+        // Successful authentication.
+        if let user = userIdentity {
+            self.reloadPlayer(userIdentity: user)
         }
     }
     

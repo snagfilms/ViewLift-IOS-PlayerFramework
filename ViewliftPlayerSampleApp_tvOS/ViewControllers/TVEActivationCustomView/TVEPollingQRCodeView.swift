@@ -10,11 +10,15 @@
 import SwiftUI
 import VLAuthentication
 
+public typealias AuthenticationCallback = (_ userIdentity: VLUserIdentity?, _ errorCode: VLAuthenticationErrorCode?) -> Void
+
 struct TVEPollingQRCodeView: View {
     // MARK: – State & Environment
     @State private var qrImage: Image?
     @State private var activationCode = ""
     @Environment(\.dismiss) private var dismiss
+    
+    var authCallback: AuthenticationCallback?
 
     // MARK: – Constants
     private let activateBase =
@@ -40,8 +44,7 @@ struct TVEPollingQRCodeView: View {
     private func setup() async {
         do {
             // 1. Get auth code
-            let code = try await VLAuthentication.sharedInstance
-                            .generateTVEAuthCode() ?? ""
+            let code = try await VLAuthentication.sharedInstance.generateTVEAuthCode() ?? ""
             activationCode = code
 
             // 2. Build full URL & QR
@@ -56,19 +59,30 @@ struct TVEPollingQRCodeView: View {
             TVEPollingHelper.shared.startPolling(
                 activationCode: code
             ) { userIdentity in
-                reloadPlayer(userIdentity: userIdentity)   // success
+                reloadPlayer(userIdentity: userIdentity)
             } onFailure: { error in
                 debugPrint("Polling failed:", error)
+                authCallback?(nil, error)
             }
 
-        } catch {
+        } catch (let error){
             debugPrint("Auth-code error:", error)
+            if let authError = error as? VLAuthenticationErrorCode {
+                authCallback?(nil, authError)
+            }
+           
         }
     }
 
     private func reloadPlayer(userIdentity: VLUserIdentity) {
         // Your existing logic…
         debugPrint("Authenticated for:", userIdentity)
-        dismiss()
+        
+        authCallback?(userIdentity, nil)
+        
+        DispatchQueue.main.async {
+            self.dismiss()
+        }
+        
     }
 }
