@@ -118,11 +118,12 @@ class PlayerViewController_tvOS: UIViewController {
         if let entitlementData{
             vlPlayer?.setEntitlement(data: entitlementData)
         }
-        // Set player source and handle completion
+        let autoPlayList = autoPlayListdataManager?.getAutoPlayUrlList()// pass this for autoplay in nextPlaybackList
         
+        // Set player source and handle completion
         vlPlayer?.setSource(type: playbackSourceType,
-                            vlPlayerTag: "1", customControlsView: nil,adUrl: Constants.defaultAdUrl,
-                            playerFeaturesSupported: featureSupported, nextPlaybackList: self.autoPlayListdataManager?.getAutoPlayUrlList()
+                            vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
+                            playerFeaturesSupported: featureSupported, nextPlaybackList: nil
                         ) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
                 var hasTVE = false
@@ -264,7 +265,7 @@ class PlayerViewController_tvOS: UIViewController {
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
         let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
         // See VLPlayer documentation for available macros
-        return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
+        return VLPlayer.VLPlayerFeatureSupported(appMacrosList: nil,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
@@ -275,7 +276,7 @@ class PlayerViewController_tvOS: UIViewController {
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
                                                  playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default),
-                                                 autoPlayConfiguration: getAutoPlayConfig(type: .custom),
+                                                 autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: true,
                                                  isServerSideAdTrackingEnabled: true)
     }

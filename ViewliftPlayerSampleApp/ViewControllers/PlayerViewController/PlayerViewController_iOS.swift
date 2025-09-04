@@ -266,10 +266,13 @@ extension PlayerViewController_iOS {
         if let data = entitlementData{
             vlPlayer.setEntitlement(data: data)
         }
+        let autoPlayList = autoPlayListdataManager?.getAutoPlayUrlList()// pass this for autoplay in nextPlaybackList
+        
+        // Set player source and handle completion
         vlPlayer.setSource(
             type: playbackSourceType,
-            vlPlayerTag: "1", customControlsView: nil,adUrl: Constants.defaultAdUrl,
-            playerFeaturesSupported: featureSupported, nextPlaybackList: autoPlayListdataManager?.getAutoPlayUrlList()
+            vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
+            playerFeaturesSupported: featureSupported, nextPlaybackList: nil
         ) {
             [weak self] isSuccess,
             playerView,
