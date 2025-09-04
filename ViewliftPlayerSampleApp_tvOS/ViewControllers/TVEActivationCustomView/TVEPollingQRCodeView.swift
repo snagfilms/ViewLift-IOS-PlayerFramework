@@ -8,7 +8,11 @@
 
 
 import SwiftUI
-import VLAuthentication
+#if os(iOS)
+import VLAuthenticationFramework
+#else
+import VLAuthenticationFramework_tvOS
+#endif
 
 public typealias AuthenticationCallback = (_ userIdentity: VLUserIdentity?, _ errorCode: VLAuthenticationErrorCode?) -> Void
 
@@ -28,10 +32,16 @@ struct TVEPollingQRCodeView: View {
         ZStack {
             Color.black.ignoresSafeArea()
             if let qrImage = qrImage {
-                qrImage
-                    .resizable()
-                    .interpolation(.none) 
-                    .frame(width: 360, height: 360)
+                VStack {
+                    Text("Activation Code: \(activationCode)")
+                    
+                    Text("Activation URL: \(activateBase + activationCode)")
+                    
+                    qrImage
+                        .resizable()
+                        .interpolation(.none)
+                        .frame(width: 360, height: 360)
+                }
             } else {
                 ProgressView()
             }

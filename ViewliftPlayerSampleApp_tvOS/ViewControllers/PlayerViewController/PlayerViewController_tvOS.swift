@@ -27,45 +27,7 @@ private enum Constants {
 }
 
 // Main player view controller for tvOS, handles player setup, UI, and playback logic
-class PlayerViewController_tvOS: UIViewController, ServerSideAdTrackingDelegate {
-    func serverSideAdTrackingEvents(
-        trackingEventType: VLPlayerLib.VLPlayer.AdsEventType,
-        eventTrackingProperties: [String : Any]
-    ) {
-        
-    }
-
-    func adCuePoints(
-        adModel: VLPlayerLib.SSAIAdsModel?,
-        duration: TimeInterval
-    ) {
-        
-    }
-
-    func adDidStart(currentPod: VLPlayerLib.SSAIAvailableAds?) {
-        
-    }
-
-    func updateAdPlayback(model: VLPlayerLib.AdModel) {
-        
-    }
-
-    func adDidFinish() {
-        
-    }
-
-    func adPlayPause(isPlaying: Bool) {
-        
-    }
-
-    func adFullScreenBtnTapped(status: Bool) {
-        
-    }
-
-    func adMuteButton(enabled: Bool) {
-        
-    }
-
+class PlayerViewController_tvOS: UIViewController {
     enum Configuration{
         case `default`
         case customTheme
