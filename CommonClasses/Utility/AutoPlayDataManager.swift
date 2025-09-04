@@ -40,7 +40,7 @@ class AutoPlayDataManager {
     
     
     func getAutoPlayUrlList() -> VLPlayer.PlaybackList? {
-        let items = [VLPlayer.StreamId(id: "stream1", url: "https://cnbcawsmpvod.akamaized.net/out/v1/066a8886bd124848a72eb770e89ba5b7/54fbf64382f04b94bb69340d5528ff8b/26cdcccd8cb84f5398bc0124836d47ee/master.m3u8"), VLPlayer.StreamId(id: "stream2", url: "https://cdn-vl-gcp-l-01.vos360.video/Content/HLS_HLS_CLEAR/Live/channel(886a397d-ff30-4021-eb16-bb73c658c033)/index.m3u8")
+        let items = [VLPlayer.StreamId(id: "stream1", url: "https://spinco.staging.asset.viewlift.com/Renditions/20250623/1750680676506_spinco_HD_TVE_CNBCSPORTO_03292025_A_7830k_mp4_CUSTOM_CODEC_TS_DRM_DASH_DRM/hls/master.m3u8"), VLPlayer.StreamId(id: "stream2", url: "https://spinco.staging.asset.viewlift.com/Renditions/20250710/1752155865323_spinco_HD_TVE_SURREALEST_303_04172025_7830k_mp4_CUSTOM_CODEC_TS_DRM_DASH_DRM/hls/master.m3u8")
         ]
         guard !items.isEmpty else { return nil }
         return VLPlayer.PlaybackList.streams(items)
@@ -48,16 +48,16 @@ class AutoPlayDataManager {
     
     func getMetadataFor(id: String) -> VLPlayer.StreamMetadata? {
         if id == "stream1"{
-            let streamConfig = VLPlayer.StreamConfig(isLive: false, isDVR: nil, isDRM: nil)
-            let drmConfig = VLPlayer.DRMConfig(licenseUrl: "", certificateUrl: "", licenseToken: "", completeSkd: "")
-            let contentData = VLPlayer.ContentData(contentTitle: "Title 1", contentDescription: "Description 1", thumbnail: nil)
-            let metaData = VLPlayer.StreamMetadata(streamConfig: streamConfig, drmconfig: nil, contentData: contentData)
+            let streamConfig = VLPlayer.StreamConfig(isLive: false, isDVR: nil)
+            let drmConfig = VLPlayer.DRMConfig(licenseUrl: "https://spinco.staging.api.viewlift.com/v1/license/fairplay/acquire", certificateUrl: "https://spinco.staging.asset.viewlift.com/Certs/fairplay-Spinco.cer", licenseToken: "spinco|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbm9ueW1vdXNVc2VySWQiOiIiLCJhc3NldEtleSI6ImJhNmM2ZGFlLWNkMTgtNDE5ZC04YmI5LTcyYTljMTEyYzhkZSIsImNsaWVudElwIjoiMTIyLjE2MS41MC45IiwiY29udGVudElkIjoiMDc0MThiODYtODE4NC00NjZhLThkNTItZDBlM2Y4OGZkMzIwIiwiY291bnRyeUNvZGUiOiJJTiIsImRldmljZUlkIjoiMkMzODI0MkYtMTU0OS00QTg4LThFQTUtRTg1NjBDQTBGNUREIiwiZGV2aWNlVHlwZSI6Imlvc19pcGFkIiwiZHJtS2V5Um90YXRpb25FbmFibGVkIjpmYWxzZSwiZXhwIjoxNzU3MDE1ODk2LCJoZGNwIjoiIiwiaWF0IjoxNzU2OTcyNjk2LCJpc0xpdmVTdHJlYW0iOmZhbHNlLCJtZWRpYUxpdmVJZCI6IiIsIm1vbmV0aXphdGlvbk1vZGVscyI6W3sidHlwZSI6IlRWRSJ9XSwic2l0ZSI6InNwaW5jbyIsInNsIjoiIiwidGVlIjoiIiwidG9rZW5JZCI6IjFjN2ZiNDEzLWU3MjctNGUwMi04MmMxLWI0YTZjOThlYTdlNyIsInVzZXJJZCI6ImJlZWYzMGE1LTJmZDUtNGQ2Yy05NzU5LWEyOTdmMzM0YmNmNCJ9.P9zAuJS0kR1IE-CoI6GNzk1CEwz85-EQFywLLO08cJM", completeSkd: "ba6c6dae-cd18-419d-8bb9-72a9c112c8de")
+            let contentData = VLPlayer.ContentData(contentTitle: "Title 1", contentDescription: "Description 1", thumbnail: "https://www.kasandbox.org/programming-images/avatars/leaf-blue.png")
+            let metaData = VLPlayer.StreamMetadata(streamConfig: streamConfig, drmconfig: drmConfig, contentData: contentData)
             return metaData
         }else if id == "stream2"{
-            let streamConfig = VLPlayer.StreamConfig(isLive: true, isDVR: nil, isDRM: nil)
-            let drmConfig = VLPlayer.DRMConfig(licenseUrl: "", certificateUrl: "", licenseToken: "", completeSkd: "")
+            let streamConfig = VLPlayer.StreamConfig(isLive: false, isDVR: nil)
+            let drmConfig = VLPlayer.DRMConfig(licenseUrl: "https://spinco.staging.api.viewlift.com/v1/license/fairplay/acquire", certificateUrl: "https://spinco.staging.asset.viewlift.com/Certs/fairplay-Spinco.cer", licenseToken: "spinco|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbm9ueW1vdXNVc2VySWQiOiIiLCJhc3NldEtleSI6ImQ5NTQzMzYzLTg5OWMtNGE4Ny04Y2M3LTgwOTE4M2E3M2JiNCIsImNsaWVudElwIjoiMTIyLjE2MS41MC45IiwiY29udGVudElkIjoiYzMwZGNiMTAtMjQ1Ni00NzczLTgzZmItMmJlNzg2MDZmMDc4IiwiY291bnRyeUNvZGUiOiJJTiIsImRldmljZUlkIjoiMkMzODI0MkYtMTU0OS00QTg4LThFQTUtRTg1NjBDQTBGNUREIiwiZGV2aWNlVHlwZSI6Imlvc19pcGFkIiwiZHJtS2V5Um90YXRpb25FbmFibGVkIjpmYWxzZSwiZXhwIjoxNzU3MDE2MDA2LCJoZGNwIjoiIiwiaWF0IjoxNzU2OTcyODA2LCJpc0xpdmVTdHJlYW0iOmZhbHNlLCJtZWRpYUxpdmVJZCI6IiIsIm1vbmV0aXphdGlvbk1vZGVscyI6W3sidHlwZSI6IkZSRUUifV0sInNpdGUiOiJzcGluY28iLCJzbCI6IiIsInRlZSI6IiIsInRva2VuSWQiOiI1YjlmNjQwMi00ZjQ2LTQ2MWEtYWEyNC05NmVlNWNiNzFkOTgiLCJ1c2VySWQiOiJiZWVmMzBhNS0yZmQ1LTRkNmMtOTc1OS1hMjk3ZjMzNGJjZjQifQ.jRgdoWGWX-TTrRn03CfpOt0sqI-c2jmPIn4yl4CPKU4", completeSkd: "d9543363-899c-4a87-8cc7-809183a73bb4")
             let contentData = VLPlayer.ContentData(contentTitle: "Title 2", contentDescription: "Description 2", thumbnail: nil)
-            let metaData = VLPlayer.StreamMetadata(streamConfig: streamConfig, drmconfig: nil, contentData: contentData)
+            let metaData = VLPlayer.StreamMetadata(streamConfig: streamConfig, drmconfig: drmConfig, contentData: contentData)
             return metaData
         }else{
             return nil

@@ -263,7 +263,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         switch asset.playbackType {
         case .url(let url):
             print("Play using URL: \(url)")
-            launchVideoPlayer(url: url, isExternal: asset.isExternal ?? false, streamConfig: VLPlayer.StreamConfig(isLive: asset.isLive, isDVR: asset.isDVR, isDRM: nil))
+            launchVideoPlayer(url: url, isExternal: asset.isExternal ?? false, streamConfig: VLPlayer.StreamConfig(isLive: asset.isLive, isDVR: asset.isDVR))
         case .videoId(let id):
             print("Play using videoId: \(id)")
             launchVideoPlayer(videoId: id, isExternal: asset.isExternal ?? false)

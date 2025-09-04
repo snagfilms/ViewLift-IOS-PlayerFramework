@@ -268,7 +268,7 @@ extension PlayerViewController_iOS {
         }
         vlPlayer.setSource(
             type: playbackSourceType,
-            vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
+            vlPlayerTag: "1", customControlsView: nil,adUrl: Constants.defaultAdUrl,
             playerFeaturesSupported: featureSupported, nextPlaybackList: autoPlayListdataManager?.getAutoPlayUrlList()
         ) {
             [weak self] isSuccess,
@@ -458,7 +458,7 @@ extension PlayerViewController_iOS {
         let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
         // You can find list of macros in VLPlayer documentation for SSAI functioning
         //https://developer.viewlift.com/docs/vlplayerfeaturesupported
-        return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
+        return VLPlayer.VLPlayerFeatureSupported(appMacrosList: nil,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
@@ -468,7 +468,7 @@ extension PlayerViewController_iOS {
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
-                                                 autoPlayConfiguration: getAutoPlayConfig(type: .custom),
+                                                 autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: false,
                                                  isCustomAdViewEnabled: enableCustomAdUI,
                                                  isServerSideAdTrackingEnabled: true)

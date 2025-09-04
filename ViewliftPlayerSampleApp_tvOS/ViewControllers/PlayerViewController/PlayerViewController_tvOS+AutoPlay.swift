@@ -36,25 +36,12 @@ extension PlayerViewController_tvOS{
     }
     
     private func createAutoPlayView() -> AutoPlayView {
-        let autoPlay = AutoPlayView()
+        let autoPlay = AutoPlayView(theme: VLPlayer.AutoPlayTheme(), autoPlayTimerCount: 15)
         autoPlay.translatesAutoresizingMaskIntoConstraints = false
         
-        autoPlay.onPlay = { [weak self] in
-            print("Play button tapped")
+        autoPlay.autoPlayUICallback = { [weak self] shouldPlayNext in
             self?.removeAutoPlayView()
-            self?.vlPlayer?.dismissAutoPlayView(playNext: true)
-        }
-        
-        autoPlay.onClose = { [weak self] in
-            print("Closed autoplay")
-            self?.vlPlayer?.dismissAutoPlayView(playNext: false)
-            self?.removeAutoPlayView()
-        }
-        
-        autoPlay.onAutoPlay = { [weak self] in
-            print("Autoplay finished, play next video")
-            self?.removeAutoPlayView()
-            self?.vlPlayer?.dismissAutoPlayView(playNext: true)
+            self?.vlPlayer?.dismissAutoPlayView(playNext: shouldPlayNext)
         }
         self .autoPlayView = autoPlay
         return autoPlay
