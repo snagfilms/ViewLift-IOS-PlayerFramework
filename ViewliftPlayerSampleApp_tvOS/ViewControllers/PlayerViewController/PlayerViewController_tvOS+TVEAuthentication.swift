@@ -8,11 +8,12 @@
 
 import VLPlayerLib
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication
 #endif
 import Foundation
+import SwiftUI
 
 // MARK: - TVE Authentication Flow
 extension PlayerViewController_tvOS {
@@ -21,7 +22,7 @@ extension PlayerViewController_tvOS {
     func loginWithTVE() {
         debugPrint("Login with TVE called")
         
-        let type = Configuration.default
+        let type = Configuration.custom
         
         switch type {
         case .custom, .customTheme:
@@ -33,37 +34,11 @@ extension PlayerViewController_tvOS {
     
     /// Presents a fully-custom activation UI and handles polling.
     private func customUIForLogin() {
-        Task {
-            do {
-                let code = try await VLAuthentication.sharedInstance.generateTVEAuthCode() ?? ""
-                let activateURL = "http://spinco.staging.web.viewlift.com/tveactivate?code=\(code)"
-                
-                debugPrint("Activation Code: \(code)")
-                
-                // Render QR code for the activation URL.
-                let qrCodeImage = TveQRCodeGenerator.generateQRCode(
-                    from: activateURL,
-                    theme: QRCodeTheme(
-                        foregroundColor: .red,
-                        backgroundColor: .yellow
-                    )
-                )
-                
-                // Begin background polling until the user is authenticated.
-                TVEPollingHelper.shared.startPolling(
-                    activationCode: code
-                ) { [weak self] userIdentity in
-                    self?.reloadPlayer(userIdentity: userIdentity)
-                    TVEPollingHelper.shared.stopPolling()
-                    
-                } onFailure: { _ in
-                    TVEPollingHelper.shared.stopPolling()
-                }
-                
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
+        let hostingController = UIHostingController(
+            rootView: TVEPollingQRCodeView()
+        )
+        
+        self.present(hostingController, animated: true)
     }
     
     /// Uses the framework-provided activation screen UI.
