@@ -274,7 +274,7 @@ class PlayerViewController_tvOS: UIViewController {
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
-                                                 payWallConfiguration: getPayWallConfiguration(type: .default),
+                                                 payWallConfiguration: .disabled,
                                                  playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: true,
@@ -301,7 +301,9 @@ class PlayerViewController_tvOS: UIViewController {
             return playerControlsViewConfiguration
         #if os(tvOS)
         case .native:
-            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .native
+            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(
+                controlsTheme: .none
+            )
             return playerControlsViewConfiguration
         #endif
         case .default:

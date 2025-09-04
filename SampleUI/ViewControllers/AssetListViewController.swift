@@ -12,149 +12,157 @@ import VLAuthenticationFramework
 #else
 import VLAuthenticationFramework_tvOS
 #endif
+import Kingfisher
 
 
 class AssetListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     private let tableView = UITableView()
     private let headerView = UIView()
     private let backButton = UIButton(type: .system)
     private let logoutButton = UIButton(type: .system)
+    private let providerImageView = UIImageView()
     private let titleLabel = UILabel()
-    var videoList:VideoList!
+    
+    // MARK: - Data
+    
+    var videoList: VideoList!
     var entitlementData: VLPlayer.EntitlementData?
     private var assetModels: [AssetModel] = []
     var configurableHeaderView: ConfigurableHeaderView?
+    
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        if videoList == nil {
-            showAlert(title: "Error", message: "Please provide valid video list data. Replace configs.json content")
+        
+        guard videoList != nil else {
+            showAlert(title: "Error", message: "Please provide valid video list data. Replace configs.json content.")
             return
         }
+        
         videoList.nextVideoList?.removeAll()
         setupHeader()
         setupTableView()
         assetModels = loadAssetModelsFromFile() ?? []
-//        DispatchQueue.main.async { [weak self] in
-//          self?.setupTableHeaderView()
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Default: hide both controls
         logoutButton.isHidden = true
+        providerImageView.isHidden = true
         
-        #if os(tvOS)
-            if UserManager.shared.userIdentity != nil {
-                logoutButton.isHidden = false
-            }
-        #endif
-        guard let videoList = AppDelegate.shared.readVideoListOperation?.videoList else{
-            return
+#if os(tvOS)
+        if UserManager.shared.userIdentity != nil {
+            logoutButton.isHidden = false
+            providerImageView.isHidden = false
         }
-        let xApiKey: String = videoList.xApiKey
-        let siteId: String = videoList.authKeys.siteId
-        let apiBaseEndpoint: String = videoList.authKeys.apiBaseEndpoint
-        self.showAlertIfConfigInvalid(apiBaseEndpoint: apiBaseEndpoint,
-                                      authorizationToken: AppDelegate.shared.authorizationToken,
-                                      siteId: siteId,
-                                      xApiKey: xApiKey,
-                                          alertMessage: "Detected invalid configuration! Please update your settings.")
+#endif
+        
+        guard let videoList = AppDelegate.shared.readVideoListOperation?.videoList else { return }
+        let xApiKey = videoList.xApiKey
+        let siteId = videoList.authKeys.siteId
+        let apiBaseEndpoint = videoList.authKeys.apiBaseEndpoint
+        
+        showAlertIfConfigInvalid(
+            apiBaseEndpoint: apiBaseEndpoint,
+            authorizationToken: AppDelegate.shared.authorizationToken,
+            siteId: siteId,
+            xApiKey: xApiKey,
+            alertMessage: "Detected invalid configuration! Please update your settings."
+        )
+    }
+    
+    func fetchUserDetails() {
+        do {
+            Task {
+                let userIdentity = try await VLAuthentication.sharedInstance.getUserIdentity()
+                
+                if let tvImageurl = userIdentity.tveMetadata?.imageUrl {
+                    self.providerImageView.isHidden = false
+                    self.providerImageView.backgroundColor  = .black
+                    
+                    let url = URL(string: tvImageurl)
+                    self.providerImageView.kf.setImage(with: url)
+                }
+                
+            }
+        } catch {
+            print(error)
+            
+            self.providerImageView.isHidden = true
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
-        guard let headerView = self.configurableHeaderView else { return }
-
+        
+        guard let headerView = configurableHeaderView else { return }
         let height = headerView.heightFittingWidth(tableView.bounds.width)
+        
         if tableView.tableHeaderView?.frame.height != height {
-            headerView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: height)
+            headerView.frame = CGRect(x: 0,
+                                      y: 0,
+                                      width: tableView.bounds.width,
+                                      height: height)
             tableView.tableHeaderView = headerView
         }
     }
     
-    private func setupTableHeaderView() {
-        let options: [ConfigurableItemType] = [.showCustomControls, .hideControls, .autoPlay, .loopPlay, .mute]
-        var items: [ConfigurableItem] = []
-        for option in options {
-            items.append(ConfigurableItem(type: option, isChecked: option == .autoPlay))
-        }
-
-        let headerView = ConfigurableHeaderView(items: items)
-
-        headerView.onHeightChanged = { [weak self, weak headerView] in
-            guard let self = self, let headerView = headerView else { return }
-            let height = headerView.heightFittingWidth(self.tableView.bounds.width)
-            headerView.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: height)
-            self.tableView.tableHeaderView = headerView
-        }
-
-        let height = headerView.heightFittingWidth(tableView.bounds.width)
-        headerView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: height)
-        tableView.tableHeaderView = headerView
-        configurableHeaderView = headerView
-    }
-
+    // MARK: - Header Setup
     
-    func getEntitlementData(
-        videoId: String,
-        completion: @escaping (Result<VLPlayer.EntitlementData, VLPlayerLib.VLError>) -> Void
-    ) {
-        fetchContentDetails(videoId: videoId) { (playerObject, isSuccess, vlError, playerResponse, contentResponse) in
-            if isSuccess, let playerObject = playerObject {
-                let entitlementData = VLPlayer.EntitlementData(
-                    playerObject: playerObject,
-                    isSuccess: true,
-                    error: vlError,
-                    playerResponse: playerResponse,
-                    contentResponse: contentResponse
-                )
-                completion(.success(entitlementData))
-            } else {
-                completion(.failure(vlError ?? VLPlayerLib.VLError()))
-            }
-        }
-    }
-
     private func setupHeader() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(headerView)
         headerView.backgroundColor = .white
+        view.addSubview(headerView)
         
         // --- Back Button (Left) ---
         backButton.setTitle("← Back", for: .normal)
         backButton.setTitleColor(.systemBlue, for: .normal)
         backButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
         backButton.translatesAutoresizingMaskIntoConstraints = false
-        backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
+        backButton.addTarget(self,
+                             action: #selector(backTapped),
+                             for: .touchUpInside)
         headerView.addSubview(backButton)
         
         var titleLabelFontSize: CGFloat = 18
-        #if os(tvOS)
+#if os(tvOS)
         backButton.isHidden = true
         titleLabelFontSize = 36
-        #endif
+#endif
         
         // --- Logout Button (Right) ---
-        logoutButton.setTitle("Logout", for: .normal) // Corrected title
-        logoutButton.setTitleColor(.systemRed, for: .normal) // Changed color for visibility
+        logoutButton.setTitle("Logout", for: .normal)
+        logoutButton.setTitleColor(.systemRed, for: .normal)
         logoutButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
-        logoutButton.addTarget(self, action: #selector(logoutTapped), for: .primaryActionTriggered)
+        logoutButton.addTarget(self,
+                               action: #selector(logoutTapped),
+                               for: .primaryActionTriggered)
         headerView.addSubview(logoutButton)
         
-        headerView.addSubview(logoutButton)
+        // --- Status ImageView (left of Logout) ---
+        providerImageView.translatesAutoresizingMaskIntoConstraints = false
+        providerImageView.contentMode = .scaleAspectFit
+        headerView.addSubview(providerImageView)
         
+        // default hidden; will toggle with logoutButton
         logoutButton.isHidden = true
+        providerImageView.isHidden = true
         
-        #if os(tvOS)
-            if UserManager.shared.userIdentity != nil {
-                logoutButton.isHidden = false
+#if os(tvOS)
+        if UserManager.shared.userIdentity != nil {
+            logoutButton.isHidden = false
+            
+            DispatchQueue.main.asyncAfter(deadline: .now()+1.0) {
+                self.fetchUserDetails()
             }
-        #endif
+        }
+#endif
         
         // --- Title Label (Center) ---
         titleLabel.text = "Assets"
@@ -163,49 +171,59 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         titleLabel.textColor = .black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(titleLabel)
-
-        // --- Activate Constraints ---
+        
+        // --- Constraints ---
         NSLayoutConstraint.activate([
-            // Header constraints
+            // Header view
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 50),
-
-            // Back button constraints (left)
+            
+            // Back button
             backButton.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
             backButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-
-            // Title label constraints (center)
-            titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
             
-            // **Added: Logout button constraints (right)**
+            // Logout button (right)
             logoutButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
-            logoutButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+            logoutButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+            
+            // Status image (immediately left of Logout)
+            providerImageView.trailingAnchor.constraint(equalTo: logoutButton.leadingAnchor, constant: -8),
+            providerImageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+            providerImageView.widthAnchor.constraint(equalToConstant: 200),
+            providerImageView.heightAnchor.constraint(equalToConstant: 112),
+            
+            // Title label (center)
+            titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
         ])
     }
-
+    
+    // MARK: - Table View Setup (unchanged)
+    
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
-        let topMargin: CGFloat = 20
         tableView.backgroundColor = .clear
+        view.addSubview(tableView)
+        
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: topMargin),
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 80
-        tableView.register(AssetTableViewCell.self, forCellReuseIdentifier: AssetTableViewCell.reuseIdentifier)
+        tableView.register(AssetTableViewCell.self,
+                           forCellReuseIdentifier: AssetTableViewCell.reuseIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
     }
-
-    // MARK: - Back Button
-
+    
+    // MARK: - Button Actions
+    
     @objc private func backTapped() {
         if let nav = navigationController {
             nav.popViewController(animated: true)
@@ -224,31 +242,30 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
             if logoutSuccessful {
                 Task { [weak self] in
                     self?.logoutButton.isHidden = true
-                    
+                    self?.providerImageView.isHidden = true  // ← sync state
                     await AppDelegate.shared.logoutUser()
-                    
                 }
             }
         }
     }
-
+    
     // MARK: - UITableViewDataSource
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return assetModels.count
     }
-
-
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let asset = assetModels[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: AssetTableViewCell.reuseIdentifier, for: indexPath) as! AssetTableViewCell
+        let asset = assetModels[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: AssetTableViewCell.reuseIdentifier, for: indexPath) as! AssetTableViewCell
         cell.configure(with: asset, index: indexPath.row)
-            cell.delegate = self
-            return cell
-        }
-
-
-
+        cell.delegate = self
+        return cell
+    }
+    
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let errorMessage = videoList.checkForConfigurationErrorMessage() {
             self.showAlert(message: errorMessage)
@@ -321,7 +338,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
             
         }
         debugPrint("contentID: \(videoId ?? "nil")")
-
+        
     }
     
     func showAlert(title: String = "Alert!", message: String = "Description") {
@@ -337,24 +354,24 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         let loopEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .loopPlay) ?? false
         let hideControls = configurableHeaderView?.getConfigurableItemSelection(type: .hideControls) ?? false
         let muteEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .mute) ?? false
-        #if os(iOS)
+#if os(iOS)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let videoPlaybackController = storyboard.instantiateViewController(withIdentifier: "PlayerViewController_iOS") as! PlayerViewController_iOS
         videoPlaybackController.streamUrl = url
         videoPlaybackController.entitlementData = self.entitlementData
         videoPlaybackController.streamConfig = streamConfig
         videoPlaybackController.drmConfig = drmConfig
-//        videoPlaybackController.view.frame = self.view.bounds
+        //        videoPlaybackController.view.frame = self.view.bounds
         videoPlaybackController.prepareView(withPlayerUIOption: videoId == nil ? .playStreamURL : .defaultControl, videoList: videoList)
         videoPlaybackController.enableCustomPlayerUI = showCustomControls
         videoPlaybackController.autoplayEnabled = autoplayEnabled
         videoPlaybackController.loopEnabled = loopEnabled
         videoPlaybackController.hideControls = hideControls
         videoPlaybackController.muteEnabled = muteEnabled
-       // videoPlaybackController.modalPresentationStyle = .fullScreen
+        // videoPlaybackController.modalPresentationStyle = .fullScreen
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.pushViewController(videoPlaybackController, animated: true)
-        #else
+#else
         let vc = PlayerViewController_tvOS()
         vc.playerOptionSelected = videoId == nil ? .playStreamURL : .defaultControl
         vc.enableCustomPlayerUI = showCustomControls
@@ -371,7 +388,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         //self.present(vc, animated: true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.pushViewController(vc, animated: true)
-        #endif
+#endif
     }
 }
 
@@ -381,7 +398,7 @@ extension AssetListViewController{
             print("❌ File not found")
             return nil
         }
-
+        
         do {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
@@ -395,9 +412,9 @@ extension AssetListViewController{
     }
     
     private func detectDuplicates(assets: [AssetModel]){
-
+        
         let duplicates = findDuplicateAssets(from: assets)
-
+        
         if duplicates.isEmpty {
             print("✅ No duplicates")
         } else {
@@ -408,19 +425,19 @@ extension AssetListViewController{
                 }
             }
         }
-
+        
     }
     func findDuplicateAssets(from assets: [AssetModel]) -> [String: [AssetModel]] {
         var seen: [String: [AssetModel]] = [:]
-
+        
         for asset in assets {
             guard let key = asset.contentIdentifier else { continue }
             seen[key, default: []].append(asset)
         }
-
+        
         return seen.filter { $1.count > 1 }
     }
-
+    
     
 }
 
@@ -434,17 +451,17 @@ extension PlaybackType: Codable {
         case type
         case value
     }
-
+    
     private enum PlaybackTypeIdentifier: String, Codable {
         case url
         case videoId
     }
-
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(PlaybackTypeIdentifier.self, forKey: .type)
         let value = try container.decode(String.self, forKey: .value)
-
+        
         switch type {
         case .url:
             self = .url(value)
@@ -452,10 +469,10 @@ extension PlaybackType: Codable {
             self = .videoId(value)
         }
     }
-
+    
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-
+        
         switch self {
         case .url(let value):
             try container.encode(PlaybackTypeIdentifier.url, forKey: .type)
@@ -472,7 +489,7 @@ extension AssetListViewController: AssetTableViewCellDelegate {
         let infoVC = AssetInfoViewController(asset: asset)
         present(infoVC, animated: true)
     }
-
+    
 }
 
 
@@ -487,11 +504,13 @@ extension UIView {
 }
 
 
-extension AssetListViewController{// Used to parse local response data.
+extension AssetListViewController{
     
-    func getEntitlementDataLocal(completion: @escaping (Result<VLPlayer.EntitlementData, VLPlayerLib.VLError>) -> Void
+    func getEntitlementData(
+        videoId: String,
+        completion: @escaping (Result<VLPlayer.EntitlementData, VLPlayerLib.VLError>) -> Void
     ) {
-        fetchContentDetailsLocal() { (playerObject, isSuccess, vlError, playerResponse, contentResponse) in
+        fetchContentDetails(videoId: videoId) { (playerObject, isSuccess, vlError, playerResponse, contentResponse) in
             if isSuccess, let playerObject = playerObject {
                 let entitlementData = VLPlayer.EntitlementData(
                     playerObject: playerObject,
@@ -509,19 +528,19 @@ extension AssetListViewController{// Used to parse local response data.
     
     func fetchContentDetailsLocal(apiResponse: @escaping (_ playerObject: VLPlayerLib.PlayerObject?, _ isSuccess: Bool, _ vlError: VLPlayerLib.VLError?, _ playerResponse: VLPlayerLib.VLPlayerResponse?, _ contentResponse: Dictionary<String, AnyObject>?) -> Void
     ) {
-
-            guard let fallbackURL = Bundle.main.url(forResource: "entitlement", withExtension: "json"),
-                  let localData = try? Data(contentsOf: fallbackURL) else {
-                let error = VLPlayerLib.VLError()
-                error.errorCode = ""
-                error.errorMessage = ""
-                error.vl_errorCode = ""
-                error.isPlayable = false
-                error.isSuccess = false
-                apiResponse(nil, false, error, nil, nil)
-                return
-            }
-            parseEntitlementData(from: localData, apiResponse: apiResponse)
-
+        
+        guard let fallbackURL = Bundle.main.url(forResource: "entitlement", withExtension: "json"),
+              let localData = try? Data(contentsOf: fallbackURL) else {
+            let error = VLPlayerLib.VLError()
+            error.errorCode = ""
+            error.errorMessage = ""
+            error.vl_errorCode = ""
+            error.isPlayable = false
+            error.isSuccess = false
+            apiResponse(nil, false, error, nil, nil)
+            return
         }
+        parseEntitlementData(from: localData, apiResponse: apiResponse)
+        
     }
+}
