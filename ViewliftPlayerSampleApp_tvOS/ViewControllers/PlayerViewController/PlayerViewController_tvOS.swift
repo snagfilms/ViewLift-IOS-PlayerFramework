@@ -17,6 +17,15 @@ import VLAuthenticationFramework_tvOS
 import AVKit
 import VLAnalyticsLib
 
+private enum Constants {
+    static let playerMargin: CGFloat = 10
+    static let aspectRatio: CGFloat = 9/16
+    static let defaultSeekForward: Double = 30.0
+    static let defaultSeekBackward: Double = 10.0
+    static let playerYPosition: CGFloat = 100
+    static let defaultAdUrl = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/vmap_ad_samples&sz=640x480&cust_params=sample_ar%3Dpremidpost&ciu_szs=300x250&gdfp_req=1&ad_rule=1&output=vmap&unviewed_position_start=1&env=vp&cmsid=496&vid=short_onecue&correlator="
+}
+
 // Main player view controller for tvOS, handles player setup, UI, and playback logic
 class PlayerViewController_tvOS: UIViewController, ServerSideAdTrackingDelegate {
     func serverSideAdTrackingEvents(
@@ -88,8 +97,10 @@ class PlayerViewController_tvOS: UIViewController, ServerSideAdTrackingDelegate 
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
     var enableCustomAdUI: Bool = false
-//    var analyticsAdDictionary = AnalyticsAdDictionary()
-    
+    var analyticsAdDictionary = AnalyticsAdDictionary()
+    var autoPlayListdataManager: AutoPlayDataManager?
+    internal var autoPlayView: AutoPlayView?
+
     override var canBecomeFirstResponder: Bool {
         return true
     }
@@ -106,7 +117,9 @@ class PlayerViewController_tvOS: UIViewController, ServerSideAdTrackingDelegate 
         view.addSubview(playerContainerView)
         setupConstraints()
         updateConstraintsForCurrentOrientation()
+        self.createAutoPlayMetaData()
         self.loadPlayerView()
+        
     }
     
     // Loads and configures the player view
@@ -144,7 +157,11 @@ class PlayerViewController_tvOS: UIViewController, ServerSideAdTrackingDelegate 
             vlPlayer?.setEntitlement(data: entitlementData)
         }
         // Set player source and handle completion
-        vlPlayer?.setSource(type: playbackSourceType, playerFeaturesSupported: featureSupported) { [weak self] isSuccess, playerView, contentResponse in
+        
+        vlPlayer?.setSource(type: playbackSourceType,
+                            vlPlayerTag: "1", customControlsView: nil,adUrl: Constants.defaultAdUrl,
+                            playerFeaturesSupported: featureSupported, nextPlaybackList: self.autoPlayListdataManager?.getAutoPlayUrlList()
+                        ) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
                 var hasTVE = false
                 
@@ -293,8 +310,10 @@ class PlayerViewController_tvOS: UIViewController, ServerSideAdTrackingDelegate 
                                                  customPlayerControlsColor: nil,
                                                  supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
+                                                 controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
-                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .custom),
+                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default),
+                                                 autoPlayConfiguration: getAutoPlayConfig(type: .custom),
                                                  isTrickPlayEnabled: true,
                                                  isServerSideAdTrackingEnabled: true)
     }
