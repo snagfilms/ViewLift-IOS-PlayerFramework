@@ -77,25 +77,25 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func fetchUserDetails() {
-        do {
-            Task {
+        Task {
+            do {
                 let userIdentity = try await VLAuthentication.sharedInstance.getUserIdentity()
                 
                 if let tvImageurl = userIdentity.tveMetadata?.imageUrl {
                     self.providerImageView.isHidden = false
-                    self.providerImageView.backgroundColor  = .black
+                    self.providerImageView.backgroundColor = .black
                     
-                    let url = URL(string: tvImageurl)
-                    self.providerImageView.kf.setImage(with: url)
+                    if let url = URL(string: tvImageurl) {
+                        self.providerImageView.kf.setImage(with: url)
+                    }
                 }
-                
+            } catch {
+                debugPrint(error)
+                self.providerImageView.isHidden = true
             }
-        } catch {
-            print(error)
-            
-            self.providerImageView.isHidden = true
         }
     }
+
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
