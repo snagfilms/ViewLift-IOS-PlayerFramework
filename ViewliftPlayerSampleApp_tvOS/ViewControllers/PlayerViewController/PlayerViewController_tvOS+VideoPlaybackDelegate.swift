@@ -28,10 +28,15 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
         
         print("Error VL:", errorDescription)
         print("VideoFetchError: contentResponse:", contentResponse)
-        DispatchQueue.main.async {
-            self.showAlert(message: errorDescription)
-            self.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
+        if error?.errorCode == "TVE_SUBSCRIPTION_NOT_FOUND"{// handle other TVE error code too
+            loginWithTVE()
+        }else{
+            DispatchQueue.main.async {
+                self.showAlert(message: errorDescription)
+                self.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
+            }
         }
+        
     }
     
     // Updates play/pause state in custom controls

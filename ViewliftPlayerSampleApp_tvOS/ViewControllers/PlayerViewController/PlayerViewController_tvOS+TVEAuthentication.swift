@@ -13,35 +13,87 @@ import VLAuthenticationFramework
 import VLAuthenticationFramework_tvOS
 #endif
 import Foundation
+import SwiftUI
 
-// Handle TVE authentication flow for the player view controller
+
+// MARK: - TVE Authentication Flow
 extension PlayerViewController_tvOS {
     
-    // Initiates TVE login and handles activation screen and user identity updates
+    /// Starts the TVE login flow and routes to the appropriate UI.
     func loginWithTVE() {
         debugPrint("Login with TVE called")
-        VLAuthentication.sharedInstance
-            .showTVEActivationScreen(
-                presentingViewController: self,
-                activationURL: "http://spinco.staging.web.viewlift.com/tveactivate",
-                qrToggle: true) { [weak self] userIdentity, errorCode in
-                    DispatchQueue.main.async {
-                        // If authentication fails, handle error (currently commented out)
-                        if userIdentity == nil, let codeString = errorCode?.codeString {
-                            // self?.showAlert(message: codeString)
-                            return
-                        }
-                        
-                        // On successful authentication, update user identity and token
-                        UserManager.shared.userIdentity = userIdentity
-                        AppDelegate.shared.authorizationToken = userIdentity?.authorizationToken
-                        // Destroy current player and clear delegates
-                        self?.vlPlayer?.destroy()
-                        
-                        self?.vlPlayer?.playerVideoAnalyticsDelegate = nil
-                        // Reload player view with new authentication context
-                        self?.loadPlayerView()
-                    }
-                }
+        
+        let type = Configuration.custom
+        
+        switch type {
+        case .custom, .customTheme:
+            customUIForLogin()
+        case .native, .default:
+            defaultUIForLogin()
+        }
+    }
+    
+    /// Presents a fully-custom activation UI and handles polling.
+    private func customUIForLogin() {
+        var tvePollingQRView = TVEPollingQRCodeView()
+        
+        tvePollingQRView.authCallback = { [weak self] userIdentity, error in
+            self?.handleTVESigninError(
+                userIdentity: userIdentity,
+                error: error
+            )
+            
+        }
+        
+        let hostingController = UIHostingController(
+            rootView: tvePollingQRView
+        )
+        
+        self.present(hostingController, animated: true)
+    }
+    
+    /// Uses the framework-provided activation screen UI.
+    private func defaultUIForLogin() {
+        VLAuthentication.sharedInstance.showTVEActivationScreen(
+            presentingViewController: self,
+            activationURL: "http://spinco.staging.web.viewlift.com/tveactivate",
+            qrToggle: true
+        ) {
+            [weak self] userIdentity,
+            error in
+            // Handle error state (optional).
+            self?.handleTVESigninError(
+                userIdentity: userIdentity,
+                error: error
+            )
+        }
+    }
+    
+    private func handleTVESigninError(
+        userIdentity: VLUserIdentity?,
+        error: VLAuthenticationErrorCode?
+    ) {
+        if userIdentity == nil, let message = error?.codeString {
+            // self?.showAlert(message: message)
+            print("Activation failed: \(message)")
+            return
+        }
+        
+        // Successful authentication.
+        if let user = userIdentity {
+            self.reloadPlayer(userIdentity: user)
+        }
+    }
+    
+    /// Refreshes the player instance with the new user identity.
+    private func reloadPlayer(userIdentity: VLUserIdentity) {
+        DispatchQueue.main.async {
+            UserManager.shared.userIdentity = userIdentity
+            AppDelegate.shared.authorizationToken = userIdentity.authorizationToken
+            
+            self.vlPlayer?.destroy()
+            self.vlPlayer?.playerVideoAnalyticsDelegate = nil
+            self.loadPlayerView()
+        }
     }
 }
