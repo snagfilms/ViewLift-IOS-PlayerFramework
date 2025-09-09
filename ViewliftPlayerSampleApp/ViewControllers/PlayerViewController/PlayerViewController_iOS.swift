@@ -66,7 +66,7 @@ class PlayerViewController_iOS: UIViewController {
     var analyticsAdDictionary = AnalyticsAdDictionary()
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
-    private let playerContainerView = UIView()
+    let playerContainerView = UIView()
     var fullscreenConstraints: [NSLayoutConstraint] = []
     var normalConstraints: [NSLayoutConstraint] = []
     var isFullscreen = false
@@ -86,7 +86,7 @@ class PlayerViewController_iOS: UIViewController {
     private var seekBackwardDuration: Double = Constants.defaultSeekBackward
     private var adUrl: String?
     private var playerOptionSelected: PlayerUIOptions!
-    var enableCustomAdUI: Bool = false
+    var enableCustomAdUI: Bool = true
     var playerRateBeforeSeek: Float = 1.0
     var isVideoPlayingBeforeSeek = true
     var autoPlayListdataManager: AutoPlayDataManager?

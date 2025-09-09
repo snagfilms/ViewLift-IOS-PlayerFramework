@@ -734,7 +734,9 @@ class CustomSlider: UISlider
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setThumbImage(#imageLiteral(resourceName: "NoKnob.png"), for: .normal)
+        if let image = UIImage(named: "NoKnob") {
+            self.setThumbImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
     }
     
     override func layoutSubviews() {
