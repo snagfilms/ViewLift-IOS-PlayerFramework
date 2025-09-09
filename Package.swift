@@ -29,7 +29,7 @@ let package = Package(
         .package(
             name: "VLBeaconLib",
             url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
-            branch: "3.0.0")
+            branch: "3.0.0_Develop")
     ],
     targets: [
         .binaryTarget(name: "VLPlayerLib", path: "VLPlayerLib.xcframework"),
