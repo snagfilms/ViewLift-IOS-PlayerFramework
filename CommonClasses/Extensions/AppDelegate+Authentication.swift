@@ -7,9 +7,9 @@
 //
 import UIKit
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 #endif
 import VLAnalyticsLib
 
@@ -50,7 +50,7 @@ extension AppDelegate {
             do {
                 guard let self = self else { return }
                 
-                // Initialize authentication framework with API config
+                // Initialize authentication framework with API con fig
                 try await VLAuthentication.sharedInstance.setupConfiguration(apiConfig: apiConfig)
                 
                 // Set current authorization token in authentication framework
@@ -61,7 +61,8 @@ extension AppDelegate {
                     self.authorizationToken = try await VLAuthentication.sharedInstance.apiToGetAnonymousToken()?.authorizationToken
                     VLAuthentication.sharedInstance.authorizationToken = self.authorizationToken
                     
-                // If tokens exist, try to refresh them
+                    try await self.handleTempPass()
+                    
                 } else if let authorizationToken = self.authorizationToken, let refreshToken = userIdentity?.refreshToken, !authorizationToken.isEmpty && !refreshToken.isEmpty {
                     self.authorizationToken = try await VLAuthentication.sharedInstance
                         .fetchUpdatedAuthToken(
@@ -76,6 +77,27 @@ extension AppDelegate {
             } catch let error as VLAuthenticationErrorCode {
                 print("VLAuthentication init error: \(error.codeString)")
             }
+        }
+    }
+    
+    func handleTempPass() async throws {
+        do {
+            let providers = try await VLAuthentication.sharedInstance.getTempPassProvider()
+            
+            if let id = providers.first?.id {
+                let response = try await VLAuthentication.sharedInstance.checkAdobeDecisionsAuthorize(
+                    mvpdId: id
+                )
+                
+                switch response {
+                case .success(let token):
+                    AppDelegate.shared.tempPass = token
+                case .failure(let _):
+                    AppDelegate.shared.tempPass = nil
+                }
+            }
+        } catch let error as VLAuthenticationErrorCode {
+            throw error
         }
     }
     

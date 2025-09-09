@@ -9,9 +9,9 @@
 import UIKit
 
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 #endif
 import GoogleCast
 
@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var readVideoListOperation:VideoListProtocol?
     var isCastingViewVisible: Bool = false
     var castContextSharedInstance: GCKCastContext?
+    var tempPass: MediaToken? = nil
 
     func application(
         _ application: UIApplication,

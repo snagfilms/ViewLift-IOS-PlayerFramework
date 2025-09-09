@@ -1,6 +1,33 @@
 {
-  "originHash" : "0e3aa8a267fdb6d6e562c094cd930512a2223705b1240511fcc2f277498cdd8d",
+  "originHash" : "0261ff9794b49376bbdc2ab7c795ac2d7fa2ee3a04f14899adb00243ee70baab",
   "pins" : [
+    {
+      "identity" : "abseil-cpp-binary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/abseil-cpp-binary.git",
+      "state" : {
+        "revision" : "bbe8b69694d7873315fd3a4ad41efe043e1c07c5",
+        "version" : "1.2024072200.0"
+      }
+    },
+    {
+      "identity" : "analytics-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/segmentio/analytics-swift",
+      "state" : {
+        "revision" : "5d3a762da5412d324205a58358b95e1da334c21e",
+        "version" : "1.8.0"
+      }
+    },
+    {
+      "identity" : "app-check",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/app-check.git",
+      "state" : {
+        "revision" : "61b85103a1aeed8218f17c794687781505fbbef5",
+        "version" : "11.2.0"
+      }
+    },
     {
       "identity" : "appauth-ios",
       "kind" : "remoteSourceControl",
@@ -8,6 +35,15 @@
       "state" : {
         "revision" : "2781038865a80e2c425a1da12cc1327bcd56501f",
         "version" : "1.7.6"
+      }
+    },
+    {
+      "identity" : "appsflyerframework",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework",
+      "state" : {
+        "revision" : "08fa1746dad0915cb336b458e4d6e8e06c2e47f7",
+        "version" : "6.17.3"
       }
     },
     {
@@ -20,6 +56,15 @@
       }
     },
     {
+      "identity" : "clevertap-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CleverTap/clevertap-ios-sdk.git",
+      "state" : {
+        "revision" : "189f51732f304a8e5747f301c49f26bc25aeb6b4",
+        "version" : "3.10.0"
+      }
+    },
+    {
       "identity" : "facebook-ios-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/facebook/facebook-ios-sdk",
@@ -29,12 +74,66 @@
       }
     },
     {
+      "identity" : "firebase-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/firebase-ios-sdk.git",
+      "state" : {
+        "revision" : "fdc352fabaf5916e7faa1f96ad02b1957e93e5a5",
+        "version" : "11.15.0"
+      }
+    },
+    {
+      "identity" : "google-ads-on-device-conversion-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/google-ads-on-device-conversion-ios-sdk",
+      "state" : {
+        "revision" : "a2d0f1f1666de591eb1a811f40b1706f5c63a2ed",
+        "version" : "2.3.0"
+      }
+    },
+    {
+      "identity" : "googleappmeasurement",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleAppMeasurement.git",
+      "state" : {
+        "revision" : "45ce435e9406d3c674dd249a042b932bee006f60",
+        "version" : "11.15.0"
+      }
+    },
+    {
+      "identity" : "googledatatransport",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleDataTransport.git",
+      "state" : {
+        "revision" : "617af071af9aa1d6a091d59a202910ac482128f9",
+        "version" : "10.1.0"
+      }
+    },
+    {
       "identity" : "googlesignin-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleSignIn-iOS",
       "state" : {
         "branch" : "7.0.0",
         "revision" : "7932d33686c1dc4d7df7a919aae47361d1cdfda4"
+      }
+    },
+    {
+      "identity" : "googleutilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleUtilities.git",
+      "state" : {
+        "revision" : "60da361632d0de02786f709bdc0c4df340f7613e",
+        "version" : "8.1.0"
+      }
+    },
+    {
+      "identity" : "grpc-binary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/grpc-binary.git",
+      "state" : {
+        "revision" : "75b31c842f664a0f46a2e590a570e370249fd8f6",
+        "version" : "1.69.1"
       }
     },
     {
@@ -56,12 +155,39 @@
       }
     },
     {
+      "identity" : "interop-ios-for-google-sdks",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/interop-ios-for-google-sdks.git",
+      "state" : {
+        "revision" : "040d087ac2267d2ddd4cca36c757d1c6a05fdbfe",
+        "version" : "101.0.0"
+      }
+    },
+    {
+      "identity" : "ios-vlanalytics-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/snagfilms/iOS-VLAnalytics-SPM",
+      "state" : {
+        "branch" : "3.0.0",
+        "revision" : "718527163e54907bfb0ea76db16c529a952f662e"
+      }
+    },
+    {
       "identity" : "ios-vlbeacon-spm",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
       "state" : {
         "branch" : "3.2.2",
         "revision" : "ab59f6b99059fe737f5cb43fc60800707d632a6b"
+      }
+    },
+    {
+      "identity" : "jsonsafeencoding-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/segmentio/jsonsafeencoding-swift.git",
+      "state" : {
+        "revision" : "af6a8b360984085e36c6341b21ecb35c12f47ebd",
+        "version" : "2.0.0"
       }
     },
     {
@@ -74,12 +200,39 @@
       }
     },
     {
+      "identity" : "leveldb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/leveldb.git",
+      "state" : {
+        "revision" : "a0bc79961d7be727d258d33d5a6b2f1023270ba1",
+        "version" : "1.22.5"
+      }
+    },
+    {
+      "identity" : "m3u8parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/M3U8Kit/M3U8Parser.git",
+      "state" : {
+        "revision" : "f7965520f3f8b31ee3a9329739623995a91cc789",
+        "version" : "1.1.0"
+      }
+    },
+    {
       "identity" : "mux-stats-sdk-avplayer",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/muxinc/mux-stats-sdk-avplayer",
+      "location" : "https://github.com/muxinc/mux-stats-sdk-avplayer.git",
       "state" : {
         "revision" : "705cb2b57cee36f9e74033bfd1d346d9b4f04d71",
         "version" : "4.0.0"
+      }
+    },
+    {
+      "identity" : "nanopb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/nanopb.git",
+      "state" : {
+        "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
+        "version" : "2.30910.0"
       }
     },
     {
@@ -101,12 +254,66 @@
       }
     },
     {
+      "identity" : "promises",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/promises.git",
+      "state" : {
+        "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
+        "version" : "2.4.0"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "34cf2423a2c4088d06a3b08655603b5bc3eeeb3a",
+        "version" : "5.21.2"
+      }
+    },
+    {
+      "identity" : "sovran-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/segmentio/sovran-swift.git",
+      "state" : {
+        "revision" : "24867f3e4ac62027db9827112135e6531b6f4051",
+        "version" : "1.1.2"
+      }
+    },
+    {
       "identity" : "stats-sdk-objc",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/muxinc/stats-sdk-objc.git",
       "state" : {
         "revision" : "93560ea15cc763d18c97c2942c21b807f81cf0a1",
         "version" : "5.0.1"
+      }
+    },
+    {
+      "identity" : "swift-protobuf",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-protobuf.git",
+      "state" : {
+        "revision" : "e3f69fd321d0c9fcdc16fb576a0cdd956675face",
+        "version" : "1.31.0"
+      }
+    },
+    {
+      "identity" : "viewlift-ios-playerframework",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework",
+      "state" : {
+        "branch" : "3.2.7",
+        "revision" : "ce64689b4a4900f38d46a6cfc4908a69e452d6fb"
+      }
+    },
+    {
+      "identity" : "visualeffectview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/efremidze/VisualEffectView.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "405baa5eba273ead6a23272605adc3232422262b"
       }
     }
   ],

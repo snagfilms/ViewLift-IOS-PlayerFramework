@@ -10,9 +10,9 @@ import UIKit
 import VLPlayerLib
 import VLBeaconLib
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 #endif
 import VLAnalyticsLib
 import AVKit
@@ -356,11 +356,13 @@ extension PlayerViewController_iOS {
             
             // If user is TVE and content requires TVE, check authorization
             if user.tveUserId != nil && hasTVE {
-                self.checkAuthz(
-                    user: user,
-                    playerView: playerView,
-                    isDVREnabled: isDVREnabled
-                )
+                Task {
+                    await self.checkAuthz(
+                        user: user,
+                        playerView: playerView,
+                        isDVREnabled: isDVREnabled
+                    )
+                }
             } else {
                 if isDVREnabled {
                     self.videoPlayerControlsView?.updateControlsBasedOnDVRFlag(isDVREnabled: isDVREnabled)
@@ -371,28 +373,32 @@ extension PlayerViewController_iOS {
     }
     
     /// Checks TVE authorization for the user before playback
-    private func checkAuthz(user: VLUserIdentity, playerView: UIView, isDVREnabled: Bool){
+    private func checkAuthz(user: VLUserIdentity, playerView: UIView, isDVREnabled: Bool) async{
         let mvpdProvider = user.mvpdProvider ?? ""
         
-        VLAuthentication.sharedInstance.checkAuthz(mvpdId: mvpdProvider) { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    if isDVREnabled {
-                        self.videoPlayerControlsView?.updateControlsBasedOnDVRFlag(isDVREnabled: isDVREnabled)
-                    }
-                    self.addPlayer(playerView: playerView)
-                case .failure(let error):
-                    self.handleAuthzFailure(error)
+        do {
+            let response = try await VLAuthentication.sharedInstance.checkAdobeDecisionsAuthorize(
+                mvpdId: mvpdProvider
+            )
+            
+            switch response {
+            case .success(let _):
+                if isDVREnabled {
+                    self.videoPlayerControlsView?.updateControlsBasedOnDVRFlag(isDVREnabled: isDVREnabled)
                 }
+                self.addPlayer(playerView: playerView)
+                
+            case .failure(let error):
+                self.handleAuthzFailure(error.message ?? "")
             }
+        } catch {
+            debugPrint(error)
         }
     }
     
     /// Handles TVE authorization failure
-    private func handleAuthzFailure(_ error: VLAuthenticationErrorCode) {
-        self.showAlert(title: "Error", message: "TVE Authorization denied")
+    private func handleAuthzFailure(_ error: String) {
+        self.showAlert(title: "Error", message: error)
     }
     
     /// Adds the player view to the main view and sets up custom UI if enabled
