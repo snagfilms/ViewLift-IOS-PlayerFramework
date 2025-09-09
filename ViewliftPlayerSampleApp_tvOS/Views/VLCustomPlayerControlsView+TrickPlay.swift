@@ -129,7 +129,10 @@ extension VLCustomPlayerControlsView {
     private func getTrickPlayData(_ slider: TvOSSlider) -> (image: UIImage?, time: String?) {
         let (image, time) = delegate?.getTrickPlayData(Double(slider.value)) ?? (nil, nil)
         if image == nil && time == nil {
-            return (image: UIImage(named: "placeholder_16x9"), time: nil)
+            if let placeHolderImage = UIImage(named: "trickPlay_placeholder_16x9") {
+                return (image:placeHolderImage , time: nil)
+            }
+            return (image: nil, time: nil)
         } else {
             return (image: image, time: time)
         }
