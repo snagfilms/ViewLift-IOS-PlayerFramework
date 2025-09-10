@@ -8,9 +8,9 @@
 import UIKit
 
 protocol AdControlDelegate: AnyObject {
-    func adPlayPause(isPlaying: Bool)
-    func muteButton(enabled status: Bool)
-    func adFullScreenBtnTapped(status: Bool)
+    func adPlayPauseTapped(isPlaying: Bool)
+    func adMuteButtonTapped(enabled status: Bool)
+    func adFullScreenButtonTapped(status: Bool)
 }
 
 final class PlayerAdEmbeddedView: UIView {
@@ -68,15 +68,15 @@ final class PlayerAdEmbeddedView: UIView {
         }
     }
     
-    init(frame: CGRect, delegate: AdControlDelegate) {
+    init(frame: CGRect, delegate: AdControlDelegate, isMuted: Bool) {
         super.init(frame: frame)
         self.delegate = delegate
-        commonInit()
+        commonInit(isMuted: isMuted)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        commonInit()
+        commonInit(isMuted: false)
     }
     
     override var accessibilityElements: [Any]? {
@@ -88,7 +88,7 @@ final class PlayerAdEmbeddedView: UIView {
         }
     }
     
-    private func commonInit() {
+    private func commonInit(isMuted: Bool) {
         Bundle.main.loadNibNamed("PlayerAdEmbeddedView", owner: self, options: nil)
         guard let contentView else { fatalError() }
         addSubview(contentView)
@@ -120,6 +120,7 @@ final class PlayerAdEmbeddedView: UIView {
         playPauseBtn?.setImage(adPlayButtonImage, for: .normal)
         playPauseBtn?.setImage(adPauseButtonImage, for: .selected)
         adSlider?.minimumTrackTintColor = .yellow
+        muteUnmuteBtnTapped = isMuted
     }
     
     func setupTVEProviderImage(with image: UIImage) {
@@ -250,20 +251,20 @@ final class PlayerAdEmbeddedView: UIView {
         playPauseBtn?.isSelected.toggle()
         UserDefaults.standard.set(playPauseBtn?.isSelected, forKey: "isPlayingAdKey")
         if let isSelected = playPauseBtn?.isSelected as? Bool {
-            delegate?.adPlayPause(isPlaying:  isSelected)
+            delegate?.adPlayPauseTapped(isPlaying:  isSelected)
             
         }
     }
     
     @IBAction func onClickMuteUmnuteBtn(_ sender: UIButton) {
         muteUnmuteBtnTapped = !muteUnmuteBtnTapped
-        delegate?.muteButton(enabled: muteUnmuteBtnTapped)
+        delegate?.adMuteButtonTapped(enabled: muteUnmuteBtnTapped)
     }
     
     @IBAction func onClickFullscreenBtn(_ sender: UIButton) {
         fullScreen.toggle()
         NotificationCenter.default.post(name: .playerAdDidHideStatusbarOnFullScreen,object: nil,userInfo: ["isStatusbarHiddenOnFullScreen": fullScreen])
-        delegate?.adFullScreenBtnTapped(status: fullScreen)
+        delegate?.adFullScreenButtonTapped(status: fullScreen)
         didChangeOrientation(isLandscape: fullScreen)
     }
     
