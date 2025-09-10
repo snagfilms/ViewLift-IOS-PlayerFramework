@@ -10,7 +10,7 @@ import SwiftUI
 import VLPlayerLib
 
 //CustomSkin Wrapper
-class PlayerControlsHostingView: UIView, CustomPlayerSkinProtocol {
+class PlayerControlsHostingView: UIView {
     private let hostingController: UIHostingController<PlayerControlsView>
     private var playerViewModel: PlayerControlsViewModel
 
@@ -37,24 +37,4 @@ class PlayerControlsHostingView: UIView, CustomPlayerSkinProtocol {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    // MARK: - CustomPlayerSkinProtocol
-    func shouldHideControlsOnTap() -> Bool {
-        return true
-    }
-
-    var isAdOnMainView: Bool { false }
-    var adRunningOnInternalPlayer: Bool = false
-
-    func muteUnmuteAdButtonTapped(isTrue: Bool) {
-        playerViewModel.toggleMute(isMuted: !isTrue)
-    }
-
-    func fullScreenAdButtonTapped(isFullscreen: Bool) {
-        playerViewModel.toggleFullScreen(isFullScreen: isFullscreen)
-    }
-
-    func updatePlayButton() {
-    }
-
 }

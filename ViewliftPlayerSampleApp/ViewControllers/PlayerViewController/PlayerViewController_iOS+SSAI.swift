@@ -34,7 +34,7 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
         if enableCustomAdUI == true,
             view.viewWithTag(911) == nil {
             // add Overlay
-            let adView = PlayerAdEmbeddedView(frame: .zero, delegate: self)
+            let adView = PlayerAdEmbeddedView(frame: .zero, delegate: self, isMuted: vlPlayer.isMuted() ?? false)
             adView.tag = 911
             view.addSubview(adView)
             view.bringSubviewToFront(adView)
@@ -62,23 +62,11 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
     /// Called when the ad's play/pause state changes.
     /// - Parameter isPlaying: `true` if ad is playing, `false` if paused.
     func adPlayPause(isPlaying: Bool) {
-        debugPrint(adPlayPause)
-        
-        if enableCustomAdUI == true {
-            if isPlaying {
-                vlPlayer.play()
-            } else {
-                vlPlayer.pause()
-            }
-        }
     }
     
     /// Called when the ad's fullscreen button is toggled.
     /// - Parameter status: `true` if fullscreen enabled, `false` if disabled.
     func adFullScreenBtnTapped(status: Bool) {
-        if enableCustomAdUI == true {
-            vlPlayer.goFullScreen(status)
-        }
     }
     
     /// Called when the ad mute/unmute button is pressed.
@@ -236,11 +224,23 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
     }
 }
 
-
+// Custom AD Skin Delegates
 extension PlayerViewController_iOS: AdControlDelegate {
     
-    func muteButton(enabled status: Bool) {
+    func adPlayPauseTapped(isPlaying: Bool) {
+        if isPlaying {
+            vlPlayer.play()
+        } else {
+            vlPlayer.pause()
+        }
+    }
+    
+    func adMuteButtonTapped(enabled status: Bool) {
         vlPlayer.shouldPlayMuted(isMuted: status)
+    }
+    
+    func adFullScreenButtonTapped(status: Bool) {
+        vlPlayer.goFullScreen(status)
     }
     
 }
