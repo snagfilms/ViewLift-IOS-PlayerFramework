@@ -275,7 +275,7 @@ class PlayerViewController_tvOS: UIViewController {
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: .disabled,
-                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .custom),
+                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .customTheme),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: true,
                                                  isServerSideAdTrackingEnabled: true)
@@ -287,8 +287,9 @@ class PlayerViewController_tvOS: UIViewController {
         case .customTheme:
             // Configure default player controls view with custom theme
             let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .yellow)
-            let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", settingText: "PLAYBACK QUALITY")
-            let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent)
+            let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", playbackQualityText: "PLAYBACK QUALITY")
+            let playerControlsConfig = PlayerControlsConfig(isSettingsSupported: false, isSubTitleSupported: true, isSlowMoSupported: false)
+            let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent, playerControlsConfig: playerControlsConfig)
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(controlsTheme: controlsTheme)
             return playerControlsViewConfiguration
         case .custom:
@@ -300,9 +301,7 @@ class PlayerViewController_tvOS: UIViewController {
             self.videoPlayerControlsView = view
             return playerControlsViewConfiguration
         case .native:
-            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(
-                controlsTheme: .none
-            )
+            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default()
             return playerControlsViewConfiguration
         case .default:
             // Use default controls view and theme

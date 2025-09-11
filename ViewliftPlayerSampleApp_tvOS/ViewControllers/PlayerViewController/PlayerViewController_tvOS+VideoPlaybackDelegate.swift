@@ -76,7 +76,7 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     
     // Updates playback progress every second
     func videoPlayerProgressByEverySecond(currentTime: Double, totalTime: Double, playerTag: String, parsedTimeStamp: String?) {
-        debugPrint("PlayerViewController videoPlayerProgre]ssByEverySecond: \(currentTime), \(totalTime)")
+        debugPrint("PlayerViewController videoPlayerProgressByEverySecond: \(currentTime), \(totalTime)")
         videoPlayerControlsView?.updateCurrentTime(currentTime: currentTime, totalTime: totalTime)
     }
     
