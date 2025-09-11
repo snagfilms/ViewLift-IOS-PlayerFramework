@@ -31,8 +31,14 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
     /// - Parameter currentPod: The ad pod that has started.
     func adDidStart(currentPod: VLPlayerLib.SSAIAvailableAds?) {
         // You can display overlays or UI changes here.
-        if enableCustomAdUI == true {
+        if enableCustomAdUI == true,
+            view.viewWithTag(911) == nil {
             // add Overlay
+            let adView = PlayerAdEmbeddedView(frame: .zero, delegate: self, isMuted: vlPlayer?.isMuted() ?? false)
+            adView.tag = 911
+            view.addSubview(adView)
+            view.bringSubviewToFront(adView)
+            adView.setupConstraints(superView:  self.playerContainerView)
         }
         // hideControls in order to access Ad view over it
     }
@@ -43,6 +49,9 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
     
         if enableCustomAdUI == true {
             // remove overlay
+            if let view = view.viewWithTag(911) {
+                view.removeFromSuperview()
+            }
         }
 //        trigger ad finish analytics
         // showControls in order to access Player controls
@@ -53,13 +62,11 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
     /// Called when the ad's play/pause state changes.
     /// - Parameter isPlaying: `true` if ad is playing, `false` if paused.
     func adPlayPause(isPlaying: Bool) {
-        debugPrint(adPlayPause)
     }
     
     /// Called when the ad's fullscreen button is toggled.
     /// - Parameter status: `true` if fullscreen enabled, `false` if disabled.
     func adFullScreenBtnTapped(status: Bool) {
-        
     }
     
     /// Called when the ad mute/unmute button is pressed.
@@ -94,6 +101,14 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
       //   lblTimer?.text = formatTime(Double(model.remainingPodTime))
         
          //lblAdCounter?.text = "\(model.currentAdNumber) of \(model.totalAds) •"
+        
+        if enableCustomAdUI {
+            if let adView = view.viewWithTag(911) as? PlayerAdEmbeddedView {
+                adView.adSlider?.setValue(model.progress, animated: false)
+                adView.lblTimer?.text = model.remainingPodTimeText
+                adView.lblAdCounter?.text = "\(model.currentAdNumber) of \(model.totalAds) •"
+            }
+        }
      }
     
     
@@ -207,4 +222,25 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
             debugPrint("default") // Future-proof: unknown event
         }
     }
+}
+
+// Custom AD Skin Delegates
+extension PlayerViewController_iOS: AdControlDelegate {
+    
+    func adPlayPauseTapped(isPlaying: Bool) {
+        if isPlaying {
+            vlPlayer?.play()
+        } else {
+            vlPlayer?.pause()
+        }
+    }
+    
+    func adMuteButtonTapped(enabled status: Bool) {
+        vlPlayer?.shouldPlayMuted(isMuted: status)
+    }
+    
+    func adFullScreenButtonTapped(status: Bool) {
+        vlPlayer?.goFullScreen(status)
+    }
+    
 }
