@@ -34,7 +34,7 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
         if enableCustomAdUI == true,
             view.viewWithTag(911) == nil {
             // add Overlay
-            let adView = PlayerAdEmbeddedView(frame: .zero, delegate: self, isMuted: vlPlayer.isMuted() ?? false)
+            let adView = PlayerAdEmbeddedView(frame: .zero, delegate: self, isMuted: vlPlayer?.isMuted() ?? false)
             adView.tag = 911
             view.addSubview(adView)
             view.bringSubviewToFront(adView)
@@ -229,18 +229,18 @@ extension PlayerViewController_iOS: AdControlDelegate {
     
     func adPlayPauseTapped(isPlaying: Bool) {
         if isPlaying {
-            vlPlayer.play()
+            vlPlayer?.play()
         } else {
-            vlPlayer.pause()
+            vlPlayer?.pause()
         }
     }
     
     func adMuteButtonTapped(enabled status: Bool) {
-        vlPlayer.shouldPlayMuted(isMuted: status)
+        vlPlayer?.shouldPlayMuted(isMuted: status)
     }
     
     func adFullScreenButtonTapped(status: Bool) {
-        vlPlayer.goFullScreen(status)
+        vlPlayer?.goFullScreen(status)
     }
     
 }
