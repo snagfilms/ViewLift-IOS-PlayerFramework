@@ -7,13 +7,14 @@
 //
 
 import UIKit
-
+import VLPlayerLib
 #if os(iOS)
 import VLAuthentication
 #else
 import VLAuthentication_tvOS
 #endif
 import GoogleCast
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var readVideoListOperation:VideoListProtocol?
     var isCastingViewVisible: Bool = false
     var castContextSharedInstance: GCKCastContext?
-    var tempPass: MediaToken? = nil
+    var playerTempPass: VLPlayer.PlayerAdobeTempPassPayload?
 
     func application(
         _ application: UIApplication,

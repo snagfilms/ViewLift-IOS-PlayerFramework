@@ -15,6 +15,7 @@ import VLAuthentication
 import VLAuthentication_tvOS
 #endif
 import VLAnalyticsLib
+import Foundation
 import AVKit
 
 // MARK: - Constants
@@ -51,6 +52,8 @@ class PlayerViewController_iOS: UIViewController {
     var videoPlayerControlsView: CustomVideoControls? // using UIKIT
     var videoPlayerCustomView: (view: UIView?, viewModel: PlayerControlsViewModel?)? // using SwiftUI
 
+    var tempPassTimer: Timer?
+    
     // Configuration Properties
     var enableCustomPlayerUI: Bool = false
     var enableBitrateLogs: Bool = false
@@ -66,6 +69,7 @@ class PlayerViewController_iOS: UIViewController {
     var analyticsAdDictionary = AnalyticsAdDictionary()
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
+    let timerLabel = UILabel()
     private let playerContainerView = UIView()
     var fullscreenConstraints: [NSLayoutConstraint] = []
     var normalConstraints: [NSLayoutConstraint] = []
@@ -114,7 +118,12 @@ class PlayerViewController_iOS: UIViewController {
         setupConstraints()
         setupInitialState()
         createAutoPlayMetaData()
-        loadPlayerView()
+        
+        timerLabel.isHidden = true
+        
+        Task {
+            await self.loadPlayerView()
+        }
         
         self.logoutButton.isHidden = true
         
@@ -124,8 +133,37 @@ class PlayerViewController_iOS: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.stopTempPassTimer()
+    }
+    
     func setupConstraints() {
-        // Normal constraints (small mode)
+        
+        timerLabel.translatesAutoresizingMaskIntoConstraints = false
+        timerLabel.textColor = .white
+        timerLabel.backgroundColor = .black
+        timerLabel.textAlignment = .center
+        timerLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 14, weight: .medium)
+        timerLabel.text = "00:00"
+        
+        timerLabel.isHidden = true
+        
+        // Add label inside playerContainerView
+        playerContainerView.addSubview(timerLabel)
+        // Bring label to front within playerContainerView
+        playerContainerView.bringSubviewToFront(timerLabel)
+
+        
+        NSLayoutConstraint.activate([
+            timerLabel.topAnchor.constraint(equalTo: playerContainerView.topAnchor, constant: 16),
+            timerLabel.trailingAnchor.constraint(equalTo: playerContainerView.trailingAnchor, constant: -16),
+            timerLabel.heightAnchor.constraint(equalToConstant: 20),
+            timerLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 50)
+        ])
+
+        
         normalConstraints = [
             playerContainerView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 8),
             playerContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -165,7 +203,9 @@ class PlayerViewController_iOS: UIViewController {
     }
     
     /// Cleans up player and UI resources
-    private func cleanupResources() {
+    internal func cleanupResources() {
+        self.stopTempPassTimer()
+        
         vlPlayer?.destroy()
         vlPlayer?.playerVideoAnalyticsDelegate = nil
         videoPlayerControlsView?.removeFromSuperview()
@@ -213,7 +253,7 @@ class PlayerViewController_iOS: UIViewController {
                     
                     await AppDelegate.shared.logoutUser()
                     self?.vlPlayer.destroy()
-                    self?.loadPlayerView()
+                    await self?.loadPlayerView()
                 }
             }
             
@@ -228,91 +268,122 @@ class PlayerViewController_iOS: UIViewController {
 extension PlayerViewController_iOS {
     
     /// Loads and configures the player view
-    func loadPlayerView() {
-        let loaderView = addLoaderView(to: playerContainerView)
-        loaderView.startAnimating()
-        
-        let featureSupported = getPlayerFeaturesSupported()
-        let vlBaseUrl = videoList.apiBaseUrl
-        
-        let playerLicenseKey: String? = ""
-        let analyticsLicenseKey: String? = ""
-        let userId: String? = nil
-        // Initialize player with license if available
-        if let playerLicenseKey = playerLicenseKey, !playerLicenseKey.isEmpty {
-            vlPlayer = VLPlayer(playerType: .bitmovin(config: VLBitmovinConfig(license: VLBitmovinConfig.VLBitmovinLicenseConfig(playerKey: playerLicenseKey, analyticsKey: analyticsLicenseKey), userId: userId)))
-        }else{
-            vlPlayer = VLPlayer(playerType: .default)
-        }
-        // Select playback source type based on user option
-        let playbackSourceType: VLPlayer.PlaybackSourceType
-        if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
-            let isDVREnabled = streamConfig?.isDVR ?? false
-            let streamType = VLPlayer.DirectStreamType(
-                url: streamUrl ?? "",
-                streamConfig: streamConfig,
-                drmconfig: drmConfig
-            )
-            
-            let playbackConfig = VLPlayer.DirectStreamPlaybackConfig(
-                stream: streamType
-            )
-            playbackSourceType = .directStream(playbackConfig)
-        }else{
-            playbackSourceType = .contentPlayback(VLPlayer.ContentPlaybackConfig(videoId: self.videoList.videoId, token: vlToken, apiBaseURL: vlBaseUrl))
-        }
-        setPlayerDelegates()
-        
-        if let data = entitlementData{
-            vlPlayer.setEntitlement(data: data)
-        }
-        let autoPlayList = autoPlayListdataManager?.getAutoPlayUrlList()// pass this for autoplay in nextPlaybackList
-        
-        // Set player source and handle completion
-        vlPlayer.setSource(
-            type: playbackSourceType,
-            vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
-            playerFeaturesSupported: featureSupported, nextPlaybackList: nil
-        ) {
-            [weak self] isSuccess,
-            playerView,
-            contentResponse in
-            var hasTVE = false
-            
-            // Check if content has TVE monetization model
-            if let video = contentResponse?["video"] as? [String: Any],
-               let monetizationModels = video["monetizationModels"] as? [[String: Any]] {
-                hasTVE = monetizationModels.contains { $0["type"] as? String == "TVE" }
+    func loadPlayerView() async {
+        do {
+            let loaderView = addLoaderView(to: playerContainerView)
+            loaderView.startAnimating()
+
+            if UserManager.shared.userIdentity?.tveUserId == nil {
+                //check if ealier temp pass was created but not expired
+                self.invalidatePlayerTempPassIfOutOfWindow()
+
+                //request for temp pass
+                await self.getTempPassPayload(channelIds: ["usa"])
             }
             
-            self?.handlePlayerSetupCompletion(
-                isSuccess: isSuccess,
-                playerView: playerView,
-                isDVREnabled: false,
-                loader: loaderView,
-                hasTVE: hasTVE
-            )
+            let featureSupported = getPlayerFeaturesSupported()
+            let vlBaseUrl = videoList.apiBaseUrl
             
-            if let video = contentResponse?["video"] as? [String: Any] {
-                let title = (video["title"] as? String) ?? ""
-                let isLive = ((video["streamingInfo"] as? [String: Any])?["isLiveStream"] as? Bool ) ?? false
+            let playerLicenseKey: String? = ""
+            let analyticsLicenseKey: String? = ""
+            let userId: String? = nil
+            // Initialize player with license if available
+            if let playerLicenseKey = playerLicenseKey, !playerLicenseKey.isEmpty {
+                vlPlayer = VLPlayer(playerType: .bitmovin(config: VLBitmovinConfig(license: VLBitmovinConfig.VLBitmovinLicenseConfig(playerKey: playerLicenseKey, analyticsKey: analyticsLicenseKey), userId: userId)))
+            }else{
+                vlPlayer = VLPlayer(playerType: .default)
+            }
+            // Select playback source type based on user option
+            let playbackSourceType: VLPlayer.PlaybackSourceType
+            if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
+                let isDVREnabled = streamConfig?.isDVR ?? false
                 
-                var isDVR = false
-                if let liveDetailsDict = video["liveDetails"] as? Dictionary<String, Any>{
-                    if let isDVREnabled = liveDetailsDict["isDvrEnabled"] as? Bool,
-                        isDVREnabled == true,
-                       let startOverTime = liveDetailsDict["startOverTime"] as? Double, startOverTime > 0 {
-                        isDVR = isDVREnabled
-                    }
-                }
-                self?.videoPlayerCustomView?.viewModel?.updateSkin(title: title, isLive: isLive, isDVREnabled: isDVR)
+                let streamType = VLPlayer.DirectStreamType(
+                    url: streamUrl ?? "",
+                    streamConfig: streamConfig,
+                    drmconfig: drmConfig
+                )
+                
+                let playbackConfig = VLPlayer.DirectStreamPlaybackConfig(
+                    stream: streamType,
+                    adobeTempPassPayload: AppDelegate.shared.playerTempPass
+                )
+                playbackSourceType = .directStream(playbackConfig)
+            } else {
+                playbackSourceType =
+                    .contentPlayback(
+                        VLPlayer
+                            .ContentPlaybackConfig(
+                                videoId: self.videoList.videoId,
+                                token: vlToken,
+                                apiBaseURL: vlBaseUrl,
+                                adobeTempPassPayload: AppDelegate.shared.playerTempPass
+                            )
+                    )
             }
             
-            if let contentResponse = contentResponse {
-                self?.parseVLVideoResponse(from: contentResponse)
+            setPlayerDelegates()
+            
+            if let data = entitlementData{
+                vlPlayer.setEntitlement(data: data)
             }
+            
+//            let autoPlayList = autoPlayListdataManager?.getAutoPlayUrlList()
+            
+            // Set player source and handle completion
+            vlPlayer.setSource(
+                type: playbackSourceType,
+                vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
+                playerFeaturesSupported: featureSupported, nextPlaybackList: nil,
+                adobePlayerPlayload: AppDelegate.shared.playerTempPass
+            ) {
+                [weak self] isSuccess,
+                playerView,
+                contentResponse in
+                var hasTVE = false
+                
+                // Check if content has TVE monetization model
+                if let video = contentResponse?["video"] as? [String: Any],
+                   let monetizationModels = video["monetizationModels"] as? [[String: Any]] {
+                    hasTVE = monetizationModels.contains { $0["type"] as? String == "TVE" }
+                }
+                
+                let plans = contentResponse?["plans"] as? [[String: Any]] ?? []
+                let channelIds = plans
+                    .flatMap { $0["planDetails"] as? [[String: Any]] ?? [] }
+                    .flatMap { $0["channelIds"] as? [String] ?? [] }
+                
+                self?.handlePlayerSetupCompletion(
+                    isSuccess: isSuccess,
+                    playerView: playerView,
+                    isDVREnabled: false,
+                    loader: loaderView,
+                    hasTVE: hasTVE,
+                    channelIds: channelIds
+                )
+                
+                if let video = contentResponse?["video"] as? [String: Any] {
+                    let title = (video["title"] as? String) ?? ""
+                    let isLive = ((video["streamingInfo"] as? [String: Any])?["isLiveStream"] as? Bool ) ?? false
+                    
+                    var isDVR = false
+                    if let liveDetailsDict = video["liveDetails"] as? Dictionary<String, Any>{
+                        if let isDVREnabled = liveDetailsDict["isDvrEnabled"] as? Bool,
+                           isDVREnabled == true,
+                           let startOverTime = liveDetailsDict["startOverTime"] as? Double, startOverTime > 0 {
+                            isDVR = isDVREnabled
+                        }
+                    }
+                    self?.videoPlayerCustomView?.viewModel?.updateSkin(title: title, isLive: isLive, isDVREnabled: isDVR)
+                }
+                
+                if let contentResponse = contentResponse {
+                    self?.parseVLVideoResponse(from: contentResponse)
+                }
+            }
+        } catch (let error) {
+            debugPrint(error)
         }
-        
 
     }
     
@@ -337,7 +408,8 @@ extension PlayerViewController_iOS {
         playerView: UIView?,
         isDVREnabled: Bool,
         loader: UIActivityIndicatorView,
-        hasTVE: Bool
+        hasTVE: Bool,
+        channelIds: [String]
     ) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -360,7 +432,8 @@ extension PlayerViewController_iOS {
                     await self.checkAuthz(
                         user: user,
                         playerView: playerView,
-                        isDVREnabled: isDVREnabled
+                        isDVREnabled: isDVREnabled,
+                        channelIds: channelIds
                     )
                 }
             } else {
@@ -373,12 +446,13 @@ extension PlayerViewController_iOS {
     }
     
     /// Checks TVE authorization for the user before playback
-    private func checkAuthz(user: VLUserIdentity, playerView: UIView, isDVREnabled: Bool) async{
+    private func checkAuthz(user: VLUserIdentity, playerView: UIView, isDVREnabled: Bool, channelIds: [String] = []) async {
         let mvpdProvider = user.mvpdProvider ?? ""
         
         do {
             let response = try await VLAuthentication.sharedInstance.checkAdobeDecisionsAuthorize(
-                mvpdId: mvpdProvider
+                mvpdId: mvpdProvider,
+                channelIds: channelIds
             )
             
             switch response {
@@ -409,6 +483,8 @@ extension PlayerViewController_iOS {
        // playerView.frame = playerFrame
         playerContainerView.addSubview(playerView)
         playerView.pinToSuperview(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        
+        playerContainerView.bringSubviewToFront(timerLabel)
     }
     
     /// Sets up custom player UI controls and PiP

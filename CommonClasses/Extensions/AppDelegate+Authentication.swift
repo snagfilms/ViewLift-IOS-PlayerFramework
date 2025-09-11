@@ -12,6 +12,7 @@ import VLAuthentication
 import VLAuthentication_tvOS
 #endif
 import VLAnalyticsLib
+import Firebase
 
 // Extension to AppDelegate for handling authentication logic
 extension AppDelegate {
@@ -61,8 +62,6 @@ extension AppDelegate {
                     self.authorizationToken = try await VLAuthentication.sharedInstance.apiToGetAnonymousToken()?.authorizationToken
                     VLAuthentication.sharedInstance.authorizationToken = self.authorizationToken
                     
-                    try await self.handleTempPass()
-                    
                 } else if let authorizationToken = self.authorizationToken, let refreshToken = userIdentity?.refreshToken, !authorizationToken.isEmpty && !refreshToken.isEmpty {
                     self.authorizationToken = try await VLAuthentication.sharedInstance
                         .fetchUpdatedAuthToken(
@@ -77,27 +76,6 @@ extension AppDelegate {
             } catch let error as VLAuthenticationErrorCode {
                 print("VLAuthentication init error: \(error.codeString)")
             }
-        }
-    }
-    
-    func handleTempPass() async throws {
-        do {
-            let providers = try await VLAuthentication.sharedInstance.getTempPassProvider()
-            
-            if let id = providers.first?.id {
-                let response = try await VLAuthentication.sharedInstance.checkAdobeDecisionsAuthorize(
-                    mvpdId: id
-                )
-                
-                switch response {
-                case .success(let token):
-                    AppDelegate.shared.tempPass = token
-                case .failure(let _):
-                    AppDelegate.shared.tempPass = nil
-                }
-            }
-        } catch let error as VLAuthenticationErrorCode {
-            throw error
         }
     }
     

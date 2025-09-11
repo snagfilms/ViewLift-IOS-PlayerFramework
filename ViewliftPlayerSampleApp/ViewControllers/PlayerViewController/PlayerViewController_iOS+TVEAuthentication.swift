@@ -67,9 +67,13 @@ extension PlayerViewController_iOS {
                 self.vlPlayer.playerVideoAnalyticsDelegate = nil
 
                 // Reload the player view with the new authentication context
-                self.loadPlayerView()
+                Task {
+                    await self.loadPlayerView()
+                }
                 self.logoutButton.isHidden = false
             }
         }
     }
+    
+    
 }

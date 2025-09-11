@@ -26,6 +26,10 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         videoPlayerCustomView?.viewModel?.setupPiP()
 
         self.playerDidStartPlaying()
+        
+        if AppDelegate.shared.playerTempPass != nil {
+            self.startTempPassTimer()
+        }
     }
 
     // Called when video is paused
@@ -79,11 +83,11 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         guard let error = error else { return "Unknown error occurred" }
 
         return """
-        Is content playable - \(error.isPlayable)
-        Content Fetched successfully - \(error.isSuccess)
-        Error Code - \(error.errorCode)
-        Error Message - \(error.errorMessage)
-        Error VL Code - \(error.vl_errorCode)
+            Is content playable - \(error.isPlayable)
+            Content Fetched successfully - \(error.isSuccess)
+            Error Code - \(error.errorCode)
+            Error Message - \(error.errorMessage)
+            Error VL Code - \(error.vl_errorCode)
         """
     }
 
