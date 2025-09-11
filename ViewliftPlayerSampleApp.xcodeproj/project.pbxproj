@@ -33,6 +33,8 @@
 		BADCC30D2E51FC0200A5E3F2 /* BoolDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADCC30C2E51FC0200A5E3F2 /* BoolDictionary.swift */; };
 		BADCC39A2E54468F00A5E3F2 /* VLAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BADCC3992E54468F00A5E3F2 /* VLAnalytics */; };
 		BADCC3B92E5446FF00A5E3F2 /* VLAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BADCC3B82E5446FF00A5E3F2 /* VLAnalytics */; };
+		D20833202E72DF690080932C /* PlayerAdEmbeddedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208331D2E72DF690080932C /* PlayerAdEmbeddedView.swift */; };
+		D20833212E72DF690080932C /* PlayerAdEmbeddedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D208331E2E72DF690080932C /* PlayerAdEmbeddedView.xib */; };
 		D2334A042E6200C4002370CB /* BoolDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADCC30C2E51FC0200A5E3F2 /* BoolDictionary.swift */; };
 		D2334A072E620133002370CB /* PlayerViewController_tvOS+SSAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2334A052E620133002370CB /* PlayerViewController_tvOS+SSAI.swift */; };
 		D23998712E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23998702E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift */; };
@@ -175,6 +177,8 @@
 		9D3AAA8A2E4E2E7100FFDA9A /* PlayerControlsHostingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlsHostingView.swift; sourceTree = "<group>"; };
 		9D3AAA8B2E4E2E7100FFDA9A /* PlayerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlsView.swift; sourceTree = "<group>"; };
 		BADCC30C2E51FC0200A5E3F2 /* BoolDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolDictionary.swift; sourceTree = "<group>"; };
+		D208331D2E72DF690080932C /* PlayerAdEmbeddedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAdEmbeddedView.swift; sourceTree = "<group>"; };
+		D208331E2E72DF690080932C /* PlayerAdEmbeddedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerAdEmbeddedView.xib; sourceTree = "<group>"; };
 		D2334A052E620133002370CB /* PlayerViewController_tvOS+SSAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_tvOS+SSAI.swift"; sourceTree = "<group>"; };
 		D23998702E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+PlayerControlsDelegate.swift"; sourceTree = "<group>"; };
 		D26D92172E6B1A4A002A70B1 /* TVEPollingQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVEPollingQRCodeView.swift; sourceTree = "<group>"; };
@@ -373,6 +377,15 @@
 			path = "Player DefaultSkin SwiftUI";
 			sourceTree = "<group>";
 		};
+		D208331F2E72DF690080932C /* Custom Ad View */ = {
+			isa = PBXGroup;
+			children = (
+				D208331D2E72DF690080932C /* PlayerAdEmbeddedView.swift */,
+				D208331E2E72DF690080932C /* PlayerAdEmbeddedView.xib */,
+			);
+			path = "Custom Ad View";
+			sourceTree = "<group>";
+		};
 		D26D92182E6B1A4A002A70B1 /* TVEActivationCustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,6 +560,7 @@
 		D2A759912E4B280D0089B4D1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D208331F2E72DF690080932C /* Custom Ad View */,
 				9D3AAA8C2E4E2E7100FFDA9A /* Player DefaultSkin SwiftUI */,
 				D2A7598F2E4B280D0089B4D1 /* CustomVideoControls.swift */,
 			);
@@ -756,6 +770,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D20833212E72DF690080932C /* PlayerAdEmbeddedView.xib in Resources */,
 				5422EFFE209912C600206D66 /* LaunchScreen.storyboard in Resources */,
 				D2A759162E4B0E130089B4D1 /* configs.json in Resources */,
 				D2A759172E4B0E130089B4D1 /* assets-provider.json in Resources */,
@@ -818,6 +833,7 @@
 				D2A759882E4B27410089B4D1 /* PlayerViewController_iOS+Chromecast.swift in Sources */,
 				40594B7B2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift in Sources */,
 				D280CCA22E5C27E40070CDA5 /* PlayerViewController_iOS+AutoPlay.swift in Sources */,
+				D20833202E72DF690080932C /* PlayerAdEmbeddedView.swift in Sources */,
 				D2A759972E4B2B800089B4D1 /* AnalyticsProtocol.swift in Sources */,
 				D2B7638A2E68A6BC00D71D6D /* String+Extension.swift in Sources */,
 				D2A759892E4B27410089B4D1 /* PlayerViewController_iOS+Analytics.swift in Sources */,
