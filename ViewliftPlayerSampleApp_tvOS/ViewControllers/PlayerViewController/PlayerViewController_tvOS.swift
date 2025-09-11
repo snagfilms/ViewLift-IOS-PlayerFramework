@@ -23,7 +23,7 @@ private enum Constants {
     static let defaultSeekForward: Double = 30.0
     static let defaultSeekBackward: Double = 10.0
     static let playerYPosition: CGFloat = 100
-    static let defaultAdUrl = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/vmap_ad_samples&sz=640x480&cust_params=sample_ar%3Dpremidpost&ciu_szs=300x250&gdfp_req=1&ad_rule=1&output=vmap&unviewed_position_start=1&env=vp&cmsid=496&vid=short_onecue&correlator="
+    static let defaultAdUrl = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator="
 }
 
 // Main player view controller for tvOS, handles player setup, UI, and playback logic
@@ -32,9 +32,7 @@ class PlayerViewController_tvOS: UIViewController {
         case `default`
         case customTheme
         case custom
-        #if os(tvOS)
         case native
-        #endif
     }
     private let playerContainerView = UIView()
     var streamUrl: String?
@@ -62,7 +60,8 @@ class PlayerViewController_tvOS: UIViewController {
     var analyticsAdDictionary = AnalyticsAdDictionary()
     var autoPlayListdataManager: AutoPlayDataManager?
     internal var autoPlayView: AutoPlayView?
-
+    internal var isFullScreen: Bool = false
+    let testButton = UIButton(type: .system)
     override var canBecomeFirstResponder: Bool {
         return true
     }
@@ -81,7 +80,7 @@ class PlayerViewController_tvOS: UIViewController {
         updateConstraintsForCurrentOrientation()
         self.createAutoPlayMetaData()
         self.loadPlayerView()
-        
+        createButton()
     }
     
     // Loads and configures the player view
@@ -184,7 +183,18 @@ class PlayerViewController_tvOS: UIViewController {
     
     // Handles TVE authorization failure
     private func handleAuthzFailure(_ error: VLAuthenticationErrorCode) {
-        self.showAlert(title: "Error", message: "TVE Authorization denied")
+        switch error {
+        case .adobeErrorResponse(let statusCode, let data, let errorMessage, let shouldPerformLogout):
+            if shouldPerformLogout {
+                self.showAlert(title: "Error", message: "TVE Authorization denied"){
+                    self.performLogout(isForceLogout: true)
+                }
+            }
+            break
+        default:
+            self.showAlert(title: "Error", message: "TVE Authorization denied")
+        }
+        
     }
     
     // Shows an alert with a title and message
@@ -199,47 +209,38 @@ class PlayerViewController_tvOS: UIViewController {
             }
     }
     
-   #if os(iOS)
-    // Handles orientation changes
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        coordinator.animate(alongsideTransition: { _ in
-            self.updateConstraintsForCurrentOrientation()
-            self.vlPlayer.goFullScreen()
-        }, completion: nil)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        vlPlayer.destroy()
-    }
-    #endif
-    
     // Updates constraints based on current orientation
     func updateConstraintsForCurrentOrientation() {
-        let isLandscape = view.bounds.width > view.bounds.height
 
         NSLayoutConstraint.deactivate(portraitConstraints + landscapeConstraints)
 
-        if isLandscape {
+        if isFullScreen {
             NSLayoutConstraint.activate(landscapeConstraints)
         } else {
             NSLayoutConstraint.activate(portraitConstraints)
         }
     }
     
+    func changeLayout() {
+        isFullScreen.toggle()
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseInOut], animations: {
+            self.updateConstraintsForCurrentOrientation()
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+
+    
     // Sets up portrait and landscape constraints for the player container
     func setupConstraints() {
-        // Portrait: 16:9, top-aligned
+        // Portrait: half width, 16:9, top aligned, left aligned
         portraitConstraints = [
-            playerContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            playerContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            playerContainerView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            playerContainerView.topAnchor.constraint(equalTo: view.topAnchor),
+            playerContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            playerContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             playerContainerView.heightAnchor.constraint(equalTo: playerContainerView.widthAnchor, multiplier: 9.0 / 16.0)
         ]
 
-        // Landscape: full screen
+        // Landscape: full width, same aspect ratio, still centered horizontally
         landscapeConstraints = [
             playerContainerView.topAnchor.constraint(equalTo: view.topAnchor),
             playerContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -247,11 +248,13 @@ class PlayerViewController_tvOS: UIViewController {
             playerContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
     }
-    
+
     // Adds the player view to the container and sets constraints
     func addPlayerViewToContainer(_ playerView: UIView) {
         playerContainerView.addSubview(playerView)
         playerContainerView.backgroundColor = .white
+        playerView.backgroundColor = .white
+        //playerView.alpha = 0.2
         playerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             playerView.topAnchor.constraint(equalTo: playerContainerView.topAnchor),
@@ -266,6 +269,7 @@ class PlayerViewController_tvOS: UIViewController {
         let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
         // See VLPlayer documentation for available macros
         return VLPlayer.VLPlayerFeatureSupported(appMacrosList: nil,
+                                                 fullScreenOnly: isFullScreen,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
@@ -275,7 +279,7 @@ class PlayerViewController_tvOS: UIViewController {
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: .disabled,
-                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .default),
+                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .custom),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: true,
                                                  isServerSideAdTrackingEnabled: true)
@@ -299,13 +303,11 @@ class PlayerViewController_tvOS: UIViewController {
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .custom(view: view)
             self.videoPlayerControlsView = view
             return playerControlsViewConfiguration
-        #if os(tvOS)
         case .native:
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(
                 controlsTheme: .none
             )
             return playerControlsViewConfiguration
-        #endif
         case .default:
             // Use default controls view and theme
             return nil
@@ -331,10 +333,8 @@ class PlayerViewController_tvOS: UIViewController {
         case .default:
             // Use default paywall view and theme
             return nil
-        #if os(tvOS)
         case .native:
             return nil
-        #endif
         }
     }
     
@@ -463,5 +463,50 @@ extension PlayerViewController_tvOS: PlayerControlsDelegate {
     //get trick play image data
     func getTrickPlayData(_ value: Double) -> (image: UIImage?, time: String?) {
         self.vlPlayer?.getTrickPlayData(value) ?? (nil, nil)
+    }
+}
+
+extension PlayerViewController_tvOS{
+    
+    internal func createButton(){
+        testButton.translatesAutoresizingMaskIntoConstraints = false
+        testButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
+        testButton.setTitle("Test Button", for: .normal)
+        view.addSubview(testButton)
+        testButton.backgroundColor = .lightGray
+        NSLayoutConstraint.activate([
+            testButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            testButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            testButton.heightAnchor.constraint(equalToConstant: 600)
+        ])
+        testButton.isHidden = isFullScreen
+    }
+    
+    @objc private func closeTapped() {
+        
+        debugPrint("closeTapped")
+        vlPlayer?.goFullScreen(true)
+       
+    }
+    
+    func performLogout(isForceLogout: Bool = false) {
+        let mvpdProvider = UserManager.shared.userIdentity?.mvpdProvider
+        
+        VLAuthentication.sharedInstance.logout(
+            client: .tvProvider(provider: .adobe, tveInitializationConfig: nil),
+            mvpdId: mvpdProvider
+        ) { [weak self] logoutSuccessful in
+            if logoutSuccessful {
+                Task { [weak self] in
+                    await AppDelegate.shared.logoutUser()
+                    self?.vlPlayer?.destroy()
+                    self?.loadPlayerView()
+                }
+            }
+            
+            if isForceLogout {
+                VLAuthentication.sharedInstance.clearTveAuthDetails()
+            }
+        }
     }
 }

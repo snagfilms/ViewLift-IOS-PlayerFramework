@@ -10,17 +10,8 @@ import UIKit
 import VLPlayerLib
 import AVKit
 
-class CustomVideoControls: UIView, CustomPlayerSkinProtocol {
+class CustomVideoControls: UIView {
     
-    func updatePlayButton() {
-        
-    }
-
-    
-    var isAdOnMainView: Bool
-    
-    var adRunningOnInternalPlayer: Bool
-
     enum PlayerControlScreen : String
     {
         case full
@@ -67,8 +58,6 @@ class CustomVideoControls: UIView, CustomPlayerSkinProtocol {
     override init(frame: CGRect) {
         self.playerControlType = .streamVideoControls
         self.playerControlScreen = .full
-        self.isAdOnMainView = false
-        self.adRunningOnInternalPlayer = false
         super.init(frame: frame)
         self.createView()
     }
@@ -734,7 +723,9 @@ class CustomSlider: UISlider
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setThumbImage(#imageLiteral(resourceName: "NoKnob.png"), for: .normal)
+        if let image = UIImage(named: "NoKnob") {
+            self.setThumbImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
     }
     
     override func layoutSubviews() {
