@@ -24,7 +24,7 @@ extension PlayerViewController_iOS {
     /// Called when PiP has started
     /// Disables the requirement for linear playback in PiP mode
     func pictureInPictureDidStart() {
-        vlPlayer.requireLinearPlaybackInPictureInPicture(isRequired: false)
+        vlPlayer?.requireLinearPlaybackInPictureInPicture(isRequired: false)
     }
     
     /// Called when the user requests to restore the full player from PiP
