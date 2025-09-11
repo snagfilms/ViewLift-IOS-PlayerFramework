@@ -63,8 +63,8 @@ extension PlayerViewController_iOS {
                 AppDelegate.shared.authorizationToken = userIdentity?.authorizationToken
 
                 // Destroy the current player and its delegates to reset state
-                self.vlPlayer.destroy()
-                self.vlPlayer.playerVideoAnalyticsDelegate = nil
+                self.vlPlayer?.destroy()
+                self.vlPlayer?.playerVideoAnalyticsDelegate = nil
 
                 // Reload the player view with the new authentication context
                 self.loadPlayerView()

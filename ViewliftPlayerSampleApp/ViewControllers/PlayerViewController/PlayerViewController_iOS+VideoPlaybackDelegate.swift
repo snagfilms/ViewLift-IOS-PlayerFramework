@@ -104,7 +104,7 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
 
     // Calculates elapsed time, considering start-over if available
     private func calculateElapsedTime(currentTime: Double, totalTime: Double) -> Double {
-        guard let _ = vlPlayer.getStartOverTime() else { return currentTime }
+        guard let _ = vlPlayer?.getStartOverTime() else { return currentTime }
         return currentTime > totalTime ? totalTime : currentTime
     }
 

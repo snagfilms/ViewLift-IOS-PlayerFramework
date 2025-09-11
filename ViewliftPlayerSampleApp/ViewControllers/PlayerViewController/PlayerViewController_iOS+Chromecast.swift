@@ -24,7 +24,7 @@ extension PlayerViewController_iOS: ChromeCastPlaybackDelegate {
     
     /// Gets the current Chromecast connection status from the player
     private func getChromeCastConnectedStatus() {
-        debugPrint("Cast connected:", vlPlayer.getChromeCastConnectedStatus())
+        debugPrint("Cast connected:", vlPlayer?.getChromeCastConnectedStatus())
     }
     
 }

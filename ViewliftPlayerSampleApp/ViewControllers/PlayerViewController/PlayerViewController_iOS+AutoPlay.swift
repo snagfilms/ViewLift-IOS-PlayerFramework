@@ -40,7 +40,7 @@ extension PlayerViewController_iOS{
         
         autoPlay.autoPlayUICallback = { [weak self] shouldPlayNext in
             self?.removeAutoPlayView()
-            self?.vlPlayer.dismissAutoPlayView(playNext: shouldPlayNext)
+            self?.vlPlayer?.dismissAutoPlayView(playNext: shouldPlayNext)
         }
         self .autoPlayView = autoPlay
         return autoPlay

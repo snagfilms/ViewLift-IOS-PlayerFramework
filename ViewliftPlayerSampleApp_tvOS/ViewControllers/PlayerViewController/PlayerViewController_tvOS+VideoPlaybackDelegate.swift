@@ -18,6 +18,12 @@ import Foundation
 // Handle video playback delegate events for the player view controller
 extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     
+    func onFullScreenChange(currentTime: Double, isFullScreen: Bool, playerTag: String) {
+        debugPrint("onFullScreenChange: currentTime: \(currentTime), isFullScreen: \(isFullScreen), playerTag: \(playerTag)")
+        testButton.isHidden = isFullScreen
+        changeLayout()
+    }
+    
     // Handles errors during video fetch and updates UI accordingly
     func videoFetchError(error: VLError?, playerTag: String?, contentResponse: Dictionary<String, AnyObject>?) {
         let errorDescription =  "Is content playable - \(error?.isPlayable ?? false) \n" +
