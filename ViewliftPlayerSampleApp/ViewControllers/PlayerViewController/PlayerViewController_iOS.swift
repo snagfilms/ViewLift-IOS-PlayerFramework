@@ -268,7 +268,7 @@ class PlayerViewController_iOS: UIViewController {
 extension PlayerViewController_iOS {
     
     /// Loads and configures the player view
-    func loadPlayerView() {
+    func loadPlayerView() async {
         
         let loaderView = addLoaderView(to: playerContainerView)
         loaderView.startAnimating()
@@ -304,23 +304,23 @@ extension PlayerViewController_iOS {
             )
             
             let playbackConfig = VLPlayer.DirectStreamPlaybackConfig(
-                stream: streamType
+                stream: streamType, adobeTempPassPayload: AppDelegate.shared.playerTempPass
             )
             playbackSourceType = .directStream(playbackConfig)
         }else{
-            playbackSourceType = .contentPlayback(VLPlayer.ContentPlaybackConfig(videoId: self.videoList.videoId, token: vlToken, apiBaseURL: vlBaseUrl))
+            playbackSourceType = .contentPlayback(VLPlayer.ContentPlaybackConfig(videoId: self.videoList.videoId, token: vlToken, apiBaseURL: vlBaseUrl, adobeTempPassPayload: AppDelegate.shared.playerTempPass))
         }
             
             setPlayerDelegates()
             
             if let data = entitlementData{
-                vlPlayer.setEntitlement(data: data)
+                vlPlayer?.setEntitlement(data: data)
             }
             
 //            let autoPlayList = autoPlayListdataManager?.getAutoPlayUrlList()
             
             // Set player source and handle completion
-            vlPlayer.setSource(
+           vlPlayer?.setSource(
                 type: playbackSourceType,
                 vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
                 playerFeaturesSupported: featureSupported, nextPlaybackList: nil,
@@ -443,14 +443,20 @@ extension PlayerViewController_iOS {
             )
             
             switch response {
-            case .success(let _):
+            case .success(_):
                 if isDVREnabled {
                     self.videoPlayerControlsView?.updateControlsBasedOnDVRFlag(isDVREnabled: isDVREnabled)
                 }
                 self.addPlayer(playerView: playerView)
                 
             case .failure(let error):
-                self.handleAuthzFailure(error.message ?? "")
+                self.handleAuthzFailure(
+                    VLAuthenticationErrorCode
+                        .decodingFailed(
+                            message: error.localizedDescription,
+                            underlyingError: error
+                        )
+                )
             }
         } catch {
             debugPrint(error)
@@ -460,7 +466,7 @@ extension PlayerViewController_iOS {
     /// Handles TVE authorization failure
     private func handleAuthzFailure(_ error: VLAuthenticationErrorCode) {
         switch error {
-        case .adobeErrorResponse(let statusCode, let data, let errorMessage, let shouldPerformLogout):
+        case .adobeErrorResponse(_, _, _, let shouldPerformLogout):
             if shouldPerformLogout {
                 self.showAlert(title: "Error", message: "TVE Authorization denied"){
                     self.performLogout(isForceLogout: true)
