@@ -119,7 +119,7 @@ extension VLAnalyticsPlayerClientProtocol {
     
     func playerChapterDidStart(currentTime: Double) {
         let eventBuilder = VLEventModelBuilder()
-            .eventType(.videochapterStart(currentTime))
+            .eventType(.videochapterStart(currentTime, 10.5))
             .contentInfo(getVideoInfo())
             .build()
         VLAnalytics.shared.trackEvent(data: eventBuilder)

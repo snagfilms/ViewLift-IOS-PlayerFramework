@@ -48,12 +48,12 @@ class AutoPlayDataManager {
     
     func getMetadataFor(id: String) -> VLPlayer.StreamMetadata? {
         if id == "stream1"{
-            let streamConfig = VLPlayer.StreamConfig(isLive: false, isDVR: nil)
+            let streamConfig = VLPlayer.StreamConfig(isLive: false)
             let contentData = VLPlayer.ContentData(contentTitle: "Title 1", contentDescription: "Description 1", thumbnail: nil)
             let metaData = VLPlayer.StreamMetadata(streamConfig: streamConfig, drmconfig: nil, contentData: contentData)
             return metaData
         }else if id == "stream2"{
-            let streamConfig = VLPlayer.StreamConfig(isLive: true, isDVR: nil)
+            let streamConfig = VLPlayer.StreamConfig(isLive: true)
             let contentData = VLPlayer.ContentData(contentTitle: "Title 2", contentDescription: "Description 2", thumbnail: nil)
             let metaData = VLPlayer.StreamMetadata(streamConfig: streamConfig, drmconfig: nil, contentData: contentData)
             return metaData

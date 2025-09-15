@@ -25,7 +25,7 @@ private enum Constants {
     static let defaultSeekForward: Double = 30.0
     static let defaultSeekBackward: Double = 10.0
     static let playerYPosition: CGFloat = 100
-    static let defaultAdUrl = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_ad_samples&sz=640x480&cust_params=sample_ct%3Dlinear&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator="
+    static let defaultAdUrl = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/simid&description_url=https%3A%2F%2Fdevelopers.google.com%2Finteractive-media-ads&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator="
 }
 
 /// Main view controller for player screen on iOS
@@ -47,7 +47,7 @@ class PlayerViewController_iOS: UIViewController {
     // MARK: - Properties
     var customPaywallView: CustomPaywallView?
     private var videoList: VideoList!
-    var vlPlayer: VLPlayer!
+    var vlPlayer: VLPlayer?
     var videoPlayerControlsView: CustomVideoControls? // using UIKIT
     var videoPlayerCustomView: (view: UIView?, viewModel: PlayerControlsViewModel?)? // using SwiftUI
 
@@ -66,7 +66,7 @@ class PlayerViewController_iOS: UIViewController {
     var analyticsAdDictionary = AnalyticsAdDictionary()
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
-    private let playerContainerView = UIView()
+    let playerContainerView = UIView()
     var fullscreenConstraints: [NSLayoutConstraint] = []
     var normalConstraints: [NSLayoutConstraint] = []
     var isFullscreen = false
@@ -86,7 +86,7 @@ class PlayerViewController_iOS: UIViewController {
     private var seekBackwardDuration: Double = Constants.defaultSeekBackward
     private var adUrl: String?
     private var playerOptionSelected: PlayerUIOptions!
-    var enableCustomAdUI: Bool = false
+    var enableCustomAdUI: Bool = true
     var playerRateBeforeSeek: Float = 1.0
     var isVideoPlayingBeforeSeek = true
     var autoPlayListdataManager: AutoPlayDataManager?
@@ -212,7 +212,7 @@ class PlayerViewController_iOS: UIViewController {
                     self?.logoutButton.isHidden = true
                     
                     await AppDelegate.shared.logoutUser()
-                    self?.vlPlayer.destroy()
+                    self?.vlPlayer?.destroy()
                     self?.loadPlayerView()
                 }
             }
@@ -264,12 +264,12 @@ extension PlayerViewController_iOS {
         setPlayerDelegates()
         
         if let data = entitlementData{
-            vlPlayer.setEntitlement(data: data)
+            vlPlayer?.setEntitlement(data: data)
         }
         let autoPlayList = autoPlayListdataManager?.getAutoPlayUrlList()// pass this for autoplay in nextPlaybackList
         
         // Set player source and handle completion
-        vlPlayer.setSource(
+        vlPlayer?.setSource(
             type: playbackSourceType,
             vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
             playerFeaturesSupported: featureSupported, nextPlaybackList: nil
@@ -324,11 +324,11 @@ extension PlayerViewController_iOS {
     /// Configures player delegates and settings
     private func setPlayerDelegates() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
-        vlPlayer.videoPlayerDelegate = self
-        vlPlayer.playerVideoAnalyticsDelegate = self
-        vlPlayer.enablePlayerBitrateLogs = enableBitrateLogs
-        vlPlayer.serverSideAdTrackingDelegate = self
-        vlPlayer.castDelegate = self
+        vlPlayer?.videoPlayerDelegate = self
+        vlPlayer?.playerVideoAnalyticsDelegate = self
+        vlPlayer?.enablePlayerBitrateLogs = enableBitrateLogs
+        vlPlayer?.serverSideAdTrackingDelegate = self
+        vlPlayer?.castDelegate = self
     }
     
     /// Handles completion of player setup, including TVE checks and UI updates
@@ -384,6 +384,7 @@ extension PlayerViewController_iOS {
                     }
                     self.addPlayer(playerView: playerView)
                 case .failure(let error):
+                    self.vlPlayer?.destroy()
                     self.handleAuthzFailure(error)
                 }
             }
@@ -392,7 +393,18 @@ extension PlayerViewController_iOS {
     
     /// Handles TVE authorization failure
     private func handleAuthzFailure(_ error: VLAuthenticationErrorCode) {
-        self.showAlert(title: "Error", message: "TVE Authorization denied")
+        switch error {
+        case .adobeErrorResponse(let statusCode, let data, let errorMessage, let shouldPerformLogout):
+            if shouldPerformLogout {
+                self.showAlert(title: "Error", message: "TVE Authorization denied"){
+                    self.performLogout(isForceLogout: true)
+                }
+            }
+            break
+        default:
+            self.showAlert(title: "Error", message: "TVE Authorization denied")
+        }
+        
     }
     
     /// Adds the player view to the main view and sets up custom UI if enabled
@@ -555,8 +567,8 @@ extension PlayerViewController_iOS {
     
     /// Handles back button tap, destroys player and dismisses view
     @IBAction private func backButtonClicked(_ sender: Any) {
-        vlPlayer.destroy()
-        vlPlayer.playerVideoAnalyticsDelegate = nil
+        vlPlayer?.destroy()
+        vlPlayer?.playerVideoAnalyticsDelegate = nil
         navigationController?.popViewController(animated: true)
     }
 }
@@ -574,18 +586,18 @@ extension PlayerViewController_iOS {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 // If we are on fullscreen and user rotates to portrait, exit fullscreen
                 if self.isFullscreen && orientation.isPortrait {
-                    self.vlPlayer.goFullScreen(false)// will trigger onFullScreenChange(false)
+                    self.vlPlayer?.goFullScreen(false)// will trigger onFullScreenChange(false)
                 }
             } else {
                 if orientation.isLandscape {
                     if !self.isFullscreen {
                         self.isFullscreen = true
-                        self.vlPlayer.goFullScreen(true)
+                        self.vlPlayer?.goFullScreen(true)
                     }
                 } else if orientation.isPortrait {
                     if self.isFullscreen {
                         self.isFullscreen = false
-                        self.vlPlayer.goFullScreen(false)
+                        self.vlPlayer?.goFullScreen(false)
                     }
                 }
             }
