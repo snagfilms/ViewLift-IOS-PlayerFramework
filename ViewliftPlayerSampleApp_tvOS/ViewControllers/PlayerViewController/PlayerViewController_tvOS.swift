@@ -175,6 +175,7 @@ class PlayerViewController_tvOS: UIViewController {
                 case .success:
                     self.addPlayerViewToContainer(playerView)
                 case .failure(let error):
+                    self.vlPlayer?.destroy()
                     self.handleAuthzFailure(error)
                 }
             }
@@ -279,9 +280,8 @@ class PlayerViewController_tvOS: UIViewController {
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: .disabled,
-                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .custom),
+                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .customTheme),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
-                                                 isTrickPlayEnabled: true,
                                                  isServerSideAdTrackingEnabled: true)
     }
     
@@ -291,8 +291,9 @@ class PlayerViewController_tvOS: UIViewController {
         case .customTheme:
             // Configure default player controls view with custom theme
             let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .yellow)
-            let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", settingText: "PLAYBACK QUALITY")
-            let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent)
+            let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", playbackQualityText: "PLAYBACK QUALITY")
+            let playerControlsConfig = PlayerControlsConfig(isSettingsSupported: false, isSubTitleSupported: true, isSlowMoSupported: false)
+            let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent, playerControlsConfig: playerControlsConfig)
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(controlsTheme: controlsTheme)
             return playerControlsViewConfiguration
         case .custom:
@@ -304,9 +305,7 @@ class PlayerViewController_tvOS: UIViewController {
             self.videoPlayerControlsView = view
             return playerControlsViewConfiguration
         case .native:
-            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(
-                controlsTheme: .none
-            )
+            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default()
             return playerControlsViewConfiguration
         case .default:
             // Use default controls view and theme
@@ -471,13 +470,15 @@ extension PlayerViewController_tvOS{
     internal func createButton(){
         testButton.translatesAutoresizingMaskIntoConstraints = false
         testButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
-        testButton.setTitle("Test Button", for: .normal)
+        testButton.setTitle("Tap!\nFull Screen", for: .normal)
+        testButton.titleLabel?.numberOfLines = 2
+        testButton.titleLabel?.textAlignment = .center
         view.addSubview(testButton)
         testButton.backgroundColor = .lightGray
         NSLayoutConstraint.activate([
-            testButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            testButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             testButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            testButton.heightAnchor.constraint(equalToConstant: 600)
+            testButton.heightAnchor.constraint(equalTo: playerContainerView.heightAnchor)
         ])
         testButton.isHidden = isFullScreen
     }
