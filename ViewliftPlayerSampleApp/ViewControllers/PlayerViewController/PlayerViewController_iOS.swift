@@ -320,7 +320,7 @@ extension PlayerViewController_iOS {
             playbackSourceType = .directStream(playbackConfig)
             
         } else {
-            let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass[self.channelkey]?.getPassPayload() ?? nil
+            let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass[self.channelkey]?.getTempToken() ?? nil
             
             playbackSourceType =
                 .contentPlayback(
@@ -329,14 +329,14 @@ extension PlayerViewController_iOS {
                             videoId: self.videoList.videoId,
                             token: vlToken,
                             apiBaseURL: vlBaseUrl,
-                            adobeTempPassPayload: adobePassPayload?.adobePlayerTempPass
+                            adobeTempPassPayload: adobePassPayload
                         )
                 )
         }
             
             setPlayerDelegates()
             
-            if let data = entitlementData{
+            if let data = entitlementData {
                 vlPlayer?.setEntitlement(data: data)
             }
             

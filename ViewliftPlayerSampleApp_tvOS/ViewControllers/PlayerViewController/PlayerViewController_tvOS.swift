@@ -126,7 +126,7 @@ class PlayerViewController_tvOS: UIViewController {
         if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
             playbackSourceType = .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", streamConfig: self.streamConfig, drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl))
         } else {
-            let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass[self.channelkey]?.getPassPayload() ?? nil
+            let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass[self.channelkey]?.getTempToken() ?? nil
             
             playbackSourceType =
                 .contentPlayback(
@@ -135,7 +135,7 @@ class PlayerViewController_tvOS: UIViewController {
                             videoId: self.videoList.videoId,
                             token: vlToken,
                             apiBaseURL: vlBaseUrl,
-                            adobeTempPassPayload: adobePassPayload?.adobePlayerTempPass
+                            adobeTempPassPayload: adobePassPayload
                         )
                 )
         }
