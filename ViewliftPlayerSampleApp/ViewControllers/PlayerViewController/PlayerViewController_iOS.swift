@@ -63,7 +63,15 @@ class PlayerViewController_iOS: UIViewController {
     var hideControls: Bool = false
     var muteEnabled: Bool = false
     var streamUrl: String?
-    var channelId: [String] = []
+    
+    var channelId: [String] = [] {
+        didSet {
+            self.channelkey = self.channelId.joined(separator: ",")
+        }
+    }
+    
+    var channelkey: String = ""
+    
     weak var player: AVPlayer?
     var analyticsAdDictionary = AnalyticsAdDictionary()
     var currentAdAssetInfo: VLAdAssetInfo?
@@ -279,7 +287,7 @@ extension PlayerViewController_iOS {
                 self.invalidatePlayerTempPassIfOutOfWindow()
 
                 //request for temp pass
-                await self.getTempPassPayload(channelIds: self.channelId)
+                await self.getTempPassPayload()
         }
         
         let featureSupported = getPlayerFeaturesSupported()
@@ -312,7 +320,7 @@ extension PlayerViewController_iOS {
             playbackSourceType = .directStream(playbackConfig)
             
         } else {
-            let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass?.getPassPayload()
+            let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass[self.channelkey]?.getPassPayload() ?? nil
             
             playbackSourceType =
                 .contentPlayback(

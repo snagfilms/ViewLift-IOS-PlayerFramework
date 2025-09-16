@@ -63,7 +63,13 @@ class PlayerViewController_tvOS: UIViewController {
     let timerLabel = UILabel()
     internal var isFullScreen: Bool = false
     let testButton = UIButton(type: .system)
-    var channelId: [String] = []
+    var channelId: [String] = [] {
+        didSet {
+            self.channelkey = self.channelId.joined(separator: ",")
+        }
+    }
+    
+    var channelkey: String = ""
     
     override var canBecomeFirstResponder: Bool {
         return true
@@ -103,7 +109,7 @@ class PlayerViewController_tvOS: UIViewController {
                 self.invalidatePlayerTempPassIfOutOfWindow()
 
                 //request for temp pass
-                await self.getTempPassPayload(channelIds: self.channelId)
+                await self.getTempPassPayload()
         }
         
         let playerLicenseKey: String? = ""
@@ -120,7 +126,7 @@ class PlayerViewController_tvOS: UIViewController {
         if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
             playbackSourceType = .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", streamConfig: self.streamConfig, drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl))
         } else {
-            let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass?.getPassPayload()
+            let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass[self.channelkey]?.getPassPayload() ?? nil
             
             playbackSourceType =
                 .contentPlayback(

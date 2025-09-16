@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var readVideoListOperation:VideoListProtocol?
     var isCastingViewVisible: Bool = false
     var castContextSharedInstance: GCKCastContext?
-    var adobePlayerTempPass: AdobePassPayload?
+    var adobePlayerTempPass: [String:AdobePassPayload] = [:]
 
     func application(
         _ application: UIApplication,

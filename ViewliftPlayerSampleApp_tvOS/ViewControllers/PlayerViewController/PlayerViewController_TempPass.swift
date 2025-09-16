@@ -9,30 +9,31 @@ import Foundation
 import VLAuthentication
 
 extension PlayerViewController_tvOS {
-    func getTempPassPayload(channelIds: [String] = []) async {
-        guard AppDelegate.shared.adobePlayerTempPass == nil else { return }
+    func getTempPassPayload() async {
+        guard AppDelegate.shared.adobePlayerTempPass[self.channelkey] == nil else { return }
 
         do {
-            let response = try await VLAuthentication.sharedInstance.getAdobeTempPass(channelIds: channelIds)
+            let response = try await VLAuthentication.sharedInstance.getAdobeTempPass(
+                channelIds: self.channelId
+            )
 
             switch response {
             case .success(let payloadOptional):
                 if let payload = payloadOptional {
-                    AppDelegate.shared.adobePlayerTempPass = payload
+                    AppDelegate.shared.adobePlayerTempPass[self.channelkey] = payload
                 }
             case .failure(_):
-                self.cleanupAndReloadPlayerView()
+                self.vlPlayer?.destroy()
                 break
             }
         } catch {
-            self.cleanupAndReloadPlayerView()
+            self.vlPlayer?.destroy()
         }
     }
     
     func cleanupAndReloadPlayerView(){
         Task { [weak self] in
             guard let self = self else { return }
-            
             self.vlPlayer?.destroy()
             await self.loadPlayerView()
         }
@@ -41,8 +42,7 @@ extension PlayerViewController_tvOS {
     
     
     func invalidatePlayerTempPassIfOutOfWindow() {
-        guard
-            let tempPass = AppDelegate.shared.adobePlayerTempPass else {
+        guard let tempPass = AppDelegate.shared.adobePlayerTempPass[self.channelkey] else {
             timerLabel.text = "00:00"
             timerLabel.isHidden = true
             return
@@ -58,7 +58,7 @@ extension PlayerViewController_tvOS {
             timerLabel.text = "00:00"
             timerLabel.isHidden = true
             
-            AppDelegate.shared.adobePlayerTempPass = nil
+            AppDelegate.shared.adobePlayerTempPass[self.channelkey] = nil
             
             self.cleanupAndReloadPlayerView()
             

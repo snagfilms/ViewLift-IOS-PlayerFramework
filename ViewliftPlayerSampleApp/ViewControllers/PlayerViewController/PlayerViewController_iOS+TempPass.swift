@@ -12,16 +12,20 @@ import UIKit
 
 extension PlayerViewController_iOS {
     
-    func getTempPassPayload(channelIds: [String] = []) async {
-        guard AppDelegate.shared.adobePlayerTempPass == nil else { return }
+    func getTempPassPayload() async {
+        guard AppDelegate.shared
+            .adobePlayerTempPass[self.channelkey] == nil else { return }
 
         do {
-            let response = try await VLAuthentication.sharedInstance.getAdobeTempPass(channelIds: channelIds)
+            let response = try await VLAuthentication.sharedInstance.getAdobeTempPass(
+                channelIds: self.channelId
+            )
 
             switch response {
             case .success(let payloadOptional):
                 if let payload = payloadOptional {
-                    AppDelegate.shared.adobePlayerTempPass = payload
+                    AppDelegate.shared
+                        .adobePlayerTempPass[self.channelkey] = payload
                 }
             case .failure(_):
                 self.cleanupAndReloadPlayerView()
@@ -38,7 +42,7 @@ extension PlayerViewController_iOS {
     
     func invalidatePlayerTempPassIfOutOfWindow() {
         guard
-            let tempPass = AppDelegate.shared.adobePlayerTempPass else {
+            let tempPass = AppDelegate.shared.adobePlayerTempPass[self.channelkey] else {
             timerLabel.text = "00:00"
             timerLabel.isHidden = true
             return
@@ -54,7 +58,7 @@ extension PlayerViewController_iOS {
             timerLabel.text = "00:00"
             timerLabel.isHidden = true
             
-            AppDelegate.shared.adobePlayerTempPass = nil
+            AppDelegate.shared.adobePlayerTempPass[self.channelkey] = nil
             
             self.cleanupAndReloadPlayerView()
             

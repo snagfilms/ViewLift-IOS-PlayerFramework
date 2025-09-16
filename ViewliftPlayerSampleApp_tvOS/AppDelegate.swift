@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var readVideoListOperation:VideoListProtocol?
     
     var authorizationToken: String? = nil
-    var adobePlayerTempPass: AdobePassPayload?
+    var adobePlayerTempPass: [String:AdobePassPayload] = [:]
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
