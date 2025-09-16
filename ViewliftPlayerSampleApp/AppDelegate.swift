@@ -11,7 +11,7 @@ import VLPlayerLib
 #if os(iOS)
 import VLAuthentication
 #else
-import VLAuthentication_tvOS
+import VLAuthentication
 #endif
 import GoogleCast
 
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var readVideoListOperation:VideoListProtocol?
     var isCastingViewVisible: Bool = false
     var castContextSharedInstance: GCKCastContext?
-    var playerTempPass: VLPlayer.PlayerAdobeTempPassPayload?
+    var adobePlayerTempPass: AdobePassPayload?
 
     func application(
         _ application: UIApplication,

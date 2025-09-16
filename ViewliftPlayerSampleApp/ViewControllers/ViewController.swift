@@ -66,6 +66,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         playerOptionSelected = playerUIOptions[indexPath.row]
+        
         if playerOptionSelected == .exploreMore{
             guard let _videoList = AppDelegate.shared.readVideoListOperation?.videoList else {return}
             let assetVC = AssetListViewController()
@@ -112,6 +113,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL {
             videoPlaybackController.streamUrl =  _videoList.streamUrl
         }
+        videoPlaybackController.channelId = _videoList.channelId
         videoPlaybackController.autoplayEnabled = self.autoPlayToggle.isOn
         videoPlaybackController.loopEnabled = self.loopPlaybackToggle.isOn
         videoPlaybackController.hideControls = self.hideControls.isOn

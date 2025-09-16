@@ -12,7 +12,7 @@ import VLBeaconLib
 #if os(iOS)
 import VLAuthentication
 #else
-import VLAuthentication_tvOS
+import VLAuthentication
 #endif
 import AVKit
 import VLAnalyticsLib
@@ -60,8 +60,11 @@ class PlayerViewController_tvOS: UIViewController {
     var analyticsAdDictionary = AnalyticsAdDictionary()
     var autoPlayListdataManager: AutoPlayDataManager?
     internal var autoPlayView: AutoPlayView?
+    let timerLabel = UILabel()
     internal var isFullScreen: Bool = false
     let testButton = UIButton(type: .system)
+    var channelId: [String] = []
+    
     override var canBecomeFirstResponder: Bool {
         return true
     }
@@ -79,16 +82,29 @@ class PlayerViewController_tvOS: UIViewController {
         setupConstraints()
         updateConstraintsForCurrentOrientation()
         self.createAutoPlayMetaData()
-        self.loadPlayerView()
+        self.timerLabel.isHidden = true
+        
+        Task {
+            await self.loadPlayerView()
+        }
+        
         createButton()
     }
     
     // Loads and configures the player view
-    func loadPlayerView() {
+    func loadPlayerView() async {
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = self.videoList.apiBaseUrl
         let vlBeaconURL: String? = self.videoList.beaconBaseUrl
         let vlToken = AppDelegate.shared.authorizationToken ?? ""
+        
+        if UserManager.shared.userIdentity?.tveUserId == nil {
+                //check if ealier temp pass was created but not expired
+                self.invalidatePlayerTempPassIfOutOfWindow()
+
+                //request for temp pass
+                await self.getTempPassPayload(channelIds: self.channelId)
+        }
         
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""
@@ -103,8 +119,19 @@ class PlayerViewController_tvOS: UIViewController {
         let playbackSourceType: VLPlayer.PlaybackSourceType
         if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
             playbackSourceType = .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", streamConfig: self.streamConfig, drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl))
-        }else{
-            playbackSourceType = .contentPlayback(VLPlayer.ContentPlaybackConfig(videoId: self.videoList.videoId, token: vlToken, apiBaseURL: vlBaseUrl))
+        } else {
+            let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass?.getPassPayload()
+            
+            playbackSourceType =
+                .contentPlayback(
+                    VLPlayer
+                        .ContentPlaybackConfig(
+                            videoId: self.videoList.videoId,
+                            token: vlToken,
+                            apiBaseURL: vlBaseUrl,
+                            adobeTempPassPayload: adobePassPayload?.adobePlayerTempPass
+                        )
+                )
         }
         // Set delegates for player events and analytics
         vlPlayer?.videoPlayerDelegate = self
@@ -233,6 +260,21 @@ class PlayerViewController_tvOS: UIViewController {
     
     // Sets up portrait and landscape constraints for the player container
     func setupConstraints() {
+        
+        timerLabel.translatesAutoresizingMaskIntoConstraints = false
+        timerLabel.textColor = .white
+        timerLabel.backgroundColor = .black
+        timerLabel.textAlignment = .center
+        timerLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 14, weight: .medium)
+        timerLabel.text = "00:00"
+        
+        timerLabel.isHidden = true
+        
+        // Add label inside playerContainerView
+        playerContainerView.addSubview(timerLabel)
+        // Bring label to front within playerContainerView
+        playerContainerView.bringSubviewToFront(timerLabel)
+        
         // Portrait: half width, 16:9, top aligned, left aligned
         portraitConstraints = [
             playerContainerView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -501,7 +543,7 @@ extension PlayerViewController_tvOS{
                 Task { [weak self] in
                     await AppDelegate.shared.logoutUser()
                     self?.vlPlayer?.destroy()
-                    self?.loadPlayerView()
+                    await self?.loadPlayerView()
                 }
             }
             

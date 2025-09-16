@@ -42,6 +42,7 @@ class ReadFromLocalJson:VideoListProtocol {
 
 struct VideoList:Decodable {
     var videoId:String
+    var channelId: [String]
     var streamUrl:String?
     var nextVideoList: [NextVideoList]?
     let apiBaseUrl: String

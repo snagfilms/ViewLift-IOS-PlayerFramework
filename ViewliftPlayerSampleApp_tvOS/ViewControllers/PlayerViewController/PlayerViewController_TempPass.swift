@@ -1,17 +1,14 @@
 //
-//  PlayerViewController_iOS+TempPass.swift
+//  PlayerViewController_TempPass.swift
 //  ViewliftPlayerSampleApp
 //
-//  Created by rakeshkrsharma@viewlift.com on 10/09/25.
+//  Created by rakeshkrsharma@viewlift.com on 16/09/25.
 //  Copyright © 2025 Viewlift. All rights reserved.
 //
-import VLAuthentication
 import Foundation
-import VLPlayerLib
-import UIKit
+import VLAuthentication
 
-extension PlayerViewController_iOS {
-    
+extension PlayerViewController_tvOS {
     func getTempPassPayload(channelIds: [String] = []) async {
         guard AppDelegate.shared.adobePlayerTempPass == nil else { return }
 
@@ -24,17 +21,13 @@ extension PlayerViewController_iOS {
                     AppDelegate.shared.adobePlayerTempPass = payload
                 }
             case .failure(_):
-                self.cleanupAndReloadPlayerView()
+//                self.cleanupAndReloadPlayerView()
+                break
             }
         } catch {
-            self.cleanupAndReloadPlayerView()
+//            self.cleanupAndReloadPlayerView()
         }
     }
-    
-    func cleanupAndReloadPlayerView() {
-        self.cleanupResources()
-    }
- 
     
     func invalidatePlayerTempPassIfOutOfWindow() {
         guard
@@ -56,7 +49,7 @@ extension PlayerViewController_iOS {
             
             AppDelegate.shared.adobePlayerTempPass = nil
             
-            self.cleanupAndReloadPlayerView()
+//            self.cleanupAndReloadPlayerView()
             
             DispatchQueue.main.async { [weak self] in
                 self?.customPaywallView?.update("The temporary access duration limit has been exceeded.")
@@ -73,6 +66,4 @@ extension PlayerViewController_iOS {
         timerLabel.text = String(format: "%02d:%02d", minutes, seconds)
         timerLabel.isHidden = false
     }
-
 }
-

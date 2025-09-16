@@ -9,7 +9,7 @@ import Foundation
 #if os(iOS)
 import VLAuthentication
 #else
-import VLAuthentication_tvOS
+import VLAuthentication
 #endif
 
 final class UserManager {

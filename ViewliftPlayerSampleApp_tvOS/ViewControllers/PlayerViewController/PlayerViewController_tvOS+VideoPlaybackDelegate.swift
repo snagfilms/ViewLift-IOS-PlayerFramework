@@ -11,7 +11,7 @@ import AVKit
 #if os(iOS)
 import VLAuthentication
 #else
-import VLAuthentication_tvOS
+import VLAuthentication
 #endif
 import Foundation
 
@@ -78,6 +78,8 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     func videoPlayerProgressByEverySecond(currentTime: Double, totalTime: Double, playerTag: String, parsedTimeStamp: String?) {
         debugPrint("PlayerViewController videoPlayerProgressByEverySecond: \(currentTime), \(totalTime)")
         videoPlayerControlsView?.updateCurrentTime(currentTime: currentTime, totalTime: totalTime)
+        
+        self.invalidatePlayerTempPassIfOutOfWindow()
     }
     
     // Updates playback progress at specific intervals

@@ -10,7 +10,7 @@ import VLPlayerLib
 #if os(iOS)
 import VLAuthentication
 #else
-import VLAuthentication_tvOS
+import VLAuthentication
 #endif
 import Foundation
 import SwiftUI
@@ -93,7 +93,9 @@ extension PlayerViewController_tvOS {
             
             self.vlPlayer?.destroy()
             self.vlPlayer?.playerVideoAnalyticsDelegate = nil
-            self.loadPlayerView()
+            Task {
+                await self.loadPlayerView()
+            }
         }
     }
 }

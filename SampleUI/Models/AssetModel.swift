@@ -16,11 +16,12 @@ struct AssetModel {
     let staticContentId: String?
     let isLive: Bool?
     let isDVR: Bool?
+    let channelId: [String]?
 }
 
 extension AssetModel: Codable {
     enum CodingKeys: String, CodingKey {
-        case title, subtitle, videoId, url, isExternal, staticContentId, isLive, isDVR
+        case title, subtitle, videoId, url, isExternal, staticContentId, isLive, isDVR, channelId
     }
 
     init(from decoder: Decoder) throws {
@@ -28,6 +29,7 @@ extension AssetModel: Codable {
 
         title = try container.decode(String.self, forKey: .title)
         subtitle = try container.decodeIfPresent(String.self, forKey: .subtitle)
+        channelId = try container.decodeIfPresent([String].self, forKey: .channelId)
         isExternal = try container.decodeIfPresent(Bool.self, forKey: .isExternal)
         staticContentId = try container.decodeIfPresent(String.self, forKey: .staticContentId)
         isLive = try container.decodeIfPresent(Bool.self, forKey: .isLive)

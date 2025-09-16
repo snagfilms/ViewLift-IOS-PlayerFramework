@@ -26,10 +26,6 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         videoPlayerCustomView?.viewModel?.setupPiP()
 
         self.playerDidStartPlaying()
-        
-        if AppDelegate.shared.playerTempPass != nil {
-            self.startTempPassTimer()
-        }
     }
 
     // Called when video is paused
@@ -73,6 +69,7 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         print("VideoFetchError: contentResponse:", contentResponse as Any)
 
         DispatchQueue.main.async { [weak self] in
+            self?.timerLabel.isHidden = true
             self?.showAlert(message: errorDescription)
             self?.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
         }
@@ -104,6 +101,8 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         let sliderValue = getSliderDuration(currentTime: elapsedTime, totalDuration: totalTime)
         videoPlayerControlsView?.updateSliderDuration(sliderValue: sliderValue)
         videoPlayerCustomView?.viewModel?.seekTo(time: sliderValue)
+        
+        self.invalidatePlayerTempPassIfOutOfWindow()
     }
 
     // Calculates elapsed time, considering start-over if available

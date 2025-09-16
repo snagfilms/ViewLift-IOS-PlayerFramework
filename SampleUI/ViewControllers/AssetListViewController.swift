@@ -10,7 +10,7 @@ import VLPlayerLib
 #if os(iOS)
 import VLAuthentication
 #else
-import VLAuthentication_tvOS
+import VLAuthentication
 #endif
 import Kingfisher
 
@@ -280,26 +280,31 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         switch asset.playbackType {
         case .url(let url):
             print("Play using URL: \(url)")
-            launchVideoPlayer(url: url, isExternal: asset.isExternal ?? false, streamConfig: VLPlayer.StreamConfig(isLive: asset.isLive, isDVR: asset.isDVR))
+            launchVideoPlayer(url: url, isExternal: asset.isExternal ?? false, streamConfig: VLPlayer.StreamConfig(isLive: asset.isLive, isDVR: asset.isDVR), channelId: asset.channelId ?? [])
         case .videoId(let id):
             print("Play using videoId: \(id)")
-            launchVideoPlayer(videoId: id, isExternal: asset.isExternal ?? false)
+            launchVideoPlayer(
+                videoId: id,
+                isExternal: asset.isExternal ?? false,
+                channelId: asset.channelId ?? [])
         }
     }
     
-    private func launchVideoPlayer(videoId: String? = nil, url: String? = nil, isExternal: Bool = false, streamConfig: VLPlayer.StreamConfig? = nil) {
+    private func launchVideoPlayer(videoId: String? = nil, url: String? = nil, isExternal: Bool = false, streamConfig: VLPlayer.StreamConfig? = nil, channelId: [String]) {
         guard (videoId != nil && !videoId!.isEmpty) || (url != nil && !url!.isEmpty) else {return}
             
         var drmConfig: VLPlayer.DRMConfig?
         if let videoId = videoId, !videoId.isEmpty {
             videoList.videoId = videoId
+            videoList.channelId = channelId
+            
             if isExternal{
                 getEntitlementData(videoId: videoId) { [weak self] result in
                     switch result {
                     case .success(let data):
                         self?.entitlementData = data
                         DispatchQueue.main.async {
-                            self?.loadVideoPlayer(videoId: videoId)
+                            self?.loadVideoPlayer(videoId: videoId, channelId: channelId)
                         }
                     case .failure(let error):
                         DispatchQueue.main.async {
@@ -310,7 +315,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                     
                 }
             }else{
-                self.loadVideoPlayer(videoId: videoId)
+                self.loadVideoPlayer(videoId: videoId, channelId: channelId)
             }
         }else{
             if isExternal {
@@ -333,7 +338,13 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                     completeSkd: completeskd
                 )
             }
-            self.loadVideoPlayer(url: url, drmConfig: drmConfig, streamConfig: streamConfig)
+            
+            self.loadVideoPlayer(
+                url: url,
+                drmConfig: drmConfig,
+                streamConfig: streamConfig,
+                channelId: channelId
+            )
             
             
         }
@@ -348,7 +359,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         self.present(alertController, animated: true, completion: nil)
     }
     
-    private func loadVideoPlayer(videoId: String? = nil, url: String? = nil, drmConfig: VLPlayer.DRMConfig? = nil, streamConfig: VLPlayer.StreamConfig? = nil) {
+    private func loadVideoPlayer(videoId: String? = nil, url: String? = nil, drmConfig: VLPlayer.DRMConfig? = nil, streamConfig: VLPlayer.StreamConfig? = nil, channelId: [String]) {
         let showCustomControls = configurableHeaderView?.getConfigurableItemSelection(type: .showCustomControls) ?? false
         let autoplayEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .autoPlay) ?? true
         let loopEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .loopPlay) ?? false
@@ -361,6 +372,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         videoPlaybackController.entitlementData = self.entitlementData
         videoPlaybackController.streamConfig = streamConfig
         videoPlaybackController.drmConfig = drmConfig
+        videoPlaybackController.channelId = channelId
         //        videoPlaybackController.view.frame = self.view.bounds
         videoPlaybackController.prepareView(withPlayerUIOption: videoId == nil ? .playStreamURL : .defaultControl, videoList: videoList)
         videoPlaybackController.enableCustomPlayerUI = showCustomControls
@@ -378,6 +390,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         vc.streamUrl = url
         vc.videoId = videoId
         vc.entitlementData = self.entitlementData
+        vc.channelId = channelId
         vc.streamConfig = streamConfig
         vc.drmConfig = drmConfig
         vc.videoList = videoList

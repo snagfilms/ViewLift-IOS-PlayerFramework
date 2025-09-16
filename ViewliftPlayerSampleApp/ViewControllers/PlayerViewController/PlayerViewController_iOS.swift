@@ -12,7 +12,7 @@ import VLBeaconLib
 #if os(iOS)
 import VLAuthentication
 #else
-import VLAuthentication_tvOS
+import VLAuthentication
 #endif
 import VLAnalyticsLib
 import Foundation
@@ -51,8 +51,6 @@ class PlayerViewController_iOS: UIViewController {
     var vlPlayer: VLPlayer?
     var videoPlayerControlsView: CustomVideoControls? // using UIKIT
     var videoPlayerCustomView: (view: UIView?, viewModel: PlayerControlsViewModel?)? // using SwiftUI
-
-    var tempPassTimer: Timer?
     
     // Configuration Properties
     var enableCustomPlayerUI: Bool = false
@@ -65,6 +63,7 @@ class PlayerViewController_iOS: UIViewController {
     var hideControls: Bool = false
     var muteEnabled: Bool = false
     var streamUrl: String?
+    var channelId: [String] = []
     weak var player: AVPlayer?
     var analyticsAdDictionary = AnalyticsAdDictionary()
     var currentAdAssetInfo: VLAdAssetInfo?
@@ -136,7 +135,7 @@ class PlayerViewController_iOS: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.stopTempPassTimer()
+//        self.stopTempPassTimer()
     }
     
     func setupConstraints() {
@@ -204,7 +203,7 @@ class PlayerViewController_iOS: UIViewController {
     
     /// Cleans up player and UI resources
     internal func cleanupResources() {
-        self.stopTempPassTimer()
+//        self.stopTempPassTimer()
         
         vlPlayer?.destroy()
         vlPlayer?.playerVideoAnalyticsDelegate = nil
@@ -273,12 +272,14 @@ extension PlayerViewController_iOS {
         let loaderView = addLoaderView(to: playerContainerView)
         loaderView.startAnimating()
 
+        self.timerLabel.isHidden = true
+        
         if UserManager.shared.userIdentity?.tveUserId == nil {
                 //check if ealier temp pass was created but not expired
                 self.invalidatePlayerTempPassIfOutOfWindow()
 
                 //request for temp pass
-                await self.getTempPassPayload(channelIds: ["usa"])
+                await self.getTempPassPayload(channelIds: self.channelId)
         }
         
         let featureSupported = getPlayerFeaturesSupported()
@@ -295,6 +296,7 @@ extension PlayerViewController_iOS {
         }
         // Select playback source type based on user option
         let playbackSourceType: VLPlayer.PlaybackSourceType
+        
         if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
             let isDVREnabled = streamConfig?.isDVR ?? false
             let streamType = VLPlayer.DirectStreamType(
@@ -304,11 +306,24 @@ extension PlayerViewController_iOS {
             )
             
             let playbackConfig = VLPlayer.DirectStreamPlaybackConfig(
-                stream: streamType, adobeTempPassPayload: AppDelegate.shared.playerTempPass
+                stream: streamType
             )
+            
             playbackSourceType = .directStream(playbackConfig)
-        }else{
-            playbackSourceType = .contentPlayback(VLPlayer.ContentPlaybackConfig(videoId: self.videoList.videoId, token: vlToken, apiBaseURL: vlBaseUrl, adobeTempPassPayload: AppDelegate.shared.playerTempPass))
+            
+        } else {
+            let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass?.getPassPayload()
+            
+            playbackSourceType =
+                .contentPlayback(
+                    VLPlayer
+                        .ContentPlaybackConfig(
+                            videoId: self.videoList.videoId,
+                            token: vlToken,
+                            apiBaseURL: vlBaseUrl,
+                            adobeTempPassPayload: adobePassPayload?.adobePlayerTempPass
+                        )
+                )
         }
             
             setPlayerDelegates()
@@ -323,8 +338,7 @@ extension PlayerViewController_iOS {
            vlPlayer?.setSource(
                 type: playbackSourceType,
                 vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
-                playerFeaturesSupported: featureSupported, nextPlaybackList: nil,
-                adobePlayerPlayload: AppDelegate.shared.playerTempPass
+                playerFeaturesSupported: featureSupported, nextPlaybackList: nil
             ) {
                 [weak self] isSuccess,
                 playerView,
