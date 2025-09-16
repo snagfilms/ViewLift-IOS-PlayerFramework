@@ -5,7 +5,7 @@
 //  Created by rakeshkrsharma@viewlift.com on 10/09/25.
 //  Copyright © 2025 Viewlift. All rights reserved.
 //
-import VLAuthentication
+import VLAuthenticationFramework
 import Foundation
 import VLPlayerLib
 import UIKit

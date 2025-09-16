@@ -6,7 +6,7 @@
 //  Copyright © 2025 Viewlift. All rights reserved.
 //
 import Foundation
-import VLAuthentication
+import VLAuthenticationFramework_tvOS
 
 extension PlayerViewController_tvOS {
     func getTempPassPayload() async {

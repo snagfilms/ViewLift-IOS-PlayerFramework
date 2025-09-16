@@ -7,11 +7,7 @@
 //
 
 import VLPlayerLib
-#if os(iOS)
-import VLAuthentication
-#else
-import VLAuthentication
-#endif
+import VLAuthenticationFramework_tvOS
 import Foundation
 import SwiftUI
 

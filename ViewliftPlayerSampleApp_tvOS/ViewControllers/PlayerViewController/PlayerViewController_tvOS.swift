@@ -9,11 +9,7 @@
 import UIKit
 import VLPlayerLib
 import VLBeaconLib
-#if os(iOS)
-import VLAuthentication
-#else
-import VLAuthentication
-#endif
+import VLAuthenticationFramework_tvOS
 import AVKit
 import VLAnalyticsLib
 
@@ -347,7 +343,7 @@ class PlayerViewController_tvOS: UIViewController {
         switch type {
         case .customTheme:
             // Configure default player controls view with custom theme
-            let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .yellow)
+            let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .yellow, smallScreenBorderColor: .green)
             let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", playbackQualityText: "PLAYBACK QUALITY")
             let playerControlsConfig = PlayerControlsConfig(isSettingsSupported: false, isSubTitleSupported: true, isSlowMoSupported: false)
             let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent, playerControlsConfig: playerControlsConfig)

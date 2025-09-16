@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VLAuthentication
+import VLAuthenticationFramework_tvOS
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

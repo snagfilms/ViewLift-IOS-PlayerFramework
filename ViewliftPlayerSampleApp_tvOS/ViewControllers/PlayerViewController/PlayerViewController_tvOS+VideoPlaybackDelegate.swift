@@ -8,11 +8,7 @@
 
 import VLPlayerLib
 import AVKit
-#if os(iOS)
-import VLAuthentication
-#else
-import VLAuthentication
-#endif
+import VLAuthenticationFramework_tvOS
 import Foundation
 
 // Handle video playback delegate events for the player view controller
