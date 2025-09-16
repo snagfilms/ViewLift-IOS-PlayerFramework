@@ -21,13 +21,24 @@ extension PlayerViewController_tvOS {
                     AppDelegate.shared.adobePlayerTempPass = payload
                 }
             case .failure(_):
-//                self.cleanupAndReloadPlayerView()
+                self.cleanupAndReloadPlayerView()
                 break
             }
         } catch {
-//            self.cleanupAndReloadPlayerView()
+            self.cleanupAndReloadPlayerView()
         }
     }
+    
+    func cleanupAndReloadPlayerView(){
+        Task { [weak self] in
+            guard let self = self else { return }
+            
+            self.vlPlayer?.destroy()
+            await self.loadPlayerView()
+        }
+    }
+    
+    
     
     func invalidatePlayerTempPassIfOutOfWindow() {
         guard
@@ -49,7 +60,7 @@ extension PlayerViewController_tvOS {
             
             AppDelegate.shared.adobePlayerTempPass = nil
             
-//            self.cleanupAndReloadPlayerView()
+            self.cleanupAndReloadPlayerView()
             
             DispatchQueue.main.async { [weak self] in
                 self?.customPaywallView?.update("The temporary access duration limit has been exceeded.")

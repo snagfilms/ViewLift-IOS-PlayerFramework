@@ -260,22 +260,16 @@ class PlayerViewController_tvOS: UIViewController {
     
     // Sets up portrait and landscape constraints for the player container
     func setupConstraints() {
-        
+        // Setup timerLabel properties (but don't add as subview here)
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
         timerLabel.textColor = .white
         timerLabel.backgroundColor = .black
         timerLabel.textAlignment = .center
-        timerLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 14, weight: .medium)
+        timerLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 32, weight: .heavy)
         timerLabel.text = "00:00"
-        
         timerLabel.isHidden = true
-        
-        // Add label inside playerContainerView
-        playerContainerView.addSubview(timerLabel)
-        // Bring label to front within playerContainerView
-        playerContainerView.bringSubviewToFront(timerLabel)
-        
-        // Portrait: half width, 16:9, top aligned, left aligned
+
+        // Prepare playerContainerView layout constraints (your existing logic)
         portraitConstraints = [
             playerContainerView.topAnchor.constraint(equalTo: view.topAnchor),
             playerContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -283,7 +277,6 @@ class PlayerViewController_tvOS: UIViewController {
             playerContainerView.heightAnchor.constraint(equalTo: playerContainerView.widthAnchor, multiplier: 9.0 / 16.0)
         ]
 
-        // Landscape: full width, same aspect ratio, still centered horizontally
         landscapeConstraints = [
             playerContainerView.topAnchor.constraint(equalTo: view.topAnchor),
             playerContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -292,20 +285,36 @@ class PlayerViewController_tvOS: UIViewController {
         ]
     }
 
+
     // Adds the player view to the container and sets constraints
     func addPlayerViewToContainer(_ playerView: UIView) {
+        timerLabel.removeFromSuperview()
+        
+        // Add player view first (fills container)
         playerContainerView.addSubview(playerView)
         playerContainerView.backgroundColor = .white
         playerView.backgroundColor = .white
-        //playerView.alpha = 0.2
         playerView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             playerView.topAnchor.constraint(equalTo: playerContainerView.topAnchor),
             playerView.bottomAnchor.constraint(equalTo: playerContainerView.bottomAnchor),
             playerView.leadingAnchor.constraint(equalTo: playerContainerView.leadingAnchor),
             playerView.trailingAnchor.constraint(equalTo: playerContainerView.trailingAnchor)
         ])
+
+        // Now add timerLabel *after* all content, so it's on top
+        playerContainerView.addSubview(timerLabel)
+        NSLayoutConstraint.activate([
+            timerLabel.topAnchor.constraint(equalTo: playerContainerView.topAnchor, constant: 16),
+            timerLabel.leadingAnchor.constraint(equalTo: playerContainerView.leadingAnchor, constant: 16),
+            timerLabel.heightAnchor.constraint(equalToConstant: 100),
+            timerLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 200)
+        ])
+
+        playerContainerView.bringSubviewToFront(timerLabel)
     }
+
 
     // Returns player features supported configuration
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
