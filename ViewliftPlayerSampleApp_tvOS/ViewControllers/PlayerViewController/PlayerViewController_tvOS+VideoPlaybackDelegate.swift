@@ -20,6 +20,37 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
         changeLayout()
     }
     
+    func videoPlaybackError(currentTime: Double, errorMessage: String, errorCode: String, playerTag: String) {
+        DispatchQueue.main.async { [weak self] in
+            if let playerView = self?.vlPlayer?.getVideoPlayerView(){
+                self?.errorHandler(message: errorMessage, playerView: playerView)
+            }
+        }
+    }
+    
+    private func errorHandler(message: String, playerView: UIView) {
+        let errorLabel = UILabel()
+        errorLabel.text = "Video playback failed"
+        errorLabel.textColor = .white
+        errorLabel.textAlignment = .center
+        errorLabel.font = .systemFont(ofSize: 32, weight: .medium)
+        errorLabel.numberOfLines = 0
+        errorLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        errorLabel.layer.cornerRadius = 8
+        errorLabel.clipsToBounds = true
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        playerView.addSubview(errorLabel)
+
+        NSLayoutConstraint.activate([
+            errorLabel.centerXAnchor.constraint(equalTo: playerView.centerXAnchor),
+            errorLabel.centerYAnchor.constraint(equalTo: playerView.centerYAnchor),
+            errorLabel.leadingAnchor.constraint(greaterThanOrEqualTo: playerView.leadingAnchor, constant: 20),
+            errorLabel.trailingAnchor.constraint(lessThanOrEqualTo: playerView.trailingAnchor, constant: -20)
+        ])
+    }
+
+    
     // Handles errors during video fetch and updates UI accordingly
     func videoFetchError(error: VLError?, playerTag: String?, contentResponse: Dictionary<String, AnyObject>?) {
         let errorDescription =  "Is content playable - \(error?.isPlayable ?? false) \n" +

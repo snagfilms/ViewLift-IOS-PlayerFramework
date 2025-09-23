@@ -278,7 +278,7 @@ extension PlayerViewController_iOS {
 
         self.timerLabel.isHidden = true
         
-        if UserManager.shared.userIdentity?.tveUserId == nil {
+        if UserManager.shared.userIdentity?.tveUserId == nil && !isPlayingFromURL() {
                 //check if ealier temp pass was created but not expired
                 self.invalidatePlayerTempPassIfOutOfWindow()
 
@@ -300,8 +300,7 @@ extension PlayerViewController_iOS {
         }
         // Select playback source type based on user option
         let playbackSourceType: VLPlayer.PlaybackSourceType
-        
-        if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL{
+        if isPlayingFromURL(){
             let isDVREnabled = streamConfig?.isDVR ?? false
             let streamType = VLPlayer.DirectStreamType(
                 url: streamUrl ?? "",
@@ -391,6 +390,9 @@ extension PlayerViewController_iOS {
 
     }
     
+    private func isPlayingFromURL() -> Bool{
+        return playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL
+    }
     
     /// Determines if direct stream should be used based on player option
     private func shouldUseDirectStream() -> Bool {
