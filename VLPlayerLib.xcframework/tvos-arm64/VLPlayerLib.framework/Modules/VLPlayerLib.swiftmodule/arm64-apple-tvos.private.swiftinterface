@@ -211,7 +211,14 @@ extension VLPlayerLib.VLPlayer {
     public init(style: VLPlayerLib.VLPlayer.PlayerControlsViewStyle = PlayerControlsViewStyle(), textContent: VLPlayerLib.VLPlayer.PlayerControlsViewTextContent = PlayerControlsViewTextContent(), playerControlsConfig: VLPlayerLib.PlayerControlsConfig = PlayerControlsConfig())
   }
   public struct PlayerControlsViewStyle {
-    public init(buttonTextColor: UIKit.UIColor = .red, buttonBackgroundColor: UIKit.UIColor = .blue, backgroundColor: UIKit.UIColor = .green, sliderColor: UIKit.UIColor = UIColor.fromHex("#ABAAAC"), sliderProgressColor: UIKit.UIColor = UIColor.fromHex("#686768"), smallScreenBorderColor: UIKit.UIColor = .white)
+    public init(buttonTextColor: UIKit.UIColor = .red, buttonBackgroundColor: UIKit.UIColor = .blue, backgroundColor: UIKit.UIColor = .green, sliderColor: UIKit.UIColor = UIColor.fromHex("#ABAAAC"), sliderProgressColor: UIKit.UIColor = UIColor.fromHex("#686768"), smallScreenBorderColor: UIKit.UIColor = .white, gradientConfig: VLPlayerLib.VLPlayer.GradientConfig = GradientConfig())
+  }
+  public struct GradientConfig {
+    public var colors: [UIKit.UIColor]
+    public var locations: [Foundation.NSNumber]
+    public var startPoint: CoreFoundation.CGPoint
+    public var endPoint: CoreFoundation.CGPoint
+    public init(colors: [UIKit.UIColor] = [.clear, .black], locations: [Foundation.NSNumber] = [0.0, 1.0], startPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 0.0), endPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 1.0))
   }
   public struct PlayerControlsViewTextContent {
     public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts")
@@ -992,7 +999,10 @@ extension UIKit.UIColor {
     @objc set
   }
   @_Concurrency.MainActor @preconcurrency final public var stepValue: Swift.Float
-  @_Concurrency.MainActor @preconcurrency final public var _isTracking: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency final public var _isTracking: Swift.Bool {
+    get
+    set
+  }
   @_Concurrency.MainActor @preconcurrency final public func setValue(_ value: Swift.Float, animated: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency final public func setMinimumTrackImage(_ image: UIKit.UIImage?, for state: UIKit.UIControl.State)
   @_Concurrency.MainActor @preconcurrency final public func setMaximumTrackImage(_ image: UIKit.UIImage?, for state: UIKit.UIControl.State)
