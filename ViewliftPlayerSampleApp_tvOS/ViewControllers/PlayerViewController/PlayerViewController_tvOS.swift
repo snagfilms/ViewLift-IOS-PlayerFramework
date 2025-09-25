@@ -118,7 +118,6 @@ class PlayerViewController_tvOS: UIViewController {
             vlPlayer = VLPlayer(playerType: .default)
         }
         // Select playback source type based on user option
-       // let url = "https://spinco.mt.staging.asset.viewlift.com/v1/master/a2769ff6f508fb0f68aca8782209ab59ae7a5db0/spinco-vod-hls-cmaf/Renditions/20250912/1757693064698_spinco_HD_TVE_CITIESOFSU_12062023_7830k_CUSTOM_CODEC_TS_DRM_DASH_DRM/cmafHls/masterNoSubs.m3u8?ads.prof=VIEWLIFT_PROF&ads.csid=VIEWLIFT_CSID&ads.caid=CNBC_VOD_9000375676&ads.vdur=VIEWLIFT_DURATION&ads.sfid=VIEWLIFT_SFID&ads._fw_vcid2=VIEWLIFT_USER&ads._fw_gdpr=VIEWLIFT_GDPR&ads._fw_gdpr_consent=VIEWLIFT_GDPR_CONSENT&ads._fw_us_privacy=VIEWLIFT_US_PRIVACY&ads._fw_is_lat=VIEWLIFT_LAT&ads._fw_did=VIEWLIFT_DEVICE_ID&ads._fw_ae=VIEWLIFT_TVE_PROVIDER&ads._fw_app_bundle=VIEWLIFT_APP_BUNDLE&ads._fw_player_width=VIEWLIFT_WIDTH&ads._fw_player_height=VIEWLIFT_HEIGHT&ads._fw_atts=VIEWLIFT_ATT_CONSENT&ads.gpp=VIEWLIFT_GPP&ads.gpp_sid=VIEWLIFT_GPP_SID&ads.afid=VIEWLIFT_AFID&ads._fw_app_store_url=VIEWLIFT_APP_STORE_URL"
         let playbackSourceType: VLPlayer.PlaybackSourceType
         if isPlayingFromURL(){
             playbackSourceType = .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", streamConfig: VLPlayer.StreamConfig(isSSAIEnabled: false), drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl))

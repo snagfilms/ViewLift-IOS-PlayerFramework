@@ -24,7 +24,7 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
             videoPlayerCustomView?.viewModel?.updateTimeLabel(totalTime: remainingTime, currentTime: currentTime)
         }
         videoPlayerCustomView?.viewModel?.setupPiP()
-
+        self.playerDidLoadVideo(player: player)
         self.playerDidStartPlaying()
     }
 

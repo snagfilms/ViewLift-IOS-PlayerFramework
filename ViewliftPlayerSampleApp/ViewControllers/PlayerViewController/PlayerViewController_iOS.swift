@@ -93,7 +93,7 @@ class PlayerViewController_iOS: UIViewController {
     private var seekBackwardDuration: Double = Constants.defaultSeekBackward
     private var adUrl: String?
     private var playerOptionSelected: PlayerUIOptions!
-    var enableCustomAdUI: Bool = true
+    var enableCustomAdUI: Bool = false
     var playerRateBeforeSeek: Float = 1.0
     var isVideoPlayingBeforeSeek = true
     var autoPlayListdataManager: AutoPlayDataManager?

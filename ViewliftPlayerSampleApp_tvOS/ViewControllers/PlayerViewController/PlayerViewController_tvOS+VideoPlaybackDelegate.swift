@@ -100,11 +100,13 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     func videoStarted(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.videoStartedPlaying(timestamp: timestamp)
         debugPrint("PlayerViewController videoStarted: \(timestamp)")
+        self.playerDidLoadVideo(player: player)
+        self.playerDidStartPlaying()
     }
     
     // Updates playback progress every second
     func videoPlayerProgressByEverySecond(currentTime: Double, totalTime: Double, playerTag: String, parsedTimeStamp: String?) {
-        debugPrint("PlayerViewController videoPlayerProgressByEverySecond: \(currentTime), \(totalTime)")
+       // debugPrint("PlayerViewController videoPlayerProgressByEverySecond: \(currentTime), \(totalTime)")
         videoPlayerControlsView?.updateCurrentTime(currentTime: currentTime, totalTime: totalTime)
         
         self.invalidatePlayerTempPassIfOutOfWindow()

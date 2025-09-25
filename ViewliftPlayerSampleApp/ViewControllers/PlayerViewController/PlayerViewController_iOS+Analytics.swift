@@ -11,7 +11,7 @@ import VLPlayerLib
 import AVKit
 
 // Handles analytics integration for player events and content/ad info
-extension PlayerViewController_iOS: VLAnalyticsPlayerClientProtocol {
+extension PlayerViewController_iOS {
     // Called when the player starts playback
     func playerDidStartPlaying() {
         let eventBuilder = VLEventModelBuilder()
@@ -137,4 +137,123 @@ extension PlayerViewController_iOS: VLAnalyticsPlayerClientProtocol {
             videoInitiate: "Manual"
         )
     }
+}
+
+extension PlayerViewController_iOS: PlayerVideoAnalyticsTrackDelegate{
+    
+    func updatePlayhead(time: Double) {
+        
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.updateCurrentPlayHead(time))
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func playerDidLoadVideo(player: AVPlayer?) {
+        let loggedUser = UserManager.shared.userIdentity
+        
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.mediaPlay)
+            .contentInfo(getVideoInfo())
+            .tvProviderInfo(VLTVProviderInfo(tvProviderName: loggedUser?.mvpdProvider ?? "", requestorId: /* AppConfiguration.shared.tveSettings?.requestorId*/ "")
+            )
+            .adsInfo(getAdsInfo())
+            .setPlayer(player)
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    
+    func playerSeekDidStart(fromTimeInterval: Double) {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.videoSeekStarted)
+            .contentInfo(getVideoInfo())
+            .adsInfo(getAdsInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func playerSeekDidComplete(toTimeInterval: Double) {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.videoSeekCompleted)
+            .contentInfo(getVideoInfo())
+            .adsInfo(getAdsInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func playerSessionEnded() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.trackSessionEnd)
+            .contentInfo(getVideoInfo())
+            .adsInfo(getAdsInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func trackVideoCompletedAnalytics() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.videoComplete)
+            .contentInfo(getVideoInfo())
+            .adsInfo(getAdsInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func playerFirstFrameLoaded() {
+        debugPrint("")
+    }
+    
+    func trackVideoFailErrorAnalytics(errorMessage: String) {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.errorEvent)
+            .errorMessage(errorMessage)
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func playerDidChangeAudioLanguage(language: String?) {
+        
+    }
+    
+    func playerDidDropFrames(count: Int) {
+        
+    }
+    
+    func playerChapterDidStart(currentTime: Double) {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.videochapterStart(currentTime))
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func playerChapterDidComplete() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.videoChapterComplete)
+            .adsInfo(getAdsInfo())
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func playerDidBitRateChange() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.playerBitrateChanged)
+            .adsInfo(getAdsInfo())
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    func playerDidStartBuffering() {
+        let eventBuilder = VLEventModelBuilder()
+            .eventType(.videoBuffer)
+            .adsInfo(getAdsInfo())
+            .contentInfo(getVideoInfo())
+            .build()
+        VLAnalytics.shared.trackEvent(data: eventBuilder)
+    }
+    
+    
 }
