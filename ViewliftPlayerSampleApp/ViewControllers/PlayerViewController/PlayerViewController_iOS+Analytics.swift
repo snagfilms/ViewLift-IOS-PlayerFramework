@@ -140,6 +140,30 @@ extension PlayerViewController_iOS {
 }
 
 extension PlayerViewController_iOS: PlayerVideoAnalyticsTrackDelegate{
+    func playerSeekDidStart() {
+        
+    }
+    
+    func playerSeekDidComplete(newTime: Double, shouldResume: Bool) {
+        
+    }
+    
+    func playerChapterDidStart(currentTime: Double, endTime: Double) {
+        
+    }
+    
+    func playerDidFail(errorMessage: String, isFatal: Bool) {
+        
+    }
+    
+    func playerDidBufferingComplete() {
+        
+    }
+    
+    func playerDidLoadVideo() {
+        
+    }
+    
     
     func updatePlayhead(time: Double) {
         

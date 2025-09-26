@@ -150,6 +150,30 @@ extension PlayerViewController_tvOS {
 }
 
 extension PlayerViewController_tvOS: PlayerVideoAnalyticsTrackDelegate{
+    func playerSeekDidStart() {
+        
+    }
+    
+    func playerSeekDidComplete(newTime: Double, shouldResume: Bool) {
+        
+    }
+    
+    func playerChapterDidStart(currentTime: Double, endTime: Double) {
+        
+    }
+    
+    func playerDidFail(errorMessage: String, isFatal: Bool) {
+        
+    }
+    
+    func playerDidBufferingComplete() {
+        
+    }
+    
+    func playerDidLoadVideo() {
+        
+    }
+    
     func playerDidChangeClosedCaptionLanguage(language: String?) {
         
     }

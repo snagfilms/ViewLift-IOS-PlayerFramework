@@ -347,9 +347,9 @@ class PlayerViewController_tvOS: UIViewController {
         switch type {
         case .customTheme:
             // Configure default player controls view with custom theme
-            let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .yellow, smallScreenBorderColor: .green)
+            let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .white, smallScreenBorderColor: .green, fullScreenBorderColor: .red)
             let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", playbackQualityText: "PLAYBACK QUALITY")
-            let playerControlsConfig = PlayerControlsConfig(isSettingsSupported: false, isSubTitleSupported: true, isSlowMoSupported: false)
+            let playerControlsConfig = PlayerControlsConfig(isSettingsSupported: false, isSubTitleSupported: true, isSlowMoSupported: false, isStartFromBeginningSupported: false)
             let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent, playerControlsConfig: playerControlsConfig)
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(controlsTheme: controlsTheme)
             return playerControlsViewConfiguration
@@ -402,7 +402,6 @@ class PlayerViewController_tvOS: UIViewController {
             return
         }
         super.pressesBegan(presses, with: event)
-        vlPlayer?.setPlayerControls(isHidden: true)
     }
     
     // Removes the controller from navigation stack or dismisses it
