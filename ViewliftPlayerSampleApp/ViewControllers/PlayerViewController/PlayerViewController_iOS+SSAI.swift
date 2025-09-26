@@ -132,7 +132,7 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
         case .breakStart:
             debugPrint("slot impression") // Ad break has started
         
-            self.trackAdBreakStartAnalytics()
+            AnalyticsHelper.shared.trackAdBreakStartAnalytics()
             
         case .impression:
             debugPrint("default impression") // Ad impression logged
@@ -140,7 +140,7 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
         case .start:
             debugPrint("impression") // Ad has started playing
             
-            self.trackAdDidStartsAnalytics()
+            AnalyticsHelper.shared.trackAdDidStartsAnalytics()
             
 
         case .firstQuartile:
@@ -155,13 +155,17 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
         case .complete:
             debugPrint("complete") // 100% of ad completed
             
-            self.trackAdDidCompleteAnalytics()
+            AnalyticsHelper.shared.trackAdDidCompleteAnalytics()
 
         case .breakEnd:
             debugPrint("slot end") // Ad break has ended
             
-            self.trackAdBreakCompleteAnalytics()
-            self.playerChapterDidStart(currentTime: playerCurrentTime)
+            AnalyticsHelper.shared.trackAdBreakCompleteAnalytics()
+            AnalyticsHelper.shared
+                .playerChapterDidStart(
+                    currentTime: playerCurrentTime,
+                    endTime: 5.0
+                )
 
         case .mute:
             debugPrint("mute") // Ad muted
@@ -178,7 +182,7 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
         case .resume:
             debugPrint("resume") // Ad resumed after pause
             
-            self.playerDidStartPlaying()
+            AnalyticsHelper.shared.playerDidStartPlaying()
 
         case .closeLinear:
             debugPrint("close") // Linear ad closed
@@ -189,7 +193,7 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
         case .pause:
             debugPrint("pause") // Ad paused
             
-            self.playerDidPaused()
+            AnalyticsHelper.shared.playerDidPaused()
 
         case .acceptInvitationLinear:
             debugPrint("accept invitation") // User accepted invitation ad
