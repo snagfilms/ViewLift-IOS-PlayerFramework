@@ -100,8 +100,29 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     func videoStarted(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.videoStartedPlaying(timestamp: timestamp)
         debugPrint("PlayerViewController videoStarted: \(timestamp)")
-        self.playerDidLoadVideo(player: player)
-        self.playerDidStartPlaying()
+        
+        self.videoSessionStartAnalytics()
+        
+    }
+    
+    func videoSessionStartAnalytics() {
+        let isPreRollAds = self.vlPlayer?.isVideoHavingPreRollAds() ?? false
+        let currentPlaybackTime = self.vlPlayer?.getCurrentPlaybackTime() ?? 0.0
+        let endPlaybackTime = self.vlPlayer?.getChapterEndTime() ?? 0.0
+        
+        let chapterInfo = ChapterInfoModel(
+            havingPreRollAds: isPreRollAds,
+            startTime: currentPlaybackTime,
+            endTime: endPlaybackTime
+        )
+        
+        if let contentInfo = self.getVideoInfo() {
+            AnalyticsHelper.shared
+                .triggerVideoSessionStartEvent(
+                    contentInfo: contentInfo,
+                    chapterInfo: chapterInfo
+                )
+        }
     }
     
     // Updates playback progress every second

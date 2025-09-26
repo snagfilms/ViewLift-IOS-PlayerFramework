@@ -12,7 +12,7 @@ import VLAuthenticationFramework
 import VLAuthenticationFramework_tvOS
 #endif
 import VLAnalyticsLib
-import Firebase
+//import Firebase
 
 // Extension to AppDelegate for handling authentication logic
 extension AppDelegate {

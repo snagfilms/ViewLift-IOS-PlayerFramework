@@ -384,7 +384,7 @@ extension PlayerViewController_iOS {
                 }
                 
                 if let contentResponse = contentResponse {
-                    self?.parseVLVideoResponse(from: contentResponse)
+                    self?.videoResponse = AnalyticsHelper.shared.parseVLVideoResponse(from: contentResponse)
                 }
             }
 
@@ -403,7 +403,7 @@ extension PlayerViewController_iOS {
     private func setPlayerDelegates() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
         vlPlayer?.videoPlayerDelegate = self
-        vlPlayer?.playerVideoAnalyticsDelegate = self
+        vlPlayer?.playerVideoAnalyticsDelegate = AnalyticsHelper.shared
         vlPlayer?.enablePlayerBitrateLogs = enableBitrateLogs
         vlPlayer?.serverSideAdTrackingDelegate = self
         vlPlayer?.castDelegate = self

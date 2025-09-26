@@ -1,5 +1,5 @@
 {
-  "originHash" : "0261ff9794b49376bbdc2ab7c795ac2d7fa2ee3a04f14899adb00243ee70baab",
+  "originHash" : "2e9e8af445dfbf6d5f75ffbe8c5aa14800f3ff4dd2ec6e865f7ef94920ed6ff9",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -8,6 +8,42 @@
       "state" : {
         "revision" : "bbe8b69694d7873315fd3a4ad41efe043e1c07c5",
         "version" : "1.2024072200.0"
+      }
+    },
+    {
+      "identity" : "aepsdk-analytics-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adobe/aepsdk-analytics-ios.git",
+      "state" : {
+        "revision" : "69835581e2f1351d39f6f5d25030857b1f79354d",
+        "version" : "5.0.2"
+      }
+    },
+    {
+      "identity" : "aepsdk-core-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adobe/aepsdk-core-ios.git",
+      "state" : {
+        "revision" : "3df34740bf0493dfdc32632ac6a98f340740d9db",
+        "version" : "5.7.0"
+      }
+    },
+    {
+      "identity" : "aepsdk-media-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adobe/aepsdk-media-ios.git",
+      "state" : {
+        "revision" : "116ba5bf349bccfc10d6c21a99ef736b3acffc39",
+        "version" : "5.0.1"
+      }
+    },
+    {
+      "identity" : "aepsdk-rulesengine-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adobe/aepsdk-rulesengine-ios.git",
+      "state" : {
+        "revision" : "514d2b3787c545bfa6749ffce5dd3e6f560c9319",
+        "version" : "5.0.0"
       }
     },
     {
@@ -29,21 +65,21 @@
       }
     },
     {
-      "identity" : "appauth-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/openid/AppAuth-iOS.git",
-      "state" : {
-        "revision" : "2781038865a80e2c425a1da12cc1327bcd56501f",
-        "version" : "1.7.6"
-      }
-    },
-    {
       "identity" : "appsflyerframework",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework",
       "state" : {
         "revision" : "08fa1746dad0915cb336b458e4d6e8e06c2e47f7",
         "version" : "6.17.3"
+      }
+    },
+    {
+      "identity" : "authenticationframework",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/snagfilms/AuthenticationFramework.git",
+      "state" : {
+        "branch" : "3.1.4",
+        "revision" : "5affab3a99c63377c4d24bad68ffe4f5a6beebb3"
       }
     },
     {
@@ -110,15 +146,6 @@
       }
     },
     {
-      "identity" : "googlesignin-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/GoogleSignIn-iOS",
-      "state" : {
-        "branch" : "7.0.0",
-        "revision" : "7932d33686c1dc4d7df7a919aae47361d1cdfda4"
-      }
-    },
-    {
       "identity" : "googleutilities",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleUtilities.git",
@@ -146,30 +173,12 @@
       }
     },
     {
-      "identity" : "gtmappauth",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/GTMAppAuth.git",
-      "state" : {
-        "revision" : "cee3c709307912d040bd1e06ca919875a92339c6",
-        "version" : "2.0.0"
-      }
-    },
-    {
       "identity" : "interop-ios-for-google-sdks",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/interop-ios-for-google-sdks.git",
       "state" : {
         "revision" : "040d087ac2267d2ddd4cca36c757d1c6a05fdbfe",
         "version" : "101.0.0"
-      }
-    },
-    {
-      "identity" : "ios-vlanalytics-spm",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/snagfilms/iOS-VLAnalytics-SPM",
-      "state" : {
-        "branch" : "3.0.0",
-        "revision" : "718527163e54907bfb0ea76db16c529a952f662e"
       }
     },
     {
@@ -299,18 +308,9 @@
       }
     },
     {
-      "identity" : "viewlift-ios-playerframework",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework",
-      "state" : {
-        "branch" : "3.2.7",
-        "revision" : "ce64689b4a4900f38d46a6cfc4908a69e452d6fb"
-      }
-    },
-    {
       "identity" : "visualeffectview",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/efremidze/VisualEffectView.git",
+      "location" : "https://github.com/efremidze/VisualEffectView",
       "state" : {
         "branch" : "master",
         "revision" : "405baa5eba273ead6a23272605adc3232422262b"

@@ -141,7 +141,7 @@ class PlayerViewController_tvOS: UIViewController {
         // Set delegates for SSAID events
         vlPlayer?.serverSideAdTrackingDelegate = self
         
-        vlPlayer?.playerVideoAnalyticsDelegate = self
+        vlPlayer?.playerVideoAnalyticsDelegate = AnalyticsHelper.shared
         // Set entitlement if available
         if let entitlementData{
             vlPlayer?.setEntitlement(data: entitlementData)
