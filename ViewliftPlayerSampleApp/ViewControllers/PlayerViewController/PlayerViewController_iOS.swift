@@ -482,6 +482,9 @@ extension PlayerViewController_iOS {
                         )
                 )
             }
+        } catch (let error as VLAuthenticationErrorCode){
+            self.vlPlayer?.destroy()
+            self.handleAuthzFailure(error)
         } catch {
             debugPrint(error)
         }

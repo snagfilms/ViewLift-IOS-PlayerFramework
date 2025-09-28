@@ -56,7 +56,7 @@ class PlayerViewController_tvOS: UIViewController {
     var autoPlayListdataManager: AutoPlayDataManager?
     internal var autoPlayView: AutoPlayView?
     let timerLabel = UILabel()
-    internal var isFullScreen: Bool = false
+    internal var isFullScreen: Bool = true
     let testButton = UIButton(type: .system)
     var totalAdsDuration: Double = 0.0
     var channelId: [String] = [] {
@@ -163,8 +163,11 @@ class PlayerViewController_tvOS: UIViewController {
                    let monetizationModels = video["monetizationModels"] as? [[String: Any]] {
                     hasTVE = monetizationModels.contains { $0["type"] as? String == "TVE" }
                 }
-                
-                self?.handlePlayerSetupCompletion(playerView: playerView, hasTVE: hasTVE)
+                let plans = contentResponse?["plans"] as? [[String: Any]] ?? []
+                let channelIds = plans
+                    .flatMap { $0["planDetails"] as? [[String: Any]] ?? [] }
+                    .flatMap { $0["channelIds"] as? [String] ?? [] }
+                self?.handlePlayerSetupCompletion(playerView: playerView, hasTVE: hasTVE, channelIds: channelIds)
                 
             }
         }
@@ -177,7 +180,8 @@ class PlayerViewController_tvOS: UIViewController {
     // Handles player setup completion, checks for TVE authorization
     private func handlePlayerSetupCompletion(
         playerView: UIView?,
-        hasTVE: Bool
+        hasTVE: Bool,
+        channelIds: [String]
     ) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -188,12 +192,15 @@ class PlayerViewController_tvOS: UIViewController {
                 self.addPlayerViewToContainer(playerView)
                 return
             }
-            
+            // If user is TVE and content requires TVE, check authorization
             if user.tveUserId != nil && hasTVE {
-                self.checkAuthz(
-                    user: user,
-                    playerView: playerView
-                )
+                Task {
+                    await self.checkAuthz(
+                        user: user,
+                        playerView: playerView,
+                        channelIds: channelIds
+                    )
+                }
             } else {
                 self.addPlayerViewToContainer(playerView)
             }
@@ -201,20 +208,32 @@ class PlayerViewController_tvOS: UIViewController {
     }
     
     // Checks TVE authorization for the user
-    private func checkAuthz(user: VLUserIdentity, playerView: UIView){
+    private func checkAuthz(user: VLUserIdentity, playerView: UIView,channelIds: [String] = []) async {
         let mvpdProvider = user.mvpdProvider ?? ""
         
-        VLAuthentication.sharedInstance.checkAuthz(mvpdId: mvpdProvider) { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self.addPlayerViewToContainer(playerView)
-                case .failure(let error):
-                    self.vlPlayer?.destroy()
-                    self.handleAuthzFailure(error)
-                }
+        do {
+            let response = try await VLAuthentication.sharedInstance.checkAdobeDecisionsAuthorize(
+                mvpdId: mvpdProvider,
+                channelIds: channelIds
+            )
+            
+            switch response {
+            case .success(_):
+                self.addPlayerViewToContainer(playerView)
+            case .failure(let error):
+                self.handleAuthzFailure(
+                    VLAuthenticationErrorCode
+                        .decodingFailed(
+                            message: error.localizedDescription,
+                            underlyingError: error
+                        )
+                )
             }
+        } catch (let error as VLAuthenticationErrorCode){
+            self.vlPlayer?.destroy()
+            self.handleAuthzFailure(error)
+        } catch {
+            debugPrint(error)
         }
     }
     
