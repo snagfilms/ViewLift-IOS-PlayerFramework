@@ -130,9 +130,7 @@ class PlayerViewController_tvOS: UIViewController {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl
-                            //rakesh
-//                            ,adobeTempPassPayload: adobePassPayload
+                            apiBaseURL: vlBaseUrl,adobeTempPassPayload: adobePassPayload
                         )
                 )
         }
