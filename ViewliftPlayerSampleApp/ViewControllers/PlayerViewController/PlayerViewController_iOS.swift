@@ -325,9 +325,7 @@ extension PlayerViewController_iOS {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl
-                            //TODO: Rakesh remove ---
-//                            , adobeTempPassPayload: adobePassPayload
+                            apiBaseURL: vlBaseUrl, adobeTempPassPayload: adobePassPayload
                         )
                 )
         }
