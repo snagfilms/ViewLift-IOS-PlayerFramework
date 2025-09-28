@@ -10,6 +10,7 @@ import VLPlayerLib
 import AVKit
 import VLAuthentication
 import Foundation
+import VLAnalyticsLib
 
 // Handle video playback delegate events for the player view controller
 extension PlayerViewController_tvOS: VideoPlaybackDelegate {
@@ -76,16 +77,21 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     // Updates play/pause state in custom controls
     func customPlayerState(isPlaying: Bool) {
         videoPlayerControlsView?.playPause(isPlaying: isPlaying)
+        
+        if isPlaying {
+            AnalyticsHelper.shared.playerDidStartPlaying()
+        } else {
+            AnalyticsHelper.shared.playerDidPaused()
+        }
     }
     
     // Called when subtitle embedding in URL changes
     func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Bool) {
         debugPrint("PlayerViewController isSubtitlesEmbeddedInUrlChanged: \(isEmbedded)")
     }
-    
-    // Called when video finishes playing
-    func didFinishPlaying() {
-        print("PlayerViewController didFinishPlaying")
+ 
+    func videoFinished(playerTag: String) {
+        AnalyticsHelper.shared.trackVideoCompletedAnalytics()
     }
     
     // Called when custom player controls visibility changes
@@ -105,6 +111,19 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
         
     }
     
+    func videoPause(timestamp: Double, playerTag: String) {
+        AnalyticsHelper.shared.playerDidPaused()
+    }
+
+    func videoResume(timestamp: Double, playerTag: String) {
+        if VLAnalytics.shared.isMediaSessionTracked == false {
+            self.videoSessionStartAnalytics()
+        } else {
+            AnalyticsHelper.shared.playerDidStartPlaying()
+        }
+    }
+
+    
     func videoSessionStartAnalytics() {
         let isPreRollAds = self.vlPlayer?.isVideoHavingPreRollAds() ?? false
         let currentPlaybackTime = self.vlPlayer?.getCurrentPlaybackTime() ?? 0.0
@@ -117,11 +136,7 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
         )
         
         if let contentInfo = self.getVideoInfo() {
-            AnalyticsHelper.shared
-                .triggerVideoSessionStartEvent(
-                    contentInfo: contentInfo,
-                    chapterInfo: chapterInfo
-                )
+            AnalyticsHelper.shared.triggerVideoSessionStartEvent(contentInfo: contentInfo,chapterInfo: chapterInfo)
         }
     }
     
