@@ -10,7 +10,7 @@ import VLPlayerLib
 #if os(iOS)
 import VLAuthentication
 #else
-import VLAuthentication_tvOS
+import VLAuthentication
 #endif
 import Kingfisher
 

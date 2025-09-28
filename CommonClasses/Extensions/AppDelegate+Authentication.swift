@@ -9,7 +9,7 @@ import UIKit
 #if os(iOS)
 import VLAuthentication
 #else
-import VLAuthentication_tvOS
+import VLAuthentication
 #endif
 import VLAnalyticsLib
 //import Firebase

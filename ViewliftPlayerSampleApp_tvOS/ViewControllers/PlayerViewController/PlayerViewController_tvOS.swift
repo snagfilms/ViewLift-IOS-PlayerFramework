@@ -9,7 +9,7 @@
 import UIKit
 import VLPlayerLib
 import VLBeaconLib
-import VLAuthentication_tvOS
+import VLAuthentication
 import AVKit
 import VLAnalyticsLib
 
@@ -58,6 +58,7 @@ class PlayerViewController_tvOS: UIViewController {
     let timerLabel = UILabel()
     internal var isFullScreen: Bool = false
     let testButton = UIButton(type: .system)
+    var totalAdsDuration: Double = 0.0
     var channelId: [String] = [] {
         didSet {
             self.channelkey = self.channelId.joined(separator: ",")
@@ -129,8 +130,9 @@ class PlayerViewController_tvOS: UIViewController {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl,
-                            adobeTempPassPayload: adobePassPayload
+                            apiBaseURL: vlBaseUrl
+                            //rakesh
+//                            ,adobeTempPassPayload: adobePassPayload
                         )
                 )
         }
@@ -153,6 +155,10 @@ class PlayerViewController_tvOS: UIViewController {
                             playerFeaturesSupported: featureSupported, nextPlaybackList: nil
                         ) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
+                if let contentResponse = contentResponse {
+                    self?.videoResponse = AnalyticsHelper.shared.parseVLVideoResponse(from: contentResponse)
+                }
+                
                 var hasTVE = false
                 
                 if let video = contentResponse?["video"] as? [String: Any],
