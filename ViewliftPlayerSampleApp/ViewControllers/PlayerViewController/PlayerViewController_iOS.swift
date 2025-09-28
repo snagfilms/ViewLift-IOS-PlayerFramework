@@ -9,7 +9,11 @@
 import UIKit
 import VLPlayerLib
 import VLBeaconLib
+#if os(iOS)
 import VLAuthenticationFramework
+#else
+import VLAuthenticationFramework_tvOS
+#endif
 import VLAnalyticsLib
 import Foundation
 import AVKit
@@ -59,6 +63,7 @@ class PlayerViewController_iOS: UIViewController {
     var hideControls: Bool = false
     var muteEnabled: Bool = false
     var streamUrl: String?
+    var totalAdsDuration: Double = 0.0
     
     var channelId: [String] = [] {
         didSet {
@@ -69,7 +74,6 @@ class PlayerViewController_iOS: UIViewController {
     var channelkey: String = ""
     
     weak var player: AVPlayer?
-    var analyticsAdDictionary = AnalyticsAdDictionary()
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
     let timerLabel = UILabel()
@@ -252,6 +256,8 @@ class PlayerViewController_iOS: UIViewController {
         ) { [weak self] logoutSuccessful in
             if logoutSuccessful {
                 Task { [weak self] in
+                    AnalyticsHelper.shared.triggerSignoutAnalytics()
+                    
                     self?.logoutButton.isHidden = true
                     
                     await AppDelegate.shared.logoutUser()
@@ -323,8 +329,7 @@ extension PlayerViewController_iOS {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl,
-                            adobeTempPassPayload: adobePassPayload
+                            apiBaseURL: vlBaseUrl, adobeTempPassPayload: adobePassPayload
                         )
                 )
         }
@@ -346,6 +351,11 @@ extension PlayerViewController_iOS {
                 [weak self] isSuccess,
                 playerView,
                 contentResponse in
+                
+                if let contentResponse = contentResponse {
+                    self?.videoResponse = AnalyticsHelper.shared.parseVLVideoResponse(from: contentResponse)
+                }
+                
                 var hasTVE = false
                 
                 // Check if content has TVE monetization model
@@ -383,9 +393,7 @@ extension PlayerViewController_iOS {
                     self?.videoPlayerCustomView?.viewModel?.updateSkin(title: title, isLive: isLive, isDVREnabled: isDVR)
                 }
                 
-                if let contentResponse = contentResponse {
-                    self?.parseVLVideoResponse(from: contentResponse)
-                }
+                
             }
 
     }
@@ -403,7 +411,7 @@ extension PlayerViewController_iOS {
     private func setPlayerDelegates() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
         vlPlayer?.videoPlayerDelegate = self
-        vlPlayer?.playerVideoAnalyticsDelegate = self
+        vlPlayer?.playerVideoAnalyticsDelegate = AnalyticsHelper.shared
         vlPlayer?.enablePlayerBitrateLogs = enableBitrateLogs
         vlPlayer?.serverSideAdTrackingDelegate = self
         vlPlayer?.castDelegate = self

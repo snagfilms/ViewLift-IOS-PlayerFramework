@@ -9,7 +9,11 @@
 import UIKit
 import VLPlayerLib
 import VLBeaconLib
+#if os(iOS)
+import VLAuthenticationFramework
+#else
 import VLAuthenticationFramework_tvOS
+#endif
 import AVKit
 import VLAnalyticsLib
 
@@ -53,12 +57,12 @@ class PlayerViewController_tvOS: UIViewController {
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
     var enableCustomAdUI: Bool = false
-    var analyticsAdDictionary = AnalyticsAdDictionary()
     var autoPlayListdataManager: AutoPlayDataManager?
     internal var autoPlayView: AutoPlayView?
     let timerLabel = UILabel()
     internal var isFullScreen: Bool = true
     let testButton = UIButton(type: .system)
+    var totalAdsDuration: Double = 0.0
     var channelId: [String] = [] {
         didSet {
             self.channelkey = self.channelId.joined(separator: ",")
@@ -130,8 +134,7 @@ class PlayerViewController_tvOS: UIViewController {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl,
-                            adobeTempPassPayload: adobePassPayload
+                            apiBaseURL: vlBaseUrl,adobeTempPassPayload: adobePassPayload
                         )
                 )
         }
@@ -141,7 +144,7 @@ class PlayerViewController_tvOS: UIViewController {
         // Set delegates for SSAID events
         vlPlayer?.serverSideAdTrackingDelegate = self
         
-        vlPlayer?.playerVideoAnalyticsDelegate = self
+        vlPlayer?.playerVideoAnalyticsDelegate = AnalyticsHelper.shared
         // Set entitlement if available
         if let entitlementData{
             vlPlayer?.setEntitlement(data: entitlementData)
@@ -154,6 +157,10 @@ class PlayerViewController_tvOS: UIViewController {
                             playerFeaturesSupported: featureSupported, nextPlaybackList: nil
                         ) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
+                if let contentResponse = contentResponse {
+                    self?.videoResponse = AnalyticsHelper.shared.parseVLVideoResponse(from: contentResponse)
+                }
+                
                 var hasTVE = false
                 
                 if let video = contentResponse?["video"] as? [String: Any],
@@ -575,6 +582,8 @@ extension PlayerViewController_tvOS{
         ) { [weak self] logoutSuccessful in
             if logoutSuccessful {
                 Task { [weak self] in
+                    AnalyticsHelper.shared.triggerSignoutAnalytics()
+                    
                     await AppDelegate.shared.logoutUser()
                     self?.vlPlayer?.destroy()
                     await self?.loadPlayerView()

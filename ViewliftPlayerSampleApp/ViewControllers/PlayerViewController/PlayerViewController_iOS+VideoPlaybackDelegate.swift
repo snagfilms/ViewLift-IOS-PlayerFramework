@@ -24,14 +24,35 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
             videoPlayerCustomView?.viewModel?.updateTimeLabel(totalTime: remainingTime, currentTime: currentTime)
         }
         videoPlayerCustomView?.viewModel?.setupPiP()
-        self.playerDidLoadVideo(player: player)
-        self.playerDidStartPlaying()
+        
+        self.videoSessionStartAnalytics()
+    }
+    
+    func videoSessionStartAnalytics() {
+        let isPreRollAds = self.vlPlayer?.isVideoHavingPreRollAds() ?? false
+        let currentPlaybackTime = self.vlPlayer?.getCurrentPlaybackTime() ?? 0.0
+        let endPlaybackTime = self.vlPlayer?.getChapterEndTime() ?? 0.0
+        
+        let chapterInfo = ChapterInfoModel(
+            havingPreRollAds: isPreRollAds,
+            startTime: currentPlaybackTime,
+            endTime: endPlaybackTime
+        )
+        
+        if let contentInfo = self.getVideoInfo() {
+            AnalyticsHelper.shared.triggerVideoSessionStartEvent(
+                    contentInfo: contentInfo,
+                    chapterInfo: chapterInfo
+                )
+        }
     }
 
     // Called when video is paused
     func videoPause(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: false)
         videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: false)
+        
+        AnalyticsHelper.shared.playerDidPaused()
 
     }
 
@@ -39,6 +60,12 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
     func videoResume(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: true)
         videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: true)
+        
+        if VLAnalytics.shared.isMediaSessionTracked == false {
+            self.videoSessionStartAnalytics()
+        } else {
+            AnalyticsHelper.shared.playerDidStartPlaying()
+        }
     }
 
     // Called when video finishes playback
@@ -46,7 +73,7 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         videoPlayerControlsView?.setPlayButtonState(state: false)
         videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: false)
 
-        self.trackVideoCompletedAnalytics()
+        AnalyticsHelper.shared.trackVideoCompletedAnalytics()
     }
 
     // Handles playback errors and shows alert if needed
@@ -57,7 +84,7 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         if !errorMessage.isEmpty {
             showAlert(message: errorMessage)
 
-            self.trackVideoFailErrorAnalytics(errorMessage: errorMessage)
+            AnalyticsHelper.shared.trackVideoFailErrorAnalytics(errorMessage: errorMessage)
         }
     }
 

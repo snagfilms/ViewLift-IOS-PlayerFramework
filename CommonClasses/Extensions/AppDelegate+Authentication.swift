@@ -12,6 +12,7 @@ import VLAuthenticationFramework
 import VLAuthenticationFramework_tvOS
 #endif
 import VLAnalyticsLib
+//import Firebase
 
 // Extension to AppDelegate for handling authentication logic
 extension AppDelegate {
@@ -96,5 +97,11 @@ extension AppDelegate {
     
     func setupAnalytics() {
         VLAnalytics.shared.setupAnalytics(clients: [.adobe])
+        
+        self.triggerSpashScreenEvent()
+    }
+    
+    func triggerSpashScreenEvent() {
+        AnalyticsHelper.shared.triggerAnalytics(event: .splashEvent)
     }
 }

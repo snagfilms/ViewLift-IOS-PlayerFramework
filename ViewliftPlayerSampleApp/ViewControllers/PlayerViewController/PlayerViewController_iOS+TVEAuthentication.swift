@@ -7,9 +7,14 @@
 //
 
 import VLPlayerLib
+#if os(iOS)
 import VLAuthenticationFramework
+#else
+import VLAuthenticationFramework_tvOS
+#endif
 import VLBeaconLib
 import Foundation
+import VLAnalyticsLib
 
 // Handles TVE authentication logic for the player view controller
 extension PlayerViewController_iOS {
@@ -57,7 +62,6 @@ extension PlayerViewController_iOS {
                 // On successful authentication, update user identity and authorization token
                 UserManager.shared.userIdentity = userIdentity
                 AppDelegate.shared.authorizationToken = userIdentity?.authorizationToken
-
                 // Destroy the current player and its delegates to reset state
                 self.vlPlayer?.destroy()
                 self.vlPlayer?.playerVideoAnalyticsDelegate = nil
@@ -67,9 +71,30 @@ extension PlayerViewController_iOS {
                     await self.loadPlayerView()
                 }
                 self.logoutButton.isHidden = false
+                
             }
         }
     }
     
+//    func analyticsTVELoginSuccess(userIdentity: VLUserIdentity?) {
+//        // trigger Analytics
+//        let userInfo = VLUserInfo(contentHub: "Adobe Pass",
+//                            passNetwork: AnalyticsHelper.shared.requestorId,
+//                            passMvpd: userIdentity?.mvpdProvider,
+//                            passGuid: userIdentity?.tveUserId ?? "")
+//                   
+//        AnalyticsHelper.shared.triggerAnalytics(event: .tveLoginSuccess, userInfo: userInfo)
+//    }
+//    
+//    func analyticsTVELoginFail(userIdentity: VLUserIdentity?) {
+//        // trigger Analytics
+//        let userInfo = VLUserInfo(contentHub: "Adobe Pass",
+//                            passNetwork: AnalyticsHelper.shared.requestorId,
+//                            passMvpd: userIdentity?.mvpdProvider,
+//                            passGuid: userIdentity?.tveUserId ?? "")
+//                   
+//        AnalyticsHelper.shared
+//            .triggerAnalytics(event: .tveLoginFailure, userInfo: userInfo)
+//    }
     
 }
