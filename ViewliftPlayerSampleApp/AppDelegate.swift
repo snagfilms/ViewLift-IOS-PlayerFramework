@@ -8,7 +8,11 @@
 
 import UIKit
 import VLPlayerLib
-import VLAuthentication
+#if os(iOS)
+import VLAuthenticationFramework
+#else
+import VLAuthenticationFramework_tvOS
+#endif
 import GoogleCast
 
 

@@ -9,7 +9,11 @@
 import UIKit
 import VLPlayerLib
 import VLBeaconLib
-import VLAuthentication
+#if os(iOS)
+import VLAuthenticationFramework
+#else
+import VLAuthenticationFramework_tvOS
+#endif
 import VLAnalyticsLib
 import Foundation
 import AVKit

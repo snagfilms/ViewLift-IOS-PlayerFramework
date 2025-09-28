@@ -9,9 +9,9 @@
 
 import SwiftUI
 #if os(iOS)
-import VLAuthentication
+import VLAuthenticationFramework
 #else
-import VLAuthentication
+import VLAuthenticationFramework_tvOS
 #endif
 
 public typealias AuthenticationCallback = (_ userIdentity: VLUserIdentity?, _ errorCode: VLAuthenticationErrorCode?) -> Void

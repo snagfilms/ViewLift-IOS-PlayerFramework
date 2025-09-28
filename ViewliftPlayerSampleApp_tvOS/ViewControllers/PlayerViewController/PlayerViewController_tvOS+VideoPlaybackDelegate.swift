@@ -8,7 +8,11 @@
 
 import VLPlayerLib
 import AVKit
-import VLAuthentication
+#if os(iOS)
+import VLAuthenticationFramework
+#else
+import VLAuthenticationFramework_tvOS
+#endif
 import Foundation
 import VLAnalyticsLib
 
