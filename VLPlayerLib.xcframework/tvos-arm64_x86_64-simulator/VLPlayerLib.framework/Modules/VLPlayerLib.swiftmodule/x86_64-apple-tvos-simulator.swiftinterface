@@ -63,15 +63,18 @@ public class AnalyticsAdInfo {
   public init(adId: Swift.String, adName: Swift.String, podName: Swift.String? = nil, podLength: Swift.Double? = nil, podPosition: Swift.Int? = nil, podOffset: Swift.Double? = nil, startTime: Swift.Double? = nil, adSystem: Swift.String? = nil)
   @objc deinit
 }
-@_hasMissingDesignatedInitializers public class SSAIAnalyticsTracker {
+public class SSAIAnalyticsTracker {
   public var beaconTrackingObject: VLPlayerLib.SSAIBeaconTracking {
     get
     set
   }
+  public var adsAnalyticsTrackingDelegate: (any VLPlayerLib.AdsAnalyticsTrackingDelegate)?
+  weak public var playHeadAnalyticsTrackingDelegate: (any VLPlayerLib.PlayheadTrackerDelegate)?
+  public init(adsAnalyticsTrackingDelegate: (any VLPlayerLib.AdsAnalyticsTrackingDelegate)? = nil, playHeadAnalyticsTrackingDelegate: (any VLPlayerLib.PlayheadTrackerDelegate)? = nil)
   @discardableResult
-  public func recordEvent(currentTime: Swift.Double, totalDuration: Swift.Double, quartile: VLPlayerLib.Quartile, analyticsTrackingType: [VLPlayerLib.AnalyticsTrackingType], trackingEvents: [VLPlayerLib.TrackingEvent], videoView: UIKit.UIView, playerVolume: CoreFoundation.CGFloat, adVerifcations: [VLPlayerLib.AdVerification]? = nil, adInfo: VLPlayerLib.AnalyticsAdInfo? = nil, playerVideoAnalyticsTrackDelegate: (any VLPlayerLib.PlayerVideoAnalyticsTrackDelegate)? = nil, serverSideAdTrackingDelegate: (any VLPlayerLib.ServerSideAdTrackingDelegate)? = nil) -> VLPlayerLib.Quartile
-  public func triggerAnalyticsEvent(eventType: VLPlayerLib.VLPlayer.AdsEventType, adObject: VLPlayerLib.SSAIAvailableAd, analyticsTrackingType: [VLPlayerLib.AnalyticsTrackingType], playerVolume: CoreFoundation.CGFloat)
-  public func triggerBeaconAnalyticsEvent(eventType: VLPlayerLib.VLPlayer.AdsEventType, adObject: VLPlayerLib.SSAIAvailableAd)
+  public func recordEvent(currentTime: Swift.Double, totalDuration: Swift.Double, quartile: VLPlayerLib.Quartile, analyticsTrackingType: [VLPlayerLib.AnalyticsTrackingType], trackingEvents: [VLPlayerLib.TrackingEvent], videoView: UIKit.UIView, playerVolume: CoreFoundation.CGFloat, adVerifcations: [VLPlayerLib.AdVerification]? = nil, adInfo: VLPlayerLib.AnalyticsAdInfo? = nil, playerVideoAnalyticsTrackDelegate: (any VLPlayerLib.PlayerVideoAnalyticsTrackDelegate)? = nil, serverSideAdTrackingDelegate: (any VLPlayerLib.ServerSideAdTrackingDelegate)? = nil, disableAdTrackingForBeacon: Swift.Bool = false) -> VLPlayerLib.Quartile
+  public func triggerAnalyticsEvent(eventType: VLPlayerLib.VLPlayer.AdsEventType, adObject: VLPlayerLib.SSAIAvailableAd, analyticsTrackingType: [VLPlayerLib.AnalyticsTrackingType], playerVolume: CoreFoundation.CGFloat, disableAdTracking: Swift.Bool = false)
+  public func triggerBeaconAnalyticsEvent(eventType: VLPlayerLib.VLPlayer.AdsEventType, adObject: VLPlayerLib.SSAIAvailableAd, disableAdTrackingForBeacon: Swift.Bool)
   @objc deinit
 }
 open class StreamSwitchHandler {
@@ -103,6 +106,27 @@ public struct TokenIdentity : Swift.Decodable {
   @objc override dynamic public init()
   @objc deinit
 }
+public struct VLSubtitle {
+  public var subTitleUrl: Swift.String?
+  public var subTitleType: Swift.String?
+  public var subTitleLanguage: Swift.String?
+}
+public struct VideoPlan : Swift.Codable {
+  public let monetizationModel: Swift.String
+  public var featureSetting: VLPlayerLib.VideoPlanFeatureSetting?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct VideoContentResponse : Swift.Codable {
+  public var plans: [VLPlayerLib.VideoPlan]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct VideoPlanFeatureSetting : Swift.Codable {
+  public var isLoginRequired: Swift.Bool?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 @objc @_inheritsConvenienceInitializers public class AdModel : ObjectiveC.NSObject {
   public var totalAds: Swift.Int
   public var totalPodDuration: Swift.Double
@@ -130,27 +154,6 @@ public struct TokenIdentity : Swift.Decodable {
   }
   @objc override dynamic public init()
   @objc deinit
-}
-public struct VLSubtitle {
-  public var subTitleUrl: Swift.String?
-  public var subTitleType: Swift.String?
-  public var subTitleLanguage: Swift.String?
-}
-public struct VideoPlan : Swift.Codable {
-  public let monetizationModel: Swift.String
-  public var featureSetting: VLPlayerLib.VideoPlanFeatureSetting?
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
-public struct VideoContentResponse : Swift.Codable {
-  public var plans: [VLPlayerLib.VideoPlan]?
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
-public struct VideoPlanFeatureSetting : Swift.Codable {
-  public var isLoginRequired: Swift.Bool?
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
 }
 @objc @_inheritsConvenienceInitializers open class VLError : ObjectiveC.NSObject, Swift.Error {
   open var isSuccess: Swift.Bool?
@@ -184,52 +187,6 @@ public enum NetworkBandwidthUnit : Swift.String {
   public var rawValue: Swift.String {
     get
   }
-}
-extension VLPlayerLib.VLPlayer {
-  public enum PayWallConfiguration {
-    case disabled
-    case `default`(payWallTheme: VLPlayerLib.VLPlayer.PayWallThemeConfiguration?)
-    case custom(view: UIKit.UIView)
-  }
-  public struct PayWallThemeConfiguration {
-    public init(style: VLPlayerLib.VLPlayer.PayWallStyle?, textContent: VLPlayerLib.VLPlayer.PayWallTextContent?)
-  }
-  public struct PayWallStyle {
-    public init(errorMessageTextColor: UIKit.UIColor?, buttonTextColor: UIKit.UIColor?, buttonBackgroundColor: UIKit.UIColor?, backgroundColor: UIKit.UIColor?)
-  }
-  public struct PayWallTextContent {
-    public init(errorMessage: Swift.String?, buttontext: Swift.String?)
-  }
-}
-extension VLPlayerLib.VLPlayer {
-  public enum PlayerControlsViewConfiguration {
-    case `default`(controlsTheme: VLPlayerLib.VLPlayer.PlayerControlsViewThemeConfiguration = PlayerControlsViewThemeConfiguration())
-    case custom(view: UIKit.UIView)
-    case native
-  }
-  public struct PlayerControlsViewThemeConfiguration {
-    public init(style: VLPlayerLib.VLPlayer.PlayerControlsViewStyle = PlayerControlsViewStyle(), textContent: VLPlayerLib.VLPlayer.PlayerControlsViewTextContent = PlayerControlsViewTextContent(), playerControlsConfig: VLPlayerLib.PlayerControlsConfig = PlayerControlsConfig())
-  }
-  public struct PlayerControlsViewStyle {
-    public init(buttonTextColor: UIKit.UIColor = .red, buttonBackgroundColor: UIKit.UIColor = .blue, backgroundColor: UIKit.UIColor = .green, sliderColor: UIKit.UIColor = UIColor.fromHex("#ABAAAC"), sliderProgressColor: UIKit.UIColor = UIColor.fromHex("#686768"), smallScreenBorderColor: UIKit.UIColor = .white, fullScreenBorderColor: UIKit.UIColor = .clear, gradientConfig: VLPlayerLib.VLPlayer.GradientConfig = GradientConfig())
-  }
-  public struct GradientConfig {
-    public var colors: [UIKit.UIColor]
-    public var locations: [Foundation.NSNumber]
-    public var startPoint: CoreFoundation.CGPoint
-    public var endPoint: CoreFoundation.CGPoint
-    public init(colors: [UIKit.UIColor] = [.clear, .black], locations: [Foundation.NSNumber] = [0.0, 1.0], startPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 0.0), endPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 1.0))
-  }
-  public struct PlayerControlsViewTextContent {
-    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts")
-  }
-}
-public struct PlayerControlsConfig {
-  public init(isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true)
-}
-extension VLPlayerLib.VLPlayer {
-  public func dismissAutoPlayView(playNext: Swift.Bool)
-  public func setControlsVisibilityWhenInFullScreen(isHidden: Swift.Bool)
 }
 public protocol VideoPlayerDataSource : AnyObject {
   func isUserLoggedIn() -> Swift.Bool
@@ -271,6 +228,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Swift.Bool)
   @objc optional func playerBitrateDebugLogs(logString: Swift.String)
   @objc optional func loginWithTVE()
+  @objc optional func videoCurrentPlayhead(playHead: Swift.Double)
   @objc optional func autoPlayUIDismissed(isPlayingNextContent: Swift.Bool)
   @objc optional func autoPlayMetadataProvider(streamId: Swift.String) -> VLPlayerLib.VLPlayer.StreamMetadata?
   @objc optional func avPlayerControllerInstance(_ avPlayerControllerInstance: AVKit.AVPlayerViewController)
@@ -278,12 +236,23 @@ public protocol VideoPlayerDataSource : AnyObject {
 public protocol ServerSideAdTrackingDelegate : AnyObject {
   func serverSideAdTrackingEvents(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType, eventTrackingProperties: [Swift.String : Any])
   func adCuePoints(adModel: VLPlayerLib.SSAIAdsModel?, duration: Foundation.TimeInterval)
+  func totalAdsDuration(_ duration: Swift.Double)
   func adDidStart(currentPod: VLPlayerLib.SSAIAvailableAds?)
   func updateAdPlayback(model: VLPlayerLib.AdModel)
   func adDidFinish()
   func adPlayPause(isPlaying: Swift.Bool)
   func adFullScreenBtnTapped(status: Swift.Bool)
   func adMuteButton(enabled: Swift.Bool)
+}
+public protocol AdsAnalyticsTrackingDelegate : AnyObject {
+  func triggerAdEvent(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType, eventTrackingProperties: [Swift.String : Any])
+}
+public protocol AdManagerDelegate : AnyObject {
+  func setCuePointsFromPlayer(adModel: VLPlayerLib.SSAIAdsModel?, duration: Foundation.TimeInterval)
+  func removeCuePoints()
+}
+public struct PlayerControlsConfig {
+  public init(isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isStartFromBeginningSupported: Swift.Bool = true)
 }
 final public class VLPlayerAnalyticsModel {
   public typealias PropertyChangeCallback = (Swift.String, Any?) -> Swift.Void
@@ -379,7 +348,7 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func pause()
   @objc dynamic open func dispose()
   @objc dynamic open func destroy()
-  @objc dynamic open func deinitialisePlayer()
+  @objc dynamic open func deinitialisePlayer(isLoadingNextVideo: Swift.Bool = false)
   @objc dynamic open func setPlayerFitToFullScreen()
   @objc dynamic open func setPlayerFitToSmallScreen(frame: CoreFoundation.CGRect)
   public func handleOverrideMenu()
@@ -388,11 +357,14 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func seekTo(seconds: Swift.Double)
   @objc dynamic open func seekTo(seconds: Swift.Double, completion: (() -> Swift.Void)? = nil)
   @objc dynamic open func getCurrentPlaybackTime() -> Swift.Double
+  @objc dynamic open func getChapterEndTime() -> Swift.Double
+  @objc dynamic open func isVideoHavingPreRollAds() -> Swift.Bool
   @objc dynamic open func seekToLivePosition()
   @objc dynamic open func setEndTimeDuration(from duration: Swift.Double)
   @objc dynamic open func seekDVRToLivePosition()
   @objc dynamic open func startTime(seconds: Swift.Double)
   public func getCurrentTime() -> Swift.Double?
+  public func getAVAssetsItemLength() -> Swift.Double?
   @objc dynamic open func getSource() -> Swift.Dictionary<Swift.String, Swift.String>?
   @objc dynamic open func setIconColor(color: Swift.String)
   @objc dynamic open func setTextColor(color: Swift.String)
@@ -438,6 +410,49 @@ extension VLPlayerLib.VLPlayer {
   public func updateEPG(programData: VLPlayerLib.EPGSupportModel?)
   @objc dynamic open func sliderEndedTracking(newSeekValue: Swift.Double)
   @objc dynamic open func sliderBeganTracking(newSeekValue: Swift.Double)
+}
+extension VLPlayerLib.VLPlayer {
+  public func dismissAutoPlayView(playNext: Swift.Bool)
+  public func setControlsVisibilityWhenInFullScreen(isHidden: Swift.Bool)
+}
+extension VLPlayerLib.VLPlayer {
+  public enum PayWallConfiguration {
+    case disabled
+    case `default`(payWallTheme: VLPlayerLib.VLPlayer.PayWallThemeConfiguration?)
+    case custom(view: UIKit.UIView)
+  }
+  public struct PayWallThemeConfiguration {
+    public init(style: VLPlayerLib.VLPlayer.PayWallStyle?, textContent: VLPlayerLib.VLPlayer.PayWallTextContent?)
+  }
+  public struct PayWallStyle {
+    public init(errorMessageTextColor: UIKit.UIColor?, buttonTextColor: UIKit.UIColor?, buttonBackgroundColor: UIKit.UIColor?, backgroundColor: UIKit.UIColor?)
+  }
+  public struct PayWallTextContent {
+    public init(errorMessage: Swift.String?, buttontext: Swift.String?)
+  }
+}
+extension VLPlayerLib.VLPlayer {
+  public enum PlayerControlsViewConfiguration {
+    case `default`(controlsTheme: VLPlayerLib.VLPlayer.PlayerControlsViewThemeConfiguration = PlayerControlsViewThemeConfiguration())
+    case custom(view: UIKit.UIView)
+    case native
+  }
+  public struct PlayerControlsViewThemeConfiguration {
+    public init(style: VLPlayerLib.VLPlayer.PlayerControlsViewStyle = PlayerControlsViewStyle(), textContent: VLPlayerLib.VLPlayer.PlayerControlsViewTextContent = PlayerControlsViewTextContent(), playerControlsConfig: VLPlayerLib.PlayerControlsConfig = PlayerControlsConfig())
+  }
+  public struct PlayerControlsViewStyle {
+    public init(buttonTextColor: UIKit.UIColor = .red, buttonBackgroundColor: UIKit.UIColor = .blue, backgroundColor: UIKit.UIColor = .green, sliderColor: UIKit.UIColor = UIColor.fromHex("#ABAAAC"), sliderProgressColor: UIKit.UIColor = UIColor.fromHex("#686768"), smallScreenBorderColor: UIKit.UIColor = .white, fullScreenBorderColor: UIKit.UIColor = .clear, gradientConfig: VLPlayerLib.VLPlayer.GradientConfig = GradientConfig())
+  }
+  public struct GradientConfig {
+    public var colors: [UIKit.UIColor]
+    public var locations: [Foundation.NSNumber]
+    public var startPoint: CoreFoundation.CGPoint
+    public var endPoint: CoreFoundation.CGPoint
+    public init(colors: [UIKit.UIColor] = [.clear, .black], locations: [Foundation.NSNumber] = [0.0, 1.0], startPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 0.0), endPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 1.0))
+  }
+  public struct PlayerControlsViewTextContent {
+    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts")
+  }
 }
 public struct VLPlayerResponse : Swift.Decodable {
   public let id: Swift.String?
@@ -650,13 +665,11 @@ public struct VLEPGProgramDetails {
   public let programId: Swift.String
   public let programTitle: Swift.String
   public let subType: Swift.String
-  public init(id: Swift.String, channelId: Swift.String, programId: Swift.String, programTitle: Swift.String, subType: Swift.String)
-}
-extension Foundation.NSNotification.Name {
-  public static let playerAdDidHideStatusbarOnFullScreen: Foundation.Notification.Name
+  public let programStartTime: Swift.Double
+  public init(id: Swift.String, channelId: Swift.String, programId: Swift.String, programTitle: Swift.String, subType: Swift.String, programStartTime: Swift.Double)
 }
 public struct SSAIBeaconTracking {
-  public func triggerAnalytics(eventType: VLPlayerLib.VLPlayer.AdsEventType, beaconUrls: [Swift.String])
+  public func triggerAnalytics(eventType: VLPlayerLib.VLPlayer.AdsEventType, beaconUrls: [Swift.String], disableAdTrackingForBeacon: Swift.Bool)
   public func triggerBeaconTracking(trackingUrls: [Swift.String])
 }
 @objc @_inheritsConvenienceInitializers open class VLPlayer : ObjectiveC.NSObject {
@@ -818,7 +831,7 @@ public struct SSAIBeaconTracking {
   }
   public func checkClosedCaption() -> Swift.Bool
   convenience public init(playerType: VLPlayerLib.VLPlayerType)
-  public func setEntitlement(data: VLPlayerLib.VLPlayer.EntitlementData, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil)
+  public func setEntitlement(data: VLPlayerLib.VLPlayer.EntitlementData?, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, epgProgram: VLPlayerLib.VLEPGProgramDetails? = nil)
   public func refreshEntitlement(data: VLPlayerLib.VLPlayer.EntitlementData?, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
   open func setSourceToPlay(isASATPlayer: Swift.Bool = false, staticContentId: Swift.String? = nil, streamURL: Swift.String, vlToken: Swift.String?, vlAPIEndPoint: Swift.String?, vlBeaconEndPoint: Swift.String? = nil, customControlsView: UIKit.UIView? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, analyticsAdditionalData: [Swift.String : Any]? = nil, adUrl: Swift.String? = nil, vlPlayerTag: Swift.String, streamConfig: VLPlayerLib.VLPlayer.StreamConfig? = nil, drmConfig: VLPlayerLib.VLPlayer.DRMConfig? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void)
   open func setSourceToPlayDirectURL(customControlsView: UIKit.UIView?, playerDisplayType: VLPlayerLib.VLPlayer.PlayerDisplayType, analyticsAdditionalData: [Swift.String : Any]?, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, streamConfig: VLPlayerLib.VLPlayer.StreamConfig?)
@@ -935,6 +948,7 @@ extension VLPlayerLib.VLPlayer.PlaybackList {
 }
 public struct SSAIAdsModel : Swift.Decodable {
   public var avails: Swift.Array<VLPlayerLib.SSAIAvailableAds>?
+  public func nextAvailableStartTime(currentTime: Swift.Double) -> Swift.Double?
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct SSAIAvailableAds : Swift.Decodable {
@@ -943,6 +957,9 @@ public struct SSAIAvailableAds : Swift.Decodable {
   public var adsDuration: Swift.Double?
   public var startTimeDuration: Swift.Double?
   public var adBreakTrackingEvents: Swift.Array<VLPlayerLib.TrackingEvent>?
+  public var isPreRoll: Swift.Bool {
+    get
+  }
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct SSAIAvailableAd : Swift.Decodable, Swift.Equatable {
@@ -965,8 +982,112 @@ public struct AdVerification : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+public struct AdBreakContext {
+  public init(breakIndex: Swift.Int?, contentDuration: Swift.Double?, breakModel: VLPlayerLib.SSAIAvailableAds, currentAdIndex: Swift.Int)
+}
+public func makeAnalyticsAdInfo(from ctx: VLPlayerLib.AdBreakContext) -> VLPlayerLib.AnalyticsAdInfo
 extension UIKit.UIColor {
   public static func fromHex(_ hex: Swift.String, alpha: CoreFoundation.CGFloat = 1.0) -> UIKit.UIColor
+}
+extension Foundation.NSNotification.Name {
+  public static let playerAdDidHideStatusbarOnFullScreen: Foundation.Notification.Name
+}
+public protocol PlayheadTrackerDelegate : AnyObject {
+  func tracker(_ tracker: VLPlayerLib.PlayheadTracker, didEmit event: VLPlayerLib.PlayheadTracker.EmittedEvent)
+  func updateAdBreakEvent(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType)
+}
+public enum Mode : Swift.Equatable {
+  case vod
+  case live
+  case linear
+  public static func == (a: VLPlayerLib.Mode, b: VLPlayerLib.Mode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct AdWindow : Swift.Equatable {
+  public let start: Swift.Double
+  public let end: Swift.Double
+  public init(start: Swift.Double, end: Swift.Double)
+  public var duration: Swift.Double {
+    get
+  }
+  public func contains(_ t: Swift.Double) -> Swift.Bool
+  public static func == (a: VLPlayerLib.AdWindow, b: VLPlayerLib.AdWindow) -> Swift.Bool
+}
+@objc final public class PlayheadTracker : ObjectiveC.NSObject {
+  public enum State : Swift.Equatable {
+    case idle
+    case playing
+    case paused
+    case buffering
+    case ad
+    case ended
+    public static func == (a: VLPlayerLib.PlayheadTracker.State, b: VLPlayerLib.PlayheadTracker.State) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public struct EmittedEvent {
+    public let type: Swift.String
+    public let playhead: Swift.Double
+    public let ts: Swift.Int64
+    public let info: [Swift.String : Swift.String]?
+    public init(type: Swift.String, playhead: Swift.Double, ts: Swift.Int64, info: [Swift.String : Swift.String]? = nil)
+  }
+  weak final public var delegate: (any VLPlayerLib.PlayheadTrackerDelegate)?
+  final public var contentDuration: Swift.Double?
+  final public var contentHeartbeatSeconds: Swift.Double
+  final public var adHeartbeatSeconds: Swift.Double
+  final public var adWindows: [VLPlayerLib.AdWindow] {
+    get
+    set
+  }
+  final public var mode: VLPlayerLib.Mode {
+    get
+  }
+  weak final public var player: AVFoundation.AVPlayer? {
+    get
+  }
+  final public var state: VLPlayerLib.PlayheadTracker.State {
+    get
+  }
+  public init(mode: VLPlayerLib.Mode, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil)
+  final public func updateEPgProgramDetails(_ epgProgramDetails: VLPlayerLib.VLEPGProgramDetails?)
+  @objc deinit
+  final public func setMode(_ newMode: VLPlayerLib.Mode)
+  final public func attach(to player: AVFoundation.AVPlayer)
+  final public func detachPlayer()
+  final public func playheadReachedEnd(killTimer: Swift.Bool = false)
+  final public func resume(isBufferComplete: Swift.Bool = false)
+  final public func getCurrentPlayhead() -> Swift.Double
+  final public func pause()
+  final public func adBreakStartCSAI()
+  final public func adBreakCompleteCSAI()
+  final public func seekStart()
+  final public func seekComplete(target: Swift.Double)
+  final public func goLive()
+}
+public protocol AnalyticsTrackerEvents : ObjectiveC.NSObjectProtocol {
+  func playerDidLoadVideo()
+}
+public protocol PlayerVideoAnalyticsTrackDelegate : VLPlayerLib.AnalyticsTrackerEvents {
+  func playerFirstFrameLoaded()
+  func playerSeekDidStart()
+  func playerSeekDidComplete(newTime: Swift.Double, shouldResume: Swift.Bool)
+  func playerSessionEnded()
+  func playerDidChangeAudioLanguage(language: Swift.String?)
+  func playerDidChangeClosedCaptionLanguage(language: Swift.String?)
+  func playerDidDropFrames(count: Swift.Int)
+  func playerChapterDidStart(currentTime: Swift.Double, endTime: Swift.Double)
+  func playerChapterDidComplete()
+  func playerDidFail(errorMessage: Swift.String, isFatal: Swift.Bool)
+  func playerDidStartBuffering()
+  func playerDidBufferingComplete()
+  func playerDidBitRateChange()
+  func updatePlayhead(time: Swift.Double)
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency final public class TvOSSlider : UIKit.UIControl {
   @objc @IBInspectable @_Concurrency.MainActor @preconcurrency final public var value: Swift.Float {
@@ -1038,23 +1159,6 @@ extension UIKit.UIColor {
   @_Concurrency.MainActor @preconcurrency final public var storedValue: Swift.Float
   @_Concurrency.MainActor @preconcurrency @objc override final public func pressesBegan(_ presses: Swift.Set<UIKit.UIPress>, with event: UIKit.UIPressesEvent?)
 }
-public protocol AnalyticsTrackerEvents : ObjectiveC.NSObjectProtocol {
-  func playerDidLoadVideo(player: AVFoundation.AVPlayer?)
-}
-public protocol PlayerVideoAnalyticsTrackDelegate : VLPlayerLib.AnalyticsTrackerEvents {
-  func playerFirstFrameLoaded()
-  func playerSeekDidStart(fromTimeInterval: Swift.Double)
-  func playerSeekDidComplete(toTimeInterval: Swift.Double)
-  func playerSessionEnded()
-  func playerDidChangeAudioLanguage(language: Swift.String?)
-  func playerDidChangeClosedCaptionLanguage(language: Swift.String?)
-  func playerDidDropFrames(count: Swift.Int)
-  func playerChapterDidStart(currentTime: Swift.Double)
-  func playerChapterDidComplete()
-  func playerDidStartBuffering()
-  func playerDidBitRateChange()
-  func updatePlayhead(time: Swift.Double)
-}
 public class EPGSupportModel {
   public var isEpg: Swift.Bool
   public var epgFrame: CoreFoundation.CGRect
@@ -1065,82 +1169,6 @@ public class EPGSupportModel {
     get
   }
   @objc deinit
-}
-public protocol PlayheadTrackerDelegate : AnyObject {
-  func tracker(_ tracker: VLPlayerLib.PlayheadTracker, didEmit event: VLPlayerLib.PlayheadTracker.EmittedEvent)
-  func chapterStarted(at time: Foundation.TimeInterval)
-  func chapterCompleted(at time: Foundation.TimeInterval)
-  func updateAdBreakEvent(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType)
-}
-public enum Mode : Swift.Equatable {
-  case vod
-  case live
-  public static func == (a: VLPlayerLib.Mode, b: VLPlayerLib.Mode) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
-}
-public struct AdWindow : Swift.Equatable {
-  public let start: Swift.Double
-  public let end: Swift.Double
-  public init(start: Swift.Double, end: Swift.Double)
-  public var duration: Swift.Double {
-    get
-  }
-  public func contains(_ t: Swift.Double) -> Swift.Bool
-  public static func == (a: VLPlayerLib.AdWindow, b: VLPlayerLib.AdWindow) -> Swift.Bool
-}
-@objc final public class PlayheadTracker : ObjectiveC.NSObject {
-  public enum State : Swift.Equatable {
-    case idle
-    case playing
-    case paused
-    case buffering
-    case ad
-    case ended
-    public static func == (a: VLPlayerLib.PlayheadTracker.State, b: VLPlayerLib.PlayheadTracker.State) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
-  public struct EmittedEvent {
-    public let type: Swift.String
-    public let playhead: Swift.Double
-    public let ts: Swift.Int64
-    public let info: [Swift.String : Swift.String]?
-    public init(type: Swift.String, playhead: Swift.Double, ts: Swift.Int64, info: [Swift.String : Swift.String]? = nil)
-  }
-  weak final public var delegate: (any VLPlayerLib.PlayheadTrackerDelegate)?
-  final public var contentDuration: Swift.Double?
-  final public var contentHeartbeatSeconds: Swift.Double
-  final public var adHeartbeatSeconds: Swift.Double
-  final public var adWindows: [VLPlayerLib.AdWindow] {
-    get
-    set
-  }
-  final public var mode: VLPlayerLib.Mode {
-    get
-  }
-  weak final public var player: AVFoundation.AVPlayer? {
-    get
-  }
-  final public var state: VLPlayerLib.PlayheadTracker.State {
-    get
-  }
-  public init(mode: VLPlayerLib.Mode)
-  @objc deinit
-  final public func setMode(_ newMode: VLPlayerLib.Mode)
-  final public func attach(to player: AVFoundation.AVPlayer)
-  final public func detachPlayer()
-  final public func resume()
-  final public func pause()
-  final public func adBreakStartCSAI()
-  final public func adBreakCompleteCSAI()
-  final public func seekStart()
-  final public func seekComplete(target: Swift.Double)
-  final public func goLive()
 }
 extension VLPlayerLib.Quartile : Swift.Equatable {}
 extension VLPlayerLib.Quartile : Swift.Hashable {}

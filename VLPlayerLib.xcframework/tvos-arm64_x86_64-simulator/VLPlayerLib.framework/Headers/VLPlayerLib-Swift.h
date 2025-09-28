@@ -400,7 +400,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)pause;
 - (void)dispose;
 - (void)destroy;
-- (void)deinitialisePlayer;
+- (void)deinitialisePlayerWithIsLoadingNextVideo:(BOOL)isLoadingNextVideo;
 - (void)setPlayerFitToFullScreen;
 - (void)setPlayerFitToSmallScreenWithFrame:(CGRect)frame;
 - (void)goFullScreen:(BOOL)isFullScreen;
@@ -419,6 +419,8 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)seekToSeconds:(double)seconds;
 - (void)seekToSeconds:(double)seconds completion:(void (^ _Nullable)(void))completion;
 - (double)getCurrentPlaybackTime SWIFT_WARN_UNUSED_RESULT;
+- (double)getChapterEndTime SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isVideoHavingPreRollAds SWIFT_WARN_UNUSED_RESULT;
 /// important:
 ///
 /// Method - Used to seek live video to live position
@@ -789,6 +791,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 - (void)playerBitrateDebugLogsWithLogString:(NSString * _Nonnull)logString;
 /// Delgate method - Called when loginWithTVE button is tapped from the SDK view
 - (void)loginWithTVE;
+- (void)videoCurrentPlayheadWithPlayHead:(double)playHead;
 /// important:
 ///
 /// Delgate method - Called when next video playback UI is dismissed
@@ -1210,7 +1213,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)pause;
 - (void)dispose;
 - (void)destroy;
-- (void)deinitialisePlayer;
+- (void)deinitialisePlayerWithIsLoadingNextVideo:(BOOL)isLoadingNextVideo;
 - (void)setPlayerFitToFullScreen;
 - (void)setPlayerFitToSmallScreenWithFrame:(CGRect)frame;
 - (void)goFullScreen:(BOOL)isFullScreen;
@@ -1229,6 +1232,8 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)seekToSeconds:(double)seconds;
 - (void)seekToSeconds:(double)seconds completion:(void (^ _Nullable)(void))completion;
 - (double)getCurrentPlaybackTime SWIFT_WARN_UNUSED_RESULT;
+- (double)getChapterEndTime SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isVideoHavingPreRollAds SWIFT_WARN_UNUSED_RESULT;
 /// important:
 ///
 /// Method - Used to seek live video to live position
@@ -1599,6 +1604,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 - (void)playerBitrateDebugLogsWithLogString:(NSString * _Nonnull)logString;
 /// Delgate method - Called when loginWithTVE button is tapped from the SDK view
 - (void)loginWithTVE;
+- (void)videoCurrentPlayheadWithPlayHead:(double)playHead;
 /// important:
 ///
 /// Delgate method - Called when next video playback UI is dismissed
