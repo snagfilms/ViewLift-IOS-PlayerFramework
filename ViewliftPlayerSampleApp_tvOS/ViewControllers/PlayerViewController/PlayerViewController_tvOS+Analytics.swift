@@ -17,33 +17,6 @@ extension PlayerViewController_tvOS {
     func getAdsInfo() -> VLAdAssetInfo? {
         return self.currentAdAssetInfo
     }
-//    
-//    // Parses video response dictionary and decodes to model
-    func parseVLVideoResponse(from dictionary: [String: Any]) {
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .useDefaultKeys
-            let response = try decoder.decode(VLVideoResponseModel.self, from: jsonData)
-            self.videoResponse = response
-        } catch {
-            print("❌ Failed to decode from dictionary:", error)
-        }
-    }
-//    
-//    // Formats a timestamp into a date string
-    func getFormattedDateFromTimestamp(timestamp: TimeInterval?) -> String? {
-        guard let timestamp = timestamp else {
-            return nil
-        }
-        let date = Date(timeIntervalSince1970: timestamp)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
-        formatter.timeZone = .current
-        let formattedDate = formatter.string(from: date)
-        print("Publish Date: \(formattedDate)")
-        return formattedDate
-    }
 
     var video: VLVideo? {
         self.videoResponse?.video
@@ -215,14 +188,14 @@ extension PlayerViewController_tvOS {
     /// - Required (linear): Milliseconds as Int64/Double.
     /// - Units: Milliseconds (ms).
     var programStartTimeMiliSeconds: Double {
-        1_758_888_531 // Replace with schedule-derived ms timestamp when available.
+        1_758_888_531
     }
 
     /// Program end timestamp in milliseconds since Unix epoch for linear schedules.
     /// - Required (linear): Milliseconds as Int64/Double.
     /// - Units: Milliseconds (ms).
     var programEndTimeMiliSeconds: Double {
-        1_758_889_990 // Replace with schedule-derived ms timestamp when available.
+        1_758_889_990
     }
 
     

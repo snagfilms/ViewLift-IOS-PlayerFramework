@@ -9,7 +9,7 @@
 import UIKit
 import VLPlayerLib
 import VLBeaconLib
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 import AVKit
 import VLAnalyticsLib
 
@@ -53,7 +53,6 @@ class PlayerViewController_tvOS: UIViewController {
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
     var enableCustomAdUI: Bool = false
-    var analyticsAdDictionary = AnalyticsAdDictionary()
     var autoPlayListdataManager: AutoPlayDataManager?
     internal var autoPlayView: AutoPlayView?
     let timerLabel = UILabel()
@@ -556,6 +555,8 @@ extension PlayerViewController_tvOS{
         ) { [weak self] logoutSuccessful in
             if logoutSuccessful {
                 Task { [weak self] in
+                    AnalyticsHelper.shared.triggerSignoutAnalytics()
+                    
                     await AppDelegate.shared.logoutUser()
                     self?.vlPlayer?.destroy()
                     await self?.loadPlayerView()

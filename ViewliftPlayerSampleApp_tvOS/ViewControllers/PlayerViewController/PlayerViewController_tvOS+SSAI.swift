@@ -71,25 +71,23 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
     
     func updateAdPlayback(model: VLPlayerLib.AdModel) {
         debugPrint(model.progress)
-        Task {
-            if let ad = model.currentAd, let adId = ad.adId, let analyticsAdInfo = model.analyticsAdInfo {
-                let currentAd = await self.analyticsAdDictionary.get(adId)
-                if currentAd == nil {
-                    await self.analyticsAdDictionary.set(adId, true)
-                    
-                    self.currentAdAssetInfo = VLAdAssetInfo(
-                        adId: analyticsAdInfo.adId,
-                        adName: analyticsAdInfo.adName,
-                        podName: analyticsAdInfo.podName,
-                        podLength: analyticsAdInfo.podLength,
-                        podPosition: analyticsAdInfo.podPosition,
-                        podOffset: analyticsAdInfo.podOffset, startTime: analyticsAdInfo.startTime, adSystem: analyticsAdInfo.adSystem
-                    )
-                }
+        if let ad = model.currentAd, let adId = ad.adId, let analyticsAdInfo = model.analyticsAdInfo {
+            let currentAd = await self.analyticsAdDictionary.get(adId)
+            if currentAd == nil {
+                await self.analyticsAdDictionary.set(adId, true)
                 
+                self.currentAdAssetInfo = VLAdAssetInfo(
+                    adId: analyticsAdInfo.adId,
+                    adName: analyticsAdInfo.adName,
+                    podName: analyticsAdInfo.podName,
+                    podLength: analyticsAdInfo.podLength,
+                    podPosition: analyticsAdInfo.podPosition,
+                    podOffset: analyticsAdInfo.podOffset, startTime: analyticsAdInfo.startTime, adSystem: analyticsAdInfo.adSystem
+                )
             }
+            
         }
-     }
+    }
     
     
     // MARK: - Detailed Server-side Tracking Events
@@ -141,7 +139,7 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
             debugPrint("slot end") // Ad break has ended
             
             AnalyticsHelper.shared.trackAdBreakCompleteAnalytics()
-            AnalyticsHelper.shared.playerChapterDidStart(currentTime: playerCurrentTime, endTime: 5.0)
+//            AnalyticsHelper.shared.playerChapterDidStart(currentTime: playerCurrentTime, endTime: 5.0)
 
         case .mute:
             debugPrint("mute") // Ad muted

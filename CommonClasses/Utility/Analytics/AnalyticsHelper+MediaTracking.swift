@@ -11,9 +11,9 @@ import VLPlayerLib
 import AVKit
 import Foundation
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 #endif
 
 struct ChapterInfoModel {
@@ -32,17 +32,25 @@ final class AnalyticsHelper: NSObject, PlayerVideoAnalyticsTrackDelegate {
     // MARK: Singleton
     static let shared = AnalyticsHelper()
 
+    let reachability = NetworkReachability()
+    
+    let domain = "https://spinco.staging.web.viewlift.com"
+    let orgid = "8CF467C25245AE3F0A490D4C@AdobeOrg"
+    let resourceID = "sparkmedia"
+    var requestorId = "sparkmedia"
+    
     private override init() {
         super.init()
         let user = UserManager.shared.userIdentity
         self.setUserIdentity(userIdentity: user)
+        
+        VLAuthentication.sharedInstance.analyticsDelegate = self
     }
 
     // MARK: Session State
     private var contentInfo: VLContentInfo? = nil
     private var currentAdAssetInfo: VLAdAssetInfo?
     private var userIdentity: VLUserIdentity?
-    private var requestorId: String = ""
     private var isFullScreen: Bool = false
 
     // MARK: Event options
@@ -84,7 +92,7 @@ extension AnalyticsHelper {
         
         self.playerDidStartPlaying()
         
-        if !chapterInfo.havingPreRollAds && chapterInfo.endTime > 0 && chapterInfo.startTime > 0 {
+        if !chapterInfo.havingPreRollAds && chapterInfo.endTime > chapterInfo.startTime {
             let startTime = chapterInfo.startTime
             let endTime = chapterInfo.endTime
             
@@ -107,7 +115,13 @@ extension AnalyticsHelper {
         self.resetSession()
     }
 
-    func trackVideoCompletedAnalytics() { track(.videoComplete) }
+    func trackVideoCompletedAnalytics() {
+        self.playerChapterDidComplete()
+        
+        track(.videoComplete)
+        
+        
+    }
 
     func playerDidLoadVideo() {
         track(.mediaPlay, options: .all)
@@ -117,19 +131,23 @@ extension AnalyticsHelper {
 // MARK: - Ads
 extension AnalyticsHelper {
     func trackAdDidStartsAnalytics() {
-        track(.adsStart)
+        track(.adsStart, options: .ads)
     }
     
     func trackAdDidCompleteAnalytics() {
-        track(.adsComplete)
+        track(.adsComplete, options: .ads)
     }
     
     func trackAdBreakStartAnalytics() {
-        track(.adsBreakStart)
+        self.playerChapterDidComplete()
+        
+        track(.adsBreakStart, options: .ads)
     }
     
-    func trackAdBreakCompleteAnalytics() {
-        track(.adsBreakComplete)
+    func trackAdBreakCompleteAnalytics(playerCurrentTime: Double, chapterEnd: Double) {
+        track(.adsBreakComplete, options: .ads)
+        
+        self.playerChapterDidStart(currentTime: playerCurrentTime, endTime: chapterEnd)
     }
 }
 
@@ -250,17 +268,17 @@ private extension AnalyticsHelper {
             .contains(.content) {
             builder = builder.contentInfo( self.contentInfo )
         }
-        if options.contains(.ads) { builder = builder.adsInfo(currentAdAssetInfo) }
-        if options.contains(.tvProvider) { builder = builder.tvProviderInfo(makeTVProviderInfo()) }
+        if options.contains(.ads) {
+            builder = builder.adsInfo(currentAdAssetInfo)
+        }
+        
+        if options.contains(.tvProvider) {
+            builder = builder.tvProviderInfo(getTVEProviderInfo())
+        }
+        
         return builder
     }
 
-    func makeTVProviderInfo() -> VLTVProviderInfo {
-        VLTVProviderInfo(
-            tvProviderName: userIdentity?.mvpdProvider ?? "",
-            requestorId: requestorId
-        )
-    }
 }
 
 // MARK: - Utilities

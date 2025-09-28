@@ -40,8 +40,7 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         )
         
         if let contentInfo = self.getVideoInfo() {
-            AnalyticsHelper.shared
-                .triggerVideoSessionStartEvent(
+            AnalyticsHelper.shared.triggerVideoSessionStartEvent(
                     contentInfo: contentInfo,
                     chapterInfo: chapterInfo
                 )
@@ -52,6 +51,8 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
     func videoPause(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: false)
         videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: false)
+        
+        AnalyticsHelper.shared.playerDidPaused()
 
     }
 
@@ -59,6 +60,12 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
     func videoResume(timestamp: Double, playerTag: String) {
         videoPlayerControlsView?.setPlayButtonState(state: true)
         videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: true)
+        
+        if VLAnalytics.shared.isMediaSessionTracked == false {
+            self.videoSessionStartAnalytics()
+        } else {
+            AnalyticsHelper.shared.playerDidStartPlaying()
+        }
     }
 
     // Called when video finishes playback

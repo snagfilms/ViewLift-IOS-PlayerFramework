@@ -8,9 +8,9 @@
 import UIKit
 import VLPlayerLib
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 #endif
 import Kingfisher
 
@@ -241,6 +241,8 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         ) { [weak self] logoutSuccessful in
             if logoutSuccessful {
                 Task { [weak self] in
+                    AnalyticsHelper.shared.triggerSignoutAnalytics()
+                    
                     self?.logoutButton.isHidden = true
                     self?.providerImageView.isHidden = true  // ← sync state
                     await AppDelegate.shared.logoutUser()

@@ -8,7 +8,7 @@
 
 import UIKit
 import VLPlayerLib
-import VLAuthenticationFramework
+import VLAuthentication
 import GoogleCast
 
 

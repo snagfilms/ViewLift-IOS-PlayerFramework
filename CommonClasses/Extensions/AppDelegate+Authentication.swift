@@ -7,9 +7,9 @@
 //
 import UIKit
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 #endif
 import VLAnalyticsLib
 //import Firebase
@@ -97,5 +97,11 @@ extension AppDelegate {
     
     func setupAnalytics() {
         VLAnalytics.shared.setupAnalytics(clients: [.adobe])
+        
+        self.triggerSpashScreenEvent()
+    }
+    
+    func triggerSpashScreenEvent() {
+        AnalyticsHelper.shared.triggerAnalytics(event: .splashEvent)
     }
 }

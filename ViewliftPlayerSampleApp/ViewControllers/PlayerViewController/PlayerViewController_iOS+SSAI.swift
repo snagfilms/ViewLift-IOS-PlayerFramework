@@ -13,6 +13,10 @@ import VLAnalyticsLib
 /// Extension to handle server-side ad tracking callbacks for the video player.
 /// These methods are triggered automatically by `VLPlayerLib` during ad playback events.
 extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
+    func totalAdsDuration(_ duration: Double) {
+        self.totalAdsDuration = duration
+    }
+
     
     // MARK: - Auto-triggered (Default + Custom Events)
     
@@ -78,29 +82,25 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
     
     func updateAdPlayback(model: VLPlayerLib.AdModel) {
         debugPrint(model.progress)
-        Task {
-            if let ad = model.currentAd, let adId = ad.adId, let analyticsAdInfo = model.analyticsAdInfo {
-                let currentAd = await self.analyticsAdDictionary.get(adId)
-                if currentAd == nil {
-                    await self.analyticsAdDictionary.set(adId, true)
-                    
-                    self.currentAdAssetInfo = VLAdAssetInfo(
-                        adId: analyticsAdInfo.adId,
-                        adName: analyticsAdInfo.adName,
-                        podName: analyticsAdInfo.podName,
-                        podLength: analyticsAdInfo.podLength,
-                        podPosition: analyticsAdInfo.podPosition,
-                        podOffset: analyticsAdInfo.podOffset, startTime: analyticsAdInfo.startTime, adSystem: analyticsAdInfo.adSystem
-                    )
-                }
-                
-            }
+        if let ad = model.currentAd, let adId = ad.adId, let analyticsAdInfo = model.analyticsAdInfo {
+            debugPrint("Current Ads: \(adId)")
+            self.currentAdAssetInfo = VLAdAssetInfo(
+                adId: analyticsAdInfo.adId,
+                adName: analyticsAdInfo.adName,
+                podName: analyticsAdInfo.podName,
+                podLength: analyticsAdInfo.podLength,
+                podPosition: analyticsAdInfo.podPosition,
+                podOffset: analyticsAdInfo.podOffset, startTime: analyticsAdInfo.startTime, adSystem: analyticsAdInfo.adSystem
+            )
+            
+            AnalyticsHelper.shared.setAdsAssets(adInfo: self.currentAdAssetInfo)
+            
         }
-       //  adSlider?.value = model.progress
+        //  adSlider?.value = model.progress
         
-      //   lblTimer?.text = formatTime(Double(model.remainingPodTime))
+        //   lblTimer?.text = formatTime(Double(model.remainingPodTime))
         
-         //lblAdCounter?.text = "\(model.currentAdNumber) of \(model.totalAds) •"
+        //lblAdCounter?.text = "\(model.currentAdNumber) of \(model.totalAds) •"
         
         if enableCustomAdUI {
             if let adView = view.viewWithTag(911) as? PlayerAdEmbeddedView {
@@ -109,7 +109,7 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
                 adView.lblAdCounter?.text = "\(model.currentAdNumber) of \(model.totalAds) •"
             }
         }
-     }
+    }
     
     
     // MARK: - Detailed Server-side Tracking Events
@@ -128,10 +128,10 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
         )
         
         switch trackingEventType {
-       
+            
         case .breakStart:
             debugPrint("slot impression") // Ad break has started
-        
+            
             AnalyticsHelper.shared.trackAdBreakStartAnalytics()
             
         case .impression:
@@ -142,86 +142,88 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
             
             AnalyticsHelper.shared.trackAdDidStartsAnalytics()
             
-
         case .firstQuartile:
             debugPrint("first quartile") // 25% of ad completed
-
+            
         case .midPoint:
             debugPrint("midpoint") // 50% of ad completed
-
+            
         case .thirdQuartile:
             debugPrint("third quartile") // 75% of ad completed
-
+            
         case .complete:
             debugPrint("complete") // 100% of ad completed
             
             AnalyticsHelper.shared.trackAdDidCompleteAnalytics()
-
+            
         case .breakEnd:
             debugPrint("slot end") // Ad break has ended
             
-            AnalyticsHelper.shared.trackAdBreakCompleteAnalytics()
-            AnalyticsHelper.shared
-                .playerChapterDidStart(
-                    currentTime: playerCurrentTime,
-                    endTime: 5.0
-                )
-
+            
+            if let startTime = self.vlPlayer?.getCurrentPlaybackTime(), let endTime = self.vlPlayer?.getChapterEndTime() {
+                
+                AnalyticsHelper.shared
+                    .trackAdBreakCompleteAnalytics(
+                        playerCurrentTime: startTime,
+                        chapterEnd: endTime
+                    )
+            }
+            
         case .mute:
             debugPrint("mute") // Ad muted
             
         case .unmute:
             debugPrint("unmute") // Ad unmuted
-
+            
         case .exitFullscreen:
             debugPrint("exit full screen") // Ad exited fullscreen
-
+            
         case .fullscreen:
             debugPrint("fullscreen") // Ad entered fullscreen
-
+            
         case .resume:
             debugPrint("resume") // Ad resumed after pause
             
             AnalyticsHelper.shared.playerDidStartPlaying()
-
+            
         case .closeLinear:
             debugPrint("close") // Linear ad closed
-
+            
         case .error:
             debugPrint("error") // Ad playback error
-
+            
         case .pause:
             debugPrint("pause") // Ad paused
             
             AnalyticsHelper.shared.playerDidPaused()
-
+            
         case .acceptInvitationLinear:
             debugPrint("accept invitation") // User accepted invitation ad
-
+            
         case .rewind:
             debugPrint("rewind") // Ad rewinded
-
+            
         case .creativeView:
             debugPrint("creative view") // Creative view tracked
-
+            
         case .stop:
             debugPrint("stop") // Ad stopped before completion
-
+            
         case .clickThrough:
             debugPrint("clickThrough") // User clicked through ad
-
+            
         case .clickTracking:
             debugPrint("clickTracking") // Click tracking logged
-
+            
         case .collapse:
             debugPrint("collapse") // Ad collapsed from expanded state
-
+            
         case .expand:
             debugPrint("expand") // Ad expanded
-
+            
         case .none:
             debugPrint("none") // No tracking event
-
+            
         @unknown default:
             debugPrint("default") // Future-proof: unknown event
         }
