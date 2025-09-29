@@ -84,6 +84,8 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
                     podPosition: analyticsAdInfo.podPosition,
                     podOffset: analyticsAdInfo.podOffset, startTime: analyticsAdInfo.startTime, adSystem: analyticsAdInfo.adSystem
                 )
+            
+            AnalyticsHelper.shared.setAdsAssets(adInfo: self.currentAdAssetInfo)
         }
     }
     
