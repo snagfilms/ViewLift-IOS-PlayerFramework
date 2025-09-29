@@ -4148,6 +4148,453 @@
         "kind": "TypeDecl",
         "name": "PlayerControlsConfig",
         "printedName": "PlayerControlsConfig",
+        "children": [
+          {
+            "kind": "TypeDecl",
+            "name": "SkipConfig",
+            "printedName": "SkipConfig",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "fixed",
+                "printedName": "fixed",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(VLPlayerLib.PlayerControlsConfig.SkipConfig.Type) -> VLPlayerLib.PlayerControlsConfig.SkipConfig",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SkipConfig",
+                        "printedName": "VLPlayerLib.PlayerControlsConfig.SkipConfig",
+                        "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "VLPlayerLib.PlayerControlsConfig.SkipConfig.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SkipConfig",
+                            "printedName": "VLPlayerLib.PlayerControlsConfig.SkipConfig",
+                            "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O5fixedyA2EmF",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV04SkipE0O5fixedyA2EmF",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "dynamic",
+                "printedName": "dynamic",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(VLPlayerLib.PlayerControlsConfig.SkipConfig.Type) -> VLPlayerLib.PlayerControlsConfig.SkipConfig",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SkipConfig",
+                        "printedName": "VLPlayerLib.PlayerControlsConfig.SkipConfig",
+                        "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "VLPlayerLib.PlayerControlsConfig.SkipConfig.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SkipConfig",
+                            "printedName": "VLPlayerLib.PlayerControlsConfig.SkipConfig",
+                            "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O7dynamicyA2EmF",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV04SkipE0O7dynamicyA2EmF",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SkipConfig",
+                    "printedName": "VLPlayerLib.PlayerControlsConfig.SkipConfig",
+                    "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SkipConfig",
+                    "printedName": "VLPlayerLib.PlayerControlsConfig.SkipConfig",
+                    "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O2eeoiySbAE_AEtFZ",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV04SkipE0O2eeoiySbAE_AEtFZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O9hashValueSivp",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV04SkipE0O9hashValueSivp",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O9hashValueSivg",
+                    "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV04SkipE0O9hashValueSivg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O4hash4intoys6HasherVz_tF",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV04SkipE0O4hash4intoys6HasherVz_tF",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O",
+            "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV04SkipE0O",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              }
+            ]
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "RemoteSeekSupport",
+            "printedName": "RemoteSeekSupport",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "disabled",
+                "printedName": "disabled",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport.Type) -> VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "RemoteSeekSupport",
+                        "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                        "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "RemoteSeekSupport",
+                            "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                            "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO8disabledyA2EmF",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO8disabledyA2EmF",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "seek",
+                "printedName": "seek",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport.Type) -> VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "RemoteSeekSupport",
+                        "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                        "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "RemoteSeekSupport",
+                            "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                            "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO4seekyA2EmF",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO4seekyA2EmF",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "skip",
+                "printedName": "skip",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport.Type) -> (VLPlayerLib.PlayerControlsConfig.SkipConfig) -> VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(VLPlayerLib.PlayerControlsConfig.SkipConfig) -> VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "RemoteSeekSupport",
+                            "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                            "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SkipConfig",
+                            "printedName": "VLPlayerLib.PlayerControlsConfig.SkipConfig",
+                            "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O"
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "RemoteSeekSupport",
+                            "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                            "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO4skipyAeC04SkipE0OcAEmF",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO4skipyAeC04SkipE0OcAEmF",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "both",
+                "printedName": "both",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport.Type) -> (VLPlayerLib.PlayerControlsConfig.SkipConfig) -> VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(VLPlayerLib.PlayerControlsConfig.SkipConfig) -> VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "RemoteSeekSupport",
+                            "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                            "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(skip: VLPlayerLib.PlayerControlsConfig.SkipConfig)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "SkipConfig",
+                                "printedName": "VLPlayerLib.PlayerControlsConfig.SkipConfig",
+                                "usr": "s:11VLPlayerLib20PlayerControlsConfigV04SkipE0O"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "RemoteSeekSupport",
+                            "printedName": "VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport",
+                            "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO4bothyAeC04SkipE0O_tcAEmF",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO4bothyAeC04SkipE0O_tcAEmF",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO",
+            "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV17RemoteSeekSupportO",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
+          }
+        ],
         "declKind": "Struct",
         "usr": "s:11VLPlayerLib20PlayerControlsConfigV",
         "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV",
@@ -51933,84 +52380,84 @@
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 1415,
+      "offset": 2474,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 1457,
+      "offset": 2516,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 1495,
+      "offset": 2554,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 1538,
+      "offset": 2597,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 1581,
+      "offset": 2640,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 1622,
+      "offset": 2681,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 1675,
+      "offset": 2734,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 2845,
+      "offset": 4070,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 2895,
+      "offset": 4120,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 2946,
+      "offset": 4171,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 3172,
+      "offset": 4397,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "Array",
-      "offset": 3506,
+      "offset": 4731,
       "length": 2,
       "value": "[]"
     },

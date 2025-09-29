@@ -168,6 +168,21 @@ extension VLPlayerLib.MarqueeText {
   @_Concurrency.MainActor @preconcurrency public func makeCompact(_ compact: Swift.Bool = true) -> VLPlayerLib.MarqueeText
 }
 public struct PlayerControlsConfig {
+  public enum SkipConfig {
+    case fixed
+    case dynamic
+    public static func == (a: VLPlayerLib.PlayerControlsConfig.SkipConfig, b: VLPlayerLib.PlayerControlsConfig.SkipConfig) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum RemoteSeekSupport {
+    case disabled
+    case seek
+    case skip(VLPlayerLib.PlayerControlsConfig.SkipConfig)
+    case both(skip: VLPlayerLib.PlayerControlsConfig.SkipConfig)
+  }
 }
 public struct SSAIBeaconTracking {
   public func triggerAnalytics(eventType: VLPlayerLib.VLPlayer.AdsEventType, beaconUrls: [Swift.String], disableAdTrackingForBeacon: Swift.Bool)
@@ -1440,6 +1455,8 @@ public struct PlayerResponseValidation {
 extension VLPlayerLib.VideoSourceType : Swift.Equatable {}
 extension VLPlayerLib.VideoSourceType : Swift.Hashable {}
 extension VLPlayerLib.MarqueeText : Swift.Sendable {}
+extension VLPlayerLib.PlayerControlsConfig.SkipConfig : Swift.Equatable {}
+extension VLPlayerLib.PlayerControlsConfig.SkipConfig : Swift.Hashable {}
 extension VLPlayerLib.NetworkConnectionStatus : Swift.Equatable {}
 extension VLPlayerLib.NetworkConnectionStatus : Swift.Hashable {}
 extension VLPlayerLib.NetworkConnectionStatus : Swift.RawRepresentable {}

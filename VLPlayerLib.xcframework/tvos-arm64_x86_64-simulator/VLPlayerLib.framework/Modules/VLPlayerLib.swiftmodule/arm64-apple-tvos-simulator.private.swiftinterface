@@ -252,7 +252,22 @@ public protocol AdManagerDelegate : AnyObject {
   func removeCuePoints()
 }
 public struct PlayerControlsConfig {
-  public init(isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isStartFromBeginningSupported: Swift.Bool = true)
+  public enum SkipConfig {
+    case fixed
+    case dynamic
+    public static func == (a: VLPlayerLib.PlayerControlsConfig.SkipConfig, b: VLPlayerLib.PlayerControlsConfig.SkipConfig) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum RemoteSeekSupport {
+    case disabled
+    case seek
+    case skip(VLPlayerLib.PlayerControlsConfig.SkipConfig)
+    case both(skip: VLPlayerLib.PlayerControlsConfig.SkipConfig)
+  }
+  public init(isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isStartFromBeginningSupported: Swift.Bool = true, remoteSeekSupport: VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport = .both(skip: SkipConfig.dynamic))
 }
 final public class VLPlayerAnalyticsModel {
   public typealias PropertyChangeCallback = (Swift.String, Any?) -> Swift.Void
@@ -1157,6 +1172,8 @@ public protocol PlayerVideoAnalyticsTrackDelegate : VLPlayerLib.AnalyticsTracker
   }
   @_Concurrency.MainActor @preconcurrency @objc override final public func didUpdateFocus(in context: UIKit.UIFocusUpdateContext, with coordinator: UIKit.UIFocusAnimationCoordinator)
   @_Concurrency.MainActor @preconcurrency final public var storedValue: Swift.Float
+  @_Concurrency.MainActor @preconcurrency final public var isSeekEnabled: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency final public var isSkipEnabled: Swift.Bool
   @_Concurrency.MainActor @preconcurrency @objc override final public func pressesBegan(_ presses: Swift.Set<UIKit.UIPress>, with event: UIKit.UIPressesEvent?)
 }
 public class EPGSupportModel {
@@ -1180,6 +1197,8 @@ extension VLPlayerLib.NetworkConnectionStatus : Swift.RawRepresentable {}
 extension VLPlayerLib.NetworkBandwidthUnit : Swift.Equatable {}
 extension VLPlayerLib.NetworkBandwidthUnit : Swift.Hashable {}
 extension VLPlayerLib.NetworkBandwidthUnit : Swift.RawRepresentable {}
+extension VLPlayerLib.PlayerControlsConfig.SkipConfig : Swift.Equatable {}
+extension VLPlayerLib.PlayerControlsConfig.SkipConfig : Swift.Hashable {}
 extension VLPlayerLib.VLPlayerAnalyticsModel.AnalyticsKey : Swift.Equatable {}
 extension VLPlayerLib.VLPlayerAnalyticsModel.AnalyticsKey : Swift.Hashable {}
 extension VLPlayerLib.VLPlayerAnalyticsModel.AnalyticsKey : Swift.RawRepresentable {}
