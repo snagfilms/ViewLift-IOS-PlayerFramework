@@ -76,6 +76,10 @@ extension AnalyticsHelper {
     func setAdsAssets(adInfo: VLAdAssetInfo?) {
         self.currentAdAssetInfo = adInfo
     }
+    
+    func setVideoAssets(contentInfo: VLContentInfo) {
+        self.contentInfo = contentInfo
+    }
 
     func resetSession() {
         contentInfo = nil
@@ -86,7 +90,7 @@ extension AnalyticsHelper {
     }
     
     func triggerVideoSessionStartEvent(contentInfo: VLContentInfo, chapterInfo: ChapterInfoModel){
-        self.contentInfo = contentInfo
+        self.setVideoAssets(contentInfo: contentInfo)
         
         self.playerDidLoadVideo()
         

@@ -520,6 +520,12 @@ extension PlayerViewController_iOS {
         playerView.pinToSuperview(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         
         playerContainerView.bringSubviewToFront(timerLabel)
+        
+        if let contentInfo = self.getVideoInfo() {
+            AnalyticsHelper.shared.setVideoAssets(contentInfo: contentInfo)
+            
+            AnalyticsHelper.shared.playerDidLoadVideo()
+        }
     }
     
     /// Sets up custom player UI controls and PiP
