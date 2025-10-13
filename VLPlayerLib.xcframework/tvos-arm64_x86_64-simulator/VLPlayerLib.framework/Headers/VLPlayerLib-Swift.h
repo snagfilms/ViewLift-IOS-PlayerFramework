@@ -374,6 +374,13 @@ SWIFT_CLASS("_TtC11VLPlayerLib10TvOSSlider")
 @end
 
 @class NSString;
+@interface TvOSSlider (SWIFT_EXTENSION(VLPlayerLib))
+@property (nonatomic) BOOL isAccessibilityElement;
+@property (nonatomic) UIAccessibilityTraits accessibilityTraits;
+@property (nonatomic, copy) NSString * _Nullable accessibilityLabel;
+@property (nonatomic, copy) NSString * _Nullable accessibilityValue;
+@end
+
 SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 @interface VLError : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -1187,6 +1194,13 @@ SWIFT_CLASS("_TtC11VLPlayerLib10TvOSSlider")
 @end
 
 @class NSString;
+@interface TvOSSlider (SWIFT_EXTENSION(VLPlayerLib))
+@property (nonatomic) BOOL isAccessibilityElement;
+@property (nonatomic) UIAccessibilityTraits accessibilityTraits;
+@property (nonatomic, copy) NSString * _Nullable accessibilityLabel;
+@property (nonatomic, copy) NSString * _Nullable accessibilityValue;
+@end
+
 SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 @interface VLError : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;

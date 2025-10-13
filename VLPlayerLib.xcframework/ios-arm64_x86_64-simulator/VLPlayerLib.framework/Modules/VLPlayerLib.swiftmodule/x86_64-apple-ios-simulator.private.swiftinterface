@@ -119,7 +119,7 @@ extension VLPlayerLib.VLPlayer {
     public init(style: VLPlayerLib.VLPlayer.PlayerControlsViewStyle = PlayerControlsViewStyle(), textContent: VLPlayerLib.VLPlayer.PlayerControlsViewTextContent = PlayerControlsViewTextContent())
   }
   public struct PlayerControlsViewStyle {
-    public init(buttonTextColor: UIKit.UIColor = .red, buttonBackgroundColor: UIKit.UIColor = .blue, backgroundColor: UIKit.UIColor = .green, sliderColor: UIKit.UIColor = UIColor.fromHex("#ABAAAC"), sliderProgressColor: UIKit.UIColor = UIColor.fromHex("#686768"), smallScreenBorderColor: UIKit.UIColor = .white, fullScreenBorderColor: UIKit.UIColor = .clear, gradientConfig: VLPlayerLib.VLPlayer.GradientConfig = GradientConfig())
+    public init(buttonTextColor: UIKit.UIColor = .red, buttonBackgroundColor: UIKit.UIColor = .blue, backgroundColor: UIKit.UIColor = .green, sliderColor: UIKit.UIColor = UIColor.fromHex("#ABAAAC"), sliderProgressColor: UIKit.UIColor = UIColor.fromHex("#686768"), smallScreenBorderColor: UIKit.UIColor = .white, fullScreenBorderColor: UIKit.UIColor = .clear, captionsOnOffStatusColor: UIKit.UIColor = .white, gradientConfig: VLPlayerLib.VLPlayer.GradientConfig = GradientConfig())
   }
   public struct GradientConfig {
     public var colors: [UIKit.UIColor]
@@ -129,7 +129,7 @@ extension VLPlayerLib.VLPlayer {
     public init(colors: [UIKit.UIColor] = [.clear, .black], locations: [Foundation.NSNumber] = [0.0, 1.0], startPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 0.0), endPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 1.0))
   }
   public struct PlayerControlsViewTextContent {
-    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts")
+    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts", subtitlesOnText: Swift.String = "Subtitles On", subtitlesOffText: Swift.String = "Subtitles Off")
   }
 }
 @objc @_inheritsConvenienceInitializers open class VLError : ObjectiveC.NSObject, Swift.Error {
@@ -166,6 +166,24 @@ extension Foundation.NSNotification.Name {
 }
 extension VLPlayerLib.MarqueeText {
   @_Concurrency.MainActor @preconcurrency public func makeCompact(_ compact: Swift.Bool = true) -> VLPlayerLib.MarqueeText
+}
+public struct AdsViewConfiguration {
+  public let viewStyle: VLPlayerLib.AdsViewConfiguration.AdsViewStyle
+  public let adsViewConfig: VLPlayerLib.AdsViewConfiguration.AdsViewConfig
+  public init(viewStyle: VLPlayerLib.AdsViewConfiguration.AdsViewStyle = AdsViewStyle(), adsViewConfig: VLPlayerLib.AdsViewConfiguration.AdsViewConfig = AdsViewConfig())
+  public struct AdsViewStyle {
+    public let sponseredTextColor: UIKit.UIColor
+    public let adCounterTextColor: UIKit.UIColor
+    public let timerTextColor: UIKit.UIColor
+    public init(sponseredTextColor: UIKit.UIColor = .white, adCounterTextColor: UIKit.UIColor = .white, timerTextColor: UIKit.UIColor = .white)
+  }
+  public struct AdsViewConfig {
+    public let showInfoIcon: Swift.Bool
+    public let showsponseredText: Swift.Bool
+    public let showAdCounterText: Swift.Bool
+    public let showTimerText: Swift.Bool
+    public init(showInfoIcon: Swift.Bool = true, showsponseredText: Swift.Bool = true, showAdCounterText: Swift.Bool = true, showTimerText: Swift.Bool = true)
+  }
 }
 public struct PlayerControlsConfig {
   public enum SkipConfig {
@@ -272,6 +290,9 @@ public protocol CustomPlayerSkinProtocol : UIKit.UIView {
   func muteUnmuteAdButtonTapped(isTrue: Swift.Bool)
   func fullScreenAdButtonTapped(isFullscreen: Swift.Bool)
   func updatePlayButton()
+}
+public struct FeatureFlags {
+  public init(shouldHideControlsOnMenuPressed: Swift.Bool = false, shouldCreateAudioLanguageOptionIndependently: Swift.Bool = true, shouldHideControlsWhenPaused: Swift.Bool = true)
 }
 @objc @_inheritsConvenienceInitializers public class BeaconHelper : ObjectiveC.NSObject {
   @objc override dynamic public init()
@@ -943,20 +964,20 @@ public struct TokenIdentity : Swift.Decodable {
   convenience public init(playerType: VLPlayerLib.VLPlayerType)
   public func setEntitlement(data: VLPlayerLib.VLPlayer.EntitlementData?, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, epgProgram: VLPlayerLib.VLEPGProgramDetails? = nil)
   public func refreshEntitlement(data: VLPlayerLib.VLPlayer.EntitlementData?, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
-  open func setSourceToPlay(isASATPlayer: Swift.Bool = false, staticContentId: Swift.String? = nil, streamURL: Swift.String, vlToken: Swift.String?, vlAPIEndPoint: Swift.String?, vlBeaconEndPoint: Swift.String? = nil, customControlsView: UIKit.UIView? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, analyticsAdditionalData: [Swift.String : Any]? = nil, adUrl: Swift.String? = nil, vlPlayerTag: Swift.String, streamConfig: VLPlayerLib.VLPlayer.StreamConfig? = nil, drmConfig: VLPlayerLib.VLPlayer.DRMConfig? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void)
+  open func setSourceToPlay(isASATPlayer: Swift.Bool = false, staticContentId: Swift.String? = nil, streamURL: Swift.String, vlToken: Swift.String?, vlAPIEndPoint: Swift.String?, vlBeaconEndPoint: Swift.String? = nil, customControlsView: UIKit.UIView? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, analyticsAdditionalData: [Swift.String : Any]? = nil, adUrl: Swift.String? = nil, vlPlayerTag: Swift.String, streamConfig: VLPlayerLib.VLPlayer.StreamConfig? = nil, drmConfig: VLPlayerLib.VLPlayer.DRMConfig? = nil, tveProviderInfo: VLPlayerLib.TVEProviderInfo? = nil, adsViewConfiguration: VLPlayerLib.AdsViewConfiguration? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void)
   open func setSourceToPlayDirectURL(customControlsView: UIKit.UIView?, playerDisplayType: VLPlayerLib.VLPlayer.PlayerDisplayType, analyticsAdditionalData: [Swift.String : Any]?, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, streamConfig: VLPlayerLib.VLPlayer.StreamConfig?)
   open func setSourceToPlayLocalURL(stringURL: Swift.String, videoId: Swift.String, userID: Swift.String?, customControlsView: UIKit.UIView?, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, playerObject: VLPlayerLib.PlayerObject?, playerDisplayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void)
   @available(*, deprecated, message: "Deprecated. Use setSource(type:customControlsView:playerFeaturesSupported:isSuccess:) or setSource(type:apiConfigEndPoint:vlPlayerTag:customControlsView:...isSuccess:) instead.")
-  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String, apiConfigEndPoint: Swift.String? = nil, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView? = nil, adUrl: Swift.String? = nil, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, householdID: Swift.String? = nil, tveProvider: Swift.String? = nil, mvpdprovider: Swift.String? = nil, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, easeLiveEnabled: Swift.Bool = false, location: (lat: Swift.String, long: Swift.String)? = nil, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, nearestServerPlayerBaseURL: Swift.String? = nil, captureWatchHistoryEvent: Swift.Bool = false, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, muxEnvironmentKey: Swift.String? = nil, tveImage: UIKit.UIImage? = nil, isCustomAdViewEnabled: Swift.Bool? = false, adobePlayerTempPass: Swift.String?, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
+  open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String, apiConfigEndPoint: Swift.String? = nil, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView? = nil, adUrl: Swift.String? = nil, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, location: (lat: Swift.String, long: Swift.String)? = nil, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, nearestServerPlayerBaseURL: Swift.String? = nil, captureWatchHistoryEvent: Swift.Bool = false, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, muxEnvironmentKey: Swift.String? = nil, tveProviderInfo: VLPlayerLib.TVEProviderInfo?, adsViewConfiguration: VLPlayerLib.AdsViewConfiguration? = nil, adobePlayerTempPass: Swift.String?, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
   open func setSource(type: VLPlayerLib.VLPlayer.PlaybackSourceType, customControlsView: UIKit.UIView? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported, vlPlayerTag: Swift.String = "1", isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
-  open func setSource(type: VLPlayerLib.VLPlayer.PlaybackSourceType, apiConfigEndPoint: Swift.String? = nil, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView? = nil, adUrl: Swift.String? = nil, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, householdID: Swift.String? = nil, tveProvider: Swift.String? = nil, mvpdprovider: Swift.String? = nil, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, easeLiveEnabled: Swift.Bool = false, location: (lat: Swift.String, long: Swift.String)? = nil, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, nearestServerPlayerBaseURL: Swift.String? = nil, captureWatchHistoryEvent: Swift.Bool = false, isBitMovinPlayer: Swift.Bool? = false, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, muxEnvironmentKey: Swift.String? = nil, tveImage: UIKit.UIImage? = nil, isCustomAdViewEnabled: Swift.Bool? = false, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
+  open func setSource(type: VLPlayerLib.VLPlayer.PlaybackSourceType, apiConfigEndPoint: Swift.String? = nil, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView? = nil, adUrl: Swift.String? = nil, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, easeLiveEnabled: Swift.Bool = false, location: (lat: Swift.String, long: Swift.String)? = nil, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, nearestServerPlayerBaseURL: Swift.String? = nil, captureWatchHistoryEvent: Swift.Bool = false, isBitMovinPlayer: Swift.Bool? = false, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, muxEnvironmentKey: Swift.String? = nil, isCustomAdViewEnabled: Swift.Bool? = false, tveProviderInfo: VLPlayerLib.TVEProviderInfo? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
   public func getTrickPlayData(_ value: Swift.Double) -> (image: UIKit.UIImage?, time: Swift.String?)
   @objc override dynamic public init()
   @objc deinit
 }
 extension VLPlayerLib.VLPlayer {
   public struct VLPlayerFeatureSupported {
-    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, loopVideoPlayback: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, playAudioOnly: Swift.Bool? = false, tapToPause: Swift.Bool? = nil, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool? = nil, isServerSideAdTrackingEnabled: Swift.Bool = true)
+    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, loopVideoPlayback: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, playAudioOnly: Swift.Bool? = false, tapToPause: Swift.Bool? = nil, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, easeLiveEnabled: Swift.Bool = false)
   }
 }
 extension VLPlayerLib.VLPlayer {
@@ -1196,6 +1217,17 @@ public protocol AdsAnalyticsTrackingDelegate : AnyObject {
 public protocol AdManagerDelegate : AnyObject {
   func setCuePointsFromPlayer(adModel: VLPlayerLib.SSAIAdsModel?, duration: Foundation.TimeInterval)
   func removeCuePoints()
+}
+public struct TVEProviderInfo {
+  public enum LogoType {
+    case image(UIKit.UIImage?)
+    case urlString(Swift.String?)
+  }
+  public let householdID: Swift.String?
+  public let tveProvider: Swift.String?
+  public let mvpdProvider: Swift.String?
+  public let logo: VLPlayerLib.TVEProviderInfo.LogoType?
+  public init(householdID: Swift.String? = nil, tveProvider: Swift.String? = nil, mvpdProvider: Swift.String? = nil, logo: VLPlayerLib.TVEProviderInfo.LogoType? = nil)
 }
 public protocol AnalyticsTrackerEvents : ObjectiveC.NSObjectProtocol {
   func playerDidLoadVideo()
