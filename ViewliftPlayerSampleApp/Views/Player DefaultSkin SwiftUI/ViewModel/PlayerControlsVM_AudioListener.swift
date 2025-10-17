@@ -18,9 +18,12 @@ extension PlayerControlsViewModel {
         }
         
         // Check initial volume state
-        let initialVolume = audioSession.outputVolume
-        DispatchQueue.main.async {
-            self.systemVolumeDidChange(systemVolume: initialVolume)
+        if !initiallyMuted{
+            initiallyMuted = false
+            let initialVolume = audioSession.outputVolume
+            DispatchQueue.main.async {
+                self.systemVolumeDidChange(systemVolume: initialVolume)
+            }
         }
         
         volumeObserver = audioSession.observe(\.outputVolume, options: [.new]) { [weak self] (audioSession, change) in

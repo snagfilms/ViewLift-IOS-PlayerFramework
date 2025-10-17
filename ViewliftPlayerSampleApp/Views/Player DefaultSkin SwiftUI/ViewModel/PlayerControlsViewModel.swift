@@ -97,10 +97,10 @@ class PlayerControlsViewModel: ObservableObject {
     
     var isAdOnMainView: Bool = false
     var adRunningOnInternalPlayer: Bool = false
-    
+    var initiallyMuted: Bool
     init(delegate: PlayerControlsViewDelegate,
-         playerControlsConfig: PlayerControlsConfig) {
-        
+         playerControlsConfig: PlayerControlsConfig, initiallyMuted: Bool = false) {
+        self.initiallyMuted = initiallyMuted
         self.delegate = delegate
         self.playerControlsConfig = playerControlsConfig
         
@@ -115,7 +115,7 @@ class PlayerControlsViewModel: ObservableObject {
         } else {
             playerControlsType = .streamControls
         }
-        
+        self.playerState.isMuted = initiallyMuted
         startVolumeMonitoring()
 //        if playerControlsConfig.isPIPSupported {
 //            self.delegate?.setupPictureInPicture()

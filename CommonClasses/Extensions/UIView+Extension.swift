@@ -76,4 +76,25 @@ extension UIView {
         
         NSLayoutConstraint.activate(constraints)
     }
+    
+    /// Adds the view into the container and centers it. Optionally sets a fixed size.
+    func center(in container: UIView, size: CGSize? = nil) {
+        container.addSubview(self)
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraints = [
+            centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            centerYAnchor.constraint(equalTo: container.centerYAnchor)
+        ]
+        
+        if let size = size {
+            constraints.append(contentsOf: [
+                widthAnchor.constraint(equalToConstant: size.width),
+                heightAnchor.constraint(equalToConstant: size.height)
+            ])
+        }
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+    
 }
