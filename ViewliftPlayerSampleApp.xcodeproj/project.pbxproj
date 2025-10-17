@@ -14,7 +14,6 @@
 		5422EFFB209912C600206D66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5422EFFA209912C600206D66 /* Assets.xcassets */; };
 		5422EFFE209912C600206D66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5422EFFC209912C600206D66 /* LaunchScreen.storyboard */; };
 		5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
-		9D3AAA792E4E2E5C00FFDA9A /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3AAA772E4E2E5C00FFDA9A /* Utility.swift */; };
 		9D3AAA8D2E4E2E7100FFDA9A /* PlayerControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3AAA7F2E4E2E7100FFDA9A /* PlayerControlButton.swift */; };
 		9D3AAA8E2E4E2E7100FFDA9A /* PlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3AAA8B2E4E2E7100FFDA9A /* PlayerControlsView.swift */; };
 		9D3AAA8F2E4E2E7100FFDA9A /* PlayerControlsHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3AAA8A2E4E2E7100FFDA9A /* PlayerControlsHostingView.swift */; };
@@ -70,6 +69,8 @@
 		D29F2A6B2E61ADD00067DC79 /* PlayerViewController_tvOS+AutoPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2A6A2E61ADB40067DC79 /* PlayerViewController_tvOS+AutoPlay.swift */; };
 		D2A15DA72E281AD900F88E09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5422EFF5209912C600206D66 /* ViewController.swift */; };
 		D2A15DA92E281AD900F88E09 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
+		D2A1AEF92EA2D32600425322 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A1AEF82EA2D32600425322 /* Utility.swift */; };
+		D2A1AEFA2EA2D32600425322 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A1AEF82EA2D32600425322 /* Utility.swift */; };
 		D2A22D5D2E72D4320058D37A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D2A22D5C2E72D4320058D37A /* Kingfisher */; };
 		D2A22D5F2E72D4500058D37A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D2A22D5E2E72D4500058D37A /* Kingfisher */; };
 		D2A3DAD72E63B0B4009070BB /* AutoPlayDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A3DAD02E63B0A0009070BB /* AutoPlayDataManager.swift */; };
@@ -159,7 +160,6 @@
 		5422EFFD209912C600206D66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5422EFFF209912C600206D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPlayerViewController.swift; sourceTree = "<group>"; };
-		9D3AAA772E4E2E5C00FFDA9A /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		9D3AAA7A2E4E2E7100FFDA9A /* CastUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastUIButton.swift; sourceTree = "<group>"; };
 		9D3AAA7B2E4E2E7100FFDA9A /* CenterPlayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterPlayButtonView.swift; sourceTree = "<group>"; };
 		9D3AAA7C2E4E2E7100FFDA9A /* CustomAirPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAirPlayButton.swift; sourceTree = "<group>"; };
@@ -180,10 +180,6 @@
 		BA05D4C82E8776AB008BF84C /* AnalyticsHelper+AuthTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsHelper+AuthTracking.swift"; sourceTree = "<group>"; };
 		BA05D4CB2E8777E0008BF84C /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 		BA0DE0582E7AEE5E00650CEA /* SiteConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SiteConfig.plist; sourceTree = "<group>"; };
-		BA26B2972E8686AB00089E29 /* GoogleCast-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleCast-iOS.xcframework"; path = "../iosplayer-sdk/VLPlayer/Framework/iOS/GoogleCast-iOS.xcframework"; sourceTree = "<group>"; };
-		BA26B2982E8686AB00089E29 /* GoogleInteractiveMediaAds-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-iOS.xcframework"; path = "../iosplayer-sdk/VLPlayer/Framework/iOS/GoogleInteractiveMediaAds-iOS.xcframework"; sourceTree = "<group>"; };
-		BA26B2992E8686AB00089E29 /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "../iosplayer-sdk/VLPlayer/Framework/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
-		BA26B2A22E86889500089E29 /* GoogleInteractiveMediaAds-tvOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-tvOS.xcframework"; path = "../iosplayer-sdk/VLPlayer/Framework/tvOS/GoogleInteractiveMediaAds-tvOS.xcframework"; sourceTree = "<group>"; };
 		BA26B2A52E86932400089E29 /* AnalyticsHelper+MediaTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsHelper+MediaTracking.swift"; sourceTree = "<group>"; };
 		BA8CFCB42E73005C008DEE58 /* PlayerViewController_iOS+TempPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+TempPass.swift"; sourceTree = "<group>"; };
 		BAB188AB2E79834C008EF175 /* PlayerViewController_TempPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController_TempPass.swift; sourceTree = "<group>"; };
@@ -199,6 +195,7 @@
 		D280CCA12E5C27C50070CDA5 /* PlayerViewController_iOS+AutoPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+AutoPlay.swift"; sourceTree = "<group>"; };
 		D29F2A6A2E61ADB40067DC79 /* PlayerViewController_tvOS+AutoPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_tvOS+AutoPlay.swift"; sourceTree = "<group>"; };
 		D2A15D8D2E28199900F88E09 /* Demo App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2A1AEF82EA2D32600425322 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		D2A3DAD02E63B0A0009070BB /* AutoPlayDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoPlayDataManager.swift; sourceTree = "<group>"; };
 		D2A758FA2E4B0D1F0089B4D1 /* AssetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetModel.swift; sourceTree = "<group>"; };
 		D2A758FB2E4B0D1F0089B4D1 /* VideoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoList.swift; sourceTree = "<group>"; };
@@ -313,7 +310,6 @@
 		5422EFF2209912C600206D66 /* ViewliftPlayerSampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				9D3AAA782E4E2E5C00FFDA9A /* Helpers */,
 				D2A759912E4B280D0089B4D1 /* Views */,
 				D2A759862E4B27410089B4D1 /* ViewControllers */,
 				5422EFF3209912C600206D66 /* AppDelegate.swift */,
@@ -328,20 +324,8 @@
 		5422F0062099162100206D66 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BA26B2A22E86889500089E29 /* GoogleInteractiveMediaAds-tvOS.xcframework */,
-				BA26B2992E8686AB00089E29 /* AmazonIVSPlayer-iOS.xcframework */,
-				BA26B2972E8686AB00089E29 /* GoogleCast-iOS.xcframework */,
-				BA26B2982E8686AB00089E29 /* GoogleInteractiveMediaAds-iOS.xcframework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9D3AAA782E4E2E5C00FFDA9A /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				9D3AAA772E4E2E5C00FFDA9A /* Utility.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		9D3AAA822E4E2E7100FFDA9A /* Components */ = {
@@ -470,6 +454,7 @@
 		D2A7590C2E4B0E130089B4D1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D2A1AEF82EA2D32600425322 /* Utility.swift */,
 				BA05D4CB2E8777E0008BF84C /* NetworkReachability.swift */,
 				BA05D4C12E86D9BA008BF84C /* Analytics */,
 				D2D2E1552E5F2128001C2CD7 /* AutoPlayView.swift */,
@@ -847,6 +832,7 @@
 				D2A759A62E4B33610089B4D1 /* AssetInfoViewController.swift in Sources */,
 				D2A759A72E4B33610089B4D1 /* AssetsListViewController+Services.swift in Sources */,
 				D2A759A82E4B33610089B4D1 /* AssetListViewController.swift in Sources */,
+				D2A1AEFA2EA2D32600425322 /* Utility.swift in Sources */,
 				D2A759202E4B0E130089B4D1 /* UserManager.swift in Sources */,
 				D2A759212E4B0E130089B4D1 /* TokenIdentity.swift in Sources */,
 				D2A759222E4B0E130089B4D1 /* AssetTableViewCell.swift in Sources */,
@@ -869,7 +855,6 @@
 				D2B7638A2E68A6BC00D71D6D /* String+Extension.swift in Sources */,
 				BA05D4C92E8776AF008BF84C /* AnalyticsHelper+AuthTracking.swift in Sources */,
 				D2A759892E4B27410089B4D1 /* PlayerViewController_iOS+Analytics.swift in Sources */,
-				9D3AAA792E4E2E5C00FFDA9A /* Utility.swift in Sources */,
 				D2A7598A2E4B27410089B4D1 /* PlayerViewController_iOS.swift in Sources */,
 				D2A7598B2E4B27410089B4D1 /* PlayerViewController_iOS+PIP.swift in Sources */,
 				D2A759932E4B280D0089B4D1 /* VLVideoResponseModel.swift in Sources */,
@@ -923,6 +908,7 @@
 				D2A7599C2E4B304E0089B4D1 /* PlayerViewController_tvOS+VideoPlaybackDelegate.swift in Sources */,
 				D26D92192E6B1A4A002A70B1 /* TVEPollingQRCodeView.swift in Sources */,
 				D2D2E1532E5F1D93001C2CD7 /* UIView+Extension.swift in Sources */,
+				D2A1AEF92EA2D32600425322 /* Utility.swift in Sources */,
 				BA05D4C62E86DA04008BF84C /* AnalyticsHelper+Data.swift in Sources */,
 				D2A759292E4B0E130089B4D1 /* ConfigurableItemRowView.swift in Sources */,
 				BA26B2A72E86932400089E29 /* AnalyticsHelper+MediaTracking.swift in Sources */,
@@ -1750,7 +1736,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/snagfilms/AuthenticationFramework";
 			requirement = {
-				branch = 3.1.4;
+				branch = 3.1.5;
 				kind = branch;
 			};
 		};
@@ -1758,7 +1744,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework";
 			requirement = {
-				branch = 3.2.11;
+				branch = 3.2.14;
 				kind = branch;
 			};
 		};
