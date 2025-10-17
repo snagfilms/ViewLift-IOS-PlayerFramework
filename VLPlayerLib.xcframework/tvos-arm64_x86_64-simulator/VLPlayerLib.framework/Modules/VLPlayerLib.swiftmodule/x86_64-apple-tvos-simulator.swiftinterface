@@ -993,6 +993,7 @@ extension VLPlayerLib.VLPlayer.PlaybackList {
 }
 public struct SSAIAdsModel : Swift.Decodable {
   public var avails: Swift.Array<VLPlayerLib.SSAIAvailableAds>?
+  public var nextToken: Swift.String?
   public func nextAvailableStartTime(currentTime: Swift.Double) -> Swift.Double?
   public init(from decoder: any Swift.Decoder) throws
 }
