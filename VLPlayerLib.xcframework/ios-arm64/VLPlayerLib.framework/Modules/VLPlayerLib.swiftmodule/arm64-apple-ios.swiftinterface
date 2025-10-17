@@ -78,7 +78,7 @@ extension AVFoundation.AVPlayer {
   @_Concurrency.MainActor @preconcurrency public func getSubTitleInstance() -> Self
   @_Concurrency.MainActor @preconcurrency public func updateSubtitlesFont()
   @_Concurrency.MainActor @preconcurrency public func updateSubTitleConstraints(parentView: UIKit.UIView, isFullScreen: Swift.Bool)
-  @_Concurrency.MainActor @preconcurrency public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8, isPathLocal: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = .utf8, isPathLocal: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency public func show(subtitles string: Swift.String)
 }
 extension AmazonIVSPlayer.IVSPlayer {
@@ -798,6 +798,7 @@ extension VLPlayerLib.VLPlayer {
   public func updateEPG(programData: VLPlayerLib.EPGSupportModel?)
   @objc dynamic open func sliderEndedTracking(newSeekValue: Swift.Double)
   @objc dynamic open func sliderBeganTracking(newSeekValue: Swift.Double)
+  public func setControlsVisibility(type: VLPlayerLib.VLPlayer.ControlsVisibility)
 }
 public struct TokenIdentity : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws

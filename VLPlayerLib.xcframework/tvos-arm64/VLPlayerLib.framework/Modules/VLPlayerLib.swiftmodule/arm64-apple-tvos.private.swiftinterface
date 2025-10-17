@@ -96,7 +96,7 @@ extension AVFoundation.AVPlayer {
   @_Concurrency.MainActor @preconcurrency public func getSubTitleInstance() -> Self
   @_Concurrency.MainActor @preconcurrency public func updateSubtitlesFont()
   @_Concurrency.MainActor @preconcurrency public func updateSubTitleConstraints(parentView: UIKit.UIView, isFullScreen: Swift.Bool)
-  @_Concurrency.MainActor @preconcurrency public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8, isPathLocal: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = .utf8, isPathLocal: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency public func show(subtitles string: Swift.String)
 }
 public struct TokenIdentity : Swift.Decodable {
@@ -267,7 +267,7 @@ public struct PlayerControlsConfig {
     case skip(VLPlayerLib.PlayerControlsConfig.SkipConfig)
     case both(skip: VLPlayerLib.PlayerControlsConfig.SkipConfig)
   }
-  public init(isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isStartFromBeginningSupported: Swift.Bool = true, isCaptionsOnOffTextSupported: Swift.Bool = true, remoteSeekSupport: VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport = .both(skip: SkipConfig.dynamic))
+  public init(isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isStartFromBeginningSupported: Swift.Bool = true, isCaptionsOnOffTextSupported: Swift.Bool = true, remoteSeekSupport: VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport = .both(skip: SkipConfig.dynamic), isPlayPauseSupported: Swift.Bool = false)
 }
 final public class VLPlayerAnalyticsModel {
   public typealias PropertyChangeCallback = (Swift.String, Any?) -> Swift.Void
@@ -425,6 +425,7 @@ extension VLPlayerLib.VLPlayer {
   public func updateEPG(programData: VLPlayerLib.EPGSupportModel?)
   @objc dynamic open func sliderEndedTracking(newSeekValue: Swift.Double)
   @objc dynamic open func sliderBeganTracking(newSeekValue: Swift.Double)
+  public func setControlsVisibility(type: VLPlayerLib.VLPlayer.ControlsVisibility)
 }
 extension VLPlayerLib.VLPlayer {
   public func dismissAutoPlayView(playNext: Swift.Bool)
