@@ -15,6 +15,7 @@ import VLAuthenticationFramework_tvOS
 import VLBeaconLib
 import Foundation
 import VLAnalyticsLib
+import SwiftUI
 
 // Handles TVE authentication logic for the player view controller
 extension PlayerViewController_iOS {
@@ -22,7 +23,53 @@ extension PlayerViewController_iOS {
     /// Initiates the TVE login process for the user
     func loginWithTVE() {
         debugPrint("Login with TVE called")
-        proceedTVELogin()
+        let type = Configuration.custom
+        
+        switch type {
+        case .custom, .customTheme:
+            customUIForLogin()
+        case .native, .default:
+            proceedTVELogin()
+        case .disabled:
+            break
+        }
+        
+    }
+    
+    private func customUIForLogin() {
+        VLAuthentication.sharedInstance.getTVEProviders { providers, errorCode in
+            if let mvpdList = providers, errorCode == nil {
+                print(mvpdList)
+                
+                DispatchQueue.main.async {
+                    
+                    let swiftUIView = MVPDGridView(mvpdList: mvpdList) { selectedMVPD in
+                          self.handleMVPDSelection(selectedMVPD)
+                    }
+                    
+                            
+                    let hostingController = UIHostingController(rootView: swiftUIView)
+                            
+                    hostingController.modalPresentationStyle = .fullScreen
+                    self.present(hostingController, animated: true)
+                }
+            }
+        }
+        
+    }
+    
+    private func handleMVPDSelection(_ mvpd: AdobeMvpd) {
+           // Process the selected MVPD
+           print("Processing MVPD: \(mvpd.id) - \(mvpd.displayName)")
+        
+        VLAuthentication.sharedInstance
+            .proceedForloginTVEAuthentication(
+                selectedProvider: mvpd,
+                presentingViewController: self) { userIdentity, errorCode in
+                    if let user = userIdentity, errorCode == nil {
+                        print(user)
+                    }
+                }
     }
     
     /// Proceeds with the TVE authentication flow using the VLAuthentication framework

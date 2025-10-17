@@ -138,6 +138,10 @@ class PlayerViewController_iOS: UIViewController {
         if UserManager.shared.userIdentity != nil {
             self.logoutButton.isHidden = false
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+5.0) {
+            self.loginWithTVE()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
