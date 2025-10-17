@@ -9,14 +9,6 @@ import VLAnalyticsLib
 import UIKit
 
 extension AnalyticsHelper {
-    private func getUserinfo() -> VLUserInfo? {
-        guard let userInfo = UserManager.shared.userIdentity else { return nil }
-        
-        return VLUserInfo(
-            userId: userInfo.userId, email: userInfo.email, deviceID: UIDevice.current.identifierForVendor?.uuidString
-        )
-    }
-    
     internal func getTVEProviderInfo() -> VLTVProviderInfo? {
         guard let userInfo = UserManager.shared.userIdentity else { return nil }
         
@@ -27,9 +19,7 @@ extension AnalyticsHelper {
     
     private func getAppInfo() -> VLAppInfo {
         return VLAppInfo(
-            network: AnalyticsHelper.shared.reachability.getRechabilityStatus(),
-            publisher: orgid,
-            domain: domain
+            publisher: orgid
         )
     }
     
@@ -51,3 +41,5 @@ extension AnalyticsHelper {
         VLAnalytics.shared.trackEvent(data: tempEventData)
     }
 }
+
+
