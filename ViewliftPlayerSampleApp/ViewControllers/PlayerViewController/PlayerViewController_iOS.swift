@@ -120,6 +120,8 @@ class PlayerViewController_iOS: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        VLAnalytics.shared.startObservingPlayerEvents()
+        
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
         setupConstraints()
@@ -142,7 +144,7 @@ class PlayerViewController_iOS: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        VLAnalytics.shared.stopObservingPlayerEvents()
 //        self.stopTempPassTimer()
     }
     
@@ -521,11 +523,23 @@ extension PlayerViewController_iOS {
         
         playerContainerView.bringSubviewToFront(timerLabel)
         
-        if let contentInfo = self.getVideoInfo() {
-            AnalyticsHelper.shared.setVideoAssets(contentInfo: contentInfo)
-            
-            AnalyticsHelper.shared.playerDidLoadVideo()
-        }
+//        V1
+//        if let contentInfo = self.getVideoInfo() {
+//            AnalyticsHelper.shared.setVideoAssets(contentInfo: contentInfo)
+//            
+//            AnalyticsHelper.shared.playerDidLoadVideo()
+//        }
+        
+        //V2
+//        if let contentInfo = self.getVideoInfoV2() {
+//            self.vlPlayer?
+//                .setAnalyticsInfo(
+//                    contentInfo: contentInfo,
+//                    playerInfo: AnalyticsHelperV2.shared.getPlayerInfo(),
+//                    tvProviderInfo: AnalyticsHelperV2.shared
+//                        .getTVEProviderInfo()
+//                )
+//        }
     }
     
     /// Sets up custom player UI controls and PiP

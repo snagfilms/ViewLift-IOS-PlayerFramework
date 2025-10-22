@@ -96,6 +96,8 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
  
     func videoFinished(playerTag: String) {
         AnalyticsHelper.shared.trackVideoCompletedAnalytics()
+        
+        
     }
     
     // Called when custom player controls visibility changes

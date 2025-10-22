@@ -89,33 +89,34 @@ extension AnalyticsHelper {
         isFullScreen = false
     }
     
-    func triggerVideoSessionStartEvent(contentInfo: VLContentInfo, chapterInfo: ChapterInfoModel){
-        self.setVideoAssets(contentInfo: contentInfo)
-        
-        self.playerDidLoadVideo()
-        
-        self.playerDidStartPlaying()
-        
-        if !chapterInfo.havingPreRollAds && chapterInfo.endTime > chapterInfo.startTime {
-            let startTime = chapterInfo.startTime
-            let endTime = chapterInfo.endTime
-            
-            self.playerChapterDidStart(
-                currentTime: startTime,
-                endTime: endTime
-            )
-        }
-    }
+//    func triggerVideoSessionStartEvent(contentInfo: VLContentInfo, chapterInfo: ChapterInfoModel){
+//        self.setVideoAssets(contentInfo: contentInfo)
+//        
+//        self.playerDidLoadVideo()
+//        
+//        self.playerDidStartPlaying()
+//        
+//        if !chapterInfo.havingPreRollAds && chapterInfo.endTime > chapterInfo.startTime {
+//            let startTime = chapterInfo.startTime
+//            let endTime = chapterInfo.endTime
+//            
+//            self.playerChapterDidStart(
+//                currentTime: startTime,
+//                endTime: endTime
+//            )
+//        }
+//    }
 }
 
 // MARK: - Playback lifecycle + media load
 extension AnalyticsHelper {
-    func playerDidStartPlaying() { track(.playStarted) }
+    func playerDidStartPlaying() { track(.playStarted) } //done
 
-    func playerDidPaused() { track(.videoPauseStarted) }
+    func playerDidPaused() { track(.videoPauseStarted) } //done
 
     func playerSessionEnded() {
-        self.track(.trackSessionEnd)
+        self.track(.trackSessionEnd) //done
+        
         self.resetSession()
     }
 

@@ -131,10 +131,23 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
             
         case .breakStart:
             debugPrint("slot impression") // Ad break has started
-            if let contentInfo = self.getVideoInfo() {
-                AnalyticsHelper.shared.setVideoAssets(contentInfo: contentInfo)
-                AnalyticsHelper.shared.playerDidLoadVideo()
-            }
+            //V1
+//            if let contentInfo = self.getVideoInfo() {
+//                AnalyticsHelper.shared.setVideoAssets(contentInfo: contentInfo)
+//                AnalyticsHelper.shared.playerDidLoadVideo()
+//            }
+            
+            //V2
+//            if let contentInfo = self.getVideoInfoV2() {
+//                self.vlPlayer?
+//                    .setAnalyticsInfo(
+//                        contentInfo: contentInfo,
+//                        playerInfo: AnalyticsHelperV2.shared.getPlayerInfo(),
+//                        tvProviderInfo: AnalyticsHelperV2.shared
+//                            .getTVEProviderInfo()
+//                    )
+//            }
+            
             
             DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                 AnalyticsHelper.shared.trackAdBreakStartAnalytics()

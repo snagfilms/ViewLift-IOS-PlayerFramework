@@ -232,4 +232,37 @@ extension PlayerViewController_iOS {
         )
         
     }
+    
+    func getVideoInfoV2() -> VLContentInfoAnalytics? {
+        return VLContentInfoAnalytics(
+            id: programId,
+            title: programTitle,
+            seriesId: seriesId,
+            seriesTitle: seriesTitle,
+            seasonNumber: seasonNumber,
+            episodeNumber: episodeNumber,
+            contentType: contentType,
+            durationInSeconds: durationInSeconds,
+            airDate: airDate,
+            language: language,
+            totalSecondsConsumed: totalSecondsConsumed,
+            streamType: streamType,
+            subcategory1: category,
+            subcategory2: subcategory,
+            screenSize: screenSize,
+            videostatus: videostatus,
+            videodomain: videodomain,
+            videotmsid: videotmsid,
+            videobroadcast: videobroadcast,
+            videoInitiate: videoInitiateRaw,
+            videocliptype: videocliptype,
+            videonetwork: videoNetwork,
+            isLive: isLive,
+            subTitle: subTitle,
+            assetId: assetId,
+            programStartTimeMiliSeconds: programStartTimeMiliSeconds,
+            programEndTimeMiliSeconds: programEndTimeMiliSeconds
+        )
+        
+    }
 }

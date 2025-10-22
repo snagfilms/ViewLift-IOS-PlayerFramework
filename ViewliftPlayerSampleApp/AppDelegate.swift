@@ -14,6 +14,7 @@ import VLAuthenticationFramework
 import VLAuthenticationFramework_tvOS
 #endif
 import GoogleCast
+import VLAnalyticsLib
 
 
 @UIApplicationMain
