@@ -74,6 +74,18 @@ extension AVFoundation.AVPlayer {
     get
     set(value)
   }
+  @_Concurrency.MainActor @preconcurrency public var backgroundColor: UIKit.UIColor? {
+    get
+    set(value)
+  }
+  @_Concurrency.MainActor @preconcurrency public var textColor: UIKit.UIColor? {
+    get
+    set(value)
+  }
+  @_Concurrency.MainActor @preconcurrency public var textFont: UIKit.UIFont? {
+    get
+    set(value)
+  }
   @_Concurrency.MainActor @preconcurrency public func addSubtitles(parentView: UIKit.UIView, textColor: Swift.String?, isFullScreen: Swift.Bool) -> Self
   @_Concurrency.MainActor @preconcurrency public func getSubTitleInstance() -> Self
   @_Concurrency.MainActor @preconcurrency public func updateSubtitlesFont()
@@ -93,6 +105,12 @@ extension AmazonIVSPlayer.IVSPlayer {
   public func open(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8, isPathLocal: Swift.Bool, playerPosition: Swift.Double)
   public func show(subtitles string: Swift.String, playerPosition: Swift.Double)
   public func showSubTitlesOnPlayerProgress(playerPosition: Swift.Double)
+}
+public struct SubtitleThemeConfiguration {
+  public init(textColor: UIKit.UIColor = .white, backgroundColor: UIKit.UIColor = UIColor.black.withAlphaComponent(0.6), font: UIKit.UIFont = .systemFont(ofSize: 15))
+}
+public struct SubtitleConfiguration {
+  public init(closeCaptions: [VLPlayerLib.CloseCaptions], themeConfiguration: VLPlayerLib.SubtitleThemeConfiguration = SubtitleThemeConfiguration())
 }
 extension VLPlayerLib.VLPlayer {
   public enum PayWallConfiguration {
@@ -920,7 +938,10 @@ public struct TokenIdentity : Swift.Decodable {
     public init(stream: VLPlayerLib.VLPlayer.DirectStreamType, token: Swift.String? = nil, apiBaseURL: Swift.String? = nil, beaconBaseURL: Swift.String? = nil)
   }
   public struct DirectStreamType {
-    public init(url: Swift.String, staticContentId: Swift.String? = nil, streamConfig: VLPlayerLib.VLPlayer.StreamConfig? = nil, drmconfig: VLPlayerLib.VLPlayer.DRMConfig? = nil)
+    public init(url: Swift.String, staticContentId: Swift.String? = nil, streamConfig: VLPlayerLib.VLPlayer.StreamConfig? = nil, drmconfig: VLPlayerLib.VLPlayer.DRMConfig? = nil, mediaMetaDataInfo: VLPlayerLib.VLPlayer.MediaMetaDataInfo? = nil)
+  }
+  public struct MediaMetaDataInfo {
+    public init(subtitleConfiguration: VLPlayerLib.SubtitleConfiguration)
   }
   @objc @objcMembers public class DRMConfig : ObjectiveC.NSObject {
     @objc public init(licenseUrl: Swift.String, certificateUrl: Swift.String, licenseToken: Swift.String, completeSkd: Swift.String)
@@ -965,7 +986,7 @@ public struct TokenIdentity : Swift.Decodable {
   convenience public init(playerType: VLPlayerLib.VLPlayerType)
   public func setEntitlement(data: VLPlayerLib.VLPlayer.EntitlementData?, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, epgProgram: VLPlayerLib.VLEPGProgramDetails? = nil)
   public func refreshEntitlement(data: VLPlayerLib.VLPlayer.EntitlementData?, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
-  open func setSourceToPlay(isASATPlayer: Swift.Bool = false, staticContentId: Swift.String? = nil, streamURL: Swift.String, vlToken: Swift.String?, vlAPIEndPoint: Swift.String?, vlBeaconEndPoint: Swift.String? = nil, customControlsView: UIKit.UIView? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, analyticsAdditionalData: [Swift.String : Any]? = nil, adUrl: Swift.String? = nil, vlPlayerTag: Swift.String, streamConfig: VLPlayerLib.VLPlayer.StreamConfig? = nil, drmConfig: VLPlayerLib.VLPlayer.DRMConfig? = nil, tveProviderInfo: VLPlayerLib.TVEProviderInfo? = nil, adsViewConfiguration: VLPlayerLib.AdsViewConfiguration? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void)
+  open func setSourceToPlay(isASATPlayer: Swift.Bool = false, staticContentId: Swift.String? = nil, streamURL: Swift.String, vlToken: Swift.String?, vlAPIEndPoint: Swift.String?, vlBeaconEndPoint: Swift.String? = nil, customControlsView: UIKit.UIView? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, analyticsAdditionalData: [Swift.String : Any]? = nil, adUrl: Swift.String? = nil, vlPlayerTag: Swift.String, streamConfig: VLPlayerLib.VLPlayer.StreamConfig? = nil, drmConfig: VLPlayerLib.VLPlayer.DRMConfig? = nil, tveProviderInfo: VLPlayerLib.TVEProviderInfo? = nil, adsViewConfiguration: VLPlayerLib.AdsViewConfiguration? = nil, closeCaptions: [VLPlayerLib.CloseCaptions]? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void)
   open func setSourceToPlayDirectURL(customControlsView: UIKit.UIView?, playerDisplayType: VLPlayerLib.VLPlayer.PlayerDisplayType, analyticsAdditionalData: [Swift.String : Any]?, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, streamConfig: VLPlayerLib.VLPlayer.StreamConfig?)
   open func setSourceToPlayLocalURL(stringURL: Swift.String, videoId: Swift.String, userID: Swift.String?, customControlsView: UIKit.UIView?, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, playerObject: VLPlayerLib.PlayerObject?, playerDisplayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void)
   @available(*, deprecated, message: "Deprecated. Use setSource(type:customControlsView:playerFeaturesSupported:isSuccess:) or setSource(type:apiConfigEndPoint:vlPlayerTag:customControlsView:...isSuccess:) instead.")
@@ -1412,6 +1433,9 @@ public func makeAnalyticsAdInfo(from ctx: VLPlayerLib.AdBreakContext) -> VLPlaye
 extension VLPlayerLib.NetworkReachabilityManager.NetworkReachabilityStatus : Swift.Equatable {
 }
 public func == (lhs: VLPlayerLib.NetworkReachabilityManager.NetworkReachabilityStatus, rhs: VLPlayerLib.NetworkReachabilityManager.NetworkReachabilityStatus) -> Swift.Bool
+public struct CloseCaptions {
+  public init(url: Swift.String, type: Swift.String, language: Swift.String)
+}
 final public class VLPlayerAnalyticsModel {
   public typealias PropertyChangeCallback = (Swift.String, Any?) -> Swift.Void
   public enum AnalyticsKey : Swift.String {
