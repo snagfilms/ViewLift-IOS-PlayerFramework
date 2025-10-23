@@ -297,6 +297,8 @@ extension PlayerViewController_iOS {
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = videoList.apiBaseUrl
         
+        let orgid = "8CF467C25245AE3F0A490D4C@AdobeOrg"
+        
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""
         let userId: String? = nil
@@ -331,7 +333,12 @@ extension PlayerViewController_iOS {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl, adobeTempPassPayload: adobePassPayload
+                            apiBaseURL: vlBaseUrl,
+                            adobeTempPassPayload: adobePassPayload,
+                            playerInfo: AnalyticsPlayerInfo(
+                                playerVersion: "3.0.0",
+                                publisher: orgid
+                            )
                         )
                 )
         }

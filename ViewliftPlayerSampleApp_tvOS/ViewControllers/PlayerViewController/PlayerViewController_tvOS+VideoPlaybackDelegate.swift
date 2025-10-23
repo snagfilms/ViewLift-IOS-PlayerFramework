@@ -141,9 +141,9 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
             endTime: endPlaybackTime
         )
         
-        if let contentInfo = self.getVideoInfo() {
-            AnalyticsHelper.shared.triggerVideoSessionStartEvent(contentInfo: contentInfo,chapterInfo: chapterInfo)
-        }
+//        if let contentInfo = self.getVideoInfo() {
+//            AnalyticsHelper.shared.triggerVideoSessionStartEvent(contentInfo: contentInfo,chapterInfo: chapterInfo)
+//        }
     }
     
     // Updates playback progress every second
