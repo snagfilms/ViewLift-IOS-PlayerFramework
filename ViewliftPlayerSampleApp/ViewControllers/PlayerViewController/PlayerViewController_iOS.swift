@@ -144,8 +144,14 @@ class PlayerViewController_iOS: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        VLAnalytics.shared.stopObservingPlayerEvents()
+        
 //        self.stopTempPassTimer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        VLAnalytics.shared.stopObservingPlayerEvents()
     }
     
     func setupConstraints() {
@@ -258,7 +264,7 @@ class PlayerViewController_iOS: UIViewController {
         ) { [weak self] logoutSuccessful in
             if logoutSuccessful {
                 Task { [weak self] in
-                    AnalyticsHelper.shared.triggerSignoutAnalytics()
+//                    AnalyticsHelper.shared.triggerSignoutAnalytics()
                     
                     self?.logoutButton.isHidden = true
                     
@@ -297,8 +303,6 @@ extension PlayerViewController_iOS {
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = videoList.apiBaseUrl
         
-        let orgid = "8CF467C25245AE3F0A490D4C@AdobeOrg"
-        
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""
         let userId: String? = nil
@@ -334,11 +338,7 @@ extension PlayerViewController_iOS {
                             videoId: self.videoList.videoId,
                             token: vlToken,
                             apiBaseURL: vlBaseUrl,
-                            adobeTempPassPayload: adobePassPayload,
-                            playerInfo: AnalyticsPlayerInfo(
-                                playerVersion: "3.0.0",
-                                publisher: orgid
-                            )
+                            adobeTempPassPayload: adobePassPayload
                         )
                 )
         }
@@ -420,7 +420,7 @@ extension PlayerViewController_iOS {
     private func setPlayerDelegates() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
         vlPlayer?.videoPlayerDelegate = self
-        vlPlayer?.playerVideoAnalyticsDelegate = AnalyticsHelper.shared
+//        vlPlayer?.playerVideoAnalyticsDelegate = AnalyticsHelper.shared
         vlPlayer?.enablePlayerBitrateLogs = enableBitrateLogs
         vlPlayer?.serverSideAdTrackingDelegate = self
         vlPlayer?.castDelegate = self
@@ -529,6 +529,17 @@ extension PlayerViewController_iOS {
         playerView.pinToSuperview(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         
         playerContainerView.bringSubviewToFront(timerLabel)
+    
+        
+        self.vlPlayer?
+            .setAnalyticsInfo(
+                mediaAnalyticsInfo: MediaAnalyticsInfo(
+                    playerInfo: AnalyticsPlayerInfo(
+                        playerVersion: "3.0.0",
+                        publisher: AnalyticsHelperV2.shared.orgid
+                    )
+                )
+            )
         
 //        V1
 //        if let contentInfo = self.getVideoInfo() {

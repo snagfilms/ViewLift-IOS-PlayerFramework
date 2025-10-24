@@ -96,7 +96,7 @@ extension AppDelegate {
     }
     
     func setupAnalytics() {
-        VLAnalytics.shared.setupAnalytics(clients: [.adobe])
+        VLAnalytics.shared.setupAnalytics(clients: [.adobe], enableDebugLogs: true)
         
         self.triggerSpashScreenEvent()
     }
