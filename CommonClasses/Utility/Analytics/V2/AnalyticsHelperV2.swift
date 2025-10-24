@@ -40,7 +40,10 @@ final class AnalyticsHelperV2: NSObject {
     
     internal func getPlayerInfo() -> AnalyticsPlayerInfo {
         return AnalyticsPlayerInfo(
-            playerVersion: "3.0.0", publisher: orgid,
+            playerVersion: "3.0.0",
+            playerName: "AVPlayer",
+            playerTech: "AVPlayer",
+            publisher: orgid
         )
     }
 

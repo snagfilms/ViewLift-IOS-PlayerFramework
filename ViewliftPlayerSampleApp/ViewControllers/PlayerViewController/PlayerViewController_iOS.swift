@@ -534,10 +534,13 @@ extension PlayerViewController_iOS {
         self.vlPlayer?
             .setAnalyticsInfo(
                 mediaAnalyticsInfo: MediaAnalyticsInfo(
+                    contentInfo: VLContentInfoAnalytics(videonetwork: "test"),
                     playerInfo: AnalyticsPlayerInfo(
                         playerVersion: "3.0.0",
+                        playerName: "AVPlayer",
+                        playerTech: "AVPlayer",
                         publisher: AnalyticsHelperV2.shared.orgid
-                    )
+                    ),
                 )
             )
         
