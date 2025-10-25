@@ -350,12 +350,26 @@ extension PlayerViewController_iOS {
             }
             
 //            let autoPlayList = autoPlayListdataManager?.getAutoPlayUrlList()
+        
+//        let epgProgram = VLEPGProgramDetails(
+//            id: "0004c623-da4f-4e1a-a6c5-f5e46a4e528a",
+//            channelId: "669090af-a232-4270-9bd2-8fdc30fdc224",
+//            programId: "EP026956620027",
+//            programTitle: "9-1-1",
+//            subType: "Series",
+//            programStartTime: 1761393500000,
+//            programEndTime: 1761393600000,
+//            subTitle: "9-1-1"
+//        )
+        
+        
             
             // Set player source and handle completion
            vlPlayer?.setSource(
                 type: playbackSourceType,
                 vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
                 playerFeaturesSupported: featureSupported, nextPlaybackList: nil
+//                , epgProgramDetails: epgProgram
             ) {
                 [weak self] isSuccess,
                 playerView,
@@ -534,7 +548,7 @@ extension PlayerViewController_iOS {
         self.vlPlayer?
             .setAnalyticsInfo(
                 mediaAnalyticsInfo: MediaAnalyticsInfo(
-                    contentInfo: VLContentInfoAnalytics(videonetwork: "test"),
+//                    contentInfo: VLContentInfoAnalytics(videonetwork: "test"),
                     playerInfo: AnalyticsHelperV2.shared.getPlayerInfo(),
                     tvProviderInfo: AnalyticsHelperV2.shared.getTVEProviderInfo()
                 )
