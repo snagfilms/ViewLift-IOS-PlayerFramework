@@ -259,7 +259,6 @@ extension PlayerViewController_iOS {
             videonetwork: videoNetwork,
             isLive: isLive,
             subTitle: subTitle,
-            assetId: assetId,
             programStartTimeMiliSeconds: programStartTimeMiliSeconds,
             programEndTimeMiliSeconds: programEndTimeMiliSeconds
         )
