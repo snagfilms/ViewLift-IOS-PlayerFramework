@@ -176,7 +176,7 @@ extension AnalyticsHelper {
         track(.videoSeekStarted)
     }
 
-    func playerSeekDidComplete(newTime: Double, shouldResume: Bool) {
+    func playerSeekDidComplete() {
         track(.videoSeekCompleted)
     }
 }
@@ -270,8 +270,11 @@ private extension AnalyticsHelper {
         var builder = VLEventModelBuilder().eventType(event)
         if options
             .contains(.content) {
-            builder = builder.contentInfo( self.contentInfo )
+            builder = builder.contentInfo( self.contentInfo)
+            
+            builder = builder.playerInfo(getPlayerInfo())
         }
+        
         if options.contains(.ads) {
             builder = builder.adsInfo(currentAdAssetInfo)
         }
@@ -279,6 +282,9 @@ private extension AnalyticsHelper {
         if options.contains(.tvProvider) {
             builder = builder.tvProviderInfo(getTVEProviderInfo())
         }
+        
+        builder = builder.appInfo(getAppInfo())
+        
         
         return builder
     }

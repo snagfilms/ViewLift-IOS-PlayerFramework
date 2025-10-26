@@ -25,7 +25,7 @@ extension AnalyticsHelper {
             requestorId: resourceID, tveID: userInfo.tveUserId)
     }
     
-    private func getAppInfo() -> VLAppInfo {
+    internal func getAppInfo() -> VLAppInfo {
         return VLAppInfo(
             network: AnalyticsHelper.shared.reachability.getRechabilityStatus(),
             publisher: orgid,
@@ -33,8 +33,9 @@ extension AnalyticsHelper {
         )
     }
     
-    private func getPlayerInfo() -> VLPlayerInfo {
+    internal func getPlayerInfo() -> VLPlayerInfo {
         return VLPlayerInfo(
+            playerTech: "AVPlayer Viewlift",
             playerName: "AVPlayer",
             playerVersion: "3.0.0"
         )
