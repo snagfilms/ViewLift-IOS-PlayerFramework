@@ -176,7 +176,7 @@ extension AnalyticsHelper {
         track(.videoSeekStarted)
     }
 
-    func playerSeekDidComplete() {
+    func playerSeekDidComplete(newTime: Double, shouldResume: Bool) {
         track(.videoSeekCompleted)
     }
 }
