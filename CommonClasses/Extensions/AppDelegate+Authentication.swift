@@ -101,6 +101,14 @@ extension AppDelegate {
         self.triggerSpashScreenEvent()
     }
     
+    func handleAnalyticsConsent() {
+        VLAnalytics.shared.setConsent(
+                                analyticsStorageIsAllowed: true,
+                                adStorageIsAllowed: true,
+                                adUserDataIsAllowed: false
+        )
+    }
+    
     func triggerSpashScreenEvent() {
         AnalyticsHelper.shared.triggerAnalytics(event: .splashEvent)
     }

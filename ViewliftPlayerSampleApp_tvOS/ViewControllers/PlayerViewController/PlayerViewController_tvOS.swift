@@ -68,7 +68,8 @@ class PlayerViewController_tvOS: UIViewController {
             self.channelkey = self.channelId.joined(separator: ",")
         }
     }
-    
+    let loaderView = UIActivityIndicatorView(style: .large)
+
     var channelkey: String = ""
     
     override var canBecomeFirstResponder: Bool {
@@ -97,8 +98,19 @@ class PlayerViewController_tvOS: UIViewController {
         createButton()
     }
     
+    private func addLoaderView(to containerView: UIView) -> UIActivityIndicatorView {
+        containerView.addSubview(loaderView)
+        loaderView.backgroundColor = .red
+        loaderView.hidesWhenStopped = true
+        loaderView.center(in: containerView)
+        return loaderView
+    }
+
+    
     // Loads and configures the player view
     func loadPlayerView() async {
+        let loaderView = addLoaderView(to: playerContainerView)
+        loaderView.startAnimating()
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = self.videoList.apiBaseUrl
         let vlBeaconURL: String? = self.videoList.beaconBaseUrl
@@ -325,7 +337,7 @@ class PlayerViewController_tvOS: UIViewController {
         // Add player view first (fills container)
         playerContainerView.addSubview(playerView)
         playerContainerView.backgroundColor = .white
-        playerView.backgroundColor = .white
+        playerView.backgroundColor = .lightGray
         playerView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -345,14 +357,15 @@ class PlayerViewController_tvOS: UIViewController {
         ])
 
         playerContainerView.bringSubviewToFront(timerLabel)
+        playerContainerView.bringSubviewToFront(loaderView)
     }
 
 
     // Returns player features supported configuration
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
-        let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
+        let customMacros  = ["VIEWLIFT_USER_AGENT": Utility.sharedUtility.getUserAgent()]
         // See VLPlayer documentation for available macros
-        return VLPlayer.VLPlayerFeatureSupported(appMacrosList: nil,
+        return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  fullScreenOnly: isFullScreen,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
@@ -373,9 +386,9 @@ class PlayerViewController_tvOS: UIViewController {
         switch type {
         case .customTheme:
             // Configure default player controls view with custom theme
-            let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .white, smallScreenBorderColor: .green, fullScreenBorderColor: .red)
-            let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", playbackQualityText: "PLAYBACK QUALITY")
-            let playerControlsConfig = PlayerControlsConfig(isSettingsSupported: false, isSubTitleSupported: true, isSlowMoSupported: false, isStartFromBeginningSupported: false)
+            let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .white, smallScreenBorderColor: .green, fullScreenBorderColor: .red, captionsOnOffStatusColor: .red)
+            let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", playbackQualityText: "PLAYBACK QUALITY", subtitlesOnText: "ON", subtitlesOffText: "OFF")
+            let playerControlsConfig = PlayerControlsConfig(isSettingsSupported: true, isSubTitleSupported: true, isSlowMoSupported: false,isStartFromBeginningSupported: false,isCaptionsOnOffTextSupported: true , remoteSeekSupport: .both(skip: .dynamic))
             let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent, playerControlsConfig: playerControlsConfig)
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(controlsTheme: controlsTheme)
             return playerControlsViewConfiguration

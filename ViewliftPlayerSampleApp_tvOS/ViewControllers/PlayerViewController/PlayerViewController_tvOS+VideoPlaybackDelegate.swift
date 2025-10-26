@@ -27,6 +27,7 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     
     func videoPlaybackError(currentTime: Double, errorMessage: String, errorCode: String, playerTag: String) {
         DispatchQueue.main.async { [weak self] in
+            self?.loaderView.stopAnimating()
             if let playerView = self?.vlPlayer?.getVideoPlayerView(){
                 self?.errorHandler(message: errorMessage, playerView: playerView)
             }
@@ -71,6 +72,7 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
             loginWithTVE()
         } else {
             DispatchQueue.main.async {
+                self.loaderView.stopAnimating()
                 self.showAlert(message: errorDescription)
                 self.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
             }
@@ -110,6 +112,7 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     
     // Called when video playback starts
     func videoStarted(timestamp: Double, playerTag: String) {
+        loaderView.stopAnimating()
         videoPlayerControlsView?.videoStartedPlaying(timestamp: timestamp)
         debugPrint("PlayerViewController videoStarted: \(timestamp)")
         

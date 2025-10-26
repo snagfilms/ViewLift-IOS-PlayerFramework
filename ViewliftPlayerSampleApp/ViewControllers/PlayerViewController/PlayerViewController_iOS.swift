@@ -387,6 +387,14 @@ extension PlayerViewController_iOS {
                     hasTVE = monetizationModels.contains { $0["type"] as? String == "TVE" }
                 }
                 
+                if !hasTVE{
+                    if let models = contentResponse?["models"] as? [String] {
+                        if models.contains("TVE") {
+                            hasTVE = true
+                        }
+                    }
+                }
+                
                 let plans = contentResponse?["plans"] as? [[String: Any]] ?? []
                 let channelIds = plans
                     .flatMap { $0["planDetails"] as? [[String: Any]] ?? [] }
@@ -616,8 +624,8 @@ extension PlayerViewController_iOS {
         )
 
         let viewModel = PlayerControlsViewModel(delegate: self,
-                                                playerControlsConfig: playerControlsConfig)
-
+                                                playerControlsConfig: playerControlsConfig,
+                                                initiallyMuted: self.muteEnabled)
         let customView = PlayerControlsHostingView(viewModel: viewModel)
         self.videoPlayerCustomView = (view: customView, viewModel: viewModel)
         
@@ -626,10 +634,10 @@ extension PlayerViewController_iOS {
 
     /// Returns the supported player features configuration
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
-        let customMacros  = ["VIEWLIFT_USER": "user_1234", "VIEWLIFT_CONTENT_TITLE": "VIDEO-TITLE"]
+        let customMacros  = ["VIEWLIFT_USER_AGENT": Utility.sharedUtility.getUserAgent()]
         // You can find list of macros in VLPlayer documentation for SSAI functioning
         //https://developer.viewlift.com/docs/vlplayerfeaturesupported
-        return VLPlayer.VLPlayerFeatureSupported(appMacrosList: nil,
+        return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
