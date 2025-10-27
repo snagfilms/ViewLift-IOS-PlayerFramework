@@ -85,7 +85,7 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
                     podOffset: analyticsAdInfo.podOffset, startTime: analyticsAdInfo.startTime, adSystem: analyticsAdInfo.adSystem
                 )
             
-            AnalyticsHelper.shared.setAdsAssets(adInfo: self.currentAdAssetInfo)
+//            AnalyticsHelper.shared.setAdsAssets(adInfo: self.currentAdAssetInfo)
         }
     }
     
@@ -110,7 +110,7 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
         case .breakStart:
             debugPrint("slot impression") // Ad break has started
             
-            AnalyticsHelper.shared.trackAdBreakStartAnalytics()
+//            AnalyticsHelper.shared.trackAdBreakStartAnalytics()
             
         case .impression:
             debugPrint("default impression") // Ad impression logged
@@ -118,7 +118,7 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
         case .start:
             debugPrint("impression") // Ad has started playing
             
-            AnalyticsHelper.shared.trackAdDidStartsAnalytics()
+//            AnalyticsHelper.shared.trackAdDidStartsAnalytics()
             
         case .firstQuartile:
             debugPrint("first quartile") // 25% of ad completed
@@ -132,20 +132,20 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
         case .complete:
             debugPrint("complete") // 100% of ad completed
             
-            AnalyticsHelper.shared.trackAdDidCompleteAnalytics()
+//            AnalyticsHelper.shared.trackAdDidCompleteAnalytics()
             
         case .breakEnd:
             debugPrint("slot end") // Ad break has ended
             
             
-            if let startTime = self.vlPlayer?.getCurrentPlaybackTime(), let endTime = self.vlPlayer?.getChapterEndTime() {
-                
-                AnalyticsHelper.shared
-                    .trackAdBreakCompleteAnalytics(
-                        playerCurrentTime: startTime,
-                        chapterEnd: endTime
-                    )
-            }
+//            if let startTime = self.vlPlayer?.getCurrentPlaybackTime(), let endTime = self.vlPlayer?.getChapterEndTime() {
+//                
+//                AnalyticsHelper.shared
+//                    .trackAdBreakCompleteAnalytics(
+//                        playerCurrentTime: startTime,
+//                        chapterEnd: endTime
+//                    )
+//            }
             
         case .mute:
             debugPrint("mute") // Ad muted
@@ -162,7 +162,7 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
         case .resume:
             debugPrint("resume") // Ad resumed after pause
             
-            AnalyticsHelper.shared.playerDidStartPlaying()
+//            AnalyticsHelper.shared.playerDidStartPlaying()
             
         case .closeLinear:
             debugPrint("close") // Linear ad closed
@@ -173,7 +173,7 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
         case .pause:
             debugPrint("pause") // Ad paused
             
-            AnalyticsHelper.shared.playerDidPaused()
+//            AnalyticsHelper.shared.playerDidPaused()
             
         case .acceptInvitationLinear:
             debugPrint("accept invitation") // User accepted invitation ad

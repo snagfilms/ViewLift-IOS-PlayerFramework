@@ -84,11 +84,11 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     func customPlayerState(isPlaying: Bool) {
         videoPlayerControlsView?.playPause(isPlaying: isPlaying)
         
-        if isPlaying {
-            AnalyticsHelper.shared.playerDidStartPlaying()
-        } else {
-            AnalyticsHelper.shared.playerDidPaused()
-        }
+//        if isPlaying {
+//            AnalyticsHelper.shared.playerDidStartPlaying()
+//        } else {
+//            AnalyticsHelper.shared.playerDidPaused()
+//        }
     }
     
     // Called when subtitle embedding in URL changes
@@ -97,7 +97,7 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     }
  
     func videoFinished(playerTag: String) {
-        AnalyticsHelper.shared.trackVideoCompletedAnalytics()
+//        AnalyticsHelper.shared.trackVideoCompletedAnalytics()
         
         
     }
@@ -121,15 +121,15 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     }
     
     func videoPause(timestamp: Double, playerTag: String) {
-        AnalyticsHelper.shared.playerDidPaused()
+//        AnalyticsHelper.shared.playerDidPaused()
     }
 
     func videoResume(timestamp: Double, playerTag: String) {
-        if VLAnalytics.shared.isMediaSessionTracked == false {
-            self.videoSessionStartAnalytics()
-        } else {
-            AnalyticsHelper.shared.playerDidStartPlaying()
-        }
+//        if VLAnalytics.shared.isMediaSessionTracked == false {
+//            self.videoSessionStartAnalytics()
+//        } else {
+//            AnalyticsHelper.shared.playerDidStartPlaying()
+//        }
     }
 
     

@@ -13,6 +13,7 @@ import VLAuthenticationFramework
 import VLAuthenticationFramework_tvOS
 #endif
 import Kingfisher
+import AppTrackingTransparency
 
 
 class AssetListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -36,6 +37,8 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+       
         
         guard videoList != nil else {
             showAlert(title: "Error", message: "Please provide valid video list data. Replace configs.json content.")
@@ -74,6 +77,16 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
             xApiKey: xApiKey,
             alertMessage: "Detected invalid configuration! Please update your settings."
         )
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                ATTrackingManager.requestTrackingAuthorization { status in
+                    // your status handling here
+                }
+            }
     }
     
     func fetchUserDetails() {

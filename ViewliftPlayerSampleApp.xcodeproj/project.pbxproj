@@ -14,7 +14,6 @@
 		5422EFFB209912C600206D66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5422EFFA209912C600206D66 /* Assets.xcassets */; };
 		5422EFFE209912C600206D66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5422EFFC209912C600206D66 /* LaunchScreen.storyboard */; };
 		5455724820F3CD5A001BCC24 /* FullScreenPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */; };
-		9D3AAA792E4E2E5C00FFDA9A /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3AAA772E4E2E5C00FFDA9A /* Utility.swift */; };
 		9D3AAA8D2E4E2E7100FFDA9A /* PlayerControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3AAA7F2E4E2E7100FFDA9A /* PlayerControlButton.swift */; };
 		9D3AAA8E2E4E2E7100FFDA9A /* PlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3AAA8B2E4E2E7100FFDA9A /* PlayerControlsView.swift */; };
 		9D3AAA8F2E4E2E7100FFDA9A /* PlayerControlsHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3AAA8A2E4E2E7100FFDA9A /* PlayerControlsHostingView.swift */; };
@@ -45,6 +44,11 @@
 		BA0DE05A2E7AEE5E00650CEA /* SiteConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA0DE0582E7AEE5E00650CEA /* SiteConfig.plist */; };
 		BA26B2A62E86932400089E29 /* AnalyticsHelper+MediaTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26B2A52E86932400089E29 /* AnalyticsHelper+MediaTracking.swift */; };
 		BA26B2A72E86932400089E29 /* AnalyticsHelper+MediaTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26B2A52E86932400089E29 /* AnalyticsHelper+MediaTracking.swift */; };
+		BA5D8B692EAE2F8F001401D8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B682EAE2F8F001401D8 /* Utility.swift */; };
+		BA5D8B6A2EAE2F8F001401D8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B682EAE2F8F001401D8 /* Utility.swift */; };
+		BA5D8B6C2EAE39BA001401D8 /* MVPDGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B6B2EAE39BA001401D8 /* MVPDGridView.swift */; };
+		BA5D8B6E2EAF54D4001401D8 /* MUXSDKStats in Frameworks */ = {isa = PBXBuildFile; productRef = BA5D8B6D2EAF54D4001401D8 /* MUXSDKStats */; };
+		BA5D8B702EAF54DA001401D8 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = BA5D8B6F2EAF54DA001401D8 /* BitmovinPlayer */; };
 		BA8CFCB52E73005C008DEE58 /* PlayerViewController_iOS+TempPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8CFCB42E73005C008DEE58 /* PlayerViewController_iOS+TempPass.swift */; };
 		BA8E148B2EA229FE00B45F68 /* VLPlayerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8E14832EA2297600B45F68 /* VLPlayerLib.framework */; };
 		BA8E148C2EA229FE00B45F68 /* VLPlayerLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA8E14832EA2297600B45F68 /* VLPlayerLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -258,7 +262,6 @@
 		5422EFFD209912C600206D66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5422EFFF209912C600206D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5455724720F3CD5A001BCC24 /* FullScreenPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPlayerViewController.swift; sourceTree = "<group>"; };
-		9D3AAA772E4E2E5C00FFDA9A /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		9D3AAA7A2E4E2E7100FFDA9A /* CastUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastUIButton.swift; sourceTree = "<group>"; };
 		9D3AAA7B2E4E2E7100FFDA9A /* CenterPlayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterPlayButtonView.swift; sourceTree = "<group>"; };
 		9D3AAA7C2E4E2E7100FFDA9A /* CustomAirPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAirPlayButton.swift; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 		BA26B2992E8686AB00089E29 /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "../iosplayer-sdk/VLPlayer/Framework/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
 		BA26B2A22E86889500089E29 /* GoogleInteractiveMediaAds-tvOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-tvOS.xcframework"; path = "../iosplayer-sdk/VLPlayer/Framework/tvOS/GoogleInteractiveMediaAds-tvOS.xcframework"; sourceTree = "<group>"; };
 		BA26B2A52E86932400089E29 /* AnalyticsHelper+MediaTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsHelper+MediaTracking.swift"; sourceTree = "<group>"; };
+		BA5D8B682EAE2F8F001401D8 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		BA5D8B6B2EAE39BA001401D8 /* MVPDGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVPDGridView.swift; sourceTree = "<group>"; };
 		BA8CFCB42E73005C008DEE58 /* PlayerViewController_iOS+TempPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+TempPass.swift"; sourceTree = "<group>"; };
 		BA8E14732EA2297600B45F68 /* VLPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VLPlayer.xcodeproj; path = "../iosplayer-sdk_OneSDK/VLPlayer/VLPlayer.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		BA8E148E2EA22A0400B45F68 /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "../iosplayer-sdk_OneSDK/VLPlayer/Framework/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
@@ -376,8 +381,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA5D8B6E2EAF54D4001401D8 /* MUXSDKStats in Frameworks */,
 				D2A22D5F2E72D4500058D37A /* Kingfisher in Frameworks */,
 				BA8E14B22EA22CDA00B45F68 /* VLAnalyticsLib.framework in Frameworks */,
+				BA5D8B702EAF54DA001401D8 /* BitmovinPlayer in Frameworks */,
 				BA8E149B2EA22A1400B45F68 /* GoogleInteractiveMediaAds-tvOS.xcframework in Frameworks */,
 				BA8E14972EA22A0F00B45F68 /* VLPlayerLib.framework in Frameworks */,
 				BA05D5092E895C59008BF84C /* VLAuthentication in Frameworks */,
@@ -423,7 +430,6 @@
 		5422EFF2209912C600206D66 /* ViewliftPlayerSampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				9D3AAA782E4E2E5C00FFDA9A /* Helpers */,
 				D2A759912E4B280D0089B4D1 /* Views */,
 				D2A759862E4B27410089B4D1 /* ViewControllers */,
 				5422EFF3209912C600206D66 /* AppDelegate.swift */,
@@ -448,14 +454,6 @@
 				BA26B2982E8686AB00089E29 /* GoogleInteractiveMediaAds-iOS.xcframework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9D3AAA782E4E2E5C00FFDA9A /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				9D3AAA772E4E2E5C00FFDA9A /* Utility.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		9D3AAA822E4E2E7100FFDA9A /* Components */ = {
@@ -623,6 +621,7 @@
 		D2A7590C2E4B0E130089B4D1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				BA5D8B682EAE2F8F001401D8 /* Utility.swift */,
 				BA05D4CB2E8777E0008BF84C /* NetworkReachability.swift */,
 				BA05D4C12E86D9BA008BF84C /* Analytics */,
 				D2D2E1552E5F2128001C2CD7 /* AutoPlayView.swift */,
@@ -741,6 +740,7 @@
 		D2A759912E4B280D0089B4D1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BA5D8B6B2EAE39BA001401D8 /* MVPDGridView.swift */,
 				D208331F2E72DF690080932C /* Custom Ad View */,
 				9D3AAA8C2E4E2E7100FFDA9A /* Player DefaultSkin SwiftUI */,
 				D2A7598F2E4B280D0089B4D1 /* CustomVideoControls.swift */,
@@ -834,6 +834,8 @@
 			packageProductDependencies = (
 				D2A22D5E2E72D4500058D37A /* Kingfisher */,
 				BA05D5082E895C59008BF84C /* VLAuthentication */,
+				BA5D8B6D2EAF54D4001401D8 /* MUXSDKStats */,
+				BA5D8B6F2EAF54DA001401D8 /* BitmovinPlayer */,
 			);
 			productName = ViewLiftPlayerSampleApp_tvOS;
 			productReference = D2A15D8D2E28199900F88E09 /* Demo App.app */;
@@ -1065,6 +1067,7 @@
 				D2A759A62E4B33610089B4D1 /* AssetInfoViewController.swift in Sources */,
 				D2A759A72E4B33610089B4D1 /* AssetsListViewController+Services.swift in Sources */,
 				D2A759A82E4B33610089B4D1 /* AssetListViewController.swift in Sources */,
+				BA5D8B692EAE2F8F001401D8 /* Utility.swift in Sources */,
 				D2A759202E4B0E130089B4D1 /* UserManager.swift in Sources */,
 				D2A759212E4B0E130089B4D1 /* TokenIdentity.swift in Sources */,
 				D2A759222E4B0E130089B4D1 /* AssetTableViewCell.swift in Sources */,
@@ -1088,7 +1091,6 @@
 				D2B7638A2E68A6BC00D71D6D /* String+Extension.swift in Sources */,
 				BA05D4C92E8776AF008BF84C /* AnalyticsHelper+AuthTracking.swift in Sources */,
 				D2A759892E4B27410089B4D1 /* PlayerViewController_iOS+Analytics.swift in Sources */,
-				9D3AAA792E4E2E5C00FFDA9A /* Utility.swift in Sources */,
 				D2A7598A2E4B27410089B4D1 /* PlayerViewController_iOS.swift in Sources */,
 				D2A7598B2E4B27410089B4D1 /* PlayerViewController_iOS+PIP.swift in Sources */,
 				D2A759932E4B280D0089B4D1 /* VLVideoResponseModel.swift in Sources */,
@@ -1100,6 +1102,7 @@
 				9D3AAA8F2E4E2E7100FFDA9A /* PlayerControlsHostingView.swift in Sources */,
 				9D3AAA902E4E2E7100FFDA9A /* ToggleButton.swift in Sources */,
 				BA26B2A62E86932400089E29 /* AnalyticsHelper+MediaTracking.swift in Sources */,
+				BA5D8B6C2EAE39BA001401D8 /* MVPDGridView.swift in Sources */,
 				BA05D4C32E86D9D7008BF84C /* AnalyticsHelper+PageTracking.swift in Sources */,
 				9D3AAA912E4E2E7100FFDA9A /* MarqueeText.swift in Sources */,
 				9D3AAA922E4E2E7100FFDA9A /* PlayerControlsViewModel.swift in Sources */,
@@ -1139,6 +1142,7 @@
 				D2A759A42E4B33610089B4D1 /* AssetsListViewController+Services.swift in Sources */,
 				D2A759A52E4B33610089B4D1 /* AssetListViewController.swift in Sources */,
 				D2A759242E4B0E130089B4D1 /* AppDelegate+Authentication.swift in Sources */,
+				BA5D8B6A2EAE2F8F001401D8 /* Utility.swift in Sources */,
 				D2A7599C2E4B304E0089B4D1 /* PlayerViewController_tvOS+VideoPlaybackDelegate.swift in Sources */,
 				D26D92192E6B1A4A002A70B1 /* TVEPollingQRCodeView.swift in Sources */,
 				D2D2E1532E5F1D93001C2CD7 /* UIView+Extension.swift in Sources */,
@@ -1341,9 +1345,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = V743M68NY7;
 				ENABLE_BITCODE = NO;
@@ -1422,6 +1426,7 @@
 					"$(PROJECT_DIR)/ViewliftPlayerSampleApp/VLPlayer\\ Frameworks",
 					"$(PROJECT_DIR)/ViewliftPlayerSampleApp/VLPlayer\\ Frameworks",
 				);
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Demo App";
 				IPHONEOS_DEPLOYMENT_TARGET = 15;
@@ -1429,12 +1434,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 11.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.spinco;
 				PRODUCT_NAME = "Demo App";
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = VL_Spinco_Dev_iOS;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = VL_Spinco_Dist_iOS;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1449,9 +1454,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = V743M68NY7;
 				ENABLE_BITCODE = NO;
@@ -1530,6 +1535,7 @@
 					"$(PROJECT_DIR)/ViewliftPlayerSampleApp/VLPlayer\\ Frameworks",
 					"$(PROJECT_DIR)/ViewliftPlayerSampleApp/VLPlayer\\ Frameworks",
 				);
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Demo App";
 				IPHONEOS_DEPLOYMENT_TARGET = 15;
@@ -1537,13 +1543,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 11.3;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.spinco;
 				PRODUCT_NAME = "Demo App";
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = VL_Spinco_Dev_iOS;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = VL_Spinco_Dist_iOS;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1561,15 +1567,28 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=appletvos*]" = V743M68NY7;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Demo App";
+				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = USA;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "App uses the local network to discover devices on your WiFi network.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some content may access Microphone";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This identifier will be used to deliver personalized ads to you.";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1579,9 +1598,10 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.viewlift.sampleapp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.spinco;
 				PRODUCT_NAME = "Demo App";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = VL_Spinco_Dist_tvOS;
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1599,15 +1619,28 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=appletvos*]" = V743M68NY7;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Demo App";
+				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = USA;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "App uses the local network to discover devices on your WiFi network.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some content may access Microphone";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This identifier will be used to deliver personalized ads to you.";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1616,9 +1649,10 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.viewlift.sampleapp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.spinco;
 				PRODUCT_NAME = "Demo App";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = VL_Spinco_Dist_tvOS;
 				SDKROOT = appletvos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1635,15 +1669,28 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=appletvos*]" = V743M68NY7;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Demo App";
+				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = USA;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "App uses the local network to discover devices on your WiFi network.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some content may access Microphone";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This identifier will be used to deliver personalized ads to you.";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1652,9 +1699,10 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.viewlift.sampleapp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.spinco;
 				PRODUCT_NAME = "Demo App";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = VL_Spinco_Dist_tvOS;
 				SDKROOT = appletvos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1728,9 +1776,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = V743M68NY7;
 				ENABLE_BITCODE = NO;
@@ -1809,6 +1857,7 @@
 					"$(PROJECT_DIR)/ViewliftPlayerSampleApp/VLPlayer\\ Frameworks",
 					"$(PROJECT_DIR)/ViewliftPlayerSampleApp/VLPlayer\\ Frameworks",
 				);
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Demo App";
 				IPHONEOS_DEPLOYMENT_TARGET = 15;
@@ -1816,12 +1865,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 11.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.spinco;
 				PRODUCT_NAME = "Demo App";
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = VL_Spinco_Dev_iOS;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = VL_Spinco_Dist_iOS;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2014,6 +2063,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BA05D5052E895C50008BF84C /* XCRemoteSwiftPackageReference "AuthenticationFramework" */;
 			productName = VLAuthentication;
+		};
+		BA5D8B6D2EAF54D4001401D8 /* MUXSDKStats */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA8E15852EA51CC500B45F68 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */;
+			productName = MUXSDKStats;
+		};
+		BA5D8B6F2EAF54DA001401D8 /* BitmovinPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA8E15822EA51CAE00B45F68 /* XCRemoteSwiftPackageReference "player-ios" */;
+			productName = BitmovinPlayer;
 		};
 		BA8E15832EA51CAE00B45F68 /* BitmovinPlayer */ = {
 			isa = XCSwiftPackageProductDependency;

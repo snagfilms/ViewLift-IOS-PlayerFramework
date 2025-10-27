@@ -98,6 +98,18 @@ class PlayerViewController_tvOS: UIViewController {
         createButton()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        VLAnalytics.shared.startObservingPlayerEvents()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        VLAnalytics.shared.stopObservingPlayerEvents()
+    }
+    
     private func addLoaderView(to containerView: UIView) -> UIActivityIndicatorView {
         containerView.addSubview(loaderView)
         loaderView.backgroundColor = .red
@@ -332,6 +344,15 @@ class PlayerViewController_tvOS: UIViewController {
 
     // Adds the player view to the container and sets constraints
     func addPlayerViewToContainer(_ playerView: UIView) {
+        self.vlPlayer?
+            .setAnalyticsInfo(
+                mediaAnalyticsInfo: MediaAnalyticsInfo(
+//                    contentInfo: VLContentInfoAnalytics(videonetwork: "test"),
+                    playerInfo: AnalyticsHelperV2.shared.getPlayerInfo(),
+                    tvProviderInfo: AnalyticsHelperV2.shared.getTVEProviderInfo()
+                )
+            )
+        
         timerLabel.removeFromSuperview()
         
         // Add player view first (fills container)

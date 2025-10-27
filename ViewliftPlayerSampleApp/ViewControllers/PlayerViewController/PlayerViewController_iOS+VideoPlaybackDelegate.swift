@@ -85,7 +85,7 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         if !errorMessage.isEmpty {
             showAlert(message: errorMessage)
 
-            AnalyticsHelper.shared.trackVideoFailErrorAnalytics(errorMessage: errorMessage)
+//            AnalyticsHelper.shared.trackVideoFailErrorAnalytics(errorMessage: errorMessage)
         }
     }
 

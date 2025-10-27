@@ -28,8 +28,8 @@ struct ChapterInfoModel {
     }
 }
 
-final class AnalyticsHelper: NSObject, PlayerVideoAnalyticsTrackDelegate {
-    // MARK: Singleton
+final class AnalyticsHelper: NSObject {
+//    // MARK: Singleton
     static let shared = AnalyticsHelper()
 
     let reachability = NetworkReachability()
@@ -62,168 +62,169 @@ final class AnalyticsHelper: NSObject, PlayerVideoAnalyticsTrackDelegate {
         static let all: TrackOptions = [.content, .ads, .tvProvider]
     }
 }
-
-// MARK: - Session APIs
+//
+//// MARK: - Session APIs
 extension AnalyticsHelper {
     func setUserIdentity(userIdentity: VLUserIdentity?) {
         self.userIdentity = userIdentity
     }
-
-    func setPlayerScreen(isFullScreen: Bool = false) {
-        self.isFullScreen = isFullScreen
-    }
-
-    func setAdsAssets(adInfo: VLAdAssetInfo?) {
-        self.currentAdAssetInfo = adInfo
-    }
-    
-    func setVideoAssets(contentInfo: VLContentInfo) {
-        self.contentInfo = contentInfo
-    }
-
-    func resetSession() {
-        contentInfo = nil
-        currentAdAssetInfo = nil
-        userIdentity = nil
-        requestorId = ""
-        isFullScreen = false
-    }
-    
-//    func triggerVideoSessionStartEvent(contentInfo: VLContentInfo, chapterInfo: ChapterInfoModel){
-//        self.setVideoAssets(contentInfo: contentInfo)
+}
+//
+//    func setPlayerScreen(isFullScreen: Bool = false) {
+//        self.isFullScreen = isFullScreen
+//    }
+//
+//    func setAdsAssets(adInfo: VLAdAssetInfo?) {
+//        self.currentAdAssetInfo = adInfo
+//    }
+//    
+//    func setVideoAssets(contentInfo: VLContentInfo) {
+//        self.contentInfo = contentInfo
+//    }
+//
+//    func resetSession() {
+//        contentInfo = nil
+//        currentAdAssetInfo = nil
+//        userIdentity = nil
+//        requestorId = ""
+//        isFullScreen = false
+//    }
+//    
+////    func triggerVideoSessionStartEvent(contentInfo: VLContentInfo, chapterInfo: ChapterInfoModel){
+////        self.setVideoAssets(contentInfo: contentInfo)
+////        
+////        self.playerDidLoadVideo()
+////        
+////        self.playerDidStartPlaying()
+////        
+////        if !chapterInfo.havingPreRollAds && chapterInfo.endTime > chapterInfo.startTime {
+////            let startTime = chapterInfo.startTime
+////            let endTime = chapterInfo.endTime
+////            
+////            self.playerChapterDidStart(
+////                currentTime: startTime,
+////                endTime: endTime
+////            )
+////        }
+////    }
+//}
+//
+//// MARK: - Playback lifecycle + media load
+//extension AnalyticsHelper {
+//    func playerDidStartPlaying() { track(.playStarted) } //done
+//
+//    func playerDidPaused() { track(.videoPauseStarted) } //done
+//
+//    func playerSessionEnded() {
+//        self.track(.trackSessionEnd) //done
 //        
-//        self.playerDidLoadVideo()
+//        self.resetSession()
+//    }
+//
+//    func trackVideoCompletedAnalytics() {
+//        self.playerChapterDidComplete()
 //        
-//        self.playerDidStartPlaying()
+//        track(.videoComplete)
 //        
-//        if !chapterInfo.havingPreRollAds && chapterInfo.endTime > chapterInfo.startTime {
-//            let startTime = chapterInfo.startTime
-//            let endTime = chapterInfo.endTime
-//            
-//            self.playerChapterDidStart(
-//                currentTime: startTime,
-//                endTime: endTime
-//            )
+//        
+//    }
+//
+//    func playerDidLoadVideo() {
+//        track(.mediaPlay, options: .all)
+//    }
+//}
+//
+//// MARK: - Ads
+//extension AnalyticsHelper {
+//    func trackAdDidStartsAnalytics() {
+//        track(.adsStart, options: .ads)
+//    }
+//    
+//    func trackAdDidCompleteAnalytics() {
+//        track(.adsComplete, options: .ads)
+//    }
+//    
+//    func trackAdBreakStartAnalytics() {
+//        self.playerChapterDidComplete()
+//        
+//        track(.adsBreakStart, options: .ads)
+//    }
+//    
+//    func trackAdBreakCompleteAnalytics(playerCurrentTime: Double, chapterEnd: Double) {
+//        track(.adsBreakComplete, options: .ads)
+//        
+//        self.playerChapterDidStart(currentTime: playerCurrentTime, endTime: chapterEnd)
+//    }
+//}
+//
+//// MARK: - Buffering / Bitrate
+//extension AnalyticsHelper {
+//    func playerDidStartBuffering() {
+//        track(.videoBuffer)
+//    }
+//
+//    func playerDidBufferingComplete() {
+//        track(.videoBufferComplete)
+//    }
+//
+//    func playerDidBitRateChange() {
+//        track(.playerBitrateChanged)
+//    }
+//}
+//
+//// MARK: - Seeking
+//extension AnalyticsHelper {
+//    func playerSeekDidStart() {
+//        track(.videoSeekStarted)
+//    }
+//
+//    func playerSeekDidComplete() {
+//        track(.videoSeekCompleted)
+//    }
+//}
+//
+//// MARK: - Chapters
+//extension AnalyticsHelper {
+//    func playerChapterDidStart(currentTime: Double, endTime: Double) {
+//        track(.videochapterStart(currentTime, endTime), options: [.content])
+//    }
+//
+//    func playerChapterDidComplete() {
+//        track(.videoChapterComplete)
+//    }
+//}
+//
+//// MARK: - Playhead updates
+//extension AnalyticsHelper {
+//    func updatePlayhead(time: Double) {
+//        track(.updateCurrentPlayHead(time), options: [])
+//    }
+//}
+//
+//// MARK: - Errors
+//extension AnalyticsHelper {
+//    func playerDidFail(errorMessage: String, isFatal: Bool) {
+//        track(.errorEvent, options: []) {
+//            $0.errorMessage(errorMessage)
 //        }
 //    }
-}
-
-// MARK: - Playback lifecycle + media load
-extension AnalyticsHelper {
-    func playerDidStartPlaying() { track(.playStarted) } //done
-
-    func playerDidPaused() { track(.videoPauseStarted) } //done
-
-    func playerSessionEnded() {
-        self.track(.trackSessionEnd) //done
-        
-        self.resetSession()
-    }
-
-    func trackVideoCompletedAnalytics() {
-        self.playerChapterDidComplete()
-        
-        track(.videoComplete)
-        
-        
-    }
-
-    func playerDidLoadVideo() {
-        track(.mediaPlay, options: .all)
-    }
-}
-
-// MARK: - Ads
-extension AnalyticsHelper {
-    func trackAdDidStartsAnalytics() {
-        track(.adsStart, options: .ads)
-    }
-    
-    func trackAdDidCompleteAnalytics() {
-        track(.adsComplete, options: .ads)
-    }
-    
-    func trackAdBreakStartAnalytics() {
-        self.playerChapterDidComplete()
-        
-        track(.adsBreakStart, options: .ads)
-    }
-    
-    func trackAdBreakCompleteAnalytics(playerCurrentTime: Double, chapterEnd: Double) {
-        track(.adsBreakComplete, options: .ads)
-        
-        self.playerChapterDidStart(currentTime: playerCurrentTime, endTime: chapterEnd)
-    }
-}
-
-// MARK: - Buffering / Bitrate
-extension AnalyticsHelper {
-    func playerDidStartBuffering() {
-        track(.videoBuffer)
-    }
-
-    func playerDidBufferingComplete() {
-        track(.videoBufferComplete)
-    }
-
-    func playerDidBitRateChange() {
-        track(.playerBitrateChanged)
-    }
-}
-
-// MARK: - Seeking
-extension AnalyticsHelper {
-    func playerSeekDidStart() {
-        track(.videoSeekStarted)
-    }
-
-    func playerSeekDidComplete() {
-        track(.videoSeekCompleted)
-    }
-}
-
-// MARK: - Chapters
-extension AnalyticsHelper {
-    func playerChapterDidStart(currentTime: Double, endTime: Double) {
-        track(.videochapterStart(currentTime, endTime), options: [.content])
-    }
-
-    func playerChapterDidComplete() {
-        track(.videoChapterComplete)
-    }
-}
-
-// MARK: - Playhead updates
-extension AnalyticsHelper {
-    func updatePlayhead(time: Double) {
-        track(.updateCurrentPlayHead(time), options: [])
-    }
-}
-
-// MARK: - Errors
-extension AnalyticsHelper {
-    func playerDidFail(errorMessage: String, isFatal: Bool) {
-        track(.errorEvent, options: []) {
-            $0.errorMessage(errorMessage)
-        }
-    }
-
-    func trackVideoFailErrorAnalytics(errorMessage: String) {
-        track(.errorEvent, options: []) {
-            $0.errorMessage(errorMessage)
-        }
-    }
-}
-
-// MARK: - Language / frames hooks
-extension AnalyticsHelper {
-    func playerDidChangeClosedCaptionLanguage(language: String?) {}
-    func playerDidChangeAudioLanguage(language: String?) {}
-    func playerDidDropFrames(count: Int) {}
-    func playerFirstFrameLoaded() {}
-}
-
-// MARK: - Parsing
+//
+//    func trackVideoFailErrorAnalytics(errorMessage: String) {
+//        track(.errorEvent, options: []) {
+//            $0.errorMessage(errorMessage)
+//        }
+//    }
+//}
+//
+//// MARK: - Language / frames hooks
+//extension AnalyticsHelper {
+//    func playerDidChangeClosedCaptionLanguage(language: String?) {}
+//    func playerDidChangeAudioLanguage(language: String?) {}
+//    func playerDidDropFrames(count: Int) {}
+//    func playerFirstFrameLoaded() {}
+//}
+//
+//// MARK: - Parsing
 extension AnalyticsHelper {
     @discardableResult
     func parseVLVideoResponse(from dictionary: [String: Any]) -> VLVideoResponseModel? {
@@ -250,49 +251,49 @@ extension AnalyticsHelper {
         return formattedDate
     }
 }
-
-// MARK: - Tracking core
-private extension AnalyticsHelper {
-    func track(_ event: VLAnalyticsEvent,
-               options: TrackOptions = .all,
-               configure: ((VLEventModelBuilder) -> VLEventModelBuilder)? = nil) {
-        var builder = baseBuilder(event: event, options: options)
-        if let configure = configure {
-            builder = configure(builder)
-        }
-        VLAnalytics.shared.trackEvent(data: builder.build())
-    }
-}
-
-// MARK: - Builders
-private extension AnalyticsHelper {
-    func baseBuilder(event: VLAnalyticsEvent,
-                     options: TrackOptions) -> VLEventModelBuilder {
-        var builder = VLEventModelBuilder().eventType(event)
-        if options
-            .contains(.content) {
-            builder = builder.contentInfo( self.contentInfo)
-            
-            builder = builder.playerInfo(getPlayerInfo())
-        }
-        
-        if options.contains(.ads) {
-            builder = builder.adsInfo(currentAdAssetInfo)
-        }
-        
-        if options.contains(.tvProvider) {
-            builder = builder.tvProviderInfo(getTVEProviderInfo())
-        }
-        
-        builder = builder.appInfo(getAppInfo())
-        
-        
-        return builder
-    }
-
-}
-
-// MARK: - Utilities
+//
+//// MARK: - Tracking core
+//private extension AnalyticsHelper {
+//    func track(_ event: VLAnalyticsEvent,
+//               options: TrackOptions = .all,
+//               configure: ((VLEventModelBuilder) -> VLEventModelBuilder)? = nil) {
+//        var builder = baseBuilder(event: event, options: options)
+//        if let configure = configure {
+//            builder = configure(builder)
+//        }
+//        VLAnalytics.shared.trackEvent(data: builder.build())
+//    }
+//}
+//
+//// MARK: - Builders
+//private extension AnalyticsHelper {
+//    func baseBuilder(event: VLAnalyticsEvent,
+//                     options: TrackOptions) -> VLEventModelBuilder {
+//        var builder = VLEventModelBuilder().eventType(event)
+//        if options
+//            .contains(.content) {
+//            builder = builder.contentInfo( self.contentInfo)
+//            
+//            builder = builder.playerInfo(getPlayerInfo())
+//        }
+//        
+//        if options.contains(.ads) {
+//            builder = builder.adsInfo(currentAdAssetInfo)
+//        }
+//        
+//        if options.contains(.tvProvider) {
+//            builder = builder.tvProviderInfo(getTVEProviderInfo())
+//        }
+//        
+//        builder = builder.appInfo(getAppInfo())
+//        
+//        
+//        return builder
+//    }
+//
+//}
+//
+//// MARK: - Utilities
 private extension AnalyticsHelper {
     static let decoder: JSONDecoder = {
         let d = JSONDecoder()
