@@ -97,6 +97,7 @@ extension AppDelegate {
     
     func setupAnalytics() {
         VLAnalytics.shared.setupAnalytics(clients: [.adobe], enableDebugLogs: true)
+        self.handleAnalyticsConsent()
         
         self.triggerSpashScreenEvent()
     }
@@ -105,7 +106,7 @@ extension AppDelegate {
         VLAnalytics.shared.setConsent(
                                 analyticsStorageIsAllowed: true,
                                 adStorageIsAllowed: true,
-                                adUserDataIsAllowed: false
+                                adUserDataIsAllowed: true
         )
     }
     
