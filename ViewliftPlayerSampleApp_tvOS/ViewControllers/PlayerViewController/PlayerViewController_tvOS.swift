@@ -148,7 +148,7 @@ class PlayerViewController_tvOS: UIViewController {
         // Select playback source type based on user option
         let playbackSourceType: VLPlayer.PlaybackSourceType
         if isPlayingFromURL(){
-            playbackSourceType = .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", streamConfig: VLPlayer.StreamConfig(isSSAIEnabled: false), drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl))
+            playbackSourceType = .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", streamConfig: VLPlayer.StreamConfig(isLive: streamConfig?.isLive, isDVR: streamConfig?.isDVR, isSSAIEnabled: false), drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl))
         } else {
             let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass[self.channelkey]?.getTempToken() ?? nil
             
