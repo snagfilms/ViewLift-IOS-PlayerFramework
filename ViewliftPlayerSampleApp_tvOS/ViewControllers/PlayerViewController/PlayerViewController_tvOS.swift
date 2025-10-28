@@ -182,7 +182,7 @@ class PlayerViewController_tvOS: UIViewController {
                         ) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
                 if let contentResponse = contentResponse {
-                    self?.videoResponse = AnalyticsHelper.shared.parseVLVideoResponse(from: contentResponse)
+                    self?.videoResponse = AnalyticsHelperV2.shared.parseVLVideoResponse(from: contentResponse)
                 }
                 
                 var hasTVE = false
@@ -616,7 +616,7 @@ extension PlayerViewController_tvOS{
         ) { [weak self] logoutSuccessful in
             if logoutSuccessful {
                 Task { [weak self] in
-                    AnalyticsHelper.shared.triggerSignoutAnalytics()
+                    AnalyticsHelperV2.shared.triggerSignoutAnalytics()
                     
                     await AppDelegate.shared.logoutUser()
                     self?.vlPlayer?.destroy()

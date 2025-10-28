@@ -111,6 +111,6 @@ extension AppDelegate {
     }
     
     func triggerSpashScreenEvent() {
-        AnalyticsHelper.shared.triggerAnalytics(event: .splashEvent)
+        AnalyticsHelperV2.shared.triggerAnalytics(event: .splashEvent)
     }
 }

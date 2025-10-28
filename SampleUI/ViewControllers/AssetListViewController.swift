@@ -254,7 +254,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         ) { [weak self] logoutSuccessful in
             if logoutSuccessful {
                 Task { [weak self] in
-                    AnalyticsHelper.shared.triggerSignoutAnalytics()
+                    AnalyticsHelperV2.shared.triggerSignoutAnalytics()
                     
                     self?.logoutButton.isHidden = true
                     self?.providerImageView.isHidden = true  // ← sync state

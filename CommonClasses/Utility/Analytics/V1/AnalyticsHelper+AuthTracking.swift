@@ -13,7 +13,7 @@ import VLAuthenticationFramework_tvOS
 #endif
 import VLAnalyticsLib
 
-extension AnalyticsHelper: AuthenticationAnalyticsDelegate {
+extension AnalyticsHelperV2: AuthenticationAnalyticsDelegate {
     func tveProviderSignIn(mvpd: String) {
         let userInfo = VLUserInfo(contentHub: "Adobe Pass",
                                   passNetwork: self.requestorId,

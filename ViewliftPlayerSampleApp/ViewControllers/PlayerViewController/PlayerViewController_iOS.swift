@@ -376,7 +376,7 @@ extension PlayerViewController_iOS {
                 contentResponse in
                 
                 if let contentResponse = contentResponse {
-                    self?.videoResponse = AnalyticsHelper.shared.parseVLVideoResponse(from: contentResponse)
+                    self?.videoResponse = AnalyticsHelperV2.shared.parseVLVideoResponse(from: contentResponse)
                 }
                 
                 var hasTVE = false
@@ -442,7 +442,6 @@ extension PlayerViewController_iOS {
     private func setPlayerDelegates() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
         vlPlayer?.videoPlayerDelegate = self
-//        vlPlayer?.playerVideoAnalyticsDelegate = AnalyticsHelper.shared
         vlPlayer?.enablePlayerBitrateLogs = enableBitrateLogs
         vlPlayer?.serverSideAdTrackingDelegate = self
         vlPlayer?.castDelegate = self
@@ -562,23 +561,6 @@ extension PlayerViewController_iOS {
                 )
             )
         
-//        V1
-//        if let contentInfo = self.getVideoInfo() {
-//            AnalyticsHelper.shared.setVideoAssets(contentInfo: contentInfo)
-//            
-//            AnalyticsHelper.shared.playerDidLoadVideo()
-//        }
-        
-        //V2
-//        if let contentInfo = self.getVideoInfoV2() {
-//            self.vlPlayer?
-//                .setAnalyticsInfo(
-//                    contentInfo: contentInfo,
-//                    playerInfo: AnalyticsHelperV2.shared.getPlayerInfo(),
-//                    tvProviderInfo: AnalyticsHelperV2.shared
-//                        .getTVEProviderInfo()
-//                )
-//        }
     }
     
     /// Sets up custom player UI controls and PiP

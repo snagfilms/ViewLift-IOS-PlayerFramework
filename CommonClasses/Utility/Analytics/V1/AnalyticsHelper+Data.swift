@@ -8,7 +8,7 @@
 import VLAnalyticsLib
 import UIKit
 
-extension AnalyticsHelper {
+extension AnalyticsHelperV2 {
     internal func getTVEProviderInfo() -> VLTVProviderInfo? {
         guard let userInfo = UserManager.shared.userIdentity else { return nil }
         

@@ -84,11 +84,6 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     func customPlayerState(isPlaying: Bool) {
         videoPlayerControlsView?.playPause(isPlaying: isPlaying)
         
-//        if isPlaying {
-//            AnalyticsHelper.shared.playerDidStartPlaying()
-//        } else {
-//            AnalyticsHelper.shared.playerDidPaused()
-//        }
     }
     
     // Called when subtitle embedding in URL changes
@@ -121,32 +116,16 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     }
     
     func videoPause(timestamp: Double, playerTag: String) {
-//        AnalyticsHelper.shared.playerDidPaused()
+
     }
 
     func videoResume(timestamp: Double, playerTag: String) {
-//        if VLAnalytics.shared.isMediaSessionTracked == false {
-//            self.videoSessionStartAnalytics()
-//        } else {
-//            AnalyticsHelper.shared.playerDidStartPlaying()
-//        }
+
     }
 
     
     func videoSessionStartAnalytics() {
-        let isPreRollAds = self.vlPlayer?.isVideoHavingPreRollAds() ?? false
-        let currentPlaybackTime = self.vlPlayer?.getCurrentPlaybackTime() ?? 0.0
-        let endPlaybackTime = self.vlPlayer?.getChapterEndTime() ?? 0.0
-        
-        let chapterInfo = ChapterInfoModel(
-            havingPreRollAds: isPreRollAds,
-            startTime: currentPlaybackTime,
-            endTime: endPlaybackTime
-        )
-        
-//        if let contentInfo = self.getVideoInfo() {
-//            AnalyticsHelper.shared.triggerVideoSessionStartEvent(contentInfo: contentInfo,chapterInfo: chapterInfo)
-//        }
+
     }
     
     // Updates playback progress every second

@@ -8,7 +8,7 @@
 
 import VLAnalyticsLib
 
-extension AnalyticsHelper {
+extension AnalyticsHelperV2 {
     
     func triggerAnalytics(event: VLAnalyticsEvent, pageInfo: VLPageInfo? = nil, userInfo: VLUserInfo? = nil) {
             let eventData = VLEventModelBuilder()

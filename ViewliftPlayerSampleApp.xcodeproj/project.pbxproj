@@ -42,8 +42,6 @@
 		BA05D5092E895C59008BF84C /* VLAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = BA05D5082E895C59008BF84C /* VLAuthentication */; };
 		BA0DE0592E7AEE5E00650CEA /* SiteConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA0DE0582E7AEE5E00650CEA /* SiteConfig.plist */; };
 		BA0DE05A2E7AEE5E00650CEA /* SiteConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA0DE0582E7AEE5E00650CEA /* SiteConfig.plist */; };
-		BA26B2A62E86932400089E29 /* AnalyticsHelper+MediaTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26B2A52E86932400089E29 /* AnalyticsHelper+MediaTracking.swift */; };
-		BA26B2A72E86932400089E29 /* AnalyticsHelper+MediaTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26B2A52E86932400089E29 /* AnalyticsHelper+MediaTracking.swift */; };
 		BA5D8B692EAE2F8F001401D8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B682EAE2F8F001401D8 /* Utility.swift */; };
 		BA5D8B6A2EAE2F8F001401D8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B682EAE2F8F001401D8 /* Utility.swift */; };
 		BA5D8B6C2EAE39BA001401D8 /* MVPDGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B6B2EAE39BA001401D8 /* MVPDGridView.swift */; };
@@ -286,7 +284,6 @@
 		BA26B2982E8686AB00089E29 /* GoogleInteractiveMediaAds-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-iOS.xcframework"; path = "../iosplayer-sdk/VLPlayer/Framework/iOS/GoogleInteractiveMediaAds-iOS.xcframework"; sourceTree = "<group>"; };
 		BA26B2992E8686AB00089E29 /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "../iosplayer-sdk/VLPlayer/Framework/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
 		BA26B2A22E86889500089E29 /* GoogleInteractiveMediaAds-tvOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleInteractiveMediaAds-tvOS.xcframework"; path = "../iosplayer-sdk/VLPlayer/Framework/tvOS/GoogleInteractiveMediaAds-tvOS.xcframework"; sourceTree = "<group>"; };
-		BA26B2A52E86932400089E29 /* AnalyticsHelper+MediaTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsHelper+MediaTracking.swift"; sourceTree = "<group>"; };
 		BA5D8B682EAE2F8F001401D8 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		BA5D8B6B2EAE39BA001401D8 /* MVPDGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVPDGridView.swift; sourceTree = "<group>"; };
 		BA8CFCB42E73005C008DEE58 /* PlayerViewController_iOS+TempPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+TempPass.swift"; sourceTree = "<group>"; };
@@ -539,7 +536,6 @@
 				BA05D4C82E8776AB008BF84C /* AnalyticsHelper+AuthTracking.swift */,
 				BA05D4C52E86DA01008BF84C /* AnalyticsHelper+Data.swift */,
 				BA05D4C22E86D9D1008BF84C /* AnalyticsHelper+PageTracking.swift */,
-				BA26B2A52E86932400089E29 /* AnalyticsHelper+MediaTracking.swift */,
 			);
 			path = V1;
 			sourceTree = "<group>";
@@ -1101,7 +1097,6 @@
 				9D3AAA8E2E4E2E7100FFDA9A /* PlayerControlsView.swift in Sources */,
 				9D3AAA8F2E4E2E7100FFDA9A /* PlayerControlsHostingView.swift in Sources */,
 				9D3AAA902E4E2E7100FFDA9A /* ToggleButton.swift in Sources */,
-				BA26B2A62E86932400089E29 /* AnalyticsHelper+MediaTracking.swift in Sources */,
 				BA5D8B6C2EAE39BA001401D8 /* MVPDGridView.swift in Sources */,
 				BA05D4C32E86D9D7008BF84C /* AnalyticsHelper+PageTracking.swift in Sources */,
 				9D3AAA912E4E2E7100FFDA9A /* MarqueeText.swift in Sources */,
@@ -1149,7 +1144,6 @@
 				BA05D4C62E86DA04008BF84C /* AnalyticsHelper+Data.swift in Sources */,
 				BA8E15802EA4DA6500B45F68 /* AnalyticsHelperV2.swift in Sources */,
 				D2A759292E4B0E130089B4D1 /* ConfigurableItemRowView.swift in Sources */,
-				BA26B2A72E86932400089E29 /* AnalyticsHelper+MediaTracking.swift in Sources */,
 				D2A7592A2E4B0E130089B4D1 /* ConfigurableHeaderView.swift in Sources */,
 				D2A759C52E4B504A0089B4D1 /* PlayerViewController_tvOS+Analytics.swift in Sources */,
 				D2A7592B2E4B0E130089B4D1 /* UserManager.swift in Sources */,

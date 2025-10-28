@@ -28,6 +28,7 @@ final class AnalyticsHelperV2: NSObject {
     private override init() {
         super.init()
     
+        VLAuthentication.sharedInstance.analyticsDelegate = self
     }
     
     internal func getTVEProviderInfo() -> VLTVProviderInfoAnalytics? {
@@ -47,4 +48,52 @@ final class AnalyticsHelperV2: NSObject {
         )
     }
 
+}
+
+
+extension AnalyticsHelperV2 {
+    @discardableResult
+    func parseVLVideoResponse(from dictionary: [String: Any]) -> VLVideoResponseModel? {
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
+            let response = try Self.decoder.decode(VLVideoResponseModel.self, from: jsonData)
+            return response
+        } catch {
+            print("❌ Failed to decode from dictionary:", error)
+            return nil
+        }
+    }
+    
+    func getFormattedDateFromTimestamp(timestamp: TimeInterval?) -> String? {
+        guard let timestamp = timestamp else {
+            return nil
+        }
+        let date = Date(timeIntervalSince1970: timestamp)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.timeZone = .current
+        let formattedDate = formatter.string(from: date)
+        print("Publish Date: \(formattedDate)")
+        return formattedDate
+    }
+}
+
+private extension AnalyticsHelperV2 {
+    static let decoder: JSONDecoder = {
+        let d = JSONDecoder()
+        d.keyDecodingStrategy = .useDefaultKeys
+        return d
+    }()
+
+    static let dateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "MM/dd/yyyy"
+        f.timeZone = .current
+        return f
+    }()
+
+    static func dateMMDDYYYY(from timestamp: TimeInterval?) -> String? {
+        guard let ts = timestamp else { return nil }
+        return dateFormatter.string(from: Date(timeIntervalSince1970: ts))
+    }
 }
