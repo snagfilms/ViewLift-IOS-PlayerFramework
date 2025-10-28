@@ -1313,7 +1313,7 @@ public protocol AnalyticsTrackerEvents : ObjectiveC.NSObjectProtocol {
 public protocol PlayerVideoAnalyticsTrackDelegate : VLPlayerLib.AnalyticsTrackerEvents {
   func playerFirstFrameLoaded()
   func playerSeekDidStart()
-  func playerSeekDidComplete()
+  func playerSeekDidComplete(newTime: Swift.Double, shouldResume: Swift.Bool)
   func playerSessionEnded()
   func playerDidChangeAudioLanguage(language: Swift.String?)
   func playerDidChangeClosedCaptionLanguage(language: Swift.String?)

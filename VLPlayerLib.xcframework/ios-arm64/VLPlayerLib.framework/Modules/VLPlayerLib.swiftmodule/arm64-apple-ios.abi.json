@@ -53901,17 +53901,29 @@
           {
             "kind": "Function",
             "name": "playerSeekDidComplete",
-            "printedName": "playerSeekDidComplete()",
+            "printedName": "playerSeekDidComplete(newTime:shouldResume:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Void",
                 "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
               }
             ],
             "declKind": "Func",
-            "usr": "s:11VLPlayerLib33PlayerVideoAnalyticsTrackDelegateP21playerSeekDidCompleteyyF",
-            "mangledName": "$s11VLPlayerLib33PlayerVideoAnalyticsTrackDelegateP21playerSeekDidCompleteyyF",
+            "usr": "s:11VLPlayerLib33PlayerVideoAnalyticsTrackDelegateP21playerSeekDidComplete7newTime12shouldResumeySd_SbtF",
+            "mangledName": "$s11VLPlayerLib33PlayerVideoAnalyticsTrackDelegateP21playerSeekDidComplete7newTime12shouldResumeySd_SbtF",
             "moduleName": "VLPlayerLib",
             "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.PlayerVideoAnalyticsTrackDelegate>",
             "sugared_genericSig": "<Self where Self : VLPlayerLib.PlayerVideoAnalyticsTrackDelegate>",
@@ -53940,9 +53952,6 @@
             "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.PlayerVideoAnalyticsTrackDelegate>",
             "sugared_genericSig": "<Self where Self : VLPlayerLib.PlayerVideoAnalyticsTrackDelegate>",
             "protocolReq": true,
-            "declAttributes": [
-              "RawDocComment"
-            ],
             "reqNewWitnessTableEntry": true,
             "funcSelfKind": "NonMutating"
           },
