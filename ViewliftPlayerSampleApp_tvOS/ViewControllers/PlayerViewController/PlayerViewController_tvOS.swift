@@ -104,8 +104,8 @@ class PlayerViewController_tvOS: UIViewController {
         VLAnalytics.shared.startObservingPlayerEvents()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
         VLAnalytics.shared.stopObservingPlayerEvents()
     }
