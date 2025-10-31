@@ -305,7 +305,7 @@ public struct PlayerControlsConfig {
     case skip(VLPlayerLib.PlayerControlsConfig.SkipConfig)
     case both(skip: VLPlayerLib.PlayerControlsConfig.SkipConfig)
   }
-  public init(isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isStartFromBeginningSupported: Swift.Bool = true, isCaptionsOnOffTextSupported: Swift.Bool = true, remoteSeekSupport: VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport = .both(skip: SkipConfig.dynamic), isPlayPauseSupported: Swift.Bool = false)
+  public init(isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isStartFromBeginningSupported: Swift.Bool = true, isCaptionsOnOffTextSupported: Swift.Bool = true, remoteSeekSupport: VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport = .both(skip: SkipConfig.dynamic), isPlayPauseSupported: Swift.Bool = false, isAddCustomViewsSupported: Swift.Bool = true)
 }
 final public class VLPlayerAnalyticsModel {
   public typealias PropertyChangeCallback = (Swift.String, Any?) -> Swift.Void
@@ -520,21 +520,15 @@ extension VLPlayerLib.VLPlayer {
   }
 }
 public struct AdsViewConfiguration {
-  public let viewStyle: VLPlayerLib.AdsViewConfiguration.AdsViewStyle
-  public let adsViewConfig: VLPlayerLib.AdsViewConfiguration.AdsViewConfig
-  public init(viewStyle: VLPlayerLib.AdsViewConfiguration.AdsViewStyle = AdsViewStyle(), adsViewConfig: VLPlayerLib.AdsViewConfiguration.AdsViewConfig = AdsViewConfig())
+  public init(viewStyle: VLPlayerLib.AdsViewConfiguration.AdsViewStyle = AdsViewStyle(), adsViewConfig: VLPlayerLib.AdsViewConfiguration.AdsViewConfig = AdsViewConfig(), adsTextContent: VLPlayerLib.AdsViewConfiguration.AdsTextContent = AdsTextContent())
   public struct AdsViewStyle {
-    public let sponseredTextColor: UIKit.UIColor
-    public let adCounterTextColor: UIKit.UIColor
-    public let timerTextColor: UIKit.UIColor
-    public init(sponseredTextColor: UIKit.UIColor = .white, adCounterTextColor: UIKit.UIColor = .white, timerTextColor: UIKit.UIColor = .white)
+    public init(sponseredTextColor: UIKit.UIColor = .white, adCounterTextColor: UIKit.UIColor = .white, timerTextColor: UIKit.UIColor = .white, progressMinimumTrackTintColor: UIKit.UIColor = .yellow, progressMaximumTrackTintColor: UIKit.UIColor = .gray, sponseredFont: UIKit.UIFont = .systemFont(ofSize: 30), adCounterFont: UIKit.UIFont = .systemFont(ofSize: 30), timerFont: UIKit.UIFont = .systemFont(ofSize: 30))
   }
   public struct AdsViewConfig {
-    public let showInfoIcon: Swift.Bool
-    public let showsponseredText: Swift.Bool
-    public let showAdCounterText: Swift.Bool
-    public let showTimerText: Swift.Bool
-    public init(showInfoIcon: Swift.Bool = true, showsponseredText: Swift.Bool = true, showAdCounterText: Swift.Bool = true, showTimerText: Swift.Bool = true)
+    public init(showInfoIcon: Swift.Bool = true, showsponseredText: Swift.Bool = true, showAdCounterAndTimerText: Swift.Bool = true, showplayPauseIcon: Swift.Bool = true, showfullScreenIcon: Swift.Bool = true, showVolumeIcon: Swift.Bool = true)
+  }
+  public struct AdsTextContent {
+    public init(sponseredText: Swift.String = "Sponsored Ad")
   }
 }
 public struct TVEProviderInfo {
@@ -982,7 +976,7 @@ public struct SSAIBeaconTracking {
   @available(*, deprecated, message: "Deprecated. Use setSource(type:customControlsView:playerFeaturesSupported:isSuccess:) or setSource(type:apiConfigEndPoint:vlPlayerTag:customControlsView:...isSuccess:) instead.")
   open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String, apiConfigEndPoint: Swift.String? = nil, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView? = nil, adUrl: Swift.String? = nil, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, location: (lat: Swift.String, long: Swift.String)? = nil, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, nearestServerPlayerBaseURL: Swift.String? = nil, captureWatchHistoryEvent: Swift.Bool = false, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, muxEnvironmentKey: Swift.String? = nil, tveProviderInfo: VLPlayerLib.TVEProviderInfo?, adsViewConfiguration: VLPlayerLib.AdsViewConfiguration? = nil, adobePlayerTempPass: Swift.String? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
   open func setSource(type: VLPlayerLib.VLPlayer.PlaybackSourceType, customControlsView: UIKit.UIView? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported, vlPlayerTag: Swift.String = "1", isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
-  open func setSource(type: VLPlayerLib.VLPlayer.PlaybackSourceType, apiConfigEndPoint: Swift.String? = nil, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView? = nil, adUrl: Swift.String? = nil, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, easeLiveEnabled: Swift.Bool = false, location: (lat: Swift.String, long: Swift.String)? = nil, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, nearestServerPlayerBaseURL: Swift.String? = nil, captureWatchHistoryEvent: Swift.Bool = false, isBitMovinPlayer: Swift.Bool? = false, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, muxEnvironmentKey: Swift.String? = nil, isCustomAdViewEnabled: Swift.Bool? = false, tveProviderInfo: VLPlayerLib.TVEProviderInfo? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
+  open func setSource(type: VLPlayerLib.VLPlayer.PlaybackSourceType, apiConfigEndPoint: Swift.String? = nil, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView? = nil, adUrl: Swift.String? = nil, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, easeLiveEnabled: Swift.Bool = false, location: (lat: Swift.String, long: Swift.String)? = nil, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, nearestServerPlayerBaseURL: Swift.String? = nil, captureWatchHistoryEvent: Swift.Bool = false, isBitMovinPlayer: Swift.Bool? = false, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, muxEnvironmentKey: Swift.String? = nil, isCustomAdViewEnabled: Swift.Bool? = false, tveProviderInfo: VLPlayerLib.TVEProviderInfo? = nil, adsConfiguration: VLPlayerLib.AdsViewConfiguration? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
   public func getTrickPlayData(_ value: Swift.Double) -> (image: UIKit.UIImage?, time: Swift.String?)
   @objc override dynamic public init()
   @objc deinit
@@ -1112,15 +1106,16 @@ public struct SSAIAvailableAd : Swift.Decodable, Swift.Equatable {
   public var adTitle: Swift.String?
   public var adDuration: Swift.Double?
   public var adStartTime: Swift.Double?
-  public var trackingEvents: [VLPlayerLib.TrackingEvent]?
-  public var adVerifications: [VLPlayerLib.AdVerification]?
+  public var trackingEvents: Swift.Array<VLPlayerLib.TrackingEvent>?
+  public var adVerifications: Swift.Array<VLPlayerLib.AdVerification>?
   public init(from decoder: any Swift.Decoder) throws
   public static func == (lhs: VLPlayerLib.SSAIAvailableAd, rhs: VLPlayerLib.SSAIAvailableAd) -> Swift.Bool
 }
-public struct TrackingEvent : Swift.Decodable {
+public struct TrackingEvent : Swift.Decodable, Swift.Equatable {
   public var beaconUrls: Swift.Array<Swift.String>?
   public var eventType: VLPlayerLib.VLPlayer.AdsEventType?
   public init(from decoder: any Swift.Decoder) throws
+  public static func == (a: VLPlayerLib.TrackingEvent, b: VLPlayerLib.TrackingEvent) -> Swift.Bool
 }
 public struct AdVerification : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
