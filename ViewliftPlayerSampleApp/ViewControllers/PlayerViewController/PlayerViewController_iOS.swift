@@ -400,6 +400,8 @@ extension PlayerViewController_iOS {
                     .flatMap { $0["planDetails"] as? [[String: Any]] ?? [] }
                     .flatMap { $0["channelIds"] as? [String] ?? [] }
                 
+//                AdobeAnalyticsConfigurationHelper.setCustomMediaParam(params: ["Test": "test"])
+                
                 self?.handlePlayerSetupCompletion(
                     isSuccess: isSuccess,
                     playerView: playerView,

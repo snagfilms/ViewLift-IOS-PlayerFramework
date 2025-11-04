@@ -34,7 +34,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         self.readVideoList(readVideoListOperation: ReadFromLocalJson())
         // Get current user identity before async context
+        
         self.setupAuthentication()
+        
+//        var adobeConfig = AdobeAnalyticsConfig()
+//        adobeConfig.reportSuites = "fanmsnbcottdev"
+//        adobeConfig.playerName = "VL Test"
+//        AdobeAnalyticsConfigurationHelper.setupAdobeConfiguration(with: adobeConfig)
+        
         self.setupAnalytics()
 
         return true
