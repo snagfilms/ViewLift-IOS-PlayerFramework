@@ -213,7 +213,7 @@ extension VLPlayerLib.MarqueeText {
 public struct AdsViewConfiguration {
   public init(viewStyle: VLPlayerLib.AdsViewConfiguration.AdsViewStyle = AdsViewStyle(), adsViewConfig: VLPlayerLib.AdsViewConfiguration.AdsViewConfig = AdsViewConfig(), adsTextContent: VLPlayerLib.AdsViewConfiguration.AdsTextContent = AdsTextContent())
   public struct AdsViewStyle {
-    public init(sponseredTextColor: UIKit.UIColor = .white, adCounterTextColor: UIKit.UIColor = .white, timerTextColor: UIKit.UIColor = .white, progressMinimumTrackTintColor: UIKit.UIColor = .yellow, progressMaximumTrackTintColor: UIKit.UIColor = .gray, sponseredFont: UIKit.UIFont = .systemFont(ofSize: 30), adCounterFont: UIKit.UIFont = .systemFont(ofSize: 30), timerFont: UIKit.UIFont = .systemFont(ofSize: 30))
+    public init(sponseredTextColor: UIKit.UIColor = .white, adCounterTextColor: UIKit.UIColor = .white, timerTextColor: UIKit.UIColor = .white, progressMinimumTrackTintColor: UIKit.UIColor = .yellow, progressMaximumTrackTintColor: UIKit.UIColor = .gray, bottomBackgroundColor: UIKit.UIColor = .lightGray, sponseredFont: UIKit.UIFont = .systemFont(ofSize: 30), adCounterFont: UIKit.UIFont = .systemFont(ofSize: 30), timerFont: UIKit.UIFont = .systemFont(ofSize: 30))
   }
   public struct AdsViewConfig {
     public init(showInfoIcon: Swift.Bool = true, showsponseredText: Swift.Bool = true, showAdCounterAndTimerText: Swift.Bool = true, showplayPauseIcon: Swift.Bool = true, showfullScreenIcon: Swift.Bool = true, showVolumeIcon: Swift.Bool = true)
