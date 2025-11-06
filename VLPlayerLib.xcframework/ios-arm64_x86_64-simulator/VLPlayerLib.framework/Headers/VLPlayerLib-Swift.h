@@ -961,6 +961,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 /// Delgate method - Called when loginWithTVE button is tapped from the SDK view
 - (void)loginWithTVE;
 - (void)addCustomView;
+- (void)showContentInfo;
 - (void)videoCurrentPlayheadWithPlayHead:(double)playHead;
 /// important:
 ///
@@ -1944,6 +1945,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 /// Delgate method - Called when loginWithTVE button is tapped from the SDK view
 - (void)loginWithTVE;
 - (void)addCustomView;
+- (void)showContentInfo;
 - (void)videoCurrentPlayheadWithPlayHead:(double)playHead;
 /// important:
 ///

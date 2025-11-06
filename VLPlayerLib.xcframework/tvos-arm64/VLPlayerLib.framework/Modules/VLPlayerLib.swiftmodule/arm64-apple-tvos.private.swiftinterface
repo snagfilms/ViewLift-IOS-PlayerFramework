@@ -251,6 +251,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func playerBitrateDebugLogs(logString: Swift.String)
   @objc optional func loginWithTVE()
   @objc optional func addCustomView()
+  @objc optional func showContentInfo()
   @objc optional func videoCurrentPlayhead(playHead: Swift.Double)
   @objc optional func autoPlayUIDismissed(isPlayingNextContent: Swift.Bool)
   @objc optional func autoPlayMetadataProvider(streamId: Swift.String) -> VLPlayerLib.VLPlayer.StreamMetadata?
@@ -1391,6 +1392,7 @@ public protocol PlayerVideoAnalyticsTrackDelegate : VLPlayerLib.AnalyticsTracker
   @_Concurrency.MainActor @preconcurrency final public var storedValue: Swift.Float
   @_Concurrency.MainActor @preconcurrency final public var isSeekEnabled: Swift.Bool
   @_Concurrency.MainActor @preconcurrency final public var isSkipEnabled: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency final public var isSwipeDownEnabled: Swift.Bool
   @_Concurrency.MainActor @preconcurrency @objc override final public func pressesBegan(_ presses: Swift.Set<UIKit.UIPress>, with event: UIKit.UIPressesEvent?)
 }
 extension VLPlayerLib.TvOSSlider {
