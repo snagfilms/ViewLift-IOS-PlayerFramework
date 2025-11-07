@@ -179,14 +179,15 @@ extension PlayerViewController_iOS: ServerSideAdTrackingDelegate {
             debugPrint("slot end") // Ad break has ended
             
             
-            if let startTime = self.vlPlayer?.getCurrentPlaybackTime(), let endTime = self.vlPlayer?.getChapterEndTime() {
+//            if let startTime = self.vlPlayer?.getCurrentPlaybackTime(), let endTime = self.vlPlayer?.getChapterEndTime(
+//                currentTime: <#Double#>) {
                 
 //                AnalyticsHelper.shared
 //                    .trackAdBreakCompleteAnalytics(
 //                        playerCurrentTime: startTime,
 //                        chapterEnd: endTime
 //                    )
-            }
+//            }
             
         case .mute:
             debugPrint("mute") // Ad muted

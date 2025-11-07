@@ -47,6 +47,43 @@ final class AnalyticsHelperV2: NSObject {
             publisher: AnalyticsHelperV2.shared.orgid
         )
     }
+    
+    func getContentInfoForAnalytics() -> VLContentInfoAnalytics? {
+        let jsonString = """
+        {
+         "id": "cG9zdDoxMDA5ODIy",
+         "guid": "https://msnbc-com.go-vip.net/watch/trump-s-economic-approval-rating-dips-below-40-percent-in-new-polling-250889797705",
+         "brand": "MS NOW",
+         "headline": "Trump's economic approval rating dips below 40 percent in new polling",
+         "published": "2025-10-29T09:13:51Z",
+         "duration": {
+          "isLive": false,
+          "timeInterval": 470.0
+         },
+         "summary": "",
+         "videoUrl": "https://vs-newsencoding.akamaized.net/MSNBC/n_mj_sevenab_251029/1/hls/index.m3u8",
+         "mpxId": "mmvo2461182531809"
+        }
+        """
+
+        do {
+            let contentInfo = try VLContentInfoAnalytics(jsonString: jsonString)
+            
+            // Access properties
+            print("ID: \(contentInfo.id ?? "N/A")")
+            print("Title: \(contentInfo.title ?? "N/A")")
+            print("Duration: \(contentInfo.durationInSeconds ?? 0) seconds")
+            print("Is Live: \(contentInfo.isLive ?? false)")
+            print("Video URL: \(contentInfo.playbackUrl ?? "N/A")")
+            
+            return contentInfo
+            
+        } catch {
+            print("Failed to parse JSON: \(error)")
+        }
+
+        return nil
+    }
 
 }
 
