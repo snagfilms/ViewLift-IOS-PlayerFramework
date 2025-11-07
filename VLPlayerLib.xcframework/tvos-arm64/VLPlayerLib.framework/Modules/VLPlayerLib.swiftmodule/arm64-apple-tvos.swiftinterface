@@ -421,7 +421,8 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func seekTo(seconds: Swift.Double)
   @objc dynamic open func seekTo(seconds: Swift.Double, completion: (() -> Swift.Void)? = nil)
   @objc dynamic open func getCurrentPlaybackTime() -> Swift.Double
-  @objc dynamic open func getChapterEndTime() -> Swift.Double
+  @objc dynamic open func getChapterEndTime(currentTime: Swift.Double) -> Swift.Double
+  @objc dynamic open func getChapterStartTime(currentTime: Swift.Double) -> Swift.Double
   @objc dynamic open func isVideoHavingPreRollAds() -> Swift.Bool
   @objc dynamic open func seekToLivePosition()
   @objc dynamic open func setEndTimeDuration(from duration: Swift.Double)
@@ -1314,7 +1315,7 @@ public protocol PlayerVideoAnalyticsTrackDelegate : VLPlayerLib.AnalyticsTracker
   func playerDidChangeAudioLanguage(language: Swift.String?)
   func playerDidChangeClosedCaptionLanguage(language: Swift.String?)
   func playerDidDropFrames(count: Swift.Int)
-  func playerChapterDidStart(currentTime: Swift.Double, endTime: Swift.Double)
+  func playerChapterDidStart(currentTime: Swift.Double, endTime: Swift.Double, chapterStartTime: Swift.Double)
   func playerChapterDidComplete()
   func playerDidFail(errorMessage: Swift.String, isFatal: Swift.Bool)
   func playerDidStartBuffering()
