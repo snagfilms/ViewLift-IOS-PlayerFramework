@@ -985,7 +985,7 @@ public struct SSAIBeaconTracking {
 }
 extension VLPlayerLib.VLPlayer {
   public struct VLPlayerFeatureSupported {
-    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, loopVideoPlayback: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, playAudioOnly: Swift.Bool? = false, tapToPause: Swift.Bool? = nil, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, easeLiveEnabled: Swift.Bool = false)
+    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, loopVideoPlayback: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, playAudioOnly: Swift.Bool? = false, tapToPause: Swift.Bool? = nil, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, easeLiveEnabled: Swift.Bool = false, hideAdsView: Swift.Bool = false)
   }
 }
 extension VLPlayerLib.VLPlayer {
@@ -1239,6 +1239,7 @@ public struct AdWindow : Swift.Equatable {
   final public func seekComplete(target: Swift.Double)
   final public func goLive()
 }
+public func secondsSinceMidnightUTC(_ now: Foundation.Date = Date()) -> Swift.Int
 public struct MediaMetaDataInfo {
 }
 public struct MediaAnalyticsInfo {
