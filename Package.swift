@@ -21,7 +21,7 @@ let package = Package(
         .package(
             name: "M3U8Parser",
             url: "https://github.com/M3U8Kit/M3U8Parser.git",
-            from: "1.2.0"),
+            Version("1.0.2")..<Version("1.0.2")),
         .package(
             name: "BitmovinPlayer",
             url: "https://github.com/bitmovin/player-ios.git",
