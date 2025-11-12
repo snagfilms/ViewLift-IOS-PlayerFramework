@@ -374,6 +374,13 @@ SWIFT_CLASS("_TtC11VLPlayerLib10TvOSSlider")
 @end
 
 @class NSString;
+@interface TvOSSlider (SWIFT_EXTENSION(VLPlayerLib))
+@property (nonatomic) BOOL isAccessibilityElement;
+@property (nonatomic) UIAccessibilityTraits accessibilityTraits;
+@property (nonatomic, copy) NSString * _Nullable accessibilityLabel;
+@property (nonatomic, copy) NSString * _Nullable accessibilityValue;
+@end
+
 SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 @interface VLError : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -400,7 +407,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)pause;
 - (void)dispose;
 - (void)destroy;
-- (void)deinitialisePlayer;
+- (void)deinitialisePlayerWithIsLoadingNextVideo:(BOOL)isLoadingNextVideo;
 - (void)setPlayerFitToFullScreen;
 - (void)setPlayerFitToSmallScreenWithFrame:(CGRect)frame;
 - (void)goFullScreen:(BOOL)isFullScreen;
@@ -419,6 +426,9 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)seekToSeconds:(double)seconds;
 - (void)seekToSeconds:(double)seconds completion:(void (^ _Nullable)(void))completion;
 - (double)getCurrentPlaybackTime SWIFT_WARN_UNUSED_RESULT;
+- (double)getChapterEndTimeWithCurrentTime:(double)currentTime SWIFT_WARN_UNUSED_RESULT;
+- (double)getChapterStartTimeWithCurrentTime:(double)currentTime SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isVideoHavingPreRollAds SWIFT_WARN_UNUSED_RESULT;
 /// important:
 ///
 /// Method - Used to seek live video to live position
@@ -538,6 +548,8 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)updateCaptionWithSelectedIndex:(NSInteger)selectedIndex selectedKey:(NSString * _Nonnull)selectedKey;
 @end
 
+@class StreamMetadata;
+@class AVPlayerViewController;
 SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 @protocol VideoPlaybackDelegate <NSObject>
 @optional
@@ -785,17 +797,20 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 /// \param logString Detailed log string of changes in bitrate
 ///
 - (void)playerBitrateDebugLogsWithLogString:(NSString * _Nonnull)logString;
-/// important:
-///
-/// Delgate method - Called when next video playback UI is displayed
-- (void)autoPlayUIInitiated;
+/// Delgate method - Called when loginWithTVE button is tapped from the SDK view
+- (void)loginWithTVE;
+- (void)addCustomView;
+- (void)showContentInfo;
+- (void)videoCurrentPlayheadWithPlayHead:(double)playHead;
 /// important:
 ///
 /// Delgate method - Called when next video playback UI is dismissed
 /// \param isPlayingNextContent Tell is next content is playing or user has cancelled playback for next video
 ///
-- (void)autoPlayUIDimissedWithIsPlayingNextContent:(BOOL)isPlayingNextContent;
-- (void)loginWithTVE;
+- (void)autoPlayUIDismissedWithIsPlayingNextContent:(BOOL)isPlayingNextContent;
+/// Delgate method - Called when AutoPlay view is about to display and asks for metadata for URL Stream.
+- (StreamMetadata * _Nullable)autoPlayMetadataProviderWithStreamId:(NSString * _Nonnull)streamId SWIFT_WARN_UNUSED_RESULT;
+- (void)avPlayerControllerInstance:(AVPlayerViewController * _Nonnull)avPlayerControllerInstance;
 @end
 
 #endif
