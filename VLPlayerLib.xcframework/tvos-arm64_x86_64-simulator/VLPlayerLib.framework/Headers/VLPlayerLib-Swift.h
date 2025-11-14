@@ -370,6 +370,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib10TvOSSlider")
 @property (nonatomic, getter=isHighlighted) BOOL highlighted;
 /// :nodoc:
 - (void)didUpdateFocusInContext:(UIFocusUpdateContext * _Nonnull)context withAnimationCoordinator:(UIFocusAnimationCoordinator * _Nonnull)coordinator;
+- (void)layoutSubviews;
 - (void)pressesBegan:(NSSet<UIPress *> * _Nonnull)presses withEvent:(UIPressesEvent * _Nullable)event;
 @end
 
@@ -1195,6 +1196,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib10TvOSSlider")
 @property (nonatomic, getter=isHighlighted) BOOL highlighted;
 /// :nodoc:
 - (void)didUpdateFocusInContext:(UIFocusUpdateContext * _Nonnull)context withAnimationCoordinator:(UIFocusAnimationCoordinator * _Nonnull)coordinator;
+- (void)layoutSubviews;
 - (void)pressesBegan:(NSSet<UIPress *> * _Nonnull)presses withEvent:(UIPressesEvent * _Nullable)event;
 @end
 

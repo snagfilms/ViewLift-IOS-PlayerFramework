@@ -214,7 +214,7 @@ extension VLPlayerLib.MarqueeText {
 public struct AdsViewConfiguration {
   public init(viewStyle: VLPlayerLib.AdsViewConfiguration.AdsViewStyle = AdsViewStyle(), adsViewConfig: VLPlayerLib.AdsViewConfiguration.AdsViewConfig = AdsViewConfig(), adsTextContent: VLPlayerLib.AdsViewConfiguration.AdsTextContent = AdsTextContent())
   public struct AdsViewStyle {
-    public init(sponseredTextColor: UIKit.UIColor = .white, adCounterTextColor: UIKit.UIColor = .white, timerTextColor: UIKit.UIColor = .white, progressMinimumTrackTintColor: UIKit.UIColor = .yellow, progressMaximumTrackTintColor: UIKit.UIColor = .gray, bottomBackgroundColor: UIKit.UIColor = .lightGray, sponseredFont: UIKit.UIFont = .systemFont(ofSize: 30), adCounterFont: UIKit.UIFont = .systemFont(ofSize: 30), timerFont: UIKit.UIFont = .systemFont(ofSize: 30))
+    public init(sponseredTextColor: UIKit.UIColor = .white, adCounterTextColor: UIKit.UIColor = .white, timerTextColor: UIKit.UIColor = .white, progressMinimumTrackTintColor: UIKit.UIColor = .yellow, progressMaximumTrackTintColor: UIKit.UIColor = .gray, bottomBackgroundColor: UIKit.UIColor = .clear, sponseredFont: UIKit.UIFont = .systemFont(ofSize: 30), adCounterFont: UIKit.UIFont = .systemFont(ofSize: 30), timerFont: UIKit.UIFont = .systemFont(ofSize: 30))
   }
   public struct AdsViewConfig {
     public init(showInfoIcon: Swift.Bool = true, showsponseredText: Swift.Bool = true, showAdCounterAndTimerText: Swift.Bool = true, showplayPauseIcon: Swift.Bool = true, showfullScreenIcon: Swift.Bool = true, showVolumeIcon: Swift.Bool = true)
@@ -1333,7 +1333,8 @@ public class AnalyticsAdInfo {
   public var podOffset: Swift.Double?
   public var startTime: Swift.Double?
   public var adSystem: Swift.String?
-  public init(adId: Swift.String, adName: Swift.String, podName: Swift.String? = nil, podLength: Swift.Double? = nil, podPosition: Swift.Int? = nil, podOffset: Swift.Double? = nil, startTime: Swift.Double? = nil, adSystem: Swift.String? = nil)
+  public var creativeParameters: VLPlayerLib.CreativeParameters?
+  public init(adId: Swift.String, adName: Swift.String, podName: Swift.String? = nil, podLength: Swift.Double? = nil, podPosition: Swift.Int? = nil, podOffset: Swift.Double? = nil, startTime: Swift.Double? = nil, adSystem: Swift.String? = nil, creativeParameters: VLPlayerLib.CreativeParameters? = nil)
   @objc deinit
 }
 public class SSAIAnalyticsTracker {
@@ -1359,7 +1360,8 @@ public class VLAdAssetInfoAnalytics : Swift.Codable {
   public var podPosition: Swift.Int?
   public var podOffset: Swift.Double?
   public var startTime: Swift.Double?
-  public init(adId: Swift.String, adName: Swift.String, podName: Swift.String? = nil, podLength: Swift.Double? = nil, podPosition: Swift.Int? = nil, podOffset: Swift.Double? = nil, startTime: Swift.Double? = nil, adSystem: Swift.String? = nil)
+  public var creativeParameters: VLPlayerLib.CreativeParameters?
+  public init(adId: Swift.String, adName: Swift.String, podName: Swift.String? = nil, podLength: Swift.Double? = nil, podPosition: Swift.Int? = nil, podOffset: Swift.Double? = nil, startTime: Swift.Double? = nil, adSystem: Swift.String? = nil, creativeParameters: VLPlayerLib.CreativeParameters? = nil)
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
   required public init(from decoder: any Swift.Decoder) throws
@@ -1570,6 +1572,63 @@ public struct SSAIAvailableAds : Swift.Decodable {
   }
   public init(from decoder: any Swift.Decoder) throws
 }
+public struct AdExtension : Swift.Decodable {
+  public var content: Swift.String?
+  public var type: Swift.String?
+  public var parsedParameters: VLPlayerLib.CreativeParameters? {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CreativeParameters {
+  public var ssaiCreativeId: Swift.String?
+  public var ssaiCreativeIdValue: Swift.String?
+  public var parameters: [Swift.String : Swift.String]
+  public var convivaAdInsights: VLPlayerLib.ConvivaAdInsights?
+  public var advertiserName: Swift.String? {
+    get
+  }
+  public var brand: Swift.String? {
+    get
+  }
+  public var industry: Swift.String? {
+    get
+  }
+  public var ccrMeasurement: Swift.String? {
+    get
+  }
+  public var creativeApiFramework: Swift.String? {
+    get
+  }
+  public var huluCcr: Swift.String? {
+    get
+  }
+  public func toDictionary() -> [Swift.String : Any]
+  public func toNestedDictionary() -> [Swift.String : Any]
+}
+public struct ConvivaAdInsights : Swift.Decodable {
+  public var id: Swift.String?
+  public var position: Swift.String?
+  public var mediaFileApiFramework: Swift.String?
+  public var sequence: Swift.String?
+  public var creativeId: Swift.String?
+  public var creativeName: Swift.String?
+  public var breakId: Swift.String?
+  public var advertiser: Swift.String?
+  public var advertiserCategory: Swift.String?
+  public var advertiserId: Swift.String?
+  public var campaignName: Swift.String?
+  public var sitesection: Swift.String?
+  public var vcid2: Swift.String?
+  public var prof: Swift.String?
+  public var csid: Swift.String?
+  public var adNetworkID: Swift.String?
+  public var renditionID: Swift.String?
+  public var duration: Swift.String?
+  public func toDictionary() -> [Swift.String : Any]
+  public func toCompactDictionary() -> [Swift.String : Swift.String]
+  public init(from decoder: any Swift.Decoder) throws
+}
 public struct SSAIAvailableAd : Swift.Decodable, Swift.Equatable {
   public var adId: Swift.String?
   public var adSystem: Swift.String?
@@ -1578,6 +1637,10 @@ public struct SSAIAvailableAd : Swift.Decodable, Swift.Equatable {
   public var adStartTime: Swift.Double?
   public var trackingEvents: Swift.Array<VLPlayerLib.TrackingEvent>?
   public var adVerifications: Swift.Array<VLPlayerLib.AdVerification>?
+  public var extensions: [VLPlayerLib.AdExtension]?
+  public var creativeParameters: VLPlayerLib.CreativeParameters? {
+    get
+  }
   public init(from decoder: any Swift.Decoder) throws
   public static func == (lhs: VLPlayerLib.SSAIAvailableAd, rhs: VLPlayerLib.SSAIAvailableAd) -> Swift.Bool
 }
