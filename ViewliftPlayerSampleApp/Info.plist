@@ -4,6 +4,11 @@
 <dict>
 	<key>Adobe_Env_Id</key>
 	<string>77ca722dd820/99867d0bb529/launch-a88516d7f021-development</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_googlecast._tcp</string>
@@ -14,5 +19,24 @@
 		<string>_http._tcp.</string>
 		<string>_airplay._tcp</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Uses Bluetooth to discover nearby Google Cast devices</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Uses Bluetooth to discover nearby Google Cast devices</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Some content may access Microphone</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>The App Uses information to track user</string>
 </dict>
 </plist>
