@@ -10040,7 +10040,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(isSettingsSupported:isSubTitleSupported:isSlowMoSupported:isStartFromBeginningSupported:isCaptionsOnOffTextSupported:remoteSeekSupport:isPlayPauseSupported:isAddCustomViewsSupported:)",
+            "printedName": "init(isSettingsSupported:isSubTitleSupported:isSlowMoSupported:isStartFromBeginningSupported:isCaptionsOnOffTextSupported:remoteSeekSupport:isPlayPauseSupported:isAddCustomViewsSupported:verticalThreshold:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -10103,11 +10103,18 @@
                 "printedName": "Swift.Bool",
                 "hasDefaultArg": true,
                 "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "hasDefaultArg": true,
+                "usr": "s:Si"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:11VLPlayerLib20PlayerControlsConfigV19isSettingsSupported0f8SubTitleH00f6SlowMoH00f18StartFromBeginningH00f17CaptionsOnOffTextH017remoteSeekSupport0f9PlayPauseH00f14AddCustomViewsH0ACSb_S4bAC06RemoteuV0OS2btcfc",
-            "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV19isSettingsSupported0f8SubTitleH00f6SlowMoH00f18StartFromBeginningH00f17CaptionsOnOffTextH017remoteSeekSupport0f9PlayPauseH00f14AddCustomViewsH0ACSb_S4bAC06RemoteuV0OS2btcfc",
+            "usr": "s:11VLPlayerLib20PlayerControlsConfigV19isSettingsSupported0f8SubTitleH00f6SlowMoH00f18StartFromBeginningH00f17CaptionsOnOffTextH017remoteSeekSupport0f9PlayPauseH00f14AddCustomViewsH017verticalThresholdACSb_S4bAC06RemoteuV0OS2bSitcfc",
+            "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV19isSettingsSupported0f8SubTitleH00f6SlowMoH00f18StartFromBeginningH00f17CaptionsOnOffTextH017remoteSeekSupport0f9PlayPauseH00f14AddCustomViewsH017verticalThresholdACSb_S4bAC06RemoteuV0OS2bSitcfc",
             "moduleName": "VLPlayerLib",
             "declAttributes": [
               "AccessControl"
@@ -41103,6 +41110,101 @@
             "init_kind": "Designated"
           },
           {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(eventType:beaconUrls:trackingDuration:eventId:trackingStartTime:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "TrackingEvent",
+                "printedName": "VLPlayerLib.TrackingEvent",
+                "usr": "s:11VLPlayerLib13TrackingEventV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AdsEventType",
+                "printedName": "VLPlayerLib.VLPlayer.AdsEventType",
+                "usr": "s:11VLPlayerLib0A0C12AdsEventTypeO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[Swift.String]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Double?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Double?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:11VLPlayerLib13TrackingEventV9eventType10beaconUrls16trackingDuration0E2Id0I9StartTimeAcA0A0C03AdsdF0O_SaySSGSgSdSgSSSgAOtcfc",
+            "mangledName": "$s11VLPlayerLib13TrackingEventV9eventType10beaconUrls16trackingDuration0E2Id0I9StartTimeAcA0A0C03AdsdF0O_SaySSGSgSdSgSSSgAOtcfc",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
             "kind": "Function",
             "name": "==",
             "printedName": "==(_:_:)",
@@ -41484,7 +41586,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(shouldHideControlsOnMenuPressed:shouldCreateAudioLanguageOptionIndependently:shouldHideControlsWhenPaused:shouldFocusLiveButton:)",
+            "printedName": "init(shouldHideControlsOnMenuPressed:shouldCreateAudioLanguageOptionIndependently:shouldHideControlsWhenPaused:shouldFocusLiveButton:shouldEnablePlayPauseOnLiveStream:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -41519,11 +41621,18 @@
                 "printedName": "Swift.Bool",
                 "hasDefaultArg": true,
                 "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:11VLPlayerLib12FeatureFlagsV31shouldHideControlsOnMenuPressed0E38CreateAudioLanguageOptionIndependently0efG10WhenPaused0E15FocusLiveButtonACSb_S3btcfc",
-            "mangledName": "$s11VLPlayerLib12FeatureFlagsV31shouldHideControlsOnMenuPressed0E38CreateAudioLanguageOptionIndependently0efG10WhenPaused0E15FocusLiveButtonACSb_S3btcfc",
+            "usr": "s:11VLPlayerLib12FeatureFlagsV31shouldHideControlsOnMenuPressed0E38CreateAudioLanguageOptionIndependently0efG10WhenPaused0E15FocusLiveButton0e15EnablePlayPausehS6StreamACSb_S4btcfc",
+            "mangledName": "$s11VLPlayerLib12FeatureFlagsV31shouldHideControlsOnMenuPressed0E38CreateAudioLanguageOptionIndependently0efG10WhenPaused0E15FocusLiveButton0e15EnablePlayPausehS6StreamACSb_S4btcfc",
             "moduleName": "VLPlayerLib",
             "declAttributes": [
               "AccessControl"
@@ -46595,6 +46704,116 @@
           },
           {
             "kind": "Var",
+            "name": "showTitle",
+            "printedName": "showTitle",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC9showTitleSSSgvp",
+            "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC9showTitleSSSgvp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC9showTitleSSSgvg",
+                "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC9showTitleSSSgvg",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC9showTitleSSSgvs",
+                "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC9showTitleSSSgvs",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC9showTitleSSSgvM",
+                "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC9showTitleSSSgvM",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "seasonNumber",
             "printedName": "seasonNumber",
             "children": [
@@ -51442,7 +51661,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(id:title:seriesId:seriesTitle:seasonNumber:episodeNumber:contentType:genre:durationInSeconds:airDate:language:subtitles:playbackUrl:playbackType:playbackPositionInSeconds:totalSecondsConsumed:streamType:assetStatus:bitRate:bufferCount:bufferTimeInSeconds:playSource:castType:subcategory1:subcategory2:adId:adDayPart:screenSize:videostatus:videodomain:videotmsid:videobroadcast:videoInitiate:videocliptype:videonetwork:isLive:videocrossdevice:endCardCue:endCardType:networkType:researchtitle:videoleague:videosponsor:advertiser:creativeName:videosport:videoplayerurl:subTitle:assetId:videoguid:programStartTimeMiliSeconds:programEndTimeMiliSeconds:)",
+            "printedName": "init(id:title:seriesId:seriesTitle:seasonNumber:episodeNumber:contentType:genre:durationInSeconds:airDate:language:subtitles:playbackUrl:playbackType:playbackPositionInSeconds:totalSecondsConsumed:streamType:assetStatus:bitRate:bufferCount:bufferTimeInSeconds:playSource:castType:subcategory1:subcategory2:adId:adDayPart:screenSize:videostatus:videodomain:videotmsid:videobroadcast:videoInitiate:videocliptype:videonetwork:isLive:videocrossdevice:endCardCue:endCardType:networkType:researchtitle:videoleague:videosponsor:advertiser:creativeName:videosport:videoplayerurl:subTitle:assetId:videoguid:programStartTimeMiliSeconds:programEndTimeMiliSeconds:showTitle:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -52229,11 +52448,26 @@
                 ],
                 "hasDefaultArg": true,
                 "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC2id5title8seriesId0H5Title12seasonNumber07episodeL011contentType5genre17durationInSeconds7airDate8language9subtitles11playbackUrl0xO00x8PositionrS005totalS8Consumed06streamO011assetStatus7bitRate11bufferCount010bufferTimerS010playSource04castO012subcategory112subcategory202adI09adDayPart10screenSize11videostatus11videodomain10videotmsid14videobroadcast13videoInitiate13videocliptype12videonetwork6isLive16videocrossdevice10endCardCue07endCardO007networkO013researchtitle11videoleague12videosponsor10advertiser12creativeName10videosport14videoplayerurl03subJ005assetI09videoguid020programStartTimeMiliS0018programEndTimeMiliS0ACSSSg_A28_A28_A28_SiSgA29_A28_A28_A29_A28_A28_A28_A28_A28_SdSgA30_A28_A28_A28_A29_A29_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_SbSgA31_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A30_A30_tcfc",
-            "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC2id5title8seriesId0H5Title12seasonNumber07episodeL011contentType5genre17durationInSeconds7airDate8language9subtitles11playbackUrl0xO00x8PositionrS005totalS8Consumed06streamO011assetStatus7bitRate11bufferCount010bufferTimerS010playSource04castO012subcategory112subcategory202adI09adDayPart10screenSize11videostatus11videodomain10videotmsid14videobroadcast13videoInitiate13videocliptype12videonetwork6isLive16videocrossdevice10endCardCue07endCardO007networkO013researchtitle11videoleague12videosponsor10advertiser12creativeName10videosport14videoplayerurl03subJ005assetI09videoguid020programStartTimeMiliS0018programEndTimeMiliS0ACSSSg_A28_A28_A28_SiSgA29_A28_A28_A29_A28_A28_A28_A28_A28_SdSgA30_A28_A28_A28_A29_A29_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_SbSgA31_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A28_A30_A30_tcfc",
+            "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC2id5title8seriesId0H5Title12seasonNumber07episodeL011contentType5genre17durationInSeconds7airDate8language9subtitles11playbackUrl0xO00x8PositionrS005totalS8Consumed06streamO011assetStatus7bitRate11bufferCount010bufferTimerS010playSource04castO012subcategory112subcategory202adI09adDayPart10screenSize11videostatus11videodomain10videotmsid14videobroadcast13videoInitiate13videocliptype12videonetwork6isLive16videocrossdevice10endCardCue07endCardO007networkO013researchtitle11videoleague12videosponsor10advertiser12creativeName10videosport14videoplayerurl03subJ005assetI09videoguid020programStartTimeMiliS0018programEndTimeMiliS004showJ0ACSSSg_A29_A29_A29_SiSgA30_A29_A29_A30_A29_A29_A29_A29_A29_SdSgA31_A29_A29_A29_A30_A30_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_SbSgA32_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A31_A31_A29_tcfc",
+            "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC2id5title8seriesId0H5Title12seasonNumber07episodeL011contentType5genre17durationInSeconds7airDate8language9subtitles11playbackUrl0xO00x8PositionrS005totalS8Consumed06streamO011assetStatus7bitRate11bufferCount010bufferTimerS010playSource04castO012subcategory112subcategory202adI09adDayPart10screenSize11videostatus11videodomain10videotmsid14videobroadcast13videoInitiate13videocliptype12videonetwork6isLive16videocrossdevice10endCardCue07endCardO007networkO013researchtitle11videoleague12videosponsor10advertiser12creativeName10videosport14videoplayerurl03subJ005assetI09videoguid020programStartTimeMiliS0018programEndTimeMiliS004showJ0ACSSSg_A29_A29_A29_SiSgA30_A29_A29_A30_A29_A29_A29_A29_A29_SdSgA31_A29_A29_A29_A30_A30_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_SbSgA32_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A29_A31_A31_A29_tcfc",
             "moduleName": "VLPlayerLib",
             "declAttributes": [
               "AccessControl"
@@ -55383,6 +55617,127 @@
                 "accessorKind": "_modify"
               }
             ]
+          },
+          {
+            "kind": "Var",
+            "name": "verticalThreshold",
+            "printedName": "verticalThreshold",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib10TvOSSliderC17verticalThresholdSivp",
+            "mangledName": "$s11VLPlayerLib10TvOSSliderC17verticalThresholdSivp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib10TvOSSliderC17verticalThresholdSivg",
+                "mangledName": "$s11VLPlayerLib10TvOSSliderC17verticalThresholdSivg",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib10TvOSSliderC17verticalThresholdSivs",
+                "mangledName": "$s11VLPlayerLib10TvOSSliderC17verticalThresholdSivs",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib10TvOSSliderC17verticalThresholdSivM",
+                "mangledName": "$s11VLPlayerLib10TvOSSliderC17verticalThresholdSivM",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "updateLayout",
+            "printedName": "updateLayout()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11VLPlayerLib10TvOSSliderC12updateLayoutyyF",
+            "mangledName": "$s11VLPlayerLib10TvOSSliderC12updateLayoutyyF",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
           },
           {
             "kind": "Function",
@@ -59604,63 +59959,63 @@
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/DefaultPlayerControlsView\/VLCustomPlayerControlsView.swift",
       "kind": "BooleanLiteral",
-      "offset": 10491,
+      "offset": 10581,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/DefaultPlayerControlsView\/VLCustomPlayerControlsView.swift",
       "kind": "BooleanLiteral",
-      "offset": 18451,
+      "offset": 18541,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/DefaultPlayerControlsView\/VLCustomPlayerControlsView.swift",
       "kind": "StringLiteral",
-      "offset": 48915,
+      "offset": 49154,
       "length": 17,
       "value": "\"Closed Captions\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/DefaultPlayerControlsView\/VLCustomPlayerControlsView.swift",
       "kind": "StringLiteral",
-      "offset": 48958,
+      "offset": 49197,
       "length": 16,
       "value": "\"Audio Language\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/DefaultPlayerControlsView\/VLCustomPlayerControlsView.swift",
       "kind": "StringLiteral",
-      "offset": 48997,
+      "offset": 49236,
       "length": 11,
       "value": "\"fontStyle\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/DefaultPlayerControlsView\/VLCustomPlayerControlsView.swift",
       "kind": "StringLiteral",
-      "offset": 49033,
+      "offset": 49272,
       "length": 15,
       "value": "\"Video Quality\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/DefaultPlayerControlsView\/VLCustomPlayerControlsView.swift",
       "kind": "StringLiteral",
-      "offset": 49323,
+      "offset": 49562,
       "length": 10,
       "value": "\"Settings\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/DefaultPlayerControlsView\/VLCustomPlayerControlsView.swift",
       "kind": "StringLiteral",
-      "offset": 49359,
+      "offset": 49598,
       "length": 15,
       "value": "\"AudioLanguage\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/DefaultPlayerControlsView\/VLCustomPlayerControlsView.swift",
       "kind": "StringLiteral",
-      "offset": 49395,
+      "offset": 49634,
       "length": 11,
       "value": "\"Subtitles\""
     },
@@ -60232,6 +60587,13 @@
       "value": "true"
     },
     {
+      "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/Player Controller\/CustomVideoController_tvOS.swift",
+      "kind": "IntegerLiteral",
+      "offset": 18495,
+      "length": 1,
+      "value": "3"
+    },
+    {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/CustomControls\/CustomSeekBarView_tvOS.swift",
       "kind": "IntegerLiteral",
       "offset": 939,
@@ -60612,51 +60974,58 @@
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 3772,
+      "offset": 3803,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 3814,
+      "offset": 3845,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 3854,
+      "offset": 3885,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 3906,
+      "offset": 3937,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 3957,
+      "offset": 3988,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4080,
+      "offset": 4111,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4121,
+      "offset": 4152,
       "length": 4,
       "value": "true"
+    },
+    {
+      "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4183,
+      "length": 3,
+      "value": "500"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/VLPlayerAnalyticsModel.swift",
@@ -61053,70 +61422,70 @@
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/AdsViewConfiguration.swift",
       "kind": "IntegerLiteral",
-      "offset": 1319,
+      "offset": 1315,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/AdsViewConfiguration.swift",
       "kind": "IntegerLiteral",
-      "offset": 1368,
+      "offset": 1364,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/AdsViewConfiguration.swift",
       "kind": "IntegerLiteral",
-      "offset": 1413,
+      "offset": 1409,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/AdsViewConfiguration.swift",
       "kind": "BooleanLiteral",
-      "offset": 2249,
+      "offset": 2245,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/AdsViewConfiguration.swift",
       "kind": "BooleanLiteral",
-      "offset": 2281,
+      "offset": 2277,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/AdsViewConfiguration.swift",
       "kind": "BooleanLiteral",
-      "offset": 2321,
+      "offset": 2317,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/AdsViewConfiguration.swift",
       "kind": "BooleanLiteral",
-      "offset": 2353,
+      "offset": 2349,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/AdsViewConfiguration.swift",
       "kind": "BooleanLiteral",
-      "offset": 2386,
+      "offset": 2382,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/AdsViewConfiguration.swift",
       "kind": "BooleanLiteral",
-      "offset": 2415,
+      "offset": 2411,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/AdsViewConfiguration.swift",
       "kind": "StringLiteral",
-      "offset": 2888,
+      "offset": 2884,
       "length": 14,
       "value": "\"Sponsored Ad\""
     },
@@ -61865,133 +62234,133 @@
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 3468,
+      "offset": 5377,
       "length": 19,
       "value": "\"durationInSeconds\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 3515,
+      "offset": 5424,
       "length": 20,
       "value": "\"startTimeInSeconds\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 6273,
+      "offset": 8182,
       "length": 19,
       "value": "\"durationInSeconds\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 6326,
+      "offset": 8235,
       "length": 20,
       "value": "\"startTimeInSeconds\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 6380,
+      "offset": 8289,
       "length": 11,
       "value": "\"eventType\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 9071,
+      "offset": 11504,
       "length": 19,
       "value": "\"durationInSeconds\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 9121,
+      "offset": 11554,
       "length": 20,
       "value": "\"startTimeInSeconds\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 10920,
+      "offset": 13353,
       "length": 23,
       "value": "\"click_fallback_images\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 10974,
+      "offset": 13407,
       "length": 12,
       "value": "\"click_data\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 11008,
+      "offset": 13441,
       "length": 12,
       "value": "\"x_position\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 11042,
+      "offset": 13475,
       "length": 12,
       "value": "\"y_position\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 11083,
+      "offset": 13516,
       "length": 10,
       "value": "\"duration\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 11128,
+      "offset": 13561,
       "length": 8,
       "value": "\"offset\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 11164,
+      "offset": 13597,
       "length": 10,
       "value": "\"alt_text\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 11199,
+      "offset": 13632,
       "length": 10,
       "value": "\"resource\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 11238,
+      "offset": 13671,
       "length": 15,
       "value": "\"creative_type\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 12782,
+      "offset": 15215,
       "length": 15,
       "value": "\"creative_type\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 12822,
+      "offset": 15255,
       "length": 10,
       "value": "\"resource\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 12856,
+      "offset": 15289,
       "length": 10,
       "value": "\"alt_text\""
     },
@@ -62159,30 +62528,37 @@
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/FeatureFlags.swift",
       "kind": "BooleanLiteral",
-      "offset": 459,
+      "offset": 507,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/FeatureFlags.swift",
       "kind": "BooleanLiteral",
-      "offset": 527,
+      "offset": 575,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/FeatureFlags.swift",
       "kind": "BooleanLiteral",
-      "offset": 578,
+      "offset": 626,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/FeatureFlags.swift",
       "kind": "BooleanLiteral",
-      "offset": 622,
+      "offset": 670,
       "length": 4,
       "value": "true"
+    },
+    {
+      "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/FeatureFlags.swift",
+      "kind": "BooleanLiteral",
+      "offset": 718,
+      "length": 5,
+      "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/CustomControls\/TopControls\/RadioViewCell.swift",
@@ -62285,7 +62661,7 @@
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/VLContentInfo.swift",
       "kind": "BooleanLiteral",
-      "offset": 4259,
+      "offset": 4293,
       "length": 5,
       "value": "false"
     },
@@ -62493,6 +62869,13 @@
       "value": "false"
     },
     {
+      "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/Player Custom Views\/TVOS Slider\/TvOSSlider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 10706,
+      "length": 2,
+      "value": "50"
+    },
+    {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/Player Custom Views\/PlayerAdSkinView\/PlayerAdSkinView_TVOS.swift",
       "kind": "BooleanLiteral",
       "offset": 1210,
@@ -62558,7 +62941,7 @@
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayerLib_tvOS\/VLVideoPlayer\/Player Custom Views\/PlayerAdSkinView\/PlayerAdSkinView_TVOS.swift",
       "kind": "BooleanLiteral",
-      "offset": 2152,
+      "offset": 2205,
       "length": 5,
       "value": "false"
     },
