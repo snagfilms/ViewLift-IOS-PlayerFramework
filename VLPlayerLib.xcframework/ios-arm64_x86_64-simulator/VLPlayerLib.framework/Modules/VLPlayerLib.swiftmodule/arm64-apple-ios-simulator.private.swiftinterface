@@ -1540,6 +1540,7 @@ public struct TrackingEvent : Swift.Decodable, Swift.Equatable {
   public var beaconUrls: Swift.Array<Swift.String>?
   public var eventType: VLPlayerLib.VLPlayer.AdsEventType?
   public init(from decoder: any Swift.Decoder) throws
+  public init(eventType: VLPlayerLib.VLPlayer.AdsEventType, beaconUrls: [Swift.String]? = nil, trackingDuration: Swift.Double? = nil, eventId: Swift.String? = nil, trackingStartTime: Swift.Double? = nil)
   public static func == (a: VLPlayerLib.TrackingEvent, b: VLPlayerLib.TrackingEvent) -> Swift.Bool
 }
 public struct AdVerification : Swift.Codable {
