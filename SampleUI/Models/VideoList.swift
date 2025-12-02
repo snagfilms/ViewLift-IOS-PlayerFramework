@@ -23,6 +23,7 @@ enum PlayerUIOptions: String {
     case playStreamURL = "Play Stream URL"
     case playASATURL = "Play ASAT URL"
     case exploreMore = "Explore Player SDK - Use Cases"
+    case verticalPlayer = "Vertical Video Player"
 }
 
 class ReadFromLocalJson:VideoListProtocol {

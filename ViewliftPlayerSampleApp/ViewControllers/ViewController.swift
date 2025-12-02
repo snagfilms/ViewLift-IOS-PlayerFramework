@@ -220,4 +220,9 @@ class FeedVCVM: FeedViewDelegate {
     func userFeedInteraction(type: VLPlayerLib.FeedInteraction, videoID: String) {
         print("****** FeedViewDelegate: userFeedInteraction \(type): videoID: \(videoID)")
     }
+    
+    func currentStateForFeedVideo(videoID: String, state: VLPlayerLib.FeedInteraction) -> Bool {
+        //TODO: handle with MAP
+        return false
+    }
 }
