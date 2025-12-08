@@ -16,7 +16,7 @@ let package = Package(
         .package(
             name: "VisualEffectView",
             url: "https://github.com/efremidze/VisualEffectView.git",
-            branch: "master"),
+            Version("5.0.8")..<Version("5.0.8")),
         .package(
             name: "M3U8Parser",
             url: "https://github.com/M3U8Kit/M3U8Parser.git",
@@ -28,7 +28,7 @@ let package = Package(
         .package(
             name: "VLBeaconLib",
             url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
-            branch: "3.2.4"),
+            Version("3.2.4")..<Version("3.2.4")),
         .package(
             name: "MUXSDKStats",
             url: "https://github.com/muxinc/mux-stats-sdk-avplayer",
