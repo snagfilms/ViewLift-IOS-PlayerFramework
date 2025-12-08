@@ -426,7 +426,8 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)seekToSeconds:(double)seconds;
 - (void)seekToSeconds:(double)seconds completion:(void (^ _Nullable)(void))completion;
 - (double)getCurrentPlaybackTime SWIFT_WARN_UNUSED_RESULT;
-- (double)getChapterEndTime SWIFT_WARN_UNUSED_RESULT;
+- (double)getChapterEndTimeWithCurrentTime:(double)currentTime SWIFT_WARN_UNUSED_RESULT;
+- (double)getChapterStartTimeWithCurrentTime:(double)currentTime SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isVideoHavingPreRollAds SWIFT_WARN_UNUSED_RESULT;
 /// important:
 ///
