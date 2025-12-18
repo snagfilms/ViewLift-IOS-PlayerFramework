@@ -1281,23 +1281,6 @@ public enum FeedViewItemType {
   open func setSource(delegate: (any VLPlayerLib.FeedViewDelegate)? = nil, config: VLPlayerLib.FeedViewConfig, baseUrl: Swift.String, authToken: Swift.String) -> UIKit.UIViewController?
   @objc override dynamic public init()
 }
-public class FeedVCVM : Foundation.ObservableObject, VLPlayerLib.FeedViewDelegate {
-  public init()
-  public func currentStateForFeedVideo(videoID: Swift.String, state: VLPlayerLib.FeedInteraction) -> Swift.Bool
-  final public let ids: [Swift.String]
-  public var idsURL: [Swift.String] {
-    get
-  }
-  public var config: VLPlayerLib.FeedViewConfig {
-    get
-  }
-  public func currentImageAd(imageUrl: Swift.String)
-  public func currentFeedPlaying(videoID: Swift.String)
-  public func feedPlayerStatus(isPlaying: Swift.Bool)
-  public func userFeedInteraction(type: VLPlayerLib.FeedInteraction, videoID: Swift.String)
-  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
-  @objc deinit
-}
 public enum FeedViewLayoutStyle : Swift.Equatable {
   case verticalReels
   case horizontal
