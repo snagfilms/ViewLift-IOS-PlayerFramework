@@ -369,6 +369,14 @@ public protocol CustomPlayerSkinProtocol : UIKit.UIView {
   func fullScreenAdButtonTapped(isFullscreen: Swift.Bool)
   func updatePlayButton()
 }
+@_hasMissingDesignatedInitializers public class VLPlayerOrientationManager {
+  public static var isOrientationLocked: Swift.Bool
+  public static var lockedOrientation: UIKit.UIInterfaceOrientationMask
+  public static var orientationLockDidChange: ((Swift.Bool) -> Swift.Void)?
+  @available(iOS 16.0, *)
+  public static func forceLandscapeOrientation()
+  @objc deinit
+}
 public struct FeatureFlags {
   public init(shouldHideControlsOnMenuPressed: Swift.Bool = false, shouldCreateAudioLanguageOptionIndependently: Swift.Bool = true, shouldHideControlsWhenPaused: Swift.Bool = true, shouldFocusLiveButton: Swift.Bool = true, shouldEnablePlayPauseOnLiveStream: Swift.Bool = false)
 }

@@ -10399,6 +10399,426 @@
         ]
       },
       {
+        "kind": "TypeDecl",
+        "name": "VLPlayerOrientationManager",
+        "printedName": "VLPlayerOrientationManager",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "isOrientationLocked",
+            "printedName": "isOrientationLocked",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib0A18OrientationManagerC02isC6LockedSbvpZ",
+            "mangledName": "$s11VLPlayerLib0A18OrientationManagerC02isC6LockedSbvpZ",
+            "moduleName": "VLPlayerLib",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A18OrientationManagerC02isC6LockedSbvgZ",
+                "mangledName": "$s11VLPlayerLib0A18OrientationManagerC02isC6LockedSbvgZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A18OrientationManagerC02isC6LockedSbvsZ",
+                "mangledName": "$s11VLPlayerLib0A18OrientationManagerC02isC6LockedSbvsZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A18OrientationManagerC02isC6LockedSbvMZ",
+                "mangledName": "$s11VLPlayerLib0A18OrientationManagerC02isC6LockedSbvMZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "lockedOrientation",
+            "printedName": "lockedOrientation",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIInterfaceOrientationMask",
+                "printedName": "UIKit.UIInterfaceOrientationMask",
+                "usr": "c:@E@UIInterfaceOrientationMask"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib0A18OrientationManagerC06lockedC0So011UIInterfaceC4MaskVvpZ",
+            "mangledName": "$s11VLPlayerLib0A18OrientationManagerC06lockedC0So011UIInterfaceC4MaskVvpZ",
+            "moduleName": "VLPlayerLib",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIInterfaceOrientationMask",
+                    "printedName": "UIKit.UIInterfaceOrientationMask",
+                    "usr": "c:@E@UIInterfaceOrientationMask"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A18OrientationManagerC06lockedC0So011UIInterfaceC4MaskVvgZ",
+                "mangledName": "$s11VLPlayerLib0A18OrientationManagerC06lockedC0So011UIInterfaceC4MaskVvgZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIInterfaceOrientationMask",
+                    "printedName": "UIKit.UIInterfaceOrientationMask",
+                    "usr": "c:@E@UIInterfaceOrientationMask"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A18OrientationManagerC06lockedC0So011UIInterfaceC4MaskVvsZ",
+                "mangledName": "$s11VLPlayerLib0A18OrientationManagerC06lockedC0So011UIInterfaceC4MaskVvsZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A18OrientationManagerC06lockedC0So011UIInterfaceC4MaskVvMZ",
+                "mangledName": "$s11VLPlayerLib0A18OrientationManagerC06lockedC0So011UIInterfaceC4MaskVvMZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "orientationLockDidChange",
+            "printedName": "orientationLockDidChange",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((Swift.Bool) -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Swift.Bool) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib0A18OrientationManagerC24orientationLockDidChangeySbcSgvpZ",
+            "mangledName": "$s11VLPlayerLib0A18OrientationManagerC24orientationLockDidChangeySbcSgvpZ",
+            "moduleName": "VLPlayerLib",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((Swift.Bool) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.Bool) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Bool",
+                            "printedName": "Swift.Bool",
+                            "usr": "s:Sb"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A18OrientationManagerC24orientationLockDidChangeySbcSgvgZ",
+                "mangledName": "$s11VLPlayerLib0A18OrientationManagerC24orientationLockDidChangeySbcSgvgZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((Swift.Bool) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(Swift.Bool) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Bool",
+                            "printedName": "Swift.Bool",
+                            "usr": "s:Sb"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A18OrientationManagerC24orientationLockDidChangeySbcSgvsZ",
+                "mangledName": "$s11VLPlayerLib0A18OrientationManagerC24orientationLockDidChangeySbcSgvsZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A18OrientationManagerC24orientationLockDidChangeySbcSgvMZ",
+                "mangledName": "$s11VLPlayerLib0A18OrientationManagerC24orientationLockDidChangeySbcSgvMZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "forceLandscapeOrientation",
+            "printedName": "forceLandscapeOrientation()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11VLPlayerLib0A18OrientationManagerC014forceLandscapeC0yyFZ",
+            "mangledName": "$s11VLPlayerLib0A18OrientationManagerC014forceLandscapeC0yyFZ",
+            "moduleName": "VLPlayerLib",
+            "static": true,
+            "intro_iOS": "16.0",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "Available",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:11VLPlayerLib0A18OrientationManagerC",
+        "mangledName": "$s11VLPlayerLib0A18OrientationManagerC",
+        "moduleName": "VLPlayerLib",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "hasMissingDesignatedInitializers": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
         "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
@@ -68957,528 +69377,556 @@
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4607,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Dictionary",
-      "offset": 4171,
+      "offset": 6194,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4265,
+      "offset": 6288,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4314,
+      "offset": 6337,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4731,
+      "offset": 6754,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4771,
+      "offset": 6794,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4998,
+      "offset": 7021,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 5051,
+      "offset": 7074,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5168,
+      "offset": 7191,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5219,
+      "offset": 7242,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 5261,
+      "offset": 7284,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 5584,
+      "offset": 7607,
       "length": 4,
       "value": "-1.0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Dictionary",
-      "offset": 6666,
+      "offset": 8689,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 6777,
+      "offset": 8800,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 6823,
+      "offset": 8846,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 7001,
+      "offset": 9024,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 7041,
+      "offset": 9064,
       "length": 10,
       "value": "\"playable\""
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 7152,
+      "offset": 9175,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7194,
+      "offset": 9217,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7329,
+      "offset": 9352,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7384,
+      "offset": 9407,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7434,
+      "offset": 9457,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7788,
+      "offset": 9811,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7842,
+      "offset": 9865,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 7887,
+      "offset": 9910,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 7933,
+      "offset": 9956,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 7976,
+      "offset": 9999,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8019,
+      "offset": 10042,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8196,
+      "offset": 10219,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8915,
+      "offset": 10938,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9055,
+      "offset": 11078,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9435,
+      "offset": 11458,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9797,
+      "offset": 11812,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9903,
+      "offset": 16102,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10982,
+      "offset": 16210,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9960,
+      "offset": 17289,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 16267,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 11287,
+      "offset": 17594,
       "length": 42,
       "value": "\"SEEK isPlayerPlaying: \""
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 11328,
+      "offset": 17635,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 13219,
+      "offset": 19526,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 13280,
+      "offset": 19587,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 13399,
+      "offset": 19706,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 13572,
+      "offset": 19879,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 13657,
+      "offset": 19964,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 13692,
+      "offset": 19999,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 13745,
+      "offset": 20052,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 14218,
+      "offset": 20525,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 14668,
+      "offset": 20975,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 14702,
+      "offset": 21009,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 16035,
+      "offset": 22342,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 16487,
+      "offset": 22794,
       "length": 2,
       "value": "45"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 17080,
+      "offset": 23387,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 17301,
+      "offset": 23608,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 17517,
+      "offset": 23824,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 17707,
+      "offset": 24014,
       "length": 16,
       "value": "\"subTitlesArray\""
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 17663,
+      "offset": 23970,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Dictionary",
-      "offset": 17909,
+      "offset": 24216,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 18101,
+      "offset": 24408,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 18153,
+      "offset": 24460,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 18646,
+      "offset": 24953,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 18700,
+      "offset": 25007,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 18860,
+      "offset": 25167,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 19041,
+      "offset": 25348,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 19084,
+      "offset": 25391,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 20143,
+      "offset": 26450,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 20192,
+      "offset": 26499,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 20307,
+      "offset": 26614,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 20696,
+      "offset": 27003,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 20955,
+      "offset": 27262,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21075,
+      "offset": 27382,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21156,
+      "offset": 27463,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21196,
+      "offset": 27503,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21270,
+      "offset": 27577,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21310,
+      "offset": 27617,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 21412,
+      "offset": 27719,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 44953,
+      "offset": 51260,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 51573,
+      "offset": 57880,
       "length": 5,
       "value": "false"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 100540,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 100571,
+      "length": 4,
+      "value": "true"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/Viewlift\/Framework_Code\/iosplayer-sdk_OneSDK\/VLPlayer\/CommonFiles\/Models\/FeatureFlags.swift",
