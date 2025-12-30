@@ -45,6 +45,9 @@ extension AppDelegate {
             authorizationToken: authorizationToken,
             apiBaseUrl: apiBaseEndpoint
         )
+        #if os(iOS)
+        VLAuthentication.sharedInstance.setRedirectURLForAdobe("https://valid.redirect.url")
+        #endif
         
         // Perform authentication
         Task { [weak self] in
