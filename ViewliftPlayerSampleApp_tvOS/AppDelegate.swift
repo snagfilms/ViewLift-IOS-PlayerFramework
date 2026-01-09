@@ -7,27 +7,26 @@
 //
 
 import UIKit
-#if os(iOS)
-import VLAuthenticationFramework
-#else
-import VLAuthenticationFramework_tvOS
-#endif
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    // Shared instance of AppDelegate for easy access
+    static var shared: AppDelegate {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Could not cast UIApplication delegate as AppDelegate")
+        }
+        return delegate
+    }
 
     var window: UIWindow?
     var readVideoListOperation:VideoListProtocol?
     
     var authorizationToken: String? = nil
-    var adobePlayerTempPass: [String:AdobePassPayload] = [:]
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         readVideoList(readVideoListOperation: ReadFromLocalJson())
-
-        self.setupAuthentication()
-        self.setupAnalytics()
         
         
         window = UIWindow(frame: UIScreen.main.bounds)

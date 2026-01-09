@@ -9,13 +9,7 @@
 import UIKit
 import VLPlayerLib
 import VLBeaconLib
-#if os(iOS)
-import VLAuthenticationFramework
-#else
-import VLAuthenticationFramework_tvOS
-#endif
 import AVKit
-import VLAnalyticsLib
 
 private enum Constants {
     static let playerMargin: CGFloat = 10
@@ -54,7 +48,6 @@ class PlayerViewController_tvOS: UIViewController {
     var portraitConstraints: [NSLayoutConstraint] = []
     var landscapeConstraints: [NSLayoutConstraint] = []
     weak var player: AVPlayer?
-    var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
     var enableCustomAdUI: Bool = false
     var autoPlayListdataManager: AutoPlayDataManager?
@@ -100,14 +93,10 @@ class PlayerViewController_tvOS: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        VLAnalytics.shared.startObservingPlayerEvents()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        VLAnalytics.shared.stopObservingPlayerEvents()
     }
     
     private func addLoaderView(to containerView: UIView) -> UIActivityIndicatorView {
@@ -127,14 +116,6 @@ class PlayerViewController_tvOS: UIViewController {
         let vlBaseUrl = self.videoList.apiBaseUrl
         let vlBeaconURL: String? = self.videoList.beaconBaseUrl
         let vlToken = AppDelegate.shared.authorizationToken ?? ""
-        // Not checking for Temp Pass if playing from direct URL in Sample APP
-        if UserManager.shared.userIdentity?.tveUserId == nil && !isPlayingFromURL(){
-                //check if ealier temp pass was created but not expired
-                self.invalidatePlayerTempPassIfOutOfWindow()
-
-                //request for temp pass
-                await self.getTempPassPayload()
-        }
         
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""
@@ -148,17 +129,16 @@ class PlayerViewController_tvOS: UIViewController {
         // Select playback source type based on user option
         let playbackSourceType: VLPlayer.PlaybackSourceType
         if isPlayingFromURL(){
-            playbackSourceType = .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", streamConfig: VLPlayer.StreamConfig(isLive: streamConfig?.isLive, isDVR: streamConfig?.isDVR, isSSAIEnabled: false), drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl))
+            playbackSourceType = .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", streamConfig: VLPlayer.StreamConfig(isLive: streamConfig?.isLive, isDVR: streamConfig?.isDVR, isSSAIEnabled: false), drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl, beaconBaseURL: "", networkName: ""))
         } else {
-            let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass[self.channelkey]?.getTempToken() ?? nil
-            
             playbackSourceType =
                 .contentPlayback(
                     VLPlayer
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl,adobeTempPassPayload: adobePassPayload
+                            apiBaseURL: vlBaseUrl,
+                            beaconBaseURL: ""
                         )
                 )
         }
@@ -178,25 +158,10 @@ class PlayerViewController_tvOS: UIViewController {
         // Set player source and handle completion
         vlPlayer?.setSource(type: playbackSourceType,
                             vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
-                            playerFeaturesSupported: featureSupported, nextPlaybackList: nil
+                            playerFeaturesSupported: featureSupported, nextPlaybackList: nil, brandName: ""
                         ) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
-                if let contentResponse = contentResponse {
-                    self?.videoResponse = AnalyticsHelperV2.shared.parseVLVideoResponse(from: contentResponse)
-                }
-                
-                var hasTVE = false
-                
-                if let video = contentResponse?["video"] as? [String: Any],
-                   let monetizationModels = video["monetizationModels"] as? [[String: Any]] {
-                    hasTVE = monetizationModels.contains { $0["type"] as? String == "TVE" }
-                }
-                let plans = contentResponse?["plans"] as? [[String: Any]] ?? []
-                let channelIds = plans
-                    .flatMap { $0["planDetails"] as? [[String: Any]] ?? [] }
-                    .flatMap { $0["channelIds"] as? [String] ?? [] }
-                self?.handlePlayerSetupCompletion(playerView: playerView, hasTVE: hasTVE, channelIds: channelIds)
-                
+                self?.handlePlayerSetupCompletion(playerView: playerView)
             }
         }
     }
@@ -207,78 +172,15 @@ class PlayerViewController_tvOS: UIViewController {
     
     // Handles player setup completion, checks for TVE authorization
     private func handlePlayerSetupCompletion(
-        playerView: UIView?,
-        hasTVE: Bool,
-        channelIds: [String]
+        playerView: UIView?
     ) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
             guard let playerView = playerView else { return }
             
-            guard let user = UserManager.shared.userIdentity else {
-                self.addPlayerViewToContainer(playerView)
-                return
-            }
-            // If user is TVE and content requires TVE, check authorization
-            if user.tveUserId != nil && hasTVE {
-                Task {
-                    await self.checkAuthz(
-                        user: user,
-                        playerView: playerView,
-                        channelIds: channelIds
-                    )
-                }
-            } else {
-                self.addPlayerViewToContainer(playerView)
-            }
+            self.addPlayerViewToContainer(playerView)
         }
-    }
-    
-    // Checks TVE authorization for the user
-    private func checkAuthz(user: VLUserIdentity, playerView: UIView,channelIds: [String] = []) async {
-        let mvpdProvider = user.mvpdProvider ?? ""
-        
-        do {
-            let response = try await VLAuthentication.sharedInstance.checkAdobeDecisionsAuthorize(
-                mvpdId: mvpdProvider,
-                channelIds: channelIds
-            )
-            
-            switch response {
-            case .success(_):
-                self.addPlayerViewToContainer(playerView)
-            case .failure(let error):
-                self.handleAuthzFailure(
-                    VLAuthenticationErrorCode
-                        .decodingFailed(
-                            message: error.localizedDescription,
-                            underlyingError: error
-                        )
-                )
-            }
-        } catch (let error as VLAuthenticationErrorCode){
-            self.vlPlayer?.destroy()
-            self.handleAuthzFailure(error)
-        } catch {
-            debugPrint(error)
-        }
-    }
-    
-    // Handles TVE authorization failure
-    private func handleAuthzFailure(_ error: VLAuthenticationErrorCode) {
-        switch error {
-        case .adobeErrorResponse(let statusCode, let data, let errorMessage, let shouldPerformLogout):
-            if shouldPerformLogout {
-                self.showAlert(title: "Error", message: "TVE Authorization denied"){
-                    self.performLogout(isForceLogout: true)
-                }
-            }
-            break
-        default:
-            self.showAlert(title: "Error", message: "TVE Authorization denied")
-        }
-        
     }
     
     // Shows an alert with a title and message
@@ -344,14 +246,6 @@ class PlayerViewController_tvOS: UIViewController {
 
     // Adds the player view to the container and sets constraints
     func addPlayerViewToContainer(_ playerView: UIView) {
-        self.vlPlayer?
-            .setAnalyticsInfo(
-                mediaAnalyticsInfo: MediaAnalyticsInfo(
-//                    contentInfo: VLContentInfoAnalytics(videonetwork: "test"),
-                    playerInfo: AnalyticsHelperV2.shared.getPlayerInfo(),
-                    tvProviderInfo: AnalyticsHelperV2.shared.getTVEProviderInfo()
-                )
-            )
         
         timerLabel.removeFromSuperview()
         
@@ -607,26 +501,5 @@ extension PlayerViewController_tvOS{
        
     }
     
-    func performLogout(isForceLogout: Bool = false) {
-        let mvpdProvider = UserManager.shared.userIdentity?.mvpdProvider
-        
-        VLAuthentication.sharedInstance.logout(
-            client: .tvProvider(provider: .adobe, tveInitializationConfig: nil),
-            mvpdId: mvpdProvider
-        ) { [weak self] logoutSuccessful in
-            if logoutSuccessful {
-                Task { [weak self] in
-                    AnalyticsHelperV2.shared.triggerSignoutAnalytics()
-                    
-                    await AppDelegate.shared.logoutUser()
-                    self?.vlPlayer?.destroy()
-                    await self?.loadPlayerView()
-                }
-            }
-            
-            if isForceLogout {
-                VLAuthentication.sharedInstance.clearTveAuthDetails()
-            }
-        }
-    }
+    func performLogout(isForceLogout: Bool = false) {}
 }

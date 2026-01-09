@@ -9,7 +9,6 @@
 import VLPlayerLib
 import Foundation
 import GoogleCast
-import VLAnalyticsLib
 
 // Handles video playback delegate events for the player view controller
 extension PlayerViewController_iOS: VideoPlaybackDelegate {
@@ -129,8 +128,6 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         let sliderValue = getSliderDuration(currentTime: elapsedTime, totalDuration: totalTime)
         videoPlayerControlsView?.updateSliderDuration(sliderValue: sliderValue)
         videoPlayerCustomView?.viewModel?.seekTo(time: sliderValue)
-        
-        self.invalidatePlayerTempPassIfOutOfWindow()
     }
 
     // Calculates elapsed time, considering start-over if available

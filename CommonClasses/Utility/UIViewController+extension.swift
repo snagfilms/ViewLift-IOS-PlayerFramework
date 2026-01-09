@@ -16,9 +16,7 @@ extension UIViewController {
     ///   - siteId: String to check
     ///   - xApiKey: String to check
     ///   - alertMessage: The message to show in alert if condition met
-    func showAlertIfConfigInvalid(apiBaseEndpoint: String,
-                                  authorizationToken: String?,
-                                  siteId: String,
+    func showAlertIfConfigInvalid(authorizationToken: String?,
                                   xApiKey: String,
                                   alertMessage: String) {
         func containsFiveTimesX(_ value: String) -> Bool {
@@ -26,9 +24,7 @@ extension UIViewController {
         }
 
         // Check each relevant property for the repeated "xxxxx"
-        let isInvalid = containsFiveTimesX(apiBaseEndpoint) ||
-                        containsFiveTimesX(siteId) ||
-                        containsFiveTimesX(xApiKey)
+        let isInvalid = containsFiveTimesX(xApiKey)
 
         // Show alert if invalid config found
         guard isInvalid else { return }

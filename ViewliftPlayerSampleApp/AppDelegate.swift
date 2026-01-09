@@ -8,17 +8,19 @@
 
 import UIKit
 import VLPlayerLib
-#if os(iOS)
-import VLAuthenticationFramework
-#else
-import VLAuthenticationFramework_tvOS
-#endif
 import GoogleCast
-import VLAnalyticsLib
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    // Shared instance of AppDelegate for easy access
+    static var shared: AppDelegate {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Could not cast UIApplication delegate as AppDelegate")
+        }
+        return delegate
+    }
 
     var isFullScreen: Bool = false
     var window: UIWindow?
@@ -26,24 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var readVideoListOperation:VideoListProtocol?
     var isCastingViewVisible: Bool = false
     var castContextSharedInstance: GCKCastContext?
-    var adobePlayerTempPass: [String:AdobePassPayload] = [:]
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         self.readVideoList(readVideoListOperation: ReadFromLocalJson())
-        // Get current user identity before async context
-        
-        self.setupAuthentication()
-        
-//        var adobeConfig = AdobeAnalyticsConfig()
-//        adobeConfig.reportSuites = "fanmsnbcottdev"
-//        adobeConfig.playerName = "VL Test"
-//        AdobeAnalyticsConfigurationHelper.setupAdobeConfiguration(with: adobeConfig)
-        
-        self.setupAnalytics()
-
+        self.authorizationToken = self.readVideoListOperation?.videoList?.vlToken
         return true
     }
 

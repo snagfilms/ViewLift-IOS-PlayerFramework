@@ -32,12 +32,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return
         }
         let xApiKey: String = videoList.xApiKey
-        let siteId: String = videoList.authKeys.siteId
-        let apiBaseEndpoint: String = videoList.authKeys.apiBaseEndpoint
         
-        self.showAlertIfConfigInvalid(apiBaseEndpoint: apiBaseEndpoint,
-                                      authorizationToken: AppDelegate.shared.authorizationToken,
-                                      siteId: siteId,
+        self.showAlertIfConfigInvalid(authorizationToken: AppDelegate.shared.authorizationToken,
                                       xApiKey: xApiKey,
                                           alertMessage: "Detected invalid configuration! Please update your settings.")
     }
@@ -113,7 +109,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL {
             videoPlaybackController.streamUrl =  _videoList.streamUrl
         }
-        videoPlaybackController.channelId = _videoList.channelId
         videoPlaybackController.autoplayEnabled = self.autoPlayToggle.isOn
         videoPlaybackController.loopEnabled = self.loopPlaybackToggle.isOn
         videoPlaybackController.hideControls = self.hideControls.isOn

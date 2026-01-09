@@ -51,7 +51,7 @@ struct VideoList:Decodable {
     let partnerApiBaseUrl: String
     let domain: String
     let drmConfig: DRMConfigAsset?
-    let authKeys: AuthKeys
+    let vlToken: String?
     func checkForConfigurationErrorMessage() -> String?{
         if apiBaseUrl.contains("xxxxx") {
             return "Please set the API base URL and ViewLift token in the VideoList json file."
@@ -63,11 +63,6 @@ struct VideoList:Decodable {
         return nil
         
     }
-}
-
-struct AuthKeys: Codable {
-    let siteId: String
-    let apiBaseEndpoint: String
 }
 
 struct NextVideoList:Codable {

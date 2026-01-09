@@ -8,13 +8,7 @@
 
 import VLPlayerLib
 import AVKit
-#if os(iOS)
-import VLAuthenticationFramework
-#else
-import VLAuthenticationFramework_tvOS
-#endif
 import Foundation
-import VLAnalyticsLib
 
 // Handle video playback delegate events for the player view controller
 extension PlayerViewController_tvOS: VideoPlaybackDelegate {
@@ -68,14 +62,10 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
         print("Error VL:", errorDescription)
         print("VideoFetchError: contentResponse:", contentResponse)
         
-        if error?.errorCode == "TVE_SUBSCRIPTION_NOT_FOUND"{// handle other TVE error code too
-            loginWithTVE()
-        } else {
-            DispatchQueue.main.async {
-                self.loaderView.stopAnimating()
-                self.showAlert(message: errorDescription)
-                self.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
-            }
+        DispatchQueue.main.async {
+            self.loaderView.stopAnimating()
+            self.showAlert(message: errorDescription)
+            self.customPaywallView?.update(error?.errorMessage ?? "Error occurred while fetching content")
         }
         
     }
@@ -132,8 +122,6 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     func videoPlayerProgressByEverySecond(currentTime: Double, totalTime: Double, playerTag: String, parsedTimeStamp: String?) {
        // debugPrint("PlayerViewController videoPlayerProgressByEverySecond: \(currentTime), \(totalTime)")
         videoPlayerControlsView?.updateCurrentTime(currentTime: currentTime, totalTime: totalTime)
-        
-        self.invalidatePlayerTempPassIfOutOfWindow()
     }
     
     // Updates playback progress at specific intervals

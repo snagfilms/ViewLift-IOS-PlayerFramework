@@ -7,11 +7,6 @@
 //
 import UIKit
 import VLPlayerLib
-#if os(iOS)
-import VLAuthenticationFramework
-#else
-import VLAuthenticationFramework_tvOS
-#endif
 import Kingfisher
 import AppTrackingTransparency
 
@@ -58,22 +53,11 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         logoutButton.isHidden = true
         providerImageView.isHidden = true
         
-#if os(tvOS)
-        if UserManager.shared.userIdentity != nil {
-            logoutButton.isHidden = false
-            providerImageView.isHidden = false
-        }
-#endif
-        
         guard let videoList = AppDelegate.shared.readVideoListOperation?.videoList else { return }
         let xApiKey = videoList.xApiKey
-        let siteId = videoList.authKeys.siteId
-        let apiBaseEndpoint = videoList.authKeys.apiBaseEndpoint
         
         showAlertIfConfigInvalid(
-            apiBaseEndpoint: apiBaseEndpoint,
             authorizationToken: AppDelegate.shared.authorizationToken,
-            siteId: siteId,
             xApiKey: xApiKey,
             alertMessage: "Detected invalid configuration! Please update your settings."
         )
@@ -87,26 +71,6 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                     // your status handling here
                 }
             }
-    }
-    
-    func fetchUserDetails() {
-        Task {
-            do {
-                let userIdentity = try await VLAuthentication.sharedInstance.getUserIdentity()
-                
-                if let tvImageurl = userIdentity.tveMetadata?.imageUrl {
-                    self.providerImageView.isHidden = false
-                    self.providerImageView.backgroundColor = .black
-                    
-                    if let url = URL(string: tvImageurl) {
-                        self.providerImageView.kf.setImage(with: url)
-                    }
-                }
-            } catch {
-                debugPrint(error)
-                self.providerImageView.isHidden = true
-            }
-        }
     }
 
     
@@ -166,16 +130,6 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         // default hidden; will toggle with logoutButton
         logoutButton.isHidden = true
         providerImageView.isHidden = true
-        
-#if os(tvOS)
-        if UserManager.shared.userIdentity != nil {
-            logoutButton.isHidden = false
-            
-            DispatchQueue.main.asyncAfter(deadline: .now()+1.0) {
-                self.fetchUserDetails()
-            }
-        }
-#endif
         
         // --- Title Label (Center) ---
         titleLabel.text = "Assets"
@@ -245,24 +199,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    @objc private func logoutTapped() {
-        let mvpdProvider = UserManager.shared.userIdentity?.mvpdProvider
-        
-        VLAuthentication.sharedInstance.logout(
-            client: .tvProvider(provider: .adobe, tveInitializationConfig: nil),
-            mvpdId: mvpdProvider
-        ) { [weak self] logoutSuccessful in
-            if logoutSuccessful {
-                Task { [weak self] in
-                    AnalyticsHelperV2.shared.triggerSignoutAnalytics()
-                    
-                    self?.logoutButton.isHidden = true
-                    self?.providerImageView.isHidden = true  // ← sync state
-                    await AppDelegate.shared.logoutUser()
-                }
-            }
-        }
-    }
+    @objc private func logoutTapped() {}
     
     // MARK: - UITableViewDataSource
     
@@ -295,17 +232,17 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         switch asset.playbackType {
         case .url(let url):
             print("Play using URL: \(url)")
-            launchVideoPlayer(url: url, isExternal: asset.isExternal ?? false, streamConfig: VLPlayer.StreamConfig(isLive: asset.isLive, isDVR: asset.isDVR), channelId: asset.channelId ?? [])
+            launchVideoPlayer(url: url, isExternal: asset.isExternal ?? false, streamConfig: VLPlayer.StreamConfig(isLive: asset.isLive, isDVR: asset.isDVR), channelId: asset.channelId ?? [], staticContentId: asset.staticContentId, configureSeekTo: asset.configureSeekTo)
         case .videoId(let id):
             print("Play using videoId: \(id)")
             launchVideoPlayer(
                 videoId: id,
                 isExternal: asset.isExternal ?? false,
-                channelId: asset.channelId ?? [])
+                channelId: asset.channelId ?? [], staticContentId: asset.staticContentId, configureSeekTo: asset.configureSeekTo)
         }
     }
     
-    private func launchVideoPlayer(videoId: String? = nil, url: String? = nil, isExternal: Bool = false, streamConfig: VLPlayer.StreamConfig? = nil, channelId: [String]) {
+    private func launchVideoPlayer(videoId: String? = nil, url: String? = nil, isExternal: Bool = false, streamConfig: VLPlayer.StreamConfig? = nil, channelId: [String], staticContentId: String? = nil, configureSeekTo: Bool? = nil) {
         guard (videoId != nil && !videoId!.isEmpty) || (url != nil && !url!.isEmpty) else {return}
             
         var drmConfig: VLPlayer.DRMConfig?
@@ -319,7 +256,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                     case .success(let data):
                         self?.entitlementData = data
                         DispatchQueue.main.async {
-                            self?.loadVideoPlayer(videoId: videoId, channelId: channelId)
+                            self?.loadVideoPlayer(videoId: videoId, channelId: channelId, configureSeekTo: configureSeekTo)
                         }
                     case .failure(let error):
                         DispatchQueue.main.async {
@@ -330,7 +267,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                     
                 }
             }else{
-                self.loadVideoPlayer(videoId: videoId, channelId: channelId)
+                self.loadVideoPlayer(videoId: videoId, channelId: channelId, configureSeekTo: configureSeekTo)
             }
         }else{
             if isExternal {
@@ -358,7 +295,9 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                 url: url,
                 drmConfig: drmConfig,
                 streamConfig: streamConfig,
-                channelId: channelId
+                channelId: channelId,
+                staticContentId: staticContentId,
+                configureSeekTo: configureSeekTo
             )
             
             
@@ -374,7 +313,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         self.present(alertController, animated: true, completion: nil)
     }
     
-    private func loadVideoPlayer(videoId: String? = nil, url: String? = nil, drmConfig: VLPlayer.DRMConfig? = nil, streamConfig: VLPlayer.StreamConfig? = nil, channelId: [String]) {
+    private func loadVideoPlayer(videoId: String? = nil, url: String? = nil, drmConfig: VLPlayer.DRMConfig? = nil, streamConfig: VLPlayer.StreamConfig? = nil, channelId: [String], staticContentId: String? = nil, configureSeekTo: Bool? = nil) {
         let showCustomControls = configurableHeaderView?.getConfigurableItemSelection(type: .showCustomControls) ?? false
         let autoplayEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .autoPlay) ?? true
         let loopEnabled = configurableHeaderView?.getConfigurableItemSelection(type: .loopPlay) ?? false
@@ -387,7 +326,8 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         videoPlaybackController.entitlementData = self.entitlementData
         videoPlaybackController.streamConfig = streamConfig
         videoPlaybackController.drmConfig = drmConfig
-        videoPlaybackController.channelId = channelId
+        videoPlaybackController.staticContentId = staticContentId //Necessary for ASAT URL only
+        videoPlaybackController.configureSeekTo = configureSeekTo
         //        videoPlaybackController.view.frame = self.view.bounds
         videoPlaybackController.prepareView(withPlayerUIOption: videoId == nil ? .playStreamURL : .defaultControl, videoList: videoList)
         videoPlaybackController.enableCustomPlayerUI = showCustomControls

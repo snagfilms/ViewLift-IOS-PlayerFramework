@@ -8,7 +8,6 @@
 
 import VLPlayerLib
 import Foundation
-import VLAnalyticsLib
 
 /// Extension to handle server-side ad tracking callbacks for the video player.
 /// These methods are triggered automatically by `VLPlayerLib` during ad playback events.
@@ -75,18 +74,18 @@ extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
     
     func updateAdPlayback(model: VLPlayerLib.AdModel) {
         debugPrint(model.progress)
-        if let ad = model.currentAd, let adId = ad.adId, let analyticsAdInfo = model.analyticsAdInfo {
-           self.currentAdAssetInfo = VLAdAssetInfo(
-                    adId: analyticsAdInfo.adId,
-                    adName: analyticsAdInfo.adName,
-                    podName: analyticsAdInfo.podName,
-                    podLength: analyticsAdInfo.podLength,
-                    podPosition: analyticsAdInfo.podPosition,
-                    podOffset: analyticsAdInfo.podOffset, startTime: analyticsAdInfo.startTime, adSystem: analyticsAdInfo.adSystem
-                )
-            
-//            AnalyticsHelper.shared.setAdsAssets(adInfo: self.currentAdAssetInfo)
-        }
+//        if let ad = model.currentAd, let adId = ad.adId, let analyticsAdInfo = model.analyticsAdInfo {
+//           self.currentAdAssetInfo = VLAdAssetInfo(
+//                    adId: analyticsAdInfo.adId,
+//                    adName: analyticsAdInfo.adName,
+//                    podName: analyticsAdInfo.podName,
+//                    podLength: analyticsAdInfo.podLength,
+//                    podPosition: analyticsAdInfo.podPosition,
+//                    podOffset: analyticsAdInfo.podOffset, startTime: analyticsAdInfo.startTime, adSystem: analyticsAdInfo.adSystem
+//                )
+//            
+////            AnalyticsHelper.shared.setAdsAssets(adInfo: self.currentAdAssetInfo)
+//        }
     }
     
     
