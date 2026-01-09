@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2.3 effective-5.10 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
 // swift-module-flags: -target x86_64-apple-tvos14.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name VLPlayerLib
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.3
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
 import AVFoundation
 import AVKit
 import AdSupport
@@ -36,9 +36,7 @@ public struct ValidatedPlayerResponse {
 }
 public struct PlayerResponseValidation {
   public init()
-  #if compiler(>=5.3) && $NonescapableTypes
   public func validateResponse(fetchedSuccessfully isSuccess: Swift.Bool, contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?, isUserLoggedIn: Swift.Bool?, creationHandler: (() -> Swift.Void)? = nil) -> VLPlayerLib.ValidatedPlayerResponse
-  #endif
 }
 public enum Quartile {
   case tracking
@@ -71,9 +69,7 @@ public class AnalyticsAdInfo {
   public var startTime: Swift.Double?
   public var adSystem: Swift.String?
   public var creativeParameters: VLPlayerLib.CreativeParameters?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(adId: Swift.String, adName: Swift.String, podName: Swift.String? = nil, podLength: Swift.Double? = nil, podPosition: Swift.Int? = nil, podOffset: Swift.Double? = nil, startTime: Swift.Double? = nil, adSystem: Swift.String? = nil, creativeParameters: VLPlayerLib.CreativeParameters? = nil)
-  #endif
   @objc deinit
 }
 public class SSAIAnalyticsTracker {
@@ -83,13 +79,9 @@ public class SSAIAnalyticsTracker {
   }
   public var adsAnalyticsTrackingDelegate: (any VLPlayerLib.AdsAnalyticsTrackingDelegate)?
   weak public var playHeadAnalyticsTrackingDelegate: (any VLPlayerLib.PlayheadTrackerDelegate)?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(adsAnalyticsTrackingDelegate: (any VLPlayerLib.AdsAnalyticsTrackingDelegate)? = nil, playHeadAnalyticsTrackingDelegate: (any VLPlayerLib.PlayheadTrackerDelegate)? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @discardableResult
   public func recordEvent(currentTime: Swift.Double, totalDuration: Swift.Double, quartile: VLPlayerLib.Quartile, analyticsTrackingType: [VLPlayerLib.AnalyticsTrackingType], trackingEvents: [VLPlayerLib.TrackingEvent], videoView: UIKit.UIView, playerVolume: CoreFoundation.CGFloat, adVerifcations: [VLPlayerLib.AdVerification]? = nil, adInfo: VLPlayerLib.AnalyticsAdInfo? = nil, playerVideoAnalyticsTrackDelegate: (any VLPlayerLib.PlayerVideoAnalyticsTrackDelegate)? = nil, serverSideAdTrackingDelegate: (any VLPlayerLib.ServerSideAdTrackingDelegate)? = nil, disableAdTrackingForBeacon: Swift.Bool = false) -> VLPlayerLib.Quartile
-  #endif
   public func triggerAnalyticsEvent(eventType: VLPlayerLib.VLPlayer.AdsEventType, adObject: VLPlayerLib.SSAIAvailableAd, analyticsTrackingType: [VLPlayerLib.AnalyticsTrackingType], playerVolume: CoreFoundation.CGFloat, disableAdTracking: Swift.Bool = false)
   public func triggerBeaconAnalyticsEvent(eventType: VLPlayerLib.VLPlayer.AdsEventType, adObject: VLPlayerLib.SSAIAvailableAd, disableAdTrackingForBeacon: Swift.Bool)
   @objc deinit
@@ -101,39 +93,27 @@ open class StreamSwitchHandler {
 public class Subtitles {
   public init(file filePath: Foundation.URL, encoding: Swift.String.Encoding = String.Encoding.utf8)
   public init(subtitles string: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func searchSubtitles(at time: Foundation.TimeInterval) -> Swift.String?
-  #endif
   @objc deinit
 }
 extension AVFoundation.AVPlayer {
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var subtitleLabel: UIKit.UILabel? {
     get
     set(value)
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var backgroundColor: UIKit.UIColor? {
     get
     set(value)
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var textColor: UIKit.UIColor? {
     get
     set(value)
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public var textFont: UIKit.UIFont? {
     get
     set(value)
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public func addSubtitles(parentView: UIKit.UIView, textColor: Swift.String?, isFullScreen: Swift.Bool) -> Self
-  #endif
   @_Concurrency.MainActor @preconcurrency public func getSubTitleInstance() -> Self
   @_Concurrency.MainActor @preconcurrency public func updateSubtitlesFont()
   @_Concurrency.MainActor @preconcurrency public func updateSubTitleConstraints(parentView: UIKit.UIView, isFullScreen: Swift.Bool)
@@ -205,9 +185,7 @@ public struct VideoPlanFeatureSetting : Swift.Codable {
   open var errorCode: Swift.String?
   open var errorMessage: Swift.String?
   open var vl_errorCode: Swift.String?
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(errorCode: Swift.String?, errorMessage: Swift.String?)
-  #endif
   @objc override dynamic open var description: Swift.String {
     @objc get
   }
@@ -218,9 +196,7 @@ public enum NetworkConnectionStatus : Swift.String {
   case poor
   case good
   case disConnected
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
-  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -230,9 +206,7 @@ public enum NetworkBandwidthUnit : Swift.String {
   case mbps
   case kbps
   case bps
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
-  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -245,47 +219,25 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func customPlayerState(isPlaying: Swift.Bool)
   @objc optional func manageClosedCaptionButton(isHidden: Swift.Bool)
   @objc optional func customPlayerControls(isHidden: Swift.Bool)
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func playerRateChanged(rate: Swift.Float, playerTag: Swift.String?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func videoStarted(timestamp: Swift.Double, playerTag: Swift.String, metaDataInfo: [Swift.String : Any]?)
-  #endif
   @objc optional func videoFinished(playerTag: Swift.String)
   @objc optional func videoPause(timestamp: Swift.Double, playerTag: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func videoResume(timestamp: Swift.Double, playerTag: Swift.String, metaDataInfo: [Swift.String : Any]?)
-  #endif
   @objc optional func videoPlayerUpdateByProgressInterveral(currentTime: Swift.Double, totalTime: Swift.Double, playerTag: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func videoPlayerProgressByEverySecond(currentTime: Swift.Double, totalTime: Swift.Double, playerTag: Swift.String, parsedTimeStamp: Swift.String?)
-  #endif
   @objc optional func videoPlaybackError(currentTime: Swift.Double, errorMessage: Swift.String, errorCode: Swift.String, playerTag: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func adStarted(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String, player: AVFoundation.AVPlayer, metaDataInfo: [Swift.String : Any]?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func adResumed(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func adStopped(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func adPaused(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func adFinished(currentTime: Swift.Double, adTag: Swift.String?, playerTag: Swift.String)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func adError(currentTime: Swift.Double, adTag: Swift.String?, errorMessage: Swift.String?, playerTag: Swift.String)
-  #endif
   @objc optional func onFullScreenChange(currentTime: Swift.Double, isFullScreen: Swift.Bool, playerTag: Swift.String)
   @objc optional func onBackButtonTapped()
   @objc optional func onSeek(currentTime: Swift.Double, playerTag: Swift.String)
   @objc optional func onBuffer(currentTime: Swift.Double, playerTag: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func videoFetchError(error: VLPlayerLib.VLError?, playerTag: Swift.String?, contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?)
-  #endif
   @objc optional func pictureInPictureSetupCompleted(isPIPSelected: Swift.Bool)
   @objc optional func pictureInPictureWillStart()
   @objc optional func pictureInPictureDidStart()
@@ -304,20 +256,14 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func showContentInfo()
   @objc optional func videoCurrentPlayhead(playHead: Swift.Double)
   @objc optional func autoPlayUIDismissed(isPlayingNextContent: Swift.Bool)
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc optional func autoPlayMetadataProvider(streamId: Swift.String) -> VLPlayerLib.VLPlayer.StreamMetadata?
-  #endif
   @objc optional func avPlayerControllerInstance(_ avPlayerControllerInstance: AVKit.AVPlayerViewController)
 }
 public protocol ServerSideAdTrackingDelegate : AnyObject {
   func serverSideAdTrackingEvents(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType, eventTrackingProperties: [Swift.String : Any])
-  #if compiler(>=5.3) && $NonescapableTypes
   func adCuePoints(adModel: VLPlayerLib.SSAIAdsModel?, duration: Foundation.TimeInterval)
-  #endif
   func totalAdsDuration(_ duration: Swift.Double)
-  #if compiler(>=5.3) && $NonescapableTypes
   func adDidStart(currentPod: VLPlayerLib.SSAIAvailableAds?)
-  #endif
   func updateAdPlayback(model: VLPlayerLib.AdModel)
   func adDidFinish()
   func adPlayPause(isPlaying: Swift.Bool)
@@ -328,9 +274,7 @@ public protocol AdsAnalyticsTrackingDelegate : AnyObject {
   func triggerAdEvent(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType, eventTrackingProperties: [Swift.String : Any])
 }
 public protocol AdManagerDelegate : AnyObject {
-  #if compiler(>=5.3) && $NonescapableTypes
   func setCuePointsFromPlayer(adModel: VLPlayerLib.SSAIAdsModel?, duration: Foundation.TimeInterval)
-  #endif
   func removeCuePoints()
 }
 extension VLPlayerLib.VLPlayer {
@@ -399,9 +343,7 @@ public struct Tags {
   public var videoID: Swift.String?
   public var videoSources: Swift.Array<VLPlayerLib.VideoSource>?
   public var secondaryVideoSources: Swift.Array<VLPlayerLib.VideoSource>?
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init(videoID: Swift.String, videoTitle: Swift.String, siteID: Swift.String, siteName: Swift.String, seriesTitle: Swift.String? = nil)
-  #endif
   @objc override dynamic public init()
   @objc deinit
 }
@@ -429,9 +371,7 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func goFullScreen(_ isFullScreen: Swift.Bool)
   @objc dynamic open func removeFullScreen()
   @objc dynamic open func seekTo(seconds: Swift.Double)
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic open func seekTo(seconds: Swift.Double, completion: (() -> Swift.Void)? = nil)
-  #endif
   @objc dynamic open func getCurrentPlaybackTime() -> Swift.Double
   @objc dynamic open func getChapterEndTime(currentTime: Swift.Double) -> Swift.Double
   @objc dynamic open func getChapterStartTime(currentTime: Swift.Double) -> Swift.Double
@@ -440,76 +380,38 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func setEndTimeDuration(from duration: Swift.Double)
   @objc dynamic open func seekDVRToLivePosition()
   @objc dynamic open func startTime(seconds: Swift.Double)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getCurrentTime() -> Swift.Double?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getAVAssetsItemLength() -> Swift.Double?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic open func getSource() -> Swift.Dictionary<Swift.String, Swift.String>?
-  #endif
   @objc dynamic open func setIconColor(color: Swift.String)
   @objc dynamic open func setTextColor(color: Swift.String)
   @objc dynamic open func setProgressBarBGColor(color: Swift.String)
   @objc dynamic open func setProgressBarColor(color: Swift.String)
   @objc dynamic open func shouldAutoplay(autoplay: Swift.Bool)
   @objc dynamic open func checkFullscreenState() -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic open func getVideoPlayerView() -> UIKit.UIView?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getPlayerDVRWindow() -> Foundation.TimeInterval?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic open func setNextVideo(videoId: Swift.String, adTag: Swift.String?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic open func playNextVideo(videoId: Swift.String?, vlToken: Swift.String?, adTag: Swift.String?, isSuccess: @escaping (_ isSuccess: Swift.Bool) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func isAutoPlay() -> Swift.Bool?
-  #endif
   @objc dynamic open func shouldPlayMuted(isMuted: Swift.Bool)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func isMuted() -> Swift.Bool?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getVolumeLevel() -> Swift.Int?
-  #endif
   @objc dynamic open func resetTimer()
   public func getState() -> VLPlayerLib.VLPlayer.VLPlayerState
-  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic open func getPlayerVersion() -> Swift.String?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getCurrentVideoTimeLeft() -> Swift.Double?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getCurrentVideoDuration() -> Swift.Double?
-  #endif
   @objc dynamic open func updateVideoPlayerFrame(frame: CoreFoundation.CGRect)
   @objc dynamic open func updateCaption(selectedIndex: Swift.Int, selectedKey: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getStartOverTime() -> Swift.Double?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func isDVREnabled() -> Swift.Bool?
-  #endif
   public func isLiveVideo() -> Swift.Bool
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getAllVideoPlaybackQualityList() -> [Swift.String]?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getCurrentPlaybackQuality() -> Swift.String?
-  #endif
   public func setPlaybackQuality(playbackQuality: Swift.String)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getAllClosedCaptionList() -> [Swift.String]?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getAllContentAudioLanguageList() -> [Swift.String]?
-  #endif
   public func setPlaybackRate(playbackSpeed: Swift.Float)
   public func getPlaybackRate() -> Swift.Float
   public func getCurrentAudioSelected() -> Swift.Int
@@ -523,14 +425,10 @@ extension VLPlayerLib.VLPlayer {
   public func setPlayerControls(isHidden: Swift.Bool)
   public func removePlayerOnly()
   @objc dynamic open func shouldPlayVideo(initially: Swift.Bool)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func updateEPG(programData: VLPlayerLib.EPGSupportModel?)
-  #endif
   @objc dynamic open func sliderEndedTracking(newSeekValue: Swift.Double)
   @objc dynamic open func sliderBeganTracking(newSeekValue: Swift.Double)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func updateVideoPlaybackOption(isFromBeginning: Swift.Bool? = nil, shouldResumePlayBack: Swift.Bool? = nil, startTime: Swift.Double? = nil, resumeTime: Swift.Double? = nil)
-  #endif
   public func setControlsVisibility(type: VLPlayerLib.VLPlayer.ControlsVisibility)
 }
 extension VLPlayerLib.VLPlayer {
@@ -545,19 +443,13 @@ extension VLPlayerLib.VLPlayer {
     case custom(view: UIKit.UIView)
   }
   public struct PayWallThemeConfiguration {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(style: VLPlayerLib.VLPlayer.PayWallStyle?, textContent: VLPlayerLib.VLPlayer.PayWallTextContent?)
-    #endif
   }
   public struct PayWallStyle {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(errorMessageTextColor: UIKit.UIColor?, buttonTextColor: UIKit.UIColor?, buttonBackgroundColor: UIKit.UIColor?, backgroundColor: UIKit.UIColor?)
-    #endif
   }
   public struct PayWallTextContent {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(errorMessage: Swift.String?, buttontext: Swift.String?)
-    #endif
   }
 }
 extension VLPlayerLib.VLPlayer {
@@ -604,9 +496,7 @@ public struct TVEProviderInfo {
   public let tveProvider: Swift.String?
   public let mvpdProvider: Swift.String?
   public let logo: VLPlayerLib.TVEProviderInfo.LogoType?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(householdID: Swift.String? = nil, tveProvider: Swift.String? = nil, mvpdProvider: Swift.String? = nil, logo: VLPlayerLib.TVEProviderInfo.LogoType? = nil)
-  #endif
 }
 public struct VLPlayerResponse : Swift.Decodable {
   public let id: Swift.String?
@@ -627,21 +517,13 @@ extension VLPlayerLib.VLPlayerResponse {
       case categories, tags, parentalRating, pricing, monetizationModels, plans, airDateTime, seasonAirDateTime, drmEnabled, seriesId, seasonId, contentDetails, liveDetails, closedCaptions, mediaType
       case generalInfo
       case playbackInfo
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.String)
-      #endif
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(stringValue: Swift.String)
-      #endif
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(intValue: Swift.Int)
-      #endif
       public typealias RawValue = Swift.String
-      #if compiler(>=5.3) && $NonescapableTypes
       public var intValue: Swift.Int? {
         get
       }
-      #endif
       public var rawValue: Swift.String {
         get
       }
@@ -770,21 +652,13 @@ extension VLPlayerLib.VLPlayerResponse.ContentInfo.PlaybackInfo {
       case hls
       case fairPlay
       case fairPlayCmaf
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.String)
-      #endif
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(stringValue: Swift.String)
-      #endif
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(intValue: Swift.Int)
-      #endif
       public typealias RawValue = Swift.String
-      #if compiler(>=5.3) && $NonescapableTypes
       public var intValue: Swift.Int? {
         get
       }
-      #endif
       public var rawValue: Swift.String {
         get
       }
@@ -825,9 +699,7 @@ public struct AdTagDetail : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @objc @_inheritsConvenienceInitializers public class DataParser : ObjectiveC.NSObject {
-  #if compiler(>=5.3) && $NonescapableTypes
   public func parseContent(channelID: Swift.String? = nil, contentDictionary: Swift.Dictionary<Swift.String, Swift.AnyObject>) -> VLPlayerLib.PlayerObject
-  #endif
   @objc override dynamic public init()
   @objc deinit
 }
@@ -848,9 +720,7 @@ public class VLTVProviderInfoAnalytics : Swift.Codable {
   public var videoMvpd: Swift.String?
   public var requestorId: Swift.String?
   public var tveID: Swift.String?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(tvProviderName: Swift.String? = nil, videoMvpd: Swift.String? = nil, requestorId: Swift.String? = nil, tveID: Swift.String? = nil)
-  #endif
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
   required public init(from decoder: any Swift.Decoder) throws
@@ -859,9 +729,7 @@ extension VLPlayerLib.VLTVProviderInfoAnalytics {
   public var asDictionary: [Swift.String : Any] {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init?(from dict: [Swift.String : Any])
-  #endif
 }
 extension VLPlayerLib.VLTVProviderInfoAnalytics {
   public var isValid: Swift.Bool {
@@ -876,12 +744,8 @@ public class AnalyticsPlayerInfo {
   public var playerTech: Swift.String?
   public var playerName: Swift.String?
   public var publisher: Swift.String?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(playerVersion: Swift.String, playerName: Swift.String?, playerTech: Swift.String?, publisher: Swift.String? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init?(from dictionary: [Swift.String : Any])
-  #endif
   @objc deinit
 }
 extension VLPlayerLib.AnalyticsPlayerInfo {
@@ -899,9 +763,7 @@ final public class VLPlayerAnalyticsModel {
     case isDVREnabled
     case streamType
     case daiStream
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
@@ -928,32 +790,16 @@ final public class VLPlayerAnalyticsModel {
   final public var screenResolution: Swift.String? {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(propertyChangeCallback: VLPlayerLib.VLPlayerAnalyticsModel.PropertyChangeCallback? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(encodedFrameRate: Swift.Int? = nil, encoding: Swift.String? = nil, screenResolution: Swift.String? = nil, streamType: Swift.String? = nil, daiStream: Swift.String? = "NO", duration: Swift.Double? = -1, isDVREnabled: Swift.Bool? = false, propertyChangeCallback: VLPlayerLib.VLPlayerAnalyticsModel.PropertyChangeCallback? = nil)
-  #endif
   final public func setPropertyChangeCallback(_ callback: @escaping VLPlayerLib.VLPlayerAnalyticsModel.PropertyChangeCallback)
   final public func setEncodedFrameRate(_ value: Swift.Int)
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setEncoding(_ value: Swift.String?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setDuration(_ value: Swift.Double?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setStreamType(_ value: Swift.String?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setDAIStream(_ value: Swift.String?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setIsDVREnabled(_ value: Swift.Bool?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func setScreenResolution(_ value: Swift.String?)
-  #endif
   final public var asDictionary: [Swift.String : Any] {
     get
   }
@@ -972,9 +818,7 @@ public enum MediaType : Swift.String {
   case audio
   case fast
   case unknown
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
-  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -986,18 +830,14 @@ public enum userSubscriptionType : Swift.String {
   case prepaid
   case tve
   case unknown
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
-  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
 }
 public struct AnalyticsModel {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(contentID: Swift.String? = nil, contentTitle: Swift.String? = nil, episodeNumber: Swift.String? = nil, seasonNumber: Swift.String? = nil, seriesTitle: Swift.String? = nil, seriesID: Swift.String? = nil, fastChannelID: Swift.String? = nil, fastProgramID: Swift.String? = nil, playlistID: Swift.String? = nil, playlistName: Swift.String? = nil, mediaType: Swift.String? = nil, isDVREnabled: Swift.Bool? = nil, isDRMProtected: Swift.Bool? = nil, DRMLicenseToken: Swift.String? = nil, DRMLicenseURL: Swift.String? = nil, epgCategory: Swift.String? = nil, epgChannelTitle: Swift.String? = nil, epgChannelID: Swift.String? = nil, epgProgramTitle: Swift.String? = nil, contentGerne: Swift.String? = nil, contentGernes: [Swift.String]? = nil, contentCategory: Swift.String? = nil, contentURL: Swift.String? = nil, contentDuration: Swift.Double? = nil, contentImageURL: Swift.String? = nil, contentYear: Swift.String? = nil, contentPath: Swift.String? = nil, mediaPlaySource: Swift.String? = nil, isContentFree: Swift.Bool? = nil, singerName: Swift.String? = nil, actorName: Swift.String? = nil, directorName: Swift.String? = nil, musicDirectorName: Swift.String? = nil, userID: Swift.String? = nil, userSubscriptionType: Swift.String? = nil, d2cType: VLPlayerLib.userSubscriptionType? = nil, applicationVersion: Swift.String? = nil, applicationBrand: Swift.String? = nil, assetProvider: Swift.String? = nil, networkType: Swift.String? = nil, bitrate: Swift.Double? = nil, frameRate: Swift.Double? = nil, subtitles: [Swift.String]? = nil, affiliate: Swift.String? = nil, encodingProfiles: [Swift.String]? = nil, DAIStreamURL: Swift.String? = nil, utmSource: Swift.String? = nil)
-  #endif
 }
 public struct SSAIBeaconTracking {
   public func triggerAnalytics(eventType: VLPlayerLib.VLPlayer.AdsEventType, beaconUrls: [Swift.String], disableAdTrackingForBeacon: Swift.Bool)
@@ -1007,26 +847,20 @@ public struct SSAIBeaconTracking {
   weak open var videoPlayerDatasource: (any VLPlayerLib.VideoPlayerDataSource)?
   @objc weak open var videoPlayerDelegate: (any VLPlayerLib.VideoPlaybackDelegate)?
   weak open var playerVideoAnalyticsDelegate: (any VLPlayerLib.PlayerVideoAnalyticsTrackDelegate)?
-  #if compiler(>=5.3) && $NonescapableTypes
   weak open var serverSideAdTrackingDelegate: (any VLPlayerLib.ServerSideAdTrackingDelegate)? {
     get
     set
   }
-  #endif
   public var debugLogs: Swift.Bool? {
     get
     set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public var audioAsset: VLPlayerLib.AudioAssets? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var getPlayerInstance: AVFoundation.AVPlayer? {
     get
   }
-  #endif
   open var enablePlayerBitrateLogs: Swift.Bool?
   open var isBitMovinPlayer: Swift.Bool?
   public var payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration?
@@ -1066,9 +900,7 @@ public struct SSAIBeaconTracking {
     case fullScreen
     case smallScreen
     public static func setUrl(_ urlString: Swift.String)
-    #if compiler(>=5.3) && $NonescapableTypes
     public static func getUrl() -> Swift.String?
-    #endif
     public static func == (a: VLPlayerLib.VLPlayer.LeaderboardPlayerControls, b: VLPlayerLib.VLPlayer.LeaderboardPlayerControls) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -1081,9 +913,7 @@ public struct SSAIBeaconTracking {
     case averageAboveResolution
     case averageBelowResolution
     case minResolution
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Float)
-    #endif
     public typealias RawValue = Swift.Float
     public var rawValue: Swift.Float {
       get
@@ -1124,19 +954,13 @@ public struct SSAIBeaconTracking {
     case directStream(VLPlayerLib.VLPlayer.DirectStreamPlaybackConfig)
   }
   public struct ContentPlaybackConfig {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(videoId: Swift.String, token: Swift.String, apiBaseURL: Swift.String, beaconBaseURL: Swift.String? = nil, adobeTempPassPayload: Swift.String? = nil)
-    #endif
   }
   public struct DirectStreamPlaybackConfig {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(stream: VLPlayerLib.VLPlayer.DirectStreamType, token: Swift.String? = nil, apiBaseURL: Swift.String? = nil, beaconBaseURL: Swift.String? = nil, mediaMetaDataInfo: VLPlayerLib.VLPlayer.MediaMetaDataInfo? = nil)
-    #endif
   }
   public struct DirectStreamType {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(url: Swift.String, staticContentId: Swift.String? = nil, streamConfig: VLPlayerLib.VLPlayer.StreamConfig? = nil, drmconfig: VLPlayerLib.VLPlayer.DRMConfig? = nil, mediaMetaDataInfo: VLPlayerLib.VLPlayer.MediaMetaDataInfo? = nil)
-    #endif
   }
   public struct MediaMetaDataInfo {
     public init(subtitleConfiguration: VLPlayerLib.SubtitleConfiguration)
@@ -1149,27 +973,21 @@ public struct SSAIBeaconTracking {
     @objc final public let isLive: Swift.Bool
     @objc final public let isDVR: Swift.Bool
     @objc final public let isSSAIEnabled: Swift.Bool
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(isLive: Swift.Bool? = nil, isDVR: Swift.Bool? = nil, isSSAIEnabled: Swift.Bool? = nil)
-    #endif
     @objc deinit
   }
   @objc @objcMembers public class StreamMetadata : ObjectiveC.NSObject {
     @objc final public let streamConfig: VLPlayerLib.VLPlayer.StreamConfig?
     @objc final public let drmconfig: VLPlayerLib.VLPlayer.DRMConfig?
     @objc final public let contentData: VLPlayerLib.VLPlayer.ContentData?
-    #if compiler(>=5.3) && $NonescapableTypes
     @objc public init(streamConfig: VLPlayerLib.VLPlayer.StreamConfig?, drmconfig: VLPlayerLib.VLPlayer.DRMConfig?, contentData: VLPlayerLib.VLPlayer.ContentData?)
-    #endif
     @objc deinit
   }
   @objc @objcMembers public class ContentData : ObjectiveC.NSObject {
     @objc final public let contentTitle: Swift.String?
     @objc final public let contentDescription: Swift.String?
     @objc final public let thumbnail: Swift.String?
-    #if compiler(>=5.3) && $NonescapableTypes
     @objc public init(contentTitle: Swift.String?, contentDescription: Swift.String?, thumbnail: Swift.String?)
-    #endif
     @objc deinit
   }
   public struct EntitlementData {
@@ -1178,18 +996,14 @@ public struct SSAIBeaconTracking {
     public let error: VLPlayerLib.VLError?
     public let playerResponse: VLPlayerLib.VLPlayerResponse?
     public let contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(playerObject: VLPlayerLib.PlayerObject?, isSuccess: Swift.Bool?, error: VLPlayerLib.VLError?, playerResponse: VLPlayerLib.VLPlayerResponse?, contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?)
-    #endif
   }
   public enum TVEErrorCode : Swift.String {
     case cantAccessTVEContent
     case svodTVESubscriptionNotFound
     case tveNoUserInfo
     case tveSubscriptionNotFound
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
@@ -1198,47 +1012,25 @@ public struct SSAIBeaconTracking {
   public func checkClosedCaption() -> Swift.Bool
   convenience public init(playerType: VLPlayerLib.VLPlayerType)
   public func setAnalyticsInfo(mediaAnalyticsInfo: VLPlayerLib.MediaAnalyticsInfo)
-  #if compiler(>=5.3) && $NonescapableTypes
   public func setEntitlement(data: VLPlayerLib.VLPlayer.EntitlementData?, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, epgProgram: VLPlayerLib.VLEPGProgramDetails? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func refreshEntitlement(data: VLPlayerLib.VLPlayer.EntitlementData?, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   open func setSourceToPlay(isASATPlayer: Swift.Bool = false, staticContentId: Swift.String? = nil, streamURL: Swift.String, vlToken: Swift.String?, vlAPIEndPoint: Swift.String?, vlBeaconEndPoint: Swift.String? = nil, customControlsView: UIKit.UIView? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, analyticsAdditionalData: [Swift.String : Any]? = nil, adUrl: Swift.String? = nil, vlPlayerTag: Swift.String, streamConfig: VLPlayerLib.VLPlayer.StreamConfig? = nil, drmConfig: VLPlayerLib.VLPlayer.DRMConfig? = nil, tveProviderInfo: VLPlayerLib.TVEProviderInfo? = nil, adsViewConfiguration: VLPlayerLib.AdsViewConfiguration? = nil, closeCaptions: [VLPlayerLib.CloseCaptions]? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   open func setSourceToPlayDirectURL(customControlsView: UIKit.UIView?, playerDisplayType: VLPlayerLib.VLPlayer.PlayerDisplayType, analyticsAdditionalData: [Swift.String : Any]?, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, streamConfig: VLPlayerLib.VLPlayer.StreamConfig?)
-  #endif
   public func createPlayerView()
-  #if compiler(>=5.3) && $NonescapableTypes
   open func setSourceToPlayLocalURL(stringURL: Swift.String, videoId: Swift.String, userID: Swift.String?, customControlsView: UIKit.UIView?, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, playerObject: VLPlayerLib.PlayerObject?, playerDisplayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, deprecated, message: "Deprecated. Use setSource(type:customControlsView:playerFeaturesSupported:isSuccess:) or setSource(type:apiConfigEndPoint:vlPlayerTag:customControlsView:...isSuccess:) instead.")
   open func setSource(vlToken: Swift.String, vlAPIEndPoint: Swift.String, apiConfigEndPoint: Swift.String? = nil, vlBeaconEndPoint: Swift.String? = nil, videoID: Swift.String, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView? = nil, adUrl: Swift.String? = nil, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, easeLiveEnabled: Swift.Bool = false, location: (lat: Swift.String, long: Swift.String)? = nil, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, nearestServerPlayerBaseURL: Swift.String? = nil, captureWatchHistoryEvent: Swift.Bool = false, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, muxEnvironmentKey: Swift.String? = nil, tveProviderInfo: VLPlayerLib.TVEProviderInfo?, adsViewConfiguration: VLPlayerLib.AdsViewConfiguration? = nil, adobePlayerTempPass: Swift.String? = nil, shouldSwitchStream: Swift.Bool? = true, deviceModel: Swift.String? = nil, goToTime: Swift.Double? = nil, resumeTime: Swift.Double? = nil, startFromBeginning: Swift.Bool = false, userConsent: Swift.Bool = true, analyticsModel: VLPlayerLib.AnalyticsModel? = nil, genericMessages: [Swift.String : Swift.String] = [:], isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   open func setSource(type: VLPlayerLib.VLPlayer.PlaybackSourceType, customControlsView: UIKit.UIView? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported, vlPlayerTag: Swift.String = "1", isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   open func setSource(type: VLPlayerLib.VLPlayer.PlaybackSourceType, apiConfigEndPoint: Swift.String? = nil, vlPlayerTag: Swift.String, customControlsView: UIKit.UIView? = nil, adUrl: Swift.String? = nil, playerProgressInterval: Swift.Int? = nil, images: (leftImage: UIKit.UIImage, rightImage: UIKit.UIImage?)? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, displayType: VLPlayerLib.VLPlayer.PlayerDisplayType? = nil, easeLiveEnabled: Swift.Bool = false, location: (lat: Swift.String, long: Swift.String)? = nil, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil, nearestServerPlayerBaseURL: Swift.String? = nil, captureWatchHistoryEvent: Swift.Bool = false, isBitMovinPlayer: Swift.Bool? = false, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, muxEnvironmentKey: Swift.String? = nil, isCustomAdViewEnabled: Swift.Bool? = false, tveProviderInfo: VLPlayerLib.TVEProviderInfo? = nil, adsConfiguration: VLPlayerLib.AdsViewConfiguration? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getTrickPlayData(_ value: Swift.Double) -> (image: UIKit.UIImage?, time: Swift.String?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public func getTrickPlayData(for value: Swift.Double) async -> (image: UIKit.UIImage?, time: Swift.String?)
-  #endif
   open func getStartFromBeginningValue() -> Swift.Bool
   @objc override dynamic public init()
   @objc deinit
 }
 extension VLPlayerLib.VLPlayer {
   public struct VLPlayerFeatureSupported {
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, showPlayerControlAlways: Swift.Bool = false, playAudioOnly: Swift.Bool? = false, epgSupportModel: VLPlayerLib.EPGSupportModel? = nil, tapToPause: Swift.Bool? = nil, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, easeLiveEnabled: Swift.Bool = false, hideAdsView: Swift.Bool = false, playerResponseRequired: Swift.Bool = false, preGameStartTime: Swift.Double? = nil, vlBeacon: VLBeaconLib.VLBeacon? = nil)
-    #endif
   }
   public struct VLClientSideAdTrackingDetails {
     public init(isClientSideAdTrackingEnabled: Swift.Bool, isWTAEnabled: Swift.Bool)
@@ -1249,9 +1041,7 @@ extension VLPlayerLib.VLPlayer {
     case resizeAspect
     case resizeAspectFill
     case resize
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
@@ -1268,9 +1058,7 @@ extension VLPlayerLib.VLPlayer {
     case stalled
     case stopped
     case none
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
@@ -1302,9 +1090,7 @@ extension VLPlayerLib.VLPlayer {
     case collapse
     case expand
     case none
-    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
-    #endif
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
@@ -1317,25 +1103,19 @@ public struct PlayerControlsColor {
   public var progressBarBGColor: Swift.String?
   public var progressBarColor: Swift.String?
   public var cueIconColor: Swift.String?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(iconColor: Swift.String? = nil, textColor: Swift.String? = nil, progressBarBGColor: Swift.String? = nil, progressBarColor: Swift.String? = nil, cueIconColor: Swift.String? = nil)
-  #endif
 }
 public struct VLBitmovinConfig : Swift.Equatable {
   public struct VLBitmovinLicenseConfig : Swift.Equatable {
     public let playerKey: Swift.String
     public let analyticsKey: Swift.String?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(playerKey: Swift.String, analyticsKey: Swift.String?)
-    #endif
     public static func == (a: VLPlayerLib.VLBitmovinConfig.VLBitmovinLicenseConfig, b: VLPlayerLib.VLBitmovinConfig.VLBitmovinLicenseConfig) -> Swift.Bool
   }
   public let license: VLPlayerLib.VLBitmovinConfig.VLBitmovinLicenseConfig
   public let userId: Swift.String?
   public let castingId: Swift.String?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(license: VLPlayerLib.VLBitmovinConfig.VLBitmovinLicenseConfig, userId: Swift.String?, castingId: Swift.String? = nil)
-  #endif
   public static func == (a: VLPlayerLib.VLBitmovinConfig, b: VLPlayerLib.VLBitmovinConfig) -> Swift.Bool
 }
 public enum VLPlayerType : Swift.Equatable {
@@ -1346,11 +1126,9 @@ public enum VLPlayerType : Swift.Equatable {
 public struct BeaconConfig {
 }
 extension VLPlayerLib.VLPlayer.PlaybackList {
-  #if compiler(>=5.3) && $NonescapableTypes
   public var firstIdentifier: Swift.String? {
     get
   }
-  #endif
   public var isEmpty: Swift.Bool {
     get
   }
@@ -1358,9 +1136,7 @@ extension VLPlayerLib.VLPlayer.PlaybackList {
 public struct SSAIAdsModel : Swift.Decodable {
   public var avails: Swift.Array<VLPlayerLib.SSAIAvailableAds>?
   public var nextToken: Swift.String?
-  #if compiler(>=5.3) && $NonescapableTypes
   public func nextAvailableStartTime(currentTime: Swift.Double) -> Swift.Double?
-  #endif
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct SSAIAvailableAds : Swift.Decodable {
@@ -1377,11 +1153,9 @@ public struct SSAIAvailableAds : Swift.Decodable {
 public struct AdExtension : Swift.Decodable {
   public var content: Swift.String?
   public var type: Swift.String?
-  #if compiler(>=5.3) && $NonescapableTypes
   public var parsedParameters: VLPlayerLib.CreativeParameters? {
     get
   }
-  #endif
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct CreativeParameters {
@@ -1389,36 +1163,24 @@ public struct CreativeParameters {
   public var ssaiCreativeIdValue: Swift.String?
   public var parameters: [Swift.String : Swift.String]
   public var convivaAdInsights: VLPlayerLib.ConvivaAdInsights?
-  #if compiler(>=5.3) && $NonescapableTypes
   public var advertiserName: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var brand: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var industry: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var ccrMeasurement: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var creativeApiFramework: Swift.String? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   public var huluCcr: Swift.String? {
     get
   }
-  #endif
   public func toDictionary() -> [Swift.String : Any]
   public func toNestedDictionary() -> [Swift.String : Any]
 }
@@ -1454,11 +1216,9 @@ public struct SSAIAvailableAd : Swift.Decodable, Swift.Equatable {
   public var trackingEvents: Swift.Array<VLPlayerLib.TrackingEvent>?
   public var adVerifications: Swift.Array<VLPlayerLib.AdVerification>?
   public var extensions: [VLPlayerLib.AdExtension]?
-  #if compiler(>=5.3) && $NonescapableTypes
   public var creativeParameters: VLPlayerLib.CreativeParameters? {
     get
   }
-  #endif
   public init(from decoder: any Swift.Decoder) throws
   public static func == (lhs: VLPlayerLib.SSAIAvailableAd, rhs: VLPlayerLib.SSAIAvailableAd) -> Swift.Bool
 }
@@ -1473,9 +1233,7 @@ public struct AdVerification : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct AdBreakContext {
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(breakIndex: Swift.Int?, contentDuration: Swift.Double?, breakModel: VLPlayerLib.SSAIAvailableAds, currentAdIndex: Swift.Int)
-  #endif
 }
 public func makeAnalyticsAdInfo(from ctx: VLPlayerLib.AdBreakContext) -> VLPlayerLib.AnalyticsAdInfo
 extension UIKit.UIColor {
@@ -1497,9 +1255,7 @@ public class VLAdAssetInfoAnalytics : Swift.Codable {
   public var podOffset: Swift.Double?
   public var startTime: Swift.Double?
   public var creativeParameters: VLPlayerLib.CreativeParameters?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(adId: Swift.String, adName: Swift.String, podName: Swift.String? = nil, podLength: Swift.Double? = nil, podPosition: Swift.Int? = nil, podOffset: Swift.Double? = nil, startTime: Swift.Double? = nil, adSystem: Swift.String? = nil, creativeParameters: VLPlayerLib.CreativeParameters? = nil)
-  #endif
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
   required public init(from decoder: any Swift.Decoder) throws
@@ -1508,9 +1264,7 @@ extension VLPlayerLib.VLAdAssetInfoAnalytics {
   public var asDictionary: [Swift.String : Any] {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init?(from dict: [Swift.String : Any])
-  #endif
 }
 extension VLPlayerLib.VLAdAssetInfoAnalytics {
   public var isValid: Swift.Bool {
@@ -1560,9 +1314,7 @@ public struct AdWindow : Swift.Equatable {
     public let playhead: Swift.Double
     public let ts: Swift.Int64
     public let info: [Swift.String : Swift.String]?
-    #if compiler(>=5.3) && $NonescapableTypes
     public init(type: Swift.String, playhead: Swift.Double, ts: Swift.Int64, info: [Swift.String : Swift.String]? = nil)
-    #endif
   }
   weak final public var delegate: (any VLPlayerLib.PlayheadTrackerDelegate)?
   final public var contentDuration: Swift.Double?
@@ -1581,12 +1333,8 @@ public struct AdWindow : Swift.Equatable {
   final public var state: VLPlayerLib.PlayheadTracker.State {
     get
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(mode: VLPlayerLib.Mode, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails? = nil)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   final public func updateEPgProgramDetails(_ epgProgramDetails: VLPlayerLib.VLEPGProgramDetails?)
-  #endif
   @objc deinit
   final public func setMode(_ newMode: VLPlayerLib.Mode)
   final public func attach(to player: AVFoundation.AVPlayer)
@@ -1608,9 +1356,7 @@ public struct MediaAnalyticsInfo {
   public var contentInfo: VLPlayerLib.VLContentInfoAnalytics?
   public var playerInfo: VLPlayerLib.AnalyticsPlayerInfo
   public var tvProviderInfo: VLPlayerLib.VLTVProviderInfoAnalytics?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(contentInfo: VLPlayerLib.VLContentInfoAnalytics? = nil, playerInfo: VLPlayerLib.AnalyticsPlayerInfo, tvProviderInfo: VLPlayerLib.VLTVProviderInfoAnalytics? = nil)
-  #endif
 }
 public class VLContentInfoAnalytics : Swift.Codable {
   public var id: Swift.String?
@@ -1665,9 +1411,7 @@ public class VLContentInfoAnalytics : Swift.Codable {
   public var videosport: Swift.String?
   public var videoplayerurl: Swift.String?
   public var subTitle: Swift.String?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(id: Swift.String? = nil, title: Swift.String? = nil, seriesId: Swift.String? = nil, seriesTitle: Swift.String? = nil, seasonNumber: Swift.Int? = nil, episodeNumber: Swift.Int? = nil, contentType: Swift.String? = nil, genre: Swift.String? = nil, durationInSeconds: Swift.Int? = nil, airDate: Swift.String? = nil, language: Swift.String? = nil, subtitles: Swift.String? = nil, playbackUrl: Swift.String? = nil, playbackType: Swift.String? = nil, playbackPositionInSeconds: Swift.Double? = nil, totalSecondsConsumed: Swift.Double? = nil, streamType: Swift.String? = nil, assetStatus: Swift.String? = nil, bitRate: Swift.String? = nil, bufferCount: Swift.Int? = nil, bufferTimeInSeconds: Swift.Int? = nil, playSource: Swift.String? = nil, castType: Swift.String? = nil, subcategory1: Swift.String? = nil, subcategory2: Swift.String? = nil, adId: Swift.String? = nil, adDayPart: Swift.String? = nil, screenSize: Swift.String? = nil, videostatus: Swift.String? = nil, videodomain: Swift.String? = nil, videotmsid: Swift.String? = nil, videobroadcast: Swift.String? = nil, videoInitiate: Swift.String? = nil, videocliptype: Swift.String? = nil, videonetwork: Swift.String? = nil, isLive: Swift.Bool? = nil, videocrossdevice: Swift.Bool? = false, endCardCue: Swift.String? = nil, endCardType: Swift.String? = nil, networkType: Swift.String? = nil, researchtitle: Swift.String? = nil, videoleague: Swift.String? = nil, videosponsor: Swift.String? = nil, advertiser: Swift.String? = nil, creativeName: Swift.String? = nil, videosport: Swift.String? = nil, videoplayerurl: Swift.String? = nil, subTitle: Swift.String? = nil, assetId: Swift.String? = nil, videoguid: Swift.String? = nil, programStartTimeMiliSeconds: Swift.Double? = nil, programEndTimeMiliSeconds: Swift.Double? = nil, showTitle: Swift.String? = nil)
-  #endif
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
   required public init(from decoder: any Swift.Decoder) throws
@@ -1680,12 +1424,8 @@ public protocol PlayerVideoAnalyticsTrackDelegate : VLPlayerLib.AnalyticsTracker
   func playerSeekDidStart()
   func playerSeekDidComplete(newTime: Swift.Double, shouldResume: Swift.Bool)
   func playerSessionEnded()
-  #if compiler(>=5.3) && $NonescapableTypes
   func playerDidChangeAudioLanguage(language: Swift.String?)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   func playerDidChangeClosedCaptionLanguage(language: Swift.String?)
-  #endif
   func playerDidDropFrames(count: Swift.Int)
   func playerChapterDidStart(currentTime: Swift.Double, endTime: Swift.Double, chapterStartTime: Swift.Double)
   func playerChapterDidComplete()
@@ -1731,43 +1471,23 @@ public protocol PlayerVideoAnalyticsTrackDelegate : VLPlayerLib.AnalyticsTracker
     set
   }
   @_Concurrency.MainActor @preconcurrency final public func setValue(_ value: Swift.Float, animated: Swift.Bool)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency final public func setMinimumTrackImage(_ image: UIKit.UIImage?, for state: UIKit.UIControl.State)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency final public func setMaximumTrackImage(_ image: UIKit.UIImage?, for state: UIKit.UIControl.State)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency final public func setThumbImage(_ image: UIKit.UIImage?, for state: UIKit.UIControl.State)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency final public var currentMinimumTrackImage: UIKit.UIImage? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency final public var currentMaximumTrackImage: UIKit.UIImage? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency final public var currentThumbImage: UIKit.UIImage? {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency final public func minimumTrackImage(for state: UIKit.UIControl.State) -> UIKit.UIImage?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency final public func maximumTrackImage(for state: UIKit.UIControl.State) -> UIKit.UIImage?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency final public func thumbImage(for state: UIKit.UIControl.State) -> UIKit.UIImage?
-  #endif
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  #endif
   @objc deinit
   @_Concurrency.MainActor @preconcurrency @objc override final public var isEnabled: Swift.Bool {
     @objc get
@@ -1788,9 +1508,7 @@ public protocol PlayerVideoAnalyticsTrackDelegate : VLPlayerLib.AnalyticsTracker
   @_Concurrency.MainActor @preconcurrency final public var isSwipeDownEnabled: Swift.Bool
   @_Concurrency.MainActor @preconcurrency final public var verticalThreshold: Swift.Int
   @_Concurrency.MainActor @preconcurrency @objc override final public func layoutSubviews()
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc override final public func pressesBegan(_ presses: Swift.Set<UIKit.UIPress>, with event: UIKit.UIPressesEvent?)
-  #endif
 }
 extension VLPlayerLib.TvOSSlider {
   @_Concurrency.MainActor @preconcurrency @objc override final public var isAccessibilityElement: Swift.Bool {
@@ -1801,18 +1519,14 @@ extension VLPlayerLib.TvOSSlider {
     @objc get
     @objc set
   }
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc override final public var accessibilityLabel: Swift.String? {
     @objc get
     @objc set
   }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc override final public var accessibilityValue: Swift.String? {
     @objc get
     @objc set
   }
-  #endif
 }
 public class EPGSupportModel {
   public var isEpg: Swift.Bool
@@ -1821,9 +1535,7 @@ public class EPGSupportModel {
   public var currentProgramTitle: Swift.String?
   public var currentProgramStartTime: Swift.String?
   public var currentProgramEndTime: Swift.String?
-  #if compiler(>=5.3) && $NonescapableTypes
   public init(isEpg: Swift.Bool = false, epgFrame: CoreFoundation.CGRect = UIScreen.main.bounds, currentProgramID: Swift.String? = nil, currentProgramTitle: Swift.String? = nil, currentProgramStartTime: Swift.String? = nil, currentProgramEndTime: Swift.String? = nil)
-  #endif
   public var description: Swift.String {
     get
   }
