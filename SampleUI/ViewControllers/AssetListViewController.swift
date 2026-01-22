@@ -8,9 +8,9 @@
 import UIKit
 import VLPlayerLib
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 #endif
 import Kingfisher
 import AppTrackingTransparency

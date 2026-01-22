@@ -9,9 +9,9 @@
 import UIKit
 import VLPlayerLib
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 #endif
 import GoogleCast
 import VLAnalyticsLib
@@ -75,10 +75,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        // Check if player orientation is locked - this takes priority over everything
+//        if VLPlayerOrientationManager.isOrientationLocked {
+//            debugPrint("🔒 AppDelegate: Orientation locked, returning landscape only")
+//            return VLPlayerOrientationManager.lockedOrientation
+//        }
+        
         if UIDevice.current.userInterfaceIdiom == .pad {
             return .all
-        }else{
-            if let topVC = topViewController(window?.rootViewController), let vc = topVC as? PlayerViewController_iOS {
+        } else {
+            if let topVC = topViewController(window?.rootViewController), let _ = topVC as? PlayerViewController_iOS {
                 return [.portrait, .landscapeLeft, .landscapeRight]
             }
             return [.portrait]

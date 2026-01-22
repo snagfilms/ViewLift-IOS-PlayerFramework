@@ -7,11 +7,12 @@
 //
 import UIKit
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 #endif
 import VLAnalyticsLib
+import VLAnalyticsAdobe
 //import Firebase
 
 // Extension to AppDelegate for handling authentication logic
@@ -96,17 +97,21 @@ extension AppDelegate {
     }
     
     func setupAnalytics() {
-        VLAnalytics.shared.setupAnalytics(clients: [.adobe], enableDebugLogs: true)
+        let clients: [VLAnalyticsLib.VLAnalyticsClient] = [.adobe]
+        VLAnalytics.shared.setupAnalytics(clients: clients, enableDebugLogs: true)
+        
+        
         self.handleAnalyticsConsent()
         
         self.triggerSpashScreenEvent()
     }
     
     func handleAnalyticsConsent() {
-        VLAnalytics.shared.setConsent(
-                                analyticsStorageIsAllowed: true,
-                                adStorageIsAllowed: true,
-                                adUserDataIsAllowed: true
+        VLAnalytics.shared
+            .setConsent(
+                analyticsStorageIsAllowed: true,
+                adStorageIsAllowed: true,
+                adUserDataIsAllowed: true
         )
     }
     

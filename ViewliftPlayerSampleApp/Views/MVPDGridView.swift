@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import VLAuthenticationFramework
+import VLAuthentication
 
 // MARK: - SwiftUI Grid View with Dismiss
 struct MVPDGridView: View {

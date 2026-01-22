@@ -8,9 +8,9 @@
 
 import VLPlayerLib
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication_tvOS
 #endif
 import VLBeaconLib
 import Foundation
@@ -23,7 +23,20 @@ extension PlayerViewController_iOS {
     /// Initiates the TVE login process for the user
     func loginWithTVE() {
         debugPrint("Login with TVE called")
-        let type = Configuration.custom
+        let type = Configuration.default
+        
+//        let theme = VLTVEThemeConfig(
+//            navigationBarBackgroundColor: .red,
+//            navigationBarTitleColor: .green,
+//            navigationBarTintColor: .yellow
+//        )
+//        
+//        let initializationConfig: VLTVEInitializationConfig =  VLTVEInitializationConfig(
+//            themeConfig: theme
+//        )
+//        
+//        VLAuthentication.sharedInstance.setupTVEConfig(tveInitializationConfig: initializationConfig)
+        
         
         switch type {
         case .custom, .customTheme:
