@@ -28,7 +28,7 @@ let package = Package(
         .package(
             name: "VLBeaconLib",
             url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
-            branch: "3.2.5"),
+            Version("3.2.6")..<Version("3.2.6")),
         .package(
             name: "MUXSDKStats",
             url: "https://github.com/muxinc/mux-stats-sdk-avplayer",
