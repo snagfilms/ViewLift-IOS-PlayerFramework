@@ -7,9 +7,9 @@
 //
 
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication
 #endif
 import VLAnalyticsLib
 

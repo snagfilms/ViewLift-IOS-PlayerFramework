@@ -10,9 +10,9 @@ import UIKit
 import VLPlayerLib
 import VLBeaconLib
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication
 #endif
 import VLAnalyticsLib
 import Foundation
@@ -323,8 +323,14 @@ extension PlayerViewController_iOS {
             )
             
             let playbackConfig = VLPlayer.DirectStreamPlaybackConfig(
-                stream: streamType
+                stream: streamType,
+                token: "",
+                    apiBaseURL:  nil,
+                    beaconURL: "",
+                    networkName: "",
+                    mediaMetaDataInfo: nil
             )
+            
             
             playbackSourceType = .directStream(playbackConfig)
             
@@ -337,7 +343,7 @@ extension PlayerViewController_iOS {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl,
+                            apiBaseURL: vlBaseUrl, beaconBaseURL: "",
                             adobeTempPassPayload: adobePassPayload
                         )
                 )
@@ -368,7 +374,8 @@ extension PlayerViewController_iOS {
            vlPlayer?.setSource(
                 type: playbackSourceType,
                 vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
-                playerFeaturesSupported: featureSupported, nextPlaybackList: nil
+                playerFeaturesSupported: featureSupported, nextPlaybackList: nil,
+                brandName: ""
 //                , epgProgramDetails: epgProgram
             ) {
                 [weak self] isSuccess,
@@ -716,6 +723,8 @@ extension PlayerViewController_iOS {
     
     /// Handles back button tap, destroys player and dismisses view
     @IBAction private func backButtonClicked(_ sender: Any) {
+        vlPlayer?.endSessionAnalytics()
+        
         vlPlayer?.destroy()
         vlPlayer?.playerVideoAnalyticsDelegate = nil
         navigationController?.popViewController(animated: true)

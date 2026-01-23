@@ -7,9 +7,9 @@
 //
 import UIKit
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication
 #endif
 import VLAnalyticsLib
 //import Firebase
@@ -45,9 +45,9 @@ extension AppDelegate {
             authorizationToken: authorizationToken,
             apiBaseUrl: apiBaseEndpoint
         )
-        #if os(iOS)
-        VLAuthentication.sharedInstance.setRedirectURLForAdobe("https://valid.redirect.url")
-        #endif
+//        #if os(iOS)
+//        VLAuthentication.sharedInstance.setRedirectURLForAdobe("https://valid.redirect.url")
+//        #endif
         
         // Perform authentication
         Task { [weak self] in
@@ -98,8 +98,32 @@ extension AppDelegate {
         }
     }
     
+    func setupAnalyticsConfiguration() {
+//        let adobeConfig = AdobeAnalyticsConfig(
+//            reportSuites: "rsid1,rsid2",
+//            trackingServer: "tracking.server.com"
+//        )
+        
+        let comscoreConfig = ComscoreAnalyticsConfig(
+            publisherId: "40813950",
+            enableDebugMode: true
+        )
+        
+        let results = AnalyticsConfigurationBuilder()
+//            .add(adobeConfig)
+            .add(comscoreConfig)
+            .build()
+        
+        // Check results
+        results.forEach { client, success in
+            print("\(client.identifier): \(success ? "✅" : "❌")")
+        }
+    }
+    
     func setupAnalytics() {
-        VLAnalytics.shared.setupAnalytics(clients: [.adobe], enableDebugLogs: true)
+        self.setupAnalyticsConfiguration()
+        
+        VLAnalytics.shared.setupAnalytics(clients: [.adobe, .comscore], enableDebugLogs: true)
         self.handleAnalyticsConsent()
         
         self.triggerSpashScreenEvent()

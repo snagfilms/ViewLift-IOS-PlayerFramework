@@ -1,6 +1,42 @@
 {
-  "originHash" : "08c2b06bdc337b6d4160c61bde21e6b819c4ce2f31d531bd97252d1e80f8bb4f",
+  "originHash" : "cf32f4790f56e65fe2b599c5c45a44aa912942c94b0b0f4fff5fca5b6bd2adca",
   "pins" : [
+    {
+      "identity" : "aepsdk-analytics-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adobe/aepsdk-analytics-ios.git",
+      "state" : {
+        "revision" : "69835581e2f1351d39f6f5d25030857b1f79354d",
+        "version" : "5.0.2"
+      }
+    },
+    {
+      "identity" : "aepsdk-core-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adobe/aepsdk-core-ios.git",
+      "state" : {
+        "revision" : "3df34740bf0493dfdc32632ac6a98f340740d9db",
+        "version" : "5.7.0"
+      }
+    },
+    {
+      "identity" : "aepsdk-media-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adobe/aepsdk-media-ios.git",
+      "state" : {
+        "revision" : "116ba5bf349bccfc10d6c21a99ef736b3acffc39",
+        "version" : "5.0.1"
+      }
+    },
+    {
+      "identity" : "aepsdk-rulesengine-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adobe/aepsdk-rulesengine-ios.git",
+      "state" : {
+        "revision" : "514d2b3787c545bfa6749ffce5dd3e6f560c9319",
+        "version" : "5.0.0"
+      }
+    },
     {
       "identity" : "analytics-swift",
       "kind" : "remoteSourceControl",
@@ -13,19 +49,10 @@
     {
       "identity" : "appsflyerframework",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework",
+      "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework.git",
       "state" : {
-        "revision" : "43147aff398c1d9973f2f5dbe1193ad5d2e82d74",
-        "version" : "6.17.7"
-      }
-    },
-    {
-      "identity" : "authenticationframework",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/snagfilms/AuthenticationFramework",
-      "state" : {
-        "branch" : "3.1.8",
-        "revision" : "b84f489c9ebe76f85271759fd7399838f8712416"
+        "revision" : "6cc9a9400a9d15e26d1ccf83ed9924c1dfbe8b75",
+        "version" : "6.17.8"
       }
     },
     {
@@ -33,8 +60,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/bitmovin/bitmovin-analytics-collector-ios.git",
       "state" : {
-        "revision" : "303f13f46e6ab528b8c00a163726213793f0f9cb",
-        "version" : "3.17.0"
+        "revision" : "f8d075366295a48e614085795f6383aa322470d0",
+        "version" : "3.20.0"
+      }
+    },
+    {
+      "identity" : "braze-swift-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/braze-inc/braze-swift-sdk",
+      "state" : {
+        "revision" : "8ed872cbd122f68333928597d2b2d2af52bdceb4",
+        "version" : "13.3.0"
       }
     },
     {
@@ -47,12 +83,57 @@
       }
     },
     {
+      "identity" : "comscore-swift-package-manager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/comScore/Comscore-Swift-Package-Manager",
+      "state" : {
+        "revision" : "a56decdcf19228ae2b4b35a4836768bb1cfaa6b1",
+        "version" : "6.15.0"
+      }
+    },
+    {
+      "identity" : "conviva-ios-appanalytics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/conviva/conviva-ios-appanalytics",
+      "state" : {
+        "revision" : "25923eededa859e69cfb498e0c5ebffdcde1772d",
+        "version" : "1.8.0"
+      }
+    },
+    {
+      "identity" : "conviva-ios-avfoundation-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Conviva/conviva-ios-avfoundation-spm",
+      "state" : {
+        "revision" : "c862220f4fe6b823f97bca14c7685fd852f2a8b3",
+        "version" : "4.3.0"
+      }
+    },
+    {
+      "identity" : "ctnotificationservice",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CleverTap/CTNotificationService",
+      "state" : {
+        "revision" : "9fb05bd25296f62be89d0ed0542a8473a96234e1",
+        "version" : "0.1.7"
+      }
+    },
+    {
       "identity" : "ios-vlanalytics-spm",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/snagfilms/iOS-VLAnalytics-SPM.git",
+      "location" : "https://github.com/snagfilms/iOS-VLAnalytics-SPM",
       "state" : {
-        "branch" : "3.0.6",
-        "revision" : "94d2a1ebda130334340359a290ae6f1d80fd758c"
+        "branch" : "3.0.10",
+        "revision" : "a60a1a4899391c988818d2591e10c3dadc08771a"
+      }
+    },
+    {
+      "identity" : "ios-vlauthentication-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/snagfilms/iOS-VLAuthentication-SPM",
+      "state" : {
+        "branch" : "3.1.14",
+        "revision" : "13095b09ec926af0db1a2d92a61ede5504f02c4e"
       }
     },
     {
@@ -60,8 +141,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
       "state" : {
-        "branch" : "3.2.4",
-        "revision" : "417ac27e06d880b4ff09247c46d52c8181b3d197"
+        "revision" : "ac0669523958a079568e8e7510d63597bcc8c37d",
+        "version" : "3.2.6"
       }
     },
     {
@@ -87,8 +168,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/M3U8Kit/M3U8Parser.git",
       "state" : {
-        "revision" : "03b8a211d6a1f597be2a2055b336b6554c985569",
-        "version" : "1.0.1"
+        "revision" : "118469bbb6db6ece3f799b9565a7429c8c377c60",
+        "version" : "1.0.2"
       }
     },
     {
@@ -123,8 +204,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "2053b120767c42a70bcba21095f34e4cfb54a75d",
-        "version" : "5.21.3"
+        "revision" : "36e79ba485e9bb4d3cd4e3318908866dac5e7b51",
+        "version" : "5.21.5"
       }
     },
     {
@@ -146,12 +227,30 @@
       }
     },
     {
+      "identity" : "swift-package-manager-google-interactive-media-ads-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git",
+      "state" : {
+        "revision" : "871bc80349774ba228c41096129995d1e9848b04",
+        "version" : "3.28.10"
+      }
+    },
+    {
+      "identity" : "swift-package-manager-google-interactive-media-ads-tvos",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-tvos.git",
+      "state" : {
+        "revision" : "fe5a302eb17388077258b02e2a18e88f63100625",
+        "version" : "4.16.0"
+      }
+    },
+    {
       "identity" : "viewlift-ios-playerframework",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework",
       "state" : {
-        "branch" : "3.2.22",
-        "revision" : "890b0604d8d1d4bf29fd4e9040350156e21a189e"
+        "branch" : "3.2.30",
+        "revision" : "8fd578a9c1909c6deb5eadd6dde037ac4544a4b7"
       }
     },
     {
@@ -159,8 +258,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/efremidze/VisualEffectView.git",
       "state" : {
-        "branch" : "master",
-        "revision" : "405baa5eba273ead6a23272605adc3232422262b"
+        "revision" : "405baa5eba273ead6a23272605adc3232422262b",
+        "version" : "5.0.8"
       }
     }
   ],

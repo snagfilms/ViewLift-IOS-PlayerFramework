@@ -10,9 +10,9 @@ import UIKit
 import VLPlayerLib
 import VLBeaconLib
 #if os(iOS)
-import VLAuthenticationFramework
+import VLAuthentication
 #else
-import VLAuthenticationFramework_tvOS
+import VLAuthentication
 #endif
 import AVKit
 import VLAnalyticsLib
@@ -148,7 +148,28 @@ class PlayerViewController_tvOS: UIViewController {
         // Select playback source type based on user option
         let playbackSourceType: VLPlayer.PlaybackSourceType
         if isPlayingFromURL(){
-            playbackSourceType = .directStream(VLPlayer.DirectStreamPlaybackConfig(stream: VLPlayer.DirectStreamType(url: streamUrl ?? "", streamConfig: VLPlayer.StreamConfig(isLive: streamConfig?.isLive, isDVR: streamConfig?.isDVR, isSSAIEnabled: false), drmconfig: drmConfig), token: vlToken, apiBaseURL: vlBaseUrl))
+        
+            playbackSourceType =
+                .directStream(
+                    VLPlayer
+                        .DirectStreamPlaybackConfig(
+                            stream: VLPlayer
+                                .DirectStreamType(
+                                    url: streamUrl ?? "",
+                                    streamConfig: VLPlayer
+                                        .StreamConfig(
+                                            isLive: streamConfig?.isLive,
+                                            isDVR: streamConfig?.isDVR,
+                                            isSSAIEnabled: false
+                                        ),
+                                    drmconfig: drmConfig
+                                ),
+                            token: vlToken,
+                            apiBaseURL: vlBaseUrl,
+                            beaconURL: "", networkName: ""
+                        )
+                )
+            
         } else {
             let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass[self.channelkey]?.getTempToken() ?? nil
             
@@ -158,7 +179,7 @@ class PlayerViewController_tvOS: UIViewController {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl,adobeTempPassPayload: adobePassPayload
+                            apiBaseURL: vlBaseUrl, beaconBaseURL: "",adobeTempPassPayload: adobePassPayload
                         )
                 )
         }
@@ -178,7 +199,7 @@ class PlayerViewController_tvOS: UIViewController {
         // Set player source and handle completion
         vlPlayer?.setSource(type: playbackSourceType,
                             vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
-                            playerFeaturesSupported: featureSupported, nextPlaybackList: nil
+                            playerFeaturesSupported: featureSupported, nextPlaybackList: nil, brandName: ""
                         ) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
                 if let contentResponse = contentResponse {
