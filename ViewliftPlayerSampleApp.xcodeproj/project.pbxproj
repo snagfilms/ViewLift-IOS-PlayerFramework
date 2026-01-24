@@ -41,7 +41,6 @@
 		BA0DE0592E7AEE5E00650CEA /* SiteConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA0DE0582E7AEE5E00650CEA /* SiteConfig.plist */; };
 		BA0DE05A2E7AEE5E00650CEA /* SiteConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA0DE0582E7AEE5E00650CEA /* SiteConfig.plist */; };
 		BA293BC12F226D45000FC394 /* VLAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = BA293BC02F226D45000FC394 /* VLAuthentication */; };
-		BA293BDB2F234FFA000FC394 /* ComScore in Frameworks */ = {isa = PBXBuildFile; productRef = BA293BDA2F234FFA000FC394 /* ComScore */; };
 		BA5D8B692EAE2F8F001401D8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B682EAE2F8F001401D8 /* Utility.swift */; };
 		BA5D8B6A2EAE2F8F001401D8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B682EAE2F8F001401D8 /* Utility.swift */; };
 		BA5D8B6C2EAE39BA001401D8 /* MVPDGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B6B2EAE39BA001401D8 /* MVPDGridView.swift */; };
@@ -50,7 +49,6 @@
 		BA79007E2F23A85D004E2329 /* AmazonIVSPlayer-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = BA79007D2F23A85D004E2329 /* AmazonIVSPlayer-iOS */; };
 		BA7900802F23A85D004E2329 /* GoogleCast-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = BA79007F2F23A85D004E2329 /* GoogleCast-iOS */; };
 		BA7900822F23A85D004E2329 /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = BA7900812F23A85D004E2329 /* VLPlayerLib */; };
-		BA7900872F23ABB5004E2329 /* GoogleInteractiveMediaAds in Frameworks */ = {isa = PBXBuildFile; productRef = BA7900862F23ABB5004E2329 /* GoogleInteractiveMediaAds */; };
 		BA79008A2F23ABCC004E2329 /* GoogleInteractiveMediaAdsTvOS in Frameworks */ = {isa = PBXBuildFile; productRef = BA7900892F23ABCC004E2329 /* GoogleInteractiveMediaAdsTvOS */; };
 		BA7900912F23B9BB004E2329 /* VLAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BA7900902F23B9BB004E2329 /* VLAnalytics */; };
 		BA7900962F23BE20004E2329 /* VLAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BA7900952F23BE20004E2329 /* VLAnalytics */; };
@@ -149,7 +147,6 @@
 		D2D2E1532E5F1D93001C2CD7 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2E14C2E5F1D84001C2CD7 /* UIView+Extension.swift */; };
 		D2D2E1542E5F1D93001C2CD7 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2E14C2E5F1D84001C2CD7 /* UIView+Extension.swift */; };
 		D2D2E1562E5F2133001C2CD7 /* AutoPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2E1552E5F2128001C2CD7 /* AutoPlayView.swift */; };
-		E85720FF1A4C92FDA3DBAC3F /* VLBeaconLib in Frameworks */ = {isa = PBXBuildFile; productRef = 5AE22F52796CC32F50886CB1 /* VLBeaconLib */; };
 		F7EAFF0D275F3AA700B46BDE /* ViewliftPlayerSampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EAFF0C275F3AA700B46BDE /* ViewliftPlayerSampleAppUITests.swift */; };
 		F7EAFF0F275F3AA700B46BDE /* ViewliftPlayerSampleAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EAFF0E275F3AA700B46BDE /* ViewliftPlayerSampleAppUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
@@ -306,14 +303,11 @@
 				BA8E15872EA51CC500B45F68 /* MUXSDKStats in Frameworks */,
 				BA7900962F23BE20004E2329 /* VLAnalytics in Frameworks */,
 				BA79007E2F23A85D004E2329 /* AmazonIVSPlayer-iOS in Frameworks */,
-				BA293BDB2F234FFA000FC394 /* ComScore in Frameworks */,
 				BA8E15842EA51CAE00B45F68 /* BitmovinPlayer in Frameworks */,
 				BA05D4DF2E87A985008BF84C /* VLAuthentication in Frameworks */,
-				BA7900872F23ABB5004E2329 /* GoogleInteractiveMediaAds in Frameworks */,
 				BA7900912F23B9BB004E2329 /* VLAnalytics in Frameworks */,
 				BA293BC12F226D45000FC394 /* VLAuthentication in Frameworks */,
 				BA7900A22F23C053004E2329 /* GoogleCast-iOS in Frameworks */,
-				E85720FF1A4C92FDA3DBAC3F /* VLBeaconLib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,12 +722,9 @@
 				BA8E15832EA51CAE00B45F68 /* BitmovinPlayer */,
 				BA8E15862EA51CC500B45F68 /* MUXSDKStats */,
 				BA293BC02F226D45000FC394 /* VLAuthentication */,
-				5AE22F52796CC32F50886CB1 /* VLBeaconLib */,
-				BA293BDA2F234FFA000FC394 /* ComScore */,
 				BA79007D2F23A85D004E2329 /* AmazonIVSPlayer-iOS */,
 				BA79007F2F23A85D004E2329 /* GoogleCast-iOS */,
 				BA7900812F23A85D004E2329 /* VLPlayerLib */,
-				BA7900862F23ABB5004E2329 /* GoogleInteractiveMediaAds */,
 				BA7900902F23B9BB004E2329 /* VLAnalytics */,
 				BA7900952F23BE20004E2329 /* VLAnalytics */,
 				BA79009A2F23BEFD004E2329 /* VLAuthentication */,
@@ -862,9 +853,6 @@
 				D2A22D5B2E72D4320058D37A /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				BA8E15822EA51CAE00B45F68 /* XCRemoteSwiftPackageReference "player-ios" */,
 				BA8E15852EA51CC500B45F68 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */,
-				23F365C0FB2F50E22B4A2249 /* XCRemoteSwiftPackageReference "iOS-VLBeacon-SPM" */,
-				BA293BD92F234FFA000FC394 /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */,
-				BA7900852F23ABB5004E2329 /* XCRemoteSwiftPackageReference "swift-package-manager-google-interactive-media-ads-ios" */,
 				BA7900882F23ABCC004E2329 /* XCRemoteSwiftPackageReference "swift-package-manager-google-interactive-media-ads-tvos" */,
 				BA7900942F23BE20004E2329 /* XCRemoteSwiftPackageReference "iOS-VLAnalytics-SPM" */,
 				BA7900992F23BEFD004E2329 /* XCRemoteSwiftPackageReference "iOS-VLAuthentication-SPM" */,
@@ -1910,30 +1898,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		23F365C0FB2F50E22B4A2249 /* XCRemoteSwiftPackageReference "iOS-VLBeacon-SPM" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/snagfilms/iOS-VLBeacon-SPM.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.2.6;
-			};
-		};
-		BA293BD92F234FFA000FC394 /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/comScore/Comscore-Swift-Package-Manager";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.15.0;
-			};
-		};
-		BA7900852F23ABB5004E2329 /* XCRemoteSwiftPackageReference "swift-package-manager-google-interactive-media-ads-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.28.0;
-			};
-		};
 		BA7900882F23ABCC004E2329 /* XCRemoteSwiftPackageReference "swift-package-manager-google-interactive-media-ads-tvos" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-tvos.git";
@@ -1993,11 +1957,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5AE22F52796CC32F50886CB1 /* VLBeaconLib */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 23F365C0FB2F50E22B4A2249 /* XCRemoteSwiftPackageReference "iOS-VLBeacon-SPM" */;
-			productName = VLBeaconLib;
-		};
 		BA05D4DE2E87A985008BF84C /* VLAuthentication */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VLAuthentication;
@@ -2005,11 +1964,6 @@
 		BA293BC02F226D45000FC394 /* VLAuthentication */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VLAuthentication;
-		};
-		BA293BDA2F234FFA000FC394 /* ComScore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BA293BD92F234FFA000FC394 /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */;
-			productName = ComScore;
 		};
 		BA5D8B6D2EAF54D4001401D8 /* MUXSDKStats */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2032,11 +1986,6 @@
 		BA7900812F23A85D004E2329 /* VLPlayerLib */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VLPlayerLib;
-		};
-		BA7900862F23ABB5004E2329 /* GoogleInteractiveMediaAds */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BA7900852F23ABB5004E2329 /* XCRemoteSwiftPackageReference "swift-package-manager-google-interactive-media-ads-ios" */;
-			productName = GoogleInteractiveMediaAds;
 		};
 		BA7900892F23ABCC004E2329 /* GoogleInteractiveMediaAdsTvOS */ = {
 			isa = XCSwiftPackageProductDependency;
