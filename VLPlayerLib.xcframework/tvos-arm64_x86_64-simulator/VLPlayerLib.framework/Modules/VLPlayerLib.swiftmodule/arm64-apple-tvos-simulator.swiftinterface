@@ -835,6 +835,14 @@ public struct SSAIBeaconTracking {
   public var getPlayerInstance: AVFoundation.AVPlayer? {
     get
   }
+  public var customInfoViewController: UIKit.UIViewController? {
+    get
+    set
+  }
+  public var customOverlayViewController: UIKit.UIViewController? {
+    get
+    set
+  }
   open var enablePlayerBitrateLogs: Swift.Bool?
   public var payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration?
   public var hasEntitlementData: Swift.Bool {
