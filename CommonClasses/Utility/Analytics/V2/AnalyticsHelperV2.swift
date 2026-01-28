@@ -11,9 +11,9 @@ import VLPlayerLib
 import AVKit
 import Foundation
 #if os(iOS)
-import VLAuthentication
+import VLAuthenticationFramework
 #else
-import VLAuthentication
+import VLAuthenticationFramework_tvOS
 #endif
 
 final class AnalyticsHelperV2: NSObject {
