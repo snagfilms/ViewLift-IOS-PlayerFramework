@@ -125,7 +125,6 @@ class PlayerViewController_tvOS: UIViewController {
         loaderView.startAnimating()
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = self.videoList.apiBaseUrl
-        let vlBeaconURL: String? = self.videoList.beaconBaseUrl
         let vlToken = AppDelegate.shared.authorizationToken ?? ""
         // Not checking for Temp Pass if playing from direct URL in Sample APP
         if UserManager.shared.userIdentity?.tveUserId == nil && !isPlayingFromURL(){
@@ -140,6 +139,8 @@ class PlayerViewController_tvOS: UIViewController {
         let analyticsLicenseKey: String? = ""
         let userId: String? = nil
         // Initialize player with license if available
+        let vlBeaconURL = VLAuthentication.sharedInstance.bootStrapConfig?.playerBeaconUrl ??  ""
+
         if let playerLicenseKey = playerLicenseKey, !playerLicenseKey.isEmpty {
             vlPlayer = VLPlayer(playerType: .bitmovin(config: VLBitmovinConfig(license: VLBitmovinConfig.VLBitmovinLicenseConfig(playerKey: playerLicenseKey, analyticsKey: analyticsLicenseKey), userId: userId)))
         }else{
@@ -166,7 +167,7 @@ class PlayerViewController_tvOS: UIViewController {
                                 ),
                             token: vlToken,
                             apiBaseURL: vlBaseUrl,
-                            beaconURL: "", networkName: ""
+                            beaconURL: vlBeaconURL, networkName: ""
                         )
                 )
             
@@ -179,7 +180,7 @@ class PlayerViewController_tvOS: UIViewController {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl, beaconBaseURL: "",adobeTempPassPayload: adobePassPayload
+                            apiBaseURL: vlBaseUrl, beaconBaseURL: vlBeaconURL,adobeTempPassPayload: adobePassPayload
                         )
                 )
         }

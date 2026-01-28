@@ -302,7 +302,8 @@ extension PlayerViewController_iOS {
         
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = videoList.apiBaseUrl
-        
+        let vlBeaconURL = VLAuthentication.sharedInstance.bootStrapConfig?.playerBeaconUrl ??  ""
+
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""
         let userId: String? = nil
@@ -324,9 +325,9 @@ extension PlayerViewController_iOS {
             
             let playbackConfig = VLPlayer.DirectStreamPlaybackConfig(
                 stream: streamType,
-                token: "",
+                token: vlToken,
                     apiBaseURL:  nil,
-                    beaconURL: "",
+                    beaconURL: vlBeaconURL,
                     networkName: "",
                     mediaMetaDataInfo: nil
             )
@@ -343,7 +344,7 @@ extension PlayerViewController_iOS {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl, beaconBaseURL: "",
+                            apiBaseURL: vlBaseUrl, beaconBaseURL: vlBeaconURL,
                             adobeTempPassPayload: adobePassPayload
                         )
                 )
