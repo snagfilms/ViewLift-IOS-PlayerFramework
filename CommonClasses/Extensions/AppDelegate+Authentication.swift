@@ -105,7 +105,7 @@ extension AppDelegate {
 //        )
         
         let comscoreConfig = ComscoreAnalyticsConfig(
-            publisherId: "40813950",
+            publisherId: "",
             enableDebugMode: true
         )
         
