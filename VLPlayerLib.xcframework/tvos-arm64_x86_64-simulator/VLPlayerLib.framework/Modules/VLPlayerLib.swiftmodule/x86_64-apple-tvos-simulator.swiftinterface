@@ -1025,12 +1025,22 @@ public struct SSAIBeaconTracking {
   public func getTrickPlayData(_ value: Swift.Double) -> (image: UIKit.UIImage?, time: Swift.String?)
   public func getTrickPlayData(for value: Swift.Double) async -> (image: UIKit.UIImage?, time: Swift.String?)
   open func getStartFromBeginningValue() -> Swift.Bool
+  public func checkParentalContentRating()
+  public var isParentalWarningShown: Swift.Bool {
+    get
+  }
+  public var isParentalContentRatingCheckRequired: Swift.Bool {
+    get
+  }
+  public var isPinSessionVerified: Swift.Bool {
+    get
+  }
   @objc override dynamic public init()
   @objc deinit
 }
 extension VLPlayerLib.VLPlayer {
   public struct VLPlayerFeatureSupported {
-    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, showPlayerControlAlways: Swift.Bool = false, playAudioOnly: Swift.Bool? = false, epgSupportModel: VLPlayerLib.EPGSupportModel? = nil, tapToPause: Swift.Bool? = nil, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, easeLiveEnabled: Swift.Bool = false, hideAdsView: Swift.Bool = false, playerResponseRequired: Swift.Bool = false, preGameStartTime: Swift.Double? = nil, vlBeacon: VLBeaconLib.VLBeacon? = nil, shouldPlayVideoInitially: Swift.Bool = true)
+    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, hideVideoControls: Swift.Bool = false, mutePlayback: Swift.Bool = false, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String?, showPlayerControlAlways: Swift.Bool = false, playAudioOnly: Swift.Bool? = false, epgSupportModel: VLPlayerLib.EPGSupportModel? = nil, tapToPause: Swift.Bool? = nil, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, easeLiveEnabled: Swift.Bool = false, hideAdsView: Swift.Bool = false, playerResponseRequired: Swift.Bool = false, preGameStartTime: Swift.Double? = nil, vlBeacon: VLBeaconLib.VLBeacon? = nil, shouldPlayVideoInitially: Swift.Bool = true, parentalControl: VLPlayerLib.VLParentalControl? = nil)
   }
   public struct VLClientSideAdTrackingDetails {
     public init(isClientSideAdTrackingEnabled: Swift.Bool, isWTAEnabled: Swift.Bool)
@@ -1238,6 +1248,49 @@ public struct AdBreakContext {
 public func makeAnalyticsAdInfo(from ctx: VLPlayerLib.AdBreakContext) -> VLPlayerLib.AnalyticsAdInfo
 extension UIKit.UIColor {
   public static func fromHex(_ hex: Swift.String, alpha: CoreFoundation.CGFloat = 1.0) -> UIKit.UIColor
+}
+public struct VLParentalControl : Swift.Sendable {
+  public var setting: VLPlayerLib.VLParentalControl.Setting
+  public var localization: VLPlayerLib.VLParentalControl.Localization
+  public var theme: VLPlayerLib.VLParentalControl.Theme
+  public init(setting: VLPlayerLib.VLParentalControl.Setting, localization: VLPlayerLib.VLParentalControl.Localization, theme: VLPlayerLib.VLParentalControl.Theme = .default)
+  public struct Setting : Swift.Sendable, Swift.Codable, Swift.Hashable {
+    public var userContentRating: Swift.Bool
+    public var parentalRating: Swift.String?
+    public init(userContentRating: Swift.Bool = false, parentalRating: Swift.String? = nil)
+    public static func == (a: VLPlayerLib.VLParentalControl.Setting, b: VLPlayerLib.VLParentalControl.Setting) -> Swift.Bool
+    public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct Localization : Swift.Sendable, Swift.Hashable {
+    public var contentRatingTextWarningLabel: Swift.String
+    public var contentRatingDescriptionLabel: Swift.String
+    public var contentRatingViewerDiscretionLabel: Swift.String
+    public init(warningLabel: Swift.String = "WARNING", descriptionLabel: Swift.String = "The following content is rated: ", viewerDiscretionLabel: Swift.String = "Viewer Discretion Is Advised")
+    public static func == (a: VLPlayerLib.VLParentalControl.Localization, b: VLPlayerLib.VLParentalControl.Localization) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public struct Theme : Swift.Sendable {
+    public var backgroundColor: SwiftUICore.Color
+    public var accentColor: SwiftUICore.Color
+    public var titleFont: SwiftUICore.Font
+    public var descriptionFont: SwiftUICore.Font
+    public var subtitleFont: SwiftUICore.Font
+    public var titleColor: SwiftUICore.Color
+    public var descriptionColor: SwiftUICore.Color
+    public var subtitleColor: SwiftUICore.Color
+    public var animationDelay: Swift.Double
+    public var animationDuration: Swift.Double
+    public init(backgroundColor: SwiftUICore.Color? = nil, accentColor: SwiftUICore.Color? = nil, titleFont: SwiftUICore.Font? = nil, descriptionFont: SwiftUICore.Font? = nil, subtitleFont: SwiftUICore.Font? = nil, titleColor: SwiftUICore.Color? = nil, descriptionColor: SwiftUICore.Color? = nil, subtitleColor: SwiftUICore.Color? = nil, animationDelay: Swift.Double? = nil, animationDuration: Swift.Double? = nil)
+    public static let `default`: VLPlayerLib.VLParentalControl.Theme
+  }
 }
 extension Foundation.NSNotification.Name {
   public static let playerAdDidHideStatusbarOnFullScreen: Foundation.Notification.Name

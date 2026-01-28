@@ -5680,6 +5680,2350 @@
         ]
       },
       {
+        "kind": "TypeDecl",
+        "name": "VLParentalControl",
+        "printedName": "VLParentalControl",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "setting",
+            "printedName": "setting",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Setting",
+                "printedName": "VLPlayerLib.VLParentalControl.Setting",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib17VLParentalControlV7settingAC7SettingVvp",
+            "mangledName": "$s11VLPlayerLib17VLParentalControlV7settingAC7SettingVvp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Setting",
+                    "printedName": "VLPlayerLib.VLParentalControl.Setting",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7settingAC7SettingVvg",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV7settingAC7SettingVvg",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Setting",
+                    "printedName": "VLPlayerLib.VLParentalControl.Setting",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7settingAC7SettingVvs",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV7settingAC7SettingVvs",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7settingAC7SettingVvM",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV7settingAC7SettingVvM",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "localization",
+            "printedName": "localization",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Localization",
+                "printedName": "VLPlayerLib.VLParentalControl.Localization",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib17VLParentalControlV12localizationAC12LocalizationVvp",
+            "mangledName": "$s11VLPlayerLib17VLParentalControlV12localizationAC12LocalizationVvp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Localization",
+                    "printedName": "VLPlayerLib.VLParentalControl.Localization",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12localizationAC12LocalizationVvg",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV12localizationAC12LocalizationVvg",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Localization",
+                    "printedName": "VLPlayerLib.VLParentalControl.Localization",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12localizationAC12LocalizationVvs",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV12localizationAC12LocalizationVvs",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12localizationAC12LocalizationVvM",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV12localizationAC12LocalizationVvM",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "theme",
+            "printedName": "theme",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Theme",
+                "printedName": "VLPlayerLib.VLParentalControl.Theme",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib17VLParentalControlV5themeAC5ThemeVvp",
+            "mangledName": "$s11VLPlayerLib17VLParentalControlV5themeAC5ThemeVvp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Theme",
+                    "printedName": "VLPlayerLib.VLParentalControl.Theme",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5themeAC5ThemeVvg",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5themeAC5ThemeVvg",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Theme",
+                    "printedName": "VLPlayerLib.VLParentalControl.Theme",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5themeAC5ThemeVvs",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5themeAC5ThemeVvs",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5themeAC5ThemeVvM",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5themeAC5ThemeVvM",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(setting:localization:theme:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "VLParentalControl",
+                "printedName": "VLPlayerLib.VLParentalControl",
+                "usr": "s:11VLPlayerLib17VLParentalControlV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Setting",
+                "printedName": "VLPlayerLib.VLParentalControl.Setting",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Localization",
+                "printedName": "VLPlayerLib.VLParentalControl.Localization",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Theme",
+                "printedName": "VLPlayerLib.VLParentalControl.Theme",
+                "hasDefaultArg": true,
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:11VLPlayerLib17VLParentalControlV7setting12localization5themeA2C7SettingV_AC12LocalizationVAC5ThemeVtcfc",
+            "mangledName": "$s11VLPlayerLib17VLParentalControlV7setting12localization5themeA2C7SettingV_AC12LocalizationVAC5ThemeVtcfc",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "Setting",
+            "printedName": "Setting",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "userContentRating",
+                "printedName": "userContentRating",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV17userContentRatingSbvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV17userContentRatingSbvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV17userContentRatingSbvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV17userContentRatingSbvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV17userContentRatingSbvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV17userContentRatingSbvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV17userContentRatingSbvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV17userContentRatingSbvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "parentalRating",
+                "printedName": "parentalRating",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV14parentalRatingSSSgvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV14parentalRatingSSSgvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV14parentalRatingSSSgvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV14parentalRatingSSSgvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV14parentalRatingSSSgvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV14parentalRatingSSSgvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV14parentalRatingSSSgvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV14parentalRatingSSSgvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(userContentRating:parentalRating:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Setting",
+                    "printedName": "VLPlayerLib.VLParentalControl.Setting",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "hasDefaultArg": true,
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV17userContentRating08parentalH0AESb_SSSgtcfc",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV17userContentRating08parentalH0AESb_SSSgtcfc",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "AccessControl"
+                ],
+                "init_kind": "Designated"
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(from:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Setting",
+                    "printedName": "VLPlayerLib.VLParentalControl.Setting",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Decoder",
+                    "printedName": "any Swift.Decoder",
+                    "usr": "s:s7DecoderP"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV4fromAEs7Decoder_p_tKcfc",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV4fromAEs7Decoder_p_tKcfc",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "throwing": true,
+                "init_kind": "Designated"
+              },
+              {
+                "kind": "Function",
+                "name": "encode",
+                "printedName": "encode(to:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Encoder",
+                    "printedName": "any Swift.Encoder",
+                    "usr": "s:s7EncoderP"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV6encode2toys7Encoder_p_tKF",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV6encode2toys7Encoder_p_tKF",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "throwing": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV9hashValueSivp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV9hashValueSivp",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV9hashValueSivg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV9hashValueSivg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV4hash4intoys6HasherVz_tF",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV4hash4intoys6HasherVz_tF",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Setting",
+                    "printedName": "VLPlayerLib.VLParentalControl.Setting",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Setting",
+                    "printedName": "VLPlayerLib.VLParentalControl.Setting",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV2eeoiySbAE_AEtFZ",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV2eeoiySbAE_AEtFZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Struct",
+            "usr": "s:11VLPlayerLib17VLParentalControlV7SettingV",
+            "mangledName": "$s11VLPlayerLib17VLParentalControlV7SettingV",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Sendable",
+                "printedName": "Sendable",
+                "usr": "s:s8SendableP",
+                "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Decodable",
+                "printedName": "Decodable",
+                "usr": "s:Se",
+                "mangledName": "$sSe"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Encodable",
+                "printedName": "Encodable",
+                "usr": "s:SE",
+                "mangledName": "$sSE"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              }
+            ]
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "Localization",
+            "printedName": "Localization",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "contentRatingTextWarningLabel",
+                "printedName": "contentRatingTextWarningLabel",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingTextWarningLabelSSvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingTextWarningLabelSSvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingTextWarningLabelSSvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingTextWarningLabelSSvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingTextWarningLabelSSvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingTextWarningLabelSSvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingTextWarningLabelSSvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingTextWarningLabelSSvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "contentRatingDescriptionLabel",
+                "printedName": "contentRatingDescriptionLabel",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingDescriptionLabelSSvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingDescriptionLabelSSvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingDescriptionLabelSSvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingDescriptionLabelSSvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingDescriptionLabelSSvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingDescriptionLabelSSvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingDescriptionLabelSSvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV29contentRatingDescriptionLabelSSvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "contentRatingViewerDiscretionLabel",
+                "printedName": "contentRatingViewerDiscretionLabel",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV34contentRatingViewerDiscretionLabelSSvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV34contentRatingViewerDiscretionLabelSSvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV34contentRatingViewerDiscretionLabelSSvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV34contentRatingViewerDiscretionLabelSSvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV34contentRatingViewerDiscretionLabelSSvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV34contentRatingViewerDiscretionLabelSSvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV34contentRatingViewerDiscretionLabelSSvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV34contentRatingViewerDiscretionLabelSSvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(warningLabel:descriptionLabel:viewerDiscretionLabel:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Localization",
+                    "printedName": "VLPlayerLib.VLParentalControl.Localization",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "hasDefaultArg": true,
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "hasDefaultArg": true,
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "hasDefaultArg": true,
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV12warningLabel011descriptionG0016viewerDiscretionG0AESS_S2Stcfc",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV12warningLabel011descriptionG0016viewerDiscretionG0AESS_S2Stcfc",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "AccessControl"
+                ],
+                "init_kind": "Designated"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV9hashValueSivp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV9hashValueSivp",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV9hashValueSivg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV9hashValueSivg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV4hash4intoys6HasherVz_tF",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV4hash4intoys6HasherVz_tF",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Localization",
+                    "printedName": "VLPlayerLib.VLParentalControl.Localization",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Localization",
+                    "printedName": "VLPlayerLib.VLParentalControl.Localization",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV2eeoiySbAE_AEtFZ",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV2eeoiySbAE_AEtFZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Struct",
+            "usr": "s:11VLPlayerLib17VLParentalControlV12LocalizationV",
+            "mangledName": "$s11VLPlayerLib17VLParentalControlV12LocalizationV",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Sendable",
+                "printedName": "Sendable",
+                "usr": "s:s8SendableP",
+                "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              }
+            ]
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "Theme",
+            "printedName": "Theme",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "backgroundColor",
+                "printedName": "backgroundColor",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Color",
+                    "printedName": "SwiftUI.Color",
+                    "usr": "s:7SwiftUI5ColorV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV15backgroundColor7SwiftUI0G0Vvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV15backgroundColor7SwiftUI0G0Vvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV15backgroundColor7SwiftUI0G0Vvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV15backgroundColor7SwiftUI0G0Vvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV15backgroundColor7SwiftUI0G0Vvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV15backgroundColor7SwiftUI0G0Vvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV15backgroundColor7SwiftUI0G0VvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV15backgroundColor7SwiftUI0G0VvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "accentColor",
+                "printedName": "accentColor",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Color",
+                    "printedName": "SwiftUI.Color",
+                    "usr": "s:7SwiftUI5ColorV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV11accentColor7SwiftUI0G0Vvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV11accentColor7SwiftUI0G0Vvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV11accentColor7SwiftUI0G0Vvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV11accentColor7SwiftUI0G0Vvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV11accentColor7SwiftUI0G0Vvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV11accentColor7SwiftUI0G0Vvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV11accentColor7SwiftUI0G0VvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV11accentColor7SwiftUI0G0VvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "titleFont",
+                "printedName": "titleFont",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Font",
+                    "printedName": "SwiftUI.Font",
+                    "usr": "s:7SwiftUI4FontV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV9titleFont7SwiftUI0G0Vvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV9titleFont7SwiftUI0G0Vvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Font",
+                        "printedName": "SwiftUI.Font",
+                        "usr": "s:7SwiftUI4FontV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV9titleFont7SwiftUI0G0Vvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV9titleFont7SwiftUI0G0Vvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Font",
+                        "printedName": "SwiftUI.Font",
+                        "usr": "s:7SwiftUI4FontV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV9titleFont7SwiftUI0G0Vvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV9titleFont7SwiftUI0G0Vvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV9titleFont7SwiftUI0G0VvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV9titleFont7SwiftUI0G0VvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "descriptionFont",
+                "printedName": "descriptionFont",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Font",
+                    "printedName": "SwiftUI.Font",
+                    "usr": "s:7SwiftUI4FontV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV15descriptionFont7SwiftUI0G0Vvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV15descriptionFont7SwiftUI0G0Vvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Font",
+                        "printedName": "SwiftUI.Font",
+                        "usr": "s:7SwiftUI4FontV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV15descriptionFont7SwiftUI0G0Vvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV15descriptionFont7SwiftUI0G0Vvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Font",
+                        "printedName": "SwiftUI.Font",
+                        "usr": "s:7SwiftUI4FontV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV15descriptionFont7SwiftUI0G0Vvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV15descriptionFont7SwiftUI0G0Vvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV15descriptionFont7SwiftUI0G0VvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV15descriptionFont7SwiftUI0G0VvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "subtitleFont",
+                "printedName": "subtitleFont",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Font",
+                    "printedName": "SwiftUI.Font",
+                    "usr": "s:7SwiftUI4FontV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV12subtitleFont7SwiftUI0G0Vvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV12subtitleFont7SwiftUI0G0Vvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Font",
+                        "printedName": "SwiftUI.Font",
+                        "usr": "s:7SwiftUI4FontV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV12subtitleFont7SwiftUI0G0Vvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV12subtitleFont7SwiftUI0G0Vvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Font",
+                        "printedName": "SwiftUI.Font",
+                        "usr": "s:7SwiftUI4FontV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV12subtitleFont7SwiftUI0G0Vvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV12subtitleFont7SwiftUI0G0Vvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV12subtitleFont7SwiftUI0G0VvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV12subtitleFont7SwiftUI0G0VvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "titleColor",
+                "printedName": "titleColor",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Color",
+                    "printedName": "SwiftUI.Color",
+                    "usr": "s:7SwiftUI5ColorV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV10titleColor7SwiftUI0G0Vvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV10titleColor7SwiftUI0G0Vvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV10titleColor7SwiftUI0G0Vvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV10titleColor7SwiftUI0G0Vvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV10titleColor7SwiftUI0G0Vvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV10titleColor7SwiftUI0G0Vvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV10titleColor7SwiftUI0G0VvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV10titleColor7SwiftUI0G0VvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "descriptionColor",
+                "printedName": "descriptionColor",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Color",
+                    "printedName": "SwiftUI.Color",
+                    "usr": "s:7SwiftUI5ColorV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV16descriptionColor7SwiftUI0G0Vvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV16descriptionColor7SwiftUI0G0Vvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV16descriptionColor7SwiftUI0G0Vvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV16descriptionColor7SwiftUI0G0Vvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV16descriptionColor7SwiftUI0G0Vvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV16descriptionColor7SwiftUI0G0Vvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV16descriptionColor7SwiftUI0G0VvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV16descriptionColor7SwiftUI0G0VvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "subtitleColor",
+                "printedName": "subtitleColor",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Color",
+                    "printedName": "SwiftUI.Color",
+                    "usr": "s:7SwiftUI5ColorV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV13subtitleColor7SwiftUI0G0Vvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV13subtitleColor7SwiftUI0G0Vvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV13subtitleColor7SwiftUI0G0Vvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV13subtitleColor7SwiftUI0G0Vvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV13subtitleColor7SwiftUI0G0Vvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV13subtitleColor7SwiftUI0G0Vvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV13subtitleColor7SwiftUI0G0VvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV13subtitleColor7SwiftUI0G0VvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "animationDelay",
+                "printedName": "animationDelay",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV14animationDelaySdvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV14animationDelaySdvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV14animationDelaySdvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV14animationDelaySdvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV14animationDelaySdvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV14animationDelaySdvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV14animationDelaySdvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV14animationDelaySdvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "animationDuration",
+                "printedName": "animationDuration",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV17animationDurationSdvp",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV17animationDurationSdvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV17animationDurationSdvg",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV17animationDurationSdvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV17animationDurationSdvs",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV17animationDurationSdvs",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV17animationDurationSdvM",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV17animationDurationSdvM",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(backgroundColor:accentColor:titleFont:descriptionFont:subtitleFont:titleColor:descriptionColor:subtitleColor:animationDelay:animationDuration:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Theme",
+                    "printedName": "VLPlayerLib.VLParentalControl.Theme",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "SwiftUI.Color?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "SwiftUI.Color?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "SwiftUI.Font?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Font",
+                        "printedName": "SwiftUI.Font",
+                        "usr": "s:7SwiftUI4FontV"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "SwiftUI.Font?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Font",
+                        "printedName": "SwiftUI.Font",
+                        "usr": "s:7SwiftUI4FontV"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "SwiftUI.Font?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Font",
+                        "printedName": "SwiftUI.Font",
+                        "usr": "s:7SwiftUI4FontV"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "SwiftUI.Color?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "SwiftUI.Color?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "SwiftUI.Color?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Color",
+                        "printedName": "SwiftUI.Color",
+                        "usr": "s:7SwiftUI5ColorV"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV15backgroundColor06accentG09titleFont011descriptionJ008subtitleJ00iG00kG00lG014animationDelay0M8DurationAE7SwiftUI0G0VSg_AsP0J0VSgA2v3SSdSgAWtcfc",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV15backgroundColor06accentG09titleFont011descriptionJ008subtitleJ00iG00kG00lG014animationDelay0M8DurationAE7SwiftUI0G0VSg_AsP0J0VSgA2v3SSdSgAWtcfc",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "AccessControl",
+                  "RawDocComment"
+                ],
+                "init_kind": "Designated"
+              },
+              {
+                "kind": "Var",
+                "name": "default",
+                "printedName": "default",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Theme",
+                    "printedName": "VLPlayerLib.VLParentalControl.Theme",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV7defaultAEvpZ",
+                "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV7defaultAEvpZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl",
+                  "RawDocComment"
+                ],
+                "isLet": true,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Theme",
+                        "printedName": "VLPlayerLib.VLParentalControl.Theme",
+                        "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV7defaultAEvgZ",
+                    "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV7defaultAEvgZ",
+                    "moduleName": "VLPlayerLib",
+                    "static": true,
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Struct",
+            "usr": "s:11VLPlayerLib17VLParentalControlV5ThemeV",
+            "mangledName": "$s11VLPlayerLib17VLParentalControlV5ThemeV",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Sendable",
+                "printedName": "Sendable",
+                "usr": "s:s8SendableP",
+                "mangledName": "$ss8SendableP"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:11VLPlayerLib17VLParentalControlV",
+        "mangledName": "$s11VLPlayerLib17VLParentalControlV",
+        "moduleName": "VLPlayerLib",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "VLPlayerLib",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
         "kind": "Import",
         "name": "SwiftUI",
         "printedName": "SwiftUI",
@@ -31918,6 +34262,23 @@
       },
       {
         "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "VLPlayerLib"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "VLPlayerLib",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
         "name": "UIKit",
         "printedName": "UIKit",
         "declKind": "Import",
@@ -38557,6 +40918,33 @@
           },
           {
             "kind": "Function",
+            "name": "isTrailerPreviewShowing",
+            "printedName": "isTrailerPreviewShowing(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11VLPlayerLib0A0C23isTrailerPreviewShowingyySbF",
+            "mangledName": "$s11VLPlayerLib0A0C23isTrailerPreviewShowingyySbF",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "setAnalyticsInfo",
             "printedName": "setAnalyticsInfo(mediaAnalyticsInfo:)",
             "children": [
@@ -40611,6 +42999,146 @@
               "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "checkParentalContentRating",
+            "printedName": "checkParentalContentRating()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11VLPlayerLib0A0C26checkParentalContentRatingyyF",
+            "mangledName": "$s11VLPlayerLib0A0C26checkParentalContentRatingyyF",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "isParentalWarningShown",
+            "printedName": "isParentalWarningShown",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib0A0C22isParentalWarningShownSbvp",
+            "mangledName": "$s11VLPlayerLib0A0C22isParentalWarningShownSbvp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A0C22isParentalWarningShownSbvg",
+                "mangledName": "$s11VLPlayerLib0A0C22isParentalWarningShownSbvg",
+                "moduleName": "VLPlayerLib",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "isParentalContentRatingCheckRequired",
+            "printedName": "isParentalContentRatingCheckRequired",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib0A0C36isParentalContentRatingCheckRequiredSbvp",
+            "mangledName": "$s11VLPlayerLib0A0C36isParentalContentRatingCheckRequiredSbvp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A0C36isParentalContentRatingCheckRequiredSbvg",
+                "mangledName": "$s11VLPlayerLib0A0C36isParentalContentRatingCheckRequiredSbvg",
+                "moduleName": "VLPlayerLib",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "isPinSessionVerified",
+            "printedName": "isPinSessionVerified",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib0A0C20isPinSessionVerifiedSbvp",
+            "mangledName": "$s11VLPlayerLib0A0C20isPinSessionVerifiedSbvp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A0C20isPinSessionVerifiedSbvg",
+                "mangledName": "$s11VLPlayerLib0A0C20isPinSessionVerifiedSbvg",
+                "moduleName": "VLPlayerLib",
+                "accessorKind": "get"
+              }
+            ]
           },
           {
             "kind": "Constructor",
@@ -45006,7 +47534,7 @@
               {
                 "kind": "Constructor",
                 "name": "init",
-                "printedName": "init(appMacrosList:fullScreenOnly:verticalVideo:isCustomLoaderAdded:shouldStartPictureInPictureInline:autoPlayEnabled:loopVideoPlayback:hideVideoControls:mutePlayback:clientSideAdTrackingDetails:customPlayerControlsColor:supportsChromeCast:chromecastCustomReceiver:showPlayerControlAlways:playAudioOnly:epgSupportModel:tapToPause:controlsVisibility:payWallConfiguration:playerControlsViewConfiguration:autoPlayConfiguration:isTrickPlayEnabled:isCustomAdViewEnabled:isServerSideAdTrackingEnabled:easeLiveEnabled:hideAdsView:playerResponseRequired:preGameStartTime:vlBeacon:shouldPlayVideoInitially:)",
+                "printedName": "init(appMacrosList:fullScreenOnly:verticalVideo:isCustomLoaderAdded:shouldStartPictureInPictureInline:autoPlayEnabled:loopVideoPlayback:hideVideoControls:mutePlayback:clientSideAdTrackingDetails:customPlayerControlsColor:supportsChromeCast:chromecastCustomReceiver:showPlayerControlAlways:playAudioOnly:epgSupportModel:tapToPause:controlsVisibility:payWallConfiguration:playerControlsViewConfiguration:autoPlayConfiguration:isTrickPlayEnabled:isCustomAdViewEnabled:isServerSideAdTrackingEnabled:easeLiveEnabled:hideAdsView:playerResponseRequired:preGameStartTime:vlBeacon:shouldPlayVideoInitially:parentalControl:)",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -45339,11 +47867,26 @@
                     "printedName": "Swift.Bool",
                     "hasDefaultArg": true,
                     "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "VLPlayerLib.VLParentalControl?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "VLParentalControl",
+                        "printedName": "VLPlayerLib.VLParentalControl",
+                        "usr": "s:11VLPlayerLib17VLParentalControlV"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
                   }
                 ],
                 "declKind": "Constructor",
-                "usr": "s:11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline15autoPlayEnabled04loopL8Playback04hideL8Controls04muteZ027clientSideAdTrackingDetails25customPlayerControlsColor18supportsChromeCast010chromecastN8Receiver23showPlayerControlAlways09playAudioJ015epgSupportModel10tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration0vW13Configuration0m5TrickwX00mn6AdViewX00m20ServerSideAdTrackingX008easeLiveX011hideAdsView22playerResponseRequired07preGameR4Time8vlBeacon0qwL9InitiallyAESDyS2SGSg_S2bSgS6bAC29VLClientSideAdTrackingDetailsVSgAA19PlayerControlsColorVSgSbSSSgSbA10_AA15EPGSupportModelCSgA10_AC18ControlsVisibilityOAC20PayWallConfigurationOSgAC31PlayerControlsViewConfigurationOSgAC04AutoW13ConfigurationOSgS6bSdSg08VLBeaconB08VLBeaconCSgSbtcfc",
-                "mangledName": "$s11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline15autoPlayEnabled04loopL8Playback04hideL8Controls04muteZ027clientSideAdTrackingDetails25customPlayerControlsColor18supportsChromeCast010chromecastN8Receiver23showPlayerControlAlways09playAudioJ015epgSupportModel10tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration0vW13Configuration0m5TrickwX00mn6AdViewX00m20ServerSideAdTrackingX008easeLiveX011hideAdsView22playerResponseRequired07preGameR4Time8vlBeacon0qwL9InitiallyAESDyS2SGSg_S2bSgS6bAC29VLClientSideAdTrackingDetailsVSgAA19PlayerControlsColorVSgSbSSSgSbA10_AA15EPGSupportModelCSgA10_AC18ControlsVisibilityOAC20PayWallConfigurationOSgAC31PlayerControlsViewConfigurationOSgAC04AutoW13ConfigurationOSgS6bSdSg08VLBeaconB08VLBeaconCSgSbtcfc",
+                "usr": "s:11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline15autoPlayEnabled04loopL8Playback04hideL8Controls04muteZ027clientSideAdTrackingDetails25customPlayerControlsColor18supportsChromeCast010chromecastN8Receiver23showPlayerControlAlways09playAudioJ015epgSupportModel10tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration0vW13Configuration0m5TrickwX00mn6AdViewX00m20ServerSideAdTrackingX008easeLiveX011hideAdsView22playerResponseRequired07preGameR4Time8vlBeacon0qwL9Initially15parentalControlAESDyS2SGSg_S2bSgS6bAC29VLClientSideAdTrackingDetailsVSgAA19PlayerControlsColorVSgSbSSSgSbA11_AA15EPGSupportModelCSgA11_AC18ControlsVisibilityOAC20PayWallConfigurationOSgAC31PlayerControlsViewConfigurationOSgAC04AutoW13ConfigurationOSgS6bSdSg08VLBeaconB08VLBeaconCSgSbAA17VLParentalControlVSgtcfc",
+                "mangledName": "$s11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline15autoPlayEnabled04loopL8Playback04hideL8Controls04muteZ027clientSideAdTrackingDetails25customPlayerControlsColor18supportsChromeCast010chromecastN8Receiver23showPlayerControlAlways09playAudioJ015epgSupportModel10tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration0vW13Configuration0m5TrickwX00mn6AdViewX00m20ServerSideAdTrackingX008easeLiveX011hideAdsView22playerResponseRequired07preGameR4Time8vlBeacon0qwL9Initially15parentalControlAESDyS2SGSg_S2bSgS6bAC29VLClientSideAdTrackingDetailsVSgAA19PlayerControlsColorVSgSbSSSgSbA11_AA15EPGSupportModelCSgA11_AC18ControlsVisibilityOAC20PayWallConfigurationOSgAC31PlayerControlsViewConfigurationOSgAC04AutoW13ConfigurationOSgS6bSdSg08VLBeaconB08VLBeaconCSgSbAA17VLParentalControlVSgtcfc",
                 "moduleName": "VLPlayerLib",
                 "declAttributes": [
                   "AccessControl"
@@ -71954,6 +74497,34 @@
       "value": "\"Sponsored Ad\""
     },
     {
+      "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Data Model\/VLParentalControl.swift",
+      "kind": "BooleanLiteral",
+      "offset": 756,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Data Model\/VLParentalControl.swift",
+      "kind": "StringLiteral",
+      "offset": 1215,
+      "length": 9,
+      "value": "\"WARNING\""
+    },
+    {
+      "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Data Model\/VLParentalControl.swift",
+      "kind": "StringLiteral",
+      "offset": 1265,
+      "length": 34,
+      "value": "\"The following content is rated: \""
+    },
+    {
+      "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Data Model\/VLParentalControl.swift",
+      "kind": "StringLiteral",
+      "offset": 1345,
+      "length": 30,
+      "value": "\"Viewer Discretion Is Advised\""
+    },
+    {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/PlayerControlsView.swift",
       "kind": "BooleanLiteral",
       "offset": 1396,
@@ -72915,532 +75486,546 @@
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Dictionary",
-      "offset": 4162,
+      "offset": 4301,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4256,
+      "offset": 4395,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4305,
+      "offset": 4444,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4722,
+      "offset": 4861,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4762,
+      "offset": 4901,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4989,
+      "offset": 5128,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5040,
+      "offset": 5179,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 5092,
+      "offset": 5231,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5209,
+      "offset": 5348,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5260,
+      "offset": 5399,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 5302,
+      "offset": 5441,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 5625,
+      "offset": 5764,
       "length": 4,
       "value": "-1.0"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5759,
+      "offset": 5992,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5879,
+      "offset": 6112,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Dictionary",
-      "offset": 6885,
+      "offset": 7123,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 6996,
+      "offset": 7234,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7042,
+      "offset": 7280,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7393,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 7220,
+      "offset": 7513,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 7260,
+      "offset": 7553,
       "length": 10,
       "value": "\"playable\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 7371,
+      "offset": 7664,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7413,
+      "offset": 7706,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7548,
+      "offset": 7841,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7603,
+      "offset": 7896,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7653,
+      "offset": 7946,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8007,
+      "offset": 8300,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8061,
+      "offset": 8354,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 8106,
+      "offset": 8399,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 8152,
+      "offset": 8445,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 8195,
+      "offset": 8488,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8238,
+      "offset": 8531,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8415,
+      "offset": 8708,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9134,
+      "offset": 9427,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9274,
+      "offset": 9567,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9654,
+      "offset": 9947,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10016,
+      "offset": 10058,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10122,
+      "offset": 10355,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11201,
+      "offset": 10461,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10179,
+      "offset": 11540,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 13242,
+      "offset": 10518,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 13303,
+      "offset": 13581,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 13422,
+      "offset": 13642,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 13761,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Dictionary",
-      "offset": 13490,
+      "offset": 13829,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 13666,
+      "offset": 14005,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 13751,
+      "offset": 14090,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 13786,
+      "offset": 14125,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 13839,
+      "offset": 14178,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 14312,
+      "offset": 14651,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 14762,
+      "offset": 15101,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 14796,
+      "offset": 15135,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 16129,
+      "offset": 16468,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 16581,
+      "offset": 16920,
       "length": 2,
       "value": "45"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 17174,
+      "offset": 17513,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 17395,
+      "offset": 17734,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 17611,
+      "offset": 17950,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 17801,
+      "offset": 18140,
       "length": 16,
       "value": "\"subTitlesArray\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 17757,
+      "offset": 18096,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Dictionary",
-      "offset": 18101,
+      "offset": 18440,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 18357,
+      "offset": 18696,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 18409,
+      "offset": 18748,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 18902,
+      "offset": 19241,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 18956,
+      "offset": 19295,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 19116,
+      "offset": 19455,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 19297,
+      "offset": 19636,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 19340,
+      "offset": 19679,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 20508,
+      "offset": 20847,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 20557,
+      "offset": 20896,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 20672,
+      "offset": 21011,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21061,
+      "offset": 21400,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21320,
+      "offset": 21659,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21440,
+      "offset": 21779,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21521,
+      "offset": 21860,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21561,
+      "offset": 21900,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21635,
+      "offset": 21974,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 21677,
+      "offset": 22016,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 46629,
+      "offset": 47095,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 53142,
+      "offset": 53609,
       "length": 5,
       "value": "false"
     },
@@ -74203,7 +76788,7 @@
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Network Class\/CustomVideoController+ContentFetch.swift",
       "kind": "BooleanLiteral",
-      "offset": 9432,
+      "offset": 9764,
       "length": 5,
       "value": "false"
     },
@@ -74418,6 +77003,20 @@
       "value": "false"
     },
     {
+      "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/VLParentalWarningOverlay.swift",
+      "kind": "BooleanLiteral",
+      "offset": 303,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/VLParentalWarningOverlay.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3950,
+      "length": 5,
+      "value": "false"
+    },
+    {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
       "offset": 1577,
@@ -74539,294 +77138,301 @@
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 16612,
+      "offset": 14417,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 25525,
+      "offset": 17123,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 29088,
+      "offset": 26125,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 29360,
+      "offset": 29688,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 29744,
+      "offset": 29960,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
+      "kind": "BooleanLiteral",
+      "offset": 30344,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 29953,
+      "offset": 30553,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 30004,
+      "offset": 30604,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Dictionary",
-      "offset": 30132,
+      "offset": 30732,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 36408,
+      "offset": 37195,
       "length": 3,
       "value": "\"1\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 37825,
+      "offset": 38612,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 38033,
+      "offset": 38820,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 38074,
+      "offset": 38861,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 38219,
+      "offset": 39006,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Dictionary",
-      "offset": 43587,
+      "offset": 44959,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 43635,
+      "offset": 45007,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 43684,
+      "offset": 45056,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 43738,
+      "offset": 45110,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 43806,
+      "offset": 45178,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 43856,
+      "offset": 45228,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 43907,
+      "offset": 45279,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 43959,
+      "offset": 45331,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44006,
+      "offset": 45378,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44213,
+      "offset": 45585,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44327,
+      "offset": 45699,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44377,
+      "offset": 45749,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44841,
+      "offset": 46213,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44898,
+      "offset": 46270,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44963,
+      "offset": 46335,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 45013,
+      "offset": 46385,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 45060,
+      "offset": 46432,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 45117,
+      "offset": 46489,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 45276,
+      "offset": 46648,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49559,
+      "offset": 51026,
       "length": 8,
       "value": "\"Paused\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49591,
+      "offset": 51058,
       "length": 9,
       "value": "\"Playing\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49634,
+      "offset": 51101,
       "length": 17,
       "value": "\"Playing+Casting\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49677,
+      "offset": 51144,
       "length": 11,
       "value": "\"Buffering\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49713,
+      "offset": 51180,
       "length": 10,
       "value": "\"Complete\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49745,
+      "offset": 51212,
       "length": 7,
       "value": "\"Error\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49782,
+      "offset": 51249,
       "length": 15,
       "value": "\"Advertisement\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49821,
+      "offset": 51288,
       "length": 9,
       "value": "\"Stalled\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49854,
+      "offset": 51321,
       "length": 9,
       "value": "\"Stopped\""
     },
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49884,
+      "offset": 51351,
       "length": 6,
       "value": "\"None\""
     },
@@ -79257,7 +81863,7 @@
     {
       "filePath": "\/Users\/vikashvishwakarma\/Desktop\/NexG\/Test2_PlayerSDK_2\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Casting Handler\/SecondScreenDeviceProvider\/CastPopOverView.swift",
       "kind": "BooleanLiteral",
-      "offset": 3997,
+      "offset": 3863,
       "length": 5,
       "value": "false"
     },
