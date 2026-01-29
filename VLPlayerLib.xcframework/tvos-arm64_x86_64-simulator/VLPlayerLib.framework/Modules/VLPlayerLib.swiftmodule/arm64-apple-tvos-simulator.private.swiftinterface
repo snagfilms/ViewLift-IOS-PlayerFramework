@@ -1256,8 +1256,9 @@ public struct VLParentalControl : Swift.Sendable {
   public init(setting: VLPlayerLib.VLParentalControl.Setting, localization: VLPlayerLib.VLParentalControl.Localization, theme: VLPlayerLib.VLParentalControl.Theme = .default)
   public struct Setting : Swift.Sendable, Swift.Codable, Swift.Hashable {
     public var userContentRating: Swift.Bool
+    public var enabledParentalPin: Swift.Bool
     public var parentalRating: Swift.String?
-    public init(userContentRating: Swift.Bool = false, parentalRating: Swift.String? = nil)
+    public init(userContentRating: Swift.Bool = false, enabledParentalPin: Swift.Bool = false, parentalRating: Swift.String? = nil)
     public static func == (a: VLPlayerLib.VLParentalControl.Setting, b: VLPlayerLib.VLParentalControl.Setting) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
     public func hash(into hasher: inout Swift.Hasher)
