@@ -8996,6 +8996,45 @@
             ],
             "reqNewWitnessTableEntry": true,
             "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "currentStateForFeedVideo",
+            "printedName": "currentStateForFeedVideo(videoID:state:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@VLPlayerLib@objc(pl)VideoPlaybackDelegate(im)currentStateForFeedVideoWithVideoID:state:",
+            "mangledName": "$s11VLPlayerLib21VideoPlaybackDelegateP019currentStateForFeedC07videoID5stateSbSS_SStF",
+            "moduleName": "VLPlayerLib",
+            "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.VideoPlaybackDelegate>",
+            "sugared_genericSig": "<Self where Self : VLPlayerLib.VideoPlaybackDelegate>",
+            "protocolReq": true,
+            "objc_name": "currentStateForFeedVideoWithVideoID:state:",
+            "declAttributes": [
+              "Optional",
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Protocol",
@@ -35875,7 +35914,7 @@
               {
                 "kind": "Constructor",
                 "name": "init",
-                "printedName": "init(appMacrosList:fullScreenOnly:verticalVideo:isCustomLoaderAdded:shouldStartPictureInPictureInline:loopVideoPlayback:mutePlayback:customPlayerControlsColor:supportsChromeCast:chromecastCustomReceiver:playAudioOnly:tapToPause:controlsVisibility:payWallConfiguration:playerControlsViewConfiguration:autoPlayConfiguration:isTrickPlayEnabled:isCustomAdViewEnabled:isServerSideAdTrackingEnabled:easeLiveEnabled:hideAdsView:playerResponseRequired:preGameStartTime:featureFlags:)",
+                "printedName": "init(appMacrosList:fullScreenOnly:verticalVideo:isCustomLoaderAdded:shouldStartPictureInPictureInline:loopVideoPlayback:mutePlayback:customPlayerControlsColor:supportsChromeCast:chromecastCustomReceiver:playAudioOnly:tapToPause:controlsVisibility:payWallConfiguration:playerControlsViewConfiguration:autoPlayConfiguration:isTrickPlayEnabled:isCustomAdViewEnabled:isServerSideAdTrackingEnabled:easeLiveEnabled:hideAdsView:isFeedVideoPlayer:playerResponseRequired:preGameStartTime:featureFlags:)",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -36125,6 +36164,13 @@
                   },
                   {
                     "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "hasDefaultArg": true,
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
                     "name": "Optional",
                     "printedName": "Swift.Double?",
                     "children": [
@@ -36147,8 +36193,8 @@
                   }
                 ],
                 "declKind": "Constructor",
-                "usr": "s:11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline04loopL8Playback04muteW025customPlayerControlsColor18supportsChromeCast010chromecastN8Receiver09playAudioJ010tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration21autoPlayConfiguration0M16TrickPlayEnabled0mN13AdViewEnabled0M27ServerSideAdTrackingEnabled15easeLiveEnabled11hideAdsView22playerResponseRequired07preGameR4Time12featureFlagsAESDyS2SGSg_S2bSgS4bAA0Z13ControlsColorVSgSbSSSgA4_A4_AC18ControlsVisibilityOAC20PayWallConfigurationOSgAC0Z25ControlsViewConfigurationOSgAC21AutoPlayConfigurationOSgS6bSdSgAA0C5FlagsVtcfc",
-                "mangledName": "$s11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline04loopL8Playback04muteW025customPlayerControlsColor18supportsChromeCast010chromecastN8Receiver09playAudioJ010tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration21autoPlayConfiguration0M16TrickPlayEnabled0mN13AdViewEnabled0M27ServerSideAdTrackingEnabled15easeLiveEnabled11hideAdsView22playerResponseRequired07preGameR4Time12featureFlagsAESDyS2SGSg_S2bSgS4bAA0Z13ControlsColorVSgSbSSSgA4_A4_AC18ControlsVisibilityOAC20PayWallConfigurationOSgAC0Z25ControlsViewConfigurationOSgAC21AutoPlayConfigurationOSgS6bSdSgAA0C5FlagsVtcfc",
+                "usr": "s:11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline04loopL8Playback04muteW025customPlayerControlsColor18supportsChromeCast010chromecastN8Receiver09playAudioJ010tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration21autoPlayConfiguration0M16TrickPlayEnabled0mN13AdViewEnabled0M27ServerSideAdTrackingEnabled15easeLiveEnabled11hideAdsView0m4FeedlZ022playerResponseRequired07preGameR4Time12featureFlagsAESDyS2SGSg_S2bSgS4bAA0Z13ControlsColorVSgSbSSSgA5_A5_AC18ControlsVisibilityOAC20PayWallConfigurationOSgAC0Z25ControlsViewConfigurationOSgAC21AutoPlayConfigurationOSgS7bSdSgAA0C5FlagsVtcfc",
+                "mangledName": "$s11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline04loopL8Playback04muteW025customPlayerControlsColor18supportsChromeCast010chromecastN8Receiver09playAudioJ010tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration21autoPlayConfiguration0M16TrickPlayEnabled0mN13AdViewEnabled0M27ServerSideAdTrackingEnabled15easeLiveEnabled11hideAdsView0m4FeedlZ022playerResponseRequired07preGameR4Time12featureFlagsAESDyS2SGSg_S2bSgS4bAA0Z13ControlsColorVSgSbSSSgA5_A5_AC18ControlsVisibilityOAC20PayWallConfigurationOSgAC0Z25ControlsViewConfigurationOSgAC21AutoPlayConfigurationOSgS7bSdSgAA0C5FlagsVtcfc",
                 "moduleName": "VLPlayerLib",
                 "declAttributes": [
                   "AccessControl"
@@ -63026,357 +63072,364 @@
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 1586,
+      "offset": 1656,
       "length": 23,
       "value": "\"com.viewlift.vlplayer\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Array",
-      "offset": 2337,
+      "offset": 2407,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 2386,
+      "offset": 2456,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Dictionary",
-      "offset": 2665,
+      "offset": 2735,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 5599,
+      "offset": 5669,
       "length": 6,
       "value": "2160.0"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 5648,
+      "offset": 5718,
       "length": 6,
       "value": "1080.0"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 5714,
+      "offset": 5784,
       "length": 5,
       "value": "720.0"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 5768,
+      "offset": 5838,
       "length": 5,
       "value": "480.0"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 5813,
+      "offset": 5883,
       "length": 5,
       "value": "360.0"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 6099,
+      "offset": 6169,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 6687,
+      "offset": 6757,
       "length": 2,
       "value": "57"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 6775,
+      "offset": 6845,
       "length": 2,
       "value": "46"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 6861,
+      "offset": 6931,
       "length": 2,
       "value": "50"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 14867,
+      "offset": 14937,
       "length": 25,
       "value": "\"CANT_ACCESS_TVE_CONTENT\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 14936,
+      "offset": 15006,
       "length": 33,
       "value": "\"SVOD_TVE_SUBSCRIPTION_NOT_FOUND\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 14999,
+      "offset": 15069,
       "length": 18,
       "value": "\"TVE_NO_USER_INFO\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15057,
+      "offset": 15127,
       "length": 28,
       "value": "\"TVE_SUBSCRIPTION_NOT_FOUND\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 18503,
+      "offset": 18573,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 27637,
+      "offset": 27871,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 31417,
+      "offset": 31651,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 37504,
+      "offset": 37902,
       "length": 3,
       "value": "\"1\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 38613,
+      "offset": 39011,
       "length": 3,
       "value": "\"1\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 38988,
+      "offset": 39386,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 39196,
+      "offset": 39594,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 39237,
+      "offset": 39635,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 39382,
+      "offset": 39780,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Dictionary",
-      "offset": 44348,
+      "offset": 44794,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44396,
+      "offset": 44842,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44445,
+      "offset": 44891,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44499,
+      "offset": 44945,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44567,
+      "offset": 45013,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44619,
+      "offset": 45065,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44666,
+      "offset": 45112,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44793,
+      "offset": 45239,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44904,
+      "offset": 45350,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 45308,
+      "offset": 45754,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 45365,
+      "offset": 45811,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 45430,
+      "offset": 45876,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 45480,
+      "offset": 45926,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 45527,
+      "offset": 45973,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 45585,
+      "offset": 46026,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
+      "kind": "BooleanLiteral",
+      "offset": 46084,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49299,
+      "offset": 49853,
       "length": 8,
       "value": "\"Paused\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49331,
+      "offset": 49885,
       "length": 9,
       "value": "\"Playing\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49374,
+      "offset": 49928,
       "length": 17,
       "value": "\"Playing+Casting\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49417,
+      "offset": 49971,
       "length": 11,
       "value": "\"Buffering\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49453,
+      "offset": 50007,
       "length": 10,
       "value": "\"Complete\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49485,
+      "offset": 50039,
       "length": 7,
       "value": "\"Error\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49522,
+      "offset": 50076,
       "length": 15,
       "value": "\"Advertisement\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49561,
+      "offset": 50115,
       "length": 9,
       "value": "\"Stalled\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49594,
+      "offset": 50148,
       "length": 9,
       "value": "\"Stopped\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/VLPlayerLib\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 49624,
+      "offset": 50178,
       "length": 6,
       "value": "\"None\""
     },

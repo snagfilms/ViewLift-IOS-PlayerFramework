@@ -505,6 +505,11 @@ SWIFT_CLASS("_TtC11VLPlayerLib7VLError")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+SWIFT_CLASS("_TtC11VLPlayerLib12VLFeedPlayer")
+@interface VLFeedPlayer : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @protocol VideoPlaybackDelegate;
 SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 @interface VLPlayer : NSObject
@@ -973,6 +978,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 /// Delgate method - Called when AutoPlay view is about to display and asks for metadata for URL Stream.
 - (StreamMetadata * _Nullable)autoPlayMetadataProviderWithStreamId:(NSString * _Nonnull)streamId SWIFT_WARN_UNUSED_RESULT;
 - (void)avPlayerControllerInstance:(AVPlayerViewController * _Nonnull)avPlayerControllerInstance;
+- (BOOL)currentStateForFeedVideoWithVideoID:(NSString * _Nonnull)videoID state:(NSString * _Nonnull)state SWIFT_WARN_UNUSED_RESULT;
 @end
 
 #endif
