@@ -373,10 +373,8 @@ public protocol CustomPlayerSkinProtocol : UIKit.UIView {
   public static var isOrientationLocked: Swift.Bool
   public static var lockedOrientation: UIKit.UIInterfaceOrientationMask
   public static var orientationLockDidChange: ((Swift.Bool) -> Swift.Void)?
-  @available(iOS 16.0, *)
-  public static func forceLandscapeOrientation()
-  @available(iOS 16.0, *)
-  public static func forcePortraitOrientation()
+  public static func setLandscape()
+  public static func setPortrait()
   @objc deinit
 }
 public struct FeatureFlags {
