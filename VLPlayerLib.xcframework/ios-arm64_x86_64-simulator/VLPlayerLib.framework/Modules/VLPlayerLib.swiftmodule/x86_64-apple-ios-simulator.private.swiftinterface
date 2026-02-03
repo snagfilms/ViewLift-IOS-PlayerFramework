@@ -369,8 +369,18 @@ public protocol CustomPlayerSkinProtocol : UIKit.UIView {
   func fullScreenAdButtonTapped(isFullscreen: Swift.Bool)
   func updatePlayButton()
 }
+@_hasMissingDesignatedInitializers public class VLPlayerOrientationManager {
+  public static var isOrientationLocked: Swift.Bool
+  public static var lockedOrientation: UIKit.UIInterfaceOrientationMask
+  public static var orientationLockDidChange: ((Swift.Bool) -> Swift.Void)?
+  @available(iOS 16.0, *)
+  public static func forceLandscapeOrientation()
+  @available(iOS 16.0, *)
+  public static func forcePortraitOrientation()
+  @objc deinit
+}
 public struct FeatureFlags {
-  public init(shouldContinuePlaybackOnScreenLock: Swift.Bool = false)
+  public init(shouldContinuePlaybackOnScreenLock: Swift.Bool = false, shouldHandleOrientation: Swift.Bool = false)
 }
 extension VLPlayerLib.VLPlayer {
   public func startSessionAnalytics()
@@ -594,6 +604,35 @@ public struct VLSubtitle {
   public var subTitleUrl: Swift.String?
   public var subTitleType: Swift.String?
   public var subTitleLanguage: Swift.String?
+}
+public enum FeedInteraction : Swift.String {
+  case like
+  case removedLike
+  case dislike
+  case removedDislike
+  case mute
+  case unMute
+  case play
+  case pause
+  case share
+  case unknown
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol FeedPlaybackDelegate : AnyObject {
+  func currentFeedPlaying(videoID: Swift.String)
+  func currentImageAd(imageUrl: Swift.String)
+  func feedPlayerStatus(isPlaying: Swift.Bool)
+  func currentStateForFeedVideo(videoID: Swift.String, state: VLPlayerLib.FeedInteraction) -> Swift.Bool
+}
+public protocol FeedViewDelegate : VLPlayerLib.FeedPlaybackDelegate {
+  func userFeedInteraction(type: VLPlayerLib.FeedInteraction, videoID: Swift.String)
+}
+public protocol FeedPlayerControlDelegate : VLPlayerLib.FeedPlaybackDelegate {
+  func userFeedInteraction(type: VLPlayerLib.FeedInteraction)
 }
 @objc @_inheritsConvenienceInitializers @IBDesignable @_Concurrency.MainActor @preconcurrency open class MarqueeLabel : UIKit.UILabel, QuartzCore.CAAnimationDelegate {
   public enum MarqueeType {
@@ -966,6 +1005,7 @@ public struct TokenIdentity : Swift.Decodable {
 @objc @_inheritsConvenienceInitializers open class VLPlayer : ObjectiveC.NSObject {
   weak open var videoPlayerDatasource: (any VLPlayerLib.VideoPlayerDataSource)?
   @objc weak open var videoPlayerDelegate: (any VLPlayerLib.VideoPlaybackDelegate)?
+  weak open var feedPlayerDelegate: (any VLPlayerLib.FeedPlayerControlDelegate)?
   @objc weak open var castDelegate: (any VLPlayerLib.ChromeCastPlaybackDelegate)?
   weak open var playerVideoAnalyticsDelegate: (any VLPlayerLib.PlayerVideoAnalyticsTrackDelegate)?
   weak open var serverSideAdTrackingDelegate: (any VLPlayerLib.ServerSideAdTrackingDelegate)? {
@@ -1146,7 +1186,7 @@ public struct TokenIdentity : Swift.Decodable {
 }
 extension VLPlayerLib.VLPlayer {
   public struct VLPlayerFeatureSupported {
-    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, loopVideoPlayback: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor? = nil, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String? = nil, playAudioOnly: Swift.Bool? = false, tapToPause: Swift.Bool? = nil, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, easeLiveEnabled: Swift.Bool = false, hideAdsView: Swift.Bool = false, playerResponseRequired: Swift.Bool = true, preGameStartTime: Swift.Double? = nil, featureFlags: VLPlayerLib.FeatureFlags = FeatureFlags())
+    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, loopVideoPlayback: Swift.Bool = false, mutePlayback: Swift.Bool = false, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor? = nil, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String? = nil, playAudioOnly: Swift.Bool? = false, tapToPause: Swift.Bool? = nil, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, easeLiveEnabled: Swift.Bool = false, hideAdsView: Swift.Bool = false, isFeedVideoPlayer: Swift.Bool = false, playerResponseRequired: Swift.Bool = true, preGameStartTime: Swift.Double? = nil, featureFlags: VLPlayerLib.FeatureFlags = FeatureFlags())
   }
 }
 extension VLPlayerLib.VLPlayer {
@@ -1245,6 +1285,26 @@ extension VLPlayerLib.VLPlayer.PlaybackList {
   public var isEmpty: Swift.Bool {
     get
   }
+}
+public struct FeedViewConfig {
+  public init(items: [Swift.String], adImageMap: [Swift.Int : Swift.String] = [:], autoSwipe: Swift.Bool = false, maxFeedPlayer: Swift.Int = 5)
+  public init(totalItems: [VLPlayerLib.FeedViewItemType], autoSwipe: Swift.Bool = false, maxFeedPlayer: Swift.Int = 5)
+}
+public enum FeedViewItemType {
+  case url(Swift.String)
+  case videoId(Swift.String)
+  case imageAd(Swift.String)
+}
+@objc @_inheritsConvenienceInitializers open class VLFeedPlayer : ObjectiveC.NSObject {
+  @objc deinit
+  open func setSource(delegate: (any VLPlayerLib.FeedViewDelegate)? = nil, config: VLPlayerLib.FeedViewConfig, baseUrl: Swift.String, authToken: Swift.String) -> UIKit.UIViewController?
+  @objc override dynamic public init()
+}
+public enum FeedViewLayoutStyle : Swift.Equatable {
+  case verticalReels
+  case horizontal
+  case grid(columns: Swift.Int)
+  public static func == (a: VLPlayerLib.FeedViewLayoutStyle, b: VLPlayerLib.FeedViewLayoutStyle) -> Swift.Bool
 }
 public struct VideoPlan : Swift.Codable {
   public let monetizationModel: Swift.String
@@ -1391,6 +1451,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func autoPlayUIDismissed(isPlayingNextContent: Swift.Bool)
   @objc optional func autoPlayMetadataProvider(streamId: Swift.String) -> VLPlayerLib.VLPlayer.StreamMetadata?
   @objc optional func avPlayerControllerInstance(_ avPlayerControllerInstance: AVKit.AVPlayerViewController)
+  @objc optional func currentStateForFeedVideo(videoID: Swift.String, state: Swift.String) -> Swift.Bool
 }
 @objc public protocol ChromeCastPlaybackDelegate : ObjectiveC.NSObjectProtocol {
   @objc optional func chromeCastConnectionStatusUpdate(isConnected: Swift.Bool, castContextSessionInstance: GoogleCast.GCKCastContext?)
@@ -1704,6 +1765,9 @@ extension VLPlayerLib.VLPlayerResponse.ContentInfo.CodingKeys : Swift.RawReprese
 extension VLPlayerLib.VLPlayerResponse.ContentInfo.PlaybackInfo.VideoAsset.CodingKeys : Swift.Equatable {}
 extension VLPlayerLib.VLPlayerResponse.ContentInfo.PlaybackInfo.VideoAsset.CodingKeys : Swift.Hashable {}
 extension VLPlayerLib.VLPlayerResponse.ContentInfo.PlaybackInfo.VideoAsset.CodingKeys : Swift.RawRepresentable {}
+extension VLPlayerLib.FeedInteraction : Swift.Equatable {}
+extension VLPlayerLib.FeedInteraction : Swift.Hashable {}
+extension VLPlayerLib.FeedInteraction : Swift.RawRepresentable {}
 extension VLPlayerLib.MarqueeLabel.MarqueeType : Swift.Equatable {}
 extension VLPlayerLib.MarqueeLabel.MarqueeType : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.LeaderboardPlayerControls : Swift.Equatable {}
