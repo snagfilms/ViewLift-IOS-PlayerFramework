@@ -373,12 +373,12 @@ public protocol CustomPlayerSkinProtocol : UIKit.UIView {
   public static var isOrientationLocked: Swift.Bool
   public static var lockedOrientation: UIKit.UIInterfaceOrientationMask
   public static var orientationLockDidChange: ((Swift.Bool) -> Swift.Void)?
-  @available(iOS 16.0, *)
-  public static func forceLandscapeOrientation()
+  public static func setLandscape()
+  public static func setPortrait()
   @objc deinit
 }
 public struct FeatureFlags {
-  public init(shouldContinuePlaybackOnScreenLock: Swift.Bool = false)
+  public init(shouldContinuePlaybackOnScreenLock: Swift.Bool = false, shouldHandleOrientation: Swift.Bool = false)
 }
 extension VLPlayerLib.VLPlayer {
   public func startSessionAnalytics()
@@ -1437,6 +1437,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func pictureInPictureDidStop()
   @objc optional func pictureInPictureDidFailedToStart(error: VLPlayerLib.VLError, playerTag: Swift.String)
   @objc optional func onLoadingChanged(isLoading: Swift.Bool)
+  @objc optional func onLockScreenChanged(isLocked: Swift.Bool)
   @objc optional func lowLatencyPlayerLoaded()
   @objc optional func playerStateChanged(state: Swift.String)
   @objc optional func bitMovinPlayerLoaded()

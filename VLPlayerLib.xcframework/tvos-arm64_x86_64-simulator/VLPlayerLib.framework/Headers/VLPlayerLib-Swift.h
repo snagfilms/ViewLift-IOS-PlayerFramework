@@ -776,6 +776,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 /// \param isLoading To tell if loader need to be start or stop
 ///
 - (void)onLoadingChangedWithIsLoading:(BOOL)isLoading;
+- (void)onLockScreenChangedWithIsLocked:(BOOL)isLocked;
 /// important:
 ///
 /// Delgate method - Called when law latency player is ready
@@ -1600,6 +1601,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 /// \param isLoading To tell if loader need to be start or stop
 ///
 - (void)onLoadingChangedWithIsLoading:(BOOL)isLoading;
+- (void)onLockScreenChangedWithIsLocked:(BOOL)isLocked;
 /// important:
 ///
 /// Delgate method - Called when law latency player is ready
