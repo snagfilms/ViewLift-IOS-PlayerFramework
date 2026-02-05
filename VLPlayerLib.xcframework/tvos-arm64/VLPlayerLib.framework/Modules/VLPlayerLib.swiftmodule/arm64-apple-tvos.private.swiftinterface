@@ -249,6 +249,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func pictureInPictureDidStop()
   @objc optional func pictureInPictureDidFailedToStart(error: VLPlayerLib.VLError, playerTag: Swift.String)
   @objc optional func onLoadingChanged(isLoading: Swift.Bool)
+  @objc optional func onLockScreenChanged(isLocked: Swift.Bool)
   @objc optional func lowLatencyPlayerLoaded()
   @objc optional func playerStateChanged(state: Swift.String)
   @objc optional func bitMovinPlayerLoaded()

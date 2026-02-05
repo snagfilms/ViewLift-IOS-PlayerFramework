@@ -8635,6 +8635,38 @@
           },
           {
             "kind": "Function",
+            "name": "onLockScreenChanged",
+            "printedName": "onLockScreenChanged(isLocked:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@VLPlayerLib@objc(pl)VideoPlaybackDelegate(im)onLockScreenChangedWithIsLocked:",
+            "mangledName": "$s11VLPlayerLib21VideoPlaybackDelegateP19onLockScreenChanged8isLockedySb_tF",
+            "moduleName": "VLPlayerLib",
+            "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.VideoPlaybackDelegate>",
+            "sugared_genericSig": "<Self where Self : VLPlayerLib.VideoPlaybackDelegate>",
+            "protocolReq": true,
+            "objc_name": "onLockScreenChangedWithIsLocked:",
+            "declAttributes": [
+              "Optional",
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "lowLatencyPlayerLoaded",
             "printedName": "lowLatencyPlayerLoaded()",
             "children": [
