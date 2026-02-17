@@ -138,8 +138,8 @@ class PlayerViewController_tvOS: UIViewController {
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""
         let userId: String? = nil
-        // Initialize player with license if available
         let vlBeaconURL = VLAuthentication.sharedInstance.bootStrapConfig?.playerBeaconUrl ??  ""
+        // Initialize player with license if available
 
         if let playerLicenseKey = playerLicenseKey, !playerLicenseKey.isEmpty {
             vlPlayer = VLPlayer(playerType: .bitmovin(config: VLBitmovinConfig(license: VLBitmovinConfig.VLBitmovinLicenseConfig(playerKey: playerLicenseKey, analyticsKey: analyticsLicenseKey), userId: userId)))

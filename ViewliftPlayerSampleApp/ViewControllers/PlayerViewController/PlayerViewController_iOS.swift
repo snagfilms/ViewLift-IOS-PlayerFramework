@@ -316,7 +316,6 @@ extension PlayerViewController_iOS {
         // Select playback source type based on user option
         let playbackSourceType: VLPlayer.PlaybackSourceType
         if isPlayingFromURL(){
-            let isDVREnabled = streamConfig?.isDVR ?? false
             let streamType = VLPlayer.DirectStreamType(
                 url: streamUrl ?? "",
                 streamConfig: VLPlayer.StreamConfig(isLive: self.streamConfig?.isLive, isDVR: self.streamConfig?.isDVR, isSSAIEnabled: self.streamConfig?.isSSAIEnabled),
@@ -326,7 +325,7 @@ extension PlayerViewController_iOS {
             let playbackConfig = VLPlayer.DirectStreamPlaybackConfig(
                 stream: streamType,
                 token: vlToken,
-                    apiBaseURL:  nil,
+                    apiBaseURL:  vlBaseUrl,
                     beaconURL: vlBeaconURL,
                     networkName: "",
                     mediaMetaDataInfo: nil
@@ -344,7 +343,7 @@ extension PlayerViewController_iOS {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl, beaconBaseURL: vlBeaconURL,
+                            apiBaseURL: vlBaseUrl, beaconURL: vlBeaconURL,
                             adobeTempPassPayload: adobePassPayload
                         )
                 )
@@ -355,21 +354,7 @@ extension PlayerViewController_iOS {
             if let data = entitlementData {
                 vlPlayer?.setEntitlement(data: data)
             }
-            
-//            let autoPlayList = autoPlayListdataManager?.getAutoPlayUrlList()
-        
-//        let epgProgram = VLEPGProgramDetails(
-//            id: "0004c623-da4f-4e1a-a6c5-f5e46a4e528a",
-//            channelId: "669090af-a232-4270-9bd2-8fdc30fdc224",
-//            programId: "EP026956620027",
-//            programTitle: "9-1-1",
-//            subType: "Series",
-//            programStartTime: 1761393500000,
-//            programEndTime: 1761393600000,
-//            subTitle: "9-1-1"
-//        )
-        
-        
+        let autoPlayList = autoPlayListdataManager?.getAutoPlayUrlList()// pass this for autoplay in nextPlaybackList
             
             // Set player source and handle completion
            vlPlayer?.setSource(
@@ -377,7 +362,6 @@ extension PlayerViewController_iOS {
                 vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
                 playerFeaturesSupported: featureSupported, nextPlaybackList: nil,
                 brandName: ""
-//                , epgProgramDetails: epgProgram
             ) {
                 [weak self] isSuccess,
                 playerView,
