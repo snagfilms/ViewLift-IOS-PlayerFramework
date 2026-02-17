@@ -401,6 +401,12 @@ class PlayerViewController_tvOS: UIViewController {
 
         playerContainerView.bringSubviewToFront(timerLabel)
         playerContainerView.bringSubviewToFront(loaderView)
+        let customInfoViewController = InfoViewController()
+        customInfoViewController.modalPresentationStyle = .overFullScreen
+        vlPlayer?.customInfoViewController = customInfoViewController
+        let customOverlayViewController = EmojiGridViewController()
+        customOverlayViewController.modalPresentationStyle = .overFullScreen
+        vlPlayer?.customOverlayViewController = customOverlayViewController
     }
 
 
