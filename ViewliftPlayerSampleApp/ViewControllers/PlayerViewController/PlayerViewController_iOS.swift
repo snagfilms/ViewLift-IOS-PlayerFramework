@@ -700,7 +700,31 @@ extension PlayerViewController_iOS {
         }
         
         alertController.addAction(okAction)
-        present(alertController, animated: true)
+        if let presentedVC = self.presentedViewController {
+            // Check if presented VC can present (not already presenting)
+            if presentedVC.presentedViewController == nil {
+                presentedVC.present(alertController, animated: true)
+            } else {
+                // Find top-most VC that can present
+                self.findTopPresentableVC()?.present(alertController, animated: true)
+            }
+        } else {
+            self.present(alertController, animated: true)
+        }
+        
+    }
+    
+    private func findTopPresentableVC() -> UIViewController? {
+        var topController: UIViewController? = self
+        
+        while topController?.presentedViewController != nil {
+            topController = topController?.presentedViewController
+            if let nav = topController as? UINavigationController {
+                topController = nav.topViewController
+            }
+        }
+        
+        return topController
     }
     
     /// Dismisses the current view controller
