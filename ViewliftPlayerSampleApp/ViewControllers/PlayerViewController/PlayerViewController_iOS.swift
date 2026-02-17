@@ -319,7 +319,7 @@ extension PlayerViewController_iOS {
             let isDVREnabled = streamConfig?.isDVR ?? false
             let streamType = VLPlayer.DirectStreamType(
                 url: streamUrl ?? "",
-                streamConfig: streamConfig,
+                streamConfig: VLPlayer.StreamConfig(isLive: self.streamConfig?.isLive, isDVR: self.streamConfig?.isDVR, isSSAIEnabled: self.streamConfig?.isSSAIEnabled),
                 drmconfig: drmConfig
             )
             
@@ -643,7 +643,7 @@ extension PlayerViewController_iOS {
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: false,
                                                  isCustomAdViewEnabled: enableCustomAdUI,
-                                                 isServerSideAdTrackingEnabled: true)
+                                                 isServerSideAdTrackingEnabled: true, featureFlags: FeatureFlags(shouldContinuePlaybackOnScreenLock: true, shouldHandleOrientation: false))
     }
         
     /// Returns the paywall configuration based on the type
@@ -677,7 +677,7 @@ extension PlayerViewController_iOS {
     /// Adds and returns a loader (activity indicator) to the given container view
     private func addLoaderView(to containerView: UIView) -> UIActivityIndicatorView {
         let loaderView: UIActivityIndicatorView
-        loaderView = UIActivityIndicatorView(style: .whiteLarge)
+        loaderView = UIActivityIndicatorView(style: .UIActivityIndicatorView.Style.large)
         containerView.addSubview(loaderView)
         loaderView.center = CGPoint(
             x: playerFrame.midX,
