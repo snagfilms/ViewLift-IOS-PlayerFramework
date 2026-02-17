@@ -54,7 +54,7 @@ struct TVEPollingQRCodeView: View {
     private func setup() async {
         do {
             // 1. Get auth code
-            let code = try await VLAuthentication.sharedInstance.generateTVEAuthCode() ?? ""
+            let code = try await VLAuthentication.sharedInstance.generateTVEAuthCode()
             activationCode = code
 
             // 2. Build full URL & QR
@@ -69,18 +69,18 @@ struct TVEPollingQRCodeView: View {
             TVEPollingHelper.shared.startPolling(
                 activationCode: code
             ) { userIdentity in
-                reloadPlayer(userIdentity: userIdentity)
+                self.reloadPlayer(userIdentity: userIdentity)
             } onFailure: { error in
                 debugPrint("Polling failed:", error)
-                authCallback?(nil, error)
+                self.authCallback?(nil, error)
             }
-
-        } catch (let error){
+            
+        } catch VLAuthenticationErrorCode.invalidParameters(let message) {
+            debugPrint("Auth-code error: \(message)")
+            authCallback?(nil, VLAuthenticationErrorCode.invalidParameters(message: message))
+        } catch {
             debugPrint("Auth-code error:", error)
-            if let authError = error as? VLAuthenticationErrorCode {
-                authCallback?(nil, authError)
-            }
-           
+            authCallback?(nil, error as? VLAuthenticationErrorCode ?? VLAuthenticationErrorCode.unknownError(underlyingError: error))
         }
     }
 
