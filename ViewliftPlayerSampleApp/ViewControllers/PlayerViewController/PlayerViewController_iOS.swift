@@ -677,7 +677,7 @@ extension PlayerViewController_iOS {
     /// Adds and returns a loader (activity indicator) to the given container view
     private func addLoaderView(to containerView: UIView) -> UIActivityIndicatorView {
         let loaderView: UIActivityIndicatorView
-        loaderView = UIActivityIndicatorView(style: .UIActivityIndicatorView.Style.large)
+        loaderView = UIActivityIndicatorView(style: .large)
         containerView.addSubview(loaderView)
         loaderView.center = CGPoint(
             x: playerFrame.midX,
