@@ -171,6 +171,11 @@ extension VLPlayerLib.VLPlayer {
 extension UIKit.UIColor {
   public static func fromHex(_ hex: Swift.String, alpha: CoreFoundation.CGFloat = 1.0) -> UIKit.UIColor
 }
+extension Swift.String {
+  public func hasQueryParameter(_ parameter: Swift.String) -> Swift.Bool
+  public func hasAllQueryParameters(_ parameters: [Swift.String]) -> Swift.Bool
+  public func hasAnyQueryParameter(_ parameters: [Swift.String]) -> Swift.Bool
+}
 public class AnalyticsPlayerInfo {
   public var playerVersion: Swift.String
   public var playerTech: Swift.String?
@@ -1092,8 +1097,9 @@ public struct TokenIdentity : Swift.Decodable {
   @objc @objcMembers public class StreamConfig : ObjectiveC.NSObject {
     @objc final public let isLive: Swift.Bool
     @objc final public let isDVR: Swift.Bool
+    @objc final public let startOverTime: Swift.Double
     @objc final public let isSSAIEnabled: Swift.Bool
-    public init(isLive: Swift.Bool? = nil, isDVR: Swift.Bool? = nil, isSSAIEnabled: Swift.Bool? = nil)
+    public init(isLive: Swift.Bool? = nil, isDVR: Swift.Bool? = nil, startOverTime: Swift.Double? = nil, isSSAIEnabled: Swift.Bool? = nil)
     @objc deinit
   }
   @objc @objcMembers public class StreamMetadata : ObjectiveC.NSObject {
@@ -1307,7 +1313,7 @@ public class SSAIAnalyticsTracker {
     get
     set
   }
-  public var adsAnalyticsTrackingDelegate: (any VLPlayerLib.AdsAnalyticsTrackingDelegate)?
+  weak public var adsAnalyticsTrackingDelegate: (any VLPlayerLib.AdsAnalyticsTrackingDelegate)?
   weak public var playHeadAnalyticsTrackingDelegate: (any VLPlayerLib.PlayheadTrackerDelegate)?
   public init(adsAnalyticsTrackingDelegate: (any VLPlayerLib.AdsAnalyticsTrackingDelegate)? = nil, playHeadAnalyticsTrackingDelegate: (any VLPlayerLib.PlayheadTrackerDelegate)? = nil)
   @discardableResult
