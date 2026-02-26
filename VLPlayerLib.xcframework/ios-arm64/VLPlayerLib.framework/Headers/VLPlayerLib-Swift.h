@@ -523,9 +523,11 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 
 @interface VLPlayer (SWIFT_EXTENSION(VLPlayerLib))
 - (BOOL)isPlaying SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isClientSideAdPlaying SWIFT_WARN_UNUSED_RESULT;
 - (void)shouldPlayVideoWithInitially:(BOOL)initially;
 - (void)sliderEndedTrackingWithNewSeekValue:(double)newSeekValue;
 - (void)sliderBeganTrackingWithNewSeekValue:(double)newSeekValue;
+- (BOOL)adRunningOnPlayer SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @interface VLPlayer (SWIFT_EXTENSION(VLPlayerLib))
@@ -536,6 +538,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)deinitialisePlayerWithIsLoadingNextVideo:(BOOL)isLoadingNextVideo;
 - (void)setPlayerFitToFullScreen;
 - (void)setPlayerFitToSmallScreenWithFrame:(CGRect)frame;
+- (void)updatePlayerFrameForMultiView:(CGRect)frame isFullScreen:(BOOL)isFullScreen;
 - (void)goFullScreen:(BOOL)isFullScreen;
 - (void)removeFullScreen;
 /// important:
@@ -718,6 +721,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)updateCaptionWithSelectedIndex:(NSInteger)selectedIndex selectedKey:(NSString * _Nonnull)selectedKey;
 @end
 
+@class AVPlayer;
 @class StreamMetadata;
 @class AVPlayerViewController;
 SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
@@ -732,13 +736,27 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 - (void)playerRateChangedWithRate:(float)rate playerTag:(NSString * _Nullable)playerTag;
 /// important:
 ///
-/// Delgate method - called when video player started playback
+/// Delegate method - called when video player started playback
+/// remark:
+///
+/// Use this method to perform anything after video has started
+/// ⚠️ DEPRECATED: Use videoStarted(timestamp:playerTag:metaDataInfo:) instead
+/// \param timestamp Current timestamp from where video has started
+///
+- (void)videoStartedWithTimestamp:(double)timestamp playerTag:(NSString * _Nonnull)playerTag SWIFT_DEPRECATED_MSG("", "videoStartedWithTimestamp:playerTag:metaDataInfo:");
+/// important:
+///
+/// Delegate method - called when video player started playback
 /// remark:
 ///
 /// Use this method to perform anything after video has started
 /// \param timestamp Current timestamp from where video has started
 ///
-- (void)videoStartedWithTimestamp:(double)timestamp playerTag:(NSString * _Nonnull)playerTag;
+/// \param playerTag Player identifier
+///
+/// \param metaDataInfo Provides playback related info
+///
+- (void)videoStartedWithTimestamp:(double)timestamp playerTag:(NSString * _Nonnull)playerTag metaDataInfo:(NSDictionary<NSString *, id> * _Nullable)metaDataInfo;
 /// important:
 ///
 /// Delgate method - called when video player is finished
@@ -757,13 +775,32 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 - (void)videoPauseWithTimestamp:(double)timestamp playerTag:(NSString * _Nonnull)playerTag;
 /// important:
 ///
-/// Delgate method - called when video player is resumed
+/// Delegate method - called when video player is resumed
 /// remark:
 ///
 /// Use this method to perform anything when video resumes from a position
+/// <em>PREFERRED METHOD</em> - includes analytics data for comprehensive tracking
 /// \param timestamp Current timestamp when video is resumed
 ///
-- (void)videoResumeWithTimestamp:(double)timestamp playerTag:(NSString * _Nonnull)playerTag;
+/// \param playerTag Player identifier
+///
+/// \param metaDataInfo Provides playback analytics and stream information
+///
+- (void)videoResumeWithTimestamp:(double)timestamp playerTag:(NSString * _Nonnull)playerTag metaDataInfo:(NSDictionary<NSString *, id> * _Nullable)metaDataInfo;
+/// ⚠️ DEPRECATED - videoResume(timestamp:playerTag:)
+/// ❌ Will be REMOVED in next major version
+/// important:
+///
+/// Delegate method - called when video player is resumed
+/// warning:
+///
+/// Update to <code>videoResume(timestamp:playerTag:metaDataInfo:)</code> to receive analytics data
+/// This method only exists for backward compatibility
+/// \param timestamp Current timestamp when video is resumed
+///
+/// \param playerTag Player identifier
+///
+- (void)videoResumeWithTimestamp:(double)timestamp playerTag:(NSString * _Nonnull)playerTag SWIFT_DEPRECATED_MSG("", "videoResumeWithTimestamp:playerTag:metaDataInfo:");
 /// important:
 ///
 /// Delgate method - called when video player playback reaches to time divisible by progress interval provided and default by 30 seconds
@@ -809,7 +846,8 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 /// </ul>
 /// \param timestamp Current timestamp when ad starts playing
 ///
-- (void)adStartedWithCurrentTime:(double)currentTime adTag:(NSString * _Nullable)adTag playerTag:(NSString * _Nonnull)playerTag;
+- (void)adStartedWithCurrentTime:(double)currentTime adTag:(NSString * _Nullable)adTag playerTag:(NSString * _Nonnull)playerTag player:(AVPlayer * _Nonnull)player metaDataInfo:(NSDictionary<NSString *, id> * _Nullable)metaDataInfo;
+- (void)adStartedWithCurrentTime:(double)currentTime adTag:(NSString * _Nullable)adTag playerTag:(NSString * _Nonnull)playerTag player:(AVPlayer * _Nonnull)player;
 /// important:
 ///
 /// Delgate method - called when ad is resumed
@@ -981,6 +1019,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 /// Delgate method - Called when AutoPlay view is about to display and asks for metadata for URL Stream.
 - (StreamMetadata * _Nullable)autoPlayMetadataProviderWithStreamId:(NSString * _Nonnull)streamId SWIFT_WARN_UNUSED_RESULT;
 - (void)avPlayerControllerInstance:(AVPlayerViewController * _Nonnull)avPlayerControllerInstance;
+- (void)airplayConnectionWithChanged:(BOOL)status;
 @end
 
 #endif
