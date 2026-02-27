@@ -10,12 +10,13 @@ import VLPlayerLib
 import Foundation
 import GoogleCast
 import VLAnalyticsLib
+import AVFoundation
 
 // Handles video playback delegate events for the player view controller
 extension PlayerViewController_iOS: VideoPlaybackDelegate {
 
     // Called when video playback starts
-    func videoStarted(timestamp: Double, playerTag: String) {
+    func videoStarted(timestamp: Double, playerTag: String, metaDataInfo: [String : Any]?) {
         videoPlayerControlsView?.setPlayButtonState(state: true)
         videoPlayerControlsView?.updateTimeLabelOnStart()
 
@@ -26,7 +27,6 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         videoPlayerCustomView?.viewModel?.setupPiP()
         
 //        self.videoSessionStartAnalytics()
-        
     }
     
 //    func videoSessionStartAnalytics() {
@@ -58,7 +58,7 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
     }
 
     // Called when video resumes from pause
-    func videoResume(timestamp: Double, playerTag: String) {
+    func videoResume(timestamp: Double, playerTag: String, metaDataInfo: [String : Any]?) {
         videoPlayerControlsView?.setPlayButtonState(state: true)
         videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: true)
         
@@ -167,6 +167,10 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
             let ccEnabled = UserDefaults.standard.bool(forKey: "CLOSED CAPTION AVAILABLE")
             self?.videoPlayerCustomView?.viewModel?.updateSubtitleState(isEnabled: ccEnabled)
         }
+    }
+    
+    func adStarted(currentTime: Double, adTag: String?, playerTag: String, player: AVPlayer, metaDataInfo: [String : Any]?) {
+        debugPrint("adStarted")
     }
     
 }

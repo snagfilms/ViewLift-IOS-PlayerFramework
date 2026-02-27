@@ -8,11 +8,6 @@
 
 import VLPlayerLib
 import AVKit
-#if os(iOS)
-import VLAuthenticationFramework
-#else
-import VLAuthenticationFramework_tvOS
-#endif
 import Foundation
 import VLAnalyticsLib
 
@@ -36,7 +31,7 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     
     private func errorHandler(message: String, playerView: UIView) {
         let errorLabel = UILabel()
-        errorLabel.text = "Video playback failed"
+        errorLabel.text = message
         errorLabel.textColor = .white
         errorLabel.textAlignment = .center
         errorLabel.font = .systemFont(ofSize: 32, weight: .medium)
@@ -106,23 +101,21 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     }
     
     // Called when video playback starts
-    func videoStarted(timestamp: Double, playerTag: String) {
+    func videoStarted(timestamp: Double, playerTag: String, metaDataInfo: [String : Any]?) {
         loaderView.stopAnimating()
         videoPlayerControlsView?.videoStartedPlaying(timestamp: timestamp)
         debugPrint("PlayerViewController videoStarted: \(timestamp)")
         
         self.videoSessionStartAnalytics()
-        
     }
     
     func videoPause(timestamp: Double, playerTag: String) {
 
     }
-
-    func videoResume(timestamp: Double, playerTag: String) {
-
+    
+    func videoResume(timestamp: Double, playerTag: String, metaDataInfo: [String : Any]?) {
+        debugPrint("")
     }
-
     
     func videoSessionStartAnalytics() {
 
@@ -149,6 +142,10 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     
     func avPlayerControllerInstance(_ avPlayerControllerInstance: AVPlayerViewController) {
         avPlayerControllerInstance.delegate = self
+    }
+    
+    func adStarted(currentTime: Double, adTag: String?, playerTag: String, player: AVPlayer, metaDataInfo: [String : Any]?) {
+        debugPrint("adStarted")
     }
 }
 
