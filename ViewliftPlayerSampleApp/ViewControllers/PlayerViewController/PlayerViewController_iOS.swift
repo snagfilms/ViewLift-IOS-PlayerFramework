@@ -624,10 +624,39 @@ extension PlayerViewController_iOS {
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
+                                                 playerControlsViewConfiguration: self.getPlayerControlsViewConfiguration(type: .custom),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: false,
                                                  isCustomAdViewEnabled: enableCustomAdUI,
                                                  isServerSideAdTrackingEnabled: true, featureFlags: FeatureFlags(shouldContinuePlaybackOnScreenLock: true, shouldHandleOrientation: false))
+    }
+    
+    
+    // Returns player controls view configuration based on type
+    private func getPlayerControlsViewConfiguration(type: Configuration) -> VLPlayer.PlayerControlsViewConfiguration? {
+        switch type {
+        case .customTheme:
+            // Configure default player controls view with custom theme
+            let playerControlsConfig = VLPlayerLib.PlayerControlsConfig(isChromeCastSupported: false, isAirPlaySupported: false, isPIPSupported: true, isSettingsSupported: true, isSubTitleSupported: true, isSlowMoSupported: false, playerControlsColor: nil)
+            let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(playerControlsConfig: playerControlsConfig)
+            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(controlsTheme: controlsTheme)
+            return playerControlsViewConfiguration
+        case .custom:
+            // Use a custom controls view
+            guard let view = getCustomPlayerSkin().view else {
+                // Use default controls view and theme
+                return nil
+            }
+            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .custom(view: view)
+            return playerControlsViewConfiguration
+        case .native:
+            // Use default controls view and theme
+            let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default()
+            return playerControlsViewConfiguration
+        case .default, .disabled:
+            // Use default controls view and theme
+            return nil
+        }
     }
         
     /// Returns the paywall configuration based on the type
