@@ -72,6 +72,8 @@
 		D20833212E72DF690080932C /* PlayerAdEmbeddedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D208331E2E72DF690080932C /* PlayerAdEmbeddedView.xib */; };
 		D2334A072E620133002370CB /* PlayerViewController_tvOS+SSAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2334A052E620133002370CB /* PlayerViewController_tvOS+SSAI.swift */; };
 		D23998712E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23998702E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift */; };
+		D2542D6D2F517F1200B42060 /* FairPlayParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2542D6C2F517F1200B42060 /* FairPlayParser.swift */; };
+		D2542D6E2F517F1200B42060 /* FairPlayParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2542D6C2F517F1200B42060 /* FairPlayParser.swift */; };
 		D26D92192E6B1A4A002A70B1 /* TVEPollingQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26D92172E6B1A4A002A70B1 /* TVEPollingQRCodeView.swift */; };
 		D26D921B2E6B1CBD002A70B1 /* PlayerViewController_tvOS+TVEAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26D921A2E6B1CBD002A70B1 /* PlayerViewController_tvOS+TVEAuthentication.swift */; };
 		D273AB502E61FC3A00DC337C /* VLCustomPlayerControlsView+TrickPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D273AB4F2E61FC3A00DC337C /* VLCustomPlayerControlsView+TrickPlay.swift */; };
@@ -227,6 +229,7 @@
 		D208331E2E72DF690080932C /* PlayerAdEmbeddedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerAdEmbeddedView.xib; sourceTree = "<group>"; };
 		D2334A052E620133002370CB /* PlayerViewController_tvOS+SSAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_tvOS+SSAI.swift"; sourceTree = "<group>"; };
 		D23998702E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+PlayerControlsDelegate.swift"; sourceTree = "<group>"; };
+		D2542D6C2F517F1200B42060 /* FairPlayParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FairPlayParser.swift; sourceTree = "<group>"; };
 		D26D92172E6B1A4A002A70B1 /* TVEPollingQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVEPollingQRCodeView.swift; sourceTree = "<group>"; };
 		D26D921A2E6B1CBD002A70B1 /* PlayerViewController_tvOS+TVEAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_tvOS+TVEAuthentication.swift"; sourceTree = "<group>"; };
 		D273AB4F2E61FC3A00DC337C /* VLCustomPlayerControlsView+TrickPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VLCustomPlayerControlsView+TrickPlay.swift"; sourceTree = "<group>"; };
@@ -483,6 +486,7 @@
 		D2A758FC2E4B0D1F0089B4D1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D2542D6C2F517F1200B42060 /* FairPlayParser.swift */,
 				D2A7598D2E4B280D0089B4D1 /* VLVideoResponseModel.swift */,
 				D2A758FA2E4B0D1F0089B4D1 /* AssetModel.swift */,
 				D2A758FB2E4B0D1F0089B4D1 /* VideoList.swift */,
@@ -936,6 +940,7 @@
 				40594B7B2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift in Sources */,
 				D280CCA22E5C27E40070CDA5 /* PlayerViewController_iOS+AutoPlay.swift in Sources */,
 				D20833202E72DF690080932C /* PlayerAdEmbeddedView.swift in Sources */,
+				D2542D6D2F517F1200B42060 /* FairPlayParser.swift in Sources */,
 				D2A759972E4B2B800089B4D1 /* AnalyticsProtocol.swift in Sources */,
 				D2B7638A2E68A6BC00D71D6D /* String+Extension.swift in Sources */,
 				BAF0E2262EBD89AA003DBA9F /* VLContentInfoAnalytics+Extension.swift in Sources */,
@@ -994,6 +999,7 @@
 				D2A759242E4B0E130089B4D1 /* AppDelegate+Authentication.swift in Sources */,
 				BA5D8B6A2EAE2F8F001401D8 /* Utility.swift in Sources */,
 				D2A7599C2E4B304E0089B4D1 /* PlayerViewController_tvOS+VideoPlaybackDelegate.swift in Sources */,
+				D2542D6E2F517F1200B42060 /* FairPlayParser.swift in Sources */,
 				D26D92192E6B1A4A002A70B1 /* TVEPollingQRCodeView.swift in Sources */,
 				D2D2E1532E5F1D93001C2CD7 /* UIView+Extension.swift in Sources */,
 				BA05D4C62E86DA04008BF84C /* AnalyticsHelper+Data.swift in Sources */,
@@ -1295,7 +1301,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 11.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.spinco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.sampleapp;
 				PRODUCT_NAME = "Demo App";
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1414,7 +1420,7 @@
 				);
 				MARKETING_VERSION = 11.3;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.spinco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.sampleapp;
 				PRODUCT_NAME = "Demo App";
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1744,7 +1750,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 11.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.spinco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.sampleapp;
 				PRODUCT_NAME = "Demo App";
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1905,16 +1911,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/snagfilms/iOS-VLAnalytics-SPM";
 			requirement = {
-				branch = 3.0.10;
-				kind = branch;
+				kind = exactVersion;
+				version = 3.0.11;
 			};
 		};
 		BA79009E2F23C053004E2329 /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework";
 			requirement = {
-				branch = 3.2.32;
-				kind = branch;
+				kind = exactVersion;
+				version = 3.2.34;
 			};
 		};
 		BA8E15822EA51CAE00B45F68 /* XCRemoteSwiftPackageReference "player-ios" */ = {
@@ -1937,8 +1943,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/snagfilms/AuthenticationFramework";
 			requirement = {
-				branch = 3.1.15;
-				kind = branch;
+				kind = exactVersion;
+				version = 3.1.16;
 			};
 		};
 		D2A22D5B2E72D4320058D37A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
