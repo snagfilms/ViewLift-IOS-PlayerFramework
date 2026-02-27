@@ -13,6 +13,10 @@ import VLAnalyticsLib
 /// Extension to handle server-side ad tracking callbacks for the video player.
 /// These methods are triggered automatically by `VLPlayerLib` during ad playback events.
 extension PlayerViewController_tvOS: ServerSideAdTrackingDelegate {
+    func removeCuePoints() {
+        
+    }
+    
     func totalAdsDuration(_ duration: Double) {
         self.totalAdsDuration = duration
     }
