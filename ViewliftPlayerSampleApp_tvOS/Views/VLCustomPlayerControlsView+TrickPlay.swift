@@ -18,10 +18,10 @@ extension VLCustomPlayerControlsView {
         trickPlayTimeView = nil
     }
     
-    internal func updateSeekingThumbnail(_ slider: TvOSSlider) {
+    internal func updateSeekingThumbnail(_ slider: TvOSSlider) async {
         removeTrickPlayView()
         
-        let trickPlayData = delegate?.getTrickPlayData(Double(slider.value))
+        let trickPlayData = await delegate?.getTrickPlayData(Double(slider.value))
         
         switch trickPlayType {
         case .thumbnail:
@@ -126,8 +126,8 @@ extension VLCustomPlayerControlsView {
         return rect
     }
     
-    private func getTrickPlayData(_ slider: TvOSSlider) -> (image: UIImage?, time: String?) {
-        let (image, time) = delegate?.getTrickPlayData(Double(slider.value)) ?? (nil, nil)
+    private func getTrickPlayData(_ slider: TvOSSlider) async -> (image: UIImage?, time: String?) {
+        let (image, time) = await delegate?.getTrickPlayData(Double(slider.value)) ?? (nil, nil)
         if image == nil && time == nil {
             if let placeHolderImage = UIImage(named: "trickPlay_placeholder_16x9") {
                 return (image:placeHolderImage , time: nil)

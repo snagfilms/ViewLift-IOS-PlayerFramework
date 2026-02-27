@@ -605,8 +605,8 @@ extension PlayerViewController_tvOS: PlayerControlsDelegate {
     }
     
     //get trick play image data
-    func getTrickPlayData(_ value: Double) -> (image: UIImage?, time: String?) {
-        self.vlPlayer?.getTrickPlayData(value) ?? (nil, nil)
+    func getTrickPlayData(_ value: Double) async -> (image: UIImage?, time: String?) {
+        await self.vlPlayer?.getTrickPlayData(value) ?? (nil, nil)
     }
 }
 

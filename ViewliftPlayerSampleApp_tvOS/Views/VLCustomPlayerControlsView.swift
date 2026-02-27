@@ -46,7 +46,7 @@ protocol PlayerControlsDelegate :AnyObject {
     func isLiveVideo() -> Bool
     func isDVREnabled () -> Bool
     func setPlaybackRate(playbackSpeed:Float)
-    func getTrickPlayData(_ value: Double) -> (image: UIImage?, time: String?)
+    func getTrickPlayData(_ value: Double) async -> (image: UIImage?, time: String?)
 }
 
 enum FontStyleValues : String, CaseIterable {
