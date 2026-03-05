@@ -62,7 +62,11 @@ final class AnalyticsHelperV2: NSObject {
          },
          "summary": "",
          "videoUrl": "https://vs-newsencoding.akamaized.net/MSNBC/n_mj_sevenab_251029/1/hls/index.m3u8",
-         "mpxId": "mmvo2461182531809"
+         "mpxId": "mmvo2461182531809",
+         "advertisingGenre": "Crime, Drama, Action",
+         "airDate": "02/22/2026",
+         "digitalAirdate": "03/22/2026",
+         "tvAirdate": "04/22/2026"
         }
         """
 
@@ -75,6 +79,11 @@ final class AnalyticsHelperV2: NSObject {
             print("Duration: \(contentInfo.durationInSeconds ?? 0) seconds")
             print("Is Live: \(contentInfo.isLive ?? false)")
             print("Video URL: \(contentInfo.playbackUrl ?? "N/A")")
+            print("advertisingGenre: \(contentInfo.advertisingGenre ?? "N/A")")
+            print("airDate: \(contentInfo.airDate ?? "N/A")")
+            print("digitalAirdate: \(contentInfo.digitalAirdate ?? "N/A")")
+            print("tvAirdate: \(contentInfo.tvAirdate ?? "N/A")")
+            
             
             return contentInfo
             

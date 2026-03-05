@@ -37,14 +37,17 @@ extension VLContentInfoAnalytics {
             id: response.id,
             title: response.headline,
             durationInSeconds: nil,
-            airDate: response.published,
+            airDate: response.airDate,
             playbackUrl: response.videoUrl,
             streamType: false ? "live" : "vod",
             videonetwork: response.brand,
- isLive: false,
+            isLive: false,
             subTitle: response.summary.isEmpty ? nil : response.summary,
- assetId: response.mpxId,
-            videoguid: response.guid
+            assetId: response.mpxId,
+            videoguid: response.guid,
+            advertisingGenre: response.advertisingGenre,
+            digitalAirdate: response.digitalAirdate,
+            tvAirdate: response.tvAirdate
         )
     }
     
@@ -61,6 +64,10 @@ extension VLContentInfoAnalytics {
         let summary: String
         let videoUrl: String?
         let mpxId: String?
+        let advertisingGenre: String?
+        let airDate: String?
+        let digitalAirdate: String?
+        let tvAirdate: String?
         
         struct Duration: Decodable {
             let isLive: Bool
@@ -77,6 +84,10 @@ extension VLContentInfoAnalytics {
             case summary
             case videoUrl
             case mpxId
+            case advertisingGenre
+            case airDate
+            case digitalAirdate
+            case tvAirdate
         }
         
         init(from decoder: Decoder) throws {
@@ -91,6 +102,10 @@ extension VLContentInfoAnalytics {
             summary = try container.decodeIfPresent(String.self, forKey: .summary) ?? ""
             videoUrl = try container.decodeIfPresent(String.self, forKey: .videoUrl)
             mpxId = try container.decodeIfPresent(String.self, forKey: .mpxId)
+            advertisingGenre = try container.decodeIfPresent(String.self, forKey: .advertisingGenre)
+            airDate = try container.decodeIfPresent(String.self, forKey: .airDate)
+            digitalAirdate = try container.decodeIfPresent(String.self, forKey: .digitalAirdate)
+            tvAirdate = try container.decodeIfPresent(String.self, forKey: .tvAirdate)
         }
     }
 }
