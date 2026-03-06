@@ -191,7 +191,7 @@
 
 /* Begin PBXFileReference section */
 		40594B7A2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+SSAI.swift"; sourceTree = "<group>"; };
-		5422EFF0209912C600206D66 /* Demo App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5422EFF0209912C600206D66 /* OneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5422EFF3209912C600206D66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5422EFF5209912C600206D66 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5422EFF8209912C600206D66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 		D28814602F445DF800AB9A4C /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		D28814642F445E5300AB9A4C /* EmojiGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiGridViewController.swift; sourceTree = "<group>"; };
 		D29F2A6A2E61ADB40067DC79 /* PlayerViewController_tvOS+AutoPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_tvOS+AutoPlay.swift"; sourceTree = "<group>"; };
-		D2A15D8D2E28199900F88E09 /* Demo App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2A15D8D2E28199900F88E09 /* OneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A3DAD02E63B0A0009070BB /* AutoPlayDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoPlayDataManager.swift; sourceTree = "<group>"; };
 		D2A758FA2E4B0D1F0089B4D1 /* AssetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetModel.swift; sourceTree = "<group>"; };
 		D2A758FB2E4B0D1F0089B4D1 /* VideoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoList.swift; sourceTree = "<group>"; };
@@ -353,9 +353,9 @@
 		5422EFF1209912C600206D66 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5422EFF0209912C600206D66 /* Demo App.app */,
+				5422EFF0209912C600206D66 /* OneApp.app */,
 				F7EAFF0A275F3AA700B46BDE /* ViewliftPlayerSampleAppUITests.xctest */,
-				D2A15D8D2E28199900F88E09 /* Demo App.app */,
+				D2A15D8D2E28199900F88E09 /* OneApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -730,7 +730,7 @@
 				BA92B0222F28EC2700D62052 /* VLAuthentication */,
 			);
 			productName = ViewliftPlayerSampleApp;
-			productReference = 5422EFF0209912C600206D66 /* Demo App.app */;
+			productReference = 5422EFF0209912C600206D66 /* OneApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D2A15D8C2E28199900F88E09 /* ViewLiftPlayerSampleApp_tvOS */ = {
@@ -757,7 +757,7 @@
 				BA92B0242F28EC3000D62052 /* VLAuthentication */,
 			);
 			productName = ViewLiftPlayerSampleApp_tvOS;
-			productReference = D2A15D8D2E28199900F88E09 /* Demo App.app */;
+			productReference = D2A15D8D2E28199900F88E09 /* OneApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F7EAFF09275F3AA700B46BDE /* ViewliftPlayerSampleAppUITests */ = {
@@ -1285,7 +1285,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Demo App";
+				INFOPLIST_KEY_CFBundleDisplayName = OneApp;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some content may access Microphone";
@@ -1301,11 +1301,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 11.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.sampleapp;
-				PRODUCT_NAME = "Demo App";
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.oneapp.sample;
+				PRODUCT_NAME = OneApp;
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = VL_Spinco_Dev_iOS;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = OneAppDevProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1403,7 +1403,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Demo App";
+				INFOPLIST_KEY_CFBundleDisplayName = OneApp;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some content may access Microphone";
@@ -1420,11 +1420,11 @@
 				);
 				MARKETING_VERSION = 11.3;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.sampleapp;
-				PRODUCT_NAME = "Demo App";
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.oneapp.sample;
+				PRODUCT_NAME = OneApp;
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = VL_Spinco_Dev_iOS;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = OneAppDevProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1473,10 +1473,10 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.viewlift.sampleapp-tvOS";
-				PRODUCT_NAME = "Demo App";
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.oneapp.sample;
+				PRODUCT_NAME = OneApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = VL_Spinco_dev_tvOS;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = OneAppDevProfileTVOS;
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1524,10 +1524,10 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.viewlift.sampleapp-tvOS";
-				PRODUCT_NAME = "Demo App";
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.oneapp.sample;
+				PRODUCT_NAME = OneApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = VL_Spinco_dev_tvOS;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = OneAppDevProfileTVOS;
 				SDKROOT = appletvos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1574,10 +1574,10 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.viewlift.sampleapp-tvOS";
-				PRODUCT_NAME = "Demo App";
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.oneapp.sample;
+				PRODUCT_NAME = OneApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = VL_Spinco_dev_tvOS;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = OneAppDevProfileTVOS;
 				SDKROOT = appletvos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1734,7 +1734,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViewliftPlayerSampleApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Demo App";
+				INFOPLIST_KEY_CFBundleDisplayName = OneApp;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Uses Bluetooth to discover nearby Google Cast devices";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some content may access Microphone";
@@ -1750,11 +1750,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 11.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.sampleapp;
-				PRODUCT_NAME = "Demo App";
+				PRODUCT_BUNDLE_IDENTIFIER = com.viewlift.oneapp.sample;
+				PRODUCT_NAME = OneApp;
 				PROVISIONING_PROFILE = "f0d60c43-b3a2-462f-b702-952ae7c78d89";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = VL_Spinco_Dev_iOS;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = OneAppDevProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1912,7 +1912,7 @@
 			repositoryURL = "https://github.com/snagfilms/iOS-VLAnalytics-SPM";
 			requirement = {
 				kind = exactVersion;
-				version = 3.0.11;
+				version = 3.0.12;
 			};
 		};
 		BA79009E2F23C053004E2329 /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */ = {
@@ -1920,7 +1920,7 @@
 			repositoryURL = "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework";
 			requirement = {
 				kind = exactVersion;
-				version = 3.2.34;
+				version = 3.2.35;
 			};
 		};
 		BA8E15822EA51CAE00B45F68 /* XCRemoteSwiftPackageReference "player-ios" */ = {
