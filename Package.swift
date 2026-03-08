@@ -6,9 +6,9 @@ let package = Package(
     name: "VLPlayerLib",
     platforms: [.iOS(.v15),.tvOS(.v15)],
     products: [
-        .library(name: "VLPlayerLib", targets: ["VLPlayerLibWrapper"]),
-        .library(name: "AmazonIVSPlayer-iOS", targets: ["AmazonIVSPlayer-iOS"]),
-        .library(name: "GoogleCast-iOS", targets: ["GoogleCast-iOS"])
+        .library(name: "VLPlayerLib", targets: ["VLPlayerLibWrapper"])//,
+//        .library(name: "AmazonIVSPlayer-iOS", targets: ["AmazonIVSPlayer-iOS"]),
+//        .library(name: "GoogleCast-iOS", targets: ["GoogleCast-iOS"])
     ],
     dependencies: [
         .package(url: "https://github.com/efremidze/VisualEffectView.git", exact: "5.0.8"),
