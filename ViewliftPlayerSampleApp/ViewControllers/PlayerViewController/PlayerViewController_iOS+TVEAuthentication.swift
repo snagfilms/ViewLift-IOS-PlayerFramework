@@ -99,6 +99,18 @@ extension PlayerViewController_iOS {
                         }
                     }
                     return
+                case .tveSessionCodeExpired:
+                    self.showAlert(
+                        title: "Error",
+                        message: "tveSessionCodeExpired"
+                    ) {
+                        if let topVC = self.findTopPresentableVC() {
+                            if let webView = topVC.presentingViewController {
+                                webView.dismiss(animated: true)
+                            }
+                        }
+                    }
+                    return
                 default:
                     break
                 }
@@ -125,4 +137,16 @@ extension PlayerViewController_iOS {
         }
     }
     
+    private func findTopPresentableVC() -> UIViewController? {
+        var topController: UIViewController? = self
+        
+        while topController?.presentedViewController != nil {
+            topController = topController?.presentedViewController
+            if let nav = topController as? UINavigationController {
+                topController = nav.topViewController
+            }
+        }
+        
+        return topController
+    }
 }

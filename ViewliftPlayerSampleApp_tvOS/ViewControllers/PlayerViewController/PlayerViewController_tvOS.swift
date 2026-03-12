@@ -507,12 +507,43 @@ class PlayerViewController_tvOS: UIViewController {
         removeController()
     }
     
-    // Shows a simple alert with a message
-    func showAlert(title: String = "Alert!", message: String = "Description") {
+    func showAlert(
+        title: String = "Alert!",
+        message: String = "Description",
+        okActionHandler: (() -> Void)? = nil
+    ) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            okActionHandler?()
+        }
+        
         alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+        if let presentedVC = self.presentedViewController {
+            // Check if presented VC can present (not already presenting)
+            if presentedVC.presentedViewController == nil {
+                presentedVC.present(alertController, animated: true)
+            } else {
+                // Find top-most VC that can present
+                self.findTopPresentableVC()?.present(alertController, animated: true)
+            }
+        } else {
+            self.present(alertController, animated: true)
+        }
+        
+    }
+    
+    private func findTopPresentableVC() -> UIViewController? {
+        var topController: UIViewController? = self
+        
+        while topController?.presentedViewController != nil {
+            topController = topController?.presentedViewController
+            if let nav = topController as? UINavigationController {
+                topController = nav.topViewController
+            }
+        }
+        
+        return topController
     }
 }
 

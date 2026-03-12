@@ -74,7 +74,7 @@ extension PlayerViewController_tvOS {
         error: VLAuthenticationErrorCode?
     ) {
         if userIdentity == nil, let message = error?.codeString {
-            // self?.showAlert(message: message)
+            self.showAlert(message: message)
             print("Activation failed: \(message)")
             return
         }
