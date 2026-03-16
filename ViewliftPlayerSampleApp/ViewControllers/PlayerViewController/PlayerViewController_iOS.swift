@@ -361,6 +361,7 @@ extension PlayerViewController_iOS {
                 type: playbackSourceType,
                 vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
                 playerFeaturesSupported: featureSupported, nextPlaybackList: nil,
+                streamSwitchHandler: StreamSwitchHandler(maxRetryCount: 5, delay: 2, jitterDelay: (min: 2, max: 4)),
                 brandName: ""
             ) {
                 [weak self] isSuccess,
