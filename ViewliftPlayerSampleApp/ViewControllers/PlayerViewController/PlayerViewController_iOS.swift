@@ -502,6 +502,7 @@ extension PlayerViewController_iOS {
                 self.addPlayer(playerView: playerView)
                 
             case .failure(let error):
+                self.vlPlayer?.destroy()
                 self.handleAuthzFailure(
                     VLAuthenticationErrorCode
                         .decodingFailed(
