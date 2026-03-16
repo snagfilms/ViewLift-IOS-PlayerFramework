@@ -420,8 +420,6 @@ class PlayerViewController_tvOS: UIViewController {
                                                  shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
                                                  mutePlayback: self.muteEnabled,
-                                                 customPlayerControlsColor: nil,
-                                                 supportsChromeCast: true,
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: .disabled,
