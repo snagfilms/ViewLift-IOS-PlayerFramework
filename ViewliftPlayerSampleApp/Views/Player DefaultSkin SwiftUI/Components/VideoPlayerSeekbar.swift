@@ -110,7 +110,7 @@ struct VideoPlayerSeekbar: View {
                 .frame(height: thumbSize, alignment: .center)
                 .contentShape(Rectangle())
             }
-            .frame(height: 26 * iconScale, alignment: .center,)
+            .frame(height: 26 * iconScale, alignment: .center)
             
             HStack(alignment: .center, spacing: 4 * iconScale) {
                 // Time label

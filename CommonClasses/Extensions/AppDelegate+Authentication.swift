@@ -68,7 +68,7 @@ extension AppDelegate {
                 } else if let authorizationToken = self.authorizationToken, let refreshToken = userIdentity?.refreshToken, !authorizationToken.isEmpty && !refreshToken.isEmpty {
                     self.authorizationToken = try await VLAuthentication.sharedInstance
                         .fetchUpdatedAuthToken(
-                            refreshToken: refreshToken,
+                            refreshToken: refreshToken
                         )?.authorizationToken
                     
                     VLAuthentication.sharedInstance.authorizationToken = self.authorizationToken
