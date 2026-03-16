@@ -23,7 +23,7 @@ extension PlayerViewController_iOS {
     /// Initiates the TVE login process for the user
     func loginWithTVE() {
         debugPrint("Login with TVE called")
-        let type = Configuration.custom
+        let type = Configuration.default
         
         switch type {
         case .custom, .customTheme:
