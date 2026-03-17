@@ -16,7 +16,7 @@ let package = Package(
         .package(url: "https://github.com/bitmovin/player-ios.git", exact: "3.85.2"),
         .package(url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git", exact: "3.2.7"),
         .package(url: "https://github.com/muxinc/mux-stats-sdk-avplayer", exact: "4.0.0"),
-        .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git", from: "3.28.0"),
+        .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git", exact: "3.28.10"),
         .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-tvos.git", from: "4.16.0")
     ],
     targets: [
