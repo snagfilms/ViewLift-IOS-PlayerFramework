@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        //Use this to reset the device identifier for testing purposes.Read documentation of this function carefully.
+       // resetDeviceIdentifier()
+
         self.readVideoList(readVideoListOperation: ReadFromLocalJson())
         // Get current user identity before async context
         
@@ -45,6 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.setupAnalytics()
 
         return true
+    }
+    
+    private func resetDeviceIdentifier() {
+        do {
+            try VLAuthentication.sharedInstance.resetDeviceIdentifier()
+        } catch {
+            print("Error resetting device identifier: \(error)")
+        }
     }
 
     private func readVideoList(readVideoListOperation: VideoListProtocol) {
