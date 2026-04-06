@@ -17,7 +17,8 @@ let package = Package(
         .package(url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git", exact: "3.2.7"),
         .package(url: "https://github.com/muxinc/mux-stats-sdk-avplayer", exact: "4.0.0"),
         .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git", exact: "3.28.10"),
-        .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-tvos.git", from: "4.16.0")
+        .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-tvos.git", from: "4.16.0"),
+        .package(url: "https://github.com/snagfilms/iOS-VLNotification-SPM.git", exact: "1.0.0"),
     ],
     targets: [
         .target(name: "VLPlayerLibWrapper",
@@ -31,6 +32,7 @@ let package = Package(
                     .product(name: "M3U8Parser", package: "M3U8Parser"),
                     .product(name: "BitmovinPlayer", package: "player-ios"),
                     .product(name: "MUXSDKStats", package: "mux-stats-sdk-avplayer"),
+                    .product(name: "VLNotificationServiceLib", package: "iOS-VLNotification-SPM", condition: .when(platforms: [.iOS])),
                     .target(name: "VLPlayerLib")
                 ],
                 path: "VLPlayerLibWrapper/Sources"),

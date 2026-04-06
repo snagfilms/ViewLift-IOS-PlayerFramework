@@ -1095,6 +1095,29 @@ public struct SSAIBeaconTracking {
       get
     }
   }
+  public enum PlayerSSEConfig {
+    case enabled(urlString: Swift.String, presentation: VLPlayerLib.VLPlayer.SSEPresentation = .default())
+    case disabled
+  }
+  public enum SSEPresentation {
+    case `default`(theme: VLPlayerLib.VLPlayer.SSETheme = SSETheme())
+    case custom(UIKit.UIView)
+    case none
+  }
+  public struct SSETheme {
+    public let timerTextColor: UIKit.UIColor
+    public let titleTextColor: UIKit.UIColor
+    public let subtitleTextColor: UIKit.UIColor
+    public let backgroundColor: UIKit.UIColor
+    public let overlayColor: UIKit.UIColor
+    public let titleFont: UIKit.UIFont
+    public let timerFont: UIKit.UIFont
+    public let subtitleFont: UIKit.UIFont
+    public let startTitle: Swift.String
+    public let endTitle: Swift.String
+    public let endSubtitle: Swift.String
+    public init(timerTextColor: UIKit.UIColor = .white, titleTextColor: UIKit.UIColor = .white, subtitleTextColor: UIKit.UIColor = .lightGray, backgroundColor: UIKit.UIColor = .black, overlayColor: UIKit.UIColor = UIColor.black.withAlphaComponent(0.5), titleFont: UIKit.UIFont = .systemFont(ofSize: 14, weight: .medium), timerFont: UIKit.UIFont = .monospacedDigitSystemFont(ofSize: 32, weight: .bold), subtitleFont: UIKit.UIFont = .systemFont(ofSize: 12), startTitle: Swift.String = "Event starts in", endTitle: Swift.String = "Event Ended", endSubtitle: Swift.String = "This content is no longer available.")
+  }
   public func checkClosedCaption() -> Swift.Bool
   @objc override dynamic public init()
   public init(playerType: VLPlayerLib.VLPlayerType)
@@ -1115,7 +1138,7 @@ public struct SSAIBeaconTracking {
 }
 extension VLPlayerLib.VLPlayer {
   public struct VLPlayerFeatureSupported {
-    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, mutePlayback: Swift.Bool = false, shouldPlayVideoInitially: Swift.Bool = true, chromecastCustomReceiver: Swift.String? = nil, playerResponseRequired: Swift.Bool = true, playAudioOnly: Swift.Bool = false, epgSupportModel: VLPlayerLib.EPGSupportModel? = nil, tapToPause: Swift.Bool = false, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, easeLiveEnabled: Swift.Bool = false, hideAdsView: Swift.Bool = false, preGameStartTime: Swift.Double? = nil, vlBeacon: VLBeaconLib.VLBeacon? = nil, featureFlags: VLPlayerLib.FeatureFlags = FeatureFlags())
+    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, mutePlayback: Swift.Bool = false, shouldPlayVideoInitially: Swift.Bool = true, chromecastCustomReceiver: Swift.String? = nil, playerResponseRequired: Swift.Bool = true, playAudioOnly: Swift.Bool = false, epgSupportModel: VLPlayerLib.EPGSupportModel? = nil, tapToPause: Swift.Bool = false, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, easeLiveEnabled: Swift.Bool = false, hideAdsView: Swift.Bool = false, preGameStartTime: Swift.Double? = nil, vlBeacon: VLBeaconLib.VLBeacon? = nil, featureFlags: VLPlayerLib.FeatureFlags = FeatureFlags(), playerSSEConfig: VLPlayerLib.VLPlayer.PlayerSSEConfig = .disabled)
   }
   public struct VLClientSideAdTrackingDetails {
     public init(isClientSideAdTrackingEnabled: Swift.Bool, isWTAEnabled: Swift.Bool)
