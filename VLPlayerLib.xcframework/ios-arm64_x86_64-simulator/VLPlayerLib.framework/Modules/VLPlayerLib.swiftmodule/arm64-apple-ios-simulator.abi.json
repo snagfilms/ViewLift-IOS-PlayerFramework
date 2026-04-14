@@ -32891,6 +32891,116 @@
           },
           {
             "kind": "Var",
+            "name": "isShortFormContent",
+            "printedName": "isShortFormContent",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC18isShortFormContentSbSgvp",
+            "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC18isShortFormContentSbSgvp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Bool?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC18isShortFormContentSbSgvg",
+                "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC18isShortFormContentSbSgvg",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Bool?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC18isShortFormContentSbSgvs",
+                "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC18isShortFormContentSbSgvs",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC18isShortFormContentSbSgvM",
+                "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC18isShortFormContentSbSgvM",
+                "moduleName": "VLPlayerLib",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "programStartTimeMiliSeconds",
             "printedName": "programStartTimeMiliSeconds",
             "children": [
@@ -34652,7 +34762,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(id:title:seriesId:seriesTitle:seasonNumber:episodeNumber:contentType:genre:durationInSeconds:airDate:language:subtitles:playbackUrl:playbackType:playbackPositionInSeconds:totalSecondsConsumed:streamType:assetStatus:bitRate:bufferCount:bufferTimeInSeconds:playSource:castType:subcategory1:subcategory2:adId:adDayPart:screenSize:videostatus:videodomain:videotmsid:videobroadcast:videoInitiate:videocliptype:videonetwork:isLive:videocrossdevice:endCardCue:endCardType:networkType:researchtitle:videoleague:videosponsor:advertiser:creativeName:videosport:videoplayerurl:subTitle:assetId:videoguid:programStartTimeMiliSeconds:programEndTimeMiliSeconds:showTitle:mediaNetwork:videoProgram:stationTitle:advertisingGenre:digitalAirdate:tvAirdate:)",
+            "printedName": "init(id:title:seriesId:seriesTitle:seasonNumber:episodeNumber:contentType:genre:durationInSeconds:airDate:language:subtitles:playbackUrl:playbackType:playbackPositionInSeconds:totalSecondsConsumed:streamType:assetStatus:bitRate:bufferCount:bufferTimeInSeconds:playSource:castType:subcategory1:subcategory2:adId:adDayPart:screenSize:videostatus:videodomain:videotmsid:videobroadcast:videoInitiate:videocliptype:videonetwork:isLive:isShortFormContent:videocrossdevice:endCardCue:endCardType:networkType:researchtitle:videoleague:videosponsor:advertiser:creativeName:videosport:videoplayerurl:subTitle:assetId:videoguid:programStartTimeMiliSeconds:programEndTimeMiliSeconds:showTitle:mediaNetwork:videoProgram:stationTitle:advertisingGenre:digitalAirdate:tvAirdate:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -35218,6 +35328,21 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
                 "printedName": "Swift.String?",
                 "children": [
                   {
@@ -35547,8 +35672,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC2id5title8seriesId0H5Title12seasonNumber07episodeL011contentType5genre17durationInSeconds7airDate8language9subtitles11playbackUrl0xO00x8PositionrS005totalS8Consumed06streamO011assetStatus7bitRate11bufferCount010bufferTimerS010playSource04castO012subcategory112subcategory202adI09adDayPart10screenSize11videostatus11videodomain10videotmsid14videobroadcast13videoInitiate13videocliptype12videonetwork6isLive16videocrossdevice10endCardCue07endCardO007networkO013researchtitle11videoleague12videosponsor10advertiser12creativeName10videosport14videoplayerurl03subJ005assetI09videoguid020programStartTimeMiliS0018programEndTimeMiliS004showJ012mediaNetwork12videoProgram07stationJ016advertisingGenre14digitalAirdate9tvAirdateACSSSg_A35_A35_A35_SiSgA36_A35_A35_A36_A35_A35_A35_A35_A35_SdSgA37_A35_A35_A35_A36_A36_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_SbSgA38_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A37_A37_A35_A35_A35_A35_A35_A35_A35_tcfc",
-            "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC2id5title8seriesId0H5Title12seasonNumber07episodeL011contentType5genre17durationInSeconds7airDate8language9subtitles11playbackUrl0xO00x8PositionrS005totalS8Consumed06streamO011assetStatus7bitRate11bufferCount010bufferTimerS010playSource04castO012subcategory112subcategory202adI09adDayPart10screenSize11videostatus11videodomain10videotmsid14videobroadcast13videoInitiate13videocliptype12videonetwork6isLive16videocrossdevice10endCardCue07endCardO007networkO013researchtitle11videoleague12videosponsor10advertiser12creativeName10videosport14videoplayerurl03subJ005assetI09videoguid020programStartTimeMiliS0018programEndTimeMiliS004showJ012mediaNetwork12videoProgram07stationJ016advertisingGenre14digitalAirdate9tvAirdateACSSSg_A35_A35_A35_SiSgA36_A35_A35_A36_A35_A35_A35_A35_A35_SdSgA37_A35_A35_A35_A36_A36_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_SbSgA38_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A35_A37_A37_A35_A35_A35_A35_A35_A35_A35_tcfc",
+            "usr": "s:11VLPlayerLib22VLContentInfoAnalyticsC2id5title8seriesId0H5Title12seasonNumber07episodeL011contentType5genre17durationInSeconds7airDate8language9subtitles11playbackUrl0xO00x8PositionrS005totalS8Consumed06streamO011assetStatus7bitRate11bufferCount010bufferTimerS010playSource04castO012subcategory112subcategory202adI09adDayPart10screenSize11videostatus11videodomain10videotmsid14videobroadcast13videoInitiate13videocliptype12videonetwork6isLive18isShortFormContent16videocrossdevice10endCardCue07endCardO007networkO013researchtitle11videoleague12videosponsor10advertiser12creativeName10videosport14videoplayerurl03subJ005assetI09videoguid020programStartTimeMiliS0018programEndTimeMiliS004showJ012mediaNetwork12videoProgram07stationJ016advertisingGenre14digitalAirdate9tvAirdateACSSSg_A36_A36_A36_SiSgA37_A36_A36_A37_A36_A36_A36_A36_A36_SdSgA38_A36_A36_A36_A37_A37_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_SbSgA39_A39_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A38_A38_A36_A36_A36_A36_A36_A36_A36_tcfc",
+            "mangledName": "$s11VLPlayerLib22VLContentInfoAnalyticsC2id5title8seriesId0H5Title12seasonNumber07episodeL011contentType5genre17durationInSeconds7airDate8language9subtitles11playbackUrl0xO00x8PositionrS005totalS8Consumed06streamO011assetStatus7bitRate11bufferCount010bufferTimerS010playSource04castO012subcategory112subcategory202adI09adDayPart10screenSize11videostatus11videodomain10videotmsid14videobroadcast13videoInitiate13videocliptype12videonetwork6isLive18isShortFormContent16videocrossdevice10endCardCue07endCardO007networkO013researchtitle11videoleague12videosponsor10advertiser12creativeName10videosport14videoplayerurl03subJ005assetI09videoguid020programStartTimeMiliS0018programEndTimeMiliS004showJ012mediaNetwork12videoProgram07stationJ016advertisingGenre14digitalAirdate9tvAirdateACSSSg_A36_A36_A36_SiSgA37_A36_A36_A37_A36_A36_A36_A36_A36_SdSgA38_A36_A36_A36_A37_A37_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_SbSgA39_A39_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A36_A38_A38_A36_A36_A36_A36_A36_A36_A36_tcfc",
             "moduleName": "VLPlayerLib",
             "declAttributes": [
               "AccessControl"
@@ -83266,7 +83391,14 @@
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/VLContentInfo.swift",
       "kind": "BooleanLiteral",
-      "offset": 4572,
+      "offset": 4615,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/CommonFiles\/Models\/VLContentInfo.swift",
+      "kind": "BooleanLiteral",
+      "offset": 4656,
       "length": 5,
       "value": "false"
     },
@@ -88796,14 +88928,14 @@
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/Constants.swift",
       "kind": "StringLiteral",
-      "offset": 15012,
+      "offset": 16016,
       "length": 11,
       "value": "\"TrickPlay\""
     },
     {
       "filePath": "\/Users\/nexg\/Desktop\/Repository\/iOSPlayerSDK\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/HelperClasses\/Constants.swift",
       "kind": "StringLiteral",
-      "offset": 15055,
+      "offset": 16059,
       "length": 6,
       "value": "\".mp4\""
     },
