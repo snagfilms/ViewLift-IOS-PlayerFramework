@@ -106,8 +106,8 @@ extension VLPlayerLib.AnalyticsHelperPlayer {
   final public func playerSessionEnded()
 }
 extension VLPlayerLib.AnalyticsHelperPlayer {
-  final public func playerChapterDidComplete()
-  final public func postVideoComplete()
+  final public func playerChapterDidComplete(excludingClients: [Swift.String] = [])
+  final public func postVideoComplete(excludingClients: [Swift.String] = [])
 }
 public struct Chapter : Swift.Equatable {
   public let index: Swift.Int
@@ -390,7 +390,7 @@ public protocol AdManagerDelegate : AnyObject {
   func removeCuePoints()
 }
 extension VLPlayerLib.VLPlayer {
-  public func startSessionAnalytics()
+  public func startSessionAnalytics(excludingClients: [Swift.String] = [])
   public func playStartedAnalytics()
   public func pauseAnalytics()
   public func endSessionAnalytics()
@@ -1011,6 +1011,9 @@ extension VLPlayerLib.VLContentInfoAnalytics {
   public var asDictionary: [Swift.String : Any] {
     get
   }
+}
+public enum VLPlayerAnalyticsNotificationKeys {
+  public static let excludedAnalyticsClients: Swift.String
 }
 public enum MediaType : Swift.String {
   case vod

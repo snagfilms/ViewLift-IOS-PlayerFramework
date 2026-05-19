@@ -473,8 +473,8 @@ extension VLPlayerLib.AnalyticsHelperPlayer {
   final public func playerSessionEnded()
 }
 extension VLPlayerLib.AnalyticsHelperPlayer {
-  final public func playerChapterDidComplete()
-  final public func postVideoComplete()
+  final public func playerChapterDidComplete(excludingClients: [Swift.String] = [])
+  final public func postVideoComplete(excludingClients: [Swift.String] = [])
 }
 public enum NetworkConnectionStatus : Swift.String {
   case poor
@@ -519,7 +519,7 @@ public struct FeatureFlags {
   public init(shouldContinuePlaybackOnScreenLock: Swift.Bool = false, shouldHandleOrientation: Swift.Bool = false)
 }
 extension VLPlayerLib.VLPlayer {
-  public func startSessionAnalytics()
+  public func startSessionAnalytics(excludingClients: [Swift.String] = [])
   public func playStartedAnalytics()
   public func pauseAnalytics()
   public func endSessionAnalytics()
@@ -1255,6 +1255,9 @@ public struct AnalyticsModel {
   #if compiler(>=5.3) && $NonescapableTypes
   public init(contentID: Swift.String? = nil, contentTitle: Swift.String? = nil, episodeNumber: Swift.String? = nil, seasonNumber: Swift.String? = nil, seriesTitle: Swift.String? = nil, seriesID: Swift.String? = nil, fastChannelID: Swift.String? = nil, fastProgramID: Swift.String? = nil, playlistID: Swift.String? = nil, playlistName: Swift.String? = nil, mediaType: Swift.String? = nil, isDVREnabled: Swift.Bool? = nil, isDRMProtected: Swift.Bool? = nil, DRMLicenseToken: Swift.String? = nil, DRMLicenseURL: Swift.String? = nil, epgCategory: Swift.String? = nil, epgChannelTitle: Swift.String? = nil, epgChannelID: Swift.String? = nil, epgProgramTitle: Swift.String? = nil, contentGerne: Swift.String? = nil, contentGernes: [Swift.String]? = nil, contentCategory: Swift.String? = nil, contentURL: Swift.String? = nil, contentDuration: Swift.Double? = nil, contentImageURL: Swift.String? = nil, contentYear: Swift.String? = nil, contentPath: Swift.String? = nil, mediaPlaySource: Swift.String? = nil, isContentFree: Swift.Bool? = nil, singerName: Swift.String? = nil, actorName: Swift.String? = nil, directorName: Swift.String? = nil, musicDirectorName: Swift.String? = nil, userID: Swift.String? = nil, userSubscriptionType: Swift.String? = nil, d2cType: VLPlayerLib.userSubscriptionType? = nil, applicationVersion: Swift.String? = nil, applicationBrand: Swift.String? = nil, assetProvider: Swift.String? = nil, networkType: Swift.String? = nil, bitrate: Swift.Double? = nil, frameRate: Swift.Double? = nil, subtitles: [Swift.String]? = nil, affiliate: Swift.String? = nil, encodingProfiles: [Swift.String]? = nil, DAIStreamURL: Swift.String? = nil, utmSource: Swift.String? = nil, customerKey: Swift.String? = nil)
   #endif
+}
+public enum VLPlayerAnalyticsNotificationKeys {
+  public static let excludedAnalyticsClients: Swift.String
 }
 @objc @_inheritsConvenienceInitializers open class VLPlayer : ObjectiveC.NSObject {
   weak open var videoPlayerDatasource: (any VLPlayerLib.VideoPlayerDataSource)?
