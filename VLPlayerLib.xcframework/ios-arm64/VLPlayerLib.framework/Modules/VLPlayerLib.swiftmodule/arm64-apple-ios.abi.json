@@ -13670,17 +13670,32 @@
           {
             "kind": "Function",
             "name": "playerChapterDidComplete",
-            "printedName": "playerChapterDidComplete()",
+            "printedName": "playerChapterDidComplete(excludingClients:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Void",
                 "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Swift.String]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sa"
               }
             ],
             "declKind": "Func",
-            "usr": "s:11VLPlayerLib21AnalyticsHelperPlayerC24playerChapterDidCompleteyyF",
-            "mangledName": "$s11VLPlayerLib21AnalyticsHelperPlayerC24playerChapterDidCompleteyyF",
+            "usr": "s:11VLPlayerLib21AnalyticsHelperPlayerC24playerChapterDidComplete16excludingClientsySaySSG_tF",
+            "mangledName": "$s11VLPlayerLib21AnalyticsHelperPlayerC24playerChapterDidComplete16excludingClientsySaySSG_tF",
             "moduleName": "VLPlayerLib",
             "declAttributes": [
               "Final",
@@ -13692,17 +13707,32 @@
           {
             "kind": "Function",
             "name": "postVideoComplete",
-            "printedName": "postVideoComplete()",
+            "printedName": "postVideoComplete(excludingClients:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Void",
                 "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Swift.String]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sa"
               }
             ],
             "declKind": "Func",
-            "usr": "s:11VLPlayerLib21AnalyticsHelperPlayerC17postVideoCompleteyyF",
-            "mangledName": "$s11VLPlayerLib21AnalyticsHelperPlayerC17postVideoCompleteyyF",
+            "usr": "s:11VLPlayerLib21AnalyticsHelperPlayerC17postVideoComplete16excludingClientsySaySSG_tF",
+            "mangledName": "$s11VLPlayerLib21AnalyticsHelperPlayerC17postVideoComplete16excludingClientsySaySSG_tF",
             "moduleName": "VLPlayerLib",
             "declAttributes": [
               "Final",
@@ -37812,6 +37842,84 @@
         "moduleName": "VLPlayerLib"
       },
       {
+        "kind": "TypeDecl",
+        "name": "VLPlayerAnalyticsNotificationKeys",
+        "printedName": "VLPlayerAnalyticsNotificationKeys",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "excludedAnalyticsClients",
+            "printedName": "excludedAnalyticsClients",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib0A25AnalyticsNotificationKeysO08excludedC7ClientsSSvpZ",
+            "mangledName": "$s11VLPlayerLib0A25AnalyticsNotificationKeysO08excludedC7ClientsSSvpZ",
+            "moduleName": "VLPlayerLib",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib0A25AnalyticsNotificationKeysO08excludedC7ClientsSSvgZ",
+                "mangledName": "$s11VLPlayerLib0A25AnalyticsNotificationKeysO08excludedC7ClientsSSvgZ",
+                "moduleName": "VLPlayerLib",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:11VLPlayerLib0A25AnalyticsNotificationKeysO",
+        "mangledName": "$s11VLPlayerLib0A25AnalyticsNotificationKeysO",
+        "moduleName": "VLPlayerLib",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
         "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
@@ -48454,17 +48562,32 @@
           {
             "kind": "Function",
             "name": "startSessionAnalytics",
-            "printedName": "startSessionAnalytics()",
+            "printedName": "startSessionAnalytics(excludingClients:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Void",
                 "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Swift.String]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sa"
               }
             ],
             "declKind": "Func",
-            "usr": "s:11VLPlayerLib0A0C21startSessionAnalyticsyyF",
-            "mangledName": "$s11VLPlayerLib0A0C21startSessionAnalyticsyyF",
+            "usr": "s:11VLPlayerLib0A0C21startSessionAnalytics16excludingClientsySaySSG_tF",
+            "mangledName": "$s11VLPlayerLib0A0C21startSessionAnalytics16excludingClientsySaySSG_tF",
             "moduleName": "VLPlayerLib",
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
@@ -78824,6 +78947,13 @@
       "value": "false"
     },
     {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController+Analytics.swift",
+      "kind": "Array",
+      "offset": 722,
+      "length": 2,
+      "value": "[]"
+    },
+    {
       "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/Components\/VideoPlayerSeekbar.swift",
       "kind": "BooleanLiteral",
       "offset": 299,
@@ -79672,31 +79802,59 @@
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
+      "kind": "Array",
+      "offset": 1463,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 1375,
+      "offset": 1629,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 1406,
+      "offset": 1660,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 1441,
+      "offset": 1695,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 3279,
+      "offset": 3533,
       "length": 5,
       "value": "false"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
+      "kind": "Array",
+      "offset": 3577,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
+      "kind": "Array",
+      "offset": 10538,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
+      "kind": "Array",
+      "offset": 10853,
+      "length": 2,
+      "value": "[]"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Network Class\/NetworkSpeedTest.swift",
@@ -80462,6 +80620,13 @@
       "value": "false"
     },
     {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer+Analytics.swift",
+      "kind": "Array",
+      "offset": 312,
+      "length": 2,
+      "value": "[]"
+    },
+    {
       "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Handlers\/PlayerObserversAndDelegates.swift",
       "kind": "BooleanLiteral",
       "offset": 475,
@@ -81205,15 +81370,57 @@
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/VLPlayerNotificationHelper+extension.swift",
+      "kind": "StringLiteral",
+      "offset": 580,
+      "length": 29,
+      "value": "\"vl.excludedAnalyticsClients\""
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/VLPlayerNotificationHelper+extension.swift",
       "kind": "BooleanLiteral",
-      "offset": 427,
+      "offset": 770,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/VLPlayerNotificationHelper+extension.swift",
+      "kind": "Array",
+      "offset": 1618,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/VLPlayerNotificationHelper+extension.swift",
+      "kind": "Array",
+      "offset": 2255,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/VLPlayerNotificationHelper+extension.swift",
+      "kind": "Array",
+      "offset": 2750,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/VLPlayerNotificationHelper+extension.swift",
+      "kind": "Array",
+      "offset": 6013,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/VLPlayerNotificationHelper+extension.swift",
+      "kind": "Array",
+      "offset": 6692,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/rakeshsharma\/Documents\/AI\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/VLPlayerNotificationHelper+extension.swift",
       "kind": "BooleanLiteral",
-      "offset": 6185,
+      "offset": 7310,
       "length": 5,
       "value": "false"
     },
