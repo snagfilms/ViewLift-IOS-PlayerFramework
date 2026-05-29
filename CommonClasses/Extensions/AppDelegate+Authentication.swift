@@ -99,10 +99,11 @@ extension AppDelegate {
     }
     
     func setupAnalyticsConfiguration() {
-//        let adobeConfig = AdobeAnalyticsConfig(
-//            reportSuites: "rsid1,rsid2",
-//            trackingServer: "tracking.server.com"
-//        )
+        let adobeConfig = AdobeAnalyticsConfig(
+            reportSuites: "rsid1,rsid2",
+            trackingServer: "tracking.server.com",
+            environmentKey: "77ca722dd820/99867d0bb529/launch-a88516d7f021-development"
+        )
         
         let comscoreConfig = ComscoreAnalyticsConfig(
             publisherId: "",
@@ -110,8 +111,8 @@ extension AppDelegate {
         )
         
         let results = AnalyticsConfigurationBuilder()
-//            .add(adobeConfig)
-            .add(comscoreConfig)
+            .add(adobeConfig)
+//            .add(comscoreConfig)
             .build()
         
         // Check results
@@ -127,6 +128,7 @@ extension AppDelegate {
         self.handleAnalyticsConsent()
         
         self.triggerSpashScreenEvent()
+        VLAnalytics.shared.startObservingPlayerEvents()
     }
     
     func handleAnalyticsConsent() {

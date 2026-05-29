@@ -31,11 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let assetVC = AssetListViewController()
-        assetVC.videoList = readVideoListOperation?.videoList
-        let navController = UINavigationController(rootViewController: assetVC)
-        navController.setNavigationBarHidden(true, animated: false)
-        window?.rootViewController = navController
+        window?.rootViewController = AssetListTabBarController(videoList: readVideoListOperation?.videoList)
         window?.makeKeyAndVisible()
         return true
     }

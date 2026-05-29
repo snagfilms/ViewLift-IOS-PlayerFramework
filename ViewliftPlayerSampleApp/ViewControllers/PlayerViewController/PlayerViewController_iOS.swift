@@ -120,7 +120,6 @@ class PlayerViewController_iOS: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        VLAnalytics.shared.startObservingPlayerEvents()
         
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
@@ -144,14 +143,14 @@ class PlayerViewController_iOS: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        vlPlayer?.endSessionAnalytics()
 //        self.stopTempPassTimer()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        self.vlPlayer?.pause()
         
-        VLAnalytics.shared.stopObservingPlayerEvents()
     }
     
     func setupConstraints() {

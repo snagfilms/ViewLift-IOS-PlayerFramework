@@ -46,8 +46,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        AdobeAnalyticsConfigurationHelper.setupAdobeConfiguration(with: adobeConfig)
         
         self.setupAnalytics()
+        configureRootViewController()
 
         return true
+    }
+
+    private func configureRootViewController() {
+        if window == nil {
+            window = UIWindow(frame: UIScreen.main.bounds)
+        }
+
+        window?.rootViewController = AssetListTabBarController(videoList: readVideoListOperation?.videoList)
+        window?.makeKeyAndVisible()
     }
     
     private func resetDeviceIdentifier() {

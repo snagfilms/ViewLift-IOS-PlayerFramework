@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		40594B7B2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40594B7A2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift */; };
+		40B391982FC9DE5000734A32 /* VLAnalyticsLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B391932FC9DB9800734A32 /* VLAnalyticsLib.framework */; };
+		40B391992FC9DE5000734A32 /* VLAnalyticsLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 40B391932FC9DB9800734A32 /* VLAnalyticsLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		40B3919A2FC9DE5000734A32 /* VLPlayerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B391832FC9DB6900734A32 /* VLPlayerLib.framework */; };
+		40B3919B2FC9DE5000734A32 /* VLPlayerLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 40B391832FC9DB6900734A32 /* VLPlayerLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		40B3919E2FC9DE9000734A32 /* AmazonIVSPlayer-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B3919C2FC9DE9000734A32 /* AmazonIVSPlayer-iOS.xcframework */; };
+		40B3919F2FC9DE9000734A32 /* AmazonIVSPlayer-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 40B3919C2FC9DE9000734A32 /* AmazonIVSPlayer-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		40B391A02FC9DE9000734A32 /* GoogleCast-iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B3919D2FC9DE9000734A32 /* GoogleCast-iOS.xcframework */; };
+		40B391A12FC9DE9000734A32 /* GoogleCast-iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 40B3919D2FC9DE9000734A32 /* GoogleCast-iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		40B391B12FC9EC3000734A32 /* GoogleInteractiveMediaAds in Frameworks */ = {isa = PBXBuildFile; productRef = 40B391B02FC9EC3000734A32 /* GoogleInteractiveMediaAds */; };
+		40B391B42FC9EC7E00734A32 /* ComScore in Frameworks */ = {isa = PBXBuildFile; productRef = 40B391B32FC9EC7E00734A32 /* ComScore */; };
+		40B391B72FC9ECB300734A32 /* MUXSDKStats in Frameworks */ = {isa = PBXBuildFile; productRef = 40B391B62FC9ECB300734A32 /* MUXSDKStats */; };
+		40B391BA2FC9ECD800734A32 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 40B391B92FC9ECD800734A32 /* BitmovinPlayer */; };
 		5422EFF4209912C600206D66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5422EFF3209912C600206D66 /* AppDelegate.swift */; };
 		5422EFF6209912C600206D66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5422EFF5209912C600206D66 /* ViewController.swift */; };
 		5422EFF9209912C600206D66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5422EFF7209912C600206D66 /* Main.storyboard */; };
@@ -44,14 +56,6 @@
 		BA5D8B692EAE2F8F001401D8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B682EAE2F8F001401D8 /* Utility.swift */; };
 		BA5D8B6A2EAE2F8F001401D8 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B682EAE2F8F001401D8 /* Utility.swift */; };
 		BA5D8B6C2EAE39BA001401D8 /* MVPDGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D8B6B2EAE39BA001401D8 /* MVPDGridView.swift */; };
-		BA79007E2F23A85D004E2329 /* AmazonIVSPlayer-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = BA79007D2F23A85D004E2329 /* AmazonIVSPlayer-iOS */; };
-		BA7900802F23A85D004E2329 /* GoogleCast-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = BA79007F2F23A85D004E2329 /* GoogleCast-iOS */; };
-		BA7900822F23A85D004E2329 /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = BA7900812F23A85D004E2329 /* VLPlayerLib */; };
-		BA7900912F23B9BB004E2329 /* VLAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BA7900902F23B9BB004E2329 /* VLAnalytics */; };
-		BA7900A02F23C053004E2329 /* AmazonIVSPlayer-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = BA79009F2F23C053004E2329 /* AmazonIVSPlayer-iOS */; };
-		BA7900A22F23C053004E2329 /* GoogleCast-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = BA7900A12F23C053004E2329 /* GoogleCast-iOS */; };
-		BA7900A42F23C053004E2329 /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = BA7900A32F23C053004E2329 /* VLPlayerLib */; };
-		BA7900A62F23C05E004E2329 /* VLPlayerLib in Frameworks */ = {isa = PBXBuildFile; productRef = BA7900A52F23C05E004E2329 /* VLPlayerLib */; };
 		BA8CFCB52E73005C008DEE58 /* PlayerViewController_iOS+TempPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8CFCB42E73005C008DEE58 /* PlayerViewController_iOS+TempPass.swift */; };
 		BA8E15802EA4DA6500B45F68 /* AnalyticsHelperV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8E157F2EA4DA6500B45F68 /* AnalyticsHelperV2.swift */; };
 		BA8E15812EA4DA6500B45F68 /* AnalyticsHelperV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8E157F2EA4DA6500B45F68 /* AnalyticsHelperV2.swift */; };
@@ -63,10 +67,8 @@
 		BAF0E2272EBD89AA003DBA9F /* VLContentInfoAnalytics+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF0E2252EBD89AA003DBA9F /* VLContentInfoAnalytics+Extension.swift */; };
 		D20833202E72DF690080932C /* PlayerAdEmbeddedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D208331D2E72DF690080932C /* PlayerAdEmbeddedView.swift */; };
 		D20833212E72DF690080932C /* PlayerAdEmbeddedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D208331E2E72DF690080932C /* PlayerAdEmbeddedView.xib */; };
-		D22E43C32F5AEA28002AA97A /* VLAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D22E43C22F5AEA28002AA97A /* VLAnalytics */; };
 		D2334A072E620133002370CB /* PlayerViewController_tvOS+SSAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2334A052E620133002370CB /* PlayerViewController_tvOS+SSAI.swift */; };
 		D23998712E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23998702E4E351900BC0AA9 /* PlayerViewController_iOS+PlayerControlsDelegate.swift */; };
-		D23E469A2F5E9A94007CD46D /* VLAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D23E46992F5E9A94007CD46D /* VLAnalytics */; };
 		D2542D6D2F517F1200B42060 /* FairPlayParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2542D6C2F517F1200B42060 /* FairPlayParser.swift */; };
 		D2542D6E2F517F1200B42060 /* FairPlayParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2542D6C2F517F1200B42060 /* FairPlayParser.swift */; };
 		D26D92192E6B1A4A002A70B1 /* TVEPollingQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26D92172E6B1A4A002A70B1 /* TVEPollingQRCodeView.swift */; };
@@ -137,6 +139,8 @@
 		D2A759A62E4B33610089B4D1 /* AssetInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7599F2E4B33610089B4D1 /* AssetInfoViewController.swift */; };
 		D2A759A72E4B33610089B4D1 /* AssetsListViewController+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A759A12E4B33610089B4D1 /* AssetsListViewController+Services.swift */; };
 		D2A759A82E4B33610089B4D1 /* AssetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A759A02E4B33610089B4D1 /* AssetListViewController.swift */; };
+		D2A759A92F5D00000089B4D1 /* AssetListTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A759A92F5D00010089B4D1 /* AssetListTabBarController.swift */; };
+		D2A759A92F5D00020089B4D1 /* AssetListTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A759A92F5D00010089B4D1 /* AssetListTabBarController.swift */; };
 		D2A759C52E4B504A0089B4D1 /* PlayerViewController_tvOS+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A759C42E4B50400089B4D1 /* PlayerViewController_tvOS+Analytics.swift */; };
 		D2A759C62E4B508F0089B4D1 /* AnalyticsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A759952E4B2B800089B4D1 /* AnalyticsProtocol.swift */; };
 		D2A759C72E4B50F10089B4D1 /* VLVideoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A7598D2E4B280D0089B4D1 /* VLVideoResponseModel.swift */; };
@@ -152,6 +156,62 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		40B3917E2FC9DB6900734A32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40B391732FC9DB6800734A32 /* VLPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F7818E45275A20D400699525;
+			remoteInfo = VLPlayerTests;
+		};
+		40B391802FC9DB6900734A32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40B391732FC9DB6800734A32 /* VLPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F7E28B9D27A3D80E0034D2BD;
+			remoteInfo = VLPlayer_test;
+		};
+		40B391822FC9DB6900734A32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40B391732FC9DB6800734A32 /* VLPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F79B0434283E365B00EF7FC8;
+			remoteInfo = VLPlayerLib;
+		};
+		40B391842FC9DB6900734A32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40B391732FC9DB6800734A32 /* VLPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A1C360A2988EDE400F272B8;
+			remoteInfo = VLPlayerLib_tvOS;
+		};
+		40B391862FC9DB6900734A32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40B391732FC9DB6800734A32 /* VLPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A1C36132988EDE400F272B8;
+			remoteInfo = VLPlayerLib_tvOSTests;
+		};
+		40B391922FC9DB9800734A32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40B391882FC9DB9700734A32 /* VLAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 882BBC16291383640074B7A0;
+			remoteInfo = VLAnalyticsLib;
+		};
+		40B391942FC9DB9800734A32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40B391882FC9DB9700734A32 /* VLAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 887C2716292F696D00BA73F7;
+			remoteInfo = VLAnalyticsLib_tvOS;
+		};
+		40B391962FC9DB9800734A32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40B391882FC9DB9700734A32 /* VLAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 882BBC20291383640074B7A0;
+			remoteInfo = VLAnalyticsTests;
+		};
 		F7EAFF10275F3AA700B46BDE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5422EFE8209912C600206D66 /* Project object */;
@@ -168,6 +228,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				40B391992FC9DE5000734A32 /* VLAnalyticsLib.framework in Embed Frameworks */,
+				40B391A12FC9DE9000734A32 /* GoogleCast-iOS.xcframework in Embed Frameworks */,
+				40B3919F2FC9DE9000734A32 /* AmazonIVSPlayer-iOS.xcframework in Embed Frameworks */,
+				40B3919B2FC9DE5000734A32 /* VLPlayerLib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +250,10 @@
 
 /* Begin PBXFileReference section */
 		40594B7A2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+SSAI.swift"; sourceTree = "<group>"; };
+		40B391732FC9DB6800734A32 /* VLPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VLPlayer.xcodeproj; path = "../iOS-player-sdk-stable/VLPlayer/VLPlayer.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		40B391882FC9DB9700734A32 /* VLAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VLAnalytics.xcodeproj; path = "/Users/shivam/Desktop/ios-analytics-sdk/VLAnalytics/VLAnalytics.xcodeproj"; sourceTree = "<absolute>"; };
+		40B3919C2FC9DE9000734A32 /* AmazonIVSPlayer-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "AmazonIVSPlayer-iOS.xcframework"; path = "../iOS-player-sdk-stable/VLPlayer/Framework/iOS/AmazonIVSPlayer-iOS.xcframework"; sourceTree = "<group>"; };
+		40B3919D2FC9DE9000734A32 /* GoogleCast-iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "GoogleCast-iOS.xcframework"; path = "../iOS-player-sdk-stable/VLPlayer/Framework/iOS/GoogleCast-iOS.xcframework"; sourceTree = "<group>"; };
 		5422EFF0209912C600206D66 /* OneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5422EFF3209912C600206D66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5422EFF5209912C600206D66 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -274,6 +342,7 @@
 		D2A7599F2E4B33610089B4D1 /* AssetInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInfoViewController.swift; sourceTree = "<group>"; };
 		D2A759A02E4B33610089B4D1 /* AssetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListViewController.swift; sourceTree = "<group>"; };
 		D2A759A12E4B33610089B4D1 /* AssetsListViewController+Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetsListViewController+Services.swift"; sourceTree = "<group>"; };
+		D2A759A92F5D00010089B4D1 /* AssetListTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListTabBarController.swift; sourceTree = "<group>"; };
 		D2A759C42E4B50400089B4D1 /* PlayerViewController_tvOS+Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_tvOS+Analytics.swift"; sourceTree = "<group>"; };
 		D2A759C82E4B5AA10089B4D1 /* PlayerViewController_iOS+FullScreenPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_iOS+FullScreenPlayer.swift"; sourceTree = "<group>"; };
 		D2B763822E68A6B300D71D6D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -289,19 +358,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40B391B42FC9EC7E00734A32 /* ComScore in Frameworks */,
 				BA92B01E2F28E99F00D62052 /* VLAuthentication in Frameworks */,
-				BA7900802F23A85D004E2329 /* GoogleCast-iOS in Frameworks */,
-				BA7900A02F23C053004E2329 /* AmazonIVSPlayer-iOS in Frameworks */,
-				BA7900822F23A85D004E2329 /* VLPlayerLib in Frameworks */,
-				D22E43C32F5AEA28002AA97A /* VLAnalytics in Frameworks */,
+				40B391A02FC9DE9000734A32 /* GoogleCast-iOS.xcframework in Frameworks */,
+				40B391BA2FC9ECD800734A32 /* BitmovinPlayer in Frameworks */,
 				D2A22D5D2E72D4320058D37A /* Kingfisher in Frameworks */,
-				BA7900A42F23C053004E2329 /* VLPlayerLib in Frameworks */,
-				BA79007E2F23A85D004E2329 /* AmazonIVSPlayer-iOS in Frameworks */,
+				40B3919E2FC9DE9000734A32 /* AmazonIVSPlayer-iOS.xcframework in Frameworks */,
+				40B3919A2FC9DE5000734A32 /* VLPlayerLib.framework in Frameworks */,
+				40B391B72FC9ECB300734A32 /* MUXSDKStats in Frameworks */,
 				BA05D4DF2E87A985008BF84C /* VLAuthentication in Frameworks */,
+				40B391B12FC9EC3000734A32 /* GoogleInteractiveMediaAds in Frameworks */,
+				40B391982FC9DE5000734A32 /* VLAnalyticsLib.framework in Frameworks */,
 				BA92B0232F28EC2700D62052 /* VLAuthentication in Frameworks */,
-				BA7900912F23B9BB004E2329 /* VLAnalytics in Frameworks */,
 				BA293BC12F226D45000FC394 /* VLAuthentication in Frameworks */,
-				BA7900A22F23C053004E2329 /* GoogleCast-iOS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,8 +379,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA92B0252F28EC3000D62052 /* VLAuthentication in Frameworks */,
-				D23E469A2F5E9A94007CD46D /* VLAnalytics in Frameworks */,
-				BA7900A62F23C05E004E2329 /* VLPlayerLib in Frameworks */,
 				D2A22D5F2E72D4500058D37A /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,9 +393,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40B391762FC9DB6800734A32 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				40B3917F2FC9DB6900734A32 /* VLPlayerTests.xctest */,
+				40B391812FC9DB6900734A32 /* VLPlayer_test.framework */,
+				40B391832FC9DB6900734A32 /* VLPlayerLib.framework */,
+				40B391852FC9DB6900734A32 /* VLPlayerLib.framework */,
+				40B391872FC9DB6900734A32 /* VLPlayerLib_tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		40B3918B2FC9DB9700734A32 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				40B391932FC9DB9800734A32 /* VLAnalyticsLib.framework */,
+				40B391952FC9DB9800734A32 /* VLAnalyticsLib.framework */,
+				40B391972FC9DB9800734A32 /* VLAnalyticsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5422EFE7209912C600206D66 = {
 			isa = PBXGroup;
 			children = (
+				40B391732FC9DB6800734A32 /* VLPlayer.xcodeproj */,
+				40B391882FC9DB9700734A32 /* VLAnalytics.xcodeproj */,
 				5422EFF2209912C600206D66 /* ViewliftPlayerSampleApp */,
 				D2A759422E4B0ED90089B4D1 /* ViewliftPlayerSampleApp_tvOS */,
 				D2A759A22E4B33610089B4D1 /* SampleUI */,
@@ -367,6 +458,8 @@
 		5422F0062099162100206D66 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				40B3919C2FC9DE9000734A32 /* AmazonIVSPlayer-iOS.xcframework */,
+				40B3919D2FC9DE9000734A32 /* GoogleCast-iOS.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -532,6 +625,7 @@
 			children = (
 				D2A7599F2E4B33610089B4D1 /* AssetInfoViewController.swift */,
 				D2A759A02E4B33610089B4D1 /* AssetListViewController.swift */,
+				D2A759A92F5D00010089B4D1 /* AssetListTabBarController.swift */,
 				D2A759A12E4B33610089B4D1 /* AssetsListViewController+Services.swift */,
 			);
 			path = ViewControllers;
@@ -706,16 +800,12 @@
 				D2A22D5C2E72D4320058D37A /* Kingfisher */,
 				BA05D4DE2E87A985008BF84C /* VLAuthentication */,
 				BA293BC02F226D45000FC394 /* VLAuthentication */,
-				BA79007D2F23A85D004E2329 /* AmazonIVSPlayer-iOS */,
-				BA79007F2F23A85D004E2329 /* GoogleCast-iOS */,
-				BA7900812F23A85D004E2329 /* VLPlayerLib */,
-				BA7900902F23B9BB004E2329 /* VLAnalytics */,
-				BA79009F2F23C053004E2329 /* AmazonIVSPlayer-iOS */,
-				BA7900A12F23C053004E2329 /* GoogleCast-iOS */,
-				BA7900A32F23C053004E2329 /* VLPlayerLib */,
 				BA92B01D2F28E99F00D62052 /* VLAuthentication */,
 				BA92B0222F28EC2700D62052 /* VLAuthentication */,
-				D22E43C22F5AEA28002AA97A /* VLAnalytics */,
+				40B391B02FC9EC3000734A32 /* GoogleInteractiveMediaAds */,
+				40B391B32FC9EC7E00734A32 /* ComScore */,
+				40B391B62FC9ECB300734A32 /* MUXSDKStats */,
+				40B391B92FC9ECD800734A32 /* BitmovinPlayer */,
 			);
 			productName = ViewliftPlayerSampleApp;
 			productReference = 5422EFF0209912C600206D66 /* OneApp.app */;
@@ -737,9 +827,7 @@
 			name = ViewLiftPlayerSampleApp_tvOS;
 			packageProductDependencies = (
 				D2A22D5E2E72D4500058D37A /* Kingfisher */,
-				BA7900A52F23C05E004E2329 /* VLPlayerLib */,
 				BA92B0242F28EC3000D62052 /* VLAuthentication */,
-				D23E46992F5E9A94007CD46D /* VLAnalytics */,
 			);
 			productName = ViewLiftPlayerSampleApp_tvOS;
 			productReference = D2A15D8D2E28199900F88E09 /* OneApp.app */;
@@ -833,12 +921,24 @@
 			mainGroup = 5422EFE7209912C600206D66;
 			packageReferences = (
 				D2A22D5B2E72D4320058D37A /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				BA79009E2F23C053004E2329 /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */,
 				BA92B0212F28EC2700D62052 /* XCRemoteSwiftPackageReference "AuthenticationFramework" */,
-				D22E43C12F5AEA28002AA97A /* XCRemoteSwiftPackageReference "iOS-VLAnalytics-SPM" */,
+				40B391AF2FC9EC3000734A32 /* XCRemoteSwiftPackageReference "swift-package-manager-google-interactive-media-ads-ios" */,
+				40B391B22FC9EC7E00734A32 /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */,
+				40B391B52FC9ECB300734A32 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */,
+				40B391B82FC9ECD800734A32 /* XCRemoteSwiftPackageReference "player-ios" */,
 			);
 			productRefGroup = 5422EFF1209912C600206D66 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 40B3918B2FC9DB9700734A32 /* Products */;
+					ProjectRef = 40B391882FC9DB9700734A32 /* VLAnalytics.xcodeproj */;
+				},
+				{
+					ProductGroup = 40B391762FC9DB6800734A32 /* Products */;
+					ProjectRef = 40B391732FC9DB6800734A32 /* VLPlayer.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5422EFEF209912C600206D66 /* ViewliftPlayerSampleApp */,
@@ -847,6 +947,65 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		40B3917F2FC9DB6900734A32 /* VLPlayerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = VLPlayerTests.xctest;
+			remoteRef = 40B3917E2FC9DB6900734A32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		40B391812FC9DB6900734A32 /* VLPlayer_test.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VLPlayer_test.framework;
+			remoteRef = 40B391802FC9DB6900734A32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		40B391832FC9DB6900734A32 /* VLPlayerLib.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VLPlayerLib.framework;
+			remoteRef = 40B391822FC9DB6900734A32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		40B391852FC9DB6900734A32 /* VLPlayerLib.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VLPlayerLib.framework;
+			remoteRef = 40B391842FC9DB6900734A32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		40B391872FC9DB6900734A32 /* VLPlayerLib_tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = VLPlayerLib_tvOSTests.xctest;
+			remoteRef = 40B391862FC9DB6900734A32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		40B391932FC9DB9800734A32 /* VLAnalyticsLib.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VLAnalyticsLib.framework;
+			remoteRef = 40B391922FC9DB9800734A32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		40B391952FC9DB9800734A32 /* VLAnalyticsLib.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VLAnalyticsLib.framework;
+			remoteRef = 40B391942FC9DB9800734A32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		40B391972FC9DB9800734A32 /* VLAnalyticsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = VLAnalyticsTests.xctest;
+			remoteRef = 40B391962FC9DB9800734A32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5422EFEE209912C600206D66 /* Resources */ = {
@@ -902,6 +1061,7 @@
 				D2A759A62E4B33610089B4D1 /* AssetInfoViewController.swift in Sources */,
 				D2A759A72E4B33610089B4D1 /* AssetsListViewController+Services.swift in Sources */,
 				D2A759A82E4B33610089B4D1 /* AssetListViewController.swift in Sources */,
+				D2A759A92F5D00020089B4D1 /* AssetListTabBarController.swift in Sources */,
 				BA5D8B692EAE2F8F001401D8 /* Utility.swift in Sources */,
 				D2A759202E4B0E130089B4D1 /* UserManager.swift in Sources */,
 				D2A759212E4B0E130089B4D1 /* TokenIdentity.swift in Sources */,
@@ -978,6 +1138,7 @@
 				D2A759A32E4B33610089B4D1 /* AssetInfoViewController.swift in Sources */,
 				D2A759A42E4B33610089B4D1 /* AssetsListViewController+Services.swift in Sources */,
 				D2A759A52E4B33610089B4D1 /* AssetListViewController.swift in Sources */,
+				D2A759A92F5D00000089B4D1 /* AssetListTabBarController.swift in Sources */,
 				D2A759242E4B0E130089B4D1 /* AppDelegate+Authentication.swift in Sources */,
 				BA5D8B6A2EAE2F8F001401D8 /* Utility.swift in Sources */,
 				D2A7599C2E4B304E0089B4D1 /* PlayerViewController_tvOS+VideoPlaybackDelegate.swift in Sources */,
@@ -1881,12 +2042,36 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BA79009E2F23C053004E2329 /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */ = {
+		40B391AF2FC9EC3000734A32 /* XCRemoteSwiftPackageReference "swift-package-manager-google-interactive-media-ads-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework";
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git";
 			requirement = {
 				kind = exactVersion;
-				version = 3.2.42;
+				version = 3.28.10;
+			};
+		};
+		40B391B22FC9EC7E00734A32 /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/comScore/Comscore-Swift-Package-Manager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.15.0;
+			};
+		};
+		40B391B52FC9ECB300734A32 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/muxinc/mux-stats-sdk-avplayer.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.0.0;
+			};
+		};
+		40B391B82FC9ECD800734A32 /* XCRemoteSwiftPackageReference "player-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bitmovin/player-ios.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.85.2;
 			};
 		};
 		BA92B0212F28EC2700D62052 /* XCRemoteSwiftPackageReference "AuthenticationFramework" */ = {
@@ -1897,25 +2082,37 @@
 				version = 3.1.21;
 			};
 		};
-		D22E43C12F5AEA28002AA97A /* XCRemoteSwiftPackageReference "iOS-VLAnalytics-SPM" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/snagfilms/iOS-VLAnalytics-SPM";
-			requirement = {
-				kind = exactVersion;
-				version = 3.0.17;
-			};
-		};
 		D2A22D5B2E72D4320058D37A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.8.1;
+				minimumVersion = 8.8.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		40B391B02FC9EC3000734A32 /* GoogleInteractiveMediaAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40B391AF2FC9EC3000734A32 /* XCRemoteSwiftPackageReference "swift-package-manager-google-interactive-media-ads-ios" */;
+			productName = GoogleInteractiveMediaAds;
+		};
+		40B391B32FC9EC7E00734A32 /* ComScore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40B391B22FC9EC7E00734A32 /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */;
+			productName = ComScore;
+		};
+		40B391B62FC9ECB300734A32 /* MUXSDKStats */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40B391B52FC9ECB300734A32 /* XCRemoteSwiftPackageReference "mux-stats-sdk-avplayer" */;
+			productName = MUXSDKStats;
+		};
+		40B391B92FC9ECD800734A32 /* BitmovinPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40B391B82FC9ECD800734A32 /* XCRemoteSwiftPackageReference "player-ios" */;
+			productName = BitmovinPlayer;
+		};
 		BA05D4DE2E87A985008BF84C /* VLAuthentication */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VLAuthentication;
@@ -1923,42 +2120,6 @@
 		BA293BC02F226D45000FC394 /* VLAuthentication */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VLAuthentication;
-		};
-		BA79007D2F23A85D004E2329 /* AmazonIVSPlayer-iOS */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "AmazonIVSPlayer-iOS";
-		};
-		BA79007F2F23A85D004E2329 /* GoogleCast-iOS */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "GoogleCast-iOS";
-		};
-		BA7900812F23A85D004E2329 /* VLPlayerLib */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = VLPlayerLib;
-		};
-		BA7900902F23B9BB004E2329 /* VLAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = VLAnalytics;
-		};
-		BA79009F2F23C053004E2329 /* AmazonIVSPlayer-iOS */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BA79009E2F23C053004E2329 /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
-			productName = "AmazonIVSPlayer-iOS";
-		};
-		BA7900A12F23C053004E2329 /* GoogleCast-iOS */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BA79009E2F23C053004E2329 /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
-			productName = "GoogleCast-iOS";
-		};
-		BA7900A32F23C053004E2329 /* VLPlayerLib */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BA79009E2F23C053004E2329 /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
-			productName = VLPlayerLib;
-		};
-		BA7900A52F23C05E004E2329 /* VLPlayerLib */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BA79009E2F23C053004E2329 /* XCRemoteSwiftPackageReference "ViewLift-IOS-PlayerFramework" */;
-			productName = VLPlayerLib;
 		};
 		BA92B01D2F28E99F00D62052 /* VLAuthentication */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1973,16 +2134,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BA92B0212F28EC2700D62052 /* XCRemoteSwiftPackageReference "AuthenticationFramework" */;
 			productName = VLAuthentication;
-		};
-		D22E43C22F5AEA28002AA97A /* VLAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D22E43C12F5AEA28002AA97A /* XCRemoteSwiftPackageReference "iOS-VLAnalytics-SPM" */;
-			productName = VLAnalytics;
-		};
-		D23E46992F5E9A94007CD46D /* VLAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D22E43C12F5AEA28002AA97A /* XCRemoteSwiftPackageReference "iOS-VLAnalytics-SPM" */;
-			productName = VLAnalytics;
 		};
 		D2A22D5C2E72D4320058D37A /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
