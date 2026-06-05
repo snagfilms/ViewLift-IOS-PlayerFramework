@@ -590,7 +590,7 @@ public protocol CustomPlayerSkinProtocol : UIKit.UIView {
   func updatePlayButton()
 }
 public struct FeatureFlags {
-  public init(shouldContinuePlaybackOnScreenLock: Swift.Bool = false, shouldHandleOrientation: Swift.Bool = false, isMPPlayingNowEnabled: Swift.Bool = false, isChromeCastEnabled: Swift.Bool = false)
+  public init(shouldContinuePlaybackOnScreenLock: Swift.Bool = false, shouldHandleOrientation: Swift.Bool = false, isMPPlayingNowEnabled: Swift.Bool = false, isChromeCastEnabled: Swift.Bool = false, showTemppassTimer: Swift.Bool = false)
 }
 extension VLPlayerLib.VLPlayer {
   public func startSessionAnalytics()
@@ -1890,6 +1890,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   #endif
   @objc optional func avPlayerControllerInstance(_ avPlayerControllerInstance: AVKit.AVPlayerViewController)
   @objc optional func airplayConnection(changed status: Swift.Bool)
+  @objc optional func hideTempPassTimerAndReloadPlayer()
 }
 @objc public protocol ChromeCastPlaybackDelegate : ObjectiveC.NSObjectProtocol {
   #if compiler(>=5.3) && $NonescapableTypes
@@ -2043,6 +2044,7 @@ public struct AdWindow : Swift.Equatable {
   final public func attach(to player: AVFoundation.AVPlayer)
   final public func detachPlayer()
   final public func playheadReachedEnd(killTimer: Swift.Bool = false)
+  final public func adjustPlayheadOnVideoComplete()
   final public func resume(isBufferComplete: Swift.Bool = false)
   final public func getCurrentPlayhead() -> Swift.Double
   #if compiler(>=5.3) && $NonescapableTypes
@@ -2056,7 +2058,7 @@ public struct AdWindow : Swift.Equatable {
   #if compiler(>=5.3) && $NonescapableTypes
   final public func seekStart(newSeekValue: Swift.Double? = nil)
   #endif
-  final public func seekComplete(target: Swift.Double)
+  final public func seekComplete(target: Swift.Double, isVideoEnded: Swift.Bool = false)
   final public func goLive()
 }
 public func secondsSinceMidnightUTC(_ now: Foundation.Date = Date()) -> Swift.Int

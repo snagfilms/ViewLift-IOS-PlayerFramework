@@ -858,6 +858,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 - (StreamMetadata * _Nullable)autoPlayMetadataProviderWithStreamId:(NSString * _Nonnull)streamId SWIFT_WARN_UNUSED_RESULT;
 - (void)avPlayerControllerInstance:(AVPlayerViewController * _Nonnull)avPlayerControllerInstance;
 - (void)airplayConnectionWithChanged:(BOOL)status;
+- (void)hideTempPassTimerAndReloadPlayer;
 @end
 
 #endif

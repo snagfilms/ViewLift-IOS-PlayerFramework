@@ -386,6 +386,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   #endif
   @objc optional func avPlayerControllerInstance(_ avPlayerControllerInstance: AVKit.AVPlayerViewController)
   @objc optional func airplayConnection(changed status: Swift.Bool)
+  @objc optional func hideTempPassTimerAndReloadPlayer()
 }
 public protocol ServerSideAdTrackingDelegate : AnyObject {
   func serverSideAdTrackingEvents(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType, eventTrackingProperties: [Swift.String : Any])
@@ -1617,7 +1618,7 @@ extension Foundation.NSNotification.Name {
   public static let playerAdDidHideStatusbarOnFullScreen: Foundation.Notification.Name
 }
 public struct FeatureFlags {
-  public init(shouldHideControlsOnMenuPressed: Swift.Bool = false, shouldCreateAudioLanguageOptionIndependently: Swift.Bool = true, shouldHideControlsWhenPaused: Swift.Bool = true, shouldFocusLiveButton: Swift.Bool = true, shouldEnablePlayPauseOnLiveStream: Swift.Bool = false)
+  public init(shouldHideControlsOnMenuPressed: Swift.Bool = false, shouldCreateAudioLanguageOptionIndependently: Swift.Bool = true, shouldHideControlsWhenPaused: Swift.Bool = true, shouldFocusLiveButton: Swift.Bool = true, shouldEnablePlayPauseOnLiveStream: Swift.Bool = false, showTemppassTimer: Swift.Bool = false)
 }
 public class VLAdAssetInfoAnalytics : Swift.Codable {
   public var adId: Swift.String
@@ -1737,6 +1738,7 @@ public struct AdWindow : Swift.Equatable {
   final public func attach(to player: AVFoundation.AVPlayer)
   final public func detachPlayer()
   final public func playheadReachedEnd(killTimer: Swift.Bool = false)
+  final public func adjustPlayheadOnVideoComplete()
   final public func resume(isBufferComplete: Swift.Bool = false)
   final public func getCurrentPlayhead() -> Swift.Double
   #if compiler(>=5.3) && $NonescapableTypes
@@ -1750,7 +1752,7 @@ public struct AdWindow : Swift.Equatable {
   #if compiler(>=5.3) && $NonescapableTypes
   final public func seekStart(newSeekValue: Swift.Double? = nil)
   #endif
-  final public func seekComplete(target: Swift.Double)
+  final public func seekComplete(target: Swift.Double, isVideoEnded: Swift.Bool = false)
   final public func goLive()
 }
 public func secondsSinceMidnightUTC(_ now: Foundation.Date = Date()) -> Swift.Int
