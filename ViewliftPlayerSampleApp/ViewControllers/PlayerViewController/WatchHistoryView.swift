@@ -58,21 +58,31 @@ struct WatchHistoryView: View {
     @Binding var watchedTime: Int
     @Binding var watchedPercentage: Double
     @Binding var doneWatching: Bool
+    var iOS: Bool {
+        #if os(iOS)
+        return true
+        #else
+        return false
+        #endif
+    }
     
     // MARK: - Body
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            // Title
-            Text("Watch History")
-                .font(.system(size: 34, weight: .bold))
-                .padding(.top, 20)
+            
             
             // Enable Toggle
             HStack {
-                Text("Enable")
-                    .font(.system(size: 17))
+                // Title
+                Text("Watch History")
+                    .font(.system(size: (iOS ? 22 : 34), weight: .bold))
+                    .foregroundStyle(.black)
                 
                 Spacer()
+
+                Text("Enable")
+                    .font(.system(size: (iOS ? 16 : 22)))
+                    .foregroundColor(.black)
                 
                 Toggle("", isOn: $isEnabled)
                     .labelsHidden()
@@ -80,48 +90,80 @@ struct WatchHistoryView: View {
                     .onChange(of: isEnabled) { newValue in
                         delegate?.updateWatchHistory(newValue)
                     }
+                    .foregroundColor(.black)
             }
-            .padding(.vertical, 10)
+            .padding(.top, 20)
+            .padding(.vertical, (iOS ? 10 : 0))
             
             // Input Fields Row - Highlight when enabled
             HStack(spacing: 15) {
                 // Interval Field
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Interval (sec)")
-                        .font(.system(size: 13))
-                        .foregroundColor(.secondary)
+                        .font(.system(size: iOS ? 13 : 22))
+                        .foregroundColor(.black)
                     
                     TextField("30", text: $interval)
-                        .textFieldStyle(.roundedBorder)
+                        .textFieldStyle(.plain)
                         .keyboardType(.numberPad)
+                        .padding(8)
+                        .background(Color(white: 0.95))
+                        .foregroundColor(.black)
+                        .cornerRadius(8)
                 }
                 
                 // Threshold Field
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Threshold (%)")
-                        .font(.system(size: 13))
-                        .foregroundColor(.secondary)
+                        .font(.system(size: iOS ? 13 : 22))
+                        .foregroundColor(.black)
                     
                     TextField("5", text: $threshold)
-                        .textFieldStyle(.roundedBorder)
+                        .textFieldStyle(.plain)
                         .keyboardType(.numberPad)
+                        .padding(8)
+                        .background(Color(white: 0.95))
+                        .foregroundColor(.black)
+                        .cornerRadius(8)
                 }
+                #if os(tvOS)
+                // Resume Field - Highlight when enabled
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Resume (sec)")
+                        .font(.system(size: 22))
+                        .foregroundColor(.black)
+                    
+                    TextField("0", text: $resume)
+                        .textFieldStyle(.plain)
+                        .keyboardType(.numberPad)
+                        .padding(8)
+                        .background(Color(white: 0.95))
+                        .foregroundColor(.black)
+                        .cornerRadius(8)
+                }
+                #endif
             }
             .disabled(!isEnabled)
             .opacity(isEnabled ? 1.0 : 0.5)
             
+            #if os(iOS)
             // Resume Field - Highlight when enabled
             VStack(alignment: .leading, spacing: 8) {
                 Text("Resume (sec)")
                     .font(.system(size: 13))
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.black)
                 
                 TextField("0", text: $resume)
-                    .textFieldStyle(.roundedBorder)
+                    .textFieldStyle(.plain)
                     .keyboardType(.numberPad)
+                    .padding(8)
+                    .background(Color(white: 0.95))
+                    .foregroundColor(.black)
+                    .cornerRadius(8)
             }
             .disabled(!isEnabled)
             .opacity(isEnabled ? 1.0 : 0.5)
+            #endif
             
             // Apply Button - Highlight when enabled
             Button(action: handleApplyTap) {
@@ -133,22 +175,22 @@ struct WatchHistoryView: View {
                     .background(Color(red: 0.4, green: 0.2, blue: 0.8))
                     .cornerRadius(10)
             }
-            .padding(.top, 10)
+            .padding(.top, (iOS ? 10 : 0))
             .disabled(!isEnabled)
             .opacity(isEnabled ? 1.0 : 0.5)
-            
             // Watch History Update Status - Highlight when enabled
             VStack(alignment: .leading, spacing: 8) {
                 Text("Watch history update:")
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.system(size: (iOS ? 17 : 24), weight: .semibold))
+                    .foregroundColor(.black)
                 
                 Text("watchedTime=\(Int(watchHistoryData.watchedTime))s, watchedPercentage=\(Int(watchHistoryData.watchedPercentage))%, doneWatching=\(watchHistoryData.doneWatching ? "true" : "false")")
-                    .font(.system(size: 15))
-                    .foregroundColor(.secondary)
+                    .font(.system(size: (iOS ? 15 : 22)))
+                    .foregroundColor(.black)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color(.systemGray6))
+            .background(Color(red: 0.95, green: 0.95, blue: 0.97))
             .cornerRadius(10)
             .disabled(!isEnabled)
             .opacity(isEnabled ? 1.0 : 0.5)
@@ -169,6 +211,7 @@ struct WatchHistoryView: View {
         .onChange(of: watchHistoryData.doneWatching) { newValue in
             doneWatching = newValue
         }
+        .background(.white)
     }
     
     // MARK: - Helper Methods

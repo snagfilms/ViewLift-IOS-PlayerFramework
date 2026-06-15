@@ -135,7 +135,7 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         self.invalidatePlayerTempPassIfOutOfWindow()
     }
     
-    func videoPlayerProgressOnDefinedInterval(currentTime: Double, totalTime: Double, playerTag: String, parsedTimeStamp: String?) {
+    func videoPlayerProgressOnDefinedInterval(currentTime: Double, totalTime: Double, playerTag: String) {
         self.updateWatchHistoryDisplay(watchedTime: currentTime, watchedPercentage: (currentTime/totalTime)*100)
     }
 
