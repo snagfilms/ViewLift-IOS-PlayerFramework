@@ -135,6 +135,10 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
         videoPlayerControlsView?.updateCurrentTime(currentTime: currentTime, totalTime: totalTime)
     }
     
+    func videoPlayerProgressOnDefinedInterval(currentTime: Double, totalTime: Double, playerTag: String) {
+        self.updateWatchHistoryDisplay(watchedTime: currentTime, watchedPercentage: (currentTime/totalTime)*100)
+    }
+    
     // Handles back button tap event
     func onBackButtonTapped() {
         menuPressed()

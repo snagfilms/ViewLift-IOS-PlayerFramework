@@ -1,5 +1,5 @@
 {
-  "originHash" : "cf32f4790f56e65fe2b599c5c45a44aa912942c94b0b0f4fff5fca5b6bd2adca",
+  "originHash" : "41007ab6777fdc39963b2ced9e8882fb09d2f82433dd983e6ef80067d4c47108",
   "pins" : [
     {
       "identity" : "aepsdk-analytics-ios",
@@ -56,12 +56,21 @@
       }
     },
     {
+      "identity" : "authenticationframework",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/snagfilms/AuthenticationFramework",
+      "state" : {
+        "revision" : "feb663b60de5e2848168ca735af70a9451a6acd1",
+        "version" : "3.1.21"
+      }
+    },
+    {
       "identity" : "bitmovin-analytics-collector-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/bitmovin/bitmovin-analytics-collector-ios.git",
       "state" : {
-        "revision" : "f8d075366295a48e614085795f6383aa322470d0",
-        "version" : "3.20.0"
+        "revision" : "50a089c1cd2084b32cde3838c63f8f52457b1f83",
+        "version" : "3.25.1"
       }
     },
     {
@@ -110,39 +119,30 @@
       }
     },
     {
-      "identity" : "ctnotificationservice",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CleverTap/CTNotificationService",
-      "state" : {
-        "revision" : "9fb05bd25296f62be89d0ed0542a8473a96234e1",
-        "version" : "0.1.7"
-      }
-    },
-    {
       "identity" : "ios-vlanalytics-spm",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/snagfilms/iOS-VLAnalytics-SPM",
       "state" : {
-        "branch" : "3.0.10",
-        "revision" : "a60a1a4899391c988818d2591e10c3dadc08771a"
-      }
-    },
-    {
-      "identity" : "ios-vlauthentication-spm",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/snagfilms/iOS-VLAuthentication-SPM",
-      "state" : {
-        "branch" : "3.1.14",
-        "revision" : "13095b09ec926af0db1a2d92a61ede5504f02c4e"
+        "revision" : "598dfa0bb801469088200558aa8a79a18fd426c4",
+        "version" : "3.0.16"
       }
     },
     {
       "identity" : "ios-vlbeacon-spm",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
+      "location" : "https://github.com/snagfilms/iOS-VLBeacon-SPM",
       "state" : {
-        "revision" : "ac0669523958a079568e8e7510d63597bcc8c37d",
-        "version" : "3.2.6"
+        "revision" : "0676e693d6c038450f61f454497f0c8abb835c00",
+        "version" : "3.2.7"
+      }
+    },
+    {
+      "identity" : "ios-vlnotification-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/snagfilms/iOS-VLNotification-SPM.git",
+      "state" : {
+        "revision" : "6d59deba12ee5d5b12b52d21bc4c1877ecab6ee4",
+        "version" : "1.0.1"
       }
     },
     {
@@ -175,7 +175,7 @@
     {
       "identity" : "mux-stats-sdk-avplayer",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/muxinc/mux-stats-sdk-avplayer.git",
+      "location" : "https://github.com/muxinc/mux-stats-sdk-avplayer",
       "state" : {
         "revision" : "705cb2b57cee36f9e74033bfd1d346d9b4f04d71",
         "version" : "4.0.0"
@@ -249,8 +249,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework",
       "state" : {
-        "branch" : "3.2.30",
-        "revision" : "8fd578a9c1909c6deb5eadd6dde037ac4544a4b7"
+        "branch" : "3.2.44",
+        "revision" : "cc07120f7a3a6558a3feabf151a79084554a3cef"
       }
     },
     {
