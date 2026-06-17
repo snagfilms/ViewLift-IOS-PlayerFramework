@@ -352,10 +352,10 @@ class PlayerViewController_tvOS: UIViewController {
         
         // Remove watch history when going to full screen
         if isFullScreen {
-            removeWatchHistoryView()
+            hideWatchHistoryView()
         } else {
             // Add watch history when exiting full screen
-            addWatchHistoryView()
+            unhideWatchHistoryView()
         }
         
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseInOut], animations: {
@@ -780,7 +780,21 @@ extension PlayerViewController_tvOS: WatchHistoryDelegate {
             hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             hostingController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        self.unhideWatchHistoryView()
     }
+    
+    func hideWatchHistoryView() {
+        guard let hostingController = watchHistoryHostingController else { return }
+        
+        hostingController.view.isHidden = true
+    }
+    
+    func unhideWatchHistoryView() {
+        guard let hostingController = watchHistoryHostingController else { return }
+        
+        hostingController.view.isHidden = false
+    }
+    
     
     /// Removes the Watch History view if it exists
     func removeWatchHistoryView() {
@@ -834,6 +848,9 @@ extension PlayerViewController_tvOS: WatchHistoryDelegate {
         self.watchedTime = Int(resume) ?? 0
         self.watchHistoryInterval = Int(interval) ?? 0
         self.watchHistoryThreshold = Double(threshold) ?? 0
+        let videoWatchPercentage = (self.vlPlayer?.getCurrentVideoDuration() != nil) ? (Double(self.watchedTime) / Double(self.vlPlayer?.getCurrentVideoDuration() ?? 0) * 100): 0.0
+        print("Watched Percentage = " + String(videoWatchPercentage))
+        self.updateWatchHistoryDisplay(watchedTime: Double(self.watchedTime), watchedPercentage: videoWatchPercentage)
         self.cleanupResources()
         Task { [weak self] in
             await self?.loadPlayerView()
