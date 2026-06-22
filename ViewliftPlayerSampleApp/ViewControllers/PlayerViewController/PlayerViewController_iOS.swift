@@ -17,15 +17,19 @@ import VLAuthenticationFramework_tvOS
 import VLAnalyticsLib
 import Foundation
 import AVKit
+import SwiftUI
 
 // MARK: - Constants
 /// Contains static constants used for player layout and configuration
-private enum Constants {
+ enum Constants {
     static let playerMargin: CGFloat = 10
     static let aspectRatio: CGFloat = 9/16
     static let defaultSeekForward: Double = 30.0
     static let defaultSeekBackward: Double = 10.0
     static let playerYPosition: CGFloat = 100
+    static let liveMomentsTopSpacing: CGFloat = 12
+    static let liveMomentsHorizontalInset: CGFloat = 12
+    static let liveMomentsHeight: CGFloat = 250
     static let defaultAdUrl = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/simid&description_url=https%3A%2F%2Fdevelopers.google.com%2Finteractive-media-ads&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator="
 }
 
@@ -102,6 +106,11 @@ class PlayerViewController_iOS: UIViewController {
     var isVideoPlayingBeforeSeek = true
     var autoPlayListdataManager: AutoPlayDataManager?
     internal var autoPlayView: AutoPlayView?
+    internal var pendingDeepLinkSeekSeconds: Double?
+    internal var liveMomentsHostingController: UIHostingController<LiveMomentsTabsView>?
+    // Chapter cue-point generation is fully handled inside VLPlayer SDK.
+    // Keep this commented unless sample-side cue-point mapping is re-enabled.
+    // internal var latestPlaybackWindowDuration: TimeInterval = .zero
     // MARK: - Computed Properties
     /// Calculates the frame for the player view based on screen size and constants
     var playerFrame: CGRect {
@@ -125,6 +134,7 @@ class PlayerViewController_iOS: UIViewController {
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
         setupConstraints()
+        setupLiveMomentsSection()
         setupInitialState()
         createAutoPlayMetaData()
         
@@ -201,6 +211,9 @@ class PlayerViewController_iOS: UIViewController {
 
     
     deinit {
+        liveMomentsHostingController?.willMove(toParent: nil)
+        liveMomentsHostingController?.view.removeFromSuperview()
+        liveMomentsHostingController?.removeFromParent()
         cleanupResources()
     }
     
@@ -313,6 +326,7 @@ extension PlayerViewController_iOS {
         }else{
             vlPlayer = VLPlayer(playerType: .default)
         }
+        configureSDKChapterSegments()
         // Select playback source type based on user option
         let playbackSourceType: VLPlayer.PlaybackSourceType
         if isPlayingFromURL(){

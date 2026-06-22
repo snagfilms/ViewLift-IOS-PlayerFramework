@@ -20,6 +20,7 @@ extension PlayerViewController_iOS {
             // Activate fullscreen constraints
             NSLayoutConstraint.deactivate(normalConstraints)
             NSLayoutConstraint.activate(fullscreenConstraints)
+            setLiveMomentsVisibility(isHidden: true)
             
             // Force landscape orientation
             goFullScreenLandscape()
@@ -28,6 +29,7 @@ extension PlayerViewController_iOS {
             // Activate normal constraints
             NSLayoutConstraint.deactivate(fullscreenConstraints)
             NSLayoutConstraint.activate(normalConstraints)
+            setLiveMomentsVisibility(isHidden: false)
             
             // Return to portrait if device is portrait
             goPortraitIfNeeded()
