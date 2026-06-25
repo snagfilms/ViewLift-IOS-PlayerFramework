@@ -1718,6 +1718,7 @@ public struct AdWindow : Swift.Equatable {
     get
     set
   }
+  final public var usesStitchedStreamAdTimeline: Swift.Bool
   final public var mode: VLPlayerLib.Mode {
     get
   }
@@ -1746,8 +1747,11 @@ public struct AdWindow : Swift.Equatable {
   #endif
   final public func pause()
   final public func adBreakStartCSAI()
-  final public func adStart()
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func adStart(adDurationSeconds: Swift.Double? = nil)
+  #endif
   final public func adComplete()
+  final public func contentPlayheadForAdAnalytics() -> Swift.Double
   final public func adBreakCompleteCSAI()
   #if compiler(>=5.3) && $NonescapableTypes
   final public func seekStart(newSeekValue: Swift.Double? = nil)
@@ -1868,6 +1872,9 @@ final public class ChapterTimeline {
   final public let streamDuration: Swift.Double
   final public let epgProgramDetails: VLPlayerLib.VLEPGProgramDetails?
   #if compiler(>=5.3) && $NonescapableTypes
+  public init(imaCuePoints: [Swift.Double], contentDuration: Swift.Double, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(adWindows: [VLPlayerLib.AdWindow], contentDuration: Swift.Double, epgProgramDetails: VLPlayerLib.VLEPGProgramDetails?)
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
@@ -1885,6 +1892,37 @@ final public class ChapterTimeline {
   final public func contentTime(forStream streamT: Swift.Double) -> Swift.Double
   final public func streamTime(forContent contentT: Swift.Double) -> Swift.Double
   @objc deinit
+}
+public enum AnalyticsChapterDurationResolver {
+  public struct VODDurationInput : Swift.Equatable {
+    public let metadataRunTime: Swift.Double?
+    public let cmsDurationSeconds: Swift.Int?
+    public let pinnedSessionDuration: Swift.Double?
+    public let playerDuration: Swift.Double?
+    public let assetDuration: Swift.Double?
+    public let ssaiAdsDuration: Swift.Double
+    public let isClientSideIMA: Swift.Bool
+    public let lastKnownAdDuration: Swift.Double?
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init(metadataRunTime: Swift.Double? = nil, cmsDurationSeconds: Swift.Int? = nil, pinnedSessionDuration: Swift.Double? = nil, playerDuration: Swift.Double? = nil, assetDuration: Swift.Double? = nil, ssaiAdsDuration: Swift.Double = 0, isClientSideIMA: Swift.Bool = false, lastKnownAdDuration: Swift.Double? = nil)
+    #endif
+    public static func == (a: VLPlayerLib.AnalyticsChapterDurationResolver.VODDurationInput, b: VLPlayerLib.AnalyticsChapterDurationResolver.VODDurationInput) -> Swift.Bool
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func isSuspiciousAdDuration(_ duration: Swift.Double, lastKnownAdDuration: Swift.Double?) -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func shouldPinSessionDuration(_ duration: Swift.Double, lastKnownAdDuration: Swift.Double?) -> Swift.Bool
+  #endif
+  public static func resolveVODContentDuration(_ input: VLPlayerLib.AnalyticsChapterDurationResolver.VODDurationInput) -> Swift.Double
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func resolveLiveContentDuration(epgProgramDurationSeconds: Swift.Double?) -> Swift.Double
+  #endif
+  public static func adobeChapterLength(contentStart: Swift.Double, contentEnd: Swift.Double, isLive: Swift.Bool, liveDurationSeconds: Swift.Int) -> Swift.Double
+  public static func imaMidRollCuePoints(from rawCuePoints: [Swift.Double]) -> [Swift.Double]
+  public static func hasIMAPreRoll(from rawCuePoints: [Swift.Double]) -> Swift.Bool
+  public static func vodCSAIPlayhead(streamTime: Swift.Double, contentPlayheadAtAdBreak: Swift.Double, isAdShowing: Swift.Bool) -> Swift.Double
+  public static func vodContentPlayhead(streamTime: Swift.Double, adWindows: [VLPlayerLib.AdWindow], usesStitchedStreamAdTimeline: Swift.Bool) -> Swift.Double
 }
 public protocol AnalyticsTrackerEvents : ObjectiveC.NSObjectProtocol {
   func playerDidLoadVideo()
