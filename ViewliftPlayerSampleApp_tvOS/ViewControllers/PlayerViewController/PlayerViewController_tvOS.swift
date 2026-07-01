@@ -35,7 +35,7 @@ class PlayerViewController_tvOS: UIViewController {
         case custom
         case native
     }
-    private let playerContainerView = UIView()
+    let playerContainerView = UIView()
     var streamUrl: String?
     var videoId: String?
     var entitlementData: VLPlayer.EntitlementData?
@@ -185,6 +185,7 @@ class PlayerViewController_tvOS: UIViewController {
                             token: vlToken,
                             apiBaseURL: vlBaseUrl,
                             beaconBaseURL: vlBeaconURL,
+                            networkName: "",
                             mediaMetaDataInfo: nil
                         )
                 )
@@ -220,7 +221,8 @@ class PlayerViewController_tvOS: UIViewController {
         // Set player source and handle completion
         vlPlayer?.setSource(type: playbackSourceType,
                             vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
-                            playerFeaturesSupported: featureSupported, nextPlaybackList: nil
+                            playerFeaturesSupported: featureSupported, nextPlaybackList: nil,
+                            brandName: ""
                         ) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
                 if let contentResponse = contentResponse {
@@ -401,6 +403,9 @@ class PlayerViewController_tvOS: UIViewController {
             unhideWatchHistoryView()
         }
         
+        // Keep the chaptering time-entry control hidden in full screen
+        updateChapteringTimeEntryVisibility()
+        
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseInOut], animations: {
             self.updateConstraintsForCurrentOrientation()
             self.view.layoutIfNeeded()
@@ -493,9 +498,6 @@ class PlayerViewController_tvOS: UIViewController {
                                                  playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .customTheme),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isServerSideAdTrackingEnabled: true,
-                                                 watchHistoryResumeTime: Double(watchedTime),
-                                                 watchHistoryTimeInterval: self.watchHistoryInterval,
-                                                 watchHistoryEnabled: self.watchHistoryEnabled)
                                                  isChapteringCuePointEnable: isChapteringCuePointEnable,
                                                  chapteringCuePoints: chapteringCuePoints.map {
                                                     VLPlayer.ChapteringCuePoint(startTime: $0.startTime,
@@ -504,7 +506,10 @@ class PlayerViewController_tvOS: UIViewController {
                                                                                 eventStartUtc: $0.eventStartUtc,
                                                                                 stocks: $0.stocks)
                                                  },
-                                                 featureFlags: FeatureFlags(shouldEnablePlayPauseOnLiveStream: true))
+                                                 featureFlags: FeatureFlags(shouldEnablePlayPauseOnLiveStream: true),
+                                                 watchHistoryResumeTime: Double(watchedTime),
+                                                 watchHistoryTimeInterval: self.watchHistoryInterval,
+                                                 watchHistoryEnabled: self.watchHistoryEnabled)
     }
     
     // Returns player controls view configuration based on type
@@ -784,6 +789,11 @@ extension PlayerViewController_tvOS{
     }
 }
 
+extension PlayerViewController_tvOS: VideoPlayerDataSource{
+    func isUserLoggedIn() -> Bool{
+        return true
+    }
+}
 // MARK: - Watch History View Management
 extension PlayerViewController_tvOS: WatchHistoryDelegate {
     
@@ -917,9 +927,6 @@ extension PlayerViewController_tvOS: WatchHistoryDelegate {
         self.watchHistoryEnabled = isEnabled
         self.vlPlayer?.setWatchHistoryEnabledForPartner(isEnabled)
         print("Watch history tracking: \(isEnabled ? "enabled" : "disabled")")
-extension PlayerViewController_tvOS: VideoPlayerDataSource{
-    func isUserLoggedIn() -> Bool{
-        return true
     }
 }
 

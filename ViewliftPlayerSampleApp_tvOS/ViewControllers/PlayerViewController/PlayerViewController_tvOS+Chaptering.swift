@@ -42,17 +42,30 @@ extension PlayerViewController_tvOS {
         applyButton.addTarget(self, action: #selector(applyChapteringTimeTapped), for: .primaryActionTriggered)
 
         let stackView = UIStackView(arrangedSubviews: [titleLabel, textField, applyButton])
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.spacing = 20
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isHidden = isFullScreen
         view.addSubview(stackView)
 
+        // Position the fields in the middle of the gap between the player view
+        // (left) and the remote/test button (right), vertically aligned with them.
+        let middleGuide = UILayoutGuide()
+        view.addLayoutGuide(middleGuide)
+
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: testButton.bottomAnchor, constant: 40),
-            stackView.trailingAnchor.constraint(equalTo: testButton.trailingAnchor)
+            middleGuide.leadingAnchor.constraint(equalTo: playerContainerView.trailingAnchor),
+            middleGuide.trailingAnchor.constraint(equalTo: testButton.leadingAnchor),
+            stackView.centerXAnchor.constraint(equalTo: middleGuide.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: playerContainerView.centerYAnchor)
         ])
+    }
+
+    // Keeps the time-entry control visible only in the non-full-screen player.
+    func updateChapteringTimeEntryVisibility() {
+        guard isChapteringCuePointEnable else { return }
+        view.viewWithTag(ChapteringTimeEntry.textFieldTag)?.superview?.isHidden = isFullScreen
     }
 
     @objc private func applyChapteringTimeTapped() {

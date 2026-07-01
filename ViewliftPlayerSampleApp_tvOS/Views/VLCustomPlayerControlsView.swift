@@ -244,7 +244,10 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate, UICollecti
     
     @objc func sliderValueChanges(slider: TvOSSlider) {
         let duration = delegate?.getCurrentVideoDuration() ?? 0.0
-        let timeToSeek = Double(slider.value) * duration
+        var timeToSeek = Double(slider.value) * duration
+        if isChapteringCuePointEnable, isDVRChaptering, duration > 0 {
+            timeToSeek = max(timeToSeek, min(1.0, duration))
+        }
         self.delegate?.seekTo(seconds: timeToSeek)
         updateLabelPosition(CGFloat(slider.value))
         if isChapteringCuePointEnable, isDVRChaptering {
