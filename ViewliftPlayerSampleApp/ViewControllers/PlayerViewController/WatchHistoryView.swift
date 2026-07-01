@@ -184,7 +184,7 @@ struct WatchHistoryView: View {
                     .font(.system(size: (iOS ? 17 : 24), weight: .semibold))
                     .foregroundColor(.black)
                 
-                Text("watchedTime=\(Int(watchHistoryData.watchedTime))s, watchedPercentage=\(Int(watchHistoryData.watchedPercentage))%, doneWatching=\(watchHistoryData.doneWatching ? "true" : "false")")
+                Text("watchedTime=\(watchHistoryData.watchedTime)s, watchedPercentage=\(watchHistoryData.watchedPercentage.isFinite ? Int(watchHistoryData.watchedPercentage) : 0)%, doneWatching=\(watchHistoryData.doneWatching ? "true" : "false")")
                     .font(.system(size: (iOS ? 15 : 22)))
                     .foregroundColor(.black)
             }
