@@ -55,7 +55,7 @@ extension VLCustomPlayerControlsView {
 
     /// Tolerance (in seconds) within which DVR playback is treated as being at the
     /// live edge, accounting for normal live latency / update jitter.
-    private var chapteringLiveEdgeTolerance: Double = 5.0
+    private var chapteringLiveEdgeTolerance: Double{ 5 }
 
 
     /// Drives the DVR slider and time label for chaptering content. The thumb is
