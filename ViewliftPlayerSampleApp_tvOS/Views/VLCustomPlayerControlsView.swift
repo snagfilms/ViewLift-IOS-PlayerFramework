@@ -16,6 +16,22 @@ enum ControlsType{
     case live(isDVR: Bool)
 }
 
+struct ChapteringCuePoint: Codable {
+    let startTime: Double
+    let label: String
+    let thumbnail: String?
+    let eventStartUtc: String?
+    let stocks: String?
+
+    enum CodingKeys: String, CodingKey {
+        case startTime = "StartTime"
+        case label = "Label"
+        case thumbnail = "OriginalThumbnailLocation"
+        case eventStartUtc = "event_start_utc"
+        case stocks = "Stocks"
+    }
+}
+
 protocol PlayerControlsViewDelegate: AnyObject {
     func videoStartedPlaying(timestamp: Double)
     func updateCurrentTime(currentTime: Double, totalTime: Double)
@@ -47,6 +63,13 @@ protocol PlayerControlsDelegate :AnyObject {
     func isDVREnabled () -> Bool
     func setPlaybackRate(playbackSpeed:Float)
     func getTrickPlayData(_ value: Double) async -> (image: UIImage?, time: String?)
+    /// Wall-clock date of the live edge for DVR chaptering. Returning `nil` lets the
+    /// controls fall back to the device clock.
+    func getLiveEdgeDate() -> Date?
+}
+
+extension PlayerControlsDelegate {
+    func getLiveEdgeDate() -> Date? { nil }
 }
 
 enum FontStyleValues : String, CaseIterable {
@@ -74,14 +97,14 @@ enum FontStyleValues : String, CaseIterable {
 }
 
 
-class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
+class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     enum FocusState{
         case subtitle
         case setting
     }
     
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var playPauseImageView: UIImageView!
+    @IBOutlet weak var playPauseImageView: UIImageView?
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var playerControlsView: UIView!
     @IBOutlet weak var liveButton: UIButton!
@@ -116,6 +139,21 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
     private var currentControlsType: ControlsType = .videoStream
     var isAdOnMainView: Bool = false
     var adRunningOnInternalPlayer: Bool = false
+    var isChapteringCuePointEnable = false
+    var chapteringCuePoints: [ChapteringCuePoint] = []
+    var chapteringDuration: TimeInterval = 0
+    // Lives in the skin nib; hidden by default and only shown when chaptering is
+    // enabled and cue points exist.
+    // Provided by the skin nib. All chapter-collection logic lives in
+    // VLCustomPlayerControlsView+ChapteringSupport.
+    @IBOutlet weak var chapteringCollectionView: UICollectionView?
+    @IBOutlet weak var chapteringCollectionBottomConstraint: NSLayoutConstraint!
+    var lastReloadedChapteringCuePointCount = -1
+
+    var isDVRChaptering: Bool {
+        if case .live(let isDVR) = currentControlsType { return isDVR }
+        return false
+    }
     
     internal var trickPlayImageView: UIImageView?
     internal var trickPlayTimeView: UILabel?
@@ -124,7 +162,8 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
         case thumbnail, time, auto, none
     }
     
-     init(frame: CGRect, config: VLPlayer.PlayerControlsViewThemeConfiguration?){
+     init(frame: CGRect, config: VLPlayer.PlayerControlsViewThemeConfiguration?, isChapteringCuePointEnable: Bool = false){
+        self.isChapteringCuePointEnable = isChapteringCuePointEnable
         super.init(frame: frame)
         loadView()
         setupAppearance()
@@ -135,22 +174,24 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
         disableAllFocusGuide()
         #endif
         setupInitialValues()
-
-        //titleLabel.text = "Title to test multiline text in tvOS player skin Title to test multiline text in tvOS player skin Title to test multiline text in tvOS player skin Title to test multiline text in tvOS player skin Title to test multiline text in tvOS player skin"
-
+       #if os(tvOS)
+        if isChapteringCuePointEnable {
+            sliderView.applyChapteringStyle(progressColor: UIColor.fromHex("#ABAAAC"))
+            chapteringCollectionView?.reloadData()
+        }
+        #endif
 
         debugPrint("delegate?.getAllVideoPlaybackQualityList() \(String(describing: delegate?.getAllVideoPlaybackQualityList()))")
         
        debugPrint("loadView",  self.containsHiddenSubview())
         
     }
-    
+
     func updateTitleLabel(text: String?){
         titleLabel.text = text
     }
    #if os(tvOS)
     private func setupFocusGuide() {
-        
         addFocusGuideToControlsStackView()
         
         addFocusGuideToLiveStackView1()
@@ -202,10 +243,15 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
     #endif
     
     @objc func sliderValueChanges(slider: TvOSSlider) {
-        let timeToSeek = Double(slider.value) * (delegate?.getCurrentVideoDuration() ?? 0.0)
+        let duration = delegate?.getCurrentVideoDuration() ?? 0.0
+        let timeToSeek = Double(slider.value) * duration
         self.delegate?.seekTo(seconds: timeToSeek)
         updateLabelPosition(CGFloat(slider.value))
-        elapsedDurationLabel.text = timeToSeek.getTimeInString()
+        if isChapteringCuePointEnable, isDVRChaptering {
+            elapsedDurationLabel.text = chapteringDVRTimeText(currentTime: timeToSeek, totalTime: duration)
+        } else {
+            elapsedDurationLabel.text = timeToSeek.getTimeInString()
+        }
 //        updateSeekingThumbnail(slider)
     }
 
@@ -213,8 +259,7 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
 
     
     func setupInitialValues(){
-        playPauseImageView.isHidden = false
-        playPauseImageView.image = UIImage(named: "play_newUI")
+        updatePlayPauseVisual(imageNamed: "play_newUI")
         sliderView.value = 0
         elapsedDurationLabel.text = "--:--"
         totalDurationLabel.text = "--:--"
@@ -241,8 +286,7 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
             }
         }
         self.hasVideoStartedPlaying = true
-        playPauseImageView.isHidden = false
-        playPauseImageView.image = UIImage(named: "pause_newUI")
+        updatePlayPauseVisual(imageNamed: "pause_newUI")
         
         switch self.currentControlsType {
         case .videoStream:
@@ -341,6 +385,9 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
        #if os(tvOS)
         Bundle.main.loadNibNamed("VLCustomPlayerSkin_tvOS", owner: self, options: nil)
         addSubview(contentView)
+        if isChapteringCuePointEnable {
+            setupChapteringCollectionView()
+        }
         #else
         Bundle.main.loadNibNamed("VLCustomPlayerSkin_iOS", owner: self, options: nil)
         addSubview(contentView)
@@ -350,6 +397,11 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.frame = bounds
+        #if os(tvOS)
+        if isChapteringCuePointEnable {
+            updateChapteringCuePointsIfNeeded(duration: chapteringDuration)
+        }
+        #endif
     }
 
 
@@ -426,14 +478,6 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate {
 
 extension VLCustomPlayerControlsView{
 
-#if os(tvOS)
-    override func shouldUpdateFocus(in context: UIFocusUpdateContext) -> Bool {
-        guard let focusedView = context.previouslyFocusedView else {return true}
-        //if [infoButton, trayTitleButton].contains(focusedView) && infoView != nil {
-       
-        return true
-    }
-#endif
     func hidePlayerControls(){
 
     }
@@ -533,6 +577,7 @@ extension VLCustomPlayerControlsView{
     
     func updateCurrentTime(currentTime: Double, totalTime: Double){
         debugPrint("updateCurrentTime currentTime \(currentTime) totalTime \(totalTime)")
+        updateChapteringCuePointsIfNeeded(duration: totalTime)
         switch currentControlsType {
         case .videoStream:
             updateTimeForVideoStream(currentTime: currentTime, totalTime: totalTime)
@@ -560,27 +605,26 @@ extension VLCustomPlayerControlsView{
         self.isFullScreen = isFullScreen
     }
     func playPause(isPlaying: Bool){
-        if !isPlaying{
-            //player.pause()
-            playPauseImageView.isHidden = false
-            playPauseImageView.image = UIImage(named: "pause_newUI")
-        }else{
-            //player.play()
-            playPauseImageView.isHidden = false
-            playPauseImageView.image = UIImage(named: "play_newUI")
+        let imageName = isPlaying ? "play_newUI" : "pause_newUI"
+        updatePlayPauseVisual(imageNamed: imageName)
+        if isPlaying {
             showPlayVideoImage()
         }
     }
 
     private  func updateTimeForDVR(currentTime: Double, totalTime: Double){
         if !currentTime.isNaN && !currentTime.isInfinite && !totalTime.isNaN && !totalTime.isInfinite{
-            elapsedDurationLabel.isHidden = false
             sliderView.isUserInteractionEnabled = true
             liveButton.isUserInteractionEnabled = true
             totalDurationLabel.isHidden = true
-            elapsedDurationLabel.text = currentTime.getTimeInString()
-            let sliderValue = getSliderDuration(currentTime: currentTime, totalDuration: totalTime)
-            sliderView.value = Float(sliderValue)
+            elapsedDurationLabel.isHidden = false
+            if isChapteringCuePointEnable {
+                updateChapteringDVRTime(currentTime: currentTime, totalTime: totalTime)
+            } else {
+                elapsedDurationLabel.text = currentTime.getTimeInString()
+                let sliderValue = getSliderDuration(currentTime: currentTime, totalDuration: totalTime)
+                sliderView.value = Float(sliderValue)
+            }
             updateLabelPosition()
         }else{
             elapsedDurationLabel.isHidden = true
@@ -634,7 +678,10 @@ extension VLCustomPlayerControlsView {
 
         coordinator.addCoordinatedFocusingAnimations { _ in
             if let focusedView = context.nextFocusedView{
-                if [self.settingButton, self.subTitleButton, self.slowMoButton].contains(focusedView) {
+                // Chapter collection cells manage their own focused appearance via
+                // the collection view's focus delegate (see +ChapteringSupport).
+                if self.isChapteringCuePointEnable, let cv = self.chapteringCollectionView, focusedView.isDescendant(of: cv) {
+                } else if [self.settingButton, self.subTitleButton, self.slowMoButton].contains(focusedView) {
                     focusedView.addCustomFocus(withBorder: true)
                 }else if focusedView == self.startFromBeginingButton{
                     focusedView.transform = .init(scaleX: 1.1, y: 1.1)
@@ -651,7 +698,8 @@ extension VLCustomPlayerControlsView {
         coordinator.addCoordinatedUnfocusingAnimations { _ in
             if let focusedView = context.previouslyFocusedView, focusedView != context.nextFocusedView {
                 self.scrollToTop(focusedView: focusedView)
-                if [self.settingButton, self.subTitleButton, self.slowMoButton].contains(focusedView) {
+                if self.isChapteringCuePointEnable, let cv = self.chapteringCollectionView, focusedView.isDescendant(of: cv) {
+                } else if [self.settingButton, self.subTitleButton, self.slowMoButton].contains(focusedView) {
                     focusedView.removeCustomFocus()
                 }else if focusedView == self.startFromBeginingButton{
                     focusedView.transform = .identity
@@ -744,7 +792,6 @@ extension VLCustomPlayerControlsView{
     }
 #if os(tvOS)
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-       
         for press in presses {
             let type = press.type
             switch type{
@@ -813,7 +860,7 @@ extension VLCustomPlayerControlsView{
     func showPlayVideoImage(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){[weak self] in
             //  if self?.isPlaying ?? false{
-            self?.playPauseImageView.isHidden = true
+            self?.playPauseImageView?.isHidden = true
             // }
         }
     }

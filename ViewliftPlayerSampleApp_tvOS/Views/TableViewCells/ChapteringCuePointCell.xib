@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="24412" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChapteringCuePointCell" id="chC-pt-cell" customClass="ChapteringCuePointCell" customModule="ViewLiftPlayerSampleApp_tvOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="784" height="472"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="784" height="472"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="chC-img">
+                        <rect key="frame" x="0.0" y="0.0" width="784" height="360"/>
+                        <color key="backgroundColor" white="0.17999999999999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chC-title">
+                        <rect key="frame" x="12" y="372" width="760" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="TYp-95-0Dr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAG" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chC-tag">
+                        <rect key="frame" x="12" y="432" width="29" height="28"/>
+                        <color key="backgroundColor" white="1" alpha="0.22" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="Q1E-GN-cJ2"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chC-meta">
+                        <rect key="frame" x="49" y="432" width="51" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="6gd-sa-wUY"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="chC-tag" firstAttribute="leading" secondItem="chC-pt-cell" secondAttribute="leading" constant="12" id="2Ys-Od-5jL"/>
+                <constraint firstItem="chC-img" firstAttribute="top" secondItem="chC-pt-cell" secondAttribute="top" id="9jM-kE-x9p"/>
+                <constraint firstAttribute="trailing" secondItem="chC-img" secondAttribute="trailing" id="Con-AW-g8E"/>
+                <constraint firstItem="chC-title" firstAttribute="leading" secondItem="chC-pt-cell" secondAttribute="leading" constant="12" id="Eyp-eJ-ADt"/>
+                <constraint firstItem="chC-meta" firstAttribute="leading" secondItem="chC-tag" secondAttribute="trailing" constant="8" symbolic="YES" id="KUe-Vl-lEV"/>
+                <constraint firstAttribute="trailing" secondItem="chC-title" secondAttribute="trailing" constant="12" id="Kdt-NU-9pv"/>
+                <constraint firstItem="chC-tag" firstAttribute="top" secondItem="chC-title" secondAttribute="bottom" constant="12" id="bDW-BI-efA"/>
+                <constraint firstAttribute="bottom" secondItem="chC-tag" secondAttribute="bottom" constant="12" id="cV4-VO-Ffi"/>
+                <constraint firstAttribute="bottom" secondItem="chC-meta" secondAttribute="bottom" constant="12" id="gz1-QN-ETR"/>
+                <constraint firstItem="chC-title" firstAttribute="top" secondItem="chC-img" secondAttribute="bottom" constant="12" id="kl1-sB-vXw"/>
+                <constraint firstItem="chC-img" firstAttribute="leading" secondItem="chC-pt-cell" secondAttribute="leading" id="wL1-At-7Fu"/>
+            </constraints>
+            <size key="customSize" width="784" height="472"/>
+            <connections>
+                <outlet property="metaLabel" destination="chC-meta" id="chC-out-meta"/>
+                <outlet property="tagLabel" destination="chC-tag" id="chC-out-tag"/>
+                <outlet property="thumbnailImageView" destination="chC-img" id="chC-out-img"/>
+                <outlet property="titleLabel" destination="chC-title" id="chC-out-title"/>
+            </connections>
+            <point key="canvasLocation" x="341" y="244"/>
+        </collectionViewCell>
+    </objects>
+</document>
