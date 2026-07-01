@@ -94,6 +94,9 @@ public final class TvOSSlider: UIControl {
     
     /// Value added or subtracted from the current value on steps left or right updates
     public var stepValue: Float = defaultStepValue
+    /// When enabled the cue points render as dot markers (chaptering) instead of
+    /// the default rectangular ad markers.
+    public var cuePointsUseDotStyle = false
     public var _isTracking: Bool = false
     
     /**
@@ -275,6 +278,8 @@ public final class TvOSSlider: UIControl {
     private var rightTapGestureRecognizer: UITapGestureRecognizer!
     
     private var thumbViewCenterXConstraint: NSLayoutConstraint!
+    private var thumbViewWidthConstraint: NSLayoutConstraint!
+    private var thumbViewHeightConstraint: NSLayoutConstraint!
     
     private var dPadState: DPadState = .select
     
@@ -282,6 +287,9 @@ public final class TvOSSlider: UIControl {
     private var deceleratingVelocity: Float = 0
     
     private var thumbViewCenterXConstraintConstant: Float = 0
+    private var chapteringCuePoints: [TimeInterval]?
+    private var chapteringCuePointsDuration: TimeInterval?
+    private var focusedCuePointIndex: Int?
     
     private func setUpView() {
         setUpTrackView()
@@ -355,8 +363,10 @@ public final class TvOSSlider: UIControl {
     private func setUpThumbViewConstraints() {
         thumbView.translatesAutoresizingMaskIntoConstraints = false
         thumbView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        thumbView.widthAnchor.constraint(equalToConstant: thumbSize.width).isActive = true
-        thumbView.heightAnchor.constraint(equalToConstant: thumbSize.height).isActive = true
+        thumbViewWidthConstraint = thumbView.widthAnchor.constraint(equalToConstant: thumbSize.width)
+        thumbViewWidthConstraint.isActive = true
+        thumbViewHeightConstraint = thumbView.heightAnchor.constraint(equalToConstant: thumbSize.height)
+        thumbViewHeightConstraint.isActive = true
         thumbViewCenterXConstraint = thumbView.centerXAnchor.constraint(equalTo: trackView.leadingAnchor, constant: CGFloat(value))
         thumbViewCenterXConstraint.isActive = true
     }
@@ -519,32 +529,82 @@ enum DPadState {
 }
 
 extension TvOSSlider {
-    
-    var cueTag: Int { return 12345 }
-    func setCuePoints(cuePoints: [TimeInterval], duration: TimeInterval) {
-        guard !cuePoints.isEmpty else { return }
-        // Clear old cue views
-        for view in self.subviews {
-            if view.tag == cueTag {
-                view.removeFromSuperview()
-            }
-        }
-        for cuePoint in cuePoints {
-            if cuePoint >= 0 && cuePoint <= duration {
-                updateCueViews(cueTime: cuePoint, duration: duration)
-            }
+
+    /// Applies the chaptering-specific slider appearance: a round white thumb,
+    /// the configured progress color, a translucent remaining track and dot-style
+    /// cue points. This is only invoked when chaptering is enabled, so the default
+    /// slider appearance and behaviour remain unchanged otherwise.
+    func applyChapteringStyle(progressColor: UIColor) {
+        cuePointsUseDotStyle = true
+
+        let remainingColor = UIColor.white.withAlphaComponent(0.3)
+        trackView.backgroundColor = remainingColor
+        maximumTrackTintColor = remainingColor
+        minimumTrackTintColor = progressColor
+
+        let thumbDiameter: CGFloat = 22
+        thumbViewWidthConstraint?.constant = thumbDiameter
+        thumbViewHeightConstraint?.constant = thumbDiameter
+        thumbView.layer.cornerRadius = thumbDiameter / 2
+        thumbView.clipsToBounds = true
+        thumbTintColor = .white
+        thumbView.backgroundColor = .white
+        clipsToBounds = false
+        layoutIfNeeded()
+    }
+
+    /// Re-plots the currently stored cue points (e.g. after a layout change).
+    func updateLayout() {
+        if let chapteringCuePoints, !chapteringCuePoints.isEmpty, let chapteringCuePointsDuration {
+            self.setCuePoints(cuePoints: chapteringCuePoints, duration: chapteringCuePointsDuration)
         }
     }
-    
-    func updateCueViews(cueTime: TimeInterval, duration: TimeInterval) {
+
+    var cueTag: Int { return 12345 }
+    var focusedCueTag: Int { return 12346 }
+
+    func setCuePoints(cuePoints: [TimeInterval], duration: TimeInterval) {
+        if !cuePointsUseDotStyle {
+            focusedCuePointIndex = nil
+        }
+        self.chapteringCuePoints = cuePoints
+        self.chapteringCuePointsDuration = duration
+        for view in self.subviews where view.tag == cueTag || view.tag == focusedCueTag {
+            view.removeFromSuperview()
+        }
+        guard !cuePoints.isEmpty, duration > 0 else { return }
+        for (index, cuePoint) in cuePoints.enumerated() where cuePoint >= 0 && cuePoint <= duration {
+            updateCueViews(cueTime: cuePoint, duration: duration, isFocused: index == focusedCuePointIndex)
+        }
+    }
+
+    func setFocusedCuePoint(at index: Int?) {
+        guard cuePointsUseDotStyle else {
+            focusedCuePointIndex = nil
+            return
+        }
+        focusedCuePointIndex = index
+        guard let chapteringCuePoints, let chapteringCuePointsDuration else { return }
+        setCuePoints(cuePoints: chapteringCuePoints, duration: chapteringCuePointsDuration)
+    }
+
+    func updateCueViews(cueTime: TimeInterval, duration: TimeInterval, isFocused: Bool = false) {
         let minX = trackView.bounds.width * CGFloat(cueTime) / CGFloat(duration)
-        let origin = CGPoint(x: minX, y: trackView.frame.minY)
-        let size = CGSize(width: 10, height: trackView.bounds.height)
-        
+        let size = cuePointsUseDotStyle
+            ? (isFocused ? CGSize(width: 20, height: 20) : CGSize(width: 8, height: 8))
+            : CGSize(width: 8, height: 8)
+        let origin = CGPoint(x: minX - (size.width / 2), y: trackView.frame.midY - (size.height / 2))
+
         let cueView = UIImageView(frame: .init(origin: origin, size: size))
-        cueView.tag = cueTag
-        cueView.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        cueView.tag = isFocused ? focusedCueTag : cueTag
+        cueView.backgroundColor = isFocused ? .systemBlue : .white
+        cueView.layer.cornerRadius = size.width / 2
+        cueView.clipsToBounds = true
         cueView.isUserInteractionEnabled = false
+        if isFocused, cuePointsUseDotStyle {
+            cueView.layer.borderWidth = 6
+            cueView.layer.borderColor = UIColor.white.cgColor
+        }
         self.addSubview(cueView)
     }
 }
