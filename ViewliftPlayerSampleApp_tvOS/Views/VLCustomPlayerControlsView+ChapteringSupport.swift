@@ -114,6 +114,17 @@ extension VLCustomPlayerControlsView {
         collectionView.isHidden = false
     }
 
+    /// Hides or shows the chapter collection alongside the main player controls
+    /// (e.g. when the settings / captions panel is opened, or when the controls are
+    /// hidden). Guarded by the chaptering feature flag so it is a no-op otherwise.
+    func setChapteringCollectionHidden(_ hidden: Bool) {
+        guard isChapteringCuePointEnable, let collectionView = chapteringCollectionView else { return }
+        collectionView.isHidden = hidden
+        if hidden {
+            setChapteringCollectionExpanded(false)
+        }
+    }
+
     /// Expands or collapses the collection using the nib's bottom constraint.
     func setChapteringCollectionExpanded(_ expanded: Bool) {
         guard isChapteringCuePointEnable, let constraint = chapteringCollectionBottomConstraint else { return }
