@@ -16,6 +16,7 @@ import VLAuthenticationFramework_tvOS
 #endif
 import AVKit
 import VLAnalyticsLib
+import SwiftUI
 
 private enum Constants {
     static let playerMargin: CGFloat = 10
@@ -34,7 +35,7 @@ class PlayerViewController_tvOS: UIViewController {
         case custom
         case native
     }
-    private let playerContainerView = UIView()
+    let playerContainerView = UIView()
     var streamUrl: String?
     var videoId: String?
     var entitlementData: VLPlayer.EntitlementData?
@@ -48,6 +49,7 @@ class PlayerViewController_tvOS: UIViewController {
     var autoplayEnabled: Bool = true
     var hideControls: Bool = false
     var muteEnabled: Bool = false
+    var isChapteringCuePointEnable: Bool = true
     var isGuestUser: Bool = false
     var videoPlayerControlsView: VLCustomPlayerControlsView?
     var customPaywallView: CustomPaywallView?
@@ -60,8 +62,19 @@ class PlayerViewController_tvOS: UIViewController {
     var autoPlayListdataManager: AutoPlayDataManager?
     internal var autoPlayView: AutoPlayView?
     let timerLabel = UILabel()
-    internal var isFullScreen: Bool = true
+    internal var isFullScreen: Bool = false
     let testButton = UIButton(type: .system)
+    
+    // Watch History View Properties
+    private var watchHistoryHostingController: UIHostingController<WatchHistoryView>?
+    private var watchHistoryView: WatchHistoryView?
+    private var watchedTime: Int = 0
+    private var watchHistoryInterval: Int = 30
+    private var watchedPercentage: Double = 0
+    private var watchHistoryThreshold: Double = 95.0
+    private var watchHistoryEnabled: Bool = true
+    private var doneWatching: Bool = false
+    
     var totalAdsDuration: Double = 0.0
     var channelId: [String] = [] {
         didSet {
@@ -71,6 +84,7 @@ class PlayerViewController_tvOS: UIViewController {
     let loaderView = UIActivityIndicatorView(style: .large)
 
     var channelkey: String = ""
+    var chapteringCuePoints: [ChapteringCuePoint] = []
     
     override var canBecomeFirstResponder: Bool {
         return true
@@ -87,6 +101,9 @@ class PlayerViewController_tvOS: UIViewController {
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
         setupConstraints()
+        if isChapteringCuePointEnable {
+            chapteringCuePoints = loadChapteringCuePoints()
+        }
         updateConstraintsForCurrentOrientation()
         self.createAutoPlayMetaData()
         self.timerLabel.isHidden = true
@@ -138,7 +155,7 @@ class PlayerViewController_tvOS: UIViewController {
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""
         let userId: String? = nil
-        let vlBeaconURL = VLAuthentication.sharedInstance.bootStrapConfig?.playerBeaconUrl ??  ""
+        let vlBeaconURL = ""
         // Initialize player with license if available
 
         if let playerLicenseKey = playerLicenseKey, !playerLicenseKey.isEmpty {
@@ -167,7 +184,9 @@ class PlayerViewController_tvOS: UIViewController {
                                 ),
                             token: vlToken,
                             apiBaseURL: vlBaseUrl,
-                            beaconURL: vlBeaconURL, networkName: ""
+                            beaconBaseURL: vlBeaconURL,
+                            networkName: "",
+                            mediaMetaDataInfo: nil
                         )
                 )
             
@@ -180,16 +199,18 @@ class PlayerViewController_tvOS: UIViewController {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl, beaconBaseURL: vlBeaconURL,adobeTempPassPayload: adobePassPayload
+                            apiBaseURL: vlBaseUrl, beaconBaseURL: vlBeaconURL,adobeTempPassPayload: nil
                         )
                 )
         }
         // Set delegates for player events and analytics
         vlPlayer?.videoPlayerDelegate = self
+        vlPlayer?.videoPlayerDatasource = self
         
         // Set delegates for SSAID events
         vlPlayer?.serverSideAdTrackingDelegate = self
         
+//        let epgProgramDetails = VLEPGProgramDetails(id: "89e9e253-3981-4684-a6cb-2a03a0353713", channelId: "60c9d965-ef28-4cd6-a7d5-9a433eb2a923", channelName: "cnbc", programId: "EP024874280301", programTitle: "Dateline", subType: "Series", programStartTime: 12.0, programEndTime: 24.0, subTitle: "Series")
 //        vlPlayer?.playerVideoAnalyticsDelegate = AnalyticsHelper.shared
         // Set entitlement if available
         if let entitlementData{
@@ -200,7 +221,8 @@ class PlayerViewController_tvOS: UIViewController {
         // Set player source and handle completion
         vlPlayer?.setSource(type: playbackSourceType,
                             vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
-                            playerFeaturesSupported: featureSupported, nextPlaybackList: nil, brandName: ""
+                            playerFeaturesSupported: featureSupported, nextPlaybackList: nil,
+                            brandName: ""
                         ) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
                 if let contentResponse = contentResponse {
@@ -219,12 +241,55 @@ class PlayerViewController_tvOS: UIViewController {
                     .flatMap { $0["channelIds"] as? [String] ?? [] }
                 self?.handlePlayerSetupCompletion(playerView: playerView, hasTVE: hasTVE, channelIds: channelIds)
                 
+                // Add watch history view after player is set up (only if not in full screen)
+                if self?.isFullScreen == false {
+                    if self?.watchHistoryView == nil {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self?.addWatchHistoryView()
+                        }
+                    }
+                }
             }
         }
     }
     
    private func isPlayingFromURL() -> Bool{
         return playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL
+    }
+
+    private func loadChapteringCuePoints() -> [ChapteringCuePoint] {
+        guard let url = Bundle.main.url(forResource: "chaptering", withExtension: "json"),
+              let rawString = try? String(contentsOf: url, encoding: .utf8),
+              let jsonStart = rawString.firstIndex(of: "{") else {
+            return []
+        }
+
+        let jsonString = String(rawString[jsonStart...])
+        guard let data = jsonString.data(using: .utf8) else { return [] }
+
+        do {
+            let response = try JSONDecoder().decode(ChapteringCuePointResponse.self, from: data)
+            return response.items.segments.sorted { $0.startTime < $1.startTime }
+        } catch {
+            debugPrint("Chaptering cue point parse error: \(error)")
+            return []
+        }
+    }
+
+    private struct ChapteringCuePointResponse: Decodable {
+        let items: Items
+
+        enum CodingKeys: String, CodingKey {
+            case items = "Items"
+        }
+
+        struct Items: Decodable {
+            let segments: [ChapteringCuePoint]
+
+            enum CodingKeys: String, CodingKey {
+                case segments = "Segments"
+            }
+        }
     }
     
     // Handles player setup completion, checks for TVE authorization
@@ -329,6 +394,18 @@ class PlayerViewController_tvOS: UIViewController {
     
     func changeLayout() {
         isFullScreen.toggle()
+        
+        // Remove watch history when going to full screen
+        if isFullScreen {
+            hideWatchHistoryView()
+        } else {
+            // Add watch history when exiting full screen
+            unhideWatchHistoryView()
+        }
+        
+        // Keep the chaptering time-entry control hidden in full screen
+        updateChapteringTimeEntryVisibility()
+        
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseInOut], animations: {
             self.updateConstraintsForCurrentOrientation()
             self.view.layoutIfNeeded()
@@ -401,12 +478,6 @@ class PlayerViewController_tvOS: UIViewController {
 
         playerContainerView.bringSubviewToFront(timerLabel)
         playerContainerView.bringSubviewToFront(loaderView)
-        let customInfoViewController = InfoViewController()
-        customInfoViewController.modalPresentationStyle = .overFullScreen
-        vlPlayer?.customInfoViewController = customInfoViewController
-        let customOverlayViewController = EmojiGridViewController()
-        customOverlayViewController.modalPresentationStyle = .overFullScreen
-        vlPlayer?.customOverlayViewController = customOverlayViewController
     }
 
 
@@ -420,12 +491,25 @@ class PlayerViewController_tvOS: UIViewController {
                                                  shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
                                                  mutePlayback: self.muteEnabled,
+                                                 customPlayerControlsColor: nil,
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: .disabled,
                                                  playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .customTheme),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
-                                                 isServerSideAdTrackingEnabled: true)
+                                                 isServerSideAdTrackingEnabled: true,
+                                                 isChapteringCuePointEnable: isChapteringCuePointEnable,
+                                                 chapteringCuePoints: chapteringCuePoints.map {
+                                                    VLPlayer.ChapteringCuePoint(startTime: $0.startTime,
+                                                                                label: $0.label,
+                                                                                thumbnail: $0.thumbnail,
+                                                                                eventStartUtc: $0.eventStartUtc,
+                                                                                stocks: $0.stocks)
+                                                 },
+                                                 featureFlags: FeatureFlags(shouldEnablePlayPauseOnLiveStream: true),
+                                                 watchHistoryResumeTime: Double(watchedTime),
+                                                 watchHistoryTimeInterval: self.watchHistoryInterval,
+                                                 watchHistoryEnabled: self.watchHistoryEnabled)
     }
     
     // Returns player controls view configuration based on type
@@ -433,7 +517,7 @@ class PlayerViewController_tvOS: UIViewController {
         switch type {
         case .customTheme:
             // Configure default player controls view with custom theme
-            let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .red, sliderProgressColor: .white, smallScreenBorderColor: .green, fullScreenBorderColor: .red, captionsOnOffStatusColor: .red)
+            let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .darkGray, sliderProgressColor: .white, smallScreenBorderColor: .green, fullScreenBorderColor: .red, captionsOnOffStatusColor: .red)
             let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", playbackQualityText: "PLAYBACK QUALITY", subtitlesOnText: "ON", subtitlesOffText: "OFF")
             let playerControlsConfig = PlayerControlsConfig(isSettingsSupported: true, isSubTitleSupported: true, isSlowMoSupported: false,isStartFromBeginningSupported: false,isCaptionsOnOffTextSupported: true , remoteSeekSupport: .both(skip: .dynamic))
             let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent, playerControlsConfig: playerControlsConfig)
@@ -441,9 +525,12 @@ class PlayerViewController_tvOS: UIViewController {
             return playerControlsViewConfiguration
         case .custom:
             // Use a custom controls view
-            let view = VLCustomPlayerControlsView(frame: .zero, config: nil)
+            let view = VLCustomPlayerControlsView(frame: .zero, config: nil, isChapteringCuePointEnable: isChapteringCuePointEnable)
             view.updateTitleLabel(text: nil)
             view.delegate = self
+            if isChapteringCuePointEnable {
+                view.configureChapteringCuePoints(chapteringCuePoints)
+            }
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .custom(view: view)
             self.videoPlayerControlsView = view
             return playerControlsViewConfiguration
@@ -501,8 +588,16 @@ class PlayerViewController_tvOS: UIViewController {
     
     // Handles menu button press to destroy player and remove controller
     func menuPressed() {
+        removeWatchHistoryView()
         vlPlayer?.destroy()
         removeController()
+    }
+    
+    /// Cleans up player and UI resources
+    internal func cleanupResources() {
+        vlPlayer?.destroy()
+        vlPlayer?.playerVideoAnalyticsDelegate = nil
+        videoPlayerControlsView?.removeFromSuperview()
     }
     
     func showAlert(
@@ -620,7 +715,12 @@ extension PlayerViewController_tvOS: PlayerControlsDelegate {
     
     // Handles play/pause toggle
     func didTogglePlayPause() {
-        
+        guard let vlPlayer else { return }
+        if vlPlayer.isPlaying() {
+            vlPlayer.pause()
+        } else {
+            vlPlayer.play()
+        }
     }
     
     // Seeks to a specific time in the video
@@ -655,6 +755,7 @@ extension PlayerViewController_tvOS{
             testButton.heightAnchor.constraint(equalTo: playerContainerView.heightAnchor)
         ])
         testButton.isHidden = isFullScreen
+        setupChapteringTimeEntry()
     }
     
     @objc private func closeTapped() {
@@ -687,3 +788,145 @@ extension PlayerViewController_tvOS{
         }
     }
 }
+
+extension PlayerViewController_tvOS: VideoPlayerDataSource{
+    func isUserLoggedIn() -> Bool{
+        return true
+    }
+}
+// MARK: - Watch History View Management
+extension PlayerViewController_tvOS: WatchHistoryDelegate {
+    
+    /// Adds the Watch History SwiftUI view under the player container
+    /// - Parameters:
+    ///   - topMargin: Top spacing from playerContainerView (default: 20)
+    func addWatchHistoryView(topMargin: CGFloat = 20) {
+        // Remove existing watch history view if present
+        removeWatchHistoryView()
+        
+        // Create SwiftUI view with bindings
+        var watchHistoryView = WatchHistoryView(
+            watchedTime: Binding(
+                get: { self.watchedTime },
+                set: { self.watchedTime = $0 }
+            ),
+            watchedPercentage: Binding(
+                get: { self.watchedPercentage },
+                set: { self.watchedPercentage = $0 }
+            ),
+            doneWatching: Binding(
+                get: { self.doneWatching },
+                set: { self.doneWatching = $0 }
+            )
+        )
+        
+        // Set delegate
+        watchHistoryView.delegate = self
+        
+        // Store reference to the view
+        self.watchHistoryView = watchHistoryView
+        
+        // Create hosting controller
+        let hostingController = UIHostingController(rootView: watchHistoryView)
+        watchHistoryHostingController = hostingController
+        
+        // Add as child view controller
+        addChild(hostingController)
+        view.addSubview(hostingController.view)
+        hostingController.didMove(toParent: self)
+        
+        // Configure view
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.backgroundColor = .clear
+        
+        // Set up constraints
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: playerContainerView.bottomAnchor, constant: topMargin),
+            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        self.unhideWatchHistoryView()
+    }
+    
+    func hideWatchHistoryView() {
+        guard let hostingController = watchHistoryHostingController else { return }
+        
+        hostingController.view.isHidden = true
+    }
+    
+    func unhideWatchHistoryView() {
+        guard let hostingController = watchHistoryHostingController else { return }
+        
+        hostingController.view.isHidden = false
+    }
+    
+    
+    /// Removes the Watch History view if it exists
+    func removeWatchHistoryView() {
+        guard let hostingController = watchHistoryHostingController else { return }
+        
+        hostingController.willMove(toParent: nil)
+        hostingController.view.removeFromSuperview()
+        hostingController.removeFromParent()
+        watchHistoryHostingController = nil
+        watchHistoryView = nil
+    }
+    
+    /// Updates the watch history display values
+    /// - Parameters:
+    ///   - watchedTime: Time watched in seconds
+    ///   - watchedPercentage: Percentage of video watched (0-100)
+    ///   - doneWatching: Whether the video is complete
+    func updateWatchHistoryDisplay(watchedTime: Double, watchedPercentage: Double) {
+        var doneWatching: Bool = false
+        if watchedPercentage >= self.watchHistoryThreshold {
+            doneWatching = true
+        }
+        // Update through the shared singleton instance
+        WatchHistoryData.shared.update(
+            watchedTime: Int(watchedTime),
+            watchedPercentage: watchedPercentage,
+            doneWatching: doneWatching
+        )
+        
+        // Also keep local properties in sync for backward compatibility
+        self.watchedTime = Int(watchedTime)
+        self.watchedPercentage = watchedPercentage
+        self.doneWatching = doneWatching
+    }
+    
+    /// Gets the current configuration from the watch history view
+    /// - Returns: Dictionary with current configuration values
+    func getWatchHistoryConfiguration() -> [String: Any]? {
+        return watchHistoryView?.getCurrentConfiguration()
+    }
+    
+    // MARK: - WatchHistoryDelegate
+    
+    func didTapApply(isEnabled: Bool, interval: String, threshold: String, resume: String) {
+        print("Watch History Apply Tapped:")
+        print("  - Enabled: \(isEnabled)")
+        print("  - Interval: \(interval)s")
+        print("  - Threshold: \(threshold)%")
+        print("  - Resume: \(resume)s")
+        
+        self.watchedTime = Int(resume) ?? 0
+        self.watchHistoryInterval = Int(interval) ?? 0
+        self.watchHistoryThreshold = Double(threshold) ?? 0
+        let videoWatchPercentage = (self.vlPlayer?.getCurrentVideoDuration() != nil) ? (Double(self.watchedTime) / Double(self.vlPlayer?.getCurrentVideoDuration() ?? 0) * 100): 0.0
+        print("Watched Percentage = " + String(videoWatchPercentage))
+        self.updateWatchHistoryDisplay(watchedTime: Double(self.watchedTime), watchedPercentage: videoWatchPercentage)
+        self.cleanupResources()
+        Task { [weak self] in
+            await self?.loadPlayerView()
+        }
+    }
+    
+    func updateWatchHistory(_ isEnabled: Bool) {
+        self.watchHistoryEnabled = isEnabled
+        self.vlPlayer?.setWatchHistoryEnabledForPartner(isEnabled)
+        print("Watch history tracking: \(isEnabled ? "enabled" : "disabled")")
+    }
+}
+

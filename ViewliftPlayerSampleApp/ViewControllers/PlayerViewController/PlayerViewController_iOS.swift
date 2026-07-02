@@ -79,7 +79,7 @@ class PlayerViewController_iOS: UIViewController {
     var muteEnabled: Bool = false
     var streamUrl: String?
     var totalAdsDuration: Double = 0.0
-    
+    var watchHistoryVisibility: Bool = true
     var channelId: [String] = [] {
         didSet {
             self.channelkey = self.channelId.joined(separator: ",")
@@ -121,6 +121,17 @@ class PlayerViewController_iOS: UIViewController {
     // Chapter cue-point generation is fully handled inside VLPlayer SDK.
     // Keep this commented unless sample-side cue-point mapping is re-enabled.
     // internal var latestPlaybackWindowDuration: TimeInterval = .zero
+    
+    // Watch History View Properties
+    private var watchHistoryHostingController: UIHostingController<WatchHistoryView>?
+    private var watchHistoryView: WatchHistoryView?
+    private var watchedTime: Int = 0
+    private var watchHistoryInterval: Int = 30
+    private var watchedPercentage: Double = 0
+    private var watchHistoryThreshold: Double = 95.0
+    private var watchHistoryEnabled: Bool = true
+    private var doneWatching: Bool = false
+
     // MARK: - Computed Properties
     /// Calculates the frame for the player view based on screen size and constants
     var playerFrame: CGRect {
@@ -237,6 +248,18 @@ class PlayerViewController_iOS: UIViewController {
         }
     }
     
+    /// Handles watch history switch
+    @objc private func watchHistorySwitchToggled() {
+        if self.watchHistoryVisibility == true {
+            removeWatchHistoryView()
+            self.watchHistoryVisibility = false
+        }
+        else {
+            addWatchHistoryView()
+            self.watchHistoryVisibility = true
+        }
+    }
+    
     private func updateButtonStates() {
         addNextButton.isEnabled = !nextVideoLists.isEmpty
         playNextButton.isEnabled = !addedNextVideoList.isEmpty
@@ -298,6 +321,10 @@ class PlayerViewController_iOS: UIViewController {
     /// Handles logout button tap, logs out user and resets player
     @IBAction func logoutButtonAction(_ sender: Any) {
         self.performLogout()
+    }
+    
+    @IBAction func historyToggleButtonAction(_ sender: Any) {
+        self.watchHistorySwitchToggled()
     }
     
     func performLogout(isForceLogout: Bool = false) {
@@ -679,7 +706,12 @@ extension PlayerViewController_iOS {
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: false,
                                                  isCustomAdViewEnabled: enableCustomAdUI,
-                                                 isServerSideAdTrackingEnabled: true, /*isChapteringEnabled: true,*/ featureFlags: FeatureFlags(shouldContinuePlaybackOnScreenLock: true, shouldHandleOrientation: false))
+                                                 isServerSideAdTrackingEnabled: true,
+                                                 featureFlags: FeatureFlags(shouldContinuePlaybackOnScreenLock: true,
+                                                                            shouldHandleOrientation: false),
+                                                 watchHistoryResumeTime: Double(watchedTime),
+                                                 watchHistoryTimeInterval: self.watchHistoryInterval,
+                                                 watchHistoryEnabled: self.watchHistoryEnabled)
     }
     
     
@@ -838,6 +870,7 @@ extension PlayerViewController_iOS {
             } else {
                 if orientation.isLandscape {
                     if !self.isFullscreen {
+                        self.removeWatchHistoryView()
                         self.isFullscreen = true
                         self.vlPlayer?.goFullScreen(true)
                     }
@@ -845,6 +878,13 @@ extension PlayerViewController_iOS {
                     if self.isFullscreen {
                         self.isFullscreen = false
                         self.vlPlayer?.goFullScreen(false)
+                        // Only add watch history if switch is on
+                        if self.watchHistoryVisibility == true {
+                            self.addWatchHistoryView()
+                        }
+                        else {
+                            self.removeWatchHistoryView()
+                        }
                     }
                 }
             }
@@ -862,3 +902,131 @@ extension PlayerViewController_iOS {
         // Handle layout updates if needed
     }
 }
+
+// MARK: - Watch History View Management
+extension PlayerViewController_iOS: WatchHistoryDelegate {
+    
+    /// Adds the Watch History SwiftUI view under the player container
+    /// - Parameters:
+    ///   - topMargin: Top spacing from playerContainerView (default: 20)
+    func addWatchHistoryView(topMargin: CGFloat = 20) {
+        // Remove existing watch history view if present
+        removeWatchHistoryView()
+        
+        // Create SwiftUI view with bindings using Binding.constant or custom Binding
+        var watchHistoryView = WatchHistoryView(
+            watchedTime: Binding(
+                get: { self.watchedTime },
+                set: { self.watchedTime = $0 }
+            ),
+            watchedPercentage: Binding(
+                get: { self.watchedPercentage },
+                set: { self.watchedPercentage = $0 }
+            ),
+            doneWatching: Binding(
+                get: { self.doneWatching },
+                set: { self.doneWatching = $0 }
+            )
+        )
+        
+        // Set delegate
+        watchHistoryView.delegate = self
+        
+        // Store reference to the view
+        self.watchHistoryView = watchHistoryView
+        
+        // Create hosting controller
+        let hostingController = UIHostingController(rootView: watchHistoryView)
+        watchHistoryHostingController = hostingController
+        
+        // Add as child view controller
+        addChild(hostingController)
+        view.addSubview(hostingController.view)
+        hostingController.didMove(toParent: self)
+        
+        // Configure hosting controller view
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.backgroundColor = .clear
+        
+        // Set up constraints
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: playerContainerView.bottomAnchor, constant: topMargin),
+            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    /// Removes the Watch History view if it exists
+    func removeWatchHistoryView() {
+        guard let hostingController = watchHistoryHostingController else { return }
+        
+        hostingController.willMove(toParent: nil)
+        hostingController.view.removeFromSuperview()
+        hostingController.removeFromParent()
+        watchHistoryHostingController = nil
+        watchHistoryView = nil
+    }
+    
+    /// Updates the watch history display values
+    /// - Parameters:
+    ///   - watchedTime: Time watched in seconds
+    ///   - watchedPercentage: Percentage of video watched (0-100)
+    ///   - doneWatching: Whether the video is complete
+    func updateWatchHistoryDisplay(watchedTime: Double, watchedPercentage: Double) {
+        var doneWatching: Bool = false
+        if watchedPercentage >= self.watchHistoryThreshold {
+            doneWatching = true
+        }
+        // Update through the shared singleton instance
+        WatchHistoryData.shared.update(
+            watchedTime: Int(watchedTime),
+            watchedPercentage: watchedPercentage,
+            doneWatching: doneWatching
+        )
+        
+        // Also keep local properties in sync for backward compatibility
+        self.watchedTime = Int(watchedTime)
+        self.watchedPercentage = watchedPercentage
+        self.doneWatching = doneWatching
+    }
+    
+    /// Gets the current configuration from the watch history view
+    /// - Returns: Dictionary with current configuration values
+    func getWatchHistoryConfiguration() -> [String: Any]? {
+        return watchHistoryView?.getCurrentConfiguration()
+    }
+    
+    // MARK: - WatchHistoryDelegate
+    
+    func didTapApply(isEnabled: Bool, interval: String, threshold: String, resume: String) {
+        print("Watch History Apply Tapped:")
+        print("  - Enabled: \(isEnabled)")
+        print("  - Interval: \(interval)s")
+        print("  - Threshold: \(threshold)%")
+        print("  - Resume: \(resume)s")
+        
+        self.watchedTime = Int(resume) ?? 0
+        self.watchHistoryInterval = Int(interval) ?? 0
+        self.watchHistoryThreshold = Double(threshold) ?? 0
+        self.cleanupResources()
+        Task { [weak self] in
+            await self?.loadPlayerView()
+        }
+        
+        // Handle the configuration here
+        // You can update player settings, save preferences, etc.
+        
+        // Example: Show confirmation
+//        showAlert(
+//            title: "Watch History Updated",
+//            message: "Settings applied successfully!\nInterval: \(interval)s, Threshold: \(threshold)%, Resume: \(resume)s"
+//        )
+    }
+    
+    func updateWatchHistory(_ isEnabled: Bool) {
+        self.watchHistoryEnabled = isEnabled
+        self.vlPlayer?.setWatchHistoryEnabledForPartner(isEnabled)
+    }
+}
+

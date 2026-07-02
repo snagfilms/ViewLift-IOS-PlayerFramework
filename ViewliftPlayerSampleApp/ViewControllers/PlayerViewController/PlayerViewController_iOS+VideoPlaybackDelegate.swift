@@ -71,6 +71,8 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
 
     // Called when video finishes playback
     func videoFinished(playerTag: String) {
+        let currentTime = vlPlayer?.getCurrentVideoDuration() ?? 0.0
+        self.updateWatchHistoryDisplay(watchedTime: currentTime, watchedPercentage: 100)
         videoPlayerControlsView?.setPlayButtonState(state: false)
         videoPlayerCustomView?.viewModel?.updatePlayingState(isPlaying: false)
 
@@ -131,6 +133,10 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         videoPlayerCustomView?.viewModel?.seekTo(time: sliderValue)
         
         self.invalidatePlayerTempPassIfOutOfWindow()
+    }
+    
+    func videoPlayerProgressOnDefinedInterval(currentTime: Double, totalTime: Double, playerTag: String) {
+        self.updateWatchHistoryDisplay(watchedTime: currentTime, watchedPercentage: (currentTime/totalTime)*100)
     }
 
     // Calculates elapsed time, considering start-over if available
