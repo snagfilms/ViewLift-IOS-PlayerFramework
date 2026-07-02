@@ -29,7 +29,7 @@ import SwiftUI
     static let playerYPosition: CGFloat = 100
     static let liveMomentsTopSpacing: CGFloat = 12
     static let liveMomentsHorizontalInset: CGFloat = 12
-    static let liveMomentsHeight: CGFloat = 250
+    static let liveMomentsHeight: CGFloat = 400
     static let defaultAdUrl = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/simid&description_url=https%3A%2F%2Fdevelopers.google.com%2Finteractive-media-ads&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator="
 }
 
@@ -45,6 +45,7 @@ class PlayerViewController_iOS: UIViewController {
     }
     // MARK: - IBOutlets
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var chapterButton: UIButton!
     @IBOutlet var debugLogView: UITextView!
     @IBOutlet private weak var addNextButton: UIButton!
     @IBOutlet private weak var playNextButton: UIButton!
@@ -59,6 +60,16 @@ class PlayerViewController_iOS: UIViewController {
     // Configuration Properties
     var enableCustomPlayerUI: Bool = false
     var enableBitrateLogs: Bool = false
+    /// Controls whether chaptering (Live Moments + SDK chaptering cue points) is active
+    var isChapteringEnabled: Bool = false
+    /// Seconds from UTC midnight for the user-entered event start time (e.g. "15:10:00" → 54600).
+    /// When set, every ChapteringCuePoint receives:
+    ///   - startTime  = JSON.startTime + chapterUTCSecondsOffset
+    ///   - eventStartUtc = UTC midnight today (00:00:00Z)
+    /// This places chapters near the live edge and lets them drift left as the DVR
+    /// window advances, regardless of the DVR buffer duration.
+    /// nil = fall back to the per-cue-point `event_start_utc` from the JSON.
+    var chapterUTCSecondsOffset: Double?
     var entitlementData: VLPlayer.EntitlementData?
     var drmConfig: VLPlayer.DRMConfig?
     var streamConfig: VLPlayer.StreamConfig?
@@ -106,7 +117,6 @@ class PlayerViewController_iOS: UIViewController {
     var isVideoPlayingBeforeSeek = true
     var autoPlayListdataManager: AutoPlayDataManager?
     internal var autoPlayView: AutoPlayView?
-    internal var pendingDeepLinkSeekSeconds: Double?
     internal var liveMomentsHostingController: UIHostingController<LiveMomentsTabsView>?
     // Chapter cue-point generation is fully handled inside VLPlayer SDK.
     // Keep this commented unless sample-side cue-point mapping is re-enabled.
@@ -134,7 +144,9 @@ class PlayerViewController_iOS: UIViewController {
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
         setupConstraints()
-        setupLiveMomentsSection()
+        if isChapteringEnabled {
+            setupLiveMomentsSection()
+        }
         setupInitialState()
         createAutoPlayMetaData()
         
@@ -263,6 +275,26 @@ class PlayerViewController_iOS: UIViewController {
         }
     }
     
+    /// Toggles chaptering on/off.
+    /// - First tap (OFF → ON): presents time-entry popup; chaptering is enabled only after "Apply".
+    /// - Second tap (ON → OFF): immediately disables chapters and hides Live Moments.
+    @IBAction func chapterButtonAction(_ sender: Any) {
+        if isChapteringEnabled {
+            isChapteringEnabled = false
+            disableChaptering()
+            updateChapterButtonAppearance()
+        } else {
+            showChapterTimeEntryPopup()
+        }
+    }
+
+    /// Updates the Chapter button title and tint to reflect the current chaptering state.
+    func updateChapterButtonAppearance() {
+        let title = isChapteringEnabled ? "Chapters ●" : "Chapters"
+        chapterButton.setTitle(title, for: .normal)
+        chapterButton.tintColor = isChapteringEnabled ? .systemGreen : .systemBlue
+    }
+
     /// Handles logout button tap, logs out user and resets player
     @IBAction func logoutButtonAction(_ sender: Any) {
         self.performLogout()
@@ -326,7 +358,9 @@ extension PlayerViewController_iOS {
         }else{
             vlPlayer = VLPlayer(playerType: .default)
         }
-        configureSDKChapterSegments()
+        if isChapteringEnabled {
+            configureSDKChapterSegments()
+        }
         // Select playback source type based on user option
         let playbackSourceType: VLPlayer.PlaybackSourceType
         if isPlayingFromURL(){
@@ -602,8 +636,8 @@ extension PlayerViewController_iOS {
             self.videoPlayerCustomView?.viewModel = nil
             self.videoPlayerCustomView = nil
         }
-
-        let playerControlsConfig = PlayerControlsConfig(
+        
+        let playerControlsConfig: PlayerControlsConfig = PlayerControlsConfig(
             isChromeCastSupported: true,
             isAirPlaySupported: true,
             isPIPSupported: true,
@@ -635,14 +669,17 @@ extension PlayerViewController_iOS {
                                                  shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
                                                  mutePlayback: self.muteEnabled,
+                                                 customPlayerControlsColor: PlayerControlsColor(progressBarBGColor: "#676D7A", progressBarColor: "#ABAFB6"),
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
-                                                 playerControlsViewConfiguration: self.getPlayerControlsViewConfiguration(type: .custom),
+                                                 // Temporary: use SDK default SwiftUI controls so chapter cue points
+                                                 // are bound to defaultPlayerControls.viewModel.
+                                                 playerControlsViewConfiguration: self.getPlayerControlsViewConfiguration(type: .customTheme),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: false,
                                                  isCustomAdViewEnabled: enableCustomAdUI,
-                                                 isServerSideAdTrackingEnabled: true, featureFlags: FeatureFlags(shouldContinuePlaybackOnScreenLock: true, shouldHandleOrientation: false))
+                                                 isServerSideAdTrackingEnabled: true, /*isChapteringEnabled: true,*/ featureFlags: FeatureFlags(shouldContinuePlaybackOnScreenLock: true, shouldHandleOrientation: false))
     }
     
     

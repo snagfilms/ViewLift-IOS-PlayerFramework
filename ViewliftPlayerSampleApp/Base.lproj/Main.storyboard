@@ -197,6 +197,17 @@
                                     <action selector="playNextVideoWithSender:" destination="c9m-tc-XCY" eventType="touchUpInside" id="fta-Rd-Q82"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ch1-pt-Btn">
+                                <rect key="frame" x="191" y="28" width="82" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="Ch2-pt-Hgt"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Chapters"/>
+                                <connections>
+                                    <action selector="chapterButtonAction:" destination="c9m-tc-XCY" eventType="touchUpInside" id="Ch5-pt-Act"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaZ-bj-Gpl">
                                 <rect key="frame" x="281" y="28" width="78" height="31"/>
                                 <constraints>
@@ -213,6 +224,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="WaZ-bj-Gpl" firstAttribute="centerY" secondItem="kji-fo-g4f" secondAttribute="centerY" id="8yW-4j-l16"/>
+                            <constraint firstItem="WaZ-bj-Gpl" firstAttribute="leading" secondItem="Ch1-pt-Btn" secondAttribute="trailing" constant="8" id="Ch3-pt-Trl"/>
+                            <constraint firstItem="Ch1-pt-Btn" firstAttribute="centerY" secondItem="kji-fo-g4f" secondAttribute="centerY" id="Ch4-pt-Ctr"/>
                             <constraint firstItem="kji-fo-g4f" firstAttribute="top" secondItem="SCz-Xw-i7N" secondAttribute="top" constant="8" id="E4g-Pc-ve4"/>
                             <constraint firstItem="SCz-Xw-i7N" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kji-fo-g4f" secondAttribute="trailing" symbolic="YES" id="GLw-0G-anX"/>
                             <constraint firstItem="SCz-Xw-i7N" firstAttribute="trailing" secondItem="vll-JY-8eq" secondAttribute="trailing" constant="22" id="Imk-rA-Eh7"/>
@@ -235,6 +248,7 @@
                     <connections>
                         <outlet property="addNextButton" destination="sl7-ZZ-4E0" id="XtX-Ty-RtF"/>
                         <outlet property="backButton" destination="kji-fo-g4f" id="IID-Pa-Q8M"/>
+                        <outlet property="chapterButton" destination="Ch1-pt-Btn" id="Ch6-pt-Out"/>
                         <outlet property="debugLogView" destination="vll-JY-8eq" id="oam-2P-pFx"/>
                         <outlet property="logoutButton" destination="WaZ-bj-Gpl" id="Btf-GI-o1A"/>
                         <outlet property="playNextButton" destination="Sd3-XC-YhM" id="soO-8a-mhg"/>
