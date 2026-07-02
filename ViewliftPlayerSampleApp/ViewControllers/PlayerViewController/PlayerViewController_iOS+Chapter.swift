@@ -15,70 +15,64 @@ import SwiftUI
 // MARK: - Chapter Toggle / Time-Entry Popup
 extension PlayerViewController_iOS {
 
-    /// Presents a popup for the user to enter the live stream's event-start time in UTC.
+    /// Presents a popup for the user to enter the live stream's event-start time (UTC, HH:MM).
     ///
-    /// ## How cue-point positioning works
-    ///   Reference point : UTC midnight today  (eventStartUTC for every segment)
-    ///   Adjusted startTime = JSON.startTime + enteredUTCSeconds
-    ///
-    ///   SDK then computes:
-    ///     liveElapsed  = Date().timeIntervalSince(midnight)  ← seconds since midnight
-    ///     windowStart  = max(0, liveElapsed - dvrWindowDuration)
-    ///     cue position = adjustedStartTime - windowStart     (if in [windowStart, liveElapsed])
-    ///     seekbar x%   = cue position / dvrWindowDuration
-    ///
-    /// ## Why this places chapters near the live edge
-    ///   User enters 15:10:00 UTC → offset = 54 600 s
-    ///   Chapter JSON.startTime 1200 → adjusted = 55 800 s
-    ///   At 15:31 UTC: liveElapsed ≈ 55 860 s, windowStart ≈ 54 060 s (30-min DVR)
-    ///   Position = (55 800 − 54 060) / 1800 = 96.7 %  → near RIGHT edge ✓
-    ///   5 min later: windowStart ≈ 54 360 s → position = 80 %  → moved LEFT ✓
+    /// On Apply, each cue point's `event_start_utc` is re-anchored to today's date at the
+    /// entered UTC time: the earliest cue point is pinned to that moment and the rest are
+    /// shifted by the same delta so their relative spacing is preserved. The updated array is
+    /// pushed to `configureSDKChapterSegments()`, which recalculates every cue point against the
+    /// current DVR window and refreshes both the slider markers and the Live Moments list. Only
+    /// cue points whose `event_start_utc + startTime` falls inside the window are shown.
     func showChapterTimeEntryPopup() {
+        guard isChapteringCuePointEnable else { return }
+
         let alert = UIAlertController(
             title: "Stream Start Time (UTC)",
-            message: "Enter the time the live stream started today, in UTC (HH:MM:SS).\nMust be a time that has already passed.",
+            message: "Enter today's live-stream start time in UTC (HH:MM).",
             preferredStyle: .alert
         )
 
         alert.addTextField { textField in
-            textField.placeholder = "HH:MM:SS  (UTC)"
+            textField.placeholder = "HH:MM  (UTC)"
             textField.keyboardType = .numbersAndPunctuation
             textField.clearButtonMode = .whileEditing
         }
 
         let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self, weak alert] _ in
-            guard
-                let self = self,
-                let text = alert?.textFields?.first?.text,
-                !text.trimmingCharacters(in: .whitespaces).isEmpty,
-                let utcSeconds = self.parseTimeString(text)
-            else {
-                self?.showAlert(title: "Invalid Input", message: "Please enter a valid time (HH:MM:SS or seconds).")
+            guard let self = self else { return }
+            guard let text = alert?.textFields?.first?.text,
+                  let baseDate = self.todayDate(preservingTimeFrom: text) else {
+                self.showAlert(title: "Invalid Time", message: "Please enter a valid time in HH:MM (UTC) format.")
                 return
             }
 
-            // Validate that the entered time-of-day has already passed today in UTC.
-            var utcCalendar = Calendar(identifier: .gregorian)
-            utcCalendar.timeZone = TimeZone(identifier: "UTC")!
-            let midnightUTC = utcCalendar.startOfDay(for: Date())
-            let enteredUTCDate = midnightUTC.addingTimeInterval(utcSeconds)
-
-            guard enteredUTCDate < Date() else {
-                self.showAlert(
-                    title: "Time is in the Future",
-                    message: "Enter a UTC time that has already passed today so chapters can appear in the DVR window."
-                )
+            let formatter = self.chapteringDateFormatter()
+            let originalDates = self.chapterCuePointSegments.compactMap { cue in
+                cue.eventStartUtc.flatMap { formatter.date(from: $0) }
+            }
+            guard let earliestDate = originalDates.min() else {
+                self.showAlert(title: "No Cue Points", message: "No chapter cue points with event_start_utc are available.")
                 return
             }
 
-            // Store the raw seconds-from-midnight offset.
-            // makeChapterSegment() will add this to each JSON startTime and use
-            // midnight UTC as the common eventStartUTC reference, which keeps every
-            // adjusted startTime close to the current liveElapsed value so cues
-            // appear near the live (right) edge and drift left over time.
-            self.chapterUTCSecondsOffset = utcSeconds
+            // Pin the earliest cue point to today + entered UTC time and shift the rest by the
+            // same delta so the relative spacing between cue points is preserved.
+            let shift = baseDate.timeIntervalSince(earliestDate)
+            self.chapterCuePointSegments = self.chapterCuePointSegments.map { cue in
+                guard let eventStartUtc = cue.eventStartUtc,
+                      let eventDate = formatter.date(from: eventStartUtc) else {
+                    return cue
+                }
+                let updatedUtc = formatter.string(from: eventDate.addingTimeInterval(shift))
+                return VLPlayer.ChapteringCuePoint(startTime: cue.startTime,
+                                                   label: cue.label,
+                                                   thumbnail: cue.thumbnail,
+                                                   origLength: cue.origLength,
+                                                   eventStartUtc: updatedUtc,
+                                                   stocks: cue.stocks)
+            }
 
-            self.isChapteringEnabled = true
+            self.isChapterButtonAction = true
             self.updateChapterButtonAppearance()
             self.setupLiveMomentsSection()
             self.configureSDKChapterSegments()
@@ -94,29 +88,10 @@ extension PlayerViewController_iOS {
 
     /// Disables SDK chapter cues and removes the Live Moments panel.
     func disableChaptering() {
-        vlPlayer?.setChapterEnabled(false)
         liveMomentsHostingController?.willMove(toParent: nil)
         liveMomentsHostingController?.view.removeFromSuperview()
         liveMomentsHostingController?.removeFromParent()
         liveMomentsHostingController = nil
-        chapterUTCSecondsOffset = nil
-    }
-
-    /// Parses a time string into total seconds.
-    /// Accepted formats: "HH:MM:SS", "MM:SS", or plain integer/decimal seconds.
-    private func parseTimeString(_ input: String) -> Double? {
-        let trimmed = input.trimmingCharacters(in: .whitespaces)
-        let parts = trimmed.split(separator: ":").compactMap { Double($0) }
-        switch parts.count {
-        case 1:
-            return parts[0]
-        case 2:
-            return parts[0] * 60 + parts[1]
-        case 3:
-            return parts[0] * 3_600 + parts[1] * 60 + parts[2]
-        default:
-            return nil
-        }
     }
 }
 
@@ -157,6 +132,9 @@ extension PlayerViewController_iOS {
         ])
         hostingController.didMove(toParent: self)
         liveMomentsHostingController = hostingController
+        // Stay hidden until at least one cue point maps inside the current DVR window.
+        let hasMoments = liveMomentsTabs.contains { $0.moments.isEmpty == false }
+        setLiveMomentsVisibility(isHidden: !hasMoments)
     }
 
     func setLiveMomentsVisibility(isHidden: Bool) {
@@ -164,27 +142,40 @@ extension PlayerViewController_iOS {
     }
 
     var liveMomentsTabs: [LiveMomentsTabItem] {
-        // segment.startTime is UTC-adjusted (jsonStartTime + chapterUTCSecondsOffset) so the
-        // SDK can position cue markers on the live seekbar relative to UTC midnight.
-        // For seeking and display we need the original event-relative position, so we
-        // subtract the offset back.  When no offset is set the subtraction is a no-op.
-        let offset = chapterUTCSecondsOffset ?? 0
-        let liveMoments = chapterSegments
-            .sorted { $0.startTime < $1.startTime }
-            .map { segment in
-                let eventRelativeSeconds = segment.startTime - offset
-                return LiveMomentItem(
+        guard isChapteringCuePointEnable else {
+            return [LiveMomentsTabItem(title: "Live Moments", moments: [])]
+        }
+        // Each cue point's air time (event_start_utc + startTime) is mapped into the current
+        // DVR window by the SDK. We consume that mapping so the list mirrors the seekbar:
+        // only cue points inside the window are shown, at their window-relative time. The raw
+        // cue-point startTime is kept for seeking (seekToChapter re-maps it internally).
+        let liveMoments = (vlPlayer?.chapteringCuePointsInCurrentWindow() ?? [])
+            .map { mapping in
+                LiveMomentItem(
                     thumbnailAssetName: "live_moments",
-                    title: segment.label,
-                    startTimeLabel: formatMomentTime(seconds: segment.startTime),
-                    seekSeconds: segment.startTime
+                    title: mapping.cuePoint.label,
+                    startTimeLabel: formatMomentTime(seconds: mapping.windowPosition),
+                    seekSeconds: mapping.cuePoint.startTime
                 )
             }
         return [LiveMomentsTabItem(title: "Live Moments", moments: liveMoments)]
     }
 
-    var chapterSegments: [VLPlayer.ChapterSegment] {
-        loadChapterSegmentsFromJSON() ?? fallbackChapterSegments()
+    /// Rebuilds the Live Moments list from the SDK's current DVR-window cue-point mapping.
+    /// Call on playback progress so the list tracks the sliding window (cue points appear /
+    /// disappear and their times update as the live edge advances). Item ids are stable, so
+    /// re-assigning the SwiftUI root view preserves selection and scroll position.
+    ///
+    /// When no cue point's air time (event_start_utc + startTime) falls inside the current DVR
+    /// window, the panel is hidden so nothing is shown — mirroring the empty slider.
+    func refreshLiveMoments() {
+        guard isChapteringCuePointEnable, let hostingController = liveMomentsHostingController else { return }
+        let tabs = liveMomentsTabs
+        let hasMoments = tabs.contains { $0.moments.isEmpty == false }
+        setLiveMomentsVisibility(isHidden: !hasMoments)
+        hostingController.rootView = LiveMomentsTabsView(tabs: tabs) { [weak self] seekSeconds in
+            self?.playerSeekForLiveMoments(seconds: seekSeconds)
+        }
     }
 
     var chapterCueConfig: VLPlayer.ChapterCueConfig {
@@ -197,10 +188,13 @@ extension PlayerViewController_iOS {
         )
     }
 
+    /// Pushes the current cue points to the SDK, which recalculates their positions inside the
+    /// current DVR window (`event_start_utc + startTime`) and refreshes the slider markers, then
+    /// refreshes the Live Moments list so both show only cue points inside the window.
     func configureSDKChapterSegments() {
-        vlPlayer?.setChapterEnabled(true)
+        vlPlayer?.setChapteringCuePoints(chapterCuePointSegments)
         vlPlayer?.setChapterCueConfig(chapterCueConfig)
-        vlPlayer?.setChapterSegments(chapterSegments)
+        refreshLiveMoments()
     }
 
     private func formatMomentTime(seconds: Double) -> String {
@@ -211,116 +205,31 @@ extension PlayerViewController_iOS {
         return String(format: "%02d:%02d:%02d", hours, minutes, secs)
     }
 
-    private func loadChapterSegmentsFromJSON() -> [VLPlayer.ChapterSegment]? {
-        guard let chapterJSONURL = Bundle.main.url(forResource: "chapter-json", withExtension: "json") else {
-            print("Chapter file chapter-json.json not found in bundle.")
-            return nil
+    func loadChapterSegmentsFromJSON() -> [VLPlayer.ChapteringCuePoint]? {
+        guard let url = Bundle.main.url(forResource: "chaptering", withExtension: "json"),
+              let rawString = try? String(contentsOf: url, encoding: .utf8),
+              let jsonStart = rawString.firstIndex(of: "{") else {
+            return []
         }
+
+        let jsonString = String(rawString[jsonStart...])
+        guard let data = jsonString.data(using: .utf8) else { return [] }
 
         do {
-            let chapterData = try Data(contentsOf: chapterJSONURL)
-            let payload = try JSONSerialization.jsonObject(with: chapterData) as? [String: Any]
-            let items = payload?["Items"] as? [String: Any]
-            let segmentDictionaries = items?["Segments"] as? [[String: Any]]
-
-            guard let segmentDictionaries = segmentDictionaries else {
-                print("Chapter JSON schema mismatch for Items.Segments.")
-                return nil
+            let response = try JSONDecoder().decode(ChapteringCuePointResponse.self, from: data)
+            let chapteringCuePoints = response.items.segments.sorted { $0.startTime < $1.startTime }
+            return chapteringCuePoints.map {
+                VLPlayer.ChapteringCuePoint(startTime: $0.startTime,
+                                            label: $0.label,
+                                            thumbnail: $0.thumbnail,
+                                            origLength: $0.origLength,
+                                            eventStartUtc: $0.eventStartUtc,
+                                            stocks: $0.stocks)
             }
-
-            let parsedSegments = segmentDictionaries.compactMap(makeChapterSegment(from:))
-            guard !parsedSegments.isEmpty else {
-                return nil
-            }
-
-            return parsedSegments.sorted { $0.startTime < $1.startTime }
         } catch {
-            print("Failed to load chapter-json.json: \(error)")
-            return nil
+            debugPrint("Chaptering cue point parse error: \(error)")
+            return []
         }
     }
-
-    private func makeChapterSegment(from payload: [String: Any]) -> VLPlayer.ChapterSegment? {
-        guard
-            let jsonStartTime = parseDouble(payload["StartTime"]),
-            let label = payload["Label"] as? String
-        else {
-            return nil
-        }
-
-        // When the user has entered an event-start time, shift every startTime so it
-        // is expressed as "seconds since UTC midnight today".  Using midnight as the
-        // shared eventStartUTC keeps liveElapsed large and stable (≈ time-of-day in
-        // seconds), so adjusted chapter times are close to liveElapsed and therefore
-        // near the live (right) edge of the seekbar — moving leftward as the DVR
-        // window advances.
-        //
-        // Without a user-supplied offset, fall back to the JSON's event_start_utc
-        // and the unmodified startTime (original behaviour).
-        let startTime: Double
-        let eventStartDate: Date?
-
-        if let offset = chapterUTCSecondsOffset {
-            var utcCalendar = Calendar(identifier: .gregorian)
-            utcCalendar.timeZone = TimeZone(identifier: "UTC")!
-            eventStartDate = utcCalendar.startOfDay(for: Date())   // midnight UTC today
-            startTime = jsonStartTime + offset
-        } else {
-            eventStartDate = (payload["event_start_utc"] as? String)
-                .flatMap { chapterDateFormatter.date(from: $0) }
-            startTime = jsonStartTime
-        }
-
-        return VLPlayer.ChapterSegment(
-            startTime: startTime,
-            label: label,
-            eventStartUTC: eventStartDate,
-            originalClipLocation: parseString(payload["OriginalClipLocation"]),
-            originalThumbnailLocation: parseString(payload["OriginalThumbnailLocation"]),
-            optimizedClipLocation: parseString(payload["OptimizedClipLocation"]),
-            optimizedThumbnailLocation: parseString(payload["OptimizedThumbnailLocation"]),
-            featureCount: parseString(payload["FeatureCount"]),
-            origLength: parseDouble(payload["OrigLength"]) ?? .zero,
-            optoLength: parseDouble(payload["OptoLength"]) ?? .zero,
-            optimizedDurationPerTrack: [],
-            optoStartCode: parseString(payload["OptoStartCode"]),
-            optoEndCode: parseString(payload["OptoEndCode"]),
-            event: parseString(payload["Event"]),
-            stocks: parseString(payload["Stocks"]),
-            notableMoments: parseString(payload["NotableMoments"])
-        )
-    }
-
-    private func parseString(_ value: Any?) -> String {
-        value as? String ?? ""
-    }
-
-    private func parseDouble(_ value: Any?) -> Double? {
-        switch value {
-        case let number as NSNumber:
-            return number.doubleValue
-        case let text as String:
-            return Double(text)
-        default:
-            return nil
-        }
-    }
-
-    private func fallbackChapterSegments() -> [VLPlayer.ChapterSegment] {
-        let eventStartDate = chapterDateFormatter.date(from: "2026-06-19T05:57:00Z")
-        return [
-            VLPlayer.ChapterSegment(startTime: 60, label: "CNBC Preview one", eventStartUTC: eventStartDate, originalClipLocation: "", originalThumbnailLocation: "", optimizedClipLocation: "", optimizedThumbnailLocation: "", featureCount: "", origLength: 150, optoLength: 1.0, optimizedDurationPerTrack: [], optoStartCode: "", optoEndCode: "", event: "", stocks: "", notableMoments: ""),
-            VLPlayer.ChapterSegment(startTime: 600, label: "CNBC Preview one", eventStartUTC: eventStartDate, originalClipLocation: "", originalThumbnailLocation: "", optimizedClipLocation: "", optimizedThumbnailLocation: "", featureCount: "", origLength: 630, optoLength: 1.0, optimizedDurationPerTrack: [], optoStartCode: "", optoEndCode: "", event: "", stocks: "", notableMoments: ""),
-            VLPlayer.ChapterSegment(startTime: 1200, label: "CNBC Preview two", eventStartUTC: eventStartDate, originalClipLocation: "", originalThumbnailLocation: "", optimizedClipLocation: "", optimizedThumbnailLocation: "", featureCount: "", origLength: 1250.0, optoLength: 1.0, optimizedDurationPerTrack: [], optoStartCode: "", optoEndCode: "", event: "", stocks: "", notableMoments: ""),
-            VLPlayer.ChapterSegment(startTime: 2400, label: "CNBC Preview three", eventStartUTC: eventStartDate, originalClipLocation: "", originalThumbnailLocation: "", optimizedClipLocation: "", optimizedThumbnailLocation: "", featureCount: "", origLength: 2480.0, optoLength: 1.0, optimizedDurationPerTrack: [], optoStartCode: "", optoEndCode: "", event: "", stocks: "", notableMoments: "")
-        ]
-    }
-
-    private var chapterDateFormatter: ISO8601DateFormatter {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime]
-        return formatter
-    }
-
 }
 

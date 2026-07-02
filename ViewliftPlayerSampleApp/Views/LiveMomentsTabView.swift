@@ -9,13 +9,16 @@ import SwiftUI
 
 // MARK: - Live Moments
 struct LiveMomentsTabItem: Identifiable {
-    let id = UUID()
+    // Stable id so per-second refreshes preserve tab selection / scroll state.
+    var id: String { title }
     let title: String
     let moments: [LiveMomentItem]
 }
 
 struct LiveMomentItem: Identifiable {
-    let id = UUID()
+    // Stable id (the cue point's own startTime) so per-second refreshes keep list
+    // identity and don't reset scroll position while the DVR window slides.
+    var id: Double { seekSeconds }
     let thumbnailAssetName: String
     let title: String
     let startTimeLabel: String
@@ -26,7 +29,7 @@ struct LiveMomentsTabsView: View {
     let tabs: [LiveMomentsTabItem]
     var onMomentTap: (Double) -> Void
 
-    @State private var selectedTabId: UUID?
+    @State private var selectedTabId: String?
 
     private let columns = [GridItem(.flexible())]
 

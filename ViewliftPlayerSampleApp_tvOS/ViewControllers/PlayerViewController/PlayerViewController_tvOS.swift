@@ -276,22 +276,6 @@ class PlayerViewController_tvOS: UIViewController {
         }
     }
 
-    private struct ChapteringCuePointResponse: Decodable {
-        let items: Items
-
-        enum CodingKeys: String, CodingKey {
-            case items = "Items"
-        }
-
-        struct Items: Decodable {
-            let segments: [ChapteringCuePoint]
-
-            enum CodingKeys: String, CodingKey {
-                case segments = "Segments"
-            }
-        }
-    }
-    
     // Handles player setup completion, checks for TVE authorization
     private func handlePlayerSetupCompletion(
         playerView: UIView?,

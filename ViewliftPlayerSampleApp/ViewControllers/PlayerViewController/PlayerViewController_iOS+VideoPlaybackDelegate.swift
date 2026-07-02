@@ -131,7 +131,11 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
         let sliderValue = getSliderDuration(currentTime: elapsedTime, totalDuration: totalTime)
         videoPlayerControlsView?.updateSliderDuration(sliderValue: sliderValue)
         videoPlayerCustomView?.viewModel?.seekTo(time: sliderValue)
-        
+
+        if isChapteringCuePointEnable {
+            refreshLiveMoments()
+        }
+
         self.invalidatePlayerTempPassIfOutOfWindow()
     }
     
@@ -184,11 +188,11 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
     /// so chapter markers and the drag-preview bubble (including `showChapterTitleTillCuePoint`
     /// behaviour) appear on the custom seekbar just as they do on the `.customTheme` built-in skin.
     func chapterCuePointsUpdated(cuePoints: [NSNumber], duration: Double, playerTag: String) {
-        guard isChapteringEnabled, let viewModel = videoPlayerCustomView?.viewModel else { return }
+        guard isChapterButtonAction, let viewModel = videoPlayerCustomView?.viewModel else { return }
         let doubleCuePoints = cuePoints.map { $0.doubleValue }
         // Sorted segment labels and origLengths correspond to sorted cue points by index.
         // We take only as many entries as there are cue points so the arrays stay aligned.
-        let sortedSegments = chapterSegments
+        let sortedSegments = chapterCuePointSegments
             .sorted { $0.startTime < $1.startTime }
             .prefix(cuePoints.count)
         let sortedLabels = sortedSegments.map { $0.label }
@@ -199,7 +203,7 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
                 cuePoints: doubleCuePoints,
                 duration: duration,
                 labels: sortedLabels,
-                origLengths: sortedOrigLengths,
+                origLengths: sortedOrigLengths as! [Double],
                 cueConfig: self.chapterCueConfig
             )
         }

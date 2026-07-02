@@ -113,30 +113,5 @@ extension PlayerViewController_tvOS {
     }
 
     // Builds today's date (in UTC) using the HH:mm time entered by the user.
-    private func todayDate(preservingTimeFrom timeText: String?) -> Date? {
-        guard let timeText = timeText?.trimmingCharacters(in: .whitespaces), !timeText.isEmpty else {
-            return nil
-        }
-        let components = timeText.split(separator: ":")
-        guard components.count == 2,
-              let hour = Int(components[0]), (0...23).contains(hour),
-              let minute = Int(components[1]), (0...59).contains(minute) else {
-            return nil
-        }
-
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = TimeZone(identifier: "UTC") ?? .current
-        var dateComponents = calendar.dateComponents([.year, .month, .day], from: Date())
-        dateComponents.hour = hour
-        dateComponents.minute = minute
-        dateComponents.second = 0
-        return calendar.date(from: dateComponents)
-    }
-
-    private func chapteringDateFormatter() -> ISO8601DateFormatter {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime]
-        formatter.timeZone = TimeZone(identifier: "UTC")
-        return formatter
-    }
+   
 }

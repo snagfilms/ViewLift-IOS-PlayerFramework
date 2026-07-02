@@ -16,21 +16,7 @@ enum ControlsType{
     case live(isDVR: Bool)
 }
 
-struct ChapteringCuePoint: Codable {
-    let startTime: Double
-    let label: String
-    let thumbnail: String?
-    let eventStartUtc: String?
-    let stocks: String?
 
-    enum CodingKeys: String, CodingKey {
-        case startTime = "StartTime"
-        case label = "Label"
-        case thumbnail = "OriginalThumbnailLocation"
-        case eventStartUtc = "event_start_utc"
-        case stocks = "Stocks"
-    }
-}
 
 protocol PlayerControlsViewDelegate: AnyObject {
     func videoStartedPlaying(timestamp: Double)

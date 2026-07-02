@@ -61,15 +61,13 @@ class PlayerViewController_iOS: UIViewController {
     var enableCustomPlayerUI: Bool = false
     var enableBitrateLogs: Bool = false
     /// Controls whether chaptering (Live Moments + SDK chaptering cue points) is active
-    var isChapteringEnabled: Bool = false
-    /// Seconds from UTC midnight for the user-entered event start time (e.g. "15:10:00" → 54600).
-    /// When set, every ChapteringCuePoint receives:
-    ///   - startTime  = JSON.startTime + chapterUTCSecondsOffset
-    ///   - eventStartUtc = UTC midnight today (00:00:00Z)
-    /// This places chapters near the live edge and lets them drift left as the DVR
-    /// window advances, regardless of the DVR buffer duration.
-    /// nil = fall back to the per-cue-point `event_start_utc` from the JSON.
-    var chapterUTCSecondsOffset: Double?
+    var isChapterButtonAction: Bool = false
+    var isChapteringCuePointEnable: Bool = true
+    /// Working set of chaptering cue points, loaded once from the bundled JSON. The time-entry
+    /// popup re-anchors each cue point's `event_start_utc` in place, then pushes the updated
+    /// array to the SDK via `configureSDKChapterSegments()`. Source of truth for both the
+    /// slider markers and the Live Moments list.
+    lazy var chapterCuePointSegments: [VLPlayer.ChapteringCuePoint] = loadChapterSegmentsFromJSON() ?? []
     var entitlementData: VLPlayer.EntitlementData?
     var drmConfig: VLPlayer.DRMConfig?
     var streamConfig: VLPlayer.StreamConfig?
@@ -155,7 +153,7 @@ class PlayerViewController_iOS: UIViewController {
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
         setupConstraints()
-        if isChapteringEnabled {
+        if isChapteringCuePointEnable {
             setupLiveMomentsSection()
         }
         setupInitialState()
@@ -302,8 +300,8 @@ class PlayerViewController_iOS: UIViewController {
     /// - First tap (OFF → ON): presents time-entry popup; chaptering is enabled only after "Apply".
     /// - Second tap (ON → OFF): immediately disables chapters and hides Live Moments.
     @IBAction func chapterButtonAction(_ sender: Any) {
-        if isChapteringEnabled {
-            isChapteringEnabled = false
+        if isChapterButtonAction {
+            isChapterButtonAction = false
             disableChaptering()
             updateChapterButtonAppearance()
         } else {
@@ -313,9 +311,9 @@ class PlayerViewController_iOS: UIViewController {
 
     /// Updates the Chapter button title and tint to reflect the current chaptering state.
     func updateChapterButtonAppearance() {
-        let title = isChapteringEnabled ? "Chapters ●" : "Chapters"
+        let title = isChapterButtonAction ? "Chapters ●" : "Chapters"
         chapterButton.setTitle(title, for: .normal)
-        chapterButton.tintColor = isChapteringEnabled ? .systemGreen : .systemBlue
+        chapterButton.tintColor = isChapterButtonAction ? .systemGreen : .systemBlue
     }
 
     /// Handles logout button tap, logs out user and resets player
@@ -385,7 +383,7 @@ extension PlayerViewController_iOS {
         }else{
             vlPlayer = VLPlayer(playerType: .default)
         }
-        if isChapteringEnabled {
+        if isChapterButtonAction {
             configureSDKChapterSegments()
         }
         // Select playback source type based on user option
@@ -512,6 +510,7 @@ extension PlayerViewController_iOS {
     private func setPlayerDelegates() {
         videoPlayerControlsView?.videoPlayer = vlPlayer
         vlPlayer?.videoPlayerDelegate = self
+        vlPlayer?.videoPlayerDatasource = self
         vlPlayer?.enablePlayerBitrateLogs = enableBitrateLogs
         vlPlayer?.serverSideAdTrackingDelegate = self
         vlPlayer?.castDelegate = self
@@ -707,6 +706,8 @@ extension PlayerViewController_iOS {
                                                  isTrickPlayEnabled: false,
                                                  isCustomAdViewEnabled: enableCustomAdUI,
                                                  isServerSideAdTrackingEnabled: true,
+                                                 isChapteringCuePointEnable: isChapteringCuePointEnable,
+                                                 chapteringCuePoints: chapterCuePointSegments,
                                                  featureFlags: FeatureFlags(shouldContinuePlaybackOnScreenLock: true,
                                                                             shouldHandleOrientation: false),
                                                  watchHistoryResumeTime: Double(watchedTime),
@@ -1030,3 +1031,8 @@ extension PlayerViewController_iOS: WatchHistoryDelegate {
     }
 }
 
+extension PlayerViewController_iOS: VideoPlayerDataSource{
+    func isUserLoggedIn() -> Bool{
+        return true
+    }
+}
