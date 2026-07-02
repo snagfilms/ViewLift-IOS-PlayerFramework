@@ -487,6 +487,7 @@ class PlayerViewController_tvOS: UIViewController {
                                                     VLPlayer.ChapteringCuePoint(startTime: $0.startTime,
                                                                                 label: $0.label,
                                                                                 thumbnail: $0.thumbnail,
+                                                                                origLength: 0.0,
                                                                                 eventStartUtc: $0.eventStartUtc,
                                                                                 stocks: $0.stocks)
                                                  },

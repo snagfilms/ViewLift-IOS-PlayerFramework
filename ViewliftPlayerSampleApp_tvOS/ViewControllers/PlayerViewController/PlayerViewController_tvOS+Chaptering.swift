@@ -95,6 +95,7 @@ extension PlayerViewController_tvOS {
                                       label: cue.label,
                                       thumbnail: cue.thumbnail,
                                       eventStartUtc: updatedUtc,
+                                      origLength: 0.0,
                                       stocks: cue.stocks)
         }
         // Refresh the app-side custom controls (when used) and push the updated
@@ -104,6 +105,7 @@ extension PlayerViewController_tvOS {
             VLPlayer.ChapteringCuePoint(startTime: $0.startTime,
                                         label: $0.label,
                                         thumbnail: $0.thumbnail,
+                                        origLength: 0.0,
                                         eventStartUtc: $0.eventStartUtc,
                                         stocks: $0.stocks)
         })
