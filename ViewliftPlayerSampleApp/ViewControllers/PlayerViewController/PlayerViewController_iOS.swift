@@ -669,7 +669,7 @@ extension PlayerViewController_iOS {
                                                  shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
                                                  mutePlayback: self.muteEnabled,
-                                                 customPlayerControlsColor: PlayerControlsColor(progressBarBGColor: "#676D7A", progressBarColor: "#ABAFB6"),
+                                                 customPlayerControlsColor: nil,
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
@@ -688,7 +688,7 @@ extension PlayerViewController_iOS {
         switch type {
         case .customTheme:
             // Configure default player controls view with custom theme
-            let playerControlsConfig = VLPlayerLib.PlayerControlsConfig(isChromeCastSupported: false, isAirPlaySupported: false, isPIPSupported: true, isSettingsSupported: true, isSubTitleSupported: true, isSlowMoSupported: false, playerControlsColor: nil)
+            let playerControlsConfig = VLPlayerLib.PlayerControlsConfig(isChromeCastSupported: false, isAirPlaySupported: false, isPIPSupported: true, isSettingsSupported: true, isSubTitleSupported: true, isSlowMoSupported: false, playerControlsColor: PlayerControlsColor(progressBarBGColor: "#676D7A", progressBarColor: "#ABAFB6"))
             let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(playerControlsConfig: playerControlsConfig)
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .default(controlsTheme: controlsTheme)
             return playerControlsViewConfiguration

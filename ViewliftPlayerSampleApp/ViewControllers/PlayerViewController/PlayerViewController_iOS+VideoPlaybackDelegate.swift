@@ -172,5 +172,31 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
     func adStarted(currentTime: Double, adTag: String?, playerTag: String, player: AVPlayer, metaDataInfo: [String : Any]?) {
         debugPrint("adStarted")
     }
-    
+
+    /// Receives computed chapter cue positions from the SDK every second.
+    /// Forwards them to the custom skin's view model when using `.custom` controls,
+    /// so chapter markers and the drag-preview bubble (including `showChapterTitleTillCuePoint`
+    /// behaviour) appear on the custom seekbar just as they do on the `.customTheme` built-in skin.
+    func chapterCuePointsUpdated(cuePoints: [NSNumber], duration: Double, playerTag: String) {
+        guard isChapteringEnabled, let viewModel = videoPlayerCustomView?.viewModel else { return }
+        let doubleCuePoints = cuePoints.map { $0.doubleValue }
+        // Sorted segment labels and origLengths correspond to sorted cue points by index.
+        // We take only as many entries as there are cue points so the arrays stay aligned.
+        let sortedSegments = chapterSegments
+            .sorted { $0.startTime < $1.startTime }
+            .prefix(cuePoints.count)
+        let sortedLabels = sortedSegments.map { $0.label }
+        let sortedOrigLengths = sortedSegments.map { $0.origLength }
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            viewModel.setChapterCuePoints(
+                cuePoints: doubleCuePoints,
+                duration: duration,
+                labels: sortedLabels,
+                origLengths: sortedOrigLengths,
+                cueConfig: self.chapterCueConfig
+            )
+        }
+    }
+
 }

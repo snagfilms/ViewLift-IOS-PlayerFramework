@@ -94,7 +94,14 @@ class PlayerControlsViewModel: ObservableObject {
     
     @Published var adsCuePoints: [Double] = []
     @Published var adsDuration: TimeInterval = .zero
-    
+
+    @Published var chapterCuePoints: [Double] = []
+    @Published var chapterDuration: TimeInterval = .zero
+    @Published var chapterCueConfig: VLPlayer.ChapterCueConfig = VLPlayer.ChapterCueConfig()
+    @Published var activeChapterDragTitle: String?
+    /// Pre-computed display segments used for the drag-preview bubble.
+    private var chapterDisplaySegments: [ChapterDisplaySegment] = []
+
     var isAdOnMainView: Bool = false
     var adRunningOnInternalPlayer: Bool = false
     var initiallyMuted: Bool
@@ -415,8 +422,106 @@ extension PlayerControlsViewModel {
     
 }
 
+// MARK: - Chapter Display Segment
+/// Mirrors the SDK's internal `ChapterCueSegment`, carrying a resolved [startTime, endTime)
+/// window for the drag-preview bubble.  The `endTime` is computed according to
+/// `ChapterCueConfig.showChapterTitleTillCuePoint` just as the SDK does in
+/// `resolvedChapterSegmentEndTime`.
+private struct ChapterDisplaySegment {
+    let startTime: Double
+    let endTime: Double
+    let label: String
+
+    /// Returns `true` when `second` falls within this segment's [startTime, endTime) window.
+    func contains(_ second: Double) -> Bool {
+        second.isFinite && second >= startTime && second < endTime
+    }
+}
+
 extension PlayerControlsViewModel {
-    
+
+    /// Updates chapter cue markers and drag-preview metadata on the custom seekbar.
+    /// Called via the `chapterCuePointsUpdated` delegate when using `.custom` controls.
+    ///
+    /// Replicates the SDK's `buildChapterCueSegments` / `resolvedChapterSegmentEndTime` logic:
+    /// - `showChapterTitleTillCuePoint = false` → title spans to the next chapter's startTime.
+    /// - `showChapterTitleTillCuePoint = true`  → title spans `startTime + origLength`
+    ///   (falls back to nextStartTime when origLength is zero / invalid).
+    ///
+    /// - Parameters:
+    ///   - cuePoints: Chapter start-time positions (seconds) in the current playback window.
+    ///   - duration: Playback window duration used to normalise positions.
+    ///   - labels: Chapter titles aligned with `cuePoints` by index.
+    ///   - origLengths: `ChapterSegment.origLength` values aligned with `cuePoints` by index.
+    ///   - cueConfig: Visual and behavioural configuration for cue markers.
+    func setChapterCuePoints(
+        cuePoints: [Double],
+        duration: TimeInterval,
+        labels: [String] = [],
+        origLengths: [Double] = [],
+        cueConfig: VLPlayer.ChapterCueConfig = VLPlayer.ChapterCueConfig()
+    ) {
+        guard duration > 0 else {
+            chapterCuePoints = []
+            chapterDuration = .zero
+            chapterDisplaySegments = []
+            chapterCueConfig = cueConfig
+            return
+        }
+
+        let filtered = cuePoints
+            .filter { $0.isFinite && $0 >= 0 && $0 <= duration }
+            .sorted()
+        chapterCuePoints = filtered
+        chapterDuration = duration
+        chapterCueConfig = cueConfig
+
+        chapterDisplaySegments = filtered.enumerated().map { index, cueTime in
+            let label = index < labels.count ? labels[index] : ""
+            let nextStartTime = (index + 1 < filtered.count) ? filtered[index + 1] : duration
+
+            let endTime: Double
+            if cueConfig.showChapterTitleTillCuePoint {
+                let origLength = index < origLengths.count ? origLengths[index] : 0
+                if origLength.isFinite && origLength > 0 {
+                    // endTime = mappedStartTime + origLength, clamped to window — matches SDK.
+                    endTime = min(cueTime + origLength, duration)
+                } else {
+                    endTime = nextStartTime
+                }
+            } else {
+                endTime = nextStartTime
+            }
+
+            return ChapterDisplaySegment(startTime: cueTime, endTime: endTime, label: label)
+        }
+    }
+
+    /// Updates the drag-preview bubble title to the chapter whose window contains `sliderValue`.
+    /// Mirrors the SDK's `updateActiveChapterDragTitle` using the pre-computed `ChapterDisplaySegment`.
+    /// - Parameter sliderValue: Normalised slider position in the range 0–100.
+    func updateActiveChapterDragTitle(sliderValue: Double) {
+        guard !chapterDisplaySegments.isEmpty, chapterDuration > 0 else {
+            activeChapterDragTitle = nil
+            return
+        }
+        let currentSecond = (sliderValue / 100.0) * chapterDuration
+        if let segment = chapterDisplaySegments.first(where: { $0.contains(currentSecond) }),
+           !segment.label.isEmpty {
+            activeChapterDragTitle = segment.label
+        } else {
+            activeChapterDragTitle = nil
+        }
+    }
+
+    func clearActiveChapterDragTitle() {
+        activeChapterDragTitle = nil
+    }
+
+}
+
+extension PlayerControlsViewModel {
+
     func setCuePointsFromPlayer(adModel adsModel: SSAIAdsModel?, duration: TimeInterval) {
         if let adsModel, let avails = adsModel.avails, avails.isEmpty == false {
             var adModelStarTime: [Double] = [Double]()

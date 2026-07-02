@@ -73,7 +73,7 @@ struct VideoPlayerSeekbar: View {
                     
                     if !viewModel.adsCuePoints.isEmpty,
                        viewModel.adsDuration > 0 {
-                        // Cue points overlaid on top of track
+                        // Ad cue points overlaid on top of track
                         let factor = trackWidth / viewModel.adsDuration
                         ForEach(viewModel.adsCuePoints, id: \.self) { cueTime in
                             if viewModel.adsDuration > 0 {
@@ -85,7 +85,39 @@ struct VideoPlayerSeekbar: View {
                             }
                         }
                     }
-                    
+
+                    if !viewModel.chapterCuePoints.isEmpty,
+                       viewModel.chapterDuration > 0 {
+                        // Chapter cue markers overlaid on top of track
+                        let chapterFactor = trackWidth / CGFloat(viewModel.chapterDuration)
+                        let config = viewModel.chapterCueConfig
+                        let cueColor = Color(config.cueColor)
+                        ForEach(viewModel.chapterCuePoints, id: \.self) { cueTime in
+                            let cuePosition = max(0, min(CGFloat(cueTime) * chapterFactor, trackWidth))
+                            if config.isCueCircular {
+                                Circle()
+                                    .fill(cueColor)
+                                    .frame(width: config.cueWidth, height: config.cueHeight)
+                                    .offset(x: cuePosition)
+                            } else {
+                                Rectangle()
+                                    .fill(cueColor)
+                                    .frame(width: config.cueWidth, height: config.cueHeight)
+                                    .offset(x: cuePosition)
+                            }
+                        }
+                    }
+
+                    // Chapter drag-preview bubble
+                    if isDragging, let title = viewModel.activeChapterDragTitle, !title.isEmpty {
+                        dragPreviewForSeekbar(
+                            title: title,
+                            thumbPosition: thumbPosition,
+                            thumbSize: thumbSize,
+                            trackWidth: trackWidth
+                        )
+                    }
+
                     // Draggable thumb
                     Circle()
                         .fill(viewModel.getIconColor())
@@ -94,7 +126,6 @@ struct VideoPlayerSeekbar: View {
                         .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1)
                         .offset(x: thumbPosition)
                         .gesture(
-                            // Combine the seek gesture with tap detection
                             seekGesture(trackWidth: trackWidth, thumbSize: thumbSize)
                         )
                         .animation(.easeOut(duration: 0.15), value: isDragging)
@@ -146,39 +177,68 @@ struct VideoPlayerSeekbar: View {
             }
             .onChanged { gesture in
                 if !isDragging {
-                    // Store initial position when drag starts
                     let currentProgress = viewModel.playerState.currentTime / 100.0
                     lastDragValue = CGFloat(currentProgress) * (trackWidth - thumbSize)
                 }
-                
-                // Calculate new position based on translation from start point
+
                 let newPosition = lastDragValue + gesture.location.x
                 let clampedPosition = max(0, min(newPosition, trackWidth - thumbSize))
-                
-                // Calculate time value (0-100)
                 let progress = clampedPosition / (trackWidth - thumbSize)
                 let newTime = min(100, max(0, Double(progress * 100)))
-                
-                // Update the view model
+
                 viewModel.playerState.currentTime = newTime
                 viewModel.sliderTracking(time: newTime)
+                viewModel.updateActiveChapterDragTitle(sliderValue: newTime)
             }
             .onEnded { gesture in
-                // Calculate final position
                 let finalPosition = lastDragValue + gesture.location.x
                 let clampedPosition = max(0, min(finalPosition, trackWidth - thumbSize))
-                
-                // Calculate final time value
                 let progress = clampedPosition / (trackWidth - thumbSize)
                 let finalTime = min(100, max(0, Double(progress * 100)))
-                
-                // Commit the final value
+
                 viewModel.playerState.currentTime = finalTime
                 viewModel.sliderEndedTracking(time: finalTime)
-                
-                // Reset for next drag
+                viewModel.clearActiveChapterDragTitle()
                 lastDragValue = 0
             }
+    }
+
+    /// Renders a chapter-title drag-preview bubble above the seekbar thumb —
+    /// identical in appearance to the SDK's built-in skin.
+    @ViewBuilder
+    private func dragPreviewForSeekbar(
+        title: String,
+        thumbPosition: CGFloat,
+        thumbSize: CGFloat,
+        trackWidth: CGFloat
+    ) -> some View {
+        let bubbleWidth: CGFloat = min(max(180 * iconScale, 120), trackWidth)
+        let thumbCenter = thumbPosition + (thumbSize / 2)
+        let bubbleX = max(0, min(thumbCenter - (bubbleWidth / 2), trackWidth - bubbleWidth))
+        let arrowOffset = thumbCenter - bubbleX - (bubbleWidth / 2)
+
+        VStack(spacing: 0) {
+            // Title bubble
+            Text(title)
+                .font(.system(size: 14 * iconScale, weight: .medium))
+                .foregroundColor(.white)
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .padding(.horizontal, 12 * iconScale)
+                .padding(.vertical, 8 * iconScale)
+                .frame(width: bubbleWidth, alignment: .center)
+                .background(
+                    RoundedRectangle(cornerRadius: 0)
+                        .fill(Color(red: 0.07, green: 0.42, blue: 0.91))
+                )
+            // Down-pointing arrow
+            SeekbarBubbleTriangle()
+                .fill(Color(red: 0.07, green: 0.42, blue: 0.91))
+                .frame(width: 24 * iconScale, height: 16 * iconScale)
+                .offset(x: arrowOffset)
+        }
+        .offset(x: bubbleX, y: -(40 * iconScale))
+        .animation(.easeInOut(duration: 0.1), value: title)
     }
 }
 
@@ -187,5 +247,17 @@ struct SeekbarThumbOriginPreferenceKey: PreferenceKey {
 
     static func reduce(value: inout [String: CGRect], nextValue: () -> [String: CGRect]) {
         value.merge(nextValue(), uniquingKeysWith: { $1 })
+    }
+}
+
+// MARK: - Triangle Shape
+struct SeekbarBubbleTriangle: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+        path.closeSubpath()
+        return path
     }
 }
