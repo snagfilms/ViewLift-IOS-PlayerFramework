@@ -491,10 +491,12 @@ extension VLCustomPlayerControlsView{
         if optionView == nil{
             addOptionsView(type: .setting)
             playerControlsStackView.alpha = hidingAlpha
+            setChapteringCollectionHidden(true)
             updateFocusOnPlayerControls()
             gradientView.isHidden = true
         }else{
             playerControlsStackView.alpha = 1.0
+            setChapteringCollectionHidden(false)
             gradientView.isHidden = false
 
         }
@@ -521,10 +523,12 @@ extension VLCustomPlayerControlsView{
         if optionView == nil{
             addOptionsView(type: .subtitle)
             playerControlsStackView.alpha = hidingAlpha
+            setChapteringCollectionHidden(true)
             updateFocusOnPlayerControls()
             gradientView.isHidden = true
         }else{
             playerControlsStackView.alpha = 1.0
+            setChapteringCollectionHidden(false)
             gradientView.isHidden = false
         }
         #endif
@@ -936,6 +940,7 @@ extension VLCustomPlayerControlsView: PlayerSettingViewDelegate_tvOS {
         optionView?.removeFromSuperview()
         optionView = nil
         playerControlsStackView.alpha = 1.0
+        setChapteringCollectionHidden(false)
         gradientView.isHidden = false
     }
 
