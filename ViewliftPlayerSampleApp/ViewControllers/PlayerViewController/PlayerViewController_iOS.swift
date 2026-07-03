@@ -865,6 +865,7 @@ extension PlayerViewController_iOS {
             } else {
                 if orientation.isLandscape {
                     if !self.isFullscreen {
+                        self.disableChaptering()
                         self.removeWatchHistoryView()
                         self.isFullscreen = true
                         self.vlPlayer?.goFullScreen(true)
@@ -874,10 +875,11 @@ extension PlayerViewController_iOS {
                         self.isFullscreen = false
                         self.vlPlayer?.goFullScreen(false)
                         // Only add watch history if switch is on
-                        if self.watchHistoryVisibility == true {
+                        if self.watchHistoryVisibility == true && self.isChapterButtonAction == false {
                             self.addWatchHistoryView()
                         }
                         else {
+                            self.setupLiveMomentsSection()
                             self.removeWatchHistoryView()
                         }
                     }
