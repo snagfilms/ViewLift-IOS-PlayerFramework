@@ -84,7 +84,9 @@ class PlayerViewController_tvOS: UIViewController {
     let loaderView = UIActivityIndicatorView(style: .large)
 
     var channelkey: String = ""
-    var chapteringCuePoints: [ChapteringCuePoint] = []
+    /// Source of truth for the slider markers and the tvOS chapter collection. Shared
+    /// with iOS via `ChapteringHosting` (see CommonClasses/ChapteringCommonFile.swift).
+    var chapterCuePointSegments: [VLPlayer.ChapteringCuePoint] = []
     
     override var canBecomeFirstResponder: Bool {
         return true
@@ -102,7 +104,7 @@ class PlayerViewController_tvOS: UIViewController {
         view.addSubview(playerContainerView)
         setupConstraints()
         if isChapteringCuePointEnable {
-            chapteringCuePoints = loadChapteringCuePoints()
+            chapterCuePointSegments = loadChapterSegmentsFromJSON()
         }
         updateConstraintsForCurrentOrientation()
         self.createAutoPlayMetaData()
@@ -255,25 +257,6 @@ class PlayerViewController_tvOS: UIViewController {
     
    private func isPlayingFromURL() -> Bool{
         return playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL
-    }
-
-    private func loadChapteringCuePoints() -> [ChapteringCuePoint] {
-        guard let url = Bundle.main.url(forResource: "chaptering", withExtension: "json"),
-              let rawString = try? String(contentsOf: url, encoding: .utf8),
-              let jsonStart = rawString.firstIndex(of: "{") else {
-            return []
-        }
-
-        let jsonString = String(rawString[jsonStart...])
-        guard let data = jsonString.data(using: .utf8) else { return [] }
-
-        do {
-            let response = try JSONDecoder().decode(ChapteringCuePointResponse.self, from: data)
-            return response.items.segments.sorted { $0.startTime < $1.startTime }
-        } catch {
-            debugPrint("Chaptering cue point parse error: \(error)")
-            return []
-        }
     }
 
     // Handles player setup completion, checks for TVE authorization
@@ -483,14 +466,7 @@ class PlayerViewController_tvOS: UIViewController {
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isServerSideAdTrackingEnabled: true,
                                                  isChapteringCuePointEnable: isChapteringCuePointEnable,
-                                                 chapteringCuePoints: chapteringCuePoints.map {
-                                                    VLPlayer.ChapteringCuePoint(startTime: $0.startTime,
-                                                                                label: $0.label,
-                                                                                thumbnail: $0.thumbnail,
-                                                                                origLength: 0.0,
-                                                                                eventStartUtc: $0.eventStartUtc,
-                                                                                stocks: $0.stocks)
-                                                 },
+                                                 chapteringCuePoints: chapterCuePointSegments,
                                                  featureFlags: FeatureFlags(shouldEnablePlayPauseOnLiveStream: true),
                                                  watchHistoryResumeTime: Double(watchedTime),
                                                  watchHistoryTimeInterval: self.watchHistoryInterval,
@@ -514,7 +490,7 @@ class PlayerViewController_tvOS: UIViewController {
             view.updateTitleLabel(text: nil)
             view.delegate = self
             if isChapteringCuePointEnable {
-                view.configureChapteringCuePoints(chapteringCuePoints)
+                view.configureChapteringCuePoints(appModelChapterCuePoints)
             }
             let playerControlsViewConfiguration: VLPlayer.PlayerControlsViewConfiguration = .custom(view: view)
             self.videoPlayerControlsView = view

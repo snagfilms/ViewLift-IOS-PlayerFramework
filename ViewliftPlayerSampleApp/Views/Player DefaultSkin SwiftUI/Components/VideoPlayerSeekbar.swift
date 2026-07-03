@@ -88,12 +88,27 @@ struct VideoPlayerSeekbar: View {
 
                     if !viewModel.chapterCuePoints.isEmpty,
                        viewModel.chapterDuration > 0 {
-                        // Chapter cue markers overlaid on top of track
-                        let chapterFactor = trackWidth / CGFloat(viewModel.chapterDuration)
+                        // Chapter cue markers overlaid on top of track.
+                        //
+                        // Map each cue onto the *same* coordinate space as the thumb — the
+                        // inset track (`trackWidth - thumbSize`) offset by a half-thumb — and
+                        // center the marker on its cue point. The thumb center for a given
+                        // progress `p` is `p * (trackWidth - thumbSize) + thumbSize/2`, so a
+                        // cue at fraction `f` (cueTime / chapterDuration) must sit at the same
+                        // center to line up with the thumb when the playhead reaches it.
+                        //
+                        // Both the thumb and these markers are pure functions of the current
+                        // `trackWidth`, so when the time label becomes visible and the layout
+                        // pass recalculates the track width, the markers are redrawn against the
+                        // final width and stay aligned with the thumb at every position — including
+                        // cues near the Live button on the right edge.
+                        let insetTrackWidth = max(0, trackWidth - thumbSize)
+                        let chapterFactor = insetTrackWidth / CGFloat(viewModel.chapterDuration)
                         let config = viewModel.chapterCueConfig
                         let cueColor = Color(config.cueColor)
                         ForEach(viewModel.chapterCuePoints, id: \.self) { cueTime in
-                            let cuePosition = max(0, min(CGFloat(cueTime) * chapterFactor, trackWidth))
+                            let cueCenterX = (thumbSize / 2) + max(0, min(CGFloat(cueTime) * chapterFactor, insetTrackWidth))
+                            let cuePosition = cueCenterX - (config.cueWidth / 2)
                             if config.isCueCircular {
                                 Circle()
                                     .fill(cueColor)

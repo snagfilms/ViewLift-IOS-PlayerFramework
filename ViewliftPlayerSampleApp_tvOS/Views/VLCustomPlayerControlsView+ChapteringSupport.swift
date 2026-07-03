@@ -188,7 +188,7 @@ extension VLCustomPlayerControlsView {
             chapterCell.configure(
                 label: cuePoint.label,
                 tagText: cuePoint.tagText,
-                formattedTime: chapteringRelativeOffset(for: cuePoint).getTimeInString(),
+                formattedTime: cuePoint.displayDateTime ?? chapteringRelativeOffset(for: cuePoint).getTimeInString(),
                 thumbnail: cuePoint.thumbnail,
                 expanded: true
             )
@@ -218,7 +218,7 @@ extension VLCustomPlayerControlsView {
         cell.configure(
             label: cuePoint.label,
             tagText: cuePoint.tagText,
-            formattedTime: chapteringRelativeOffset(for: cuePoint).getTimeInString(),
+            formattedTime: cuePoint.displayDateTime ?? chapteringRelativeOffset(for: cuePoint).getTimeInString(),
             thumbnail: cuePoint.thumbnail,
             expanded: true
         )
@@ -287,6 +287,23 @@ extension ChapteringCuePoint {
         let eventStart = ChapteringCuePoint.eventStartUtcFormatter.date(from: eventStartUtc)
             ?? ChapteringCuePoint.eventStartUtcFractionalFormatter.date(from: eventStartUtc)
         return eventStart?.addingTimeInterval(startTime)
+    }
+
+    /// Localized "date + time" formatter for the chapter's curated air time (e.g.
+    /// "Jun 30, 10:30 AM"). Matches the iOS/SDK format so the cell renders identically.
+    static let displayDateTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.setLocalizedDateFormatFromTemplate("MMMd jmm")
+        return formatter
+    }()
+
+    /// The chapter's curated air date & time as a display string. This is a fixed
+    /// wall-clock value (it does not slide with the DVR window), so the cell can show
+    /// it statically. `nil` when `event_start_utc` is missing/unparsable.
+    var displayDateTime: String? {
+        guard let eventStartDate else { return nil }
+        return ChapteringCuePoint.displayDateTimeFormatter.string(from: eventStartDate)
     }
 
     /// Tag displayed on a cue-point card (the associated stock symbols).

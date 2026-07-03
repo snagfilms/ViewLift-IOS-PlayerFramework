@@ -63,11 +63,7 @@ class PlayerViewController_iOS: UIViewController {
     /// Controls whether chaptering (Live Moments + SDK chaptering cue points) is active
     var isChapterButtonAction: Bool = false
     var isChapteringCuePointEnable: Bool = true
-    /// Working set of chaptering cue points, loaded once from the bundled JSON. The time-entry
-    /// popup re-anchors each cue point's `event_start_utc` in place, then pushes the updated
-    /// array to the SDK via `configureSDKChapterSegments()`. Source of truth for both the
-    /// slider markers and the Live Moments list.
-    lazy var chapterCuePointSegments: [VLPlayer.ChapteringCuePoint] = loadChapterSegmentsFromJSON() ?? []
+    lazy var chapterCuePointSegments: [VLPlayer.ChapteringCuePoint] = loadChapterSegmentsFromJSON()
     var entitlementData: VLPlayer.EntitlementData?
     var drmConfig: VLPlayer.DRMConfig?
     var streamConfig: VLPlayer.StreamConfig?
@@ -699,9 +695,7 @@ extension PlayerViewController_iOS {
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
-                                                 // Temporary: use SDK default SwiftUI controls so chapter cue points
-                                                 // are bound to defaultPlayerControls.viewModel.
-                                                 playerControlsViewConfiguration: self.getPlayerControlsViewConfiguration(type: .customTheme),
+                                                 playerControlsViewConfiguration: self.getPlayerControlsViewConfiguration(type: .custom),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: false,
                                                  isCustomAdViewEnabled: enableCustomAdUI,

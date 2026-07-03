@@ -25,9 +25,23 @@ struct LiveMomentItem: Identifiable {
     let seekSeconds: Double
 }
 
+/// Reference-type backing store for the Live Moments list. The host mutates `tabs`
+/// only when a chapter enters or leaves the DVR window, so SwiftUI diffs the
+/// `ForEach` by stable id and inserts/removes just the affected row instead of the
+/// list being rebuilt (which happened when the whole `rootView` was reassigned).
+final class LiveMomentsModel: ObservableObject {
+    @Published var tabs: [LiveMomentsTabItem]
+
+    init(tabs: [LiveMomentsTabItem]) {
+        self.tabs = tabs
+    }
+}
+
 struct LiveMomentsTabsView: View {
-    let tabs: [LiveMomentsTabItem]
+    @ObservedObject var model: LiveMomentsModel
     var onMomentTap: (Double) -> Void
+
+    private var tabs: [LiveMomentsTabItem] { model.tabs }
 
     @State private var selectedTabId: String?
 
