@@ -114,6 +114,21 @@ extension VLCustomPlayerControlsView {
         collectionView.isHidden = false
     }
 
+    /// Re-asserts the chapter collection's visible state when the player (re)enters full
+    /// screen. `setupChapteringCollectionView()` only runs once at init, so on later
+    /// full-screen entries the collection can be left hidden or with cells laid out for the
+    /// small-screen frame. Forcing `isHidden = false`, the collapsed constant and a full
+    /// reload makes it appear every time the player enters full screen (not just the first).
+    func restoreChapteringCollectionForFullScreen() {
+        guard isChapteringCuePointEnable, let collectionView = chapteringCollectionView else { return }
+        collectionView.isHidden = false
+        chapteringCollectionBottomConstraint?.constant = chapteringCollapsedBottomConstant
+        // Force the next refresh to fully reload so cells are rebuilt for the full-screen frame.
+        lastReloadedChapteringCuePointCount = -1
+        updateChapteringCuePointsIfNeeded(duration: chapteringDuration)
+        layoutIfNeeded()
+    }
+
     /// Hides or shows the chapter collection alongside the main player controls
     /// (e.g. when the settings / captions panel is opened, or when the controls are
     /// hidden). Guarded by the chaptering feature flag so it is a no-op otherwise.

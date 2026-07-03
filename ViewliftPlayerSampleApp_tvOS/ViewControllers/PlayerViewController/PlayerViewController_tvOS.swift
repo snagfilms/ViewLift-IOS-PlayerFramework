@@ -365,6 +365,9 @@ class PlayerViewController_tvOS: UIViewController {
         // Remove watch history when going to full screen
         if isFullScreen {
             hideWatchHistoryView()
+            // Ensure the chapter collection is shown every time we enter full screen,
+            // not just on the first presentation.
+            videoPlayerControlsView?.restoreChapteringCollectionForFullScreen()
         } else {
             // Add watch history when exiting full screen
             unhideWatchHistoryView()
