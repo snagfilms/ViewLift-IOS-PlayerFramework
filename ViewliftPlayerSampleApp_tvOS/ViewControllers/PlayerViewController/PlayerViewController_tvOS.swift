@@ -703,7 +703,7 @@ extension PlayerViewController_tvOS: PlayerControlsDelegate {
     }
 }
 
-extension PlayerViewController_tvOS{
+extension PlayerViewController_tvOS: ChapteringHosting{
     
     internal func createButton(){
         testButton.translatesAutoresizingMaskIntoConstraints = false

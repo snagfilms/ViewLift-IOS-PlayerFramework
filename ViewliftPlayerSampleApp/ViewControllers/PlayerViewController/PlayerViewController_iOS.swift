@@ -848,7 +848,7 @@ extension PlayerViewController_iOS {
 }
 
 // MARK: - Orientation Handling
-extension PlayerViewController_iOS {
+extension PlayerViewController_iOS: ChapteringHosting {
     
     /// Handles device orientation changes for fullscreen player
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
