@@ -19,9 +19,15 @@
 		99B1542E2FF6554100FE292B /* WatchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1542D2FF6554100FE292B /* WatchHistoryView.swift */; };
 		99B1542F2FF6554100FE292B /* WatchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1542D2FF6554100FE292B /* WatchHistoryView.swift */; };
 		99B154312FF6558C00FE292B /* VLCustomPlayerControlsView+ChapteringSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B154302FF6558C00FE292B /* VLCustomPlayerControlsView+ChapteringSupport.swift */; };
-		99B154332FF655BC00FE292B /* PlayerViewController_tvOS+Chaptering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B154322FF655BC00FE292B /* PlayerViewController_tvOS+Chaptering.swift */; };
 		99B154362FF655EA00FE292B /* ChapteringCuePointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B154342FF655EA00FE292B /* ChapteringCuePointCell.swift */; };
 		99B154372FF655EA00FE292B /* ChapteringCuePointCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B154352FF655EA00FE292B /* ChapteringCuePointCell.xib */; };
+		99B154402FF6579800FE292B /* chaptering.json in Resources */ = {isa = PBXBuildFile; fileRef = 99B1543E2FF6579800FE292B /* chaptering.json */; };
+		99B154412FF6579800FE292B /* placeholderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 99B1543F2FF6579800FE292B /* placeholderImage.png */; };
+		99B154422FF6579800FE292B /* chaptering.json in Resources */ = {isa = PBXBuildFile; fileRef = 99B1543E2FF6579800FE292B /* chaptering.json */; };
+		99B154432FF6579800FE292B /* placeholderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 99B1543F2FF6579800FE292B /* placeholderImage.png */; };
+		99B154502FF66E3300FE292B /* LiveMomentsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1544F2FF66E3300FE292B /* LiveMomentsTabView.swift */; };
+		99B154582FF6864900FE292B /* ChapteringCommonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B154572FF6864200FE292B /* ChapteringCommonFile.swift */; };
+		99B154592FF6864900FE292B /* ChapteringCommonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B154572FF6864200FE292B /* ChapteringCommonFile.swift */; };
 		9D3AAA8D2E4E2E7100FFDA9A /* PlayerControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3AAA7F2E4E2E7100FFDA9A /* PlayerControlButton.swift */; };
 		9D3AAA8E2E4E2E7100FFDA9A /* PlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3AAA8B2E4E2E7100FFDA9A /* PlayerControlsView.swift */; };
 		9D3AAA8F2E4E2E7100FFDA9A /* PlayerControlsHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3AAA8A2E4E2E7100FFDA9A /* PlayerControlsHostingView.swift */; };
@@ -237,9 +243,11 @@
 		99B154162FF6531E00FE292B /* VLPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VLPlayer.xcodeproj; path = "/Users/devendragaur/Desktop/VLDeveloper/iosplayer-sdk/VLPlayer/VLPlayer.xcodeproj"; sourceTree = "<absolute>"; };
 		99B1542D2FF6554100FE292B /* WatchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchHistoryView.swift; sourceTree = "<group>"; };
 		99B154302FF6558C00FE292B /* VLCustomPlayerControlsView+ChapteringSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VLCustomPlayerControlsView+ChapteringSupport.swift"; sourceTree = "<group>"; };
-		99B154322FF655BC00FE292B /* PlayerViewController_tvOS+Chaptering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerViewController_tvOS+Chaptering.swift"; sourceTree = "<group>"; };
 		99B154342FF655EA00FE292B /* ChapteringCuePointCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapteringCuePointCell.swift; sourceTree = "<group>"; };
 		99B154352FF655EA00FE292B /* ChapteringCuePointCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChapteringCuePointCell.xib; sourceTree = "<group>"; };
+		99B1543E2FF6579800FE292B /* chaptering.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = chaptering.json; sourceTree = "<group>"; };
+		99B1544F2FF66E3300FE292B /* LiveMomentsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMomentsTabView.swift; sourceTree = "<group>"; };
+		99B154572FF6864200FE292B /* ChapteringCommonFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapteringCommonFile.swift; sourceTree = "<group>"; };
 		9D3AAA7A2E4E2E7100FFDA9A /* CastUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastUIButton.swift; sourceTree = "<group>"; };
 		9D3AAA7B2E4E2E7100FFDA9A /* CenterPlayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterPlayButtonView.swift; sourceTree = "<group>"; };
 		9D3AAA7C2E4E2E7100FFDA9A /* CustomAirPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAirPlayButton.swift; sourceTree = "<group>"; };
@@ -521,6 +529,7 @@
 			isa = PBXGroup;
 			children = (
 				BAF0E2252EBD89AA003DBA9F /* VLContentInfoAnalytics+Extension.swift */,
+				99B154572FF6864200FE292B /* ChapteringCommonFile.swift */,
 				D2A759962E4B2B800089B4D1 /* Protocols */,
 				D2A759022E4B0E130089B4D1 /* Extensions */,
 				D2A7590C2E4B0E130089B4D1 /* Utility */,
@@ -554,6 +563,8 @@
 		D2A759082E4B0E130089B4D1 /* json-file */ = {
 			isa = PBXGroup;
 			children = (
+				99B1543E2FF6579800FE292B /* chaptering.json */,
+				99B1543F2FF6579800FE292B /* placeholderImage.png */,
 				D2A759052E4B0E130089B4D1 /* assets-provider.json */,
 				D2A759072E4B0E130089B4D1 /* configs.json */,
 			);
@@ -696,6 +707,7 @@
 		D2A759912E4B280D0089B4D1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				99B1544F2FF66E3300FE292B /* LiveMomentsTabView.swift */,
 				BA5D8B6B2EAE39BA001401D8 /* MVPDGridView.swift */,
 				D208331F2E72DF690080932C /* Custom Ad View */,
 				9D3AAA8C2E4E2E7100FFDA9A /* Player DefaultSkin SwiftUI */,
@@ -717,7 +729,6 @@
 			children = (
 				BAB188AB2E79834C008EF175 /* PlayerViewController_TempPass.swift */,
 				D2A759982E4B30030089B4D1 /* PlayerViewController_tvOS.swift */,
-				99B154322FF655BC00FE292B /* PlayerViewController_tvOS+Chaptering.swift */,
 				D2A7599B2E4B302C0089B4D1 /* PlayerViewController_tvOS+VideoPlaybackDelegate.swift */,
 				D2334A052E620133002370CB /* PlayerViewController_tvOS+SSAI.swift */,
 				D26D921A2E6B1CBD002A70B1 /* PlayerViewController_tvOS+TVEAuthentication.swift */,
@@ -954,6 +965,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA0DE0592E7AEE5E00650CEA /* SiteConfig.plist in Resources */,
+				99B154402FF6579800FE292B /* chaptering.json in Resources */,
+				99B154412FF6579800FE292B /* placeholderImage.png in Resources */,
 				D20833212E72DF690080932C /* PlayerAdEmbeddedView.xib in Resources */,
 				5422EFFE209912C600206D66 /* LaunchScreen.storyboard in Resources */,
 				D2A759162E4B0E130089B4D1 /* configs.json in Resources */,
@@ -968,6 +981,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				99B154372FF655EA00FE292B /* ChapteringCuePointCell.xib in Resources */,
+				99B154422FF6579800FE292B /* chaptering.json in Resources */,
+				99B154432FF6579800FE292B /* placeholderImage.png in Resources */,
 				D2A759652E4B11410089B4D1 /* VLCustomPlayerSkin_tvOS.xib in Resources */,
 				BA0DE05A2E7AEE5E00650CEA /* SiteConfig.plist in Resources */,
 				D2A759662E4B11410089B4D1 /* OptionsTableViewCell.xib in Resources */,
@@ -1023,6 +1038,7 @@
 				D2A759882E4B27410089B4D1 /* PlayerViewController_iOS+Chromecast.swift in Sources */,
 				40594B7B2E50AB2D00176629 /* PlayerViewController_iOS+SSAI.swift in Sources */,
 				D280CCA22E5C27E40070CDA5 /* PlayerViewController_iOS+AutoPlay.swift in Sources */,
+				99B154502FF66E3300FE292B /* LiveMomentsTabView.swift in Sources */,
 				D20833202E72DF690080932C /* PlayerAdEmbeddedView.swift in Sources */,
 				D2542D6D2F517F1200B42060 /* FairPlayParser.swift in Sources */,
 				D2A759972E4B2B800089B4D1 /* AnalyticsProtocol.swift in Sources */,
@@ -1043,6 +1059,7 @@
 				BA5D8B6C2EAE39BA001401D8 /* MVPDGridView.swift in Sources */,
 				BA05D4C32E86D9D7008BF84C /* AnalyticsHelper+PageTracking.swift in Sources */,
 				9D3AAA912E4E2E7100FFDA9A /* MarqueeText.swift in Sources */,
+				99B154592FF6864900FE292B /* ChapteringCommonFile.swift in Sources */,
 				9D3AAA922E4E2E7100FFDA9A /* PlayerControlsViewModel.swift in Sources */,
 				9D3AAA932E4E2E7100FFDA9A /* UIDeviceViewModifier.swift in Sources */,
 				D2D2E1562E5F2133001C2CD7 /* AutoPlayView.swift in Sources */,
@@ -1086,13 +1103,13 @@
 				BA5D8B6A2EAE2F8F001401D8 /* Utility.swift in Sources */,
 				D2A7599C2E4B304E0089B4D1 /* PlayerViewController_tvOS+VideoPlaybackDelegate.swift in Sources */,
 				D2542D6E2F517F1200B42060 /* FairPlayParser.swift in Sources */,
-				99B154332FF655BC00FE292B /* PlayerViewController_tvOS+Chaptering.swift in Sources */,
 				D26D92192E6B1A4A002A70B1 /* TVEPollingQRCodeView.swift in Sources */,
 				D2D2E1532E5F1D93001C2CD7 /* UIView+Extension.swift in Sources */,
 				BA05D4C62E86DA04008BF84C /* AnalyticsHelper+Data.swift in Sources */,
 				BA8E15802EA4DA6500B45F68 /* AnalyticsHelperV2.swift in Sources */,
 				D2A759292E4B0E130089B4D1 /* ConfigurableItemRowView.swift in Sources */,
 				99B154312FF6558C00FE292B /* VLCustomPlayerControlsView+ChapteringSupport.swift in Sources */,
+				99B154582FF6864900FE292B /* ChapteringCommonFile.swift in Sources */,
 				D2A7592A2E4B0E130089B4D1 /* ConfigurableHeaderView.swift in Sources */,
 				D2A759C52E4B504A0089B4D1 /* PlayerViewController_tvOS+Analytics.swift in Sources */,
 				D2A7592B2E4B0E130089B4D1 /* UserManager.swift in Sources */,
