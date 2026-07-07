@@ -20,10 +20,37 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupDarkModeSupport()
         multiplePlayerOptionTable.reloadData()
         // Do any additional setup after loading the view, typically from a nib.
         
         
+    }
+    
+    private func setupDarkModeSupport() {
+        // Ensure the view adapts to dark mode
+        view.backgroundColor = .systemBackground
+        
+        // Configure table view for dark mode
+        multiplePlayerOptionTable.backgroundColor = .systemBackground
+        multiplePlayerOptionTable.separatorColor = .separator
+        
+        // Override trait collection changes to update UI when appearance changes
+        overrideUserInterfaceStyle = .unspecified // Allow system to control appearance
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        // Update UI when dark mode changes
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateColorsForCurrentTraitCollection()
+        }
+    }
+    
+    private func updateColorsForCurrentTraitCollection() {
+        // Refresh table view to update cell colors
+        multiplePlayerOptionTable.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,8 +81,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //TableViewMethods
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableCell = tableView.dequeueReusableCell(withIdentifier: "MultiplePlayerUICell", for: indexPath)
+        
+        // Configure cell for dark mode
+        tableCell.backgroundColor = .secondarySystemBackground
+        tableCell.contentView.backgroundColor = .secondarySystemBackground
+        
         let textLabel = tableCell.contentView.viewWithTag(111) as? UILabel
         textLabel?.text = playerUIOptions[indexPath.row].rawValue
+        textLabel?.textColor = .label // Adapts to dark/light mode
+        
         return tableCell
     }
     

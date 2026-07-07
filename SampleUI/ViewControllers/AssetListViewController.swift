@@ -36,7 +36,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        setupDarkModeSupport()
         
        
         
@@ -49,6 +49,37 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         setupHeader()
         setupTableView()
         assetModels = loadAssetModelsFromFile() ?? []
+    }
+    
+    // MARK: - Dark Mode Support
+    
+    private func setupDarkModeSupport() {
+        // Ensure the view adapts to dark mode
+        view.backgroundColor = .systemBackground
+        
+        // Allow system to control appearance
+        overrideUserInterfaceStyle = .unspecified
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        // Update UI when dark mode changes
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateColorsForCurrentTraitCollection()
+        }
+    }
+    
+    private func updateColorsForCurrentTraitCollection() {
+        // Refresh UI elements for current appearance
+        view.backgroundColor = .systemBackground
+        headerView.backgroundColor = .systemBackground
+        tableView.backgroundColor = .systemBackground
+        tableView.separatorColor = .separator
+        titleLabel.textColor = .label
+        
+        // Reload table view to update cell colors
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,7 +160,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     
     private func setupHeader() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.backgroundColor = .white
+        headerView.backgroundColor = .systemBackground
         view.addSubview(headerView)
         
         // --- Back Button (Left) ---
@@ -181,7 +212,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         titleLabel.text = "Assets"
         titleLabel.font = .boldSystemFont(ofSize: titleLabelFontSize)
         titleLabel.textAlignment = .center
-        titleLabel.textColor = .black
+        titleLabel.textColor = .label
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(titleLabel)
         
@@ -217,7 +248,8 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = .systemBackground
+        tableView.separatorColor = .separator
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([

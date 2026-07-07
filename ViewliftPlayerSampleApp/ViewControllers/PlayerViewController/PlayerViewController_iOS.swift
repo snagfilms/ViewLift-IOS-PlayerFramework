@@ -144,6 +144,7 @@ class PlayerViewController_iOS: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupDarkModeSupport()
         VLAnalytics.shared.startObservingPlayerEvents()
         
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -167,6 +168,46 @@ class PlayerViewController_iOS: UIViewController {
         if UserManager.shared.userIdentity != nil {
             self.logoutButton.isHidden = false
         }
+    }
+    
+    // MARK: - Dark Mode Support
+    
+    private func setupDarkModeSupport() {
+        // Ensure the view adapts to dark mode
+        view.backgroundColor = .systemBackground
+        
+        // Allow system to control appearance
+        overrideUserInterfaceStyle = .unspecified
+        
+        // Configure player container
+        playerContainerView.backgroundColor = .black // Player area should always be black
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        // Update UI when dark mode changes
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateColorsForCurrentTraitCollection()
+        }
+    }
+    
+    private func updateColorsForCurrentTraitCollection() {
+        // Update main view background
+        view.backgroundColor = .systemBackground
+        
+        // Update debug log view if visible
+        if !debugLogView.isHidden {
+            debugLogView.backgroundColor = .secondarySystemBackground
+            debugLogView.textColor = .label
+        }
+        
+        // Update timer label
+        timerLabel.textColor = .white
+        timerLabel.backgroundColor = .black.withAlphaComponent(0.7)
+        
+        // Player container should remain black for video playback
+        playerContainerView.backgroundColor = .black
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -239,6 +280,9 @@ class PlayerViewController_iOS: UIViewController {
         updateButtonStates()
         if enableBitrateLogs {
             debugLogView.isHidden = false
+        }
+        else {
+            debugLogView.isHidden = true
         }
     }
     

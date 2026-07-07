@@ -26,11 +26,42 @@ class AssetTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupDarkModeSupport()
         setupUI()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Dark Mode Support
+    
+    private func setupDarkModeSupport() {
+        // Cell background colors that adapt to dark mode
+        backgroundColor = .systemBackground
+        contentView.backgroundColor = .systemBackground
+        
+        // Configure selected background view
+        let selectedView = UIView()
+        selectedView.backgroundColor = .systemGray4
+        selectedBackgroundView = selectedView
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        // Update colors when appearance changes
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateColorsForCurrentTraitCollection()
+        }
+    }
+    
+    private func updateColorsForCurrentTraitCollection() {
+        backgroundColor = .systemBackground
+        contentView.backgroundColor = .systemBackground
+        titleLabel.textColor = .label
+        subtitleLabel.textColor = .secondaryLabel
+        separatorView.backgroundColor = UIColor.separator.withAlphaComponent(0.6)
     }
 
     private func setupUI() {
@@ -42,8 +73,8 @@ class AssetTableViewCell: UITableViewCell {
 
         titleLabel.numberOfLines = 0
         subtitleLabel.numberOfLines = 0
-        subtitleLabel.textColor = .darkGray
-        titleLabel.textColor = .black
+        subtitleLabel.textColor = .secondaryLabel
+        titleLabel.textColor = .label
        #if os(tvOS)
        leftIndexLabel.font = UIFont.boldSystemFont(ofSize: 32)
        titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
@@ -76,7 +107,7 @@ class AssetTableViewCell: UITableViewCell {
             horizontalStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
 
-        separatorView.backgroundColor = .black.withAlphaComponent(0.4)
+        separatorView.backgroundColor = UIColor.separator.withAlphaComponent(0.6)
         contentView.addSubview(separatorView)
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
