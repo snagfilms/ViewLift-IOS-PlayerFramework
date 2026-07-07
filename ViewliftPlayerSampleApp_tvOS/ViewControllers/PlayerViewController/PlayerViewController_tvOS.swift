@@ -99,7 +99,7 @@ class PlayerViewController_tvOS: UIViewController {
     // Initial setup for the view and player
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .black
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
         setupConstraints()
@@ -426,7 +426,7 @@ class PlayerViewController_tvOS: UIViewController {
         
         // Add player view first (fills container)
         playerContainerView.addSubview(playerView)
-        playerContainerView.backgroundColor = .white
+        playerContainerView.backgroundColor = .black
         playerView.backgroundColor = .lightGray
         playerView.translatesAutoresizingMaskIntoConstraints = false
 

@@ -36,8 +36,11 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        #if os(iOS)
         setupDarkModeSupport()
-        
+        #else
+        view.backgroundColor = .black
+        #endif
        
         
         guard videoList != nil else {
@@ -51,6 +54,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         assetModels = loadAssetModelsFromFile() ?? []
     }
     
+    #if os(iOS)
     // MARK: - Dark Mode Support
     
     private func setupDarkModeSupport() {
@@ -81,6 +85,8 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         // Reload table view to update cell colors
         tableView.reloadData()
     }
+    #endif
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -160,7 +166,11 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     
     private func setupHeader() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
+        #if os(iOS)
         headerView.backgroundColor = .systemBackground
+        #else
+        headerView.backgroundColor = .black
+        #endif
         view.addSubview(headerView)
         
         // --- Back Button (Left) ---
@@ -212,7 +222,11 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         titleLabel.text = "Assets"
         titleLabel.font = .boldSystemFont(ofSize: titleLabelFontSize)
         titleLabel.textAlignment = .center
+        #if os(iOS)
         titleLabel.textColor = .label
+        #else
+        titleLabel.textColor = .white
+        #endif
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(titleLabel)
         
@@ -248,8 +262,13 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        #if os(iOS)
         tableView.backgroundColor = .systemBackground
         tableView.separatorColor = .separator
+        #else
+        tableView.backgroundColor = .black
+        #endif
+        
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([

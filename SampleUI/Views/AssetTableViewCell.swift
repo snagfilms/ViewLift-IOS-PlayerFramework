@@ -26,7 +26,9 @@ class AssetTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        #if os(iOS)
         setupDarkModeSupport()
+        #endif
         setupUI()
     }
 
@@ -34,6 +36,7 @@ class AssetTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    #if os(iOS)
     // MARK: - Dark Mode Support
     
     private func setupDarkModeSupport() {
@@ -46,7 +49,6 @@ class AssetTableViewCell: UITableViewCell {
         selectedView.backgroundColor = .systemGray4
         selectedBackgroundView = selectedView
     }
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
@@ -63,6 +65,53 @@ class AssetTableViewCell: UITableViewCell {
         subtitleLabel.textColor = .secondaryLabel
         separatorView.backgroundColor = UIColor.separator.withAlphaComponent(0.6)
     }
+#endif
+
+#if os(tvOS)
+    // MARK: - tvOS Focus Handling
+    
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        
+        coordinator.addCoordinatedAnimations {
+            if self.isFocused {
+                // Cell is focused - apply focused state
+//                self.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+                self.layer.shadowColor = UIColor.black.cgColor
+                self.layer.shadowOffset = CGSize(width: 0, height: 10)
+                self.layer.shadowOpacity = 0.3
+                self.layer.shadowRadius = 15
+                
+                // Apply focus background color
+                self.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+                self.contentView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+                
+                // Update text colors for focused state
+                self.titleLabel.textColor = .black
+                self.subtitleLabel.textColor = UIColor.black.withAlphaComponent(0.8)
+                self.leftIndexLabel.textColor = .systemBlue
+            } else {
+                // Cell is unfocused - revert to normal state
+//                self.transform = .identity
+                self.layer.shadowOpacity = 0
+                
+                // Remove focus background color
+                self.backgroundColor = .clear
+                self.contentView.backgroundColor = .clear
+                
+                // Revert text colors
+                self.titleLabel.textColor = .white
+                self.subtitleLabel.textColor = UIColor.white.withAlphaComponent(0.8)
+                self.leftIndexLabel.textColor = .systemBlue
+            }
+        }
+    }
+    
+    override var canBecomeFocused: Bool {
+        return true
+    }
+#endif
+
 
     private func setupUI() {
         leftIndexLabel.textColor = .systemBlue
@@ -80,6 +129,9 @@ class AssetTableViewCell: UITableViewCell {
        titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
        subtitleLabel.font = UIFont.systemFont(ofSize: 28)
        infoButton.isHidden = true
+        titleLabel.textColor = .white
+        subtitleLabel.textColor = UIColor.white.withAlphaComponent(0.8)
+        leftIndexLabel.textColor = .systemBlue
        #else
        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
        subtitleLabel.font = UIFont.systemFont(ofSize: 14)
