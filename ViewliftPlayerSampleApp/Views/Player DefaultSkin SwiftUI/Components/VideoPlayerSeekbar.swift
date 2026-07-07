@@ -114,16 +114,23 @@ struct VideoPlayerSeekbar: View {
                                     .fill(cueColor)
                                     .frame(width: config.cueWidth, height: config.cueHeight)
                                     .offset(x: cuePosition)
+                                    // Never animate cue markers on the per-second DVR heartbeat.
+                                    // Otherwise the progress-fill's easeInOut expansion pulses
+                                    // (and the red fill flashes) over the white cue points.
+                                    .animation(nil, value: viewModel.playerState.currentTime)
                             } else {
                                 Rectangle()
                                     .fill(cueColor)
                                     .frame(width: config.cueWidth, height: config.cueHeight)
                                     .offset(x: cuePosition)
+                                    .animation(nil, value: viewModel.playerState.currentTime)
                             }
                         }
                     }
 
-                    // Chapter drag-preview bubble
+                    // Chapter drag-preview bubble. Kept topmost so it is never covered by
+                    // the thumb or, once the containing controls layer is raised, by the
+                    // center play/pause controls it can overlap in the compact player.
                     if isDragging, let title = viewModel.activeChapterDragTitle, !title.isEmpty {
                         dragPreviewForSeekbar(
                             title: title,
@@ -131,6 +138,7 @@ struct VideoPlayerSeekbar: View {
                             thumbSize: thumbSize,
                             trackWidth: trackWidth
                         )
+                        .zIndex(1)
                     }
 
                     // Draggable thumb
@@ -182,7 +190,10 @@ struct VideoPlayerSeekbar: View {
             .padding(.bottom, 6 * iconScale)
         }
         .frame(alignment: .center)
-        .animation(.easeInOut, value: viewModel.playerState.currentTime)
+        // No blanket implicit animation on the seekbar: keying easeInOut on currentTime made
+        // the progress-fill expand with an animation on every per-second DVR heartbeat, which
+        // visually pulsed the red fill over the white chapter cue markers ("blinking"). The
+        // playhead/progress now snap per tick, matching the SDK's built-in skin behaviour.
     }
     
     private func seekGesture(trackWidth: CGFloat, thumbSize: CGFloat) -> some Gesture {
@@ -210,7 +221,11 @@ struct VideoPlayerSeekbar: View {
                 let clampedPosition = max(0, min(finalPosition, trackWidth - thumbSize))
                 let progress = clampedPosition / (trackWidth - thumbSize)
                 let finalTime = min(100, max(0, Double(progress * 100)))
-
+                if viewModel.playerControlsType == .dvrControls, finalTime <= 0 {
+                    viewModel.sliderEndedTracking(time: finalTime + 0.3)
+                } else {
+                    viewModel.sliderEndedTracking(time: finalTime)
+                }
                 viewModel.playerState.currentTime = finalTime
                 viewModel.sliderEndedTracking(time: finalTime)
                 viewModel.clearActiveChapterDragTitle()

@@ -56,6 +56,12 @@ struct PlayerControlsOverlay: View {
                 
             } else {
                 VStack(spacing: 0) {
+                    Spacer()
+                    centerPlayButton
+                    Spacer()
+                }
+
+                VStack(spacing: 0) {
                     // Top Controls
                     topControls
                     
@@ -66,12 +72,11 @@ struct PlayerControlsOverlay: View {
                 }
                 .padding(.horizontal, isLandscape ? 15 : 15)
                 .padding(.vertical, isLandscape ? 20 : 15)
-                
-                VStack(spacing: 0) {
-                    Spacer()
-                    centerPlayButton
-                    Spacer()
-                }
+                // Keep the top/bottom controls (which host the seekbar and its chapter
+                // drag-preview bubble) above the center play controls, so the bubble stays
+                // in front when it overlaps them in the compact player. The center controls
+                // remain tappable through the transparent spacer in the middle of this layer.
+                .zIndex(1)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

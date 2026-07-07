@@ -209,7 +209,7 @@ class PlayerControlsViewModel: ObservableObject {
         delegate?.sliderEndedTracking(time: time / 100)
         sentSliderBeginTracking = false
     }
-    
+
     func seekToLiveTapped() {
         delegate?.seekToLive()
     }
@@ -303,7 +303,7 @@ extension PlayerControlsViewModel {
     
     func updateTimeLabel(totalTime: Double, currentTime: Double) {
         if playerControlsConfig.isDVREnabled {
-            if totalTime > 3 {
+            if totalTime > 8 {
                 updateTimeLabel(text: "-\(formatTime(totalTime))")
                 setLiveButtonText(text: "GO LIVE")
             } else {
@@ -427,7 +427,7 @@ extension PlayerControlsViewModel {
 /// window for the drag-preview bubble.  The `endTime` is computed according to
 /// `ChapterCueConfig.showChapterTitleTillCuePoint` just as the SDK does in
 /// `resolvedChapterSegmentEndTime`.
-private struct ChapterDisplaySegment {
+private struct ChapterDisplaySegment: Equatable {
     let startTime: Double
     let endTime: Double
     let label: String
@@ -455,47 +455,61 @@ extension PlayerControlsViewModel {
     ///   - origLengths: `ChapterSegment.origLength` values aligned with `cuePoints` by index.
     ///   - cueConfig: Visual and behavioural configuration for cue markers.
     func setChapterCuePoints(
-        cuePoints: [Double],
-        duration: TimeInterval,
-        labels: [String] = [],
-        origLengths: [Double] = [],
-        cueConfig: VLPlayer.ChapterCueConfig = VLPlayer.ChapterCueConfig()
-    ) {
-        guard duration > 0 else {
-            chapterCuePoints = []
-            chapterDuration = .zero
-            chapterDisplaySegments = []
-            chapterCueConfig = cueConfig
-            return
-        }
+            cuePoints: [Double],
+            duration: TimeInterval,
+            labels: [String] = [],
+            origLengths: [Double] = [],
+            cueConfig: VLPlayer.ChapterCueConfig = VLPlayer.ChapterCueConfig()
+        ) {
+            guard duration > 0 else {
+                // Only publish the cleared state when it actually differs, so a transient
+                // zero-duration tick doesn't fire objectWillChange (and re-render the seekbar)
+                // when the markers are already empty.
+                guard !chapterCuePoints.isEmpty || chapterDuration != .zero || !chapterDisplaySegments.isEmpty else { return }
+                chapterCuePoints = []
+                chapterDuration = .zero
+                chapterDisplaySegments = []
+                chapterCueConfig = cueConfig
+                return
+            }
 
-        let filtered = cuePoints
-            .filter { $0.isFinite && $0 >= 0 && $0 <= duration }
-            .sorted()
-        chapterCuePoints = filtered
-        chapterDuration = duration
-        chapterCueConfig = cueConfig
+            let filtered = cuePoints
+                .filter { $0.isFinite && $0 >= 0 && $0 <= duration }
+                .sorted()
 
-        chapterDisplaySegments = filtered.enumerated().map { index, cueTime in
-            let label = index < labels.count ? labels[index] : ""
-            let nextStartTime = (index + 1 < filtered.count) ? filtered[index + 1] : duration
+            let newSegments = filtered.enumerated().map { index, cueTime -> ChapterDisplaySegment in
+                let label = index < labels.count ? labels[index] : ""
+                let nextStartTime = (index + 1 < filtered.count) ? filtered[index + 1] : duration
 
-            let endTime: Double
-            if cueConfig.showChapterTitleTillCuePoint {
-                let origLength = index < origLengths.count ? origLengths[index] : 0
-                if origLength.isFinite && origLength > 0 {
-                    // endTime = mappedStartTime + origLength, clamped to window — matches SDK.
-                    endTime = min(cueTime + origLength, duration)
-                } else {
-                    endTime = nextStartTime
-                }
-            } else {
-                endTime = nextStartTime
-            }
+                let endTime: Double
+                if cueConfig.showChapterTitleTillCuePoint {
+                    let origLength = index < origLengths.count ? origLengths[index] : 0
+                    if origLength.isFinite && origLength > 0 {
+                        // endTime = mappedStartTime + origLength, clamped to window — matches SDK.
+                        endTime = min(cueTime + origLength, duration)
+                    } else {
+                        endTime = nextStartTime
+                    }
+                } else {
+                    endTime = nextStartTime
+                }
 
-            return ChapterDisplaySegment(startTime: cueTime, endTime: endTime, label: label)
-        }
-    }
+                return ChapterDisplaySegment(startTime: cueTime, endTime: endTime, label: label)
+            }
+
+            // The DVR-window validation runs every second, but the in-window cue set usually
+            // doesn't change. Skip publishing when nothing changed so the seekbar re-renders
+            // its chapter markers only when a cue is actually added/removed. (The thumb still
+            // updates every second via playerState.currentTime, independently of this.)
+            guard filtered != chapterCuePoints
+                || duration != chapterDuration
+                || newSegments != chapterDisplaySegments else { return }
+
+            chapterCuePoints = filtered
+            chapterDuration = duration
+            chapterCueConfig = cueConfig
+            chapterDisplaySegments = newSegments
+        }
 
     /// Updates the drag-preview bubble title to the chapter whose window contains `sliderValue`.
     /// Mirrors the SDK's `updateActiveChapterDragTitle` using the pre-computed `ChapterDisplaySegment`.
