@@ -99,6 +99,8 @@ protocol ChapteringHosting: UIViewController {
     var playerContainerView: UIView { get }
     var testButton: UIButton { get }
     var isFullScreen: Bool { get }
+    var useCustomThemeControls: Bool { get }
+    func applyChapteringFeatureConfiguration(chapteringEnabled: Bool, useCustomThemeControls: Bool)
     #endif
 }
 
@@ -349,6 +351,47 @@ private enum ChapteringTimeEntry {
     static let placeholder = "HH:mm"
 }
 
+/// Two SwiftUI toggles (styled like `WatchHistoryView`) for the tvOS chaptering panel:
+/// one enables/disables chaptering, the other switches the controls skin
+/// (On = `.customTheme`, Off = `.custom`). Any change calls `onChange` with both values.
+private struct ChapteringFeatureTogglesView: View {
+    @State var chapteringEnabled: Bool
+    @State var useCustomThemeControls: Bool
+    let onChange: (_ chapteringEnabled: Bool, _ useCustomThemeControls: Bool) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            HStack {
+                Text("Chaptering enable")
+                    .font(.system(size: 22))
+                    .foregroundColor(.primary)
+
+                Toggle("", isOn: $chapteringEnabled)
+                    .labelsHidden()
+                    .tint(.green)
+                    .onChange(of: chapteringEnabled) { newValue in
+                        onChange(newValue, useCustomThemeControls)
+                    }
+                    .foregroundColor(.primary)
+            }
+
+            HStack {
+                Text("Custom controls")
+                    .font(.system(size: 22))
+                    .foregroundColor(.primary)
+
+                Toggle("", isOn: $useCustomThemeControls)
+                    .labelsHidden()
+                    .tint(.green)
+                    .onChange(of: useCustomThemeControls) { newValue in
+                        onChange(chapteringEnabled, newValue)
+                    }
+                    .foregroundColor(.primary)
+            }
+        }
+    }
+}
+
 extension ChapteringHosting {
 
     /// App-model cue points for `VLCustomPlayerControlsView`, which renders the tvOS chapter
@@ -373,7 +416,7 @@ extension ChapteringHosting {
 
         let titleLabel = UILabel()
         titleLabel.text = "Live recap start time"
-        titleLabel.textColor = .black
+        titleLabel.textColor = .label
         titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
 
         let textField = UITextField()
@@ -391,12 +434,37 @@ extension ChapteringHosting {
             self?.applyChapteringTimeEntry()
         }, for: .primaryActionTriggered)
 
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, textField, applyButton])
+        // Toggle 1: enable/disable chaptering cue points.
+        // Toggle 2: choose the controls skin (On = .customTheme, Off = .custom).
+        let togglesView = ChapteringFeatureTogglesView(
+            chapteringEnabled: isChapteringCuePointEnable,
+            useCustomThemeControls: useCustomThemeControls
+        ) { [weak self] chapteringEnabled, useCustomThemeControls in
+            self?.applyChapteringFeatureConfiguration(
+                chapteringEnabled: chapteringEnabled,
+                useCustomThemeControls: useCustomThemeControls
+            )
+        }
+        let togglesHost = UIHostingController(rootView: togglesView)
+        togglesHost.view.backgroundColor = .clear
+        togglesHost.view.translatesAutoresizingMaskIntoConstraints = false
+        addChild(togglesHost)
+        togglesHost.didMove(toParent: self)
+
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, textField, applyButton, togglesHost.view])
         stackView.axis = .vertical
         stackView.spacing = 20
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isHidden = isFullScreen
+        stackView.backgroundColor = UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(white: 0.15, alpha: 1.0)
+                : UIColor(white: 0.95, alpha: 1.0)
+        }
+        stackView.layer.cornerRadius = 12
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 24, bottom: 20, trailing: 24)
         view.addSubview(stackView)
 
         // Position the fields in the middle of the gap between the player view

@@ -50,6 +50,7 @@ class PlayerViewController_tvOS: UIViewController {
     var hideControls: Bool = false
     var muteEnabled: Bool = false
     var isChapteringCuePointEnable: Bool = true
+    var useCustomThemeControls: Bool = true
     var isGuestUser: Bool = false
     var videoPlayerControlsView: VLCustomPlayerControlsView?
     var customPaywallView: CustomPaywallView?
@@ -99,7 +100,7 @@ class PlayerViewController_tvOS: UIViewController {
     // Initial setup for the view and player
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        view.backgroundColor = .tvOSAdaptiveBackground
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
         setupConstraints()
@@ -242,13 +243,12 @@ class PlayerViewController_tvOS: UIViewController {
                     .flatMap { $0["planDetails"] as? [[String: Any]] ?? [] }
                     .flatMap { $0["channelIds"] as? [String] ?? [] }
                 self?.handlePlayerSetupCompletion(playerView: playerView, hasTVE: hasTVE, channelIds: channelIds)
-                
-                // Add watch history view after player is set up (only if not in full screen)
-                if self?.isFullScreen == false {
-                    if self?.watchHistoryView == nil {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            self?.addWatchHistoryView()
-                        }
+                let isDVRContent = (self?.isLiveVideo() ?? false) && (self?.isDVREnabled() ?? false)
+                if isDVRContent {
+                    self?.setupChapteringTimeEntry()
+                } else if self?.isFullScreen == false, self?.watchHistoryView == nil {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self?.addWatchHistoryView()
                     }
                 }
             }
@@ -465,7 +465,7 @@ class PlayerViewController_tvOS: UIViewController {
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: .disabled,
-                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: .customTheme),
+                                                 playerControlsViewConfiguration: getPlayerControlsViewConfiguration(type: useCustomThemeControls ? .customTheme : .custom),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isServerSideAdTrackingEnabled: true,
                                                  isChapteringCuePointEnable: isChapteringCuePointEnable,
@@ -719,9 +719,19 @@ extension PlayerViewController_tvOS: ChapteringHosting{
             testButton.heightAnchor.constraint(equalTo: playerContainerView.heightAnchor)
         ])
         testButton.isHidden = isFullScreen
-        setupChapteringTimeEntry()
     }
-    
+
+    /// `getPlayerFeaturesSupported()` during setup.
+    func applyChapteringFeatureConfiguration(chapteringEnabled: Bool, useCustomThemeControls: Bool) {
+        isChapteringCuePointEnable = chapteringEnabled
+        self.useCustomThemeControls = useCustomThemeControls
+        if chapteringEnabled, chapterCuePointSegments.isEmpty {
+            chapterCuePointSegments = loadChapterSegmentsFromJSON()
+        }
+        vlPlayer?.destroy()
+        Task { [weak self] in await self?.loadPlayerView() }
+    }
+
     @objc private func closeTapped() {
         
         debugPrint("closeTapped")

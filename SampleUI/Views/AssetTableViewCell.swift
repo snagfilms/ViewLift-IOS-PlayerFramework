@@ -86,7 +86,6 @@ class AssetTableViewCell: UITableViewCell {
                 self.backgroundColor = UIColor.white.withAlphaComponent(0.1)
                 self.contentView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
                 
-                // Update text colors for focused state
                 self.titleLabel.textColor = .black
                 self.subtitleLabel.textColor = UIColor.black.withAlphaComponent(0.8)
                 self.leftIndexLabel.textColor = .systemBlue
@@ -99,9 +98,9 @@ class AssetTableViewCell: UITableViewCell {
                 self.backgroundColor = .clear
                 self.contentView.backgroundColor = .clear
                 
-                // Revert text colors
-                self.titleLabel.textColor = .white
-                self.subtitleLabel.textColor = UIColor.white.withAlphaComponent(0.8)
+                // Revert to semantic text colors (adapt to Light/Dark mode).
+                self.titleLabel.textColor = .label
+                self.subtitleLabel.textColor = .secondaryLabel
                 self.leftIndexLabel.textColor = .systemBlue
             }
         }
@@ -129,9 +128,8 @@ class AssetTableViewCell: UITableViewCell {
        titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
        subtitleLabel.font = UIFont.systemFont(ofSize: 28)
        infoButton.isHidden = true
-        titleLabel.textColor = .white
-        subtitleLabel.textColor = UIColor.white.withAlphaComponent(0.8)
-        leftIndexLabel.textColor = .systemBlue
+       backgroundColor = .clear
+       contentView.backgroundColor = .clear
        #else
        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
        subtitleLabel.font = UIFont.systemFont(ofSize: 14)

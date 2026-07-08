@@ -39,7 +39,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         #if os(iOS)
         setupDarkModeSupport()
         #else
-        view.backgroundColor = .black
+        view.backgroundColor = .tvOSAdaptiveBackground
         #endif
        
         
@@ -169,7 +169,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         #if os(iOS)
         headerView.backgroundColor = .systemBackground
         #else
-        headerView.backgroundColor = .black
+        headerView.backgroundColor = .tvOSAdaptiveBackground
         #endif
         view.addSubview(headerView)
         
@@ -222,11 +222,9 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         titleLabel.text = "Assets"
         titleLabel.font = .boldSystemFont(ofSize: titleLabelFontSize)
         titleLabel.textAlignment = .center
-        #if os(iOS)
+        // `.label` adapts to the appearance (dark text in Light mode, light text in Dark)
+        // and is available on both iOS and tvOS.
         titleLabel.textColor = .label
-        #else
-        titleLabel.textColor = .white
-        #endif
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(titleLabel)
         
@@ -266,7 +264,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.backgroundColor = .systemBackground
         tableView.separatorColor = .separator
         #else
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = .tvOSAdaptiveBackground
         #endif
         
         view.addSubview(tableView)
@@ -623,3 +621,11 @@ extension AssetListViewController{
         
     }
 }
+
+#if os(tvOS)
+extension UIColor {
+    static var tvOSAdaptiveBackground: UIColor {
+        UIColor { traits in traits.userInterfaceStyle == .dark ? .black : .white }
+    }
+}
+#endif
