@@ -33,6 +33,24 @@ import SwiftUI
     static let defaultAdUrl = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/simid&description_url=https%3A%2F%2Fdevelopers.google.com%2Finteractive-media-ads&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator="
 }
 
+/// Describes the playback content type used to drive control visibility.
+enum PlayerContentType {
+    case vod
+    case live
+    case dvr
+
+    /// Maps the raw streaming flags to a concrete content type.
+    init(isLive: Bool, isDVR: Bool) {
+        if !isLive {
+            self = .vod
+        } else if isDVR {
+            self = .dvr
+        } else {
+            self = .live
+        }
+    }
+}
+
 /// Main view controller for player screen on iOS
 class PlayerViewController_iOS: UIViewController {
     /// Player configuration options
@@ -46,6 +64,7 @@ class PlayerViewController_iOS: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var chapterButton: UIButton!
+    @IBOutlet weak var historyToggleButton: UIButton!
     @IBOutlet var debugLogView: UITextView!
     @IBOutlet private weak var addNextButton: UIButton!
     @IBOutlet private weak var playNextButton: UIButton!
@@ -63,6 +82,9 @@ class PlayerViewController_iOS: UIViewController {
     /// Controls whether chaptering (Live Moments + SDK chaptering cue points) is active
     var isChapterButtonAction: Bool = false
     var isChapteringCuePointEnable: Bool = true
+    /// Player controls configuration selected by the user in the chaptering popup. Drives
+    /// which `playerControlsViewConfiguration` is passed to the SDK feature-support builder.
+    var selectedPlayerControlsConfiguration: PlayerControlsConfigurationOption = .custom
     lazy var chapterCuePointSegments: [VLPlayer.ChapteringCuePoint] = loadChapterSegmentsFromJSON()
     var entitlementData: VLPlayer.EntitlementData?
     var drmConfig: VLPlayer.DRMConfig?
@@ -286,6 +308,42 @@ class PlayerViewController_iOS: UIViewController {
         }
     }
     
+    /// Adjusts the chaptering and watch-history controls based on the content type.
+    /// - VOD: hides the Chapters button and shows the Watch History view.
+    /// - DVR/Live: hides the Watch History view and shows the Chapters button.
+    func updateControlsForContentType(_ contentType: PlayerContentType) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            switch contentType {
+            case .vod:
+                self.showWatchHistoryControls()
+            case .live, .dvr:
+                self.showChapterControls()
+            }
+        }
+    }
+
+    /// Configures the UI for VOD content: Watch History visible, chaptering hidden.
+    private func showWatchHistoryControls() {
+        chapterButton.isHidden = true
+        historyToggleButton.isHidden = false
+        isChapterButtonAction = false
+        disableChaptering()
+        updateChapterButtonAppearance()
+        watchHistoryVisibility = true
+        if !isFullscreen {
+            addWatchHistoryView()
+        }
+    }
+
+    /// Configures the UI for DVR/Live content: chaptering visible, Watch History hidden.
+    private func showChapterControls() {
+        chapterButton.isHidden = false
+        historyToggleButton.isHidden = true
+        watchHistoryVisibility = false
+        removeWatchHistoryView()
+    }
+
     /// Handles watch history switch
     @objc private func watchHistorySwitchToggled() {
         if self.watchHistoryVisibility == true {
@@ -391,9 +449,33 @@ class PlayerViewController_iOS: UIViewController {
     }
 }
 
+// MARK: - Player Controls Configuration Mapping
+extension PlayerControlsConfigurationOption {
+    /// Maps the user-facing chaptering selection onto the view controller's internal
+    /// player configuration used by `getPlayerControlsViewConfiguration(type:)`.
+    var configuration: PlayerViewController_iOS.Configuration {
+        switch self {
+        case .custom:
+            return .custom
+        case .customTheme:
+            return .customTheme
+        }
+    }
+}
+
 // MARK: - Player Setup
 extension PlayerViewController_iOS {
     
+    /// Rebuilds the player so the newly selected controls configuration takes effect
+    /// immediately. Reuses the same teardown/reload path as other config changes; the
+    /// re-anchored cue points are carried into the reload via `getPlayerFeaturesSupported()`.
+    func reloadPlayerForSelectedControlsConfiguration() {
+        cleanupResources()
+        Task { [weak self] in
+            await self?.loadPlayerView()
+        }
+    }
+
     /// Loads and configures the player view
     func loadPlayerView() async {
         
@@ -423,9 +505,9 @@ extension PlayerViewController_iOS {
         }else{
             vlPlayer = VLPlayer(playerType: .default)
         }
-        if isChapterButtonAction {
-            configureSDKChapterSegments()
-        }
+//        if isChapterButtonAction {
+//            configureSDKChapterSegments()
+//        }
         // Select playback source type based on user option
         let playbackSourceType: VLPlayer.PlaybackSourceType
         if isPlayingFromURL(){
@@ -446,7 +528,11 @@ extension PlayerViewController_iOS {
             
             
             playbackSourceType = .directStream(playbackConfig)
-            
+
+            let isLive = self.streamConfig?.isLive ?? false
+            let isDVR = self.streamConfig?.isDVR ?? false
+            updateControlsForContentType(PlayerContentType(isLive: isLive, isDVR: isDVR))
+
         } else {
             let adobePassPayload = try? AppDelegate.shared.adobePlayerTempPass[self.channelkey]?.getTempToken() ?? nil
             
@@ -516,6 +602,15 @@ extension PlayerViewController_iOS {
                     hasTVE: hasTVE,
                     channelIds: channelIds
                 )
+
+                // Re-apply the chaptering config to the freshly loaded player so the built-in
+                // (.customTheme) skin honours `showChapterTitleTillCuePoint`. Feature support
+                // carries the cue points but not the cue config, which must be set explicitly.
+                if self?.isChapterButtonAction == true {
+                    DispatchQueue.main.async {
+                        self?.configureSDKChapterSegments()
+                    }
+                }
                 
                 if let video = contentResponse?["video"] as? [String: Any] {
                     let title = (video["title"] as? String) ?? ""
@@ -530,6 +625,7 @@ extension PlayerViewController_iOS {
                         }
                     }
                     self?.videoPlayerCustomView?.viewModel?.updateSkin(title: title, isLive: isLive, isDVREnabled: isDVR)
+                    self?.updateControlsForContentType(PlayerContentType(isLive: isLive, isDVR: isDVR))
                 }
                 
                 
@@ -739,7 +835,7 @@ extension PlayerViewController_iOS {
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
-                                                 playerControlsViewConfiguration: self.getPlayerControlsViewConfiguration(type: .custom),
+                                                 playerControlsViewConfiguration: self.getPlayerControlsViewConfiguration(type: selectedPlayerControlsConfiguration.configuration),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: false,
                                                  isCustomAdViewEnabled: enableCustomAdUI,

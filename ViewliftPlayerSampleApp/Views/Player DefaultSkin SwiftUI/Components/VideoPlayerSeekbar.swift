@@ -222,7 +222,7 @@ struct VideoPlayerSeekbar: View {
                 let progress = clampedPosition / (trackWidth - thumbSize)
                 let finalTime = min(100, max(0, Double(progress * 100)))
                 if viewModel.playerControlsType == .dvrControls, finalTime <= 0 {
-                    viewModel.sliderEndedTracking(time: finalTime + 0.3)
+                    viewModel.sliderEndedTracking(time: finalTime + 0.4)
                 } else {
                     viewModel.sliderEndedTracking(time: finalTime)
                 }

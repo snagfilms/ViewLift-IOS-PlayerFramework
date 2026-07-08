@@ -93,7 +93,14 @@ protocol ChapteringHosting: UIViewController {
     var isChapterButtonAction: Bool { get set }
     var liveMomentsHostingController: UIHostingController<LiveMomentsTabsView>? { get set }
     var playerContainerView: UIView { get }
+    /// The player controls configuration the user picks in the chaptering popup. The host
+    /// reads this back in its feature-support builder so the selection drives which
+    /// `playerControlsViewConfiguration` is applied.
+    var selectedPlayerControlsConfiguration: PlayerControlsConfigurationOption { get set }
     func updateChapterButtonAppearance()
+    /// Tears down and rebuilds the player so a newly selected controls configuration is
+    /// applied instantly. Implemented by the host since only it owns the player lifecycle.
+    func reloadPlayerForSelectedControlsConfiguration()
     #elseif os(tvOS)
     var videoPlayerControlsView: VLCustomPlayerControlsView? { get }
     var playerContainerView: UIView { get }
@@ -192,6 +199,24 @@ extension ChapteringHosting {
 // MARK: - iOS-specific chaptering UI
 
 #if os(iOS)
+/// Player controls configuration options a user can pick from the chaptering popup.
+/// Kept independent of the host's internal configuration enum so the shared chaptering
+/// layer stays decoupled from any single view controller (Dependency Inversion).
+enum PlayerControlsConfigurationOption: CaseIterable {
+    case custom
+    case customTheme
+
+    /// User-facing title shown in the selection control.
+    var title: String {
+        switch self {
+        case .custom:
+            return "Custom"
+        case .customTheme:
+            return "Custom Theme"
+        }
+    }
+}
+
 extension ChapteringHosting {
 
     var chapterCueConfig: VLPlayer.ChapterCueConfig {
@@ -216,7 +241,7 @@ extension ChapteringHosting {
 
         let alert = UIAlertController(
             title: "Stream Start Time (UTC)",
-            message: "Enter today's live-stream start time in UTC (HH:MM).",
+            message: "Enter today's live-stream start time in UTC (HH:MM).\n\nSelect the player controls configuration to apply.\n\n",
             preferredStyle: .alert
         )
 
@@ -226,8 +251,22 @@ extension ChapteringHosting {
             textField.clearButtonMode = .whileEditing
         }
 
-        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self, weak alert] _ in
+        let configurationControl = makePlayerControlsConfigurationControl()
+        alert.view.addSubview(configurationControl)
+        NSLayoutConstraint.activate([
+            configurationControl.leadingAnchor.constraint(equalTo: alert.view.leadingAnchor, constant: 16),
+            configurationControl.trailingAnchor.constraint(equalTo: alert.view.trailingAnchor, constant: -16),
+            configurationControl.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -140)
+        ])
+
+        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self, weak alert, weak configurationControl] _ in
             guard let self = self else { return }
+            let previousConfiguration = self.selectedPlayerControlsConfiguration
+            if let selectedIndex = configurationControl?.selectedSegmentIndex,
+               PlayerControlsConfigurationOption.allCases.indices.contains(selectedIndex) {
+                self.selectedPlayerControlsConfiguration = PlayerControlsConfigurationOption.allCases[selectedIndex]
+            }
+            let didChangeConfiguration = previousConfiguration != self.selectedPlayerControlsConfiguration
             guard let text = alert?.textFields?.first?.text,
                   let baseDate = self.todayDate(preservingTimeFrom: text) else {
                 self.presentChapteringAlert(title: "Invalid Time", message: "Please enter a valid time in HH:MM (UTC) format.")
@@ -241,12 +280,29 @@ extension ChapteringHosting {
             self.isChapterButtonAction = true
             self.updateChapterButtonAppearance()
             self.setupLiveMomentsSection()
-            self.configureSDKChapterSegments()
+            // A controls-configuration change requires a fresh player so the new controls
+            // view is built from the updated feature support; otherwise just push the
+            // re-anchored cue points to the existing player.
+            if didChangeConfiguration {
+                self.reloadPlayerForSelectedControlsConfiguration()
+            } else {
+                self.configureSDKChapterSegments()
+            }
         }
 
         alert.addAction(applyAction)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
+    }
+
+    /// Builds the segmented control that lets the user pick between the available player
+    /// controls configurations, pre-selecting the currently stored option.
+    private func makePlayerControlsConfigurationControl() -> UISegmentedControl {
+        let control = UISegmentedControl(items: PlayerControlsConfigurationOption.allCases.map { $0.title })
+        control.translatesAutoresizingMaskIntoConstraints = false
+        control.selectedSegmentIndex = PlayerControlsConfigurationOption.allCases
+            .firstIndex(of: selectedPlayerControlsConfiguration) ?? 0
+        return control
     }
 
     /// Disables SDK chapter cues and removes the Live Moments panel.
