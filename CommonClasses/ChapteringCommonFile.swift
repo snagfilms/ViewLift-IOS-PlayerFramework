@@ -538,7 +538,6 @@ extension ChapteringHosting {
 
     /// Keeps the time-entry control visible only in the non-full-screen player.
     func updateChapteringTimeEntryVisibility() {
-        guard isChapteringCuePointEnable else { return }
         view.viewWithTag(ChapteringTimeEntry.textFieldTag)?.superview?.isHidden = isFullScreen
     }
 
