@@ -189,21 +189,41 @@ extension PlayerViewController_iOS: VideoPlaybackDelegate {
     /// behaviour) appear on the custom seekbar just as they do on the `.customTheme` built-in skin.
     func chapterCuePointsUpdated(cuePoints: [NSNumber], duration: Double, playerTag: String) {
         guard isChapterButtonAction, let viewModel = videoPlayerCustomView?.viewModel else { return }
-        let doubleCuePoints = cuePoints.map { $0.doubleValue }
-        // Sorted segment labels and origLengths correspond to sorted cue points by index.
-        // We take only as many entries as there are cue points so the arrays stay aligned.
-        let sortedSegments = chapterCuePointSegments
-            .sorted { $0.startTime < $1.startTime }
-            .prefix(cuePoints.count)
-        let sortedLabels = sortedSegments.map { $0.label }
-        let sortedOrigLengths = sortedSegments.map { $0.origLength }
+
+        // Pair every cue position with its OWN label/origLength using the SDK's in-window
+        // mapping, which resolves each surviving cue point together with its window position.
+        //
+        // The previous approach aligned labels to cue points purely by array index — taking a
+        // `prefix` of the earliest N segments (sorted by startTime). That only holds while the
+        // in-window set happens to be the first N segments. As soon as the DVR/live window drops
+        // the earliest cues (e.g. after entering a stream-start time in the chaptering popup, or
+        // as the live edge advances) the remaining in-window cues are no longer the first N, so
+        // each drag title shifted onto the wrong cue point. The mismatch only affected the
+        // `.custom` skin, which re-derives the drag title here; the built-in `.customTheme` skin
+        // resolves titles inside the SDK and therefore stayed correct.
+        let sortedPositions = cuePoints.map { $0.doubleValue }.sorted()
+        let sortedMappings = (vlPlayer?.chapteringCuePointsInCurrentWindow() ?? [])
+            .sorted { $0.windowPosition < $1.windowPosition }
+
+        let resolvedLabels: [String]
+        let resolvedOrigLengths: [Double]
+        if sortedMappings.count == sortedPositions.count {
+            resolvedLabels = sortedMappings.map { $0.cuePoint.label }
+            resolvedOrigLengths = sortedMappings.map { $0.cuePoint.origLength ?? 0 }
+        } else {
+            // No reliable 1:1 pairing available this tick — draw the markers without drag
+            // titles rather than risk labelling them with the wrong chapter.
+            resolvedLabels = []
+            resolvedOrigLengths = []
+        }
+
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             viewModel.setChapterCuePoints(
-                cuePoints: doubleCuePoints,
+                cuePoints: sortedPositions,
                 duration: duration,
-                labels: sortedLabels,
-                origLengths: sortedOrigLengths as! [Double],
+                labels: resolvedLabels,
+                origLengths: resolvedOrigLengths,
                 cueConfig: self.chapterCueConfig
             )
         }

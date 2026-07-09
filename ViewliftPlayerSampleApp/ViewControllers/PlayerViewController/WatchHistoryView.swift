@@ -58,6 +58,29 @@ struct WatchHistoryView: View {
     @Binding var watchedTime: Int
     @Binding var watchedPercentage: Double
     @Binding var doneWatching: Bool
+
+    // MARK: - Init
+    /// Creates the view, seeding the editable fields with the caller's last-applied
+    /// configuration so user-entered values persist across view re-creations
+    /// (e.g. when the player reloads after tapping Apply).
+    init(
+        isEnabled: Bool = true,
+        interval: String = "30",
+        threshold: String = "95",
+        resume: String = "0",
+        watchedTime: Binding<Int>,
+        watchedPercentage: Binding<Double>,
+        doneWatching: Binding<Bool>
+    ) {
+        _isEnabled = State(initialValue: isEnabled)
+        _interval = State(initialValue: interval)
+        _threshold = State(initialValue: threshold)
+        _resume = State(initialValue: resume)
+        _watchedTime = watchedTime
+        _watchedPercentage = watchedPercentage
+        _doneWatching = doneWatching
+    }
+
     var iOS: Bool {
         #if os(iOS)
         return true

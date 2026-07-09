@@ -1050,8 +1050,14 @@ extension PlayerViewController_iOS: WatchHistoryDelegate {
         // Remove existing watch history view if present
         removeWatchHistoryView()
         
-        // Create SwiftUI view with bindings using Binding.constant or custom Binding
+        // Create SwiftUI view with bindings using Binding.constant or custom Binding.
+        // Seed the editable fields with the last-applied configuration so user-entered
+        // values are retained when the view is re-created (e.g. after tapping Apply).
         var watchHistoryView = WatchHistoryView(
+            isEnabled: self.watchHistoryEnabled,
+            interval: String(self.watchHistoryInterval),
+            threshold: String(Int(self.watchHistoryThreshold)),
+            resume: String(self.watchedTime),
             watchedTime: Binding(
                 get: { self.watchedTime },
                 set: { self.watchedTime = $0 }
