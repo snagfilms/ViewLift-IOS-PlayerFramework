@@ -158,7 +158,7 @@ class PlayerViewController_tvOS: UIViewController {
         let playerLicenseKey: String? = ""
         let analyticsLicenseKey: String? = ""
         let userId: String? = nil
-        let vlBeaconURL = ""
+        let vlBeaconURL = VLAuthentication.sharedInstance.bootStrapConfig?.playerBeaconUrl ?? ""
         // Initialize player with license if available
 
         if let playerLicenseKey = playerLicenseKey, !playerLicenseKey.isEmpty {
