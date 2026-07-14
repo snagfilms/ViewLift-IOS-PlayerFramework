@@ -14,7 +14,7 @@ let package = Package(
         .package(url: "https://github.com/efremidze/VisualEffectView.git", exact: "5.0.8"),
         .package(url: "https://github.com/M3U8Kit/M3U8Parser.git", exact: "1.0.2"),
         .package(url: "https://github.com/bitmovin/player-ios.git", exact: "3.90.0"),
-        .package(url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git", exact: "3.2.6"),
+        .package(url: "https://github.com/snagfilms/iOS-VLBeacon-SPM.git", branch: "Develop"),
         .package(url: "https://github.com/muxinc/mux-stats-sdk-avplayer", exact: "4.0.0"),
         .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git", from: "3.28.0"),
         .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-tvos.git", from: "4.16.0")
