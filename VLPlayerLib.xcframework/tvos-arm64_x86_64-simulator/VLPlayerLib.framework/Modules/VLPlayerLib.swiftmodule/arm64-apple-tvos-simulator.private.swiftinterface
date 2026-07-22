@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)
-// swift-module-flags: -target arm64-apple-tvos14.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name VLPlayerLib
+// swift-module-flags: -target arm64-apple-tvos15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name VLPlayerLib
 // swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.4
 import AVFoundation
 import AVKit
@@ -1049,6 +1049,9 @@ public struct AnalyticsModel {
   #if compiler(>=5.3) && $NonescapableTypes
   public init(contentID: Swift.String? = nil, contentTitle: Swift.String? = nil, episodeNumber: Swift.String? = nil, seasonNumber: Swift.String? = nil, seriesTitle: Swift.String? = nil, seriesID: Swift.String? = nil, fastChannelID: Swift.String? = nil, fastProgramID: Swift.String? = nil, playlistID: Swift.String? = nil, playlistName: Swift.String? = nil, mediaType: Swift.String? = nil, isDVREnabled: Swift.Bool? = nil, isDRMProtected: Swift.Bool? = nil, DRMLicenseToken: Swift.String? = nil, DRMLicenseURL: Swift.String? = nil, epgCategory: Swift.String? = nil, epgChannelTitle: Swift.String? = nil, epgChannelID: Swift.String? = nil, epgProgramTitle: Swift.String? = nil, contentGerne: Swift.String? = nil, contentGernes: [Swift.String]? = nil, contentCategory: Swift.String? = nil, contentURL: Swift.String? = nil, contentDuration: Swift.Double? = nil, contentImageURL: Swift.String? = nil, contentYear: Swift.String? = nil, contentPath: Swift.String? = nil, mediaPlaySource: Swift.String? = nil, isContentFree: Swift.Bool? = nil, singerName: Swift.String? = nil, actorName: Swift.String? = nil, directorName: Swift.String? = nil, musicDirectorName: Swift.String? = nil, userID: Swift.String? = nil, userSubscriptionType: Swift.String? = nil, d2cType: VLPlayerLib.userSubscriptionType? = nil, applicationVersion: Swift.String? = nil, applicationBrand: Swift.String? = nil, assetProvider: Swift.String? = nil, networkType: Swift.String? = nil, bitrate: Swift.Double? = nil, frameRate: Swift.Double? = nil, subtitles: [Swift.String]? = nil, affiliate: Swift.String? = nil, encodingProfiles: [Swift.String]? = nil, DAIStreamURL: Swift.String? = nil, utmSource: Swift.String? = nil, customerKey: Swift.String? = nil)
   #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public mutating func updateContentTitleId(_ contentTitle: Swift.String?, contentID: Swift.String?)
+  #endif
 }
 public struct SSAIBeaconTracking {
   public func triggerAnalytics(eventType: VLPlayerLib.VLPlayer.AdsEventType, beaconUrls: [Swift.String], disableAdTrackingForBeacon: Swift.Bool)
@@ -1105,6 +1108,7 @@ public struct SSAIBeaconTracking {
     case download
     case vertical
     case leaderboard(type: VLPlayerLib.VLPlayer.LeaderboardPlayerControls)
+    case trailer
     public static func == (a: VLPlayerLib.VLPlayer.PlayerDisplayType, b: VLPlayerLib.VLPlayer.PlayerDisplayType) -> Swift.Bool
   }
   public enum LeaderboardPlayerControls {
