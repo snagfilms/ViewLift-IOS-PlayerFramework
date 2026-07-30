@@ -47840,6 +47840,113 @@
             ]
           },
           {
+            "kind": "Function",
+            "name": "getEntitlementData",
+            "printedName": "getEntitlementData(from:channelId:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "VLPlayerLib.VLPlayer.EntitlementData?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "EntitlementData",
+                    "printedName": "VLPlayerLib.VLPlayer.EntitlementData",
+                    "usr": "s:11VLPlayerLib0A0C15EntitlementDataV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11VLPlayerLib0A0C18getEntitlementData4from9channelIdAC0dE0VSg10Foundation0E0V_SSSgtFZ",
+            "mangledName": "$s11VLPlayerLib0A0C18getEntitlementData4from9channelIdAC0dE0VSg10Foundation0E0V_SSSgtFZ",
+            "moduleName": "VLPlayerLib",
+            "static": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getEntitlementData",
+            "printedName": "getEntitlementData(from:channelId:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "EntitlementData",
+                "printedName": "VLPlayerLib.VLPlayer.EntitlementData",
+                "usr": "s:11VLPlayerLib0A0C15EntitlementDataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : AnyObject]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "AnyObject"
+                  }
+                ],
+                "usr": "s:SD"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11VLPlayerLib0A0C18getEntitlementData4from9channelIdAC0dE0VSDySSyXlG_SSSgtFZ",
+            "mangledName": "$s11VLPlayerLib0A0C18getEntitlementData4from9channelIdAC0dE0VSDySSyXlG_SSSgtFZ",
+            "moduleName": "VLPlayerLib",
+            "static": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
             "kind": "TypeDecl",
             "name": "TVEErrorCode",
             "printedName": "TVEErrorCode",
@@ -53858,9 +53965,8 @@
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
+                "name": "Void",
+                "printedName": "()"
               },
               {
                 "kind": "TypeNominal",
@@ -53870,12 +53976,11 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:11VLPlayerLib0A0C13seekToChapter9startTimeSbSd_tF",
-            "mangledName": "$s11VLPlayerLib0A0C13seekToChapter9startTimeSbSd_tF",
+            "usr": "s:11VLPlayerLib0A0C13seekToChapter9startTimeySd_tF",
+            "mangledName": "$s11VLPlayerLib0A0C13seekToChapter9startTimeySd_tF",
             "moduleName": "VLPlayerLib",
             "declAttributes": [
-              "AccessControl",
-              "DiscardableResult"
+              "AccessControl"
             ],
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
@@ -57089,7 +57194,7 @@
               {
                 "kind": "Constructor",
                 "name": "init",
-                "printedName": "init(appMacrosList:fullScreenOnly:verticalVideo:isCustomLoaderAdded:shouldStartPictureInPictureInline:autoPlayEnabled:loopVideoPlayback:mutePlayback:shouldPlayVideoInitially:clientSideAdTrackingDetails:customPlayerControlsColor:supportsChromeCast:chromecastCustomReceiver:playerResponseRequired:showPlayerControlAlways:playAudioOnly:epgSupportModel:tapToPause:controlsVisibility:payWallConfiguration:playerControlsViewConfiguration:autoPlayConfiguration:isTrickPlayEnabled:isCustomAdViewEnabled:isServerSideAdTrackingEnabled:isChapteringCuePointEnable:chapteringCuePoints:easeLiveEnabled:hideAdsView:preGameStartTime:vlBeacon:featureFlags:playerSSEConfig:watchHistoryResumeTime:watchHistoryTimeInterval:watchHistoryEnabled:parentalControl:isHarmonicTrackingEnabled:)",
+                "printedName": "init(appMacrosList:fullScreenOnly:verticalVideo:isCustomLoaderAdded:shouldStartPictureInPictureInline:autoPlayEnabled:loopVideoPlayback:mutePlayback:shouldPlayVideoInitially:clientSideAdTrackingDetails:chromecastCustomReceiver:playerResponseRequired:showPlayerControlAlways:playAudioOnly:epgSupportModel:tapToPause:controlsVisibility:payWallConfiguration:playerControlsViewConfiguration:autoPlayConfiguration:isTrickPlayEnabled:isCustomAdViewEnabled:isServerSideAdTrackingEnabled:isChapteringCuePointEnable:chapteringCuePoints:easeLiveEnabled:hideAdsView:preGameStartTime:vlBeacon:featureFlags:playerSSEConfig:watchHistoryResumeTime:watchHistoryTimeInterval:watchHistoryEnabled:parentalControl:isHarmonicTrackingEnabled:)",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -57204,27 +57309,6 @@
                     ],
                     "hasDefaultArg": true,
                     "usr": "s:Sq"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "VLPlayerLib.PlayerControlsColor?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "PlayerControlsColor",
-                        "printedName": "VLPlayerLib.PlayerControlsColor",
-                        "usr": "s:11VLPlayerLib19PlayerControlsColorV"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "hasDefaultArg": true,
-                    "usr": "s:Sb"
                   },
                   {
                     "kind": "TypeNominal",
@@ -57506,8 +57590,8 @@
                   }
                 ],
                 "declKind": "Constructor",
-                "usr": "s:11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline15autoPlayEnabled04loopL8Playback04muteZ00qwL9Initially27clientSideAdTrackingDetails25customPlayerControlsColor18supportsChromeCast010chromecastN8Receiver22playerResponseRequired23showPlayerControlAlways09playAudioJ015epgSupportModel10tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration0vW13Configuration0m5TrickwX00mn6AdViewX00m20ServerSideAdTrackingX00M24ChapteringCuePointEnable19chapteringCuePoints08easeLiveX011hideAdsView07preGameR4Time8vlBeacon12featureFlags15playerSSEConfig22watchHistoryResumeTime24watchHistoryTimeInterval012watchHistoryX015parentalControl0m16HarmonicTrackingX0AESDyS2SGSg_S2bSgS6bAC29VLClientSideAdTrackingDetailsVSgAA19PlayerControlsColorVSgSbSSSgS2bA18_AA15EPGSupportModelCSgSbAC18ControlsVisibilityOAC20PayWallConfigurationOSgAC31PlayerControlsViewConfigurationOSgAC04AutoW13ConfigurationOSgS4bSayAC18ChapteringCuePointVGS2bSdSg08VLBeaconB08VLBeaconCSgAA0C5FlagsVAC15PlayerSSEConfigOA43_SiSgSbAA17VLParentalControlVSgSbtcfc",
-                "mangledName": "$s11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline15autoPlayEnabled04loopL8Playback04muteZ00qwL9Initially27clientSideAdTrackingDetails25customPlayerControlsColor18supportsChromeCast010chromecastN8Receiver22playerResponseRequired23showPlayerControlAlways09playAudioJ015epgSupportModel10tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration0vW13Configuration0m5TrickwX00mn6AdViewX00m20ServerSideAdTrackingX00M24ChapteringCuePointEnable19chapteringCuePoints08easeLiveX011hideAdsView07preGameR4Time8vlBeacon12featureFlags15playerSSEConfig22watchHistoryResumeTime24watchHistoryTimeInterval012watchHistoryX015parentalControl0m16HarmonicTrackingX0AESDyS2SGSg_S2bSgS6bAC29VLClientSideAdTrackingDetailsVSgAA19PlayerControlsColorVSgSbSSSgS2bA18_AA15EPGSupportModelCSgSbAC18ControlsVisibilityOAC20PayWallConfigurationOSgAC31PlayerControlsViewConfigurationOSgAC04AutoW13ConfigurationOSgS4bSayAC18ChapteringCuePointVGS2bSdSg08VLBeaconB08VLBeaconCSgAA0C5FlagsVAC15PlayerSSEConfigOA43_SiSgSbAA17VLParentalControlVSgSbtcfc",
+                "usr": "s:11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline15autoPlayEnabled04loopL8Playback04muteZ00qwL9Initially27clientSideAdTrackingDetails010chromecastN8Receiver22playerResponseRequired23showPlayerControlAlways09playAudioJ015epgSupportModel10tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration0vW13Configuration0m5TrickwX00mn6AdViewX00m20ServerSideAdTrackingX00M24ChapteringCuePointEnable19chapteringCuePoints08easeLiveX011hideAdsView07preGameR4Time8vlBeacon12featureFlags15playerSSEConfig22watchHistoryResumeTime24watchHistoryTimeInterval012watchHistoryX015parentalControl0m16HarmonicTrackingX0AESDyS2SGSg_S2bSgS6bAC29VLClientSideAdTrackingDetailsVSgSSSgS2bA16_AA15EPGSupportModelCSgSbAC18ControlsVisibilityOAC20PayWallConfigurationOSgAC31PlayerControlsViewConfigurationOSgAC04AutoW13ConfigurationOSgS4bSayAC18ChapteringCuePointVGS2bSdSg08VLBeaconB08VLBeaconCSgAA0C5FlagsVAC15PlayerSSEConfigOA38_SiSgSbAA17VLParentalControlVSgSbtcfc",
+                "mangledName": "$s11VLPlayerLib0A0C0A16FeatureSupportedV13appMacrosList14fullScreenOnly13verticalVideo19isCustomLoaderAdded020shouldStartPictureInS6Inline15autoPlayEnabled04loopL8Playback04muteZ00qwL9Initially27clientSideAdTrackingDetails010chromecastN8Receiver22playerResponseRequired23showPlayerControlAlways09playAudioJ015epgSupportModel10tapToPause18controlsVisibility20payWallConfiguration31playerControlsViewConfiguration0vW13Configuration0m5TrickwX00mn6AdViewX00m20ServerSideAdTrackingX00M24ChapteringCuePointEnable19chapteringCuePoints08easeLiveX011hideAdsView07preGameR4Time8vlBeacon12featureFlags15playerSSEConfig22watchHistoryResumeTime24watchHistoryTimeInterval012watchHistoryX015parentalControl0m16HarmonicTrackingX0AESDyS2SGSg_S2bSgS6bAC29VLClientSideAdTrackingDetailsVSgSSSgS2bA16_AA15EPGSupportModelCSgSbAC18ControlsVisibilityOAC20PayWallConfigurationOSgAC31PlayerControlsViewConfigurationOSgAC04AutoW13ConfigurationOSgS4bSayAC18ChapteringCuePointVGS2bSdSg08VLBeaconB08VLBeaconCSgAA0C5FlagsVAC15PlayerSSEConfigOA38_SiSgSbAA17VLParentalControlVSgSbtcfc",
                 "moduleName": "VLPlayerLib",
                 "declAttributes": [
                   "AccessControl"
@@ -82833,6 +82917,122 @@
               "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "placementId",
+            "printedName": "placementId",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib15SSAIAvailableAdV11placementIdSSSgvp",
+            "mangledName": "$s11VLPlayerLib15SSAIAvailableAdV11placementIdSSSgvp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib15SSAIAvailableAdV11placementIdSSSgvg",
+                "mangledName": "$s11VLPlayerLib15SSAIAvailableAdV11placementIdSSSgvg",
+                "moduleName": "VLPlayerLib",
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "campaignId",
+            "printedName": "campaignId",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:11VLPlayerLib15SSAIAvailableAdV10campaignIdSSSgvp",
+            "mangledName": "$s11VLPlayerLib15SSAIAvailableAdV10campaignIdSSSgvp",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:11VLPlayerLib15SSAIAvailableAdV10campaignIdSSSgvg",
+                "mangledName": "$s11VLPlayerLib15SSAIAvailableAdV10campaignIdSSSgvg",
+                "moduleName": "VLPlayerLib",
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
           }
         ],
         "declKind": "Struct",
@@ -92146,7 +92346,7 @@
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Network Class\/CustomVideoController+ContentFetch.swift",
       "kind": "BooleanLiteral",
-      "offset": 10841,
+      "offset": 11579,
       "length": 5,
       "value": "false"
     },
@@ -92601,434 +92801,427 @@
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18784,
+      "offset": 19462,
       "length": 25,
       "value": "\"CANT_ACCESS_TVE_CONTENT\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18853,
+      "offset": 19531,
       "length": 33,
       "value": "\"SVOD_TVE_SUBSCRIPTION_NOT_FOUND\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18916,
+      "offset": 19594,
       "length": 18,
       "value": "\"TVE_NO_USER_INFO\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 18974,
+      "offset": 19652,
       "length": 28,
       "value": "\"TVE_SUBSCRIPTION_NOT_FOUND\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 23058,
+      "offset": 23736,
       "length": 2,
       "value": "14"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 23145,
+      "offset": 23823,
       "length": 2,
       "value": "32"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 23220,
+      "offset": 23898,
       "length": 2,
       "value": "12"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 23271,
+      "offset": 23949,
       "length": 17,
       "value": "\"Event starts in\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 23321,
+      "offset": 23999,
       "length": 13,
       "value": "\"Event Ended\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 23370,
+      "offset": 24048,
       "length": 38,
       "value": "\"This content is no longer available.\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 25172,
+      "offset": 25850,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 28748,
+      "offset": 29426,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 39473,
+      "offset": 40151,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 43450,
+      "offset": 44128,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 43886,
+      "offset": 44564,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44043,
+      "offset": 44721,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 44094,
+      "offset": 44772,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Dictionary",
-      "offset": 44223,
+      "offset": 44901,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 52915,
+      "offset": 53490,
       "length": 3,
       "value": "\"1\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 53988,
+      "offset": 54563,
       "length": 3,
       "value": "\"1\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 54532,
+      "offset": 55107,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 54573,
+      "offset": 55148,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 54718,
+      "offset": 55293,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 64899,
+      "offset": 65352,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 64955,
+      "offset": 65408,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Dictionary",
-      "offset": 65084,
+      "offset": 65537,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 65132,
+      "offset": 65585,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 65181,
+      "offset": 65634,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 65235,
+      "offset": 65688,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 65303,
+      "offset": 65756,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 65353,
+      "offset": 65806,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 65404,
+      "offset": 65857,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 65451,
+      "offset": 65904,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 65511,
+      "offset": 65964,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 65717,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
-      "kind": "BooleanLiteral",
-      "offset": 65835,
+      "offset": 66167,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 65893,
+      "offset": 66225,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 65943,
+      "offset": 66275,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 66049,
+      "offset": 66381,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 66408,
+      "offset": 66740,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 66465,
+      "offset": 66797,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 66530,
+      "offset": 66862,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 66591,
+      "offset": 66923,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Array",
-      "offset": 66662,
+      "offset": 66994,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 66710,
+      "offset": 67042,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 66757,
+      "offset": 67089,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 67049,
+      "offset": 67381,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 67105,
+      "offset": 67437,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 67156,
+      "offset": 67488,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 67280,
+      "offset": 67612,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 72086,
+      "offset": 72290,
       "length": 8,
       "value": "\"Paused\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 72118,
+      "offset": 72322,
       "length": 9,
       "value": "\"Playing\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 72161,
+      "offset": 72365,
       "length": 17,
       "value": "\"Playing+Casting\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 72204,
+      "offset": 72408,
       "length": 11,
       "value": "\"Buffering\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 72240,
+      "offset": 72444,
       "length": 10,
       "value": "\"Complete\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 72272,
+      "offset": 72476,
       "length": 7,
       "value": "\"Error\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 72309,
+      "offset": 72513,
       "length": 15,
       "value": "\"Advertisement\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 72348,
+      "offset": 72552,
       "length": 9,
       "value": "\"Stalled\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 72381,
+      "offset": 72585,
       "length": 9,
       "value": "\"Stopped\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 72411,
+      "offset": 72615,
       "length": 6,
       "value": "\"None\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 80731,
+      "offset": 80935,
       "length": 10,
       "value": "\"MMMd jmm\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 87833,
+      "offset": 88037,
       "length": 5,
       "value": "false"
     },
@@ -93335,169 +93528,183 @@
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
+      "kind": "Array",
+      "offset": 20986,
+      "length": 25,
+      "value": "[\"placementId\", \"plcmnt\"]"
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
+      "kind": "Array",
+      "offset": 21057,
+      "length": 23,
+      "value": "[\"campaignId\", \"cmpgn\"]"
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 21969,
+      "offset": 22992,
       "length": 19,
       "value": "\"durationInSeconds\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 22022,
+      "offset": 23045,
       "length": 20,
       "value": "\"startTimeInSeconds\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 22076,
+      "offset": 23099,
       "length": 11,
       "value": "\"eventType\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 25525,
+      "offset": 26548,
       "length": 19,
       "value": "\"durationInSeconds\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 25575,
+      "offset": 26598,
       "length": 20,
       "value": "\"startTimeInSeconds\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 27405,
+      "offset": 28428,
       "length": 23,
       "value": "\"click_fallback_images\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 27459,
+      "offset": 28482,
       "length": 12,
       "value": "\"click_data\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 27493,
+      "offset": 28516,
       "length": 12,
       "value": "\"x_position\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 27527,
+      "offset": 28550,
       "length": 12,
       "value": "\"y_position\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 27568,
+      "offset": 28591,
       "length": 10,
       "value": "\"duration\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 27613,
+      "offset": 28636,
       "length": 8,
       "value": "\"offset\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 27649,
+      "offset": 28672,
       "length": 10,
       "value": "\"alt_text\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 27684,
+      "offset": 28707,
       "length": 10,
       "value": "\"resource\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 27723,
+      "offset": 28746,
       "length": 15,
       "value": "\"creative_type\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 29274,
+      "offset": 30297,
       "length": 15,
       "value": "\"creative_type\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 29314,
+      "offset": 30337,
       "length": 10,
       "value": "\"resource\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "StringLiteral",
-      "offset": 29348,
+      "offset": 30371,
       "length": 10,
       "value": "\"alt_text\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 34588,
+      "offset": 35611,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 34599,
+      "offset": 35622,
       "length": 10,
       "value": "1"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 34619,
+      "offset": 35642,
       "length": 13,
       "value": "2"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 34642,
+      "offset": 35665,
       "length": 8,
       "value": "3"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 34660,
+      "offset": 35683,
       "length": 13,
       "value": "4"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 34683,
+      "offset": 35706,
       "length": 8,
       "value": "5"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/MSN\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/SDKManager\/SSAIDFPTracking\/Model\/VLSSAIModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 34701,
+      "offset": 35724,
       "length": 8,
       "value": "6"
     },

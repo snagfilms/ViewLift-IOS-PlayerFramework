@@ -1361,6 +1361,12 @@ public struct SSAIBeaconTracking {
     public init(playerObject: VLPlayerLib.PlayerObject?, isSuccess: Swift.Bool?, error: VLPlayerLib.VLError?, playerResponse: VLPlayerLib.VLPlayerResponse?, contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?)
     #endif
   }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public class func getEntitlementData(from data: Foundation.Data, channelId: Swift.String? = nil) -> VLPlayerLib.VLPlayer.EntitlementData?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public class func getEntitlementData(from json: Swift.Dictionary<Swift.String, Swift.AnyObject>, channelId: Swift.String? = nil) -> VLPlayerLib.VLPlayer.EntitlementData
+  #endif
   public enum TVEErrorCode : Swift.String {
     case cantAccessTVEContent
     case svodTVESubscriptionNotFound
@@ -1476,7 +1482,7 @@ extension VLPlayerLib.VLPlayer {
   }
   public struct VLPlayerFeatureSupported {
     #if compiler(>=5.3) && $NonescapableTypes
-    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, mutePlayback: Swift.Bool = false, shouldPlayVideoInitially: Swift.Bool = true, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, customPlayerControlsColor: VLPlayerLib.PlayerControlsColor?, supportsChromeCast: Swift.Bool = false, chromecastCustomReceiver: Swift.String? = nil, playerResponseRequired: Swift.Bool = true, showPlayerControlAlways: Swift.Bool = false, playAudioOnly: Swift.Bool? = false, epgSupportModel: VLPlayerLib.EPGSupportModel? = nil, tapToPause: Swift.Bool = false, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, isChapteringCuePointEnable: Swift.Bool = false, chapteringCuePoints: [VLPlayerLib.VLPlayer.ChapteringCuePoint] = [], easeLiveEnabled: Swift.Bool = false, hideAdsView: Swift.Bool = false, preGameStartTime: Swift.Double? = nil, vlBeacon: VLBeaconLib.VLBeacon? = nil, featureFlags: VLPlayerLib.FeatureFlags = FeatureFlags(), playerSSEConfig: VLPlayerLib.VLPlayer.PlayerSSEConfig = .disabled, watchHistoryResumeTime: Swift.Double? = 0, watchHistoryTimeInterval: Swift.Int? = 0, watchHistoryEnabled: Swift.Bool = false, parentalControl: VLPlayerLib.VLParentalControl? = nil, isHarmonicTrackingEnabled: Swift.Bool = false)
+    public init(appMacrosList: [Swift.String : Swift.String]? = [:], fullScreenOnly: Swift.Bool = false, verticalVideo: Swift.Bool? = false, isCustomLoaderAdded: Swift.Bool = false, shouldStartPictureInPictureInline: Swift.Bool = false, autoPlayEnabled: Swift.Bool = true, loopVideoPlayback: Swift.Bool = false, mutePlayback: Swift.Bool = false, shouldPlayVideoInitially: Swift.Bool = true, clientSideAdTrackingDetails: VLPlayerLib.VLPlayer.VLClientSideAdTrackingDetails? = nil, chromecastCustomReceiver: Swift.String? = nil, playerResponseRequired: Swift.Bool = true, showPlayerControlAlways: Swift.Bool = false, playAudioOnly: Swift.Bool? = false, epgSupportModel: VLPlayerLib.EPGSupportModel? = nil, tapToPause: Swift.Bool = false, controlsVisibility: VLPlayerLib.VLPlayer.ControlsVisibility = .auto, payWallConfiguration: VLPlayerLib.VLPlayer.PayWallConfiguration? = nil, playerControlsViewConfiguration: VLPlayerLib.VLPlayer.PlayerControlsViewConfiguration? = nil, autoPlayConfiguration: VLPlayerLib.VLPlayer.AutoPlayConfiguration? = nil, isTrickPlayEnabled: Swift.Bool = false, isCustomAdViewEnabled: Swift.Bool = false, isServerSideAdTrackingEnabled: Swift.Bool = true, isChapteringCuePointEnable: Swift.Bool = false, chapteringCuePoints: [VLPlayerLib.VLPlayer.ChapteringCuePoint] = [], easeLiveEnabled: Swift.Bool = false, hideAdsView: Swift.Bool = false, preGameStartTime: Swift.Double? = nil, vlBeacon: VLBeaconLib.VLBeacon? = nil, featureFlags: VLPlayerLib.FeatureFlags = FeatureFlags(), playerSSEConfig: VLPlayerLib.VLPlayer.PlayerSSEConfig = .disabled, watchHistoryResumeTime: Swift.Double? = 0, watchHistoryTimeInterval: Swift.Int? = 0, watchHistoryEnabled: Swift.Bool = false, parentalControl: VLPlayerLib.VLParentalControl? = nil, isHarmonicTrackingEnabled: Swift.Bool = false)
     #endif
   }
   public struct VLClientSideAdTrackingDetails {
@@ -1701,6 +1707,18 @@ public struct SSAIAvailableAd : Swift.Decodable, Swift.Equatable {
   #endif
   public init(from decoder: any Swift.Decoder) throws
   public static func == (lhs: VLPlayerLib.SSAIAvailableAd, rhs: VLPlayerLib.SSAIAvailableAd) -> Swift.Bool
+}
+extension VLPlayerLib.SSAIAvailableAd {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var placementId: Swift.String? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var campaignId: Swift.String? {
+    get
+  }
+  #endif
 }
 public struct TrackingEvent : Swift.Decodable, Swift.Equatable {
   public var beaconUrls: Swift.Array<Swift.String>?
