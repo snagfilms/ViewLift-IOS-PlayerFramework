@@ -621,6 +621,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 /// </ul>
 - (void)seekToSeconds:(double)seconds;
 - (void)checkVideoPlayStateWithState:(BOOL)state;
+- (NSString * _Nullable)getStreamID SWIFT_WARN_UNUSED_RESULT;
 - (void)seekToSeconds:(double)seconds completion:(void (^ _Nullable)(void))completion;
 - (double)getCurrentPlaybackTime SWIFT_WARN_UNUSED_RESULT;
 - (double)getChapterEndTimeWithCurrentTime:(double)currentTime SWIFT_WARN_UNUSED_RESULT;
@@ -1689,6 +1690,7 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 /// </ul>
 - (void)seekToSeconds:(double)seconds;
 - (void)checkVideoPlayStateWithState:(BOOL)state;
+- (NSString * _Nullable)getStreamID SWIFT_WARN_UNUSED_RESULT;
 - (void)seekToSeconds:(double)seconds completion:(void (^ _Nullable)(void))completion;
 - (double)getCurrentPlaybackTime SWIFT_WARN_UNUSED_RESULT;
 - (double)getChapterEndTimeWithCurrentTime:(double)currentTime SWIFT_WARN_UNUSED_RESULT;
