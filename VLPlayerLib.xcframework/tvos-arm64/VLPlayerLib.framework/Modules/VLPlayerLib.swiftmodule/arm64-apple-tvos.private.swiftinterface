@@ -417,6 +417,7 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func goFullScreen(_ isFullScreen: Swift.Bool)
   @objc dynamic open func removeFullScreen(withoutAnyUpdate: Swift.Bool = false)
   @objc dynamic open func seekTo(seconds: Swift.Double)
+  @objc dynamic open func getStreamID() -> Swift.String?
   @objc dynamic open func seekTo(seconds: Swift.Double, completion: (() -> Swift.Void)? = nil)
   @objc dynamic open func getCurrentPlaybackTime() -> Swift.Double
   @objc dynamic open func getChapterEndTime(currentTime: Swift.Double) -> Swift.Double
