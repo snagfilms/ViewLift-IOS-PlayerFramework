@@ -52,6 +52,7 @@ protocol PlayerControlsDelegate :AnyObject {
     /// Wall-clock date of the live edge for DVR chaptering. Returning `nil` lets the
     /// controls fall back to the device clock.
     func getLiveEdgeDate() -> Date?
+    func seekToChapter(startTime: Double)
 }
 
 extension PlayerControlsDelegate {
@@ -789,17 +790,14 @@ extension VLCustomPlayerControlsView{
             let type = press.type
             switch type{
             case .playPause:
-                self.delegate?.didTogglePlayPause()
                 super.pressesBegan(presses, with: event)
             case .select:
-               
+                self.delegate?.didTogglePlayPause()
                 break
             case .menu:
                
                 break
             default:
- 
-                    
                 super.pressesBegan(presses, with: event)
             }
         }

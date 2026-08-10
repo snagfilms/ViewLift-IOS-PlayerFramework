@@ -243,7 +243,7 @@ extension VLCustomPlayerControlsView {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cuePoints = visibleChapteringCuePoints
         guard cuePoints.indices.contains(indexPath.item) else { return }
-        delegate?.seekTo(seconds: chapteringRelativeOffset(for: cuePoints[indexPath.item]))
+        delegate?.seekToChapter(startTime: chapteringRelativeOffset(for: cuePoints[indexPath.item]))
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -677,13 +677,22 @@ extension PlayerViewController_tvOS: PlayerControlsDelegate {
         }
     }
     
+    func seekToChapter(startTime: Double){
+        guard startTime.isFinite, !startTime.isNaN else {
+            return
+        }
+        vlPlayer?.seekToChapter(startTime: startTime)
+    }
+    
     // Handles play/pause toggle
     func didTogglePlayPause() {
         guard let vlPlayer else { return }
         if vlPlayer.isPlaying() {
             vlPlayer.pause()
+            customPlayerState(isPlaying: false)
         } else {
             vlPlayer.play()
+            customPlayerState(isPlaying: true)
         }
     }
     
