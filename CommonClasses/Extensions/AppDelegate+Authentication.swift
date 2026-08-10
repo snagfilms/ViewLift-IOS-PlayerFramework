@@ -99,26 +99,42 @@ extension AppDelegate {
     }
     
     func setupAnalyticsConfiguration() {
-//        let adobeConfig = AdobeAnalyticsConfig(
-//            reportSuites: "rsid1,rsid2",
-//            trackingServer: "tracking.server.com"
-//        )
-        
-        let comscoreConfig = ComscoreAnalyticsConfig(
-            publisherId: "",
-            enableDebugMode: true
-        )
-        
-        let results = AnalyticsConfigurationBuilder()
-//            .add(adobeConfig)
-            .add(comscoreConfig)
-            .build()
-        
-        // Check results
-        results.forEach { client, success in
-            print("\(client.identifier): \(success ? "✅" : "❌")")
+            let adobeConfig = AdobeAnalyticsConfig(
+                //            reportSuites: "rsid1,rsid2",
+                //            trackingServer: "tracking.server.com"
+                environmentKey: "77ca722dd820/99867d0bb529/launch-a88516d7f021-development"
+            )
+
+            let appName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? "ViewliftPlayerSampleApp"
+            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+
+            let comscoreConfig = ComscoreAnalyticsConfig(
+                publisherId: "40813950",
+                applicationName: appName,
+                playerName: "AVPlayer",
+                playerVersion: appVersion,
+                enableDebugMode: true
+            )
+
+            let results = AnalyticsConfigurationBuilder()
+                .add(adobeConfig)
+                .add(comscoreConfig)
+                .build()
+
+            // Check results
+            results.forEach { client, success in
+                print("\(client.identifier): \(success ? "✅" : "❌")")
+            }
+
+            if results[.comscore] == true {
+                // Bootstrap Comscore synchronously so SCORAnalytics.start() runs before playback events.
+                ComscoreAnalyticsConfigurationHelper.setup(with: comscoreConfig)
+            }
+
+            let enabledClients = results.filter { $0.value }.map { $0.key }
+            VLAnalytics.shared.setupAnalytics(clients: enabledClients, enableDebugLogs: true)
         }
-    }
+
     
     func setupAnalytics() {
         self.setupAnalyticsConfiguration()
