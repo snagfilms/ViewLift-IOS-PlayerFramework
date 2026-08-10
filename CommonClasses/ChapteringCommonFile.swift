@@ -46,6 +46,35 @@ struct ChapteringCuePoint: Codable {
 }
 
 
+// MARK: - Chaptering JSON index lookup
+
+/// Chaptering segments cached in the exact order declared in `chaptering.json` — i.e. before
+/// any sorting or DVR-window filtering applied for display. Kept separate from
+/// `loadChapterSegmentsFromJSON()` (which sorts and maps to the SDK model) so callers can
+/// still resolve a cue point's true position in the source file.
+private let chapteringRawJSONSegments: [ChapteringCuePoint] = {
+    guard let url = Bundle.main.url(forResource: "chaptering", withExtension: "json"),
+          let rawString = try? String(contentsOf: url, encoding: .utf8),
+          let jsonStart = rawString.firstIndex(of: "{"),
+          let data = String(rawString[jsonStart...]).data(using: .utf8) else {
+        return []
+    }
+    do {
+        return try JSONDecoder().decode(ChapteringCuePointResponse.self, from: data).items.segments
+    } catch {
+        debugPrint("Chaptering cue point parse error: \(error)")
+        return []
+    }
+}()
+
+/// Index of the JSON object in `chaptering.json` (its original file order) whose `StartTime`
+/// matches `startTime`. This is the index that should be reported to `logLiveRecapSelection`
+/// so analytics reflect the tapped item's real position in the source data, rather than its
+/// position in a sorted/filtered on-screen list. Returns `0` when no match is found.
+func chapterJSONIndex(forStartTime startTime: Double) -> Int {
+    chapteringRawJSONSegments.firstIndex { $0.startTime == startTime } ?? 0
+}
+
 extension UIViewController{
     func todayDate(preservingTimeFrom timeText: String?) -> Date? {
         guard let timeText = timeText?.trimmingCharacters(in: .whitespaces), !timeText.isEmpty else {
@@ -387,6 +416,7 @@ extension ChapteringHosting {
 
     func playerSeekForLiveMoments(seconds: Double) {
         vlPlayer?.seekToChapter(startTime: seconds)
+        vlPlayer?.logLiveRecapSelection(startTime: seconds, index: chapterJSONIndex(forStartTime: seconds))
     }
 
     private func formatMomentTime(seconds: Double) -> String {
