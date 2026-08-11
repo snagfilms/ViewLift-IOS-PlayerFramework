@@ -7,11 +7,7 @@
 //
 
 import UIKit
-#if os(iOS)
-import VLAuthenticationFramework
-#else
-import VLAuthenticationFramework_tvOS
-#endif
+import VLAuthentication
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

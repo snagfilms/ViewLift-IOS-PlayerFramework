@@ -6,11 +6,7 @@
 //  Copyright © 2025 Viewlift. All rights reserved.
 //
 
-#if os(iOS)
-import VLAuthenticationFramework
-#else
-import VLAuthenticationFramework_tvOS
-#endif
+import VLAuthentication
 import VLAnalyticsLib
 
 extension AnalyticsHelperV2: AuthenticationAnalyticsDelegate {

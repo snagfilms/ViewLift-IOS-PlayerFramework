@@ -6,11 +6,7 @@
 //  Copyright © 2025 Viewlift. All rights reserved.
 //
 import UIKit
-#if os(iOS)
-import VLAuthenticationFramework
-#else
-import VLAuthenticationFramework_tvOS
-#endif
+import VLAuthentication
 import VLAnalyticsLib
 //import Firebase
 
@@ -99,19 +95,20 @@ extension AppDelegate {
     }
     
     func setupAnalyticsConfiguration() {
-//        let adobeConfig = AdobeAnalyticsConfig(
+        let adobeConfig = AdobeAnalyticsConfig(
 //            reportSuites: "rsid1,rsid2",
-//            trackingServer: "tracking.server.com"
-//        )
-        
-        let comscoreConfig = ComscoreAnalyticsConfig(
-            publisherId: "",
-            enableDebugMode: true
+//            trackingServer: "tracking.server.com",
+            environmentKey: "77ca722dd820/99867d0bb529/launch-a88516d7f021-development"
         )
         
+//        let comscoreConfig = ComscoreAnalyticsConfig(
+//            publisherId: "",
+//            enableDebugMode: true
+//        )
+        
         let results = AnalyticsConfigurationBuilder()
-//            .add(adobeConfig)
-            .add(comscoreConfig)
+            .add(adobeConfig)
+//            .add(comscoreConfig)
             .build()
         
         // Check results
@@ -122,11 +119,17 @@ extension AppDelegate {
     
     func setupAnalytics() {
         self.setupAnalyticsConfiguration()
+
+        // Client scenario: host owns Adobe Mobile Core + privacy; VLAnalytics uses hostManaged.
+        VLAnalytics.shared.configureAdobeSDKMode(.hostManaged)
+        
+        AdobeSDKHostBootstrap.initializeIfNeeded { [weak self] in
+            // Fire page tracking only after host configureWith + privacy optedIn.
+            self?.triggerSpashScreenEvent()
+        }
         
         VLAnalytics.shared.setupAnalytics(clients: [.adobe, .comscore], enableDebugLogs: true)
         self.handleAnalyticsConsent()
-        
-        self.triggerSpashScreenEvent()
     }
     
     func handleAnalyticsConsent() {

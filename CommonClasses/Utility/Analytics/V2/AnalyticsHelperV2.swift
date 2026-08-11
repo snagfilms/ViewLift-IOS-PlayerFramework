@@ -10,11 +10,7 @@
 import VLPlayerLib
 import AVKit
 import Foundation
-#if os(iOS)
-import VLAuthenticationFramework
-#else
-import VLAuthenticationFramework_tvOS
-#endif
+import VLAuthentication
 
 final class AnalyticsHelperV2: NSObject {
     // MARK: Singleton
