@@ -1474,6 +1474,7 @@ extension VLPlayerLib.VLPlayer {
       get
     }
     #endif
+    public func contains(time: Swift.Double) -> Swift.Bool
   }
   public struct ChapteringCuePointWindowMapping {
     public let cuePoint: VLPlayerLib.VLPlayer.ChapteringCuePoint

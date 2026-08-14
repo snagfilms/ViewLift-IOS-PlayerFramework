@@ -1139,6 +1139,9 @@ extension VLPlayerLib.VLPlayer {
   #endif
   public func setChapteringCuePoints(_ cuePoints: [VLPlayerLib.VLPlayer.ChapteringCuePoint])
   public func seekToChapter(startTime: Swift.Double)
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func logLiveRecapSelection(startTime: Swift.Double, index: Swift.Int? = nil)
+  #endif
   public func setChapterCueConfig(_ config: VLPlayerLib.VLPlayer.ChapterCueConfig)
   public func chapteringCuePointsInCurrentWindow() -> [VLPlayerLib.VLPlayer.ChapteringCuePointWindowMapping]
   @objc dynamic open func getCurrentPlaybackTime() -> Swift.Double
@@ -1652,6 +1655,7 @@ extension VLPlayerLib.VLPlayer {
       get
     }
     #endif
+    public func contains(time: Swift.Double) -> Swift.Bool
   }
   public struct ChapteringCuePointWindowMapping {
     public let cuePoint: VLPlayerLib.VLPlayer.ChapteringCuePoint
