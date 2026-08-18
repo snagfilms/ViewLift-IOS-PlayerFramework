@@ -385,7 +385,9 @@ extension ChapteringHosting {
                 LiveMomentItem(
                     thumbnailAssetName: "live_moments",
                     title: mapping.cuePoint.label,
-                    startTimeLabel: mapping.cuePoint.displayDateTime ?? formatMomentTime(seconds: mapping.windowPosition),
+                    startTimeLabel: formatMomentTime(
+                        secondsAgo: mapping.windowDuration - mapping.windowPosition
+                    ),
                     seekSeconds: mapping.cuePoint.startTime
                 )
             }
@@ -419,12 +421,15 @@ extension ChapteringHosting {
         vlPlayer?.logLiveRecapSelection(startTime: seconds, index: chapterJSONIndex(forStartTime: seconds))
     }
 
-    private func formatMomentTime(seconds: Double) -> String {
-        let boundedValue = max(0, Int(seconds.rounded()))
-        let hours = boundedValue / 3600
-        let minutes = (boundedValue % 3600) / 60
-        let secs = boundedValue % 60
-        return String(format: "%02d:%02d:%02d", hours, minutes, secs)
+    private func formatMomentTime(secondsAgo: Double) -> String {
+        let elapsedSeconds = max(0, Int(secondsAgo.rounded(.down)))
+        if elapsedSeconds < 60 {
+            return "\(elapsedSeconds)s ago"
+        }
+        if elapsedSeconds < 3_600 {
+            return "\(elapsedSeconds / 60)m ago"
+        }
+        return "\(elapsedSeconds / 3_600)h ago"
     }
 }
 #endif

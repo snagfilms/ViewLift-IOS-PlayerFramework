@@ -22,7 +22,17 @@ extension PlayerViewController_tvOS {
     /// Starts the TVE login flow and routes to the appropriate UI.
     func loginWithTVE() {
         debugPrint("Login with TVE called")
-        
+        Task { @MainActor [weak self] in
+            do {
+                try await AppDelegate.shared.prepareAuthenticationForTVELogin()
+                self?.startTVELogin()
+            } catch {
+                self?.showAlert(message: "Unable to start TV provider login. \(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func startTVELogin() {
         let type = Configuration.custom
         
         switch type {
@@ -90,6 +100,7 @@ extension PlayerViewController_tvOS {
         DispatchQueue.main.async {
             UserManager.shared.userIdentity = userIdentity
             AppDelegate.shared.authorizationToken = userIdentity.authorizationToken
+            VLAuthentication.sharedInstance.authorizationToken = userIdentity.authorizationToken
             
             self.vlPlayer?.destroy()
             self.vlPlayer?.playerVideoAnalyticsDelegate = nil

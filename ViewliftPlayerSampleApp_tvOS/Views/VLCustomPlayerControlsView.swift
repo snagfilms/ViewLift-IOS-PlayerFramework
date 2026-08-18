@@ -129,6 +129,7 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate, UICollecti
     var isChapteringCuePointEnable = false
     var chapteringCuePoints: [ChapteringCuePoint] = []
     var chapteringDuration: TimeInterval = 0
+    private var pendingSliderSeekPosition: TimeInterval?
     // Lives in the skin nib; hidden by default and only shown when chaptering is
     // enabled and cue points exist.
     // Provided by the skin nib. All chapter-collection logic lives in
@@ -235,6 +236,7 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate, UICollecti
         if isChapteringCuePointEnable, isDVRChaptering, duration > 0 {
             timeToSeek = max(timeToSeek, min(1.0, duration))
         }
+        pendingSliderSeekPosition = timeToSeek
         self.delegate?.seekTo(seconds: timeToSeek)
         updateLabelPosition(CGFloat(slider.value))
         if isChapteringCuePointEnable, isDVRChaptering {
@@ -571,6 +573,15 @@ extension VLCustomPlayerControlsView{
     
     func updateCurrentTime(currentTime: Double, totalTime: Double){
         debugPrint("updateCurrentTime currentTime \(currentTime) totalTime \(totalTime)")
+        if sliderView._isTracking {
+            return
+        }
+        if let pendingPosition = pendingSliderSeekPosition {
+            guard abs(currentTime - pendingPosition) <= 1 else {
+                return
+            }
+            pendingSliderSeekPosition = nil
+        }
         updateChapteringCuePointsIfNeeded(duration: totalTime)
         switch currentControlsType {
         case .videoStream:

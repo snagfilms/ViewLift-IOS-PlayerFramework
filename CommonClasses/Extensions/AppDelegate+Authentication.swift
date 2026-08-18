@@ -81,6 +81,41 @@ extension AppDelegate {
             }
         }
     }
+
+    /// Ensures TVE starts with a valid ViewLift token even when the asynchronous
+    /// application-start refresh has not completed yet.
+    func prepareAuthenticationForTVELogin() async throws {
+        let userIdentity = UserManager.shared.userIdentity
+        let currentToken = authorizationToken ?? userIdentity?.authorizationToken
+        let refreshToken = userIdentity?.refreshToken
+
+        let refreshedToken: String?
+        if let currentToken,
+           !currentToken.isEmpty,
+           let refreshToken,
+           !refreshToken.isEmpty {
+            do {
+                refreshedToken = try await VLAuthentication.sharedInstance
+                    .fetchUpdatedAuthToken(refreshToken: refreshToken)?.authorizationToken
+            } catch {
+                // A failed/expired user refresh must not be reused for a new TVE sign-in.
+                refreshedToken = try await VLAuthentication.sharedInstance
+                    .apiToGetAnonymousToken()?.authorizationToken
+            }
+        } else {
+            refreshedToken = try await VLAuthentication.sharedInstance
+                .apiToGetAnonymousToken()?.authorizationToken
+        }
+
+        guard let refreshedToken, !refreshedToken.isEmpty else {
+            throw VLAuthenticationErrorCode.requestFailed(
+                message: "TVE token refresh returned an empty authorization token."
+            )
+        }
+
+        authorizationToken = refreshedToken
+        VLAuthentication.sharedInstance.authorizationToken = refreshedToken
+    }
     
     // Logs out the user and resets authentication tokens
     func logoutUser() async {

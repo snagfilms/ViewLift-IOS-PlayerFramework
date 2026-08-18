@@ -40,6 +40,23 @@ extension VLCustomPlayerControlsView {
         return cuePoint.startTime
     }
 
+    func chapteringRelativeTimeText(for cuePoint: ChapteringCuePoint) -> String {
+        let secondsAgo = max(0, chapteringDuration - chapteringRelativeOffset(for: cuePoint))
+        let totalSeconds = max(0, Int(secondsAgo.rounded(.down)))
+        
+        let hours = totalSeconds / 3_600
+        let minutes = (totalSeconds % 3_600) / 60
+        let seconds = totalSeconds % 60
+        if hours > 0 {
+            return String(format: "%d:%02d:%02dh ago", hours, minutes, seconds)
+        }
+        if minutes > 0 {
+            return String(format: "%02d:%02dm ago", minutes, seconds)
+        }
+        
+        return String(format: "00:%02ds ago", seconds)
+    }
+
     /// Cue points that fall inside the current timeline / DVR window.
     var visibleChapteringCuePoints: [ChapteringCuePoint] {
         guard chapteringDuration > 0 else { return [] }
@@ -203,7 +220,7 @@ extension VLCustomPlayerControlsView {
             chapterCell.configure(
                 label: cuePoint.label,
                 tagText: cuePoint.tagText,
-                formattedTime: cuePoint.displayDateTime ?? chapteringRelativeOffset(for: cuePoint).getTimeInString(),
+                formattedTime: chapteringRelativeTimeText(for: cuePoint),
                 thumbnail: cuePoint.thumbnail,
                 expanded: true
             )
@@ -233,7 +250,7 @@ extension VLCustomPlayerControlsView {
         cell.configure(
             label: cuePoint.label,
             tagText: cuePoint.tagText,
-            formattedTime: cuePoint.displayDateTime ?? chapteringRelativeOffset(for: cuePoint).getTimeInString(),
+            formattedTime: chapteringRelativeTimeText(for: cuePoint),
             thumbnail: cuePoint.thumbnail,
             expanded: true
         )
