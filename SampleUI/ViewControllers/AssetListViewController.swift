@@ -14,9 +14,7 @@ import VLAuthenticationFramework_tvOS
 #endif
 import Kingfisher
 import AppTrackingTransparency
-#if os(iOS) || os(tvOS)
 import VLAnalyticsLib
-#endif
 
 
 class AssetListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -33,9 +31,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     #elseif os(tvOS)
     private let analyticsTrackingButton = UIButton(type: .system)
     #endif
-    #if os(iOS) || os(tvOS)
     private let analyticsTrackingPreferenceKey = "analyticsTrackingIsAllowed"
-    #endif
     
     // MARK: - Data
     
@@ -67,9 +63,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         videoList.nextVideoList?.removeAll()
-#if os(iOS) || os(tvOS)
         setupAnalyticsTrackingToggle()
-#endif
         setupHeader()
         setupTableView()
         assetModels = loadAssetModelsFromFile() ?? []
@@ -115,9 +109,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
 #if os(iOS)
         navigationController?.setNavigationBarHidden(false, animated: animated)
 #endif
-#if os(iOS) || os(tvOS)
         updateAnalyticsTrackingToggleAppearance()
-#endif
         
         // Default: hide both controls
         logoutButton.isHidden = true
@@ -192,7 +184,6 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Header Setup
 
-#if os(iOS) || os(tvOS)
     private func setupAnalyticsTrackingToggle() {
         let isAllowed = UserDefaults.standard.object(forKey: analyticsTrackingPreferenceKey) as? Bool ?? true
 
@@ -250,7 +241,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         analyticsTrackingButton.accessibilityHint = "Press to change analytics tracking"
         #endif
     }
-#endif
+
     
     private func setupHeader() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
