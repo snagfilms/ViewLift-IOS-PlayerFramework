@@ -14,6 +14,9 @@ import VLAuthenticationFramework_tvOS
 #endif
 import Kingfisher
 import AppTrackingTransparency
+#if os(iOS) || os(tvOS)
+import VLAnalyticsLib
+#endif
 
 
 class AssetListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -24,6 +27,15 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     private let logoutButton = UIButton(type: .system)
     private let providerImageView = UIImageView()
     private let titleLabel = UILabel()
+    #if os(iOS)
+    private let analyticsTrackingSwitch = UISwitch()
+    private let analyticsTrackingStatusLabel = UILabel()
+    #elseif os(tvOS)
+    private let analyticsTrackingButton = UIButton(type: .system)
+    #endif
+    #if os(iOS) || os(tvOS)
+    private let analyticsTrackingPreferenceKey = "analyticsTrackingIsAllowed"
+    #endif
     
     // MARK: - Data
     
@@ -31,6 +43,12 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     var entitlementData: VLPlayer.EntitlementData?
     private var assetModels: [AssetModel] = []
     var configurableHeaderView: ConfigurableHeaderView?
+
+    #if os(tvOS)
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        [analyticsTrackingButton, tableView]
+    }
+    #endif
     
     // MARK: - View Lifecycle
     
@@ -49,6 +67,9 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         videoList.nextVideoList?.removeAll()
+#if os(iOS) || os(tvOS)
+        setupAnalyticsTrackingToggle()
+#endif
         setupHeader()
         setupTableView()
         assetModels = loadAssetModelsFromFile() ?? []
@@ -90,6 +111,13 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+#if os(iOS)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+#endif
+#if os(iOS) || os(tvOS)
+        updateAnalyticsTrackingToggleAppearance()
+#endif
         
         // Default: hide both controls
         logoutButton.isHidden = true
@@ -163,6 +191,66 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     // MARK: - Header Setup
+
+#if os(iOS) || os(tvOS)
+    private func setupAnalyticsTrackingToggle() {
+        let isAllowed = UserDefaults.standard.object(forKey: analyticsTrackingPreferenceKey) as? Bool ?? true
+
+        #if os(iOS)
+        analyticsTrackingSwitch.isOn = isAllowed
+        analyticsTrackingSwitch.accessibilityIdentifier = "analyticsTrackingToggle"
+        analyticsTrackingSwitch.addTarget(self, action: #selector(analyticsTrackingToggled), for: .valueChanged)
+
+        analyticsTrackingStatusLabel.font = .preferredFont(forTextStyle: .caption2)
+        analyticsTrackingStatusLabel.adjustsFontForContentSizeCategory = true
+        analyticsTrackingStatusLabel.textAlignment = .right
+
+        let analyticsControl = UIStackView(arrangedSubviews: [analyticsTrackingStatusLabel, analyticsTrackingSwitch])
+        analyticsControl.axis = .horizontal
+        analyticsControl.alignment = .center
+        analyticsControl.spacing = 4
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: analyticsControl)
+        #else
+        analyticsTrackingButton.accessibilityIdentifier = "analyticsTrackingToggle"
+        analyticsTrackingButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        analyticsTrackingButton.addTarget(self, action: #selector(analyticsTrackingToggled), for: .primaryActionTriggered)
+        #endif
+
+        applyAnalyticsTracking(isAllowed: isAllowed)
+    }
+
+    @objc private func analyticsTrackingToggled() {
+        #if os(iOS)
+        applyAnalyticsTracking(isAllowed: analyticsTrackingSwitch.isOn)
+        #else
+        let isAllowed = UserDefaults.standard.object(forKey: analyticsTrackingPreferenceKey) as? Bool ?? true
+        applyAnalyticsTracking(isAllowed: !isAllowed)
+        #endif
+    }
+
+    private func applyAnalyticsTracking(isAllowed: Bool) {
+        UserDefaults.standard.set(isAllowed, forKey: analyticsTrackingPreferenceKey)
+        VLAnalytics.shared.manageAnalyticsTracking(isAllowed: isAllowed)
+        debugPrint("Analytics tracking is now \(isAllowed ? "enabled" : "disabled")")
+        updateAnalyticsTrackingToggleAppearance()
+    }
+
+    private func updateAnalyticsTrackingToggleAppearance() {
+        let isAllowed = UserDefaults.standard.object(forKey: analyticsTrackingPreferenceKey) as? Bool ?? true
+        #if os(iOS)
+        analyticsTrackingSwitch.isOn = isAllowed
+        analyticsTrackingStatusLabel.text = isAllowed ? "Analytics On" : "Analytics Off"
+        analyticsTrackingSwitch.accessibilityLabel = analyticsTrackingStatusLabel.text
+        analyticsTrackingSwitch.accessibilityValue = isAllowed ? "Enabled" : "Disabled"
+        #else
+        let title = isAllowed ? "Analytics On" : "Analytics Off"
+        analyticsTrackingButton.setTitle(title, for: .normal)
+        analyticsTrackingButton.accessibilityLabel = title
+        analyticsTrackingButton.accessibilityValue = isAllowed ? "Enabled" : "Disabled"
+        analyticsTrackingButton.accessibilityHint = "Press to change analytics tracking"
+        #endif
+    }
+#endif
     
     private func setupHeader() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
@@ -198,6 +286,11 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                                action: #selector(logoutTapped),
                                for: .primaryActionTriggered)
         headerView.addSubview(logoutButton)
+
+#if os(tvOS)
+        analyticsTrackingButton.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(analyticsTrackingButton)
+#endif
         
         // --- Status ImageView (left of Logout) ---
         providerImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -229,31 +322,47 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         headerView.addSubview(titleLabel)
         
         // --- Constraints ---
-        NSLayoutConstraint.activate([
+        var constraints: [NSLayoutConstraint] = [
             // Header view
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 50),
-            
+
             // Back button
             backButton.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
             backButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            
+
             // Logout button (right)
             logoutButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
             logoutButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            
-            // Status image (immediately left of Logout)
-            providerImageView.trailingAnchor.constraint(equalTo: logoutButton.leadingAnchor, constant: -8),
-            providerImageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            providerImageView.widthAnchor.constraint(equalToConstant: 200),
-            providerImageView.heightAnchor.constraint(equalToConstant: 112),
-            
+
             // Title label (center)
             titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
             titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+        ]
+
+        // Status image (immediately left of Logout / Analytics button)
+        #if os(tvOS)
+        constraints.append(providerImageView.trailingAnchor.constraint(equalTo: analyticsTrackingButton.leadingAnchor, constant: -8))
+        #else
+        constraints.append(providerImageView.trailingAnchor.constraint(equalTo: logoutButton.leadingAnchor, constant: -8))
+        #endif
+
+        constraints.append(contentsOf: [
+            providerImageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+            providerImageView.widthAnchor.constraint(equalToConstant: 200),
+            providerImageView.heightAnchor.constraint(equalToConstant: 112)
         ])
+
+        NSLayoutConstraint.activate(constraints)
+
+#if os(tvOS)
+        NSLayoutConstraint.activate([
+            analyticsTrackingButton.trailingAnchor.constraint(equalTo: logoutButton.leadingAnchor, constant: -16),
+            analyticsTrackingButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+        ])
+#endif
     }
     
     // MARK: - Table View Setup (unchanged)
@@ -629,3 +738,4 @@ extension UIColor {
     }
 }
 #endif
+
