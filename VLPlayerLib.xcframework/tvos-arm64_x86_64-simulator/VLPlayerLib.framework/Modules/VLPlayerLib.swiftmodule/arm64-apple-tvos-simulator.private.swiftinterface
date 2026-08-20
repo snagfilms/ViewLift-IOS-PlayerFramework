@@ -378,6 +378,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func videoPlayerProgressByEverySecond(currentTime: Swift.Double, totalTime: Swift.Double, playerTag: Swift.String, parsedTimeStamp: Swift.String?)
   #endif
   @objc optional func chapterCuePointsUpdated(cuePoints: [Foundation.NSNumber], duration: Swift.Double, playerTag: Swift.String)
+  @objc optional func chapterScheduleButtonTapped(playerTag: Swift.String)
   @objc optional func videoPlayerProgressOnDefinedInterval(currentTime: Swift.Double, totalTime: Swift.Double, playerTag: Swift.String)
   @objc optional func videoPlaybackError(currentTime: Swift.Double, errorMessage: Swift.String, errorCode: Swift.String, playerTag: Swift.String)
   #if compiler(>=5.3) && $NonescapableTypes

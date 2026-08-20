@@ -676,6 +676,8 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 /// \param playerTag Tag of video player instance.
 ///
 - (void)chapterCuePointsUpdatedWithCuePoints:(NSArray<NSNumber *> * _Nonnull)cuePoints duration:(double)duration playerTag:(NSString * _Nonnull)playerTag;
+/// Called once when the user selects the Schedule button in the chaptering player controls.
+- (void)chapterScheduleButtonTappedWithPlayerTag:(NSString * _Nonnull)playerTag;
 /// important:
 ///
 /// Delgate method - called when on defined interval in seconds
@@ -1573,6 +1575,8 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 /// \param playerTag Tag of video player instance.
 ///
 - (void)chapterCuePointsUpdatedWithCuePoints:(NSArray<NSNumber *> * _Nonnull)cuePoints duration:(double)duration playerTag:(NSString * _Nonnull)playerTag;
+/// Called once when the user selects the Schedule button in the chaptering player controls.
+- (void)chapterScheduleButtonTappedWithPlayerTag:(NSString * _Nonnull)playerTag;
 /// important:
 ///
 /// Delgate method - called when on defined interval in seconds
