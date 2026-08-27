@@ -530,6 +530,20 @@ extension VLCustomPlayerControlsView{
 
 
     @objc func liveButtonTapped(sender: UIButton){
+        let duration = delegate?.getCurrentVideoDuration() ?? chapteringDuration
+        if duration > 0 {
+            // Replace the position recorded while scrubbing so stale progress callbacks
+            // cannot keep the controls at the old DVR offset after jumping to Live.
+            pendingSliderSeekPosition = duration
+        } else {
+            pendingSliderSeekPosition = nil
+        }
+        sliderView.setValue(1.0, animated: true)
+        updateLabelPosition(1.0)
+        if isChapteringCuePointEnable, isDVRChaptering, duration > 0 {
+            elapsedDurationLabel.text = chapteringDVRTimeText(currentTime: duration, totalTime: duration)
+            selectChapteringCuePoint(at: duration)
+        }
         delegate?.seekToLivePosition()
     }
 

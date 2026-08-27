@@ -51,6 +51,8 @@ class PlayerViewController_tvOS: UIViewController {
     var muteEnabled: Bool = false
     var isChapteringCuePointEnable: Bool = true
     var useCustomThemeControls: Bool = true
+    var onChapterScheduleButtonTapped: ((String) -> Void)?
+    var chapterScheduleViewController: UIViewController?
     var isGuestUser: Bool = false
     var videoPlayerControlsView: VLCustomPlayerControlsView?
     var customPaywallView: CustomPaywallView?
@@ -231,7 +233,6 @@ class PlayerViewController_tvOS: UIViewController {
                 if let contentResponse = contentResponse {
                     self?.videoResponse = AnalyticsHelperV2.shared.parseVLVideoResponse(from: contentResponse)
                 }
-                
                 var hasTVE = false
                 
                 if let video = contentResponse?["video"] as? [String: Any],
@@ -461,7 +462,6 @@ class PlayerViewController_tvOS: UIViewController {
                                                  shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
                                                  mutePlayback: self.muteEnabled,
-                                                 customPlayerControlsColor: nil,
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: .disabled,
@@ -481,7 +481,8 @@ class PlayerViewController_tvOS: UIViewController {
         switch type {
         case .customTheme:
             // Configure default player controls view with custom theme
-            let style = VLPlayer.PlayerControlsViewStyle(sliderColor: .darkGray, sliderProgressColor: .white, smallScreenBorderColor: .green, fullScreenBorderColor: .red, captionsOnOffStatusColor: .red)
+            let sliderColor = UIColor.fromHex("164aa5")
+            let style = VLPlayer.PlayerControlsViewStyle(sliderColor: sliderColor, sliderProgressColor: .white, smallScreenBorderColor: .green, fullScreenBorderColor: .red, captionsOnOffStatusColor: .red)
             let textContent = VLPlayer.PlayerControlsViewTextContent(slowmoText: "SLOWMO", liveText: "LIVE", startFromBeginningText: "START FROM BEGINNING", closeCaptionHeaderText: "CLOSE CAPTION", closeCaptionText: "CLOSE CAPTION", settingHeaderText: "SETTIING", playbackQualityText: "PLAYBACK QUALITY", subtitlesOnText: "ON", subtitlesOffText: "OFF")
             let playerControlsConfig = PlayerControlsConfig(isSettingsSupported: true, isSubTitleSupported: true, isSlowMoSupported: false,isStartFromBeginningSupported: false,isCaptionsOnOffTextSupported: true , remoteSeekSupport: .both(skip: .dynamic))
             let controlsTheme = VLPlayer.PlayerControlsViewThemeConfiguration(style: style, textContent: textContent, playerControlsConfig: playerControlsConfig)
@@ -912,4 +913,3 @@ extension PlayerViewController_tvOS: WatchHistoryDelegate {
         print("Watch history tracking: \(isEnabled ? "enabled" : "disabled")")
     }
 }
-

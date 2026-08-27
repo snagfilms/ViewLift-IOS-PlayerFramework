@@ -227,6 +227,28 @@ extension VLCustomPlayerControlsView {
         }
     }
 
+    /// Selects and reveals the chapter containing a playback position. This updates
+    /// selection only; it deliberately does not request focus, so activating Live
+    /// keeps focus on the Live button.
+    func selectChapteringCuePoint(at playbackPosition: TimeInterval) {
+        guard isChapteringCuePointEnable,
+              let collectionView = chapteringCollectionView else { return }
+
+        let cuePoints = visibleChapteringCuePoints
+        guard let index = cuePoints.indices
+            .filter({ chapteringRelativeOffset(for: cuePoints[$0]) <= playbackPosition })
+            .max(by: { chapteringRelativeOffset(for: cuePoints[$0]) < chapteringRelativeOffset(for: cuePoints[$1]) })
+        else {
+            collectionView.selectItem(at: nil, animated: false, scrollPosition: [])
+            sliderView.setFocusedCuePoint(at: nil)
+            return
+        }
+
+        let indexPath = IndexPath(item: index, section: 0)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        sliderView.setFocusedCuePoint(at: index)
+    }
+
     // MARK: - UICollectionViewDataSource / Delegate
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

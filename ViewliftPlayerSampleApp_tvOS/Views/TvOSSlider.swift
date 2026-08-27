@@ -19,6 +19,13 @@ private let decelerationRate: Float = 0.92
 private let decelerationMaxVelocity: Float = 1000
 private let fineTunningVelocityThreshold: Float = 600
 
+private enum ChapteringSliderDesign {
+    static let thumbDiameter: CGFloat = 30
+    static let cuePointDiameter: CGFloat = 12
+    static let focusedCuePointDiameter: CGFloat = 32
+    static let focusedCuePointBorderWidth: CGFloat = 6
+}
+
 /// A control used to select a single value from a continuous range of values.
 public final class TvOSSlider: UIControl {
     
@@ -542,10 +549,9 @@ extension TvOSSlider {
         maximumTrackTintColor = remainingColor
         minimumTrackTintColor = progressColor
 
-        let thumbDiameter: CGFloat = 22
-        thumbViewWidthConstraint?.constant = thumbDiameter
-        thumbViewHeightConstraint?.constant = thumbDiameter
-        thumbView.layer.cornerRadius = thumbDiameter / 2
+        thumbViewWidthConstraint?.constant = ChapteringSliderDesign.thumbDiameter
+        thumbViewHeightConstraint?.constant = ChapteringSliderDesign.thumbDiameter
+        thumbView.layer.cornerRadius = ChapteringSliderDesign.thumbDiameter / 2
         thumbView.clipsToBounds = true
         thumbTintColor = .white
         thumbView.backgroundColor = .white
@@ -591,7 +597,11 @@ extension TvOSSlider {
     func updateCueViews(cueTime: TimeInterval, duration: TimeInterval, isFocused: Bool = false) {
         let minX = trackView.bounds.width * CGFloat(cueTime) / CGFloat(duration)
         let size = cuePointsUseDotStyle
-            ? (isFocused ? CGSize(width: 20, height: 20) : CGSize(width: 8, height: 8))
+            ? (isFocused
+                ? CGSize(width: ChapteringSliderDesign.focusedCuePointDiameter,
+                         height: ChapteringSliderDesign.focusedCuePointDiameter)
+                : CGSize(width: ChapteringSliderDesign.cuePointDiameter,
+                         height: ChapteringSliderDesign.cuePointDiameter))
             : CGSize(width: 8, height: 8)
         let origin = CGPoint(x: minX - (size.width / 2), y: trackView.frame.midY - (size.height / 2))
 
@@ -602,7 +612,7 @@ extension TvOSSlider {
         cueView.clipsToBounds = true
         cueView.isUserInteractionEnabled = false
         if isFocused, cuePointsUseDotStyle {
-            cueView.layer.borderWidth = 6
+            cueView.layer.borderWidth = ChapteringSliderDesign.focusedCuePointBorderWidth
             cueView.layer.borderColor = UIColor.white.cgColor
         }
         self.addSubview(cueView)

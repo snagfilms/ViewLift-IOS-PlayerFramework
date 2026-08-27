@@ -12,6 +12,45 @@ import AVKit
 //
 //// Handles analytics integration for player events and content/ad info
 extension PlayerViewController_iOS {
+    /// Creates a new immutable content metadata snapshot for each player/source instance.
+    /// This is deliberately called before the player is attached and allowed to play.
+    func configureAnalyticsForCurrentSource() {
+        if !Thread.isMainThread {
+            DispatchQueue.main.sync { [weak self] in
+                self?.configureAnalyticsForCurrentSource()
+            }
+            return
+        }
+
+        let contentInfo: VLContentInfoAnalytics
+        if isPlayingFromURLForAnalytics {
+            contentInfo = AnalyticsHelperV2.shared.buildStreamMetadata(
+                response: analyticsContentResponse,
+                contentId: playableVideoId ?? videoList.videoId,
+                playbackURL: streamUrl,
+                channelName: channelId.first
+            )
+        } else {
+            contentInfo = AnalyticsHelperV2.shared.buildVODMetadata(
+                response: analyticsContentResponse,
+                contentId: playableVideoId ?? videoList.videoId
+            )
+        }
+
+        AnalyticsHelperV2.shared.logMetadata(contentInfo, stage: "player configuration")
+        vlPlayer?.setAnalyticsInfo(
+            mediaAnalyticsInfo: MediaAnalyticsInfo(
+                contentInfo: contentInfo,
+                playerInfo: AnalyticsHelperV2.shared.getPlayerInfo(),
+                tvProviderInfo: AnalyticsHelperV2.shared.getTVEProviderInfo()
+            )
+        )
+        AnalyticsHelperV2.shared.logMetadata(contentInfo, stage: "Comscore session initialization / before first beacon")
+    }
+
+    private var isPlayingFromURLForAnalytics: Bool {
+        playerOptionSelected == .playStreamURL || playerOptionSelected == .playASATURL
+    }
 //    // Called when the player starts playback
     func getAdsInfo() -> VLAdAssetInfo? {
         return self.currentAdAssetInfo
