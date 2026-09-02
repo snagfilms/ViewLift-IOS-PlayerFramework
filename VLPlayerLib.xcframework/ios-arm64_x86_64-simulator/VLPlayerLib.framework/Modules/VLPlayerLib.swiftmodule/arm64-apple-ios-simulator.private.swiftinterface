@@ -1178,6 +1178,9 @@ extension VLPlayerLib.VLPlayer {
   public func getPlayerDVRWindow() -> Foundation.TimeInterval?
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
+  public func getLiveDuration() -> Foundation.TimeInterval?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func getSecondsBehindLive() -> Swift.Double?
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
