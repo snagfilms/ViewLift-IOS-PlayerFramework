@@ -565,6 +565,7 @@ extension VLPlayerLib.VLPlayer {
   #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic open func seekTo(seconds: Swift.Double, completion: (() -> Swift.Void)? = nil)
   #endif
+  public func setChapterCueConfig(_ config: VLPlayerLib.VLPlayer.ChapterCueConfig)
   public func seekToChapter(startTime: Swift.Double)
   @objc dynamic open func getCurrentPlaybackTime() -> Swift.Double
   @objc dynamic open func getChapterEndTime(currentTime: Swift.Double) -> Swift.Double
@@ -1345,7 +1346,14 @@ public struct SSAIBeaconTracking {
     public let cueHeight: CoreFoundation.CGFloat
     public let isCueCircular: Swift.Bool
     public let showChapterTitleTillCuePoint: Swift.Bool
-    public init(cueColor: UIKit.UIColor = .white, cueWidth: CoreFoundation.CGFloat = 8, cueHeight: CoreFoundation.CGFloat = 8, isCueCircular: Swift.Bool = true, showChapterTitleTillCuePoint: Swift.Bool = false)
+    public let sliderProgressColor: UIKit.UIColor?
+    public let sliderCornerRadius: CoreFoundation.CGFloat?
+    public let unfocusedCueDiameter: CoreFoundation.CGFloat?
+    public let focusedCueDiameter: CoreFoundation.CGFloat?
+    public let focusedCueRingWidth: CoreFoundation.CGFloat?
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init(cueColor: UIKit.UIColor = .white, cueWidth: CoreFoundation.CGFloat = 8, cueHeight: CoreFoundation.CGFloat = 8, isCueCircular: Swift.Bool = true, showChapterTitleTillCuePoint: Swift.Bool = false, sliderProgressColor: UIKit.UIColor? = nil, sliderCornerRadius: CoreFoundation.CGFloat? = nil, unfocusedCueDiameter: CoreFoundation.CGFloat? = nil, focusedCueDiameter: CoreFoundation.CGFloat? = nil, focusedCueRingWidth: CoreFoundation.CGFloat? = nil)
+    #endif
   }
   @objc @objcMembers public class ContentData : ObjectiveC.NSObject {
     @objc final public let contentTitle: Swift.String?
