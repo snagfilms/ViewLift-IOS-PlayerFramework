@@ -36,12 +36,12 @@ struct ChapteringCuePoint: Codable {
     let stocks: String?
 
     enum CodingKeys: String, CodingKey {
-        case startTime = "StartTime"
-        case label = "Label"
-        case origLength = "OrigLength"
-        case thumbnail = "OriginalThumbnailLocation"
-        case eventStartUtc = "event_start_utc"
-        case stocks = "Stocks"
+        case startTime = "startTime"
+        case label = "label"
+        case origLength = "origLength"
+        case thumbnail = "originalThumbnailLocation"
+        case eventStartUtc = "eventStartUtc"
+        case stocks = "stocks"
     }
 }
 
@@ -203,6 +203,33 @@ extension ChapteringHosting {
         return true
     }
 
+    /// Chaptering seekbar appearance pushed to the SDK through `setChapterCueConfig(_:)`:
+    /// the cue marker color, size and shape on both platforms, plus the chaptering slider's
+    /// progress color, track corner radius, and focused/unfocused cue metrics on tvOS.
+    var chapterCueConfig: VLPlayer.ChapterCueConfig {
+        #if os(tvOS)
+        return VLPlayer.ChapterCueConfig(
+            cueColor: .white,
+            cueWidth: 12,
+            cueHeight: 12,
+            isCueCircular: true,
+            sliderProgressColor: UIColor.fromHex("#0d39a8"),
+            sliderCornerRadius: 4,
+            unfocusedCueDiameter: 12,
+            focusedCueDiameter: 32,
+            focusedCueRingWidth: 5
+        )
+        #else
+        return VLPlayer.ChapterCueConfig(
+            cueColor: .white,
+            cueWidth: 8,
+            cueHeight: 8,
+            isCueCircular: true,
+            showChapterTitleTillCuePoint: true
+        )
+        #endif
+    }
+
     /// Pushes the current cue points to the SDK, which recalculates their positions inside
     /// the current DVR window (`event_start_utc + startTime`), then refreshes the platform
     /// chaptering UI so both show only cue points inside the window.
@@ -214,6 +241,7 @@ extension ChapteringHosting {
         #elseif os(tvOS)
         videoPlayerControlsView?.configureChapteringCuePoints(appModelChapterCuePoints)
         vlPlayer?.updateChapteringCuePoints(chapterCuePointSegments)
+        vlPlayer?.setChapterCueConfig(chapterCueConfig)
         #endif
     }
 
@@ -247,16 +275,6 @@ enum PlayerControlsConfigurationOption: CaseIterable {
 }
 
 extension ChapteringHosting {
-
-    var chapterCueConfig: VLPlayer.ChapterCueConfig {
-        VLPlayer.ChapterCueConfig(
-            cueColor: .white,
-            cueWidth: 8,
-            cueHeight: 8,
-            isCueCircular: true,
-            showChapterTitleTillCuePoint: true
-        )
-    }
 
     /// Presents a popup for the user to enter the live stream's event-start time (UTC, HH:MM).
     ///
