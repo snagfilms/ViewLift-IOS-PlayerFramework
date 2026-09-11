@@ -21,31 +21,6 @@ extension PlayerViewController_iOS {
             }
             return
         }
-
-        let contentInfo: VLContentInfoAnalytics
-        if isPlayingFromURLForAnalytics {
-            contentInfo = AnalyticsHelperV2.shared.buildStreamMetadata(
-                response: analyticsContentResponse,
-                contentId: playableVideoId ?? videoList.videoId,
-                playbackURL: streamUrl,
-                channelName: channelId.first
-            )
-        } else {
-            contentInfo = AnalyticsHelperV2.shared.buildVODMetadata(
-                response: analyticsContentResponse,
-                contentId: playableVideoId ?? videoList.videoId
-            )
-        }
-
-        AnalyticsHelperV2.shared.logMetadata(contentInfo, stage: "player configuration")
-        vlPlayer?.setAnalyticsInfo(
-            mediaAnalyticsInfo: MediaAnalyticsInfo(
-                contentInfo: contentInfo,
-                playerInfo: AnalyticsHelperV2.shared.getPlayerInfo(),
-                tvProviderInfo: AnalyticsHelperV2.shared.getTVEProviderInfo()
-            )
-        )
-        AnalyticsHelperV2.shared.logMetadata(contentInfo, stage: "Comscore session initialization / before first beacon")
     }
 
     private var isPlayingFromURLForAnalytics: Bool {
