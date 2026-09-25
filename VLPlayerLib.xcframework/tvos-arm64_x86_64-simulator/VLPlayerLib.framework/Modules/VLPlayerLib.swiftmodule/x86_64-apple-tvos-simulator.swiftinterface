@@ -345,6 +345,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func pictureInPictureDidFailedToStart(error: VLPlayerLib.VLError, playerTag: Swift.String)
   @objc optional func onLoadingChanged(isLoading: Swift.Bool)
   @objc optional func lowLatencyPlayerLoaded()
+  @available(*, deprecated, message: "Use playbackStateDidChange(state:) instead, which passes a strongly-typed VLPlayer.PlayingState instead of a raw String.")
   @objc optional func playerStateChanged(state: Swift.String)
   @objc optional func bitMovinPlayerLoaded()
   @objc optional func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Swift.Bool)
@@ -358,6 +359,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func avPlayerControllerInstance(_ avPlayerControllerInstance: AVKit.AVPlayerViewController)
   @objc optional func airplayConnection(changed status: Swift.Bool)
   @objc optional func hideTempPassTimerAndReloadPlayer()
+  @objc optional func playbackStateDidChange(state: VLPlayerLib.VLPlayer.PlayingState)
 }
 public protocol ServerSideAdTrackingDelegate : AnyObject {
   func serverSideAdTrackingEvents(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType, eventTrackingProperties: [Swift.String : Any])
@@ -1193,6 +1195,17 @@ public struct SSAIBeaconTracking {
     public let endSubtitle: Swift.String
     public init(timerTextColor: UIKit.UIColor = .white, titleTextColor: UIKit.UIColor = .white, subtitleTextColor: UIKit.UIColor = .white, backgroundColor: UIKit.UIColor = .clear, overlayColor: UIKit.UIColor = .black, titleFont: UIKit.UIFont = .systemFont(ofSize: 14, weight: .bold), timerFont: UIKit.UIFont = .monospacedDigitSystemFont(ofSize: 32, weight: .bold), subtitleFont: UIKit.UIFont = .systemFont(ofSize: 12), startTitle: Swift.String = "Event starts in", endTitle: Swift.String = "Event Ended", endSubtitle: Swift.String = "This content is no longer available.")
   }
+  @objc public enum PlayingState : Swift.Int {
+    case playing
+    case paused
+    case buffering
+    case unknown
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
   public func checkClosedCaption() -> Swift.Bool
   @objc override dynamic public init()
   public init(playerType: VLPlayerLib.VLPlayerType)
@@ -1899,6 +1912,9 @@ extension VLPlayerLib.VLPlayer.ControlsVisibility : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.TVEErrorCode : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.TVEErrorCode : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.TVEErrorCode : Swift.RawRepresentable {}
+extension VLPlayerLib.VLPlayer.PlayingState : Swift.Equatable {}
+extension VLPlayerLib.VLPlayer.PlayingState : Swift.Hashable {}
+extension VLPlayerLib.VLPlayer.PlayingState : Swift.RawRepresentable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.RawRepresentable {}

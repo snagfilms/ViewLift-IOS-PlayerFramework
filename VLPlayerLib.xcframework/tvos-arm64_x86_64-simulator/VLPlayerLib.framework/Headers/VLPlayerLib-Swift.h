@@ -468,6 +468,13 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)updateAppMacros:(NSDictionary<NSString *, NSString *> * _Nonnull)macros;
 @end
 
+typedef SWIFT_ENUM(NSInteger, PlayingState, open) {
+  PlayingStatePlaying = 0,
+  PlayingStatePaused = 1,
+  PlayingStateBuffering = 2,
+  PlayingStateUnknown = 3,
+};
+
 @interface VLPlayer (SWIFT_EXTENSION(VLPlayerLib))
 - (BOOL)isPlaying SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isClientSideAdPlaying SWIFT_WARN_UNUSED_RESULT;
@@ -919,7 +926,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 ///
 /// Delgate method - Called when law latency player is ready
 - (void)lowLatencyPlayerLoaded;
-- (void)playerStateChangedWithState:(NSString * _Nonnull)state;
+- (void)playerStateChangedWithState:(NSString * _Nonnull)state SWIFT_DEPRECATED_MSG("Use playbackStateDidChange(state:) instead, which passes a strongly-typed VLPlayer.PlayingState instead of a raw String.");
 /// important:
 ///
 /// Delgate method - Called when bitmovin player is ready
@@ -952,6 +959,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 - (void)avPlayerControllerInstance:(AVPlayerViewController * _Nonnull)avPlayerControllerInstance;
 - (void)airplayConnectionWithChanged:(BOOL)status;
 - (void)hideTempPassTimerAndReloadPlayer;
+- (void)playbackStateDidChangeWithState:(enum PlayingState)state;
 @end
 
 #endif // defined(__OBJC__)
@@ -1432,6 +1440,13 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 - (void)updateAppMacros:(NSDictionary<NSString *, NSString *> * _Nonnull)macros;
 @end
 
+typedef SWIFT_ENUM(NSInteger, PlayingState, open) {
+  PlayingStatePlaying = 0,
+  PlayingStatePaused = 1,
+  PlayingStateBuffering = 2,
+  PlayingStateUnknown = 3,
+};
+
 @interface VLPlayer (SWIFT_EXTENSION(VLPlayerLib))
 - (BOOL)isPlaying SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isClientSideAdPlaying SWIFT_WARN_UNUSED_RESULT;
@@ -1883,7 +1898,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 ///
 /// Delgate method - Called when law latency player is ready
 - (void)lowLatencyPlayerLoaded;
-- (void)playerStateChangedWithState:(NSString * _Nonnull)state;
+- (void)playerStateChangedWithState:(NSString * _Nonnull)state SWIFT_DEPRECATED_MSG("Use playbackStateDidChange(state:) instead, which passes a strongly-typed VLPlayer.PlayingState instead of a raw String.");
 /// important:
 ///
 /// Delgate method - Called when bitmovin player is ready
@@ -1916,6 +1931,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 - (void)avPlayerControllerInstance:(AVPlayerViewController * _Nonnull)avPlayerControllerInstance;
 - (void)airplayConnectionWithChanged:(BOOL)status;
 - (void)hideTempPassTimerAndReloadPlayer;
+- (void)playbackStateDidChangeWithState:(enum PlayingState)state;
 @end
 
 #endif // defined(__OBJC__)
