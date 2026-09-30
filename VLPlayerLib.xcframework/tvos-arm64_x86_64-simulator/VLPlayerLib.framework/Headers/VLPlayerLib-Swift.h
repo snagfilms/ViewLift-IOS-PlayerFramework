@@ -960,6 +960,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 - (void)airplayConnectionWithChanged:(BOOL)status;
 - (void)hideTempPassTimerAndReloadPlayer;
 - (void)playbackStateDidChangeWithState:(enum PlayingState)state;
+- (void)onPlaybackOptionChangedWithPlaybackOption:(NSString * _Nonnull)playbackOption playerTag:(NSString * _Nonnull)playerTag;
 @end
 
 #endif // defined(__OBJC__)
@@ -1932,6 +1933,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 - (void)airplayConnectionWithChanged:(BOOL)status;
 - (void)hideTempPassTimerAndReloadPlayer;
 - (void)playbackStateDidChangeWithState:(enum PlayingState)state;
+- (void)onPlaybackOptionChangedWithPlaybackOption:(NSString * _Nonnull)playbackOption playerTag:(NSString * _Nonnull)playerTag;
 @end
 
 #endif // defined(__OBJC__)

@@ -246,6 +246,9 @@ final public class TransmitAPI {
 extension VLPlayerLib.MarqueeText {
   @_Concurrency.MainActor @preconcurrency public func makeCompact(_ compact: Swift.Bool = true) -> VLPlayerLib.MarqueeText
 }
+public struct ListSidebarTab {
+  public init<V>(name: Swift.String, @SwiftUICore.ViewBuilder content: () -> V) where V : SwiftUICore.View
+}
 public struct AdsViewConfiguration {
   public init(viewStyle: VLPlayerLib.AdsViewConfiguration.AdsViewStyle = AdsViewStyle(), adsViewConfig: VLPlayerLib.AdsViewConfiguration.AdsViewConfig = AdsViewConfig(), adsTextContent: VLPlayerLib.AdsViewConfiguration.AdsTextContent = AdsTextContent())
   public struct AdsViewStyle {
@@ -330,7 +333,18 @@ public struct PlayerControlsConfig {
     case override(title: Swift.String)
     case hide
   }
-  public init(isChromeCastSupported: Swift.Bool = true, isAirPlaySupported: Swift.Bool = true, isPIPSupported: Swift.Bool = true, isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isStartFromBeginningSupported: Swift.Bool = true, playerControlsColor: VLPlayerLib.PlayerControlsColor? = nil)
+  public init(isChromeCastSupported: Swift.Bool = true, isAirPlaySupported: Swift.Bool = true, isPIPSupported: Swift.Bool = true, isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isPlaybackOptionSupported: Swift.Bool = false, playerControlsColor: VLPlayerLib.PlayerControlsColor? = nil)
+}
+public enum PlaybackOptionType {
+  case none
+  case live
+  case fromBeginning
+  case resume
+  public static func == (a: VLPlayerLib.PlaybackOptionType, b: VLPlayerLib.PlaybackOptionType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 public class VLTVProviderInfoAnalytics : Swift.Codable {
   public var tvProviderName: Swift.String?
@@ -490,7 +504,7 @@ public protocol CustomPlayerSkinProtocol : UIKit.UIView {
   func updateSubtitleButton()
 }
 public struct FeatureFlags {
-  public init(shouldContinuePlaybackOnScreenLock: Swift.Bool = false, shouldHandleOrientation: Swift.Bool = false, isMPPlayingNowEnabled: Swift.Bool = false, isChromeCastEnabled: Swift.Bool = false, showTemppassTimer: Swift.Bool = false, shouldFetchRenditionsAfterPlaybackStart: Swift.Bool = false)
+  public init(shouldContinuePlaybackOnScreenLock: Swift.Bool = false, shouldHandleOrientation: Swift.Bool = false, isMPPlayingNowEnabled: Swift.Bool = false, isChromeCastEnabled: Swift.Bool = false, isPlaybackOptionSupported: Swift.Bool = false, showTemppassTimer: Swift.Bool = false, shouldFetchRenditionsAfterPlaybackStart: Swift.Bool = false)
 }
 extension VLPlayerLib.VLPlayer {
   public func startSessionAnalytics(excludingClients: [Swift.String] = [])
@@ -1125,8 +1139,9 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func adRunningOnPlayer() -> Swift.Bool
   public func updateVideoPlaybackOption(isFromBeginning: Swift.Bool? = nil, shouldResumePlayBack: Swift.Bool? = nil, startTime: Swift.Double? = nil, resumeTime: Swift.Double? = nil)
   public func triggerMVSelectionBeaconEvent(currentTime: Swift.Float)
-  public func setControlsVisibility(type: VLPlayerLib.VLPlayer.ControlsVisibility)
   public func setSDKLoadingIndicatorVisible(enabled: Swift.Bool)
+  public func setControlsVisibility(type: VLPlayerLib.VLPlayer.ControlsVisibility)
+  public func updatePlaybackOptionType(_ type: Swift.String)
 }
 public struct TokenIdentity : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
@@ -1420,6 +1435,7 @@ public enum AdType {
   public func setAnalyticsModel(_ analyticsModel: VLPlayerLib.AnalyticsModel?)
   public func setEntitlement(data: VLPlayerLib.VLPlayer.EntitlementData?, screenResolution: VLPlayerLib.VLPlayer.ResolutionType? = nil, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, userID: Swift.String? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, epgProgram: VLPlayerLib.VLEPGProgramDetails? = nil)
   public func refreshEntitlement(data: VLPlayerLib.VLPlayer.EntitlementData?, isBitMovinPlayer: Swift.Bool? = nil, isLowLatency: Swift.Bool? = nil, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?, _ contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?) -> Swift.Void)
+  open func vlPlayerSetTabs(sideBarTabs: [VLPlayerLib.ListSidebarTab], listSidebarWidth: CoreFoundation.CGFloat = 350)
   open func setSourceToPlay(isASATPlayer: Swift.Bool = false, staticContentId: Swift.String? = nil, streamURL: Swift.String, vlToken: Swift.String?, vlAPIEndPoint: Swift.String?, vlBeaconEndPoint: Swift.String? = nil, customControlsView: UIKit.UIView? = nil, playerFeaturesSupported: VLPlayerLib.VLPlayer.VLPlayerFeatureSupported!, nextPlaybackList: VLPlayerLib.VLPlayer.PlaybackList? = nil, analyticsAdditionalData: [Swift.String : Any]? = nil, adUrl: Swift.String? = nil, vlPlayerTag: Swift.String, streamConfig: VLPlayerLib.VLPlayer.StreamConfig? = nil, drmConfig: VLPlayerLib.VLPlayer.DRMConfig? = nil, tveProviderInfo: VLPlayerLib.TVEProviderInfo? = nil, adsViewConfiguration: VLPlayerLib.AdsViewConfiguration? = nil, closeCaptions: [VLPlayerLib.CloseCaptions]? = nil, brandName: Swift.String, networkName: Swift.String, isSuccess: @escaping (_ isSuccess: Swift.Bool, _ playerView: UIKit.UIView?) -> Swift.Void)
   open func setSourceToPlayDirectURL(customControlsView: UIKit.UIView?, playerDisplayType: VLPlayerLib.VLPlayer.PlayerDisplayType, analyticsAdditionalData: [Swift.String : Any]?, streamSwitchHandler: VLPlayerLib.StreamSwitchHandler? = nil, streamConfig: VLPlayerLib.VLPlayer.StreamConfig?)
   public func createPlayerView()
@@ -1745,6 +1761,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func airplayConnection(changed status: Swift.Bool)
   @objc optional func hideTempPassTimerAndReloadPlayer()
   @objc optional func playbackStateDidChange(state: VLPlayerLib.VLPlayer.PlayingState)
+  @objc optional func onPlaybackOptionChanged(playbackOption: Swift.String, playerTag: Swift.String)
 }
 @objc public protocol ChromeCastPlaybackDelegate : ObjectiveC.NSObjectProtocol {
   @objc optional func chromeCastConnectionStatusUpdate(isConnected: Swift.Bool, castContextSessionInstance: GoogleCast.GCKCastContext?)
@@ -2142,6 +2159,8 @@ extension VLPlayerLib.VideoSourceType : Swift.Hashable {}
 extension VLPlayerLib.MarqueeText : Swift.Sendable {}
 extension VLPlayerLib.PlayerControlsConfig.SkipConfig : Swift.Equatable {}
 extension VLPlayerLib.PlayerControlsConfig.SkipConfig : Swift.Hashable {}
+extension VLPlayerLib.PlaybackOptionType : Swift.Equatable {}
+extension VLPlayerLib.PlaybackOptionType : Swift.Hashable {}
 extension VLPlayerLib.NetworkConnectionStatus : Swift.Equatable {}
 extension VLPlayerLib.NetworkConnectionStatus : Swift.Hashable {}
 extension VLPlayerLib.NetworkConnectionStatus : Swift.RawRepresentable {}

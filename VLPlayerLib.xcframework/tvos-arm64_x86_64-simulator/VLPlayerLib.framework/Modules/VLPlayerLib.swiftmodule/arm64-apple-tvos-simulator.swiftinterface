@@ -362,6 +362,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func airplayConnection(changed status: Swift.Bool)
   @objc optional func hideTempPassTimerAndReloadPlayer()
   @objc optional func playbackStateDidChange(state: VLPlayerLib.VLPlayer.PlayingState)
+  @objc optional func onPlaybackOptionChanged(playbackOption: Swift.String, playerTag: Swift.String)
 }
 public protocol ServerSideAdTrackingDelegate : AnyObject {
   func serverSideAdTrackingEvents(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType, eventTrackingProperties: [Swift.String : Any])
@@ -552,13 +553,15 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func adRunningOnPlayer() -> Swift.Bool
   public func updateVideoPlaybackOption(isFromBeginning: Swift.Bool? = nil, shouldResumePlayBack: Swift.Bool? = nil, startTime: Swift.Double? = nil, resumeTime: Swift.Double? = nil)
   public func triggerMVSelectionBeaconEvent(currentTime: Swift.Float)
-  public func setControlsVisibility(type: VLPlayerLib.VLPlayer.ControlsVisibility)
   public func setSDKLoadingIndicatorVisible(enabled: Swift.Bool)
 }
 extension VLPlayerLib.VLPlayer {
   public func dismissAutoPlayView(playNext: Swift.Bool)
   public func setControlsVisibilityWhenInFullScreen(isHidden: Swift.Bool)
   public func updateFocusOnControls(isEnable: Swift.Bool)
+}
+public struct ListSidebarTab {
+  public init<V>(name: Swift.String, @SwiftUICore.ViewBuilder content: () -> V) where V : SwiftUICore.View
 }
 extension VLPlayerLib.VLPlayer {
   public enum PayWallConfiguration {
@@ -1358,6 +1361,10 @@ extension VLPlayerLib.VLPlayer.PlaybackList {
   public var isEmpty: Swift.Bool {
     get
   }
+}
+extension VLPlayerLib.VLPlayer {
+  public func addInfoView(_ infoView: UIKit.UIView)
+  public func showHidePlayerControls(_ hidden: Swift.Bool)
 }
 public struct SSAIAdsModel : Swift.Decodable {
   public var avails: Swift.Array<VLPlayerLib.SSAIAvailableAds>?
