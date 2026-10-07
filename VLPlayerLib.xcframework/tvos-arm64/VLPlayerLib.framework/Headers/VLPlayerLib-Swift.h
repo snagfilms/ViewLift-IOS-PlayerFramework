@@ -404,6 +404,12 @@ SWIFT_CLASS("_TtC11VLPlayerLib8VLPlayer")
 @end
 
 @interface VLPlayer (SWIFT_EXTENSION(VLPlayerLib))
+/// Turns console logging of the documented tvOS accessibility identifiers on or off.
+/// Logging stays off until the app enables it.
++ (void)setAccessibilityEventLoggingEnabled:(BOOL)enabled;
+@end
+
+@interface VLPlayer (SWIFT_EXTENSION(VLPlayerLib))
 - (BOOL)isPlaying SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isClientSideAdPlaying SWIFT_WARN_UNUSED_RESULT;
 - (void)shouldPlayVideoWithInitially:(BOOL)initially;
