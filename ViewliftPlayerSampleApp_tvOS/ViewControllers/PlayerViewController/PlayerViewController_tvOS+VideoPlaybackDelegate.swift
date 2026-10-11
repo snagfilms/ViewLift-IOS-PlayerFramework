@@ -17,7 +17,7 @@ extension PlayerViewController_tvOS: VideoPlaybackDelegate {
     func onFullScreenChange(currentTime: Double, isFullScreen: Bool, playerTag: String) {
         debugPrint("onFullScreenChange: currentTime: \(currentTime), isFullScreen: \(isFullScreen), playerTag: \(playerTag)")
         testButton.isHidden = isFullScreen
-        changeLayout()
+        changeLayout(isFullScreen: isFullScreen)
     }
     
     func videoPlaybackError(currentTime: Double, errorMessage: String, errorCode: String, playerTag: String) {

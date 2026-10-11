@@ -378,9 +378,8 @@ class PlayerViewController_tvOS: UIViewController {
         }
     }
     
-    func changeLayout() {
-        isFullScreen.toggle()
-        
+    func changeLayout(isFullScreen: Bool) {
+        self.isFullScreen = isFullScreen
         // Remove watch history when going to full screen
         if isFullScreen {
             hideWatchHistoryView()
