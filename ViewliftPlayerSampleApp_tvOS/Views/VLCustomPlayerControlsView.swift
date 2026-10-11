@@ -107,7 +107,7 @@ class VLCustomPlayerControlsView: UIView, PlayerControlsViewDelegate, UICollecti
     @IBOutlet weak var innerStackView: UIStackView!
     @IBOutlet weak var playerControlsStackView: UIStackView!
     @IBOutlet weak var controlsStackView: UIStackView!
-    @IBOutlet weak var imageView_TVE: UIImageView!
+    @IBOutlet weak var imageViewTVE: UIImageView!
     @IBOutlet weak var progressLabelLeadingConstraint: NSLayoutConstraint!
     private var isSlowmoEnabled = false
    #if os(tvOS)

@@ -210,13 +210,13 @@ extension ChapteringHosting {
         #if os(tvOS)
         return VLPlayer.ChapterCueConfig(
             cueColor: .white,
-            cueWidth: 12,
-            cueHeight: 12,
+            cueWidth: 20,
+            cueHeight: 20,
             isCueCircular: true,
             sliderProgressColor: UIColor.fromHex("#0d39a8"),
-            sliderCornerRadius: 4,
-            unfocusedCueDiameter: 12,
-            focusedCueDiameter: 32,
+            sliderCornerRadius: 10,
+            unfocusedCueDiameter: 14,
+            focusedCueDiameter: 26,
             focusedCueRingWidth: 5
         )
         #else
@@ -441,13 +441,9 @@ extension ChapteringHosting {
 
     private func formatMomentTime(secondsAgo: Double) -> String {
         let elapsedSeconds = max(0, Int(secondsAgo.rounded(.down)))
-        if elapsedSeconds < 60 {
-            return "\(elapsedSeconds)s ago"
-        }
-        if elapsedSeconds < 3_600 {
-            return "\(elapsedSeconds / 60)m ago"
-        }
-        return "\(elapsedSeconds / 3_600)h ago"
+        let minutes = elapsedSeconds / 60
+        let seconds = elapsedSeconds % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }
 #endif
@@ -611,3 +607,81 @@ extension ChapteringHosting {
     }
 }
 #endif
+
+final class TimerView: UIView {
+
+    private var timer: Timer?
+    private var endTimestamp: TimeInterval = 0
+
+    var onTimerFinished: (() -> Void)?
+
+    private let timerLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        #if os(tvOS)
+        label.font = .boldSystemFont(ofSize: 48)
+        #else
+        label.font = .boldSystemFont(ofSize: 18)
+        #endif
+        label.textColor = .white
+        return label
+    }()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupUI()
+    }
+
+    private func setupUI() {
+        backgroundColor = .red
+        layer.cornerRadius = 8
+        isUserInteractionEnabled = false
+
+        addSubview(timerLabel)
+        timerLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            timerLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            timerLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+    }
+
+    func startTimer(startTime: TimeInterval, duration: TimeInterval = 60) {
+        destroyTimer()
+        endTimestamp = startTime + duration
+        updateTimer()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            self?.updateTimer()
+        }
+    }
+
+    func destroyTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+
+    deinit {
+        destroyTimer()
+    }
+
+    private func updateTimer() {
+        let remaining = Int(endTimestamp - Date().timeIntervalSince1970)
+
+        guard remaining > 0 else {
+            timerLabel.text = "00:00"
+            destroyTimer()
+            onTimerFinished?()
+            removeFromSuperview()
+            return
+        }
+
+        let minutes = remaining / 60
+        let seconds = remaining % 60
+        timerLabel.text = String(format: "%02d:%02d", minutes, seconds)
+    }
+}

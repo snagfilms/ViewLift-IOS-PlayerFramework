@@ -140,10 +140,12 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidAppear(animated)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                ATTrackingManager.requestTrackingAuthorization { status in
-                    // your status handling here
-                }
+            ATTrackingManager.requestTrackingAuthorization { _ in
+                #if os(tvOS)
+                VLAnalytics.shared.refreshAdvertisingIdentifier()
+                #endif
             }
+        }
     }
     
     func fetchUserDetails() {

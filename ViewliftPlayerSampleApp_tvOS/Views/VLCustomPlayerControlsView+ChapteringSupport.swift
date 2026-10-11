@@ -65,9 +65,13 @@ extension VLCustomPlayerControlsView {
             return chapteringCuePoints.filter { cuePoint in
                 guard let date = cuePoint.eventStartDate else { return false }
                 return date >= windowStart && date <= windowEnd
+            }.sorted{
+                $0.startTime > $1.startTime
             }
         }
-        return chapteringCuePoints.filter { $0.startTime >= 0 && $0.startTime <= chapteringDuration }
+        return chapteringCuePoints.filter { $0.startTime >= 0 && $0.startTime <= chapteringDuration }.sorted{
+            $0.startTime > $1.startTime
+        }
     }
 
     /// Tolerance (in seconds) within which DVR playback is treated as being at the

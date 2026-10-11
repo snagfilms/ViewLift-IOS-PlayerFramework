@@ -71,7 +71,7 @@ class PlayerViewController_iOS: UIViewController {
     @IBOutlet private weak var backButton: UIButton!
     // MARK: - Properties
     var customPaywallView: CustomPaywallView?
-    private var videoList: VideoList!
+    var videoList: VideoList!
     var vlPlayer: VLPlayer?
     var videoPlayerControlsView: CustomVideoControls? // using UIKIT
     var videoPlayerCustomView: (view: UIView?, viewModel: PlayerControlsViewModel?)? // using SwiftUI
@@ -107,6 +107,7 @@ class PlayerViewController_iOS: UIViewController {
     weak var player: AVPlayer?
     var currentAdAssetInfo: VLAdAssetInfo?
     var videoResponse: VLVideoResponseModel?
+    var analyticsContentResponse: [String: Any]?
     let timerLabel = UILabel()
     let playerContainerView = UIView()
     var fullscreenConstraints: [NSLayoutConstraint] = []
@@ -123,14 +124,16 @@ class PlayerViewController_iOS: UIViewController {
             updateButtonStates()
         }
     }
-    private var playableVideoId: String?
+    var playableVideoId: String?
     private var seekForwardDuration: Double = Constants.defaultSeekForward
     private var seekBackwardDuration: Double = Constants.defaultSeekBackward
     private var adUrl: String?
-    private var playerOptionSelected: PlayerUIOptions!
+    var isCustomViewEnableForSSE: Bool = false
+    var playerOptionSelected: PlayerUIOptions!
     var enableCustomAdUI: Bool = false
     var playerRateBeforeSeek: Float = 1.0
     var isVideoPlayingBeforeSeek = true
+    var timerView : TimerView? = nil
     var autoPlayListdataManager: AutoPlayDataManager?
     internal var autoPlayView: AutoPlayView?
     internal var liveMomentsHostingController: UIHostingController<LiveMomentsTabsView>?
@@ -478,6 +481,8 @@ extension PlayerViewController_iOS {
 
     /// Loads and configures the player view
     func loadPlayerView() async {
+        // A source reload/replay/channel switch must never inherit the prior asset snapshot.
+        analyticsContentResponse = nil
         
         let loaderView = addLoaderView(to: playerContainerView)
         loaderView.startAnimating()
@@ -509,12 +514,15 @@ extension PlayerViewController_iOS {
 //            configureSDKChapterSegments()
 //        }
         // Select playback source type based on user option
+        VLPlayer.setAccessibilityEventLoggingEnabled(true)
         let playbackSourceType: VLPlayer.PlaybackSourceType
+        let fairplayParser = FairPlayParser.streamUrl
         if isPlayingFromURL(){
             let streamType = VLPlayer.DirectStreamType(
                 url: streamUrl ?? "",
                 streamConfig: VLPlayer.StreamConfig(isLive: self.streamConfig?.isLive, isDVR: self.streamConfig?.isDVR, isSSAIEnabled: self.streamConfig?.isSSAIEnabled),
                 drmconfig: drmConfig
+//                drmconfig: FairPlayParser.drmConfig
             )
             
             let playbackConfig = VLPlayer.DirectStreamPlaybackConfig(
@@ -543,7 +551,7 @@ extension PlayerViewController_iOS {
                             videoId: self.videoList.videoId,
                             token: vlToken,
                             apiBaseURL: vlBaseUrl, beaconURL: vlBeaconURL,
-                            adobeTempPassPayload: adobePassPayload
+                            adobeTempPassPayload: nil
                         )
                 )
         }
@@ -650,6 +658,7 @@ extension PlayerViewController_iOS {
         vlPlayer?.enablePlayerBitrateLogs = enableBitrateLogs
         vlPlayer?.serverSideAdTrackingDelegate = self
         vlPlayer?.castDelegate = self
+        vlPlayer?.playerSSEDelegate = self
     }
     
     /// Handles completion of player setup, including TVE checks and UI updates
@@ -824,26 +833,42 @@ extension PlayerViewController_iOS {
     /// Returns the supported player features configuration
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
         let customMacros  = ["VIEWLIFT_USER_AGENT": Utility.sharedUtility.getUserAgent()]
+        let presentation : VLPlayer.SSEPresentation
+        if isCustomViewEnableForSSE ==  true{
+            setupTimeView()
+            if let timerView{
+                presentation = .custom(timerView)//VLPlayer.SSEPresentation(.custom(timerView))
+            }else {
+                presentation = .default()
+            }
+        }else {
+            presentation = .default()
+        }
         // You can find list of macros in VLPlayer documentation for SSAI functioning
         //https://developer.viewlift.com/docs/vlplayerfeaturesupported
+        let playerControlsSkin: VLPlayer.PlayerControlsSkin = .chaptering
+        let controlsConfiguration: Configuration = playerControlsSkin == .chaptering
+            ? .customTheme
+            : selectedPlayerControlsConfiguration.configuration
         return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  isCustomLoaderAdded: false,
                                                  shouldStartPictureInPictureInline: true,
                                                  loopVideoPlayback: self.loopEnabled,
                                                  mutePlayback: self.muteEnabled,
-                                                 customPlayerControlsColor: nil,
                                                  chromecastCustomReceiver: nil,
                                                  controlsVisibility: .auto,
                                                  payWallConfiguration: getPayWallConfiguration(type: .default),
-                                                 playerControlsViewConfiguration: self.getPlayerControlsViewConfiguration(type: selectedPlayerControlsConfiguration.configuration),
+                                                 playerControlsViewConfiguration: self.getPlayerControlsViewConfiguration(type: controlsConfiguration),
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isTrickPlayEnabled: false,
                                                  isCustomAdViewEnabled: enableCustomAdUI,
                                                  isServerSideAdTrackingEnabled: true,
                                                  isChapteringCuePointEnable: isChapteringCuePointEnable,
+                                                 playerControlsSkin: playerControlsSkin,
                                                  chapteringCuePoints: chapterCuePointSegments,
                                                  featureFlags: FeatureFlags(shouldContinuePlaybackOnScreenLock: true,
                                                                             shouldHandleOrientation: false),
+                                                 playerSSEConfig: .enabled(urlString: VLAuthentication.sharedInstance.bootStrapConfig?.sseBaseUrl ?? "", presentation: presentation),
                                                  watchHistoryResumeTime: Double(watchedTime),
                                                  watchHistoryTimeInterval: self.watchHistoryInterval,
                                                  watchHistoryEnabled: self.watchHistoryEnabled)
@@ -1178,3 +1203,251 @@ extension PlayerViewController_iOS: VideoPlayerDataSource{
         return true
     }
 }
+
+extension PlayerViewController_iOS: PlayerSSEDelegate{
+    func timerDidStart(endTime: TimeInterval) {
+        debugPrint("PlayerSSEDelegate timerDidStart")
+        if isCustomViewEnableForSSE == true {
+            let startTime = Date().timeIntervalSince1970
+            self.timerView?.startTimer(startTime: startTime, duration: (endTime - startTime))
+        }
+    }
+    
+    func gameDidStart() {
+        debugPrint("PlayerSSEDelegate gameDidStart")
+        Task { [weak self] in
+            
+            guard let self else { return }
+            
+            await MainActor.run {
+                self.vlPlayer?.destroy()
+            }
+            
+            await self.loadPlayerView()
+        }
+    }
+    
+    func gameDidEnd() {
+        debugPrint("PlayerSSEDelegate gameDidEnd")
+    }
+    func setupTimeView(){
+        let timerView = TimerView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        view.addSubview(timerView)
+
+        timerView.onTimerFinished = {
+            self.gameDidStart()
+            print("✅ Timer Finished")
+        }
+//        let startTime = Date().timeIntervalSince1970
+//        timerView.startTimer(startTime: startTime, duration: 60)
+        self.timerView = timerView
+    }
+    
+    
+    func getEntitlementData() -> VLPlayer.EntitlementData? {
+        
+        let contentResponseJSON = """
+            {
+              "data": {
+                "drmProtectedAsset": {
+                  "id": "b50de707-148f-4d8f-a788-3c1ad8bcc4bd",
+                  "drmAsset": "LiveStream",
+                  "videoAsset": {
+                    "siteName": "versant-news",
+                    "siteId": "b1317f26-739e-4120-bbe7-bddd95e59146",
+                    "playable": true,
+                    "success": true,
+                    "video": {
+            "id": "65d7d39a-dbb6-4f43-909a-8d985141fd7a",
+            "title": "On the Ground with... Mychael Schnell ",
+            "gist": {
+                "id": "65d7d39a-dbb6-4f43-909a-8d985141fd7a",
+                "site": "msnow",
+                "permalink": "/video/on-the-ground-with...-mychael-schnell--1788387854",
+                "title": "On the Ground with... Mychael Schnell ",
+                "description": "Ask MS NOW’s Mychael Schnell about how a growing number of House Republicans are sounding the alarm about increased turnover at the Pentagon as the Iran war drags on.",
+                "imageGist": {
+                    "r16x9": "https://msnow.asset.viewlift.com/images/2026/09/02/1788387299727/rec1QyYaUwyEXcAJR/thumbnail.jpg"
+                },
+                "primaryCategory": {},
+                "contentType": "VIDEO",
+                "languageCode": "en",
+                "timezone": "America/New_York",
+                "featuredTag": {
+                    "id": "bab54d40-62d9-415f-ae23-b83b21e7e54b",
+                    "title": "Q&A"
+                }
+            },
+            "tags": [
+                {
+                    "id": "bab54d40-62d9-415f-ae23-b83b21e7e54b",
+                    "title": "Q&A"
+                },
+                {
+                    "id": "25555ccf-83df-43d0-b845-feee3b2e4076",
+                    "title": "MSNBC"
+                },
+                {
+                    "id": "e53fe4b9-e1df-438d-9eef-e4bc4b5242ce",
+                    "title": "News"
+                },
+                {
+                    "id": "f224573e-0f32-4443-8842-647e6cf0e6fd",
+                    "title": "msnbc-fer"
+                }
+            ],
+            "monetizationModels": [
+                {
+                    "id": "416fad14-76d0-4ffe-9016-df335dbd05e7",
+                    "type": "TVE"
+                }
+            ],
+            "plans": [
+                {
+                    "type": "TVE",
+                    "planIds": [
+                        "48a67a59-6eaa-43ad-8318-28aedc2c2023"
+                    ]
+                }
+            ],
+            "parentalRating": "NR",
+            "showInAdvance": false,
+            "free": false,
+            "runtime": 859,
+            "skipIntroStartTime": 0,
+            "skipIntroEndTime": 0,
+            "skipRecapStartTime": 0,
+            "skipRecapEndTime": 0,
+            "playNextTime": 0,
+            "streamingInfo": {
+                "isLiveStream": false,
+                "videoAssets": {
+                    "fairPlay": {
+                        "url": "https://msnow.linear-east.viewlift.com/AdSegmentFilter/markers=((17883828010000000,3622000),(17883872820000000,275000))/Content/LiveEvent/fc54a8ce-7d14-434e-adee-daccd5e4aa51/HLS/index.m3u8",
+                        "certificateUrl": "https://usanetwork.asset.viewlift.com/Certs/fairplay-Spinco.cer",
+                        "licenseUrl": "https://usanetwork.api.viewlift.com/v1/license/fairplay/acquire",
+                        "skd": "50dfa508-e7fc-8f0a-e7ff-731bf0b8033c",
+                        "completeskd": "50dfa508-e7fc-8f0a-e7ff-731bf0b8033c:90C6EC7A16A3A90A5551838F8E7B4B6F",
+                        "licenseToken": "msnow|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbm9ueW1vdXNVc2VySWQiOiIiLCJhc3NldEtleSI6IjUwZGZhNTA4LWU3ZmMtOGYwYS1lN2ZmLTczMWJmMGI4MDMzYyIsImNsaWVudElwIjoiMTUyLjU4Ljg3LjIzNyIsImNvbnRlbnRJZCI6IjY1ZDdkMzlhLWRiYjYtNGY0My05MDlhLThkOTg1MTQxZmQ3YSIsImNvdW50cnlDb2RlIjoiSU4iLCJkZXZpY2VJZCI6IjIxMzhDMzAxLTI0MTEtNEREQy1BQkMxLUM0OTMzMkVCNTY0MiIsImRldmljZVR5cGUiOiJpb3NfcGhvbmUiLCJkcm1LZXlSb3RhdGlvbkVuYWJsZWQiOmZhbHNlLCJleHAiOjE3ODg0ODM5MjcsImhkY3AiOiIiLCJpYXQiOjE3ODg0NDA3MjcsImlzTGl2ZVN0cmVhbSI6ZmFsc2UsIm1lZGlhTGl2ZUlkIjoiIiwibW9uZXRpemF0aW9uTW9kZWxzIjpbeyJ0eXBlIjoiVFZFIn1dLCJzaXRlIjoibXNub3ciLCJzbCI6IiIsInRlZSI6IiIsInRva2VuSWQiOiI0MjNlYWNmOS1kYmY3LTQ5YWYtYmFiOS1jNTZlN2IyNDk1NmIiLCJ1c2VySWQiOiI1ZWUxOTkxNi1lZTA0LTQzZmMtYWU5NC01MzVmOTdkYWE4NWIifQ.AsYquUwwK0_1OTqAOdHETtaQaP6WaG5VDdZn4pTiolo"
+                    },
+                    "playReady": {
+                        "url": "https://msnow.linear-east.viewlift.com/AdSegmentFilter/markers=((17883828010000000,3622000),(17883872820000000,275000))/Content/LiveEvent/fc54a8ce-7d14-434e-adee-daccd5e4aa51/DASH/master.mpd",
+                        "licenseUrl": "https://usanetwork.api.viewlift.com/v1/license/playready/acquire",
+                        "skd": "3d8ce7e3-db79-1e49-a378-d68ff41457a9",
+                        "licenseToken": "msnow|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbm9ueW1vdXNVc2VySWQiOiIiLCJhc3NldEtleSI6IjNkOGNlN2UzLWRiNzktMWU0OS1hMzc4LWQ2OGZmNDE0NTdhOSIsImNsaWVudElwIjoiMTUyLjU4Ljg3LjIzNyIsImNvbnRlbnRJZCI6IjY1ZDdkMzlhLWRiYjYtNGY0My05MDlhLThkOTg1MTQxZmQ3YSIsImNvdW50cnlDb2RlIjoiSU4iLCJkZXZpY2VJZCI6IjIxMzhDMzAxLTI0MTEtNEREQy1BQkMxLUM0OTMzMkVCNTY0MiIsImRldmljZVR5cGUiOiJpb3NfcGhvbmUiLCJkcm1LZXlSb3RhdGlvbkVuYWJsZWQiOmZhbHNlLCJleHAiOjE3ODg0ODM5MjcsImhkY3AiOiIiLCJpYXQiOjE3ODg0NDA3MjcsImlzTGl2ZVN0cmVhbSI6ZmFsc2UsIm1lZGlhTGl2ZUlkIjoiIiwibW9uZXRpemF0aW9uTW9kZWxzIjpbeyJ0eXBlIjoiVFZFIn1dLCJzaXRlIjoibXNub3ciLCJzbCI6IiIsInRlZSI6IiIsInRva2VuSWQiOiI2NzVlODg0MS1jODkyLTQ4MWEtOGJkYy1jZWJkM2I2ZmM5ZjEiLCJ1c2VySWQiOiI1ZWUxOTkxNi1lZTA0LTQzZmMtYWU5NC01MzVmOTdkYWE4NWIifQ.5NfGp0JeKowy_uIEMzQEVp19E708-jKBTBaea9-XErQ"
+                    },
+                    "widevine": {
+                        "url": "https://msnow.linear-east.viewlift.com/AdSegmentFilter/markers=((17883828010000000,3622000),(17883872820000000,275000))/Content/LiveEvent/fc54a8ce-7d14-434e-adee-daccd5e4aa51/DASH/master.mpd",
+                        "licenseUrl": "https://usanetwork.api.viewlift.com/v1/license/widevine/acquire",
+                        "skd": "3d8ce7e3-db79-1e49-a378-d68ff41457a9",
+                        "licenseToken": "msnow|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbm9ueW1vdXNVc2VySWQiOiIiLCJhc3NldEtleSI6IjNkOGNlN2UzLWRiNzktMWU0OS1hMzc4LWQ2OGZmNDE0NTdhOSIsImNsaWVudElwIjoiMTUyLjU4Ljg3LjIzNyIsImNvbnRlbnRJZCI6IjY1ZDdkMzlhLWRiYjYtNGY0My05MDlhLThkOTg1MTQxZmQ3YSIsImNvdW50cnlDb2RlIjoiSU4iLCJkZXZpY2VJZCI6IjIxMzhDMzAxLTI0MTEtNEREQy1BQkMxLUM0OTMzMkVCNTY0MiIsImRldmljZVR5cGUiOiJpb3NfcGhvbmUiLCJkcm1LZXlSb3RhdGlvbkVuYWJsZWQiOmZhbHNlLCJleHAiOjE3ODg0ODM5MjcsImhkY3AiOiIiLCJpYXQiOjE3ODg0NDA3MjcsImlzTGl2ZVN0cmVhbSI6ZmFsc2UsIm1lZGlhTGl2ZUlkIjoiIiwibW9uZXRpemF0aW9uTW9kZWxzIjpbeyJ0eXBlIjoiVFZFIn1dLCJzaXRlIjoibXNub3ciLCJzbCI6IiIsInRlZSI6IiIsInRva2VuSWQiOiJiMDZkY2ZjYi01NTNkLTQ4MTAtOGU5OS00ZTgxOTY2MGRjMTgiLCJ1c2VySWQiOiI1ZWUxOTkxNi1lZTA0LTQzZmMtYWU5NC01MzVmOTdkYWE4NWIifQ.7dj3VFPzYwn5UuC6FnhREFkP0FvUroTDyFXXyDdMLxM"
+                    },
+                    "type": "videoAsset"
+                },
+                "audioAssets": {},
+                "secondaryVideoAssets": {
+                    "type": "videoAsset"
+                }
+            },
+            "metadata": [
+                {
+                    "name": "EVENT",
+                    "value": "On the Ground with... "
+                },
+                {
+                    "name": "VIDEO_RESEARCH_TITLE",
+                    "value": "09022026-MSNOW-On the Ground with... "
+                },
+                {
+                    "name": "VIEWLIFT_EXTERNAL_AD_ID",
+                    "value": "msnow_vl-65d7d39a-dbb6-4f43-909a-8d985141fd7a_vod"
+                },
+                {
+                    "name": "externalAdvertiserId",
+                    "value": "msnow_vl-65d7d39a-dbb6-4f43-909a-8d985141fd7a_vod"
+                }
+            ],
+            "publishDate": 1788388169,
+            "contentType": "VIDEO",
+            "mediaType": "VIDEO",
+            "updateDate": 1788388169,
+            "drmEnabled": true,
+            "licenses": [
+                "52d96bf1-1914-4782-8a49-c6dded6033fd"
+            ],
+            "monetizationBadgeIdentifier": "tve",
+            "objectKey": "video",
+            "seo": {},
+            "airTimezone": "America/New_York",
+            "seasonAirTimezone": "America/New_York",
+            "isVerticalVideo": false,
+            "status": "open",
+            "cuePoints": null,
+            "mediaProvider": "HARMONIC",
+            "network": "msnbc",
+            "externalId": "fc54a8ce-7d14-434e-adee-daccd5e4aa51",
+            "sport": {},
+            "isReplay": true,
+            "airtable": {
+                "id": "rec1QyYaUwyEXcAJR"
+            },
+            "region": "us-east1",
+            "isClip": false
+            },
+                    "errorCode": "",
+                    "errorMessage": "",
+                    "vl_errorCode": ""
+                  }
+                }
+              }
+            }
+            """
+
+        
+        
+        guard
+                let outerData = contentResponseJSON.data(using: .utf8),
+                var outerJSON = try? JSONSerialization.jsonObject(
+                    with: outerData
+                ) as? [String: Any],
+                var dataObject = outerJSON["data"] as? [String: Any],
+                var drmObject = dataObject["drmProtectedAsset"] as? [String: Any],
+                let videoAssetObject = drmObject["videoAsset"] as? [String: Any],
+                let videoAssetData = try? JSONSerialization.data(
+                    withJSONObject: videoAssetObject
+                ),
+                let videoAssetString = String(
+                    data: videoAssetData,
+                    encoding: .utf8
+                )
+            else {
+                print("Invalid entitlement JSON")
+                return nil
+            }
+
+            drmObject["videoAsset"] = videoAssetString
+            dataObject["drmProtectedAsset"] = drmObject
+            outerJSON["data"] = dataObject
+
+            guard
+                let finalData = try? JSONSerialization.data(
+                    withJSONObject: outerJSON
+                ),
+                let finalJSONString = String(
+                    data: finalData,
+                    encoding: .utf8
+                )
+            else {
+                return nil
+            }
+
+            let dataParser = DataParser()
+        //        let dataParser = VLPlayer.DataParser()
+        let playerObject = dataParser.parseContent( channelID: "12345", contentDictionary: videoAssetObject  as Dictionary<String, AnyObject>)
+        let response = try? JSONDecoder().decode(VLPlayerResponse.self, from: videoAssetData)
+                
+    
+        return VLPlayer.EntitlementData(playerObject: playerObject, isSuccess: true, error: nil, playerResponse: response, contentResponse: videoAssetObject as Dictionary<String, AnyObject>)
+    }
+}
+

@@ -49,7 +49,7 @@ class PlayerViewController_tvOS: UIViewController {
     var autoplayEnabled: Bool = true
     var hideControls: Bool = false
     var muteEnabled: Bool = false
-    var isChapteringCuePointEnable: Bool = true
+    var isChapteringCuePointEnable: Bool = false
     var useCustomThemeControls: Bool = true
     var onChapterScheduleButtonTapped: ((String) -> Void)?
     var chapterScheduleViewController: UIViewController?
@@ -85,6 +85,8 @@ class PlayerViewController_tvOS: UIViewController {
         }
     }
     let loaderView = UIActivityIndicatorView(style: .large)
+    var isCustomViewEnableForSSE: Bool = false
+    var timerView: TimerView?
 
     var channelkey: String = ""
     /// Source of truth for the slider markers and the tvOS chapter collection. Shared
@@ -211,6 +213,7 @@ class PlayerViewController_tvOS: UIViewController {
         // Set delegates for player events and analytics
         vlPlayer?.videoPlayerDelegate = self
         vlPlayer?.videoPlayerDatasource = self
+        vlPlayer?.playerSSEDelegate = self
         
         // Set delegates for SSAID events
         vlPlayer?.serverSideAdTrackingDelegate = self
@@ -222,11 +225,23 @@ class PlayerViewController_tvOS: UIViewController {
             vlPlayer?.setEntitlement(data: entitlementData)
         }
         let autoPlayList = autoPlayListdataManager?.getAutoPlayUrlList()// pass this for autoplay in nextPlaybackList
+        var tveProviderInfo: TVEProviderInfo?
+        do {
+            let userIdentity = try await VLAuthentication.sharedInstance.getUserIdentity()
+            tveProviderInfo = TVEProviderInfo(
+                tveProvider: userIdentity.tveMetadata?.tveProvider,
+                mvpdProvider: userIdentity.tveMetadata?.mvpdProvider,
+                logo: userIdentity.tveMetadata?.imageUrl.map { .urlString($0) }
+            )
+        } catch {
+            debugPrint(error)
+        }
         
         // Set player source and handle completion
         vlPlayer?.setSource(type: playbackSourceType,
                             vlPlayerTag: "1", customControlsView: nil,adUrl: nil,
-                            playerFeaturesSupported: featureSupported, nextPlaybackList: nil,
+                            playerFeaturesSupported: featureSupported, nextPlaybackList: autoPlayList,
+                            tveProviderInfo: tveProviderInfo,
                             brandName: ""
                         ) { [weak self] isSuccess, playerView, contentResponse in
             DispatchQueue.main.async {
@@ -247,6 +262,9 @@ class PlayerViewController_tvOS: UIViewController {
                 let isDVRContent = (self?.isLiveVideo() ?? false) && (self?.isDVREnabled() ?? false)
                 if isDVRContent {
                     self?.setupChapteringTimeEntry()
+                    if let self, self.isChapteringCuePointEnable {
+                        self.vlPlayer?.setChapterCueConfig(self.chapterCueConfig)
+                    }
                 } else if self?.isFullScreen == false, self?.watchHistoryView == nil {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         self?.addWatchHistoryView()
@@ -417,7 +435,7 @@ class PlayerViewController_tvOS: UIViewController {
         self.vlPlayer?
             .setAnalyticsInfo(
                 mediaAnalyticsInfo: MediaAnalyticsInfo(
-//                    contentInfo: VLContentInfoAnalytics(videonetwork: "test"),
+                    contentInfo: VLContentInfoAnalytics(id:"1234", title: "dummy", videonetwork: "test"),
                     playerInfo: AnalyticsHelperV2.shared.getPlayerInfo(),
                     tvProviderInfo: AnalyticsHelperV2.shared.getTVEProviderInfo()
                 )
@@ -455,6 +473,17 @@ class PlayerViewController_tvOS: UIViewController {
     // Returns player features supported configuration
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
         let customMacros  = ["VIEWLIFT_USER_AGENT": Utility.sharedUtility.getUserAgent()]
+        let presentation: VLPlayer.SSEPresentation
+        if isCustomViewEnableForSSE {
+            setupTimeView()
+            if let timerView {
+                presentation = .custom(timerView)
+            } else {
+                presentation = .default()
+            }
+        } else {
+            presentation = .default()
+        }
         // See VLPlayer documentation for available macros
         return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  fullScreenOnly: isFullScreen,
@@ -469,8 +498,10 @@ class PlayerViewController_tvOS: UIViewController {
                                                  autoPlayConfiguration: getAutoPlayConfig(type: .default),
                                                  isServerSideAdTrackingEnabled: true,
                                                  isChapteringCuePointEnable: isChapteringCuePointEnable,
+                                                 playerControlsSkin: .chaptering,
                                                  chapteringCuePoints: chapterCuePointSegments,
                                                  featureFlags: FeatureFlags(shouldEnablePlayPauseOnLiveStream: true),
+                                                 playerSSEConfig: .enabled(urlString: VLAuthentication.sharedInstance.bootStrapConfig?.sseBaseUrl ?? "", presentation: presentation),
                                                  watchHistoryResumeTime: Double(watchedTime),
                                                  watchHistoryTimeInterval: self.watchHistoryInterval,
                                                  watchHistoryEnabled: self.watchHistoryEnabled)
@@ -911,5 +942,42 @@ extension PlayerViewController_tvOS: WatchHistoryDelegate {
         self.watchHistoryEnabled = isEnabled
         self.vlPlayer?.setWatchHistoryEnabledForPartner(isEnabled)
         print("Watch history tracking: \(isEnabled ? "enabled" : "disabled")")
+    }
+}
+
+extension PlayerViewController_tvOS: PlayerSSEDelegate{
+    func timerDidStart(endTime: TimeInterval) {
+        debugPrint("PlayerSSEDelegate timerDidStart")
+        if isCustomViewEnableForSSE {
+            let startTime = Date().timeIntervalSince1970
+            timerView?.startTimer(startTime: startTime, duration: endTime - startTime)
+        }
+    }
+    
+    func gameDidStart() {
+        debugPrint("PlayerSSEDelegate gameDidStart")
+        Task { [weak self] in
+            
+            guard let self else { return }
+            
+            await MainActor.run {
+                self.vlPlayer?.destroy()
+            }
+            
+            await self.loadPlayerView()
+        }
+    }
+    
+    func gameDidEnd() {
+        debugPrint("PlayerSSEDelegate gameDidEnd")
+    }
+
+    func setupTimeView() {
+        let timerView = TimerView(frame: .zero)
+        view.addSubview(timerView)
+        timerView.onTimerFinished = { [weak self] in
+            self?.gameDidStart()
+        }
+        self.timerView = timerView
     }
 }

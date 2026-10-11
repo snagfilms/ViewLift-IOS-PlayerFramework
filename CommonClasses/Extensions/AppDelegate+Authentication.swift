@@ -168,13 +168,15 @@ extension AppDelegate {
 
             let enabledClients = results.filter { $0.value }.map { $0.key }
             VLAnalytics.shared.setupAnalytics(clients: enabledClients, enableDebugLogs: true)
+        
+            VLAnalytics.shared.startObservingPlayerEvents()
         }
 
     
     func setupAnalytics() {
         self.setupAnalyticsConfiguration()
         
-        VLAnalytics.shared.setupAnalytics(clients: [.adobe, .comscore], enableDebugLogs: true)
+//        VLAnalytics.shared.setupAnalytics(clients: [.adobe, .comscore], enableDebugLogs: true)
         self.handleAnalyticsConsent()
         
         self.triggerSpashScreenEvent()

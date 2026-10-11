@@ -16,7 +16,7 @@
                 <outlet property="controlsStackView" destination="w7K-X8-XPR" id="p4F-nZ-6c4"/>
                 <outlet property="elapsedDurationLabel" destination="9NQ-Pl-W1R" id="x8c-8j-qo7"/>
                 <outlet property="gradientView" destination="9jE-vm-v5X" id="5gq-jv-u1I"/>
-                <outlet property="imageView_TVE" destination="eKa-DW-XM5" id="pyz-Ft-0j0"/>
+                <outlet property="imageViewTVE" destination="eKa-DW-XM5" id="hiL-3s-FD8"/>
                 <outlet property="innerStackView" destination="NGl-ah-6Ed" id="dc8-cq-TGu"/>
                 <outlet property="liveButton" destination="TUY-eK-xDX" id="5wl-pe-a0f"/>
                 <outlet property="mainStackView" destination="YRa-Er-LiP" id="PNt-ap-bSu"/>
@@ -189,7 +189,7 @@
                                                 </stackView>
                                             </subviews>
                                         </stackView>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" hidden="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="47O-CO-u1S">
+                                        <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="47O-CO-u1S">
                                             <rect key="frame" x="40" y="794" width="1840" height="291"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
