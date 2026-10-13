@@ -496,6 +496,7 @@ extension VLPlayerLib.VLPlayer {
   @objc dynamic open func seekDVRToLivePosition()
   @objc dynamic open func startTime(seconds: Swift.Double)
   public func getCurrentTime() -> Swift.Double?
+  public func freezeLiveEdge()
   public func getAVAssetsItemLength() -> Swift.Double?
   @objc dynamic open func getSource() -> Swift.Dictionary<Swift.String, Swift.String>?
   @objc dynamic open func setIconColor(color: Swift.String)
