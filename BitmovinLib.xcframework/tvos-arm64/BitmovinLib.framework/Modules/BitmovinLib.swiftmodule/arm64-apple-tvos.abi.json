@@ -1,0 +1,868 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "BitmovinLib",
+    "printedName": "BitmovinLib",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "BitmovinLib",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "BitmovinPlayer",
+        "printedName": "BitmovinPlayer",
+        "declKind": "Import",
+        "moduleName": "BitmovinLib"
+      },
+      {
+        "kind": "Import",
+        "name": "Combine",
+        "printedName": "Combine",
+        "declKind": "Import",
+        "moduleName": "BitmovinLib"
+      },
+      {
+        "kind": "Import",
+        "name": "VLBeaconLib",
+        "printedName": "VLBeaconLib",
+        "declKind": "Import",
+        "moduleName": "BitmovinLib"
+      },
+      {
+        "kind": "Import",
+        "name": "VLPlayerLib",
+        "printedName": "VLPlayerLib",
+        "declKind": "Import",
+        "moduleName": "BitmovinLib"
+      },
+      {
+        "kind": "Import",
+        "name": "BitmovinPlayer",
+        "printedName": "BitmovinPlayer",
+        "declKind": "Import",
+        "moduleName": "BitmovinLib",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "VLPlayerLib",
+        "printedName": "VLPlayerLib",
+        "declKind": "Import",
+        "moduleName": "BitmovinLib"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "BitmovinLib",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "VLPlayerLib",
+        "printedName": "VLPlayerLib",
+        "declKind": "Import",
+        "moduleName": "BitmovinLib"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "BitmovinLibModuleLoader",
+        "printedName": "BitmovinLibModuleLoader",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "bootstrapModule",
+            "printedName": "bootstrapModule()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@BitmovinLib@objc(cs)BitmovinLibModuleLoader(cm)bootstrapModule",
+            "mangledName": "$s11BitmovinLib0aB12ModuleLoaderC09bootstrapC0yyFZ",
+            "moduleName": "BitmovinLib",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "BitmovinLibModuleLoader",
+                "printedName": "BitmovinLib.BitmovinLibModuleLoader",
+                "usr": "c:@M@BitmovinLib@objc(cs)BitmovinLibModuleLoader"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@BitmovinLib@objc(cs)BitmovinLibModuleLoader(im)init",
+            "mangledName": "$s11BitmovinLib0aB12ModuleLoaderCACycfc",
+            "moduleName": "BitmovinLib",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@BitmovinLib@objc(cs)BitmovinLibModuleLoader",
+        "mangledName": "$s11BitmovinLib0aB12ModuleLoaderC",
+        "moduleName": "BitmovinLib",
+        "objc_name": "BitmovinLibModuleLoader",
+        "declAttributes": [
+          "Final",
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "CustomVideoController",
+        "printedName": "CustomVideoController",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "onEvent",
+            "printedName": "onEvent(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Event",
+                "printedName": "any BitmovinPlayerCore.Event",
+                "usr": "c:@M@BitmovinPlayerCore@objc(pl)BMPEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onEvent:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E7onEvent_6playery0F10PlayerCore0H0_p_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onEvent:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onSourceAdded",
+            "printedName": "onSourceAdded(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "SourceAddedEvent",
+                "printedName": "BitmovinPlayerCore.SourceAddedEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPSourceAddedEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onSourceAdded:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E13onSourceAdded_6playery0F10PlayerCore0hI5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onSourceAdded:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onTimeChanged",
+            "printedName": "onTimeChanged(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "TimeChangedEvent",
+                "printedName": "BitmovinPlayerCore.TimeChangedEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPTimeChangedEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onTimeChanged:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E13onTimeChanged_6playery0F10PlayerCore0hI5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onTimeChanged:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onReady",
+            "printedName": "onReady(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ReadyEvent",
+                "printedName": "BitmovinPlayerCore.ReadyEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPReadyEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onReady:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E7onReady_6playery0F10PlayerCore0H5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onReady:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onStallStarted",
+            "printedName": "onStallStarted(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "StallStartedEvent",
+                "printedName": "BitmovinPlayerCore.StallStartedEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPStallStartedEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onStallStarted:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E14onStallStarted_6playery0F10PlayerCore0hI5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onStallStarted:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onStallEnded",
+            "printedName": "onStallEnded(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "StallEndedEvent",
+                "printedName": "BitmovinPlayerCore.StallEndedEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPStallEndedEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onStallEnded:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E12onStallEnded_6playery0F10PlayerCore0hI5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onStallEnded:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onPlayerInactive",
+            "printedName": "onPlayerInactive(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "PlayerInactiveEvent",
+                "printedName": "BitmovinPlayerCore.PlayerInactiveEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPPlayerInactiveEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onPlayerInactive:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E16onPlayerInactive_6playery0fH4Core0hI5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onPlayerInactive:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onPlaying",
+            "printedName": "onPlaying(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "PlayingEvent",
+                "printedName": "BitmovinPlayerCore.PlayingEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPPlayingEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onPlaying:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E9onPlaying_6playery0F10PlayerCore0H5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onPlaying:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onPlayerError",
+            "printedName": "onPlayerError(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "PlayerErrorEvent",
+                "printedName": "BitmovinPlayerCore.PlayerErrorEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPPlayerErrorEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onPlayerError:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E13onPlayerError_6playery0fH4Core0hI5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onPlayerError:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onSourceRemoved",
+            "printedName": "onSourceRemoved(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "SourceRemovedEvent",
+                "printedName": "BitmovinPlayerCore.SourceRemovedEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPSourceRemovedEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onSourceRemoved:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E15onSourceRemoved_6playery0F10PlayerCore0hI5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onSourceRemoved:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onSourceError",
+            "printedName": "onSourceError(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "SourceErrorEvent",
+                "printedName": "BitmovinPlayerCore.SourceErrorEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPSourceErrorEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onSourceError:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E13onSourceError_6playery0F10PlayerCore0hI5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onSourceError:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onPlaybackFinished",
+            "printedName": "onPlaybackFinished(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "PlaybackFinishedEvent",
+                "printedName": "BitmovinPlayerCore.PlaybackFinishedEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPPlaybackFinishedEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onPlaybackFinished:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E18onPlaybackFinished_6playery0F10PlayerCore0hI5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onPlaybackFinished:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onVideoPlaybackQualityChanged",
+            "printedName": "onVideoPlaybackQualityChanged(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "VideoPlaybackQualityChangedEvent",
+                "printedName": "BitmovinPlayerCore.VideoPlaybackQualityChangedEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPVideoPlaybackQualityChangedEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onVideoPlaybackQualityChanged:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E02onD22PlaybackQualityChanged_6playery0F10PlayerCore0dhiJ5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onVideoPlaybackQualityChanged:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onVideoDownloadQualityChanged",
+            "printedName": "onVideoDownloadQualityChanged(_:player:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "VideoDownloadQualityChangedEvent",
+                "printedName": "BitmovinPlayerCore.VideoDownloadQualityChangedEvent",
+                "usr": "c:@M@BitmovinPlayerCore@objc(cs)BMPVideoDownloadQualityChangedEvent"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Player",
+                "printedName": "any BitmovinPlayerCore.Player",
+                "usr": "c:objc(pl)BMPPlayer"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@BitmovinLib@VLPlayerLib@objc(cs)CustomVideoController(im)onVideoDownloadQualityChanged:player:",
+            "mangledName": "$s11VLPlayerLib21CustomVideoControllerC08BitmovinB0E02onD22DownloadQualityChanged_6playery0F10PlayerCore0dhiJ5EventC_So9BMPPlayer_ptF",
+            "moduleName": "BitmovinLib",
+            "objc_name": "onVideoDownloadQualityChanged:player:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Nonisolated",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@VLPlayerLib@objc(cs)CustomVideoController",
+        "mangledName": "$s11VLPlayerLib21CustomVideoControllerC",
+        "moduleName": "VLPlayerLib",
+        "declAttributes": [
+          "Preconcurrency",
+          "Custom",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)UIViewController",
+        "isExternal": true,
+        "superclassNames": [
+          "UIKit.UIViewController",
+          "UIKit.UIResponder",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "PlayerListener",
+            "printedName": "PlayerListener",
+            "usr": "c:@M@BitmovinPlayerCore@objc(pl)BMPPlayerListener",
+            "mangledName": "$s18BitmovinPlayerCore0B8ListenerP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "SendableMetatype",
+            "printedName": "SendableMetatype",
+            "usr": "s:s16SendableMetatypeP",
+            "mangledName": "$ss16SendableMetatypeP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "UITraitChangeObservable",
+            "printedName": "UITraitChangeObservable",
+            "usr": "s:5UIKit23UITraitChangeObservableP",
+            "mangledName": "$s5UIKit23UITraitChangeObservableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "AdsAnalyticsTrackingDelegate",
+            "printedName": "AdsAnalyticsTrackingDelegate",
+            "usr": "s:11VLPlayerLib28AdsAnalyticsTrackingDelegateP",
+            "mangledName": "$s11VLPlayerLib28AdsAnalyticsTrackingDelegateP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "PlayheadTrackerDelegate",
+            "printedName": "PlayheadTrackerDelegate",
+            "usr": "s:11VLPlayerLib23PlayheadTrackerDelegateP",
+            "mangledName": "$s11VLPlayerLib23PlayheadTrackerDelegateP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/nexg\/Documents\/Viewlift\/Frameworks\/Player\/Clone_1\/iosplayer-sdk\/VLPlayer\/BitmovinLib\/BitMovinVideoController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 698,
+      "length": 5,
+      "value": "false"
+    }
+  ]
+}

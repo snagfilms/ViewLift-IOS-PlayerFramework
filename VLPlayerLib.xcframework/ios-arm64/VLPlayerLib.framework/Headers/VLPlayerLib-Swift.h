@@ -346,9 +346,14 @@ extern "C" {
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import AVFoundation;
+@import AVKit;
+@import AmazonIVSPlayer;
 @import CoreFoundation;
 @import CoreGraphics;
+@import CoreMedia;
 @import Foundation;
+@import GoogleInteractiveMediaAds;
 @import ObjectiveC;
 @import QuartzCore;
 @import UIKit;
@@ -385,6 +390,12 @@ SWIFT_CLASS("_TtC11VLPlayerLib21AnalyticsHelperPlayer")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+SWIFT_CLASS("_TtC11VLPlayerLib11BeaconEvent")
+@interface BeaconEvent : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 SWIFT_CLASS("_TtC11VLPlayerLib12BeaconHelper")
 @interface BeaconHelper : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -406,19 +417,132 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib26ChromeCastPlaybackDelegate_")
 - (void)chromeCastStartedConnectingDevice;
 @end
 
+@class NSCoder;
+@protocol UIViewControllerTransitionCoordinator;
+@class UITouch;
+@class UIEvent;
+@class NSString;
+@class NSBundle;
+SWIFT_CLASS("_TtC11VLPlayerLib21CustomVideoController")
+@interface CustomVideoController : UIViewController
+/// important:
+///
+/// Method - initialize method for CustomViewController
+/// remark:
+///
+/// Use this method to initialize video player.
+/// <ul>
+///   <li>
+///     Parameters:
+///   </li>
+///   <li>
+///     videoObject:(VideoObject) Object of VideoObject class that saves details of video and ad to be played
+///   </li>
+/// </ul>
+/// Also See - VideoObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+/// important:
+///
+/// Method - viewDidLoad
+/// Default method to overide custom code to UIViewController - viewDidLoad
+- (void)viewDidLoad;
+/// important:
+///
+/// Method - viewWillAppear
+/// <ul>
+///   <li>
+///     Parameters:
+///   </li>
+///   <li>
+///     animated: Attribute to tell if view is loaded with Animation
+///   </li>
+/// </ul>
+/// Default method to overide custom code to UIViewController - viewWillAppear
+- (void)viewWillAppear:(BOOL)animated;
+/// important:
+///
+/// Method - viewDidLayoutSubviews
+- (void)viewDidLayoutSubviews;
+/// important:
+///
+/// Method - viewWillLayoutSubviews
+/// Default method to overide custom code to UIViewController - viewWillLayoutSubviews
+- (void)viewWillLayoutSubviews;
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+/// important:
+///
+/// Method - touchesEnded
+/// Default method to overide custom code to UIViewController - touchesEnded
+- (void)touchesEnded:(NSSet<UITouch *> * _Nonnull)touches withEvent:(UIEvent * _Nullable)event;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+@interface CustomVideoController (SWIFT_EXTENSION(VLPlayerLib))
+@property (nonatomic, readonly) NSTimeInterval currentTime;
+@end
+
+@class IVSPlayer;
+@class IVSQuality;
+@interface CustomVideoController (SWIFT_EXTENSION(VLPlayerLib)) <IMAContentPlayhead, IVSPlayerDelegate>
+/// IVSPlayer Delegates
+- (void)player:(IVSPlayer * _Nonnull)player didChangeState:(IVSPlayerState)state;
+- (void)player:(IVSPlayer * _Nonnull)player didChangeDuration:(CMTime)duration;
+- (void)playerWillRebuffer:(IVSPlayer * _Nonnull)player;
+- (void)player:(IVSPlayer * _Nonnull)player didFailWithError:(NSError * _Nonnull)error;
+- (void)player:(IVSPlayer * _Nonnull)player didChangeQuality:(IVSQuality * _Nullable)quality;
+- (void)player:(IVSPlayer * _Nonnull)player didSeekToTime:(CMTime)time;
+@end
+
+@class IMAAdsLoader;
+@class IMAAdsLoadedData;
+@class IMAAdLoadingErrorData;
+@class IMAAdsManager;
+@class IMAAdError;
+@class IMAAdEvent;
+@interface CustomVideoController (SWIFT_EXTENSION(VLPlayerLib)) <IMAAdsLoaderDelegate, IMAAdsManagerDelegate>
+- (void)adsLoader:(IMAAdsLoader * _Nonnull)loader adsLoadedWithData:(IMAAdsLoadedData * _Nonnull)adsLoadedData;
+- (void)adsLoader:(IMAAdsLoader * _Nonnull)loader failedWithErrorData:(IMAAdLoadingErrorData * _Nonnull)adErrorData;
+- (void)adsManager:(IMAAdsManager * _Nonnull)adsManager didReceiveAdError:(IMAAdError * _Nonnull)error;
+- (void)adsManager:(IMAAdsManager * _Nonnull)adsManager adDidProgressToTime:(NSTimeInterval)mediaTime totalTime:(NSTimeInterval)totalTime;
+- (void)adsManager:(IMAAdsManager * _Nonnull)adsManager didReceiveAdEvent:(IMAAdEvent * _Nonnull)event;
+- (void)adsManagerDidRequestContentPause:(IMAAdsManager * _Nonnull)adsManager;
+- (void)adsManagerDidRequestContentResume:(IMAAdsManager * _Nonnull)adsManager;
+@end
+
+@class AVPlayerItemMetadataOutput;
+@class AVTimedMetadataGroup;
+@class AVPlayerItemTrack;
+@interface CustomVideoController (SWIFT_EXTENSION(VLPlayerLib)) <AVPlayerItemMetadataOutputPushDelegate>
+/// Observer, not to be used
+- (void)addObserver:(NSObject * _Nonnull)observer forKeyPath:(NSString * _Nonnull)keyPath options:(NSKeyValueObservingOptions)options context:(void * _Nullable)context;
+/// Observer, not to be used
+- (void)observeValueForKeyPath:(NSString * _Nullable)keyPath ofObject:(id _Nullable)object change:(NSDictionary<NSKeyValueChangeKey, id> * _Nullable)change context:(void * _Nullable)context;
+- (void)metadataOutput:(AVPlayerItemMetadataOutput * _Nonnull)output didOutputTimedMetadataGroups:(NSArray<AVTimedMetadataGroup *> * _Nonnull)groups fromPlayerItemTrack:(AVPlayerItemTrack * _Nullable)track;
+@end
+
+@class AVPictureInPictureController;
+@interface CustomVideoController (SWIFT_EXTENSION(VLPlayerLib)) <AVPictureInPictureControllerDelegate>
+- (void)videoPlayerFullScreenButtonTapped;
+- (void)pictureInPictureControllerWillStartPictureInPicture:(AVPictureInPictureController * _Nonnull)pictureInPictureController;
+- (void)pictureInPictureControllerDidStartPictureInPicture:(AVPictureInPictureController * _Nonnull)pictureInPictureController;
+- (void)pictureInPictureController:(AVPictureInPictureController * _Nonnull)pictureInPictureController restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:(void (^ _Nonnull)(BOOL))completionHandler;
+- (void)pictureInPictureControllerWillStopPictureInPicture:(AVPictureInPictureController * _Nonnull)pictureInPictureController;
+- (void)pictureInPictureControllerDidStopPictureInPicture:(AVPictureInPictureController * _Nonnull)pictureInPictureController;
+- (void)pictureInPictureController:(AVPictureInPictureController * _Nonnull)pictureInPictureController failedToStartPictureInPictureWithError:(NSError * _Nonnull)error;
+@end
+
 SWIFT_CLASS("_TtC11VLPlayerLib10DataParser")
 @interface DataParser : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class NSCoder;
 @class UIWindow;
 @class CAAnimation;
 @class CALayer;
 @class NSNotification;
 @class UIGestureRecognizer;
 @class UIView;
-@class NSString;
 @class NSAttributedString;
 @class UIFont;
 @class UIColor;
@@ -568,6 +692,12 @@ SWIFT_CLASS("_TtC11VLPlayerLib15PlayheadTracker")
 @interface PlayheadTracker : NSObject
 @property (nonatomic, readonly) NSUInteger hash;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+SWIFT_CLASS("_TtC11VLPlayerLib7Utility")
+@interface Utility : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -798,6 +928,13 @@ typedef SWIFT_ENUM(NSInteger, PlayingState, open) {
 /// </ul>
 - (void)updateVideoPlayerFrameWithFrame:(CGRect)frame;
 - (void)updateCaptionWithSelectedIndex:(NSInteger)selectedIndex selectedKey:(NSString * _Nonnull)selectedKey;
+@end
+
+SWIFT_CLASS("_TtC11VLPlayerLib17VideoControlsView")
+@interface VideoControlsView : UIView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+@property (nonatomic, copy) NSArray * _Nullable accessibilityElements;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
 @class NSNumber;

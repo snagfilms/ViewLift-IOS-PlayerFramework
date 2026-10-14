@@ -348,6 +348,7 @@ extern "C" {
 #endif
 @import CoreFoundation;
 @import Foundation;
+@import GoogleInteractiveMediaAds;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -383,9 +384,118 @@ SWIFT_CLASS("_TtC11VLPlayerLib21AnalyticsHelperPlayer")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+SWIFT_CLASS("_TtC11VLPlayerLib11BeaconEvent")
+@interface BeaconEvent : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 SWIFT_CLASS("_TtC11VLPlayerLib12BeaconHelper")
 @interface BeaconHelper : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSCoder;
+@protocol UIFocusEnvironment;
+@class NSString;
+@class NSBundle;
+/// important:
+///
+/// Class to create and use video player
+/// remark:
+///
+/// Full screen video player, Create object of this class and ad it as child view controller.
+/// You can also use this to present a stand alone full screen Video player
+/// warning:
+///
+/// Dont push this view controller via Naviation controller
+SWIFT_CLASS("_TtC11VLPlayerLib21CustomVideoController")
+@interface CustomVideoController : UIViewController
+/// important:
+///
+/// Method - initialize method for CustomViewController
+/// remark:
+///
+/// Use this method to initialize video player.
+/// <ul>
+///   <li>
+///     Parameters:
+///   </li>
+///   <li>
+///     videoObject:(VideoObject) Object of VideoObject class that saves details of video and ad to be played
+///   </li>
+/// </ul>
+/// Also See - VideoObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSArray<id <UIFocusEnvironment>> * _Nonnull preferredFocusEnvironments;
+/// important:
+///
+/// Method - viewDidLoad
+/// Default method to overide custom code to UIViewController - viewDidLoad
+- (void)viewDidLoad;
+- (void)viewDidLayoutSubviews;
+- (void)viewDidAppear:(BOOL)animated;
+/// important:
+///
+/// Method - viewWillAppear
+/// <ul>
+///   <li>
+///     Parameters:
+///   </li>
+///   <li>
+///     animated: Attribute to tell if view is loaded with Animation
+///   </li>
+/// </ul>
+/// Default method to overide custom code to UIViewController - viewWillAppear
+- (void)viewWillAppear:(BOOL)animated;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+@class UIPress;
+@class UIPressesEvent;
+@class UIFocusUpdateContext;
+@class UIFocusAnimationCoordinator;
+@interface CustomVideoController (SWIFT_EXTENSION(VLPlayerLib))
+- (void)pressesBegan:(NSSet<UIPress *> * _Nonnull)presses withEvent:(UIPressesEvent * _Nullable)event;
+- (void)pressesEnded:(NSSet<UIPress *> * _Nonnull)presses withEvent:(UIPressesEvent * _Nullable)event;
+- (void)didUpdateFocusInContext:(UIFocusUpdateContext * _Nonnull)context withAnimationCoordinator:(UIFocusAnimationCoordinator * _Nonnull)coordinator;
+@end
+
+@class IMAAdsLoader;
+@class IMAAdsLoadedData;
+@class IMAAdLoadingErrorData;
+@class IMAAdsManager;
+@class IMAAdError;
+@class IMAAdEvent;
+@interface CustomVideoController (SWIFT_EXTENSION(VLPlayerLib)) <IMAAdsLoaderDelegate, IMAAdsManagerDelegate>
+- (void)adsLoader:(IMAAdsLoader * _Nonnull)loader adsLoadedWithData:(IMAAdsLoadedData * _Nonnull)adsLoadedData;
+- (void)adsLoader:(IMAAdsLoader * _Nonnull)loader failedWithErrorData:(IMAAdLoadingErrorData * _Nonnull)adErrorData;
+- (void)adsManager:(IMAAdsManager * _Nonnull)adsManager didReceiveAdError:(IMAAdError * _Nonnull)error;
+- (void)adsManager:(IMAAdsManager * _Nonnull)adsManager adDidProgressToTime:(NSTimeInterval)mediaTime totalTime:(NSTimeInterval)totalTime;
+- (void)adsManager:(IMAAdsManager * _Nonnull)adsManager didReceiveAdEvent:(IMAAdEvent * _Nonnull)event;
+- (void)adsManagerDidRequestContentPause:(IMAAdsManager * _Nonnull)adsManager;
+- (void)adsManagerDidRequestContentResume:(IMAAdsManager * _Nonnull)adsManager;
+@end
+
+@interface CustomVideoController (SWIFT_EXTENSION(VLPlayerLib))
+/// Observer, not to be used
+- (void)addObserver:(NSObject * _Nonnull)observer forKeyPath:(NSString * _Nonnull)keyPath options:(NSKeyValueObservingOptions)options context:(void * _Nullable)context;
+/// Observer, not to be used
+- (void)observeValueForKeyPath:(NSString * _Nullable)keyPath ofObject:(id _Nullable)object change:(NSDictionary<NSKeyValueChangeKey, id> * _Nullable)change context:(void * _Nullable)context;
+@end
+
+@interface CustomVideoController (SWIFT_EXTENSION(VLPlayerLib))
+/// /        if let subTitleString = self.getSubtitleURLString() {
+/// /            self.playerControls?.setSubtitleUrlString(subTitleString: subTitleString)
+/// /            if !checkIfSubtitleIsAlreadyAdded() {
+/// /                self.videoPlayerAddSubtitle()
+/// /            }
+/// /        }
+/// /        self.avPlayer.subtitleLabel?.isHidden = !Constants.kSTANDARDUSERDEFAULTS.bool(forKey: Constants.kIsCCEnabled)
+/// /        Constants.kSTANDARDUSERDEFAULTS.set(!isSubtitleOff, forKey: Constants.kIsCCEnabled)
+/// /        self.displaySubtitlesEmbedWithinUrl(shouldHide: isSubtitleOff)
+- (void)videoPlayerZoomInButtonTapped;
 @end
 
 SWIFT_CLASS("_TtC11VLPlayerLib10DataParser")
@@ -407,11 +517,6 @@ SWIFT_CLASS("_TtC11VLPlayerLib15PlayheadTracker")
 @end
 
 @class UIColor;
-@class NSCoder;
-@class UIFocusUpdateContext;
-@class UIFocusAnimationCoordinator;
-@class UIPress;
-@class UIPressesEvent;
 /// A control used to select a single value from a continuous range of values.
 SWIFT_CLASS("_TtC11VLPlayerLib10TvOSSlider")
 @interface TvOSSlider : UIControl
@@ -446,12 +551,17 @@ SWIFT_CLASS("_TtC11VLPlayerLib10TvOSSlider")
 - (void)pressesBegan:(NSSet<UIPress *> * _Nonnull)presses withEvent:(UIPressesEvent * _Nullable)event;
 @end
 
-@class NSString;
 @interface TvOSSlider (SWIFT_EXTENSION(VLPlayerLib))
 @property (nonatomic) BOOL isAccessibilityElement;
 @property (nonatomic) UIAccessibilityTraits accessibilityTraits;
 @property (nonatomic, copy) NSString * _Nullable accessibilityLabel;
 @property (nonatomic, copy) NSString * _Nullable accessibilityValue;
+@end
+
+SWIFT_CLASS("_TtC11VLPlayerLib7Utility")
+@interface Utility : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 SWIFT_CLASS("_TtC11VLPlayerLib7VLError")

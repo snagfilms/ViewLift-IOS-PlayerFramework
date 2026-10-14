@@ -1,0 +1,185 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "MuxLib",
+    "printedName": "MuxLib",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "AVFoundation",
+        "printedName": "AVFoundation",
+        "declKind": "Import",
+        "moduleName": "MuxLib",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "MuxLib"
+      },
+      {
+        "kind": "Import",
+        "name": "MuxCore",
+        "printedName": "MuxCore",
+        "declKind": "Import",
+        "moduleName": "MuxLib"
+      },
+      {
+        "kind": "Import",
+        "name": "MUXSDKStats",
+        "printedName": "MUXSDKStats",
+        "declKind": "Import",
+        "moduleName": "MuxLib"
+      },
+      {
+        "kind": "Import",
+        "name": "VLPlayerLib",
+        "printedName": "VLPlayerLib",
+        "declKind": "Import",
+        "moduleName": "MuxLib"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MuxLibModuleLoader",
+        "printedName": "MuxLibModuleLoader",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "bootstrapModule",
+            "printedName": "bootstrapModule()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@MuxLib@objc(cs)MuxLibModuleLoader(cm)bootstrapModule",
+            "mangledName": "$s6MuxLib0aB12ModuleLoaderC09bootstrapC0yyFZ",
+            "moduleName": "MuxLib",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MuxLibModuleLoader",
+                "printedName": "MuxLib.MuxLibModuleLoader",
+                "usr": "c:@M@MuxLib@objc(cs)MuxLibModuleLoader"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@MuxLib@objc(cs)MuxLibModuleLoader(im)init",
+            "mangledName": "$s6MuxLib0aB12ModuleLoaderCACycfc",
+            "moduleName": "MuxLib",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@MuxLib@objc(cs)MuxLibModuleLoader",
+        "mangledName": "$s6MuxLib0aB12ModuleLoaderC",
+        "moduleName": "MuxLib",
+        "objc_name": "MuxLibModuleLoader",
+        "declAttributes": [
+          "Final",
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": []
+}
