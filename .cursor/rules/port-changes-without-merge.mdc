@@ -28,6 +28,14 @@ Do not copy these legacy-branch files over current versions:
 - Any `.xcframework` content
 - `.swiftpm`, `xcuserdata`, `.DS_Store`, or other generated/user-state files
 
-This repository contains packaged binaries, not VLPlayerLib, BitmovinLib, or MuxLib implementation sources. Never simulate a source port by editing generated Swift interfaces or framework contents. If a required class is absent, report which source module must change and request its source repository or a newly built XCFramework.
+This repository contains packaged binaries, not VLPlayerLib, BitmovinLib, or MuxLib implementation sources. Never simulate a source port by editing generated Swift interfaces or framework contents.
+
+Port class changes in `/Users/nexg/Documents/Viewlift/Frameworks/Player/Clone_1/iosplayer-sdk` on branch `Develop_VLPlayer_Split`:
+
+- Shared player changes go in `VLPlayer/VLPlayer` or `VLPlayer/VLPlayerLib_tvOS`, targets `VLPlayerLib` and `VLPlayerLib_tvOS`.
+- Bitmovin changes go in `VLPlayer/BitmovinLib`, targets `BitmovinLib` and `BitmovinLib_tvOS`.
+- Mux changes go in `VLPlayer/MuxLib`, targets `MuxLib` and `MuxLib_tvOS`.
+
+Then rebuild the affected XCFramework and replace the whole framework in this package. If that source repository is unavailable, stop and ask for it.
 
 Before editing, summarize source commits/files and proposed module ownership. After editing, show exactly which hunks were ported. Validate all affected products on iOS and tvOS.

@@ -7,6 +7,8 @@ alwaysApply: true
 
 This branch packages three independently built dynamic XCFramework modules. Preserve this separation.
 
+Implementation sources live in `/Users/nexg/Documents/Viewlift/Frameworks/Player/Clone_1/iosplayer-sdk` on branch `Develop_VLPlayer_Split`. Edit classes there, then rebuild and replace the matching XCFramework here.
+
 - `VLPlayerLib.xcframework` contains shared player code.
 - `BitmovinLib.xcframework` contains Bitmovin-specific integrations and extensions.
 - `MuxLib.xcframework` contains Mux-specific integrations.
