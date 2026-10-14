@@ -1,0 +1,33 @@
+---
+description: Port changes from legacy branches without merging over the split SPM structure
+alwaysApply: true
+---
+
+# Port Changes Without Merging
+
+When asked to bring changes from another branch into this split SPM branch, treat the request as a manual code port.
+
+1. Inspect source branch with read-only commands such as `git diff`, `git show`, and `git log`.
+2. Identify changed behavior and changed classes before editing.
+3. Classify every source change by ownership:
+   - Shared playback, UI, ads, IVS, Cast, or common player behavior belongs to VLPlayerLib.
+   - Bitmovin player setup, listeners, events, fullscreen handling, or Bitmovin-only behavior belongs to BitmovinLib.
+   - Mux monitoring, Mux metadata, or Mux-only behavior belongs to MuxLib.
+4. Port only relevant code hunks into corresponding source classes. Adapt imports and references to module boundaries.
+5. Preserve unrelated code and current split-package configuration.
+
+Never run `git pull`, `git merge`, `git rebase`, or whole-commit `git cherry-pick` for this task unless user explicitly requests that exact Git operation after seeing impact.
+
+Do not copy these legacy-branch files over current versions:
+
+- `Package.swift`
+- `Package.resolved`
+- `VLPlayerLibWrapper/Sources/VLPlayerLibWrapper/VLPlayerLibWrapper.swift`
+- `Sources/BitmovinLibTarget/BitmovinLibLinkage.swift`
+- `Sources/MuxLibTarget/MuxLibLinkage.swift`
+- Any `.xcframework` content
+- `.swiftpm`, `xcuserdata`, `.DS_Store`, or other generated/user-state files
+
+This repository contains packaged binaries, not VLPlayerLib, BitmovinLib, or MuxLib implementation sources. Never simulate a source port by editing generated Swift interfaces or framework contents. If a required class is absent, report which source module must change and request its source repository or a newly built XCFramework.
+
+Before editing, summarize source commits/files and proposed module ownership. After editing, show exactly which hunks were ported. Validate all affected products on iOS and tvOS.

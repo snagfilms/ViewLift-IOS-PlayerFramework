@@ -1,0 +1,31 @@
+---
+description: Preserve the split VLPlayer, Bitmovin, and Mux Swift package architecture
+alwaysApply: true
+---
+
+# Split SPM Architecture
+
+This branch packages three independently built dynamic XCFramework modules. Preserve this separation.
+
+- `VLPlayerLib.xcframework` contains shared player code.
+- `BitmovinLib.xcframework` contains Bitmovin-specific integrations and extensions.
+- `MuxLib.xcframework` contains Mux-specific integrations.
+- All three XCFrameworks contain iOS, iOS Simulator, tvOS, and tvOS Simulator slices.
+- Minimum supported platforms are iOS 16 and tvOS 16.
+
+`Package.swift` must keep these products and target relationships:
+
+- Product `VLPlayerLib` exposes `VLPlayerLibWrapper` and binary target `VLPlayerLib`.
+- Product `BitmovinLib` exposes `BitmovinLibLinkage`.
+- `BitmovinLibLinkage` depends on binary target `BitmovinLib`, `BitmovinPlayer`, and `BitmovinPlayerCore`.
+- Product `MuxLib` exposes `MuxLibLinkage`.
+- `MuxLibLinkage` depends on binary target `MuxLib`, `MUXSDKStats`, and `MuxCore`.
+- `VLPlayerLibWrapper` depends on core VLPlayer dependencies only. Do not add Bitmovin or Mux dependencies to it.
+- Google Cast, Amazon IVS, VisualEffectView, and iOS IMA remain iOS-only.
+- tvOS IMA remains tvOS-only.
+
+Keep `Sources/BitmovinLibTarget/BitmovinLibLinkage.swift` and `Sources/MuxLibTarget/MuxLibLinkage.swift`. Their imports force required binary modules and transitive frameworks to link.
+
+Do not edit generated files inside any `.xcframework`. Source changes require rebuilding and replacing the complete XCFramework from its source project.
+
+After package changes, run `swift package dump-package`, resolve dependencies, then build `VLPlayerLib`, `BitmovinLib`, and `MuxLib` for both iOS Simulator and tvOS Simulator.

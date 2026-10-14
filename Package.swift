@@ -8,7 +8,15 @@ let package = Package(
     products: [
         .library(
             name: "VLPlayerLib",
-            targets: ["VLPlayerLibWrapper", "VLPlayerLib", "BitmovinLib", "MuxLib"]
+            targets: ["VLPlayerLibWrapper", "VLPlayerLib"]
+        ),
+        .library(
+            name: "BitmovinLib",
+            targets: ["BitmovinLibLinkage"]
+        ),
+        .library(
+            name: "MuxLib",
+            targets: ["MuxLibLinkage"]
         )
     ],
     dependencies: [
@@ -27,13 +35,7 @@ let package = Package(
             name: "VLPlayerLibWrapper",
             dependencies: [
                 .target(name: "VLPlayerLib"),
-                .target(name: "BitmovinLib"),
-                .target(name: "MuxLib"),
                 .product(name: "VLBeaconLib", package: "iOS-VLBeacon-SPM"),
-                .product(name: "BitmovinPlayer", package: "player-ios"),
-                .product(name: "BitmovinPlayerCore", package: "player-ios-core"),
-                .product(name: "MUXSDKStats", package: "mux-stats-sdk-avplayer"),
-                .product(name: "MuxCore", package: "stats-sdk-objc"),
                 .product(name: "M3U8Parser", package: "M3U8Parser"),
                 .product(name: "GoogleInteractiveMediaAds", package: "swift-package-manager-google-interactive-media-ads-ios", condition: .when(platforms: [.iOS])),
                 .product(name: "GoogleInteractiveMediaAdsTvOS", package: "swift-package-manager-google-interactive-media-ads-tvos", condition: .when(platforms: [.tvOS])),
@@ -42,6 +44,24 @@ let package = Package(
                 .product(name: "VisualEffectView", package: "VisualEffectView", condition: .when(platforms: [.iOS]))
             ],
             path: "VLPlayerLibWrapper/Sources"
+        ),
+        .target(
+            name: "BitmovinLibLinkage",
+            dependencies: [
+                .target(name: "BitmovinLib"),
+                .product(name: "BitmovinPlayer", package: "player-ios"),
+                .product(name: "BitmovinPlayerCore", package: "player-ios-core")
+            ],
+            path: "Sources/BitmovinLibTarget"
+        ),
+        .target(
+            name: "MuxLibLinkage",
+            dependencies: [
+                .target(name: "MuxLib"),
+                .product(name: "MUXSDKStats", package: "mux-stats-sdk-avplayer"),
+                .product(name: "MuxCore", package: "stats-sdk-objc")
+            ],
+            path: "Sources/MuxLibTarget"
         ),
         .binaryTarget(name: "VLPlayerLib", path: "VLPlayerLib.xcframework"),
         .binaryTarget(name: "BitmovinLib", path: "BitmovinLib.xcframework"),
