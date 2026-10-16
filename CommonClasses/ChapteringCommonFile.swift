@@ -615,17 +615,9 @@ final class TimerView: UIView {
 
     var onTimerFinished: (() -> Void)?
 
-    private let timerLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        #if os(tvOS)
-        label.font = .boldSystemFont(ofSize: 48)
-        #else
-        label.font = .boldSystemFont(ofSize: 18)
-        #endif
-        label.textColor = .white
-        return label
-    }()
+    private let titleLabel = UILabel()
+    private let timerLabel = UILabel()
+    private let footerLabel = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -638,17 +630,71 @@ final class TimerView: UIView {
     }
 
     private func setupUI() {
-        backgroundColor = .red
-        layer.cornerRadius = 8
+        backgroundColor = UIColor.black.withAlphaComponent(0.72)
         isUserInteractionEnabled = false
 
-        addSubview(timerLabel)
-        timerLabel.translatesAutoresizingMaskIntoConstraints = false
+        #if os(tvOS)
+        let titleSize: CGFloat = 42
+        let timerSize: CGFloat = 72
+        let footerSize: CGFloat = 30
+        let logoSize: CGFloat = 36
+        let wordmarkSize: CGFloat = 44
+        let stackSpacing: CGFloat = 18
+        #else
+        let titleSize: CGFloat = 22
+        let timerSize: CGFloat = 40
+        let footerSize: CGFloat = 16
+        let logoSize: CGFloat = 22
+        let wordmarkSize: CGFloat = 28
+        let stackSpacing: CGFloat = 12
+        #endif
+
+        let logoRow = UIStackView(arrangedSubviews: [
+            ViewliftMarkView(size: logoSize),
+            wordmarkLabel(size: wordmarkSize)
+        ])
+        logoRow.axis = .horizontal
+        logoRow.alignment = .center
+        logoRow.spacing = logoSize * 0.35
+
+        titleLabel.text = "This Q&A will begin in"
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = .white
+        titleLabel.font = .systemFont(ofSize: titleSize, weight: .semibold)
+
+        timerLabel.text = "00:00:00"
+        timerLabel.textAlignment = .center
+        timerLabel.textColor = .white
+        timerLabel.font = .systemFont(ofSize: timerSize, weight: .bold)
+
+        footerLabel.text = "Please submit a question to our moderators in the comments\nbelow."
+        footerLabel.textAlignment = .center
+        footerLabel.textColor = UIColor.red.withAlphaComponent(0.92)
+        footerLabel.font = .systemFont(ofSize: footerSize, weight: .regular)
+        footerLabel.numberOfLines = 2
+
+        let stack = UIStackView(arrangedSubviews: [logoRow, titleLabel, timerLabel, footerLabel])
+        stack.axis = .vertical
+        stack.alignment = .center
+        stack.spacing = stackSpacing
+        stack.setCustomSpacing(stackSpacing * 1.4, after: logoRow)
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stack)
 
         NSLayoutConstraint.activate([
-            timerLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            timerLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+            stack.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stack.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stack.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 24),
+            stack.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -24)
         ])
+    }
+
+    private func wordmarkLabel(size: CGFloat) -> UILabel {
+        let label = UILabel()
+        label.text = "VIEWLIFT"
+        label.textColor = .white
+        label.font = .systemFont(ofSize: size, weight: .bold)
+        return label
     }
 
     func startTimer(startTime: TimeInterval, duration: TimeInterval = 60) {
@@ -673,15 +719,48 @@ final class TimerView: UIView {
         let remaining = Int(endTimestamp - Date().timeIntervalSince1970)
 
         guard remaining > 0 else {
-            timerLabel.text = "00:00"
+            timerLabel.text = "00:00:00"
             destroyTimer()
             onTimerFinished?()
             removeFromSuperview()
             return
         }
 
-        let minutes = remaining / 60
+        let hours = remaining / 3600
+        let minutes = (remaining % 3600) / 60
         let seconds = remaining % 60
-        timerLabel.text = String(format: "%02d:%02d", minutes, seconds)
+        timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+}
+
+private final class ViewliftMarkView: UIView {
+    init(size: CGFloat) {
+        super.init(frame: CGRect(x: 0, y: 0, width: size, height: size))
+        backgroundColor = .clear
+        isUserInteractionEnabled = false
+        widthAnchor.constraint(equalToConstant: size).isActive = true
+        heightAnchor.constraint(equalToConstant: size).isActive = true
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    override func draw(_ rect: CGRect) {
+        let inset = rect.insetBy(dx: rect.width * 0.08, dy: rect.height * 0.08)
+        let border = UIBezierPath(roundedRect: inset, cornerRadius: rect.width * 0.08)
+        UIColor.white.setStroke()
+        border.lineWidth = max(1.5, rect.width * 0.06)
+        border.stroke()
+
+        let mark = UIBezierPath()
+        mark.move(to: CGPoint(x: rect.midX - rect.width * 0.16, y: rect.midY - rect.height * 0.18))
+        mark.addLine(to: CGPoint(x: rect.midX + rect.width * 0.18, y: rect.midY))
+        mark.addLine(to: CGPoint(x: rect.midX - rect.width * 0.16, y: rect.midY + rect.height * 0.18))
+        UIColor.white.setStroke()
+        mark.lineWidth = max(1.5, rect.width * 0.07)
+        mark.lineCapStyle = .round
+        mark.lineJoinStyle = .round
+        mark.stroke()
     }
 }
