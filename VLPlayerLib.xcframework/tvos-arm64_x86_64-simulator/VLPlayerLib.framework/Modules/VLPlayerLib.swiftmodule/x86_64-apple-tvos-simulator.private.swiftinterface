@@ -489,13 +489,22 @@ public struct PlayerControlsConfig {
     case skip(VLPlayerLib.PlayerControlsConfig.SkipConfig)
     case both(skip: VLPlayerLib.PlayerControlsConfig.SkipConfig)
   }
+  public struct ScrubberHoverStyle {
+    public let barHeight: CoreFoundation.CGFloat
+    public let headHeight: CoreFoundation.CGFloat
+    public let headWidth: CoreFoundation.CGFloat
+    public let showsFocusBorder: Swift.Bool?
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init(barHeight: CoreFoundation.CGFloat = 12, headHeight: CoreFoundation.CGFloat = 28, headWidth: CoreFoundation.CGFloat = 8, showsFocusBorder: Swift.Bool? = nil)
+    #endif
+  }
   public enum TitleControlConfiguration {
     case `default`
-    case override(title: Swift.String)
+    case override(title: Swift.String, subtitle: Swift.String? = nil)
     case hide
   }
   #if compiler(>=5.3) && $NonescapableTypes
-  public init(isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isStartFromBeginningSupported: Swift.Bool = true, isCaptionsOnOffTextSupported: Swift.Bool = true, remoteSeekSupport: VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport = .both(skip: SkipConfig.dynamic), isPlayPauseSupported: Swift.Bool = false, isAddCustomViewsSupported: Swift.Bool = true, verticalThreshold: Swift.Int = 500, titleControlConfiguration: VLPlayerLib.PlayerControlsConfig.TitleControlConfiguration = .default, playerControlsColor: VLPlayerLib.PlayerControlsColor? = nil)
+  public init(isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isStartFromBeginningSupported: Swift.Bool = true, isCaptionsOnOffTextSupported: Swift.Bool = true, remoteSeekSupport: VLPlayerLib.PlayerControlsConfig.RemoteSeekSupport = .both(skip: SkipConfig.dynamic), scrubberHoverStyle: VLPlayerLib.PlayerControlsConfig.ScrubberHoverStyle? = nil, isPlayPauseSupported: Swift.Bool = false, isAddCustomViewsSupported: Swift.Bool = true, verticalThreshold: Swift.Int = 500, titleControlConfiguration: VLPlayerLib.PlayerControlsConfig.TitleControlConfiguration = .default, playerControlsColor: VLPlayerLib.PlayerControlsColor? = nil)
   #endif
 }
 public enum VideoSourceType {
@@ -1147,9 +1156,15 @@ public struct SSAIBeaconTracking {
   public func triggerAnalytics(eventType: VLPlayerLib.VLPlayer.AdsEventType, beaconUrls: [Swift.String], disableAdTrackingForBeacon: Swift.Bool)
   public func triggerBeaconTracking(trackingUrls: [Swift.String])
 }
+public protocol PlayerSSEDelegate : AnyObject {
+  func timerDidStart(endTime: Foundation.TimeInterval)
+  func gameDidStart()
+  func gameDidEnd()
+}
 @objc @_inheritsConvenienceInitializers open class VLPlayer : ObjectiveC.NSObject {
   weak open var videoPlayerDatasource: (any VLPlayerLib.VideoPlayerDataSource)?
   @objc weak open var videoPlayerDelegate: (any VLPlayerLib.VideoPlaybackDelegate)?
+  weak open var playerSSEDelegate: (any VLPlayerLib.PlayerSSEDelegate)?
   weak open var playerVideoAnalyticsDelegate: (any VLPlayerLib.PlayerVideoAnalyticsTrackDelegate)?
   #if compiler(>=5.3) && $NonescapableTypes
   weak open var serverSideAdTrackingDelegate: (any VLPlayerLib.ServerSideAdTrackingDelegate)? {

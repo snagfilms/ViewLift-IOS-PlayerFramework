@@ -369,9 +369,18 @@ public struct PlayerControlsConfig {
     case skip(VLPlayerLib.PlayerControlsConfig.SkipConfig)
     case both(skip: VLPlayerLib.PlayerControlsConfig.SkipConfig)
   }
+  public struct ScrubberHoverStyle {
+    public let barHeight: CoreFoundation.CGFloat
+    public let headHeight: CoreFoundation.CGFloat
+    public let headWidth: CoreFoundation.CGFloat
+    public let showsFocusBorder: Swift.Bool?
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init(barHeight: CoreFoundation.CGFloat = 12, headHeight: CoreFoundation.CGFloat = 28, headWidth: CoreFoundation.CGFloat = 8, showsFocusBorder: Swift.Bool? = nil)
+    #endif
+  }
   public enum TitleControlConfiguration {
     case `default`
-    case override(title: Swift.String)
+    case override(title: Swift.String, subtitle: Swift.String? = nil)
     case hide
   }
   #if compiler(>=5.3) && $NonescapableTypes
@@ -535,11 +544,6 @@ public enum NetworkBandwidthUnit : Swift.String {
 open class StreamSwitchHandler {
   public init(maxRetryCount: Swift.Int, delay: Swift.Int, jitterDelay: (min: Swift.Double, max: Swift.Double))
   @objc deinit
-}
-public protocol PlayerSSEDelegate : AnyObject {
-  func timerDidStart(endTime: Foundation.TimeInterval)
-  func gameDidStart()
-  func gameDidEnd()
 }
 public protocol CustomPlayerSkinProtocol : UIKit.UIView {
   func shouldHideControlsOnTap() -> Swift.Bool
@@ -1325,6 +1329,11 @@ public enum AdType {
   public var hashValue: Swift.Int {
     get
   }
+}
+public protocol PlayerSSEDelegate : AnyObject {
+  func timerDidStart(endTime: Foundation.TimeInterval)
+  func gameDidStart()
+  func gameDidEnd()
 }
 @objc @_inheritsConvenienceInitializers open class VLPlayer : ObjectiveC.NSObject {
   weak open var videoPlayerDatasource: (any VLPlayerLib.VideoPlayerDataSource)?

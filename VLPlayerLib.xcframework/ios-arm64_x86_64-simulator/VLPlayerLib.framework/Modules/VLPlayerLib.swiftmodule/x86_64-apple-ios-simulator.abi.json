@@ -9583,6 +9583,286 @@
           },
           {
             "kind": "TypeDecl",
+            "name": "ScrubberHoverStyle",
+            "printedName": "ScrubberHoverStyle",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "barHeight",
+                "printedName": "barHeight",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV9barHeight14CoreFoundation7CGFloatVvp",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV9barHeight12CoreGraphics7CGFloatVvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "isLet": true,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV9barHeight14CoreFoundation7CGFloatVvg",
+                    "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV9barHeight12CoreGraphics7CGFloatVvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "headHeight",
+                "printedName": "headHeight",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV10headHeight14CoreFoundation7CGFloatVvp",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV10headHeight12CoreGraphics7CGFloatVvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "isLet": true,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV10headHeight14CoreFoundation7CGFloatVvg",
+                    "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV10headHeight12CoreGraphics7CGFloatVvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "headWidth",
+                "printedName": "headWidth",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV9headWidth14CoreFoundation7CGFloatVvp",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV9headWidth12CoreGraphics7CGFloatVvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "isLet": true,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV9headWidth14CoreFoundation7CGFloatVvg",
+                    "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV9headWidth12CoreGraphics7CGFloatVvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "showsFocusBorder",
+                "printedName": "showsFocusBorder",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Bool?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV16showsFocusBorderSbSgvp",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV16showsFocusBorderSbSgvp",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "isLet": true,
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.Bool?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Bool",
+                            "printedName": "Swift.Bool",
+                            "usr": "s:Sb"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV16showsFocusBorderSbSgvg",
+                    "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV16showsFocusBorderSbSgvg",
+                    "moduleName": "VLPlayerLib",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(barHeight:headHeight:headWidth:showsFocusBorder:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ScrubberHoverStyle",
+                    "printedName": "VLPlayerLib.PlayerControlsConfig.ScrubberHoverStyle",
+                    "usr": "s:11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "hasDefaultArg": true,
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "hasDefaultArg": true,
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "hasDefaultArg": true,
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Bool?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "hasDefaultArg": true,
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV9barHeight04headJ00K5Width16showsFocusBorderAE14CoreFoundation7CGFloatV_A2LSbSgtcfc",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV9barHeight04headJ00K5Width16showsFocusBorderAE12CoreGraphics7CGFloatV_A2LSbSgtcfc",
+                "moduleName": "VLPlayerLib",
+                "declAttributes": [
+                  "AccessControl"
+                ],
+                "init_kind": "Designated"
+              }
+            ],
+            "declKind": "Struct",
+            "usr": "s:11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV",
+            "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV18ScrubberHoverStyleV",
+            "moduleName": "VLPlayerLib",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
+          },
+          {
+            "kind": "TypeDecl",
             "name": "TitleControlConfiguration",
             "printedName": "TitleControlConfiguration",
             "children": [
@@ -9631,12 +9911,12 @@
                   {
                     "kind": "TypeFunc",
                     "name": "Function",
-                    "printedName": "(VLPlayerLib.PlayerControlsConfig.TitleControlConfiguration.Type) -> (Swift.String) -> VLPlayerLib.PlayerControlsConfig.TitleControlConfiguration",
+                    "printedName": "(VLPlayerLib.PlayerControlsConfig.TitleControlConfiguration.Type) -> (Swift.String, Swift.String?) -> VLPlayerLib.PlayerControlsConfig.TitleControlConfiguration",
                     "children": [
                       {
                         "kind": "TypeFunc",
                         "name": "Function",
-                        "printedName": "(Swift.String) -> VLPlayerLib.PlayerControlsConfig.TitleControlConfiguration",
+                        "printedName": "(Swift.String, Swift.String?) -> VLPlayerLib.PlayerControlsConfig.TitleControlConfiguration",
                         "children": [
                           {
                             "kind": "TypeNominal",
@@ -9647,13 +9927,27 @@
                           {
                             "kind": "TypeNominal",
                             "name": "Tuple",
-                            "printedName": "(title: Swift.String)",
+                            "printedName": "(title: Swift.String, subtitle: Swift.String?)",
                             "children": [
                               {
                                 "kind": "TypeNominal",
                                 "name": "String",
                                 "printedName": "Swift.String",
                                 "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Optional",
+                                "printedName": "Swift.String?",
+                                "children": [
+                                  {
+                                    "kind": "TypeNominal",
+                                    "name": "String",
+                                    "printedName": "Swift.String",
+                                    "usr": "s:SS"
+                                  }
+                                ],
+                                "usr": "s:Sq"
                               }
                             ]
                           }
@@ -9676,8 +9970,8 @@
                   }
                 ],
                 "declKind": "EnumElement",
-                "usr": "s:11VLPlayerLib20PlayerControlsConfigV25TitleControlConfigurationO8overrideyAESS_tcAEmF",
-                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV25TitleControlConfigurationO8overrideyAESS_tcAEmF",
+                "usr": "s:11VLPlayerLib20PlayerControlsConfigV25TitleControlConfigurationO8overrideyAESS_SSSgtcAEmF",
+                "mangledName": "$s11VLPlayerLib20PlayerControlsConfigV25TitleControlConfigurationO8overrideyAESS_SSSgtcAEmF",
                 "moduleName": "VLPlayerLib"
               },
               {
@@ -15369,116 +15663,6 @@
         "moduleName": "VLPlayerLib",
         "declAttributes": [
           "AccessControl"
-        ]
-      },
-      {
-        "kind": "TypeDecl",
-        "name": "PlayerSSEDelegate",
-        "printedName": "PlayerSSEDelegate",
-        "children": [
-          {
-            "kind": "Function",
-            "name": "timerDidStart",
-            "printedName": "timerDidStart(endTime:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Double",
-                "printedName": "Swift.Double",
-                "usr": "s:Sd"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:11VLPlayerLib17PlayerSSEDelegateP13timerDidStart7endTimeySd_tF",
-            "mangledName": "$s11VLPlayerLib17PlayerSSEDelegateP13timerDidStart7endTimeySd_tF",
-            "moduleName": "VLPlayerLib",
-            "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.PlayerSSEDelegate>",
-            "sugared_genericSig": "<Self where Self : VLPlayerLib.PlayerSSEDelegate>",
-            "protocolReq": true,
-            "declAttributes": [
-              "RawDocComment"
-            ],
-            "reqNewWitnessTableEntry": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "gameDidStart",
-            "printedName": "gameDidStart()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:11VLPlayerLib17PlayerSSEDelegateP12gameDidStartyyF",
-            "mangledName": "$s11VLPlayerLib17PlayerSSEDelegateP12gameDidStartyyF",
-            "moduleName": "VLPlayerLib",
-            "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.PlayerSSEDelegate>",
-            "sugared_genericSig": "<Self where Self : VLPlayerLib.PlayerSSEDelegate>",
-            "protocolReq": true,
-            "declAttributes": [
-              "RawDocComment"
-            ],
-            "reqNewWitnessTableEntry": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "gameDidEnd",
-            "printedName": "gameDidEnd()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:11VLPlayerLib17PlayerSSEDelegateP10gameDidEndyyF",
-            "mangledName": "$s11VLPlayerLib17PlayerSSEDelegateP10gameDidEndyyF",
-            "moduleName": "VLPlayerLib",
-            "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.PlayerSSEDelegate>",
-            "sugared_genericSig": "<Self where Self : VLPlayerLib.PlayerSSEDelegate>",
-            "protocolReq": true,
-            "declAttributes": [
-              "RawDocComment"
-            ],
-            "reqNewWitnessTableEntry": true,
-            "funcSelfKind": "NonMutating"
-          }
-        ],
-        "declKind": "Protocol",
-        "usr": "s:11VLPlayerLib17PlayerSSEDelegateP",
-        "mangledName": "$s11VLPlayerLib17PlayerSSEDelegateP",
-        "moduleName": "VLPlayerLib",
-        "genericSig": "<τ_0_0 : AnyObject>",
-        "sugared_genericSig": "<Self : AnyObject>",
-        "declAttributes": [
-          "AccessControl"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Escapable",
-            "printedName": "Escapable",
-            "usr": "s:s9EscapableP",
-            "mangledName": "$ss9EscapableP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Copyable",
-            "printedName": "Copyable",
-            "usr": "s:s8CopyableP",
-            "mangledName": "$ss8CopyableP"
-          }
         ]
       },
       {
@@ -40121,6 +40305,116 @@
         "printedName": "GoogleCast",
         "declKind": "Import",
         "moduleName": "VLPlayerLib"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PlayerSSEDelegate",
+        "printedName": "PlayerSSEDelegate",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "timerDidStart",
+            "printedName": "timerDidStart(endTime:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11VLPlayerLib17PlayerSSEDelegateP13timerDidStart7endTimeySd_tF",
+            "mangledName": "$s11VLPlayerLib17PlayerSSEDelegateP13timerDidStart7endTimeySd_tF",
+            "moduleName": "VLPlayerLib",
+            "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.PlayerSSEDelegate>",
+            "sugared_genericSig": "<Self where Self : VLPlayerLib.PlayerSSEDelegate>",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "gameDidStart",
+            "printedName": "gameDidStart()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11VLPlayerLib17PlayerSSEDelegateP12gameDidStartyyF",
+            "mangledName": "$s11VLPlayerLib17PlayerSSEDelegateP12gameDidStartyyF",
+            "moduleName": "VLPlayerLib",
+            "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.PlayerSSEDelegate>",
+            "sugared_genericSig": "<Self where Self : VLPlayerLib.PlayerSSEDelegate>",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "gameDidEnd",
+            "printedName": "gameDidEnd()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11VLPlayerLib17PlayerSSEDelegateP10gameDidEndyyF",
+            "mangledName": "$s11VLPlayerLib17PlayerSSEDelegateP10gameDidEndyyF",
+            "moduleName": "VLPlayerLib",
+            "genericSig": "<τ_0_0 where τ_0_0 : VLPlayerLib.PlayerSSEDelegate>",
+            "sugared_genericSig": "<Self where Self : VLPlayerLib.PlayerSSEDelegate>",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:11VLPlayerLib17PlayerSSEDelegateP",
+        "mangledName": "$s11VLPlayerLib17PlayerSSEDelegateP",
+        "moduleName": "VLPlayerLib",
+        "genericSig": "<τ_0_0 : AnyObject>",
+        "sugared_genericSig": "<Self : AnyObject>",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
       },
       {
         "kind": "TypeDecl",
@@ -90355,141 +90649,162 @@
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4168,
+      "length": 2,
+      "value": "12"
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4214,
+      "length": 2,
+      "value": "28"
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4259,
+      "length": 1,
+      "value": "8"
+    },
+    {
+      "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4234,
+      "offset": 4972,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4276,
+      "offset": 5014,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4314,
+      "offset": 5052,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4357,
+      "offset": 5095,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4400,
+      "offset": 5138,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4441,
+      "offset": 5179,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 4494,
+      "offset": 5232,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 6669,
+      "offset": 7563,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 6719,
+      "offset": 7613,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 6770,
+      "offset": 7664,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 6859,
+      "offset": 7753,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "Array",
-      "offset": 6906,
+      "offset": 7800,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 6951,
+      "offset": 7845,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 7173,
+      "offset": 8067,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "Array",
-      "offset": 7507,
+      "offset": 8401,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "Array",
-      "offset": 7611,
+      "offset": 8505,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "Array",
-      "offset": 7732,
+      "offset": 8626,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 8323,
+      "offset": 9217,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 8604,
+      "offset": 9498,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player DefaultSkin SwiftUI\/ViewModel\/PlayerControlsViewModel.swift",
       "kind": "Array",
-      "offset": 20784,
+      "offset": 21678,
       "length": 2,
       "value": "[]"
     },
@@ -91196,119 +91511,119 @@
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 771,
+      "offset": 776,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 926,
+      "offset": 931,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 971,
+      "offset": 976,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 1014,
+      "offset": 1019,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 1056,
+      "offset": 1061,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 1415,
+      "offset": 1420,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 1462,
+      "offset": 1467,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "Array",
-      "offset": 1719,
+      "offset": 1724,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 2000,
+      "offset": 2005,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 2031,
+      "offset": 2036,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 2066,
+      "offset": 2071,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 4256,
+      "offset": 4261,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 4289,
+      "offset": 4294,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "Array",
-      "offset": 4325,
+      "offset": 4330,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "Array",
-      "offset": 13984,
+      "offset": 13989,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "Array",
-      "offset": 14299,
+      "offset": 14304,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/CommonFiles\/Observers\/AnalyticsHelperPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 15466,
+      "offset": 15471,
       "length": 5,
       "value": "false"
     },
@@ -91420,791 +91735,791 @@
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Dictionary",
-      "offset": 4759,
+      "offset": 4371,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4853,
+      "offset": 4465,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4902,
+      "offset": 4514,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5319,
+      "offset": 4931,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5359,
+      "offset": 4971,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5502,
+      "offset": 5114,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5643,
+      "offset": 5255,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 5695,
+      "offset": 5307,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5859,
+      "offset": 5471,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5910,
+      "offset": 5522,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 5952,
+      "offset": 5564,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 6260,
+      "offset": 5872,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 6407,
+      "offset": 6019,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 6457,
+      "offset": 6069,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 6507,
+      "offset": 6119,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 6953,
+      "offset": 6565,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 7015,
+      "offset": 6627,
       "length": 4,
       "value": "-1.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7134,
+      "offset": 6746,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 7237,
+      "offset": 6849,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 7387,
+      "offset": 6999,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 7483,
+      "offset": 7095,
       "length": 79,
       "value": "\"⚠️ watchHistoryEnabled changed from \""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 7535,
+      "offset": 7147,
       "length": 2,
       "value": "\" to \""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 7561,
+      "offset": 7173,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7435,
+      "offset": 7047,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Dictionary",
-      "offset": 8638,
+      "offset": 8250,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 8749,
+      "offset": 8361,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8795,
+      "offset": 8407,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8908,
+      "offset": 8520,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9028,
+      "offset": 8640,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 9068,
+      "offset": 8680,
       "length": 10,
       "value": "\"playable\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9179,
+      "offset": 8791,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9221,
+      "offset": 8833,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9356,
+      "offset": 8968,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9411,
+      "offset": 9023,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9461,
+      "offset": 9073,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9815,
+      "offset": 9427,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9869,
+      "offset": 9481,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9914,
+      "offset": 9526,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9960,
+      "offset": 9572,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 10003,
+      "offset": 9615,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10046,
+      "offset": 9658,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10103,
+      "offset": 9715,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10174,
+      "offset": 9786,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 10301,
+      "offset": 9913,
       "length": 4,
       "value": "0.35"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10478,
+      "offset": 10090,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10548,
+      "offset": 10160,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11218,
+      "offset": 10830,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11261,
+      "offset": 10873,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11358,
+      "offset": 10970,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11833,
+      "offset": 11445,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11944,
+      "offset": 11556,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 12241,
+      "offset": 11853,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 12347,
+      "offset": 11959,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 13410,
+      "offset": 13022,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 12404,
+      "offset": 12016,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 14077,
+      "offset": 13689,
       "length": 42,
       "value": "\"SEEK isPlayerPlaying: \""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 14118,
+      "offset": 13730,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 16058,
+      "offset": 15670,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 16119,
+      "offset": 15731,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 16238,
+      "offset": 15850,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Dictionary",
-      "offset": 16302,
+      "offset": 15914,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 16474,
+      "offset": 16086,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 16559,
+      "offset": 16171,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 16594,
+      "offset": 16206,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 16668,
+      "offset": 16280,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 16805,
+      "offset": 16417,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 17117,
+      "offset": 16729,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 17169,
+      "offset": 16781,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 17642,
+      "offset": 17254,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 18088,
+      "offset": 17700,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 18122,
+      "offset": 17734,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 18726,
+      "offset": 18338,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 18766,
+      "offset": 18378,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 20527,
+      "offset": 20139,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 20975,
+      "offset": 20587,
       "length": 2,
       "value": "45"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21569,
+      "offset": 21181,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21790,
+      "offset": 21402,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21921,
+      "offset": 21533,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 22073,
+      "offset": 21685,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 22263,
+      "offset": 21875,
       "length": 16,
       "value": "\"subTitlesArray\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 22219,
+      "offset": 21831,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Dictionary",
-      "offset": 22559,
+      "offset": 22171,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 22815,
+      "offset": 22427,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "Array",
-      "offset": 22867,
+      "offset": 22479,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 23360,
+      "offset": 22972,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 23414,
+      "offset": 23026,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 23574,
+      "offset": 23186,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 23755,
+      "offset": 23367,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 23798,
+      "offset": 23410,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 24149,
+      "offset": 23761,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 24208,
+      "offset": 23820,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 24370,
+      "offset": 23982,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 24413,
+      "offset": 24025,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 24454,
+      "offset": 24066,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 24494,
+      "offset": 24106,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 25415,
+      "offset": 25027,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 25530,
+      "offset": 25142,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "FloatLiteral",
-      "offset": 25618,
+      "offset": 25230,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 25962,
+      "offset": 25574,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 26221,
+      "offset": 25833,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 26341,
+      "offset": 25953,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 26475,
+      "offset": 26087,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 26556,
+      "offset": 26168,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 26591,
+      "offset": 26203,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 26665,
+      "offset": 26277,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "IntegerLiteral",
-      "offset": 26707,
+      "offset": 26319,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 27252,
+      "offset": 26864,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 27547,
+      "offset": 27159,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 31328,
+      "offset": 30940,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 32694,
+      "offset": 32306,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 34369,
+      "offset": 33981,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "StringLiteral",
-      "offset": 57132,
+      "offset": 56744,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Controller\/CustomVideoController.swift",
       "kind": "BooleanLiteral",
-      "offset": 64332,
+      "offset": 63944,
       "length": 5,
       "value": "false"
     },
@@ -93100,7 +93415,7 @@
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLVideoPlayer\/Player Classes\/Player Network Class\/CustomVideoController+ContentFetch.swift",
       "kind": "BooleanLiteral",
-      "offset": 11579,
+      "offset": 11653,
       "length": 5,
       "value": "false"
     },
@@ -93345,658 +93660,658 @@
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 1641,
+      "offset": 2029,
       "length": 23,
       "value": "\"com.viewlift.vlplayer\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Array",
-      "offset": 2435,
+      "offset": 2823,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 2484,
+      "offset": 2872,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Dictionary",
-      "offset": 2762,
+      "offset": 3150,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 5717,
+      "offset": 6105,
       "length": 6,
       "value": "2160.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 5766,
+      "offset": 6154,
       "length": 6,
       "value": "1080.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 5832,
+      "offset": 6220,
       "length": 5,
       "value": "720.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 5886,
+      "offset": 6274,
       "length": 5,
       "value": "480.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "FloatLiteral",
-      "offset": 5931,
+      "offset": 6319,
       "length": 5,
       "value": "360.0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 6217,
+      "offset": 6605,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 7657,
+      "offset": 8045,
       "length": 2,
       "value": "22"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 7745,
+      "offset": 8133,
       "length": 2,
       "value": "18"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 7831,
+      "offset": 8219,
       "length": 2,
       "value": "18"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15158,
+      "offset": 15546,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15210,
+      "offset": 15598,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15258,
+      "offset": 15646,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15311,
+      "offset": 15699,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15350,
+      "offset": 15738,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 15387,
+      "offset": 15775,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 15423,
+      "offset": 15811,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Array",
-      "offset": 15476,
+      "offset": 15864,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15516,
+      "offset": 15904,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15554,
+      "offset": 15942,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15586,
+      "offset": 15974,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15619,
+      "offset": 16007,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 15660,
+      "offset": 16048,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 18022,
+      "offset": 18410,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 18058,
+      "offset": 18446,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 18095,
+      "offset": 18483,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 18150,
+      "offset": 18538,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 20832,
+      "offset": 21220,
       "length": 25,
       "value": "\"CANT_ACCESS_TVE_CONTENT\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 20901,
+      "offset": 21289,
       "length": 33,
       "value": "\"SVOD_TVE_SUBSCRIPTION_NOT_FOUND\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 20964,
+      "offset": 21352,
       "length": 18,
       "value": "\"TVE_NO_USER_INFO\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 21022,
+      "offset": 21410,
       "length": 28,
       "value": "\"TVE_SUBSCRIPTION_NOT_FOUND\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 25106,
+      "offset": 25494,
       "length": 2,
       "value": "14"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 25193,
+      "offset": 25581,
       "length": 2,
       "value": "32"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 25268,
+      "offset": 25656,
       "length": 2,
       "value": "12"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 25319,
+      "offset": 25707,
       "length": 17,
       "value": "\"Event starts in\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 25369,
+      "offset": 25757,
       "length": 13,
       "value": "\"Event Ended\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 25418,
+      "offset": 25806,
       "length": 38,
       "value": "\"This content is no longer available.\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 27220,
+      "offset": 27608,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 30796,
+      "offset": 31184,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 41616,
+      "offset": 42004,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 45593,
+      "offset": 45981,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 46029,
+      "offset": 46417,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 46186,
+      "offset": 46574,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 46237,
+      "offset": 46625,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Dictionary",
-      "offset": 46366,
+      "offset": 46754,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 55050,
+      "offset": 55438,
       "length": 3,
       "value": "\"1\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 56123,
+      "offset": 56511,
       "length": 3,
       "value": "\"1\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 56667,
+      "offset": 57055,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 56708,
+      "offset": 57096,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 56853,
+      "offset": 57241,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 67662,
+      "offset": 68050,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 67718,
+      "offset": 68106,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Dictionary",
-      "offset": 67847,
+      "offset": 68235,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 67895,
+      "offset": 68283,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 67944,
+      "offset": 68332,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 67998,
+      "offset": 68386,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 68066,
+      "offset": 68454,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 68116,
+      "offset": 68504,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 68167,
+      "offset": 68555,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 68214,
+      "offset": 68602,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 68274,
+      "offset": 68662,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 68477,
+      "offset": 68865,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 68535,
+      "offset": 68923,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 68585,
+      "offset": 68973,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 68691,
+      "offset": 69079,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 69050,
+      "offset": 69438,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 69107,
+      "offset": 69495,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 69172,
+      "offset": 69560,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 69233,
+      "offset": 69621,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Array",
-      "offset": 69375,
+      "offset": 69763,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 69423,
+      "offset": 69811,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 69470,
+      "offset": 69858,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 69762,
+      "offset": 70150,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 69818,
+      "offset": 70206,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 69869,
+      "offset": 70257,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 69993,
+      "offset": 70381,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 74728,
+      "offset": 75116,
       "length": 8,
       "value": "\"Paused\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 74760,
+      "offset": 75148,
       "length": 9,
       "value": "\"Playing\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 74803,
+      "offset": 75191,
       "length": 17,
       "value": "\"Playing+Casting\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 74846,
+      "offset": 75234,
       "length": 11,
       "value": "\"Buffering\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 74882,
+      "offset": 75270,
       "length": 10,
       "value": "\"Complete\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 74914,
+      "offset": 75302,
       "length": 7,
       "value": "\"Error\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 74951,
+      "offset": 75339,
       "length": 15,
       "value": "\"Advertisement\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 74990,
+      "offset": 75378,
       "length": 9,
       "value": "\"Stalled\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 75023,
+      "offset": 75411,
       "length": 9,
       "value": "\"Stopped\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 75053,
+      "offset": 75441,
       "length": 6,
       "value": "\"None\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 83373,
+      "offset": 83761,
       "length": 10,
       "value": "\"MMMd jmm\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 90475,
+      "offset": 90863,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "BooleanLiteral",
-      "offset": 95585,
+      "offset": 95973,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "StringLiteral",
-      "offset": 95641,
+      "offset": 96029,
       "length": 42,
       "value": "\"VLPlayerAccessibilityEventLoggingChanged\""
     },
     {
       "filePath": "\/Users\/devendragaur\/Desktop\/Viewlift Code\/NESN_iOS_SDK\/iosplayer-sdk\/VLPlayer\/VLPlayer\/VLPlayer.swift",
       "kind": "Array",
-      "offset": 95725,
+      "offset": 96113,
       "length": 1858,
       "value": "[\"PlayerViewSmall\", \"PlayerViewFull\", \"PlayerChromeSmall\", \"PlayerChromeFull\", \"PlayerTimeCurrent\", \"PlayerTimeRemaining\", \"PlayerTimeDuration\", \"PlayerProgressBar\", \"PlayerProgressBuffered\", \"PlayerStateLoading\", \"PlayerStateBuffering\", \"PlayerStatePlaying\", \"PlayerStatePaused\", \"PlayerControlPlayPause\", \"PlayerVideoBitrate\", \"PlayerVideoResolution\", \"PlayerVideoCodec\", \"PlayerVideoFrameRate\", \"PlayerAudioBitrate\", \"PlayerAudioCodec\", \"PlayerAudioLanguage\", \"PlayerSubtitleLanguage\", \"PlayerPlaybackSpeed\", \"PlayerNetworkState\", \"PlayerDroppedFrames\", \"PlayerBufferHealth\", \"PlayerStreamType\", \"PlayerDRMType\", \"PlayerPlaybackQuality\", \"PlayerAudioTrackSelected\", \"PlayerSubtitleSelected\", \"PlayerSubtitleEnabled\", \"PlayerSubtitleDisabled\", \"PlayerSurroundAudio\", \"PlayerStartupTime\", \"PlayerRebufferCount\", \"PlayerRebufferDuration\", \"PlayerLatencyLive\", \"PlayerCDNProvider\", \"PlayerManifestURL\", \"PlayerPlaybackSessionId\", \"PlayerSeekBackward\", \"PlayerSeekForward\", \"PlayerScrubberThumb\", \"PlayerAdContainer\", \"PlayerAdIndexCurrent\", \"PlayerAdIndexTotal\", \"PlayerAdTimeRemaining\", \"PlayerAdStarted\", \"PlayerAdEnded\", \"PlayerLiveBadge\", \"PlayerGoLive\", \"PlayerClosedCaptions\", \"PlayerAudioTracks\", \"PlayerRelatedTray\", \"PlayerRelatedTrayTitle\", \"PlayerRelatedTrayCollection\", \"PlayerErrorTitle\", \"PlayerErrorMessage\", \"PlayerErrorDismiss\", \"PlayerErrorRetry\"]"
     },
