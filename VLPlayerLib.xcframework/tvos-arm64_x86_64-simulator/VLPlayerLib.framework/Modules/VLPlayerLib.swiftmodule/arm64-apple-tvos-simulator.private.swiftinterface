@@ -739,7 +739,7 @@ extension VLPlayerLib.VLPlayer {
     public init(colors: [UIKit.UIColor] = [.clear, .black], locations: [Foundation.NSNumber] = [0.0, 1.0], startPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 0.0), endPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 1.0))
   }
   public struct PlayerControlsViewTextContent {
-    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts", subtitlesOnText: Swift.String = "Subtitles On", subtitlesOffText: Swift.String = "Subtitles Off")
+    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Closed Captions", closeCaptionText: Swift.String = "Closed Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts", subtitlesOnText: Swift.String = "Subtitles On", subtitlesOffText: Swift.String = "Subtitles Off")
   }
 }
 public struct AdsViewConfiguration {
