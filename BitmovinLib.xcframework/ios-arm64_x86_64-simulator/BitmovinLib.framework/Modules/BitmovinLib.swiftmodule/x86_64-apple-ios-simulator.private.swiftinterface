@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.3.3 effective-5.10 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
-// swift-module-flags: -target x86_64-apple-ios16.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -Onone -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name BitmovinLib
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.3
+// swift-compiler-version: Apple Swift version 6.4 effective-5.10 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)
+// swift-module-flags: -target x86_64-apple-ios16.0-simulator -enable-objc-interop -enable-library-evolution -language-mode 5 -Onone -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name BitmovinLib
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
 import BitmovinPlayer
 import Combine
 import Foundation
@@ -11,36 +11,36 @@ import VLPlayerLib
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-extension VLPlayerLib.CustomVideoController : BitmovinPlayerCore.PlayerListener {
-  @objc nonisolated dynamic public func onEvent(_ event: any BitmovinPlayerCore.Event, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onSourceAdded(_ event: BitmovinPlayerCore.SourceAddedEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onTimeChanged(_ event: BitmovinPlayerCore.TimeChangedEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onReady(_ event: BitmovinPlayerCore.ReadyEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onStallStarted(_ event: BitmovinPlayerCore.StallStartedEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onStallEnded(_ event: BitmovinPlayerCore.StallEndedEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onPlayerInactive(_ event: BitmovinPlayerCore.PlayerInactiveEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onPlaying(_ event: BitmovinPlayerCore.PlayingEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onPlayerError(_ event: BitmovinPlayerCore.PlayerErrorEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onSourceRemoved(_ event: BitmovinPlayerCore.SourceRemovedEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onSourceError(_ event: BitmovinPlayerCore.SourceErrorEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onPlaybackFinished(_ event: BitmovinPlayerCore.PlaybackFinishedEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onVideoPlaybackQualityChanged(_ event: BitmovinPlayerCore.VideoPlaybackQualityChangedEvent, player: any BitmovinPlayerCore.Player)
-  @objc nonisolated dynamic public func onVideoDownloadQualityChanged(_ event: BitmovinPlayerCore.VideoDownloadQualityChangedEvent, player: any BitmovinPlayerCore.Player)
+extension VLPlayerLib::CustomVideoController : BitmovinPlayerCore::PlayerListener {
+  @objc nonisolated dynamic public func onEvent(_ event: any BitmovinPlayerCore::Event, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onSourceAdded(_ event: BitmovinPlayerCore::SourceAddedEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onTimeChanged(_ event: BitmovinPlayerCore::TimeChangedEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onReady(_ event: BitmovinPlayerCore::ReadyEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onStallStarted(_ event: BitmovinPlayerCore::StallStartedEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onStallEnded(_ event: BitmovinPlayerCore::StallEndedEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onPlayerInactive(_ event: BitmovinPlayerCore::PlayerInactiveEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onPlaying(_ event: BitmovinPlayerCore::PlayingEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onPlayerError(_ event: BitmovinPlayerCore::PlayerErrorEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onSourceRemoved(_ event: BitmovinPlayerCore::SourceRemovedEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onSourceError(_ event: BitmovinPlayerCore::SourceErrorEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onPlaybackFinished(_ event: BitmovinPlayerCore::PlaybackFinishedEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onVideoPlaybackQualityChanged(_ event: BitmovinPlayerCore::VideoPlaybackQualityChangedEvent, player: any BitmovinPlayerCore::Player)
+  @objc nonisolated dynamic public func onVideoDownloadQualityChanged(_ event: BitmovinPlayerCore::VideoDownloadQualityChangedEvent, player: any BitmovinPlayerCore::Player)
 }
-extension VLPlayerLib.CustomVideoController : BitmovinPlayerCore.FullscreenHandler {
-  @_Concurrency.MainActor @objc dynamic public var isFullscreen: Swift.Bool {
+extension VLPlayerLib::CustomVideoController : BitmovinPlayerCore::FullscreenHandler {
+  @_Concurrency::MainActor @objc dynamic public var isFullscreen: Swift::Bool {
     @objc get
   }
-  @_Concurrency.MainActor @objc dynamic public func onFullscreenRequested()
-  @_Concurrency.MainActor @objc dynamic public func onFullscreenExitRequested()
+  @_Concurrency::MainActor @objc dynamic public func onFullscreenRequested()
+  @_Concurrency::MainActor @objc dynamic public func onFullscreenExitRequested()
 }
-extension VLPlayerLib.CustomVideoController : BitmovinPlayerCore.UserInterfaceListener {
-  @objc nonisolated dynamic public func onPictureInPictureEnter(_ event: BitmovinPlayerCore.PictureInPictureEnterEvent, view: BitmovinPlayerCore.PlayerView)
-  @objc nonisolated dynamic public func onPictureInPictureEntered(_ event: BitmovinPlayerCore.PictureInPictureEnteredEvent, view: BitmovinPlayerCore.PlayerView)
-  @objc nonisolated dynamic public func onPictureInPictureExit(_ event: BitmovinPlayerCore.PictureInPictureExitEvent, view: BitmovinPlayerCore.PlayerView)
-  @objc nonisolated dynamic public func onPictureInPictureExited(_ event: BitmovinPlayerCore.PictureInPictureExitedEvent, view: BitmovinPlayerCore.PlayerView)
+extension VLPlayerLib::CustomVideoController : BitmovinPlayerCore::UserInterfaceListener {
+  @objc nonisolated dynamic public func onPictureInPictureEnter(_ event: BitmovinPlayerCore::PictureInPictureEnterEvent, view: BitmovinPlayerCore::PlayerView)
+  @objc nonisolated dynamic public func onPictureInPictureEntered(_ event: BitmovinPlayerCore::PictureInPictureEnteredEvent, view: BitmovinPlayerCore::PlayerView)
+  @objc nonisolated dynamic public func onPictureInPictureExit(_ event: BitmovinPlayerCore::PictureInPictureExitEvent, view: BitmovinPlayerCore::PlayerView)
+  @objc nonisolated dynamic public func onPictureInPictureExited(_ event: BitmovinPlayerCore::PictureInPictureExitedEvent, view: BitmovinPlayerCore::PlayerView)
 }
-@_inheritsConvenienceInitializers @objc(BitmovinLibModuleLoader) final public class BitmovinLibModuleLoader : ObjectiveC.NSObject {
+@_inheritsConvenienceInitializers @objc(BitmovinLibModuleLoader) final public class BitmovinLibModuleLoader : ObjectiveC::NSObject {
   @objc public static func bootstrapModule()
   @objc override dynamic public init()
   @objc deinit
