@@ -80793,28 +80793,6 @@
           },
           {
             "kind": "Conformance",
-            "name": "AccessibilityRotorContent",
-            "printedName": "AccessibilityRotorContent",
-            "children": [
-              {
-                "kind": "TypeWitness",
-                "name": "Body",
-                "printedName": "Body",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Never",
-                    "printedName": "Swift.Never",
-                    "usr": "s:s5NeverO"
-                  }
-                ]
-              }
-            ],
-            "usr": "s:7SwiftUI25AccessibilityRotorContentP",
-            "mangledName": "$s7SwiftUI25AccessibilityRotorContentP"
-          },
-          {
-            "kind": "Conformance",
             "name": "CustomizableToolbarContent",
             "printedName": "CustomizableToolbarContent",
             "usr": "s:7SwiftUI26CustomizableToolbarContentP",
@@ -80999,6 +80977,27 @@
             ],
             "usr": "s:7SwiftUI34AttributedTextFormattingDefinitionP",
             "mangledName": "$s7SwiftUI34AttributedTextFormattingDefinitionP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "AtomicRepresentable",
+            "printedName": "AtomicRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "AtomicRepresentation",
+                "printedName": "AtomicRepresentation",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DependentMember",
+                    "printedName": "τ_0_0.AtomicOptionalRepresentation"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:15Synchronization19AtomicRepresentableP",
+            "mangledName": "$s15Synchronization19AtomicRepresentableP"
           }
         ]
       },
@@ -81197,13 +81196,6 @@
             ],
             "usr": "s:16CoreTransferable0B0P",
             "mangledName": "$s16CoreTransferable0B0P"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CVAttachmentValueRepresentable",
-            "printedName": "CVAttachmentValueRepresentable",
-            "usr": "s:9CoreVideo30CVAttachmentValueRepresentableP",
-            "mangledName": "$s9CoreVideo30CVAttachmentValueRepresentableP"
           },
           {
             "kind": "Conformance",
@@ -82555,9 +82547,11 @@
         "isOpen": true,
         "objc_name": "UIColor",
         "declAttributes": [
+          "Available",
           "ObjC",
           "SynthesizedProtocol",
           "NonSendable",
+          "Sendable",
           "Dynamic"
         ],
         "superclassUsr": "c:objc(cs)NSObject",
@@ -82717,7 +82711,8 @@
           "SynthesizedProtocol",
           "SynthesizedProtocol",
           "SynthesizedProtocol",
-          "SynthesizedProtocol"
+          "SynthesizedProtocol",
+          "Sendable"
         ],
         "isFromExtension": true,
         "isExternal": true,
