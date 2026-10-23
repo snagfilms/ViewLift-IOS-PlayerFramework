@@ -2200,6 +2200,7 @@ public protocol PlayerVideoAnalyticsTrackDelegate : VLPlayerLib.AnalyticsTracker
   @_Concurrency.MainActor @preconcurrency final public var isSkipEnabled: Swift.Bool
   @_Concurrency.MainActor @preconcurrency final public var isSwipeDownEnabled: Swift.Bool
   @_Concurrency.MainActor @preconcurrency final public var verticalThreshold: Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc override final public func layoutSubviews()
   @_Concurrency.MainActor @preconcurrency final public func updateLayout()
   #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc override final public func pressesBegan(_ presses: Swift.Set<UIKit.UIPress>, with event: UIKit.UIPressesEvent?)
