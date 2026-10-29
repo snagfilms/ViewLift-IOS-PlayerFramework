@@ -13,7 +13,6 @@ import VLAuthenticationFramework
 import VLAuthenticationFramework_tvOS
 #endif
 import Kingfisher
-import AppTrackingTransparency
 
 
 class AssetListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -21,6 +20,7 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
     private let tableView = UITableView()
     private let headerView = UIView()
     private let backButton = UIButton(type: .system)
+    private let privacyButton = UIButton(type: .system)
     private let logoutButton = UIButton(type: .system)
     private let providerImageView = UIImageView()
     private let titleLabel = UILabel()
@@ -51,6 +51,17 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         assetModels = loadAssetModelsFromFile() ?? []
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        #if os(tvOS)
+        OneTrustService.shared.launchBannerIfNeeded { [weak self] didShowBanner in
+            guard didShowBanner == false else { return }
+            self?.setNeedsFocusUpdate()
+            self?.updateFocusIfNeeded()
+        }
+        #endif
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -77,16 +88,6 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
             xApiKey: xApiKey,
             alertMessage: "Detected invalid configuration! Please update your settings."
         )
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                ATTrackingManager.requestTrackingAuthorization { status in
-                    // your status handling here
-                }
-            }
     }
     
     func fetchUserDetails() {
@@ -141,6 +142,14 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
                              action: #selector(backTapped),
                              for: .touchUpInside)
         headerView.addSubview(backButton)
+
+        privacyButton.setTitle("Privacy", for: .normal)
+        privacyButton.setTitleColor(.systemBlue, for: .normal)
+        privacyButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        privacyButton.translatesAutoresizingMaskIntoConstraints = false
+        privacyButton.addTarget(self, action: #selector(privacyTapped), for: .primaryActionTriggered)
+        privacyButton.isHidden = !OneTrustService.shared.isEnabled
+        headerView.addSubview(privacyButton)
         
         var titleLabelFontSize: CGFloat = 18
 #if os(tvOS)
@@ -196,6 +205,8 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
             // Back button
             backButton.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
             backButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+
+            privacyButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
             
             // Logout button (right)
             logoutButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
@@ -211,6 +222,11 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
             titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
             titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
         ])
+        #if os(tvOS)
+        privacyButton.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 40).isActive = true
+        #else
+        privacyButton.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 16).isActive = true
+        #endif
     }
     
     // MARK: - Table View Setup (unchanged)
@@ -243,6 +259,10 @@ class AssetListViewController: UIViewController, UITableViewDataSource, UITableV
         } else {
             dismiss(animated: true)
         }
+    }
+
+    @objc private func privacyTapped() {
+        OneTrustService.shared.showPreferenceCenter(param: nil)
     }
     
     @objc private func logoutTapped() {

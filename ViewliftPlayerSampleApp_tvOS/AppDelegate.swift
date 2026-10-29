@@ -12,6 +12,11 @@ import VLAuthenticationFramework
 #else
 import VLAuthenticationFramework_tvOS
 #endif
+#if DEBUG
+#if canImport(Atlantis)
+import Atlantis
+#endif
+#endif
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,11 +28,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var adobePlayerTempPass: [String:AdobePassPayload] = [:]
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        #if DEBUG
+        #if canImport(Atlantis)
+        Atlantis.start()
+        #endif
+        #endif
+
         // Override point for customization after application launch.
         readVideoList(readVideoListOperation: ReadFromLocalJson())
 
         self.setupAuthentication()
         self.setupAnalytics()
+        OneTrustService.shared.prepareForLaunch()
         
         
         window = UIWindow(frame: UIScreen.main.bounds)

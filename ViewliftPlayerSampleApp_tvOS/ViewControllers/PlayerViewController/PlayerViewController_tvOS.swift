@@ -412,7 +412,8 @@ class PlayerViewController_tvOS: UIViewController {
 
     // Returns player features supported configuration
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
-        let customMacros  = ["VIEWLIFT_USER_AGENT": Utility.sharedUtility.getUserAgent()]
+        var customMacros = ["VIEWLIFT_USER_AGENT": Utility.sharedUtility.getUserAgent()]
+        customMacros.merge(OneTrustService.shared.privacyMacros()) { _, new in new }
         // See VLPlayer documentation for available macros
         return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,
                                                  fullScreenOnly: isFullScreen,

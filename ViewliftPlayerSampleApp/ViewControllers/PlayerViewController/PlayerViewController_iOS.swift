@@ -613,7 +613,8 @@ extension PlayerViewController_iOS {
 
     /// Returns the supported player features configuration
     private func getPlayerFeaturesSupported() -> VLPlayer.VLPlayerFeatureSupported {
-        let customMacros  = ["VIEWLIFT_USER_AGENT": Utility.sharedUtility.getUserAgent()]
+        var customMacros = ["VIEWLIFT_USER_AGENT": Utility.sharedUtility.getUserAgent()]
+        customMacros.merge(OneTrustService.shared.privacyMacros()) { _, new in new }
         // You can find list of macros in VLPlayer documentation for SSAI functioning
         //https://developer.viewlift.com/docs/vlplayerfeaturesupported
         return VLPlayer.VLPlayerFeatureSupported(appMacrosList: customMacros,

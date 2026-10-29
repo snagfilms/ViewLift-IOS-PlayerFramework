@@ -52,6 +52,7 @@ struct VideoList:Decodable {
     let domain: String
     let drmConfig: DRMConfigAsset?
     let authKeys: AuthKeys
+    let oneTrust: OneTrustDetail?
     func checkForConfigurationErrorMessage() -> String?{
         if apiBaseUrl.contains("xxxxx") {
             return "Please set the API base URL and ViewLift token in the VideoList json file."
@@ -68,6 +69,20 @@ struct VideoList:Decodable {
 struct AuthKeys: Codable {
     let siteId: String
     let apiBaseEndpoint: String
+}
+
+struct OneTrustDetail: Decodable {
+    let enabled: Bool
+    let version: String?
+    let domainID: String?
+    let storageLocation: String?
+
+    enum CodingKeys: String, CodingKey {
+        case enabled = "enable"
+        case version
+        case domainID = "clientId"
+        case storageLocation = "cdnUrl"
+    }
 }
 
 struct NextVideoList:Codable {

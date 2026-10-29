@@ -15,6 +15,11 @@ import VLAuthenticationFramework_tvOS
 #endif
 import GoogleCast
 import VLAnalyticsLib
+#if DEBUG
+#if canImport(Atlantis)
+import Atlantis
+#endif
+#endif
 
 
 @UIApplicationMain
@@ -32,6 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        #if DEBUG
+        #if canImport(Atlantis)
+        Atlantis.start()
+        #endif
+        #endif
+
         //Use this to reset the device identifier for testing purposes.Read documentation of this function carefully.
        // resetDeviceIdentifier()
 
@@ -46,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        AdobeAnalyticsConfigurationHelper.setupAdobeConfiguration(with: adobeConfig)
         
         self.setupAnalytics()
+        OneTrustService.shared.prepareForLaunch()
 
         return true
     }
