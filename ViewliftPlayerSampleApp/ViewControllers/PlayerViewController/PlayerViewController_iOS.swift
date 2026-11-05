@@ -115,13 +115,22 @@ class PlayerViewController_iOS: UIViewController {
     
     /// Returns the current authorization token from AppDelegate
     private var vlToken: String {
-        return AppDelegate.shared.authorizationToken ?? ""
+        return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3VudHJ5Q29kZSI6IlVTIiwiZGV2aWNlSWQiOiJGNTIxNUY3Mi0wOEE0LTQ2MzctOTUyMS1BQjA4NzI1MzlFNTQiLCJlbWFpbCI6ImRjYzhkMjAzLWJmODEtNDdhOS1hMjU0LWE4NGVhY2ExNzAyNy1hdXRvQHZpZXdsaWZ0LmNvbSIsImV4cCI6MTc5NjI5OTYzMCwiaWF0IjoxNzkzNzA3NjMwLCJpZCI6ImRjYzBkMDRmLThjODQtNGRkYS04ZTU0LWU1MmFmZDhiNjhiNyIsImlwYWRkcmVzc2VzIjoiMTg3LjE1LjkxLjIzNCwxMC4yMDEuMTkzLjIwNCIsInBvc3RhbGNvZGUiOiI5ODE2MCIsInByb3ZpZGVyIjoiaG90d2lyZWNvbW11bmljYXRpb25zX2F1dGgtZ2F0ZXdheV9uZXQiLCJzaXRlIjoiZ29sZmNoYW5uZWwiLCJzaXRlSWQiOiI4YjQxMzVmNi0zZjU5LTQyOGQtYWUyNy04YzllMjcwNjQxMTIiLCJ1c2VySWQiOiJkY2MwZDA0Zi04Yzg0LTRkZGEtOGU1NC1lNTJhZmQ4YjY4YjcifQ.J51Zsdkdtt8q0mAzrdXDwRTdD5AnB5ThBiRciT_11tg"//AppDelegate.shared.authorizationToken ?? ""
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        VLAnalytics.shared.startObservingPlayerEvents()
-        
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(playerAnalyticsRemovalObserved(_:)),
+            name: NSNotification.Name(rawValue: "playerAnalyticsRemove"),
+            object: nil
+        )
+        // #region agent log
+        clearPlayheadDebugLog()
+        // #endregion
+
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(playerContainerView)
         setupConstraints()
@@ -150,10 +159,17 @@ class PlayerViewController_iOS: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        // #region agent log
+        writePlayheadDebugLog(
+            message: "viewDidDisappear invokes destroyPlayer",
+            hypothesisId: "H1",
+            data: ["isMovingFromParent": isMovingFromParent]
+        )
+        // #endregion
+        self.destroyPlayer()
         
-        VLAnalytics.shared.stopObservingPlayerEvents()
     }
-    
+
     func setupConstraints() {
         
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -201,6 +217,7 @@ class PlayerViewController_iOS: UIViewController {
 
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         cleanupResources()
     }
     
@@ -292,13 +309,13 @@ extension PlayerViewController_iOS {
 
         self.timerLabel.isHidden = true
         
-        if UserManager.shared.userIdentity?.tveUserId == nil && !isPlayingFromURL() {
-                //check if ealier temp pass was created but not expired
-                self.invalidatePlayerTempPassIfOutOfWindow()
-
-                //request for temp pass
-                await self.getTempPassPayload()
-        }
+//        if UserManager.shared.userIdentity?.tveUserId == nil && !isPlayingFromURL() {
+//                //check if ealier temp pass was created but not expired
+//                self.invalidatePlayerTempPassIfOutOfWindow()
+//
+//                //request for temp pass
+//                await self.getTempPassPayload()
+//        }
         
         let featureSupported = getPlayerFeaturesSupported()
         let vlBaseUrl = videoList.apiBaseUrl
@@ -317,8 +334,8 @@ extension PlayerViewController_iOS {
         let playbackSourceType: VLPlayer.PlaybackSourceType
         if isPlayingFromURL(){
             let streamType = VLPlayer.DirectStreamType(
-                url: streamUrl ?? "",
-                streamConfig: VLPlayer.StreamConfig(isLive: self.streamConfig?.isLive, isDVR: self.streamConfig?.isDVR, isSSAIEnabled: self.streamConfig?.isSSAIEnabled),
+                url: "https://golfchannel.mt-sf.asset.viewlift.com/v1/master/dfe581e0a446a1e548014078b2d81b62b917979d/golfchannel-vod-sf-external-d2/1006/221/golf/hls/cmp_4aa2877a91584b12bffbe541c2af97e5/Top_1007.m3u8",
+                streamConfig: VLPlayer.StreamConfig(isLive: false, isDVR: false, isSSAIEnabled: true),
                 drmconfig: drmConfig
             )
             
@@ -343,8 +360,8 @@ extension PlayerViewController_iOS {
                         .ContentPlaybackConfig(
                             videoId: self.videoList.videoId,
                             token: vlToken,
-                            apiBaseURL: vlBaseUrl, beaconURL: vlBeaconURL,
-                            adobeTempPassPayload: adobePassPayload
+                            apiBaseURL: vlBaseUrl, beaconURL: vlBeaconURL
+                            //adobeTempPassPayload: adobePassPayload
                         )
                 )
         }
@@ -548,10 +565,25 @@ extension PlayerViewController_iOS {
         playerContainerView.bringSubviewToFront(timerLabel)
     
         
+        let analyticsContentId = isPlayingFromURL() ? streamUrl : playableVideoId
+        // #region agent log
+        agentBd5c3bSample(
+            location: "PlayerViewController_iOS.addPlayer",
+            message: "per-tab analytics content id applied",
+            hypothesisId: "H1",
+            data: [
+                "playerVC": ObjectIdentifier(self).hashValue,
+                "playableVideoId": self.playableVideoId ?? "",
+                "streamUrl": self.streamUrl ?? "",
+                "analyticsContentId": analyticsContentId ?? "",
+                "option": self.playerOptionSelected?.rawValue ?? ""
+            ]
+        )
+        // #endregion
         self.vlPlayer?
             .setAnalyticsInfo(
                 mediaAnalyticsInfo: MediaAnalyticsInfo(
-//                    contentInfo: VLContentInfoAnalytics(videonetwork: "test"),
+                    contentInfo: VLContentInfoAnalytics(id: analyticsContentId, title: "Tone-deaf? Reacting to Garcia's DPWT return statement"),
 //                    contentInfo: AnalyticsHelperV2.shared.getContentInfoForAnalytics(),
                     playerInfo: AnalyticsHelperV2.shared.getPlayerInfo(),
                     tvProviderInfo: AnalyticsHelperV2.shared.getTVEProviderInfo()
@@ -740,6 +772,66 @@ extension PlayerViewController_iOS {
         
         return topController
     }
+
+    // #region agent log
+    private func writePlayheadDebugLog(
+        message: String,
+        hypothesisId: String,
+        data: [String: Any]
+    ) {
+        let payload: [String: Any] = [
+            "sessionId": "0983d1",
+            "runId": "baseline",
+            "hypothesisId": hypothesisId,
+            "location": "PlayerViewController_iOS.swift",
+            "message": message,
+            "data": data,
+            "timestamp": Int(Date().timeIntervalSince1970 * 1_000)
+        ]
+        guard
+            let jsonData = try? JSONSerialization.data(withJSONObject: payload),
+            let json = String(data: jsonData, encoding: .utf8)
+        else {
+            return
+        }
+        print("AGENT0983D1 \(json)")
+        guard
+            let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+            let line = (json + "\n").data(using: .utf8)
+        else {
+            return
+        }
+        let url = directory.appendingPathComponent("debug-0983d1.log")
+        if !FileManager.default.fileExists(atPath: url.path) {
+            FileManager.default.createFile(atPath: url.path, contents: nil)
+        }
+        guard let handle = try? FileHandle(forWritingTo: url) else { return }
+        defer { try? handle.close() }
+        _ = try? handle.seekToEnd()
+        _ = try? handle.write(contentsOf: line)
+    }
+
+    private func clearPlayheadDebugLog() {
+        guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return
+        }
+        let url = directory.appendingPathComponent("debug-0983d1.log")
+        try? FileManager.default.removeItem(at: url)
+    }
+    // #endregion
+
+    // #region agent log
+    @objc private func playerAnalyticsRemovalObserved(_ notification: NSNotification) {
+        writePlayheadDebugLog(
+            message: "playerAnalyticsRemove observed by player controller",
+            hypothesisId: "H3",
+            data: [
+                "killTimer": notification.userInfo?["killTimer"] as? Bool ?? false,
+                "objectIsNil": notification.object == nil
+            ]
+        )
+    }
+    // #endregion
     
     /// Dismisses the current view controller
     private func dismissViewController() {
@@ -762,11 +854,47 @@ extension PlayerViewController_iOS {
     
     /// Handles back button tap, destroys player and dismisses view
     @IBAction private func backButtonClicked(_ sender: Any) {
-        vlPlayer?.endSessionAnalytics()
+//        VLAnalytics.shared.stopObservingPlayerEvents()
         
-        vlPlayer?.destroy()
-        vlPlayer?.playerVideoAnalyticsDelegate = nil
+        self.destroyPlayer()
+        
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func destroyPlayer() {
+        // #region agent log
+        writePlayheadDebugLog(
+            message: "destroyPlayer entered",
+            hypothesisId: "H1",
+            data: ["playerExists": vlPlayer != nil]
+        )
+        // #endregion
+        vlPlayer?.endSessionAnalytics()
+        // #region agent log
+        writePlayheadDebugLog(
+            message: "endSessionAnalytics completed before removal notification",
+            hypothesisId: "H2",
+            data: ["playerExists": vlPlayer != nil]
+        )
+        // #endregion
+        vlPlayer?.pause()
+        
+        // #region agent log
+        writePlayheadDebugLog(
+            message: "posting playerAnalyticsRemove",
+            hypothesisId: "H3",
+            data: ["killTimer": true]
+        )
+        // #endregion
+        NotificationCenter.default.post(
+            name: NSNotification.Name(rawValue: "playerAnalyticsRemove"),
+            object: vlPlayer,
+            userInfo: ["killTimer": true]
+        )
+        
+        
+//        vlPlayer?.destroy()
+//        vlPlayer?.playerVideoAnalyticsDelegate = nil
     }
 }
 

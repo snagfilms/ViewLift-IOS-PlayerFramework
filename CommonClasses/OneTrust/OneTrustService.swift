@@ -58,18 +58,6 @@ final class OneTrustService {
     private init() {}
 
     func prepareForLaunch() {
-        // #region agent log
-        writeDebugLog(
-            hypothesisId: "H1",
-            location: "OneTrustService.swift:prepareForLaunch",
-            message: "OneTrust launch configuration evaluated",
-            data: [
-                "isEnabled": isEnabled,
-                "domainIDLength": configuration?.domainID?.count ?? 0,
-                "storageLocation": configuration?.storageLocation ?? ""
-            ]
-        )
-        // #endregion
         guard isEnabled else { return }
         #if os(tvOS)
         checkForTracking { [weak self] in
@@ -89,19 +77,6 @@ final class OneTrustService {
     }
 
     func launchBannerIfNeeded(completion: ((Bool) -> Void)? = nil) {
-        // #region agent log
-        writeDebugLog(
-            hypothesisId: "H2",
-            location: "OneTrustService.swift:launchBannerIfNeeded",
-            message: "OneTrust banner eligibility evaluated",
-            data: [
-                "isEnabled": isEnabled,
-                "hasShownPopup": UserDefaults.standard.bool(forKey: OneTrustStorageKey.showPopup),
-                "trackingStatus": String(describing: ATTrackingManager.trackingAuthorizationStatus),
-                "countryCode": currentCountryCode()
-            ]
-        )
-        // #endregion
         guard isEnabled else {
             completion?(false)
             return
@@ -135,26 +110,6 @@ final class OneTrustService {
 
     func showBanner(param: OTSdkParams?, completion: @escaping (Bool) -> Void) {
         let status = ATTrackingManager.trackingAuthorizationStatus
-        // #region agent log
-        let attBranch: String
-        if status == .notDetermined {
-            attBranch = "notDetermined"
-        } else if status == .denied {
-            attBranch = "denied"
-        } else {
-            attBranch = "showOTBanner"
-        }
-        writeDebugLog(
-            hypothesisId: "H3",
-            location: "OneTrustService.swift:showBanner",
-            message: "ATT branch selected before OneTrust UI",
-            data: [
-                "trackingStatus": String(describing: status),
-                "branch": attBranch,
-                "hasSdkParams": param != nil
-            ]
-        )
-        // #endregion
         if status == .notDetermined {
             checkForTracking { [weak self] in
                 guard ATTrackingManager.trackingAuthorizationStatus != .denied else {
@@ -197,50 +152,17 @@ final class OneTrustService {
 
     private func showOTBanner(param: OTSdkParams?, completion: @escaping (Bool) -> Void) {
         startSDK(param: param) { response in
-            // #region agent log
-            self.writeDebugLog(
-                hypothesisId: "H3",
-                location: "OneTrustService.swift:showOTBanner",
-                message: "OneTrust SDK setup completed",
-                data: [
-                    "hasError": response.error != nil,
-                    "errorDescription": response.error?.localizedDescription ?? "",
-                    "errorDomain": (response.error as NSError?)?.domain ?? "",
-                    "errorCode": (response.error as NSError?)?.code ?? -1,
-                    "hasBannerData": OTPublishersHeadlessSDK.shared.getBannerData() != nil
-                ]
-            )
-            // #endregion
             guard response.error == nil else {
                 completion(false)
                 return
             }
             let shouldShowBanner = OTPublishersHeadlessSDK.shared.shouldShowBanner()
-            // #region agent log
-            self.writeDebugLog(
-                hypothesisId: "H4",
-                location: "OneTrustService.swift:showOTBanner",
-                message: "OneTrust banner visibility evaluated",
-                data: [
-                    "shouldShowBanner": shouldShowBanner,
-                    "featureLaunchFlagPresent": UserDefaults.standard.string(forKey: OneTrustStorageKey.featureEnabled) != nil
-                ]
-            )
-            // #endregion
             guard shouldShowBanner else {
                 completion(false)
                 return
             }
             DispatchQueue.main.async {
                 guard let topViewController = AppDelegate.shared.window?.rootViewController else {
-                    // #region agent log
-                    self.writeDebugLog(
-                        hypothesisId: "H6",
-                        location: "OneTrustService.swift:showOTBanner",
-                        message: "Banner skipped because root view controller missing",
-                        data: ["hasWindow": AppDelegate.shared.window != nil]
-                    )
-                    // #endregion
                     completion(false)
                     return
                 }
@@ -248,29 +170,7 @@ final class OneTrustService {
                     UserDefaults.standard.set("true", forKey: OneTrustStorageKey.featureEnabled)
                     OTPublishersHeadlessSDK.shared.setupUI(topViewController, UIType: .banner)
                     OTPublishersHeadlessSDK.shared.showConsentUI(for: .idfa, from: topViewController) {}
-                    // #region agent log
-                    self.writeDebugLog(
-                        hypothesisId: "H5",
-                        location: "OneTrustService.swift:showOTBanner",
-                        message: "OneTrust banner presentation requested",
-                        data: [
-                            "hasRootViewController": true,
-                            "uiApi": "showConsentUI.idfa",
-                            "presenter": String(describing: type(of: topViewController))
-                        ]
-                    )
-                    // #endregion
                 } else {
-                    // #region agent log
-                    self.writeDebugLog(
-                        hypothesisId: "H5",
-                        location: "OneTrustService.swift:showOTBanner",
-                        message: "Banner skipped because OnetrustLaunch already set",
-                        data: [
-                            "featureLaunchValue": UserDefaults.standard.string(forKey: OneTrustStorageKey.featureEnabled) ?? ""
-                        ]
-                    )
-                    // #endregion
                     completion(false)
                 }
             }
@@ -281,18 +181,6 @@ final class OneTrustService {
         let storageLocation = configuration?.storageLocation?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let domainIdentifier = configuration?.domainID?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         guard isEnabled, !storageLocation.isEmpty, !domainIdentifier.isEmpty else {
-            // #region agent log
-            writeDebugLog(
-                hypothesisId: "H7",
-                location: "OneTrustService.swift:startSDK",
-                message: "startSDK returned before SDK call",
-                data: [
-                    "isEnabled": isEnabled,
-                    "storageLocationEmpty": storageLocation.isEmpty,
-                    "domainIdentifierEmpty": domainIdentifier.isEmpty
-                ]
-            )
-            // #endregion
             return
         }
         OTPublishersHeadlessSDK.shared.startSDK(
@@ -400,44 +288,6 @@ final class OneTrustService {
         OneTrustUserDefaultsHelper.shared.createOrUpdateValue(forKey: userId, shownConsent: true)
     }
 
-    // #region agent log
-    private func writeDebugLog(
-        hypothesisId: String,
-        location: String,
-        message: String,
-        data: [String: Any]
-    ) {
-        var payload: [String: Any] = data
-        payload["sessionId"] = "819f31"
-        payload["runId"] = "pre-fix"
-        payload["hypothesisId"] = hypothesisId
-        payload["location"] = location
-        payload["message"] = message
-        payload["timestamp"] = Int(Date().timeIntervalSince1970 * 1000)
-        guard JSONSerialization.isValidJSONObject(payload),
-              let encodedPayload = try? JSONSerialization.data(withJSONObject: payload),
-              let jsonLine = String(data: encodedPayload, encoding: .utf8) else {
-            return
-        }
-        print("DBG0088BB \(jsonLine)")
-        let ingestURLs = [
-            "http://192.168.1.68:7613/ingest/6c1ebb5d-2cad-4d30-8c36-f313e6f114be"
-        ]
-        for urlString in ingestURLs {
-            guard let url = URL(string: urlString) else { continue }
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.setValue("819f31", forHTTPHeaderField: "X-Debug-Session-Id")
-            request.httpBody = encodedPayload
-            URLSession.shared.dataTask(with: request) { _, _, error in
-                if let error {
-                    print("DBG0088BB ingest failed \(error.localizedDescription)")
-                }
-            }.resume()
-        }
-    }
-    // #endregion
 }
 
 extension OneTrustService: OTEventListener {

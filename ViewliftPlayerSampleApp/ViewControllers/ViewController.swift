@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak private var hideControls: UISwitch!
     @IBOutlet weak private var muteControls: UISwitch!
     private var playerOptionSelected:PlayerUIOptions = .defaultControl
-    private var playerUIOptions: [PlayerUIOptions] = [.exploreMore]
+    private var playerUIOptions: [PlayerUIOptions] = [.exploreMore, .rootTabPlayers]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let assetVC = AssetListViewController()
             assetVC.videoList = _videoList
             navigationController?.pushViewController(assetVC, animated: true)
-        }else{
+        } else if playerOptionSelected == .rootTabPlayers {
+            guard let videoList = AppDelegate.shared.readVideoListOperation?.videoList else { return }
+            if let message = videoList.checkForConfigurationErrorMessage() {
+                showAlert(message: message)
+                return
+            }
+            let rootTabBarController = RootTabBarController(videoList: videoList)
+            navigationController?.pushViewController(rootTabBarController, animated: true)
+        } else {
             launchVideoPlayer()
         }
     }

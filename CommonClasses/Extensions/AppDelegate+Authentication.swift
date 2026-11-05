@@ -28,7 +28,7 @@ extension AppDelegate {
     func setupAuthentication() {
         // Retrieve current user identity and authorization token
         let userIdentity = UserManager.shared.userIdentity
-        self.authorizationToken = userIdentity?.authorizationToken
+        self.authorizationToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3VudHJ5Q29kZSI6IlVTIiwiZGV2aWNlSWQiOiJGNTIxNUY3Mi0wOEE0LTQ2MzctOTUyMS1BQjA4NzI1MzlFNTQiLCJlbWFpbCI6ImRjYzhkMjAzLWJmODEtNDdhOS1hMjU0LWE4NGVhY2ExNzAyNy1hdXRvQHZpZXdsaWZ0LmNvbSIsImV4cCI6MTc5NjI5OTYzMCwiaWF0IjoxNzkzNzA3NjMwLCJpZCI6ImRjYzBkMDRmLThjODQtNGRkYS04ZTU0LWU1MmFmZDhiNjhiNyIsImlwYWRkcmVzc2VzIjoiMTg3LjE1LjkxLjIzNCwxMC4yMDEuMTkzLjIwNCIsInBvc3RhbGNvZGUiOiI5ODE2MCIsInByb3ZpZGVyIjoiaG90d2lyZWNvbW11bmljYXRpb25zX2F1dGgtZ2F0ZXdheV9uZXQiLCJzaXRlIjoiZ29sZmNoYW5uZWwiLCJzaXRlSWQiOiI4YjQxMzVmNi0zZjU5LTQyOGQtYWUyNy04YzllMjcwNjQxMTIiLCJ1c2VySWQiOiJkY2MwZDA0Zi04Yzg0LTRkZGEtOGU1NC1lNTJhZmQ4YjY4YjcifQ.J51Zsdkdtt8q0mAzrdXDwRTdD5AnB5ThBiRciT_11tg"//userIdentity?.authorizationToken
         
         // Ensure video list and authentication keys are available
         guard let videoList = AppDelegate.shared.readVideoListOperation?.videoList else{
@@ -99,19 +99,20 @@ extension AppDelegate {
     }
     
     func setupAnalyticsConfiguration() {
-//        let adobeConfig = AdobeAnalyticsConfig(
+        let adobeConfig = AdobeAnalyticsConfig(
 //            reportSuites: "rsid1,rsid2",
-//            trackingServer: "tracking.server.com"
-//        )
-        
-        let comscoreConfig = ComscoreAnalyticsConfig(
-            publisherId: "",
-            enableDebugMode: true
+//            trackingServer: "tracking.server.com",
+            environmentKey: "77ca722dd820/99867d0bb529/launch-a88516d7f021-development"
         )
         
+//        let comscoreConfig = ComscoreAnalyticsConfig(
+//            publisherId: "",
+//            enableDebugMode: true
+//        )
+        
         let results = AnalyticsConfigurationBuilder()
-//            .add(adobeConfig)
-            .add(comscoreConfig)
+            .add(adobeConfig)
+//            .add(comscoreConfig)
             .build()
         
         // Check results
@@ -123,10 +124,12 @@ extension AppDelegate {
     func setupAnalytics() {
         self.setupAnalyticsConfiguration()
         
-        VLAnalytics.shared.setupAnalytics(clients: [.adobe, .comscore], enableDebugLogs: true)
+        VLAnalytics.shared.setupAnalytics(clients: [.adobe], enableDebugLogs: true)
         self.handleAnalyticsConsent()
         
         self.triggerSpashScreenEvent()
+        
+        VLAnalytics.shared.startObservingPlayerEvents()
     }
     
     func handleAnalyticsConsent() {

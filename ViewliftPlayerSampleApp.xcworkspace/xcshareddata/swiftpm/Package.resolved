@@ -1,5 +1,5 @@
 {
-  "originHash" : "24aa446c5c7113e189c674a57c665e6aa28273112cf4b5d8aa5404ab83fd1d8e",
+  "originHash" : "7fc713abbe7ce83ed1a495df7f68ca55e1ed4a4d6f5162d1093252f48b1b40dd",
   "pins" : [
     {
       "identity" : "aepsdk-analytics-ios",
@@ -42,8 +42,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/segmentio/analytics-swift",
       "state" : {
-        "revision" : "9fbe9389da04ff5a0fb55b419d5f5c24a503a04b",
-        "version" : "1.10.3"
+        "revision" : "8a56244d3a0c7b8880cdc0046ebf99f830f4a554",
+        "version" : "1.10.4"
+      }
+    },
+    {
+      "identity" : "apollo-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apollographql/apollo-ios.git",
+      "state" : {
+        "revision" : "09a62e377f4e9054b5d3ee7d702984094e69f661",
+        "version" : "1.25.7"
       }
     },
     {
@@ -69,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/snagfilms/AuthenticationFramework",
       "state" : {
-        "revision" : "36d86e0546fcaeb8dad645944b006051d01cae36",
-        "version" : "3.1.34-1"
+        "revision" : "58e72a8c2685ef90fe02250d1e377ac012594789",
+        "version" : "3.1.36"
       }
     },
     {
@@ -128,6 +137,24 @@
       }
     },
     {
+      "identity" : "dd-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Datadog/dd-sdk-ios.git",
+      "state" : {
+        "revision" : "36ca2cfdf8e02a2753fd66f6dbdd2a065a84e412",
+        "version" : "3.21.0"
+      }
+    },
+    {
+      "identity" : "dd-sdk-ios-apollo-interceptor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor",
+      "state" : {
+        "revision" : "0dcf84e4d1708b7aee452777463e3c7efca59930",
+        "version" : "1.0.2"
+      }
+    },
+    {
       "identity" : "facebook-ios-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/facebook/facebook-ios-sdk",
@@ -141,8 +168,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/snagfilms/iOS-VLAnalytics-SPM",
       "state" : {
-        "revision" : "dc797a37decef335897348c9c983f1d8da331374",
-        "version" : "3.0.24"
+        "revision" : "129291ca693b6abe4a2230259097dfad1aa7f978",
+        "version" : "3.0.26"
       }
     },
     {
@@ -150,8 +177,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/snagfilms/iOS-VLBeacon-SPM.git",
       "state" : {
-        "revision" : "a83f38bd9ce30c296416a1c1c498ccc7ef7bdb78",
-        "version" : "3.2.9"
+        "revision" : "553abad1464e842dd54217807f97f5801fe5cb2b",
+        "version" : "3.2.10"
+      }
+    },
+    {
+      "identity" : "ios-vlnotification-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/snagfilms/iOS-VLNotification-SPM",
+      "state" : {
+        "revision" : "c2fc4796b9098ac99defa38397677bf74e1aeedc",
+        "version" : "1.0.3"
       }
     },
     {
@@ -168,8 +204,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
-        "revision" : "2ef543ee21d63734e1c004ad6c870255e8716c50",
-        "version" : "7.12.0"
+        "revision" : "80e7d020ea0a76b65431ebba839046cea2e7ea8e",
+        "version" : "8.15.0"
+      }
+    },
+    {
+      "identity" : "kscrash",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kstenerud/KSCrash.git",
+      "state" : {
+        "revision" : "95a8895d75f3c22aa9ad9f2a15d2fbd97b0a55e2",
+        "version" : "2.5.1"
       }
     },
     {
@@ -188,6 +233,15 @@
       "state" : {
         "revision" : "705cb2b57cee36f9e74033bfd1d346d9b4f04d71",
         "version" : "4.0.0"
+      }
+    },
+    {
+      "identity" : "opentelemetry-swift-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/open-telemetry/opentelemetry-swift-core",
+      "state" : {
+        "revision" : "06f8a460a66f813758d22f09025d85df45450a63",
+        "version" : "2.5.1"
       }
     },
     {
@@ -236,6 +290,15 @@
       }
     },
     {
+      "identity" : "swift-atomics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-atomics.git",
+      "state" : {
+        "revision" : "0442cb5a3f98ab802acb777929fdb446bda11a34",
+        "version" : "1.3.1"
+      }
+    },
+    {
       "identity" : "swift-package-manager-google-interactive-media-ads-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git",
@@ -249,17 +312,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-tvos.git",
       "state" : {
-        "revision" : "8d029b6efbb2ec8681575b5f544f605daf1d98b2",
-        "version" : "4.18.1"
-      }
-    },
-    {
-      "identity" : "viewlift-ios-playerframework",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/snagfilms/ViewLift-IOS-PlayerFramework",
-      "state" : {
-        "revision" : "23f1e32566b00d6d2f3f1a69ad338a0078805a23",
-        "version" : "3.2.52"
+        "revision" : "fe5a302eb17388077258b02e2a18e88f63100625",
+        "version" : "4.16.0"
       }
     },
     {
@@ -267,8 +321,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/efremidze/VisualEffectView.git",
       "state" : {
-        "revision" : "405baa5eba273ead6a23272605adc3232422262b",
-        "version" : "5.0.8"
+        "branch" : "5.0.8",
+        "revision" : "405baa5eba273ead6a23272605adc3232422262b"
       }
     }
   ],
