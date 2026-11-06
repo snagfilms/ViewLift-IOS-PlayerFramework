@@ -124,11 +124,15 @@ open class StreamSwitchHandler {
   @objc deinit
 }
 extension VLPlayerLib.AnalyticsHelperPlayer {
-  final public func playerSessionEnded()
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func playerSessionEnded(from owner: Swift.AnyObject? = nil)
+  #endif
 }
 extension VLPlayerLib.AnalyticsHelperPlayer {
   final public func playerChapterDidComplete(excludingClients: [Swift.String] = [])
-  final public func postVideoComplete(excludingClients: [Swift.String] = [])
+  #if compiler(>=5.3) && $NonescapableTypes
+  final public func postVideoComplete(excludingClients: [Swift.String] = [], from owner: Swift.AnyObject? = nil)
+  #endif
 }
 public struct Chapter : Swift.Equatable {
   public let index: Swift.Int
