@@ -1253,6 +1253,7 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 /// Delgate method - Called when next video playback UI is dismissed
 /// \param isPlayingNextContent Tell is next content is playing or user has cancelled playback for next video
 ///
+- (void)autoPlayUIWillShow;
 - (void)autoPlayUIDismissedWithIsPlayingNextContent:(BOOL)isPlayingNextContent;
 /// Delgate method - Called when AutoPlay view is about to display and asks for metadata for URL Stream.
 - (StreamMetadata * _Nullable)autoPlayMetadataProviderWithStreamId:(NSString * _Nonnull)streamId SWIFT_WARN_UNUSED_RESULT;

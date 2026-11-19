@@ -517,6 +517,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func addCustomView()
   @objc optional func showContentInfo()
   @objc optional func videoCurrentPlayhead(playHead: Swift.Double)
+  @objc optional func autoPlayUIWillShow()
   @objc optional func autoPlayUIDismissed(isPlayingNextContent: Swift.Bool)
   @objc optional func autoPlayMetadataProvider(streamId: Swift.String) -> VLPlayerLib.VLPlayer.StreamMetadata?
   @objc optional func avPlayerControllerInstance(_ avPlayerControllerInstance: AVKit.AVPlayerViewController)
@@ -879,7 +880,7 @@ extension VLPlayerLib.VLPlayer {
     public init(colors: [UIKit.UIColor] = [.clear, .black], locations: [Foundation.NSNumber] = [0.0, 1.0], startPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 0.0), endPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 1.0))
   }
   public struct PlayerControlsViewTextContent {
-    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts", subtitlesOnText: Swift.String = "Subtitles On", subtitlesOffText: Swift.String = "Subtitles Off", volumeOnText: Swift.String = "Volume On", volumeOffText: Swift.String = "Volume Off", lockControlsText: Swift.String = "Lock Controls", unlockControlsText: Swift.String = "Unlock Controls?", watchLiveText: Swift.String = "Watch Live", resumeText: Swift.String = "Resume")
+    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts", subtitlesOnText: Swift.String = "Subtitles On", subtitlesOffText: Swift.String = "Subtitles Off", volumeOnText: Swift.String = "Volume On", volumeOffText: Swift.String = "Volume Off", lockControlsText: Swift.String = "Lock Controls", unlockControlsText: Swift.String = "Unlock Controls?", watchLiveText: Swift.String = "Watch Live", resumeText: Swift.String = "Resume", goLiveText: Swift.String = "Go Live")
   }
 }
 public struct AdsViewConfiguration {
@@ -1309,12 +1310,33 @@ public struct SSAIBeaconTracking {
   }
   public struct VideoId {
     public let id: Swift.String
-    public init(_ id: Swift.String)
+    public let autoPlayMetadata: VLPlayerLib.VLPlayer.AutoPlayMetadata?
+    public init(_ id: Swift.String, autoPlayMetadata: VLPlayerLib.VLPlayer.AutoPlayMetadata? = nil)
+  }
+  public struct AutoPlayMetadata {
+    public enum LayoutAxis {
+      case horizontal
+      case vertical
+      public static func == (a: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis, b: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+    public var isClip: Swift.Bool
+    public var networkBadgeUrl: Swift.String?
+    public var subtitle: Swift.String?
+    public var clipMetadataText: Swift.String?
+    public var duration: Swift.Double?
+    public var showsDuration: Swift.Bool
+    public var layoutAxis: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis
+    public init(isClip: Swift.Bool, networkBadgeUrl: Swift.String?, subtitle: Swift.String?, clipMetadataText: Swift.String?, duration: Swift.Double?, showsDuration: Swift.Bool, layoutAxis: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis)
   }
   public struct StreamId {
     public let id: Swift.String
     public let url: Swift.String
-    public init(id: Swift.String, url: Swift.String)
+    public let autoPlayMetadata: VLPlayerLib.VLPlayer.AutoPlayMetadata?
+    public init(id: Swift.String, url: Swift.String, autoPlayMetadata: VLPlayerLib.VLPlayer.AutoPlayMetadata? = nil)
   }
   public enum PlaybackItem {
     case video(VLPlayerLib.VLPlayer.VideoId)
@@ -2228,6 +2250,8 @@ extension VLPlayerLib.MediaType : Swift.RawRepresentable {}
 extension VLPlayerLib.userSubscriptionType : Swift.Equatable {}
 extension VLPlayerLib.userSubscriptionType : Swift.Hashable {}
 extension VLPlayerLib.userSubscriptionType : Swift.RawRepresentable {}
+extension VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis : Swift.Equatable {}
+extension VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.LeaderboardPlayerControls : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.LeaderboardPlayerControls : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.ResolutionType : Swift.Equatable {}

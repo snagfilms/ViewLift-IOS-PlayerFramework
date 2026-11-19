@@ -192,7 +192,7 @@ extension VLPlayerLib.VLPlayer {
     public init(colors: [UIKit.UIColor] = [.clear, .black], locations: [Foundation.NSNumber] = [0.0, 1.0], startPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 0.0), endPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 1.0))
   }
   public struct PlayerControlsViewTextContent {
-    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts", subtitlesOnText: Swift.String = "Subtitles On", subtitlesOffText: Swift.String = "Subtitles Off", volumeOnText: Swift.String = "Volume On", volumeOffText: Swift.String = "Volume Off", lockControlsText: Swift.String = "Lock Controls", unlockControlsText: Swift.String = "Unlock Controls?", watchLiveText: Swift.String = "Watch Live", resumeText: Swift.String = "Resume")
+    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts", subtitlesOnText: Swift.String = "Subtitles On", subtitlesOffText: Swift.String = "Subtitles Off", volumeOnText: Swift.String = "Volume On", volumeOffText: Swift.String = "Volume Off", lockControlsText: Swift.String = "Lock Controls", unlockControlsText: Swift.String = "Unlock Controls?", watchLiveText: Swift.String = "Watch Live", resumeText: Swift.String = "Resume", goLiveText: Swift.String = "Go Live")
   }
 }
 @objc @_inheritsConvenienceInitializers open class VLError : ObjectiveC.NSObject, Swift.Error {
@@ -1515,12 +1515,33 @@ public enum AdType {
   }
   public struct VideoId {
     public let id: Swift.String
-    public init(_ id: Swift.String)
+    public let autoPlayMetadata: VLPlayerLib.VLPlayer.AutoPlayMetadata?
+    public init(_ id: Swift.String, autoPlayMetadata: VLPlayerLib.VLPlayer.AutoPlayMetadata? = nil)
+  }
+  public struct AutoPlayMetadata {
+    public enum LayoutAxis {
+      case horizontal
+      case vertical
+      public static func == (a: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis, b: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+    public var isClip: Swift.Bool
+    public var networkBadgeUrl: Swift.String?
+    public var subtitle: Swift.String?
+    public var clipMetadataText: Swift.String?
+    public var duration: Swift.Double?
+    public var showsDuration: Swift.Bool
+    public var layoutAxis: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis
+    public init(isClip: Swift.Bool, networkBadgeUrl: Swift.String?, subtitle: Swift.String?, clipMetadataText: Swift.String?, duration: Swift.Double?, showsDuration: Swift.Bool, layoutAxis: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis)
   }
   public struct StreamId {
     public let id: Swift.String
     public let url: Swift.String
-    public init(id: Swift.String, url: Swift.String)
+    public let autoPlayMetadata: VLPlayerLib.VLPlayer.AutoPlayMetadata?
+    public init(id: Swift.String, url: Swift.String, autoPlayMetadata: VLPlayerLib.VLPlayer.AutoPlayMetadata? = nil)
   }
   public enum PlaybackItem {
     case video(VLPlayerLib.VLPlayer.VideoId)
@@ -1582,7 +1603,21 @@ public enum AdType {
     public var closeButtonBorderColor: UIKit.UIColor
     public var thumbnailBorderColor: UIKit.UIColor
     public var iconTint: UIKit.UIColor
-    public init(title: VLPlayerLib.VLPlayer.LabelStyle = LabelStyle(textColor: .white, font: .systemFont(ofSize: 22)), description: VLPlayerLib.VLPlayer.LabelStyle = LabelStyle(textColor: .white, font: .systemFont(ofSize: 18)), timerText: VLPlayerLib.VLPlayer.LabelStyle = LabelStyle(textColor: .white, font: .systemFont(ofSize: 18)), backgroundColor: UIKit.UIColor = .black, closeButtonBorderColor: UIKit.UIColor = .red, thumbnailBorderColor: UIKit.UIColor = .green, iconTint: UIKit.UIColor = .white)
+    public var subtitle: VLPlayerLib.VLPlayer.LabelStyle
+    public var duration: VLPlayerLib.VLPlayer.LabelStyle
+    public var clipBadge: VLPlayerLib.VLPlayer.LabelStyle
+    public var clipMetadata: VLPlayerLib.VLPlayer.LabelStyle
+    public var cardTitle: VLPlayerLib.VLPlayer.LabelStyle
+    public var strings: VLPlayerLib.VLPlayer.AutoPlayStrings
+    public init(title: VLPlayerLib.VLPlayer.LabelStyle = LabelStyle(textColor: .white, font: .systemFont(ofSize: AutoPlayTheme.idiomFontSize(pad: 20, phone: 15))), subtitle: VLPlayerLib.VLPlayer.LabelStyle = LabelStyle(textColor: UIColor.white.withAlphaComponent(0.7), font: .systemFont(ofSize: AutoPlayTheme.idiomFontSize(pad: 15, phone: 12))), description: VLPlayerLib.VLPlayer.LabelStyle = LabelStyle(textColor: UIColor.white.withAlphaComponent(0.65), font: .systemFont(ofSize: AutoPlayTheme.idiomFontSize(pad: 15, phone: 12))), timerText: VLPlayerLib.VLPlayer.LabelStyle = LabelStyle(textColor: .white, font: .systemFont(ofSize: AutoPlayTheme.idiomFontSize(pad: 18, phone: 14))), duration: VLPlayerLib.VLPlayer.LabelStyle = LabelStyle(textColor: .white, font: .systemFont(ofSize: AutoPlayTheme.idiomFontSize(pad: 13, phone: 11))), clipBadge: VLPlayerLib.VLPlayer.LabelStyle = LabelStyle(textColor: .white, font: .systemFont(ofSize: AutoPlayTheme.idiomFontSize(pad: 12, phone: 9), weight: .semibold)), clipMetadata: VLPlayerLib.VLPlayer.LabelStyle = LabelStyle(textColor: .white, font: .systemFont(ofSize: AutoPlayTheme.idiomFontSize(pad: 14, phone: 11))), cardTitle: VLPlayerLib.VLPlayer.LabelStyle = LabelStyle(textColor: .white, font: .systemFont(ofSize: 16)), strings: VLPlayerLib.VLPlayer.AutoPlayStrings = AutoPlayStrings(), backgroundColor: UIKit.UIColor = .black, closeButtonBorderColor: UIKit.UIColor = .red, thumbnailBorderColor: UIKit.UIColor = .green, iconTint: UIKit.UIColor = .white)
+    public static func idiomFontSize(pad: CoreFoundation.CGFloat, phone: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat
+  }
+  public struct AutoPlayStrings {
+    public var timerPrefix: Swift.String
+    public var clipBadgeText: Swift.String
+    public var closeAccessibilityLabel: Swift.String
+    public var playAccessibilityLabel: Swift.String
+    public init(timerPrefix: Swift.String = "Next up in", clipBadgeText: Swift.String = "CLIP", closeAccessibilityLabel: Swift.String = "Close", playAccessibilityLabel: Swift.String = "Play next video")
   }
   public struct LabelStyle {
     public let textColor: UIKit.UIColor
@@ -2072,6 +2107,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func addCustomView()
   @objc optional func showContentInfo()
   @objc optional func videoCurrentPlayhead(playHead: Swift.Double)
+  @objc optional func autoPlayUIWillShow()
   @objc optional func autoPlayUIDismissed(isPlayingNextContent: Swift.Bool)
   @objc optional func autoPlayMetadataProvider(streamId: Swift.String) -> VLPlayerLib.VLPlayer.StreamMetadata?
   @objc optional func avPlayerControllerInstance(_ avPlayerControllerInstance: AVKit.AVPlayerViewController)
@@ -2528,6 +2564,8 @@ extension VLPlayerLib.userSubscriptionType : Swift.Hashable {}
 extension VLPlayerLib.userSubscriptionType : Swift.RawRepresentable {}
 extension VLPlayerLib.AdType : Swift.Equatable {}
 extension VLPlayerLib.AdType : Swift.Hashable {}
+extension VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis : Swift.Equatable {}
+extension VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.LeaderboardPlayerControls : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.LeaderboardPlayerControls : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.ResolutionType : Swift.Equatable {}
