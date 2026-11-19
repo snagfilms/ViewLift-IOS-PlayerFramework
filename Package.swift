@@ -49,6 +49,8 @@ let package = Package(
             name: "BitmovinLibLinkage",
             dependencies: [
                 .target(name: "BitmovinLib"),
+                .target(name: "VLPlayerLib"),
+                .product(name: "VLBeaconLib", package: "iOS-VLBeacon-SPM"),
                 .product(name: "BitmovinPlayer", package: "player-ios"),
                 .product(name: "BitmovinPlayerCore", package: "player-ios-core")
             ],
@@ -58,6 +60,8 @@ let package = Package(
             name: "MuxLibLinkage",
             dependencies: [
                 .target(name: "MuxLib"),
+                .target(name: "VLPlayerLib"),
+                .product(name: "VLBeaconLib", package: "iOS-VLBeacon-SPM"),
                 .product(name: "MUXSDKStats", package: "mux-stats-sdk-avplayer"),
                 .product(name: "MuxCore", package: "stats-sdk-objc")
             ],
