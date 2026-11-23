@@ -585,6 +585,16 @@ typedef SWIFT_ENUM(NSInteger, PlayingState, open) {
   PlayingStateUnknown = 3,
 };
 
+/// Represents a lifecycle event for the player sidebar.
+typedef SWIFT_ENUM(NSInteger, PlayerSideBarVisibility, open) {
+/// Called just before the sidebar is presented.
+/// The app can use this event to refresh or update the sidebar tabs,
+/// for example by re-seeding the season from the currently playing content.
+  PlayerSideBarVisibilityWillShow = 0,
+/// Called when the sidebar is about to be hidden.
+  PlayerSideBarVisibilityWillHide = 1,
+};
+
 @interface VLPlayer (SWIFT_EXTENSION(VLPlayerLib))
 - (BOOL)isPlaying SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isClientSideAdPlaying SWIFT_WARN_UNUSED_RESULT;
@@ -1065,6 +1075,18 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 ///
 - (void)autoPlayUIWillShow;
 - (void)autoPlayUIDismissedWithIsPlayingNextContent:(BOOL)isPlayingNextContent;
+/// important:
+///
+/// Delegate method - called when AutoPlay is about to start the next item
+/// (after UI dismiss / countdown Play), immediately before the SDK builds
+/// the next player controller. Same shape as <code>setSource</code> completion.
+/// \param success Whether next entitlement / source is ready to play
+///
+/// \param playerView Current player surface (may be recreated after this call)
+///
+/// \param contentResponse Entitlement / content dictionary for the next item
+///
+- (void)autoPlayNextContentReadyWithSuccess:(BOOL)success playerView:(UIView * _Nullable)playerView contentResponse:(NSDictionary<NSString *, id> * _Nullable)contentResponse;
 /// Delgate method - Called when AutoPlay view is about to display and asks for metadata for URL Stream.
 - (StreamMetadata * _Nullable)autoPlayMetadataProviderWithStreamId:(NSString * _Nonnull)streamId SWIFT_WARN_UNUSED_RESULT;
 - (void)avPlayerControllerInstance:(AVPlayerViewController * _Nonnull)avPlayerControllerInstance;
@@ -1072,6 +1094,21 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 - (void)hideTempPassTimerAndReloadPlayer;
 - (void)playbackStateDidChangeWithState:(enum PlayingState)state;
 - (void)onPlaybackOptionChangedWithPlaybackOption:(NSString * _Nonnull)playbackOption playerTag:(NSString * _Nonnull)playerTag;
+/// Notifies the app about player sidebar lifecycle events.
+- (void)playerSideBarWithVisibility:(enum PlayerSideBarVisibility)visibility;
+/// Called when the player is about to automatically start playing the next content.
+/// The delegate can use this callback to decide whether autoplay should proceed.
+/// The completion handler must be called with <code>true</code> to allow autoplay or <code>false</code>
+/// to prevent it.
+/// \param contentId The identifier of the content that is about to autoplay.
+///
+/// \param completion Completion handler used to approve or reject autoplay.
+///
+- (void)playerWillShowAutoPlayWithContentId:(NSString * _Nonnull)contentId completion:(void (^ _Nonnull)(BOOL))completion;
+/// Called when the player needs additional playback items to continue playback.
+/// The delegate should provide or append additional playback items when this
+/// callback is received, if more content is available.
+- (void)playerNeedsMorePlaybackItems;
 @end
 
 #endif // defined(__OBJC__)

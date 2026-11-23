@@ -5,6 +5,7 @@
 import AVFoundation
 import AVKit
 import AdSupport
+import Combine
 import CommonCrypto
 import CoreMedia
 import CryptoKit
@@ -519,12 +520,16 @@ public protocol VideoPlayerDataSource : AnyObject {
   @objc optional func videoCurrentPlayhead(playHead: Swift.Double)
   @objc optional func autoPlayUIWillShow()
   @objc optional func autoPlayUIDismissed(isPlayingNextContent: Swift.Bool)
+  @objc optional func autoPlayNextContentReady(success: Swift.Bool, playerView: UIKit.UIView?, contentResponse: Swift.Dictionary<Swift.String, Swift.AnyObject>?)
   @objc optional func autoPlayMetadataProvider(streamId: Swift.String) -> VLPlayerLib.VLPlayer.StreamMetadata?
   @objc optional func avPlayerControllerInstance(_ avPlayerControllerInstance: AVKit.AVPlayerViewController)
   @objc optional func airplayConnection(changed status: Swift.Bool)
   @objc optional func hideTempPassTimerAndReloadPlayer()
   @objc optional func playbackStateDidChange(state: VLPlayerLib.VLPlayer.PlayingState)
   @objc optional func onPlaybackOptionChanged(playbackOption: Swift.String, playerTag: Swift.String)
+  @objc optional func playerSideBar(visibility: VLPlayerLib.VLPlayer.PlayerSideBarVisibility)
+  @objc optional func playerWillShowAutoPlay(contentId: Swift.String, completion: @escaping (_ approved: Swift.Bool) -> Swift.Void)
+  @objc optional func playerNeedsMorePlaybackItems()
 }
 public protocol ServerSideAdTrackingDelegate : AnyObject {
   func serverSideAdTrackingEvents(trackingEventType: VLPlayerLib.VLPlayer.AdsEventType, eventTrackingProperties: [Swift.String : Any])
@@ -777,6 +782,7 @@ extension VLPlayerLib.VLPlayer {
   public func isPlayerDestroyed() -> Swift.Bool?
   @objc dynamic open func setNextVideo(videoId: Swift.String, adTag: Swift.String?)
   @objc dynamic open func playNextVideo(videoId: Swift.String?, vlToken: Swift.String?, adTag: Swift.String?, isSuccess: @escaping (_ isSuccess: Swift.Bool) -> Swift.Void)
+  public func updateNextPlaybackList(_ list: VLPlayerLib.VLPlayer.PlaybackList?)
   public func isAutoPlay() -> Swift.Bool?
   @objc dynamic open func shouldPlayMuted(isMuted: Swift.Bool)
   public func isMuted() -> Swift.Bool?
@@ -840,6 +846,11 @@ extension VLPlayerLib.VLPlayer {
 }
 public struct ListSidebarTab {
   public init<V>(name: Swift.String, @SwiftUICore.ViewBuilder content: () -> V) where V : SwiftUICore.View
+}
+public struct ListSidebarHeader {
+  public let headerView: SwiftUICore.AnyView
+  public init(headerView: SwiftUICore.AnyView)
+  public init<V>(@SwiftUICore.ViewBuilder headerView: () -> V) where V : SwiftUICore.View
 }
 extension Swift.Double {
   public func toInt() -> Swift.Int?
@@ -1314,23 +1325,16 @@ public struct SSAIBeaconTracking {
     public init(_ id: Swift.String, autoPlayMetadata: VLPlayerLib.VLPlayer.AutoPlayMetadata? = nil)
   }
   public struct AutoPlayMetadata {
-    public enum LayoutAxis {
-      case horizontal
-      case vertical
-      public static func == (a: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis, b: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis) -> Swift.Bool
-      public func hash(into hasher: inout Swift.Hasher)
-      public var hashValue: Swift.Int {
-        get
-      }
-    }
+    public var title: Swift.String?
+    public var thumbnailUrl: Swift.String?
+    public var description: Swift.String?
     public var isClip: Swift.Bool
     public var networkBadgeUrl: Swift.String?
     public var subtitle: Swift.String?
     public var clipMetadataText: Swift.String?
     public var duration: Swift.Double?
     public var showsDuration: Swift.Bool
-    public var layoutAxis: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis
-    public init(isClip: Swift.Bool, networkBadgeUrl: Swift.String?, subtitle: Swift.String?, clipMetadataText: Swift.String?, duration: Swift.Double?, showsDuration: Swift.Bool, layoutAxis: VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis)
+    public init(title: Swift.String? = nil, thumbnailUrl: Swift.String? = nil, description: Swift.String? = nil, isClip: Swift.Bool = false, networkBadgeUrl: Swift.String? = nil, subtitle: Swift.String? = nil, clipMetadataText: Swift.String? = nil, duration: Swift.Double? = nil, showsDuration: Swift.Bool = true)
   }
   public struct StreamId {
     public let id: Swift.String
@@ -1384,9 +1388,23 @@ public struct SSAIBeaconTracking {
       get
     }
   }
+  public struct AutoPlayOptions {
+    public enum LayoutAxis {
+      case horizontal
+      case vertical
+      public static func == (a: VLPlayerLib.VLPlayer.AutoPlayOptions.LayoutAxis, b: VLPlayerLib.VLPlayer.AutoPlayOptions.LayoutAxis) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+    public var countdown: Swift.Int
+    public var layoutAxis: VLPlayerLib.VLPlayer.AutoPlayOptions.LayoutAxis
+    public init(countdown: Swift.Int = 10, layoutAxis: VLPlayerLib.VLPlayer.AutoPlayOptions.LayoutAxis = .horizontal)
+  }
   public enum AutoPlayConfiguration {
     case disabled
-    case `default`(countdown: Swift.Int = 10, theme: VLPlayerLib.VLPlayer.AutoPlayTheme = AutoPlayTheme())
+    case `default`(options: VLPlayerLib.VLPlayer.AutoPlayOptions = AutoPlayOptions(), theme: VLPlayerLib.VLPlayer.AutoPlayTheme = AutoPlayTheme())
     case custom(view: UIKit.UIView)
   }
   public struct AutoPlayTheme {
@@ -1531,6 +1549,15 @@ public struct SSAIBeaconTracking {
     case paused
     case buffering
     case unknown
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  @objc public enum PlayerSideBarVisibility : Swift.Int {
+    case willShow
+    case willHide
     public init?(rawValue: Swift.Int)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
@@ -1682,6 +1709,9 @@ public struct BeaconConfig {
 }
 extension VLPlayerLib.VLPlayer.PlaybackList {
   public var firstIdentifier: Swift.String? {
+    get
+  }
+  public var count: Swift.Int {
     get
   }
   public var isEmpty: Swift.Bool {
@@ -2250,8 +2280,6 @@ extension VLPlayerLib.MediaType : Swift.RawRepresentable {}
 extension VLPlayerLib.userSubscriptionType : Swift.Equatable {}
 extension VLPlayerLib.userSubscriptionType : Swift.Hashable {}
 extension VLPlayerLib.userSubscriptionType : Swift.RawRepresentable {}
-extension VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis : Swift.Equatable {}
-extension VLPlayerLib.VLPlayer.AutoPlayMetadata.LayoutAxis : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.LeaderboardPlayerControls : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.LeaderboardPlayerControls : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.ResolutionType : Swift.Equatable {}
@@ -2259,12 +2287,17 @@ extension VLPlayerLib.VLPlayer.ResolutionType : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.ResolutionType : Swift.RawRepresentable {}
 extension VLPlayerLib.VLPlayer.ControlsVisibility : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.ControlsVisibility : Swift.Hashable {}
+extension VLPlayerLib.VLPlayer.AutoPlayOptions.LayoutAxis : Swift.Equatable {}
+extension VLPlayerLib.VLPlayer.AutoPlayOptions.LayoutAxis : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.TVEErrorCode : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.TVEErrorCode : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.TVEErrorCode : Swift.RawRepresentable {}
 extension VLPlayerLib.VLPlayer.PlayingState : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.PlayingState : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.PlayingState : Swift.RawRepresentable {}
+extension VLPlayerLib.VLPlayer.PlayerSideBarVisibility : Swift.Equatable {}
+extension VLPlayerLib.VLPlayer.PlayerSideBarVisibility : Swift.Hashable {}
+extension VLPlayerLib.VLPlayer.PlayerSideBarVisibility : Swift.RawRepresentable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.Equatable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.Hashable {}
 extension VLPlayerLib.VLPlayer.VideoPlayerGravity : Swift.RawRepresentable {}
