@@ -512,6 +512,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @available(*, deprecated, message: "Use playbackStateDidChange(state:) instead, which passes a strongly-typed VLPlayer.PlayingState instead of a raw String.")
   @objc optional func playerStateChanged(state: Swift.String)
   @objc optional func bitMovinPlayerLoaded()
+  @objc optional func readyToPlay()
   @objc optional func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Swift.Bool)
   @objc optional func playerBitrateDebugLogs(logString: Swift.String)
   @objc optional func loginWithTVE()
@@ -910,6 +911,12 @@ public struct TVEProviderInfo {
   public enum LogoType {
     case image(UIKit.UIImage?)
     case urlString(Swift.String?)
+    public var urlString: Swift.String? {
+      get
+    }
+    public var image: UIKit.UIImage? {
+      get
+    }
   }
   public let householdID: Swift.String?
   public let tveProvider: Swift.String?
@@ -1895,7 +1902,7 @@ extension Foundation.NSNotification.Name {
   public static let playerAdDidHideStatusbarOnFullScreen: Foundation.Notification.Name
 }
 public struct FeatureFlags {
-  public init(shouldHideControlsOnMenuPressed: Swift.Bool = false, shouldCreateAudioLanguageOptionIndependently: Swift.Bool = true, shouldHideControlsWhenPaused: Swift.Bool = true, shouldFocusLiveButton: Swift.Bool = true, shouldEnablePlayPauseOnLiveStream: Swift.Bool = false, showTemppassTimer: Swift.Bool = false, shouldFetchRenditionsAfterPlaybackStart: Swift.Bool = false)
+  public init(shouldHideControlsOnMenuPressed: Swift.Bool = false, shouldCreateAudioLanguageOptionIndependently: Swift.Bool = true, shouldHideControlsWhenPaused: Swift.Bool = true, shouldFocusLiveButton: Swift.Bool = true, shouldEnablePlayPauseOnLiveStream: Swift.Bool = false, showTemppassTimer: Swift.Bool = false, shouldFetchRenditionsAfterPlaybackStart: Swift.Bool = false, isMPPlayingNowEnabled: Swift.Bool = false)
 }
 public class VLAdAssetInfoAnalytics : Swift.Codable {
   public var adId: Swift.String

@@ -714,6 +714,7 @@ public protocol CustomPlayerSkinProtocol : UIKit.UIView {
   @_Concurrency.MainActor @preconcurrency public var soundTurnedOff: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public var tveProvider: Swift.String?
   @_Concurrency.MainActor @preconcurrency public var mvpdprovider: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var logo: VLPlayerLib.TVEProviderInfo.LogoType?
   @_Concurrency.MainActor @preconcurrency public var bitMovinplayerView: VLPlayerLib.VLBitmovinPlayerSurface?
   @_Concurrency.MainActor @preconcurrency public var bitMovinplayerCurrentTime: Swift.Double? {
     get
@@ -2126,6 +2127,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @available(*, deprecated, message: "Use playbackStateDidChange(state:) instead, which passes a strongly-typed VLPlayer.PlayingState instead of a raw String.")
   @objc optional func playerStateChanged(state: Swift.String)
   @objc optional func bitMovinPlayerLoaded()
+  @objc optional func readyToPlay()
   @objc optional func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Swift.Bool)
   @objc optional func playerBitrateDebugLogs(logString: Swift.String)
   @objc optional func loginWithTVE()
@@ -2172,6 +2174,12 @@ public struct TVEProviderInfo {
   public enum LogoType {
     case image(UIKit.UIImage?)
     case urlString(Swift.String?)
+    public var urlString: Swift.String? {
+      get
+    }
+    public var image: UIKit.UIImage? {
+      get
+    }
   }
   public let householdID: Swift.String?
   public let tveProvider: Swift.String?
