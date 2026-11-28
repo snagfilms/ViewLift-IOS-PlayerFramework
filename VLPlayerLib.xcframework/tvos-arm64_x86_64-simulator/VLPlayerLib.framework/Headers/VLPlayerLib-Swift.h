@@ -1053,6 +1053,14 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 - (void)bitMovinPlayerLoaded;
 /// important:
 ///
+/// Delegate method - Called when the player item first becomes ready to play.
+/// remark:
+///
+/// Fires as often as <code>videoStarted</code>: once per video (first video, next video, autoplay),
+/// and again after a retry / stream switch. Sent for AVPlayer playback only.
+- (void)readyToPlay;
+/// important:
+///
 /// Delgate method - Called when subtitle is available or not.
 /// \param isEmbedded To tell if subtitle is embedded or not
 ///
@@ -2172,6 +2180,14 @@ SWIFT_PROTOCOL("_TtP11VLPlayerLib21VideoPlaybackDelegate_")
 ///
 /// Delgate method - Called when bitmovin player is ready
 - (void)bitMovinPlayerLoaded;
+/// important:
+///
+/// Delegate method - Called when the player item first becomes ready to play.
+/// remark:
+///
+/// Fires as often as <code>videoStarted</code>: once per video (first video, next video, autoplay),
+/// and again after a retry / stream switch. Sent for AVPlayer playback only.
+- (void)readyToPlay;
 /// important:
 ///
 /// Delgate method - Called when subtitle is available or not.

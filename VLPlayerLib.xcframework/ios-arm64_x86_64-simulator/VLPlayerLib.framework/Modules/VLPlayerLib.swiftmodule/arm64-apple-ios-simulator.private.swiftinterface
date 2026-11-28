@@ -192,7 +192,7 @@ extension VLPlayerLib.VLPlayer {
     public init(colors: [UIKit.UIColor] = [.clear, .black], locations: [Foundation.NSNumber] = [0.0, 1.0], startPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 0.0), endPoint: CoreFoundation.CGPoint = CGPoint(x: 0.5, y: 1.0))
   }
   public struct PlayerControlsViewTextContent {
-    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts", subtitlesOnText: Swift.String = "Subtitles On", subtitlesOffText: Swift.String = "Subtitles Off", volumeOnText: Swift.String = "Volume On", volumeOffText: Swift.String = "Volume Off", lockControlsText: Swift.String = "Lock Controls", unlockControlsText: Swift.String = "Unlock Controls?", watchLiveText: Swift.String = "Watch Live", resumeText: Swift.String = "Resume", goLiveText: Swift.String = "Go Live")
+    public init(slowmoText: Swift.String = "Slow Mo", liveText: Swift.String = "Live", startFromBeginningText: Swift.String = "Start from beginning", closeCaptionHeaderText: Swift.String = "Close Captions", closeCaptionText: Swift.String = "Close Captions", settingHeaderText: Swift.String = "Settings", playbackQualityText: Swift.String = "Playback Quality", fontText: Swift.String = "Manage Fonts", subtitlesOnText: Swift.String = "Subtitles On", subtitlesOffText: Swift.String = "Subtitles Off", volumeOnText: Swift.String = "Volume On", volumeOffText: Swift.String = "Volume Off", lockControlsText: Swift.String = "Lock Controls", unlockControlsText: Swift.String = "Unlock Controls?", watchLiveText: Swift.String = "Watch Live", resumeText: Swift.String = "Resume", goLiveText: Swift.String = "Go Live", connectedToAirPlayText: Swift.String = "Connected to AirPlay")
   }
 }
 @objc @_inheritsConvenienceInitializers open class VLError : ObjectiveC.NSObject, Swift.Error {
@@ -390,7 +390,7 @@ public struct PlayerControlsConfig {
     case override(title: Swift.String)
     case hide
   }
-  public init(isChromeCastSupported: Swift.Bool = true, isAirPlaySupported: Swift.Bool = true, isPIPSupported: Swift.Bool = true, isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isPlaybackOptionSupported: Swift.Bool = false, playerControlsColor: VLPlayerLib.PlayerControlsColor? = nil)
+  public init(isChromeCastSupported: Swift.Bool = true, isAirPlaySupported: Swift.Bool = true, isPIPSupported: Swift.Bool = true, isSettingsSupported: Swift.Bool = true, isSubTitleSupported: Swift.Bool = true, isSlowMoSupported: Swift.Bool = true, isPlaybackOptionSupported: Swift.Bool = false, isAirPlayPlaceholderSupported: Swift.Bool = false, isVolumeSliderSupported: Swift.Bool = false, playerControlsColor: VLPlayerLib.PlayerControlsColor? = nil)
 }
 public enum PlaybackOptionType {
   case none
@@ -1901,7 +1901,7 @@ public struct PlayerControlsColor {
   public var progressBarBGColor: Swift.String?
   public var progressBarColor: Swift.String?
   public var cueIconColor: Swift.String?
-  public init(iconColor: Swift.String? = nil, textColor: Swift.String? = nil, progressBarBGColor: Swift.String? = nil, progressBarColor: Swift.String? = nil, cueIconColor: Swift.String? = nil)
+  public init(iconColor: Swift.String? = nil, textColor: Swift.String? = nil, progressBarBGColor: Swift.String? = nil, progressBarColor: Swift.String? = nil, cueIconColor: Swift.String? = "#FFFF00")
 }
 public struct VLBitmovinConfig : Swift.Equatable {
   public struct VLBitmovinLicenseConfig : Swift.Equatable {
@@ -2126,6 +2126,7 @@ public protocol VideoPlayerDataSource : AnyObject {
   @available(*, deprecated, message: "Use playbackStateDidChange(state:) instead, which passes a strongly-typed VLPlayer.PlayingState instead of a raw String.")
   @objc optional func playerStateChanged(state: Swift.String)
   @objc optional func bitMovinPlayerLoaded()
+  @objc optional func readyToPlay()
   @objc optional func isSubtitlesEmbeddedInUrlChanged(isEmbedded: Swift.Bool)
   @objc optional func playerBitrateDebugLogs(logString: Swift.String)
   @objc optional func loginWithTVE()
